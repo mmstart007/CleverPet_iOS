@@ -3,5 +3,7 @@
 
 target 'CleverPet' do
 
+pod 'GoogleIdentityToolkit'
+
 end
 
