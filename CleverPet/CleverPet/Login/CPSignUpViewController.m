@@ -8,6 +8,7 @@
 
 #import "CPSignUpViewController.h"
 #import "CPLoginController.h"
+#import "CPTextField.h"
 
 @interface CPSignUpViewController ()
 
@@ -26,11 +27,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setupStyling];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupStyling
+{
+    self.view.backgroundColor = [UIColor appBackgroundColor];
+    self.headerLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
+    self.headerLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.signUpButton.backgroundColor = [UIColor appLightTealColor];
+    [self.signUpButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    self.signUpButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
 #pragma mark - IBActions
