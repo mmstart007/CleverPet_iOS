@@ -8,11 +8,13 @@
 
 #import "CPSignInViewController.h"
 #import "CPLoginController.h"
+#import "CPTextField.h"
 
 @interface CPSignInViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *emailField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
+@property (weak, nonatomic) IBOutlet CPTextField *emailField;
+@property (weak, nonatomic) IBOutlet CPTextField *passwordField;
 @property (weak, nonatomic) IBOutlet UIButton *forgotPasswordButton;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -25,11 +27,24 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.emailField.text = self.email;
+    [self setupStyling];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupStyling
+{
+    self.view.backgroundColor = [UIColor appBackgroundColor];
+    self.headerLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
+    self.headerLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.forgotPasswordButton.titleLabel.font = [UIFont cpLightFontWithSize:12.f italic:NO];
+    [self.forgotPasswordButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    self.signInButton.backgroundColor = [UIColor appLightTealColor];
+    [self.signInButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    self.signInButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
 #pragma mark - IBActions
@@ -42,7 +57,9 @@
 {
     // TODO: verification
     [[CPLoginController sharedInstance] verifyPassword:self.passwordField.text forEmail:self.emailField.text failure:^{
-        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails") message:NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails") preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }];
 }
 

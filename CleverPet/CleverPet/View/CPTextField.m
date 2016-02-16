@@ -33,7 +33,13 @@ CGFloat const kCPTextFieldHorizontalInset = 10.f;
     self.layer.shadowOffset = CGSizeMake(0.f, 1.f);
     
     self.textColor = [UIColor appSignUpHeaderTextColor];
-    self.font = [UIFont cpLightFontWithSize:kTextFieldFontSize italic:NO];
+    self.font = [UIFont cpLightFontWithSize:15.f italic:NO];
+}
+
+- (void)setPlaceholder:(NSString *)placeholder
+{
+    [super setPlaceholder:placeholder];
+    [self setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName:[UIColor appTextFieldPlaceholderColor], NSFontAttributeName:self.font}]];
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds
@@ -44,22 +50,6 @@ CGFloat const kCPTextFieldHorizontalInset = 10.f;
 - (CGRect)editingRectForBounds:(CGRect)bounds
 {
     return CGRectInset(bounds, 2*kCPTextFieldHorizontalInset, 0.f);
-}
-
-- (CGRect)placeholderRectForBounds:(CGRect)bounds
-{
-    CGSize textSize = [self.placeholder sizeWithAttributes:@{NSFontAttributeName:self.font}];
-    return CGRectMake((bounds.size.width - textSize.width)*.5f, bounds.origin.y, textSize.width, bounds.size.height);
-}
-
-- (void)drawPlaceholderInRect:(CGRect)rect
-{
-    if ([self.placeholder respondsToSelector:@selector(drawInRect:withAttributes:)])
-    {
-        NSDictionary *attributes = @{NSForegroundColorAttributeName:[UIColor appTextFieldPlaceholderColor], NSFontAttributeName: self.font};
-        CGRect boundingRect = [self.placeholder boundingRectWithSize:rect.size options:0 attributes:attributes context:nil];
-        [self.placeholder drawAtPoint:CGPointMake(0, (rect.size.height/2)-boundingRect.size.height/2) withAttributes:attributes];
-    }
 }
 
 /*

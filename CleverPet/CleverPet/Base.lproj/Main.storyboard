@@ -8,6 +8,7 @@
     <customFonts key="customFonts">
         <mutableArray key="Omnes-Light.otf">
             <string>Omnes-Light</string>
+            <string>Omnes-Light</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -100,22 +101,25 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJn-ka-7bC">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeU-u5-ZCs">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeU-u5-ZCs">
                                                 <rect key="frame" x="20" y="190" width="560" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tvw-8L-D34">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tvw-8L-D34" customClass="CPTextField">
                                                 <rect key="frame" x="0.0" y="231" width="600" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Xp0-H4-Ado"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="cwW-8n-6D6" id="Mhd-mW-VUw"/>
+                                                </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VCM-5d-4kA">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VCM-5d-4kA" customClass="CPTextField">
                                                 <rect key="frame" x="0.0" y="291" width="600" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -123,6 +127,9 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="cwW-8n-6D6" id="Xjz-Eh-yfb"/>
+                                                </connections>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i8j-dF-KHP">
                                                 <rect key="frame" x="239" y="356" width="123" height="30"/>
@@ -142,7 +149,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="IeU-u5-ZCs" secondAttribute="trailing" constant="20" id="2BM-Ew-6QA"/>
                                             <constraint firstItem="IeU-u5-ZCs" firstAttribute="leading" secondItem="XJn-ka-7bC" secondAttribute="leading" constant="20" id="3YP-o3-1fp"/>
@@ -186,6 +193,7 @@
                     <connections>
                         <outlet property="emailField" destination="tvw-8L-D34" id="le4-z0-BkX"/>
                         <outlet property="forgotPasswordButton" destination="i8j-dF-KHP" id="yC6-EW-NvH"/>
+                        <outlet property="headerLabel" destination="IeU-u5-ZCs" id="beY-cE-Su0"/>
                         <outlet property="passwordField" destination="VCM-5d-4kA" id="wPZ-oB-e1m"/>
                         <outlet property="scrollView" destination="vUa-tA-qTV" id="WsZ-3x-gCd"/>
                         <outlet property="signInButton" destination="D5g-XP-p6r" id="Cfn-kF-HAb"/>

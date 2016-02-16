@@ -8,6 +8,8 @@
 
 #import "CPLoginController.h"
 #import <GoogleIdentityToolkit/GITkit.h>
+#import "CPSignInViewController.h"
+#import "CPSignUpViewController.h"
 
 @interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate>
 
@@ -79,13 +81,17 @@
 - (UIViewController *)legacySignInControllerWithEmail:(NSString *)email
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    return [storyboard instantiateViewControllerWithIdentifier:@"SignIn"];
+    CPSignInViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SignIn"];
+    vc.email = email;
+    return vc;
 }
 
 - (UIViewController *)legacySignUpControllerWithEmail:(NSString *)email
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    return [storyboard instantiateViewControllerWithIdentifier:@"SignUp"];
+    CPSignUpViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SignUp"];
+    vc.email = email;
+    return vc;
 }
 
 //- (UIViewController *)accountLinkingControllerWithUnverifiedProvider:(NSString *)unverifiedProvider

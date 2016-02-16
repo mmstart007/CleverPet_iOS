@@ -10,4 +10,6 @@
 
 @interface CPSignUpViewController : UIViewController
 
+@property (nonatomic, strong) NSString *email;
+
 @end
