@@ -32,6 +32,7 @@
 		97EB7AE61C73B826007F1383 /* Omnes-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD41C73B826007F1383 /* Omnes-Thin.otf */; };
 		97EB7AE71C73B826007F1383 /* Omnes-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */; };
 		97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */; };
+		97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,8 @@
 		97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-ThinItalic.otf"; sourceTree = "<group>"; };
 		97EB7AE91C73B858007F1383 /* UIFont+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+CleverPet.h"; sourceTree = "<group>"; };
 		97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CleverPet.m"; sourceTree = "<group>"; };
+		97EB7AEF1C73BEA9007F1383 /* UIColor+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CleverPet.h"; sourceTree = "<group>"; };
+		97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CleverPet.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +153,8 @@
 			children = (
 				97EB7AE91C73B858007F1383 /* UIFont+CleverPet.h */,
 				97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */,
+				97EB7AEF1C73BEA9007F1383 /* UIColor+CleverPet.h */,
+				97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 				0D36AA8E1C7243D600349D03 /* ViewController.m in Sources */,
 				0D36AA8B1C7243D600349D03 /* AppDelegate.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
+				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
 				97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
