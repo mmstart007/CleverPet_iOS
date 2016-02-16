@@ -38,6 +38,7 @@
 		97EB7AE71C73B826007F1383 /* Omnes-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */; };
 		97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */; };
 		97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */; };
+		97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF61C73CA1B007F1383 /* CPTextField.m */; };
 		BCD1938D360A74B45F4482F4 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,8 @@
 		97EB7AEF1C73BEA9007F1383 /* UIColor+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CleverPet.h"; sourceTree = "<group>"; };
 		97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CleverPet.m"; sourceTree = "<group>"; };
 		97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CleverPet-Prefix.pch"; sourceTree = "<group>"; };
+		97EB7AF51C73CA1B007F1383 /* CPTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTextField.h; sourceTree = "<group>"; };
+		97EB7AF61C73CA1B007F1383 /* CPTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTextField.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +140,7 @@
 				0D36AA971C7243D600349D03 /* Info.plist */,
 				0D36AA861C7243D600349D03 /* Supporting Files */,
 				97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */,
+				97EB7AF41C73C9FD007F1383 /* View */,
 			);
 			path = CleverPet;
 			sourceTree = "<group>";
@@ -216,6 +220,15 @@
 				97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		97EB7AF41C73C9FD007F1383 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				97EB7AF51C73CA1B007F1383 /* CPTextField.h */,
+				97EB7AF61C73CA1B007F1383 /* CPTextField.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		D625135D7BCE1E48B006E50A /* Frameworks */ = {
@@ -368,6 +381,7 @@
 			files = (
 				97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */,
 				97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */,
+				97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */,
 				0D36AA8E1C7243D600349D03 /* ViewController.m in Sources */,
 				97EB7AC21C73A97D007F1383 /* CPSignUpViewController.m in Sources */,
 				97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */,
