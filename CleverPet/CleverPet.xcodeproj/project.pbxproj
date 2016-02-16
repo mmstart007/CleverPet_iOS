@@ -13,6 +13,14 @@
 		0D36AA911C7243D600349D03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA8F1C7243D600349D03 /* Main.storyboard */; };
 		0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA921C7243D600349D03 /* Assets.xcassets */; };
 		0D36AA961C7243D600349D03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA941C7243D600349D03 /* LaunchScreen.storyboard */; };
+		0DD4BD311C739426006B3725 /* CPTileViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4BD301C739426006B3725 /* CPTileViewCell.xib */; };
+		1827A1A2D601B2388415D37D /* CPTileCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A89D02ED75C767F6D453 /* CPTileCollectionViewDataSource.m */; };
+		1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AD320F0C4F8FD18E36D8 /* CPTile.m */; };
+		1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A7B9850CB706EB4171D0 /* CPMainScreenViewController.m */; };
+		1827A9098315281E1E57C652 /* CPTileSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A50A4A6169E21622727F /* CPTileSection.m */; };
+		1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */; };
+		1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A57728C978A652728E14 /* CPTileViewCell.m */; };
+		9F35FA18F408008B41416649 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A9E804D4BE6FFF4E3C06AD /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +34,22 @@
 		0D36AA921C7243D600349D03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D36AA951C7243D600349D03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D36AA971C7243D600349D03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0DD4BD301C739426006B3725 /* CPTileViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPTileViewCell.xib; sourceTree = "<group>"; };
+		1827A1BFAE0043C9D902D1AC /* CPTileViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileViewCell.h; sourceTree = "<group>"; };
+		1827A50A4A6169E21622727F /* CPTileSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileSection.m; sourceTree = "<group>"; };
+		1827A57728C978A652728E14 /* CPTileViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileViewCell.m; sourceTree = "<group>"; };
+		1827A6F613CFD7AD893E5A8F /* CPTileCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileCollectionViewDataSource.h; sourceTree = "<group>"; };
+		1827A708180DD5D390DB0EA8 /* CPMainScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainScreenViewController.h; sourceTree = "<group>"; };
+		1827A7B9850CB706EB4171D0 /* CPMainScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainScreenViewController.m; sourceTree = "<group>"; };
+		1827A87BCF9FE7F9424CC0A7 /* CPSimpleDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSimpleDate.h; sourceTree = "<group>"; };
+		1827A89D02ED75C767F6D453 /* CPTileCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileCollectionViewDataSource.m; sourceTree = "<group>"; };
+		1827AA55CD84B5F8ACE22F8A /* CPTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTile.h; sourceTree = "<group>"; };
+		1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSimpleDate.m; sourceTree = "<group>"; };
+		1827ABB6A0821DBDEABC48C9 /* CPTileSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileSection.h; sourceTree = "<group>"; };
+		1827AD320F0C4F8FD18E36D8 /* CPTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTile.m; sourceTree = "<group>"; };
+		96A9E804D4BE6FFF4E3C06AD /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B84732F7BC0433516A62C96A /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
+		F69DE4571D744DF549FA8E73 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F35FA18F408008B41416649 /* libPods-CleverPet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +69,8 @@
 			children = (
 				0D36AA851C7243D600349D03 /* CleverPet */,
 				0D36AA841C7243D600349D03 /* Products */,
+				EA7AAA759335BC852E293C0E /* Pods */,
+				2C65E458065A4E14BB6A4855 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +94,11 @@
 				0D36AA941C7243D600349D03 /* LaunchScreen.storyboard */,
 				0D36AA971C7243D600349D03 /* Info.plist */,
 				0D36AA861C7243D600349D03 /* Supporting Files */,
+				1827A33D9223DD88F1F07633 /* Model */,
+				1827A78F146E373DB1371921 /* ViewController */,
+				1827AE900814435357461822 /* View */,
+				1827A89D02ED75C767F6D453 /* CPTileCollectionViewDataSource.m */,
+				1827A6F613CFD7AD893E5A8F /* CPTileCollectionViewDataSource.h */,
 			);
 			path = CleverPet;
 			sourceTree = "<group>";
@@ -79,6 +111,55 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1827A33D9223DD88F1F07633 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1827AD320F0C4F8FD18E36D8 /* CPTile.m */,
+				1827AA55CD84B5F8ACE22F8A /* CPTile.h */,
+				1827A50A4A6169E21622727F /* CPTileSection.m */,
+				1827ABB6A0821DBDEABC48C9 /* CPTileSection.h */,
+				1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */,
+				1827A87BCF9FE7F9424CC0A7 /* CPSimpleDate.h */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1827A78F146E373DB1371921 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1827A7B9850CB706EB4171D0 /* CPMainScreenViewController.m */,
+				1827A708180DD5D390DB0EA8 /* CPMainScreenViewController.h */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		1827AE900814435357461822 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1827A57728C978A652728E14 /* CPTileViewCell.m */,
+				1827A1BFAE0043C9D902D1AC /* CPTileViewCell.h */,
+				0DD4BD301C739426006B3725 /* CPTileViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2C65E458065A4E14BB6A4855 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				96A9E804D4BE6FFF4E3C06AD /* libPods-CleverPet.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EA7AAA759335BC852E293C0E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B84732F7BC0433516A62C96A /* Pods-CleverPet.debug.xcconfig */,
+				F69DE4571D744DF549FA8E73 /* Pods-CleverPet.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +167,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0D36AA9A1C7243D600349D03 /* Build configuration list for PBXNativeTarget "CleverPet" */;
 			buildPhases = (
+				92CECB30215D1832EC5B89B1 /* Check Pods Manifest.lock */,
 				0D36AA7F1C7243D600349D03 /* Sources */,
 				0D36AA801C7243D600349D03 /* Frameworks */,
 				0D36AA811C7243D600349D03 /* Resources */,
+				CB93564FD167B6DF6F30C3BE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -139,10 +222,44 @@
 				0D36AA961C7243D600349D03 /* LaunchScreen.storyboard in Resources */,
 				0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */,
 				0D36AA911C7243D600349D03 /* Main.storyboard in Resources */,
+				0DD4BD311C739426006B3725 /* CPTileViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		92CECB30215D1832EC5B89B1 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CB93564FD167B6DF6F30C3BE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0D36AA7F1C7243D600349D03 /* Sources */ = {
@@ -152,6 +269,12 @@
 				0D36AA8E1C7243D600349D03 /* ViewController.m in Sources */,
 				0D36AA8B1C7243D600349D03 /* AppDelegate.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
+				1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */,
+				1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */,
+				1827A1A2D601B2388415D37D /* CPTileCollectionViewDataSource.m in Sources */,
+				1827A9098315281E1E57C652 /* CPTileSection.m in Sources */,
+				1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */,
+				1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +382,7 @@
 		};
 		0D36AA9B1C7243D600349D03 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B84732F7BC0433516A62C96A /* Pods-CleverPet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CleverPet/Info.plist;
@@ -270,6 +394,7 @@
 		};
 		0D36AA9C1C7243D600349D03 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F69DE4571D744DF549FA8E73 /* Pods-CleverPet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CleverPet/Info.plist;
@@ -298,6 +423,7 @@
 				0D36AA9C1C7243D600349D03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -1,1 +1,39 @@
+PODS:
+  - AFNetworking (3.0.4):
+    - AFNetworking/NSURLSession (= 3.0.4)
+    - AFNetworking/Reachability (= 3.0.4)
+    - AFNetworking/Security (= 3.0.4)
+    - AFNetworking/Serialization (= 3.0.4)
+    - AFNetworking/UIKit (= 3.0.4)
+  - AFNetworking/NSURLSession (3.0.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.0.4)
+  - AFNetworking/Security (3.0.4)
+  - AFNetworking/Serialization (3.0.4)
+  - AFNetworking/UIKit (3.0.4):
+    - AFNetworking/NSURLSession
+  - AttributedMarkdown (0.9.2)
+  - JSONModel (1.2.0)
+
+DEPENDENCIES:
+  - AFNetworking
+  - AttributedMarkdown (from `https://github.com/dreamwieber/AttributedMarkdown.git`)
+  - JSONModel
+
+EXTERNAL SOURCES:
+  AttributedMarkdown:
+    :git: https://github.com/dreamwieber/AttributedMarkdown.git
+
+CHECKOUT OPTIONS:
+  AttributedMarkdown:
+    :commit: 4aef3c80e0ffe6c7011c20c7f703ea56af774861
+    :git: https://github.com/dreamwieber/AttributedMarkdown.git
+
+SPEC CHECKSUMS:
+  AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  AttributedMarkdown: ac5060667280be8cc8ee33a46c73e4ec6b17ca1a
+  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
+
 COCOAPODS: 0.38.2
