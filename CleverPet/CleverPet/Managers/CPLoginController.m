@@ -108,7 +108,7 @@ didFinishSignInWithToken:(NSString *)token
        account:(GITAccount *)account
          error:(NSError *)error
 {
-    NSInteger breakpoint = 0;
+    NSLog(@"Login Successful: %@", account.email);
 }
 
 @end
