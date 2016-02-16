@@ -28,9 +28,9 @@ CGFloat const kCPTextFieldHorizontalInset = 10.f;
     self.stripeView = stripe;
     
     self.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.bounds].CGPath;
-    self.layer.shadowColor = [UIColor colorWithWhite:0.f alpha:.15f].CGColor;
+    self.layer.shadowColor = [UIColor colorWithWhite:0.15f alpha:1.f].CGColor;
     self.layer.shadowRadius = 3;
-    self.layer.shadowOffset = CGSizeMake(0.f, 3.f);
+    self.layer.shadowOffset = CGSizeMake(0.f, 1.f);
     
     self.textColor = [UIColor appSignUpHeaderTextColor];
     self.font = [UIFont cpLightFontWithSize:kTextFieldFontSize italic:NO];

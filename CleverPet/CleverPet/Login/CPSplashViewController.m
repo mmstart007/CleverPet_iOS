@@ -33,7 +33,7 @@
 
 - (void)setupStyling
 {
-    self.taglineLabel.font = [UIFont cpLightFontWithSize:32.0 italic:NO];
+    self.taglineLabel.font = [UIFont cpLightFontWithSize:16.0 italic:NO];
     self.taglineLabel.textColor = [UIColor appGreyColor];
     self.signInButton.backgroundColor = [UIColor appLightTealColor];
     [self.signInButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];

@@ -10,6 +10,7 @@
 
 extern CGFloat const kButtonTitleFontSize;
 extern CGFloat const kTextFieldFontSize;
+extern CGFloat const kSignInHeaderFontSize;
 
 @interface UIFont(CleverPet)
 

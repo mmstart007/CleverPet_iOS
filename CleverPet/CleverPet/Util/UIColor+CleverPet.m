@@ -60,4 +60,14 @@
     return [UIColor colorWithRed:230.0/255.0 green:247.0/255.0 blue:249.0/255.0 alpha:1.0];
 }
 
++ (UIColor*)appSignUpHeaderTextColor
+{
+    return [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0];
+}
+
++ (UIColor*)appTextFieldPlaceholderColor
+{
+    return [UIColor colorWithRed:197.0/255.0 green:197.0/255.0 blue:197.0/255.0 alpha:1.0];
+}
+
 @end

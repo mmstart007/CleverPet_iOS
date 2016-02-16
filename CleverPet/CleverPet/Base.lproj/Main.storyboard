@@ -27,9 +27,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4t-xv-zM4">
-                                <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="0Hb-LW-76K"/>
+                                    <constraint firstAttribute="height" constant="50" id="0Hb-LW-76K"/>
                                 </constraints>
                                 <state key="normal" title="Sign in"/>
                                 <connections>
@@ -369,7 +369,7 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gxM-gK-ksM">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gxM-gK-ksM" customClass="CPTextField">
                                                 <rect key="frame" x="0.0" y="141" width="600" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -412,11 +412,12 @@
                                                 </connections>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="gxM-gK-ksM" firstAttribute="top" secondItem="9mr-b6-oCy" secondAttribute="bottom" constant="20" id="2bj-4w-5Gg"/>
                                             <constraint firstItem="sev-Aa-tHz" firstAttribute="leading" secondItem="fRt-yR-GP6" secondAttribute="leading" id="36c-X0-nr3"/>
                                             <constraint firstAttribute="trailing" secondItem="gxM-gK-ksM" secondAttribute="trailing" id="7mC-ck-spL"/>
+                                            <constraint firstItem="sev-Aa-tHz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hkA-OW-VK6" secondAttribute="bottom" constant="20" id="9ps-9M-LDw"/>
                                             <constraint firstItem="9mr-b6-oCy" firstAttribute="leading" secondItem="fRt-yR-GP6" secondAttribute="leading" constant="20" id="CQG-w4-rMn"/>
                                             <constraint firstItem="gxM-gK-ksM" firstAttribute="leading" secondItem="fRt-yR-GP6" secondAttribute="leading" id="Ct7-Rz-6lJ"/>
                                             <constraint firstItem="hkA-OW-VK6" firstAttribute="leading" secondItem="fRt-yR-GP6" secondAttribute="leading" id="Jrx-Me-03E"/>
@@ -461,6 +462,8 @@
                         <outlet property="emailField" destination="gxM-gK-ksM" id="kDa-Z4-sJk"/>
                         <outlet property="facebookButton" destination="oFL-hb-352" id="MGf-ac-Ox6"/>
                         <outlet property="googleButton" destination="hkA-OW-VK6" id="w7N-LL-8zI"/>
+                        <outlet property="headerLabel" destination="9mr-b6-oCy" id="wHt-ow-9H3"/>
+                        <outlet property="orLabel" destination="hE9-LX-YUd" id="618-mG-XLM"/>
                         <outlet property="scrollView" destination="pxV-AE-N2T" id="i0p-RB-MlA"/>
                         <outlet property="signInButton" destination="sev-Aa-tHz" id="EtQ-zi-pb2"/>
                     </connections>
