@@ -1,0 +1,14 @@
+//
+//  CleverPet-Prefix.pch
+//  CleverPet
+//
+//  Created by Dan Wright on 2016-02-16.
+//  Copyright © 2016 CleverPet, Inc. All rights reserved.
+//
+
+#ifdef __OBJC__
+
+#import "UIFont+CleverPet.h"
+#import "UIColor+CleverPet.h"
+
+#endif
