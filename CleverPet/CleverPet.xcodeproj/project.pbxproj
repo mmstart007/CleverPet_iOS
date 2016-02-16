@@ -13,6 +13,25 @@
 		0D36AA911C7243D600349D03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA8F1C7243D600349D03 /* Main.storyboard */; };
 		0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA921C7243D600349D03 /* Assets.xcassets */; };
 		0D36AA961C7243D600349D03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA941C7243D600349D03 /* LaunchScreen.storyboard */; };
+		97EB7AD61C73B826007F1383 /* Omnes-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC41C73B826007F1383 /* Omnes-Black.otf */; };
+		97EB7AD71C73B826007F1383 /* Omnes-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC51C73B826007F1383 /* Omnes-BlackItalic.otf */; };
+		97EB7AD81C73B826007F1383 /* Omnes-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC61C73B826007F1383 /* Omnes-Bold.otf */; };
+		97EB7AD91C73B826007F1383 /* Omnes-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC71C73B826007F1383 /* Omnes-BoldItalic.otf */; };
+		97EB7ADA1C73B826007F1383 /* Omnes-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC81C73B826007F1383 /* Omnes-ExtraLight.otf */; };
+		97EB7ADB1C73B826007F1383 /* Omnes-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC91C73B826007F1383 /* Omnes-ExtraLightItalic.otf */; };
+		97EB7ADC1C73B826007F1383 /* Omnes-Hairline.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7ACA1C73B826007F1383 /* Omnes-Hairline.otf */; };
+		97EB7ADD1C73B826007F1383 /* Omnes-HairlineItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7ACB1C73B826007F1383 /* Omnes-HairlineItalic.otf */; };
+		97EB7ADE1C73B826007F1383 /* Omnes-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7ACC1C73B826007F1383 /* Omnes-Light.otf */; };
+		97EB7ADF1C73B826007F1383 /* Omnes-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7ACD1C73B826007F1383 /* Omnes-LightItalic.otf */; };
+		97EB7AE01C73B826007F1383 /* Omnes-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7ACE1C73B826007F1383 /* Omnes-Medium.otf */; };
+		97EB7AE11C73B826007F1383 /* Omnes-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7ACF1C73B826007F1383 /* Omnes-MediumItalic.otf */; };
+		97EB7AE21C73B826007F1383 /* Omnes-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD01C73B826007F1383 /* Omnes-Regular.otf */; };
+		97EB7AE31C73B826007F1383 /* Omnes-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD11C73B826007F1383 /* Omnes-RegularItalic.otf */; };
+		97EB7AE41C73B826007F1383 /* Omnes-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD21C73B826007F1383 /* Omnes-Semibold.otf */; };
+		97EB7AE51C73B826007F1383 /* Omnes-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD31C73B826007F1383 /* Omnes-SemiboldItalic.otf */; };
+		97EB7AE61C73B826007F1383 /* Omnes-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD41C73B826007F1383 /* Omnes-Thin.otf */; };
+		97EB7AE71C73B826007F1383 /* Omnes-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */; };
+		97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +45,26 @@
 		0D36AA921C7243D600349D03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D36AA951C7243D600349D03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D36AA971C7243D600349D03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97EB7AC41C73B826007F1383 /* Omnes-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Black.otf"; sourceTree = "<group>"; };
+		97EB7AC51C73B826007F1383 /* Omnes-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-BlackItalic.otf"; sourceTree = "<group>"; };
+		97EB7AC61C73B826007F1383 /* Omnes-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Bold.otf"; sourceTree = "<group>"; };
+		97EB7AC71C73B826007F1383 /* Omnes-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-BoldItalic.otf"; sourceTree = "<group>"; };
+		97EB7AC81C73B826007F1383 /* Omnes-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-ExtraLight.otf"; sourceTree = "<group>"; };
+		97EB7AC91C73B826007F1383 /* Omnes-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-ExtraLightItalic.otf"; sourceTree = "<group>"; };
+		97EB7ACA1C73B826007F1383 /* Omnes-Hairline.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Hairline.otf"; sourceTree = "<group>"; };
+		97EB7ACB1C73B826007F1383 /* Omnes-HairlineItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-HairlineItalic.otf"; sourceTree = "<group>"; };
+		97EB7ACC1C73B826007F1383 /* Omnes-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Light.otf"; sourceTree = "<group>"; };
+		97EB7ACD1C73B826007F1383 /* Omnes-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-LightItalic.otf"; sourceTree = "<group>"; };
+		97EB7ACE1C73B826007F1383 /* Omnes-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Medium.otf"; sourceTree = "<group>"; };
+		97EB7ACF1C73B826007F1383 /* Omnes-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-MediumItalic.otf"; sourceTree = "<group>"; };
+		97EB7AD01C73B826007F1383 /* Omnes-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Regular.otf"; sourceTree = "<group>"; };
+		97EB7AD11C73B826007F1383 /* Omnes-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-RegularItalic.otf"; sourceTree = "<group>"; };
+		97EB7AD21C73B826007F1383 /* Omnes-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Semibold.otf"; sourceTree = "<group>"; };
+		97EB7AD31C73B826007F1383 /* Omnes-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		97EB7AD41C73B826007F1383 /* Omnes-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Thin.otf"; sourceTree = "<group>"; };
+		97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-ThinItalic.otf"; sourceTree = "<group>"; };
+		97EB7AE91C73B858007F1383 /* UIFont+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+CleverPet.h"; sourceTree = "<group>"; };
+		97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CleverPet.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +97,8 @@
 		0D36AA851C7243D600349D03 /* CleverPet */ = {
 			isa = PBXGroup;
 			children = (
+				97EB7AE81C73B833007F1383 /* Util */,
+				97EB7AC31C73B826007F1383 /* Font */,
 				0D36AA891C7243D600349D03 /* AppDelegate.h */,
 				0D36AA8A1C7243D600349D03 /* AppDelegate.m */,
 				0D36AA8C1C7243D600349D03 /* ViewController.h */,
@@ -77,6 +118,40 @@
 				0D36AA871C7243D600349D03 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		97EB7AC31C73B826007F1383 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				97EB7AC41C73B826007F1383 /* Omnes-Black.otf */,
+				97EB7AC51C73B826007F1383 /* Omnes-BlackItalic.otf */,
+				97EB7AC61C73B826007F1383 /* Omnes-Bold.otf */,
+				97EB7AC71C73B826007F1383 /* Omnes-BoldItalic.otf */,
+				97EB7AC81C73B826007F1383 /* Omnes-ExtraLight.otf */,
+				97EB7AC91C73B826007F1383 /* Omnes-ExtraLightItalic.otf */,
+				97EB7ACA1C73B826007F1383 /* Omnes-Hairline.otf */,
+				97EB7ACB1C73B826007F1383 /* Omnes-HairlineItalic.otf */,
+				97EB7ACC1C73B826007F1383 /* Omnes-Light.otf */,
+				97EB7ACD1C73B826007F1383 /* Omnes-LightItalic.otf */,
+				97EB7ACE1C73B826007F1383 /* Omnes-Medium.otf */,
+				97EB7ACF1C73B826007F1383 /* Omnes-MediumItalic.otf */,
+				97EB7AD01C73B826007F1383 /* Omnes-Regular.otf */,
+				97EB7AD11C73B826007F1383 /* Omnes-RegularItalic.otf */,
+				97EB7AD21C73B826007F1383 /* Omnes-Semibold.otf */,
+				97EB7AD31C73B826007F1383 /* Omnes-SemiboldItalic.otf */,
+				97EB7AD41C73B826007F1383 /* Omnes-Thin.otf */,
+				97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		97EB7AE81C73B833007F1383 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				97EB7AE91C73B858007F1383 /* UIFont+CleverPet.h */,
+				97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */,
+			);
+			path = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +212,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D36AA961C7243D600349D03 /* LaunchScreen.storyboard in Resources */,
+				97EB7AE41C73B826007F1383 /* Omnes-Semibold.otf in Resources */,
+				97EB7ADF1C73B826007F1383 /* Omnes-LightItalic.otf in Resources */,
+				97EB7AE61C73B826007F1383 /* Omnes-Thin.otf in Resources */,
+				97EB7ADE1C73B826007F1383 /* Omnes-Light.otf in Resources */,
+				97EB7AD81C73B826007F1383 /* Omnes-Bold.otf in Resources */,
+				97EB7ADC1C73B826007F1383 /* Omnes-Hairline.otf in Resources */,
 				0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */,
+				97EB7AD91C73B826007F1383 /* Omnes-BoldItalic.otf in Resources */,
+				97EB7AE51C73B826007F1383 /* Omnes-SemiboldItalic.otf in Resources */,
+				97EB7AE31C73B826007F1383 /* Omnes-RegularItalic.otf in Resources */,
+				97EB7AE11C73B826007F1383 /* Omnes-MediumItalic.otf in Resources */,
+				97EB7AD61C73B826007F1383 /* Omnes-Black.otf in Resources */,
+				97EB7AE21C73B826007F1383 /* Omnes-Regular.otf in Resources */,
 				0D36AA911C7243D600349D03 /* Main.storyboard in Resources */,
+				97EB7AE01C73B826007F1383 /* Omnes-Medium.otf in Resources */,
+				97EB7ADD1C73B826007F1383 /* Omnes-HairlineItalic.otf in Resources */,
+				97EB7ADB1C73B826007F1383 /* Omnes-ExtraLightItalic.otf in Resources */,
+				97EB7AE71C73B826007F1383 /* Omnes-ThinItalic.otf in Resources */,
+				97EB7ADA1C73B826007F1383 /* Omnes-ExtraLight.otf in Resources */,
+				97EB7AD71C73B826007F1383 /* Omnes-BlackItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +245,7 @@
 				0D36AA8E1C7243D600349D03 /* ViewController.m in Sources */,
 				0D36AA8B1C7243D600349D03 /* AppDelegate.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
+				97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +392,7 @@
 				0D36AA9C1C7243D600349D03 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
