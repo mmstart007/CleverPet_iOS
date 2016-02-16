@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+extern CGFloat const kButtonTitleFontSize;
+extern CGFloat const kTextFieldFontSize;
+
 @interface UIFont(CleverPet)
 
 + (UIFont*)cpHairlineFontWithSize:(CGFloat)fontSize italic:(BOOL)italic;

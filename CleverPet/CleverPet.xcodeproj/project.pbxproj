@@ -13,6 +13,11 @@
 		0D36AA911C7243D600349D03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA8F1C7243D600349D03 /* Main.storyboard */; };
 		0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA921C7243D600349D03 /* Assets.xcassets */; };
 		0D36AA961C7243D600349D03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA941C7243D600349D03 /* LaunchScreen.storyboard */; };
+		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
+		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
+		97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */; };
+		97EB7ABF1C72AAFB007F1383 /* CPLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABE1C72AAFB007F1383 /* CPLoginController.m */; };
+		97EB7AC21C73A97D007F1383 /* CPSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AC11C73A97D007F1383 /* CPSignUpViewController.m */; };
 		97EB7AD61C73B826007F1383 /* Omnes-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC41C73B826007F1383 /* Omnes-Black.otf */; };
 		97EB7AD71C73B826007F1383 /* Omnes-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC51C73B826007F1383 /* Omnes-BlackItalic.otf */; };
 		97EB7AD81C73B826007F1383 /* Omnes-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC61C73B826007F1383 /* Omnes-Bold.otf */; };
@@ -33,11 +38,6 @@
 		97EB7AE71C73B826007F1383 /* Omnes-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */; };
 		97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */; };
 		97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */; };
-		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
-		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
-		97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */; };
-		97EB7ABF1C72AAFB007F1383 /* CPLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABE1C72AAFB007F1383 /* CPLoginController.m */; };
-		97EB7AC21C73A97D007F1383 /* CPSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AC11C73A97D007F1383 /* CPSignUpViewController.m */; };
 		BCD1938D360A74B45F4482F4 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +52,19 @@
 		0D36AA921C7243D600349D03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D36AA951C7243D600349D03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D36AA971C7243D600349D03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
+		3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
+		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
+		97EB7AB41C729F33007F1383 /* CPNascarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNascarViewController.m; sourceTree = "<group>"; };
+		97EB7AB61C72A300007F1383 /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
+		97EB7AB71C72A300007F1383 /* CPSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSignInViewController.m; sourceTree = "<group>"; };
+		97EB7AB91C72A570007F1383 /* CPSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSplashViewController.h; sourceTree = "<group>"; };
+		97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSplashViewController.m; sourceTree = "<group>"; };
+		97EB7ABD1C72AAFB007F1383 /* CPLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLoginController.h; sourceTree = "<group>"; };
+		97EB7ABE1C72AAFB007F1383 /* CPLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLoginController.m; sourceTree = "<group>"; };
+		97EB7AC01C73A97D007F1383 /* CPSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignUpViewController.h; sourceTree = "<group>"; };
+		97EB7AC11C73A97D007F1383 /* CPSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSignUpViewController.m; sourceTree = "<group>"; };
 		97EB7AC41C73B826007F1383 /* Omnes-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Black.otf"; sourceTree = "<group>"; };
 		97EB7AC51C73B826007F1383 /* Omnes-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-BlackItalic.otf"; sourceTree = "<group>"; };
 		97EB7AC61C73B826007F1383 /* Omnes-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Bold.otf"; sourceTree = "<group>"; };
@@ -75,19 +88,6 @@
 		97EB7AEF1C73BEA9007F1383 /* UIColor+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CleverPet.h"; sourceTree = "<group>"; };
 		97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CleverPet.m"; sourceTree = "<group>"; };
 		97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CleverPet-Prefix.pch"; sourceTree = "<group>"; };
-		12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
-		3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
-		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
-		97EB7AB41C729F33007F1383 /* CPNascarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNascarViewController.m; sourceTree = "<group>"; };
-		97EB7AB61C72A300007F1383 /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
-		97EB7AB71C72A300007F1383 /* CPSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSignInViewController.m; sourceTree = "<group>"; };
-		97EB7AB91C72A570007F1383 /* CPSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSplashViewController.h; sourceTree = "<group>"; };
-		97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSplashViewController.m; sourceTree = "<group>"; };
-		97EB7ABD1C72AAFB007F1383 /* CPLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLoginController.h; sourceTree = "<group>"; };
-		97EB7ABE1C72AAFB007F1383 /* CPLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLoginController.m; sourceTree = "<group>"; };
-		97EB7AC01C73A97D007F1383 /* CPSignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignUpViewController.h; sourceTree = "<group>"; };
-		97EB7AC11C73A97D007F1383 /* CPSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSignUpViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +149,39 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		57ADBCB9E6A0A0D72BB97CA7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */,
+				3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		974868B11C725A990031BEEF /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				97EB7AB31C729F33007F1383 /* CPNascarViewController.h */,
+				97EB7AB41C729F33007F1383 /* CPNascarViewController.m */,
+				97EB7AB61C72A300007F1383 /* CPSignInViewController.h */,
+				97EB7AB71C72A300007F1383 /* CPSignInViewController.m */,
+				97EB7AB91C72A570007F1383 /* CPSplashViewController.h */,
+				97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */,
+				97EB7AC01C73A97D007F1383 /* CPSignUpViewController.h */,
+				97EB7AC11C73A97D007F1383 /* CPSignUpViewController.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		97EB7ABC1C72AAE3007F1383 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				97EB7ABD1C72AAFB007F1383 /* CPLoginController.h */,
+				97EB7ABE1C72AAFB007F1383 /* CPLoginController.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		97EB7AC31C73B826007F1383 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,39 +216,6 @@
 				97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */,
 			);
 			path = Util;
-			sourceTree = "<group>";
-		};
-		57ADBCB9E6A0A0D72BB97CA7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */,
-				3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		974868B11C725A990031BEEF /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				97EB7AB31C729F33007F1383 /* CPNascarViewController.h */,
-				97EB7AB41C729F33007F1383 /* CPNascarViewController.m */,
-				97EB7AB61C72A300007F1383 /* CPSignInViewController.h */,
-				97EB7AB71C72A300007F1383 /* CPSignInViewController.m */,
-				97EB7AB91C72A570007F1383 /* CPSplashViewController.h */,
-				97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */,
-				97EB7AC01C73A97D007F1383 /* CPSignUpViewController.h */,
-				97EB7AC11C73A97D007F1383 /* CPSignUpViewController.m */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		97EB7ABC1C72AAE3007F1383 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				97EB7ABD1C72AAFB007F1383 /* CPLoginController.h */,
-				97EB7ABE1C72AAFB007F1383 /* CPLoginController.m */,
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 		D625135D7BCE1E48B006E50A /* Frameworks */ = {
