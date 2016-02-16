@@ -10,7 +10,7 @@
 #import "CPLoginController.h"
 #import "CPTextField.h"
 
-@interface CPNascarViewController ()<UITableViewDelegate>
+@interface CPNascarViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet CPTextField *emailField;
@@ -77,6 +77,14 @@
 - (IBAction)signInTapped:(id)sender
 {
     [[CPLoginController sharedInstance] signInWithEmail:self.emailField.text];
+}
+
+#pragma mark - UITextFieldDelegate methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    // TODO: Proceed with sign in?
+    return YES;
 }
 
 #pragma mark - Keyboard

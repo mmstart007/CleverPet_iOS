@@ -10,7 +10,7 @@
 #import "CPLoginController.h"
 #import "CPTextField.h"
 
-@interface CPSignInViewController ()
+@interface CPSignInViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet CPTextField *emailField;
@@ -74,6 +74,18 @@
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alertController animated:YES completion:nil];
     }];
+}
+
+#pragma mark - UITextFieldDelegate methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.emailField) {
+        [self.passwordField becomeFirstResponder];
+    } else {
+        // TODO: Proceed with sign in?
+        [textField resignFirstResponder];
+    }
+    return YES;
 }
 
 #pragma mark - Keyboard

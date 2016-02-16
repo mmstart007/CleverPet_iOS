@@ -10,7 +10,7 @@
 #import "CPLoginController.h"
 #import "CPTextField.h"
 
-@interface CPSignUpViewController ()
+@interface CPSignUpViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -62,6 +62,22 @@
 - (IBAction)signUpTapped:(id)sender
 {
     [[CPLoginController sharedInstance] signUpWithEmail:self.emailField.text displayName:self.nameField.text andPassword:self.passwordField.text];
+}
+
+#pragma mark - UITextFieldDelegate methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.emailField) {
+        [self.nameField becomeFirstResponder];
+    } else if(textField == self.nameField) {
+        [self.passwordField becomeFirstResponder];
+    } else if(textField == self.passwordField) {
+        [self.verifyField becomeFirstResponder];
+    } else {
+        // TODO: Proceed with sign in?
+        [textField resignFirstResponder];
+    }
+    return YES;
 }
 
 #pragma mark - Keyboard
