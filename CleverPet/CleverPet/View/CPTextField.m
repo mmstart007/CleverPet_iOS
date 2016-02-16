@@ -44,12 +44,12 @@ CGFloat const kCPTextFieldHorizontalInset = 10.f;
 
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
-    return CGRectInset(bounds, 2*kCPTextFieldHorizontalInset, 0.f);
+    return CGRectInset(bounds, 2*kCPTextFieldHorizontalInset, 0.5f);
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds
 {
-    return CGRectInset(bounds, 2*kCPTextFieldHorizontalInset, 0.f);
+    return CGRectInset(bounds, 2*kCPTextFieldHorizontalInset, 0.5f);
 }
 
 /*
