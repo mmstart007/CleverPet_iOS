@@ -9,6 +9,11 @@
 #import "CPPetProfileViewController.h"
 #import "CPTextField.h"
 
+NSInteger const kNameFieldMinChars = 2;
+NSInteger const kNameFieldMaxChars = 10;
+NSInteger const kFamilyNameFieldMinChars = 1;
+NSInteger const kFamilyNameFieldMaxChars = 35;
+
 @interface CPPetProfileViewController ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
@@ -23,6 +28,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *continueButtonBottomConstraint;
 
 @property (nonatomic, strong) NSArray *textFields;
+@property (nonatomic, strong) NSCharacterSet *invalidNameCharacters;
+@property (nonatomic, strong) NSCharacterSet *invalidFamilyNameCharacters;
+@property (nonatomic, strong) NSCharacterSet *invalidNumericalCharacters;
+
+@property (nonatomic, strong) NSString *weightDescriptor;
 
 @end
 
@@ -35,6 +45,19 @@
     // TODO: switch for weight units, gender, auto complete for breeds, potentially switch for altered
     [self setupStyling];
     self.textFields = @[self.nameField, self.familyField, self.breedField, self.genderField, self.ageField, self.weightField];
+    
+    NSMutableCharacterSet *alphaSet = [NSMutableCharacterSet alphanumericCharacterSet];
+    // alpha includes letter, numbers and marks, we want to remove marks
+    [alphaSet formIntersectionWithCharacterSet:[[NSCharacterSet nonBaseCharacterSet] invertedSet]];
+    self.invalidNameCharacters = [alphaSet invertedSet];
+    
+    // Family name additionally allows spaces
+    [alphaSet addCharactersInString:@" "];
+    [alphaSet formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
+    self.invalidFamilyNameCharacters = [alphaSet invertedSet];
+    
+    self.invalidNumericalCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789.,"] invertedSet];
+    self.weightDescriptor = @"lbs";
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -69,14 +92,69 @@
     [self.continueButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
 }
 
+- (BOOL)validateInput
+{
+    if ([self.nameField.text length] < kNameFieldMinChars || [self.nameField.text length] > kNameFieldMaxChars) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Name must be between %d and %d characters long", @"Error message when name name does not fit requirements. First %d is minimum number of characters, second is maximum"), kNameFieldMinChars, kNameFieldMaxChars]];
+        return NO;
+    }
+    
+    if ([self.familyField.text length] < kFamilyNameFieldMinChars || [self.familyField.text length] > kFamilyNameFieldMaxChars) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Family name must be between %d and %d characters long", @"Error message when family name does not fit requirements. First %d is minimum number of characters, second is maximum"), kFamilyNameFieldMinChars, kFamilyNameFieldMaxChars]];
+        return NO;
+    }
+    
+    if ([self.breedField.text length] == 0) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:NSLocalizedString(@"Please enter the breed of your pet", @"Error message when pet breed is empty")];
+        return NO;
+    }
+    
+    if ([self.genderField.text length] == 0) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:NSLocalizedString(@"Please enter the gender of your pet", @"Error message when pet gender is empty")];
+        return NO;
+    }
+    
+    if ([self.ageField.text length] == 0) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:NSLocalizedString(@"Please enter your pets age", @"Error message when pet age is empty")];
+        return NO;
+    }
+    
+    NSString *weight = [self.weightField.text stringByReplacingOccurrencesOfString:self.weightDescriptor withString:@""];
+    weight = [weight stringByReplacingOccurrencesOfString:@" " withString:@""];
+    if ([weight length] == 0) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:NSLocalizedString(@"Please enter your pets weight", @"Error message when pet weight is empty")];
+    }
+    
+    return YES;
+}
+
 #pragma mark - IBActions
 - (IBAction)continueTapped:(id)sender
 {
-    // TODO: verification
-    [self performSegueWithIdentifier:@"setPetPhoto" sender:nil];
+    if ([self validateInput]) {
+        [self performSegueWithIdentifier:@"setPetPhoto" sender:nil];
+    }
 }
 
 #pragma mark - UITextFieldDelegate methods
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (textField == self.nameField) {
+        return [newString rangeOfCharacterFromSet:self.invalidNameCharacters options:NSCaseInsensitiveSearch].location == NSNotFound && [newString length] <= 10;
+    }
+    
+    if (textField == self.familyField) {
+        return [newString rangeOfCharacterFromSet:self.invalidFamilyNameCharacters options:NSCaseInsensitiveSearch].location == NSNotFound && [newString length] <= 35;
+    }
+    
+    if (textField == self.ageField || textField == self.weightField) {
+        return [newString rangeOfCharacterFromSet:self.invalidNumericalCharacters options:NSCaseInsensitiveSearch].location == NSNotFound;
+    }
+    
+    return YES;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     NSUInteger index = [self.textFields indexOfObject:textField];
