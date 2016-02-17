@@ -17,6 +17,7 @@ NSString * const kLoginErrorKey = @"LoginError";
 @interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate>
 
 @property (nonatomic, strong) GITInterfaceManager *interfaceManager;
+@property (nonatomic, strong) NSDataDetector *emailDetector;
 
 @end
 
@@ -28,6 +29,7 @@ NSString * const kLoginErrorKey = @"LoginError";
     static CPLoginController *s_Instance;
     dispatch_once(&onceToken, ^{
         s_Instance = [[CPLoginController alloc] init];
+        s_Instance.emailDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
     });
     return s_Instance;
 }
@@ -41,6 +43,12 @@ NSString * const kLoginErrorKey = @"LoginError";
         [GITClient sharedInstance].delegate = self;
     }
     return self;
+}
+
+- (BOOL)isValidEmail:(NSString *)email
+{
+    NSArray *emailMatches = [self.emailDetector matchesInString:email options:kNilOptions range:NSMakeRange(0, [email length])];
+    return [emailMatches count] == 1 && [[[emailMatches firstObject] URL].scheme isEqualToString:@"mailto"];
 }
 
 #pragma mark - Flow control

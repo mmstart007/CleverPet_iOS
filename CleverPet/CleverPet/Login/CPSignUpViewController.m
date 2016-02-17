@@ -29,6 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupStyling];
+    self.emailField.text = self.email;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -59,10 +60,41 @@
     self.signUpButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
+- (BOOL)validateInput
+{
+    NSString *emailString = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
+        [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address")];
+        return NO;
+    }
+    
+    if ([[self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] < 1) {
+        [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter a display name", @"Error message when trying to sign up with an invalid display name")];
+        return NO;
+    }
+    
+    // TODO: Password verification before sending to identity toolkit
+    
+    if ([self.passwordField.text length] < 1 || self.verifyField.text.length < 1) {
+        [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter and verify your password", @"Error message when trying to sign up with missing password")];
+        return NO;
+    }
+    
+    if (![self.passwordField.text isEqualToString:self.verifyField.text]) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"The passwords entered do not match", @"Error title when trying to sign up with mismatched passwords") andMessage:NSLocalizedString(@"Please re-enter your password", @"Error message when trying to sign up with mismatched passwords")];
+        return NO;
+    }
+    
+    return YES;
+}
+
 #pragma mark - IBActions
 - (IBAction)signUpTapped:(id)sender
 {
-    [[CPLoginController sharedInstance] signUpWithEmail:self.emailField.text displayName:self.nameField.text andPassword:self.passwordField.text];
+    if ([self validateInput]) {
+        [[CPLoginController sharedInstance] signUpWithEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] displayName:[self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] andPassword:self.passwordField.text];
+    }
 }
 
 #pragma mark - UITextFieldDelegate methods

@@ -24,4 +24,6 @@ extern NSString * const kLoginErrorKey;
 - (void)signInWithFacebook;
 - (void)signInWithGoogle;
 
+- (BOOL)isValidEmail:(NSString*)email;
+
 @end
