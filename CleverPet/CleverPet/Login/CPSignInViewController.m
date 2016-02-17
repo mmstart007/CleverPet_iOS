@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *forgotPasswordButton;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *signInButtonBottomConstraint;
 
 @end
 
@@ -95,16 +96,27 @@
     CGRect keyboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
     
-    UIEdgeInsets contentInset = self.scrollView.contentInset;
-    contentInset.bottom = keyboardRect.size.height;
-    self.scrollView.contentInset = contentInset;
+    NSTimeInterval duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve curve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [UIView setAnimationCurve:curve];
+        self.signInButtonBottomConstraint.constant = keyboardRect.size.height;
+        [self.view layoutIfNeeded];
+    } completion:nil];
 }
 
 - (void)keyboardWillHide:(NSNotification *)note
 {
-    UIEdgeInsets contentInset = self.scrollView.contentInset;
-    contentInset.bottom = 0;
-    self.scrollView.contentInset = contentInset;
+    NSDictionary *info = [note userInfo];
+    NSTimeInterval duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve curve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [UIView setAnimationCurve:curve];
+        self.signInButtonBottomConstraint.constant = 0.f;
+        [self.view layoutIfNeeded];
+    } completion:nil];
 }
 
 /*

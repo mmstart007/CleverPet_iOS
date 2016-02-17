@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *verifyField;
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *signUpButtonBottomConstraint;
 
 @end
 
@@ -87,16 +88,27 @@
     CGRect keyboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
     keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
     
-    UIEdgeInsets contentInset = self.scrollView.contentInset;
-    contentInset.bottom = keyboardRect.size.height;
-    self.scrollView.contentInset = contentInset;
+    NSTimeInterval duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve curve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [UIView setAnimationCurve:curve];
+        self.signUpButtonBottomConstraint.constant = keyboardRect.size.height;
+        [self.view layoutIfNeeded];
+    } completion:nil];
 }
 
 - (void)keyboardWillHide:(NSNotification *)note
 {
-    UIEdgeInsets contentInset = self.scrollView.contentInset;
-    contentInset.bottom = 0;
-    self.scrollView.contentInset = contentInset;
+    NSDictionary *info = [note userInfo];
+    NSTimeInterval duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve curve = [[info objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+    
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [UIView setAnimationCurve:curve];
+        self.signUpButtonBottomConstraint.constant = 0.f;
+        [self.view layoutIfNeeded];
+    } completion:nil];
 }
 
 /*
