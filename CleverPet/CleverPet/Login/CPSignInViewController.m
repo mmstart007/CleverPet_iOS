@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signInButtonBottomConstraint;
+@property (nonatomic, strong) NSDataDetector *dataDetector;
 
 @end
 
@@ -29,6 +30,7 @@
     // Do any additional setup after loading the view.
     self.emailField.text = self.email;
     [self setupStyling];
+    self.dataDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -61,6 +63,19 @@
     self.signInButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
+- (BOOL)validateInput
+{
+    NSString *emailString = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray *emailMatches = [self.dataDetector matchesInString:emailString options:kNilOptions range:NSMakeRange(0, [emailString length])];
+    
+    if ([emailMatches count] != 1 || ![[[emailMatches firstObject] URL].scheme isEqualToString:@"mailto"]) {
+        [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address")];
+        return NO;
+    }
+    
+    return YES;
+}
+
 #pragma mark - IBActions
 - (IBAction)forgotPasswordTapped:(id)sender
 {
@@ -69,12 +84,11 @@
 
 - (IBAction)signInTapped:(id)sender
 {
-    // TODO: verification
-    [[CPLoginController sharedInstance] verifyPassword:self.passwordField.text forEmail:self.emailField.text failure:^{
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails") message:NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails") preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }];
+    if ([self validateInput]) {
+        [[CPLoginController sharedInstance] verifyPassword:self.passwordField.text forEmail:self.emailField.text failure:^{
+            [self displayErrorAlertWithTitle:NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails") andMessage:NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails")];
+        }];
+    }
 }
 
 #pragma mark - UITextFieldDelegate methods

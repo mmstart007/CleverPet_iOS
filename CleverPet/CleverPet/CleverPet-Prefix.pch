@@ -10,5 +10,6 @@
 
 #import "UIFont+CleverPet.h"
 #import "UIColor+CleverPet.h"
+#import "UIViewController+CleverPet.h"
 
 #endif

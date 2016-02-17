@@ -72,16 +72,12 @@
     NSString *emailString = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSArray *emailMatches = [self.dataDetector matchesInString:emailString options:kNilOptions range:NSMakeRange(0, [emailString length])];
     
-    if ([emailMatches count] == 1 && [[[emailMatches firstObject] URL].scheme isEqualToString:@"mailto"]) {
-        return YES;
+    if ([emailMatches count] != 1 || ![[[emailMatches firstObject] URL].scheme isEqualToString:@"mailto"]) {
+        [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address")];
+        return NO;
     }
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address") preferredStyle:UIAlertControllerStyleAlert];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-    
-    return NO;
+    return YES;
 }
 
 #pragma mark - IBActions
