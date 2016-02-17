@@ -41,7 +41,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hAG-wA-LEy">
                                 <rect key="frame" x="0.0" y="42" width="293" height="699"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="252" misplaced="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Here's my body text!" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iD4-wD-MtP">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalHuggingPriority="252" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="Here's my body text!" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iD4-wD-MtP">
                                         <rect key="frame" x="0.0" y="0.0" width="293" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -99,6 +99,7 @@
                 <outlet property="bodyTextView" destination="iD4-wD-MtP" id="WJj-FW-XGx"/>
                 <outlet property="cellImageView" destination="mFx-Hn-w6d" id="Rkb-7N-icv"/>
                 <outlet property="colorBarView" destination="iTN-1K-Ios" id="OW2-1g-tGL"/>
+                <outlet property="tagTimeStampLabel" destination="5Dp-xC-Bv6" id="suy-rh-aDZ"/>
                 <outlet property="titleLabel" destination="OEU-Rs-4GK" id="zAP-0U-hck"/>
             </connections>
             <point key="canvasLocation" x="610" y="1223"/>

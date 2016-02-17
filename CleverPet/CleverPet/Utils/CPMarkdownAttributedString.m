@@ -18,14 +18,17 @@
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        UIFont *para = [UIFont fontWithName:@"AvenirNext-Medium" size:12.0];
-        UIFont *emph = [UIFont fontWithName:@"AvenirNext-Bold" size:12.0];
-        UIColor *color = [UIColor redColor];
+        UIFont *para = [UIFont cpLightFontWithSize:13 italic:NO];
+        UIColor *paraColor = [UIColor appLightGreyColor];
+//        UIFont *emph = [UIFont fontWithName:@"AvenirNext-Bold" size:12.0];
+        UIFont *emph = [UIFont cpMediumFontWithSize:13 italic:NO];
         
         s_markdownAttributes = @{
-                                 @(PARA): @{NSFontAttributeName: para},
+                                 @(PARA): @{
+                                         NSFontAttributeName: para,
+                                         NSForegroundColorAttributeName: paraColor
+                                         },
                                  @(EMPH): @{
-                                         NSForegroundColorAttributeName: color,
                                          NSFontAttributeName: emph
                                          }
                                  };
