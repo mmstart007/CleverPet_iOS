@@ -10,6 +10,9 @@
 
 @class GITAccount;
 
+extern NSString * const kLoginCompleteNotification;
+extern NSString * const kLoginErrorKey;
+
 @interface CPLoginController : NSObject
 
 + (instancetype)sharedInstance;

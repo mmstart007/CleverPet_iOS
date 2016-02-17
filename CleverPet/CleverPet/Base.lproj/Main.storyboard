@@ -73,11 +73,38 @@
                         <outlet property="iconImage" destination="REs-0U-Wys" id="u2U-Br-j0I"/>
                         <outlet property="signInButton" destination="M4t-xv-zM4" id="43Y-4t-BV0"/>
                         <outlet property="taglineLabel" destination="auy-Fs-Rb9" id="pYF-YW-3OL"/>
+                        <segue destination="EC4-kn-l0k" kind="show" identifier="setupPetProfile" id="nBB-Y7-LSw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="362" y="461"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="yl5-7j-K0b">
+            <objects>
+                <viewController id="EC4-kn-l0k" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vsP-lG-tWR"/>
+                        <viewControllerLayoutGuide type="bottom" id="9SQ-F1-fT9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sGD-I1-2YD">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Logged In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UpE-jt-kir">
+                                <rect key="frame" x="310" y="157" width="130" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="piX-PY-pt8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="362" y="1287"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="iJZ-ia-4ns">

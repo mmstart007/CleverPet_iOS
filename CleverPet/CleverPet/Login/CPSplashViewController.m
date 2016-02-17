@@ -26,6 +26,18 @@
     [self setupStyling];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginComplete:) name:kLoginCompleteNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -46,6 +58,16 @@
     [[CPLoginController sharedInstance] startSignin];
 }
 
+- (void)loginComplete:(NSNotification*)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    if (userInfo[kLoginErrorKey]) {
+        // TODO: display error
+    } else {
+        // TODO: skip profile set up if we've already done it
+        [self performSegueWithIdentifier:@"setupPetProfile" sender:nil];
+    }
+}
 
 /*
 #pragma mark - Navigation

@@ -11,6 +11,9 @@
 #import "CPSignInViewController.h"
 #import "CPSignUpViewController.h"
 
+NSString * const kLoginCompleteNotification = @"NOTE_LoginComplete";
+NSString * const kLoginErrorKey = @"LoginError";
+
 @interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate>
 
 @property (nonatomic, strong) GITInterfaceManager *interfaceManager;
@@ -114,7 +117,9 @@ didFinishSignInWithToken:(NSString *)token
        account:(GITAccount *)account
          error:(NSError *)error
 {
-    NSLog(@"Login Successful: %@", account.email);
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    userInfo[kLoginErrorKey] = error;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleteNotification object:nil userInfo:userInfo];
 }
 
 @end
