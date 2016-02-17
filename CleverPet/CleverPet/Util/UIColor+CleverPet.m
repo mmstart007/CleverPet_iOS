@@ -65,6 +65,11 @@
     return [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0];
 }
 
++ (UIColor*)appSubCopyTextColor
+{
+    return [UIColor colorWithWhite:.5f alpha:1.f];
+}
+
 + (UIColor*)appTextFieldPlaceholderColor
 {
     return [UIColor colorWithRed:197.0/255.0 green:197.0/255.0 blue:197.0/255.0 alpha:1.0];

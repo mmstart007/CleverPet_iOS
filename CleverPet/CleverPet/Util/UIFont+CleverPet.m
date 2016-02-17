@@ -13,6 +13,7 @@ NSString * const kFontName = @"Omnes";
 CGFloat const kButtonTitleFontSize = 15.0;
 CGFloat const kTextFieldFontSize = 15.0;
 CGFloat const kSignInHeaderFontSize = 17.0;
+CGFloat const kSubCopyFontSize = 13.0;
 
 @implementation UIFont(CleverPet)
 

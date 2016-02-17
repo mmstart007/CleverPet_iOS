@@ -40,6 +40,7 @@
 		97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */; };
 		97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF61C73CA1B007F1383 /* CPTextField.m */; };
 		97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */; };
+		97EB7AFF1C7400A9007F1383 /* CPPetPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AFE1C7400A9007F1383 /* CPPetPhotoViewController.m */; };
 		BCD1938D360A74B45F4482F4 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
@@ -94,6 +95,8 @@
 		97EB7AF61C73CA1B007F1383 /* CPTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTextField.m; sourceTree = "<group>"; };
 		97EB7AFA1C73F282007F1383 /* CPPetProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetProfileViewController.h; sourceTree = "<group>"; };
 		97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetProfileViewController.m; sourceTree = "<group>"; };
+		97EB7AFD1C7400A9007F1383 /* CPPetPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetPhotoViewController.h; sourceTree = "<group>"; };
+		97EB7AFE1C7400A9007F1383 /* CPPetPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetPhotoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +181,8 @@
 				97EB7AC11C73A97D007F1383 /* CPSignUpViewController.m */,
 				97EB7AFA1C73F282007F1383 /* CPPetProfileViewController.h */,
 				97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */,
+				97EB7AFD1C7400A9007F1383 /* CPPetPhotoViewController.h */,
+				97EB7AFE1C7400A9007F1383 /* CPPetPhotoViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -384,6 +389,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97EB7AFF1C7400A9007F1383 /* CPPetPhotoViewController.m in Sources */,
 				97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */,
 				97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */,
 				97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */,
@@ -510,7 +516,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				INFOPLIST_FILE = CleverPet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.getcleverpet.ios.CleverPet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -526,7 +532,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				INFOPLIST_FILE = CleverPet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.getcleverpet.ios.CleverPet;
 				PRODUCT_NAME = "$(TARGET_NAME)";

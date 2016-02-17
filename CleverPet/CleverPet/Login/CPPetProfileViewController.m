@@ -62,8 +62,8 @@
     self.headerLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
     self.headerLabel.textColor = [UIColor appSignUpHeaderTextColor];
     self.subCopyLabel.text = NSLocalizedString(@"Placeholder sub copy", @"Sub copy text for pets profile");
-    self.subCopyLabel.font = [UIFont cpLightFontWithSize:13.f italic:NO];
-    self.subCopyLabel.textColor = [UIColor colorWithWhite:.5f alpha:1.f];
+    self.subCopyLabel.font = [UIFont cpLightFontWithSize:kSubCopyFontSize italic:NO];
+    self.subCopyLabel.textColor = [UIColor appSubCopyTextColor];
     self.continueButton.backgroundColor = [UIColor appLightTealColor];
     self.continueButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.continueButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
@@ -73,6 +73,7 @@
 - (IBAction)continueTapped:(id)sender
 {
     // TODO: verification
+    [self performSegueWithIdentifier:@"setPetPhoto" sender:nil];
 }
 
 #pragma mark - UITextFieldDelegate methods
