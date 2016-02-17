@@ -39,6 +39,7 @@
 		97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */; };
 		97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */; };
 		97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF61C73CA1B007F1383 /* CPTextField.m */; };
+		97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */; };
 		BCD1938D360A74B45F4482F4 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,8 @@
 		97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CleverPet-Prefix.pch"; sourceTree = "<group>"; };
 		97EB7AF51C73CA1B007F1383 /* CPTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTextField.h; sourceTree = "<group>"; };
 		97EB7AF61C73CA1B007F1383 /* CPTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTextField.m; sourceTree = "<group>"; };
+		97EB7AFA1C73F282007F1383 /* CPPetProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetProfileViewController.h; sourceTree = "<group>"; };
+		97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetProfileViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +176,8 @@
 				97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */,
 				97EB7AC01C73A97D007F1383 /* CPSignUpViewController.h */,
 				97EB7AC11C73A97D007F1383 /* CPSignUpViewController.m */,
+				97EB7AFA1C73F282007F1383 /* CPPetProfileViewController.h */,
+				97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -386,6 +391,7 @@
 				97EB7AC21C73A97D007F1383 /* CPSignUpViewController.m in Sources */,
 				97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */,
 				0D36AA8B1C7243D600349D03 /* AppDelegate.m in Sources */,
+				97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */,
 				97EB7ABF1C72AAFB007F1383 /* CPLoginController.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
 				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
