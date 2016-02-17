@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signInButtonBottomConstraint;
 
+@property (nonatomic, strong) NSDataDetector *dataDetector;
+
 @end
 
 @implementation CPNascarViewController
@@ -29,6 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupStyling];
+    self.dataDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,6 +67,23 @@
     self.signInButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
+- (BOOL)validateInput
+{
+    NSString *emailString = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray *emailMatches = [self.dataDetector matchesInString:emailString options:kNilOptions range:NSMakeRange(0, [emailString length])];
+    
+    if ([emailMatches count] == 1 && [[[emailMatches firstObject] URL].scheme isEqualToString:@"mailto"]) {
+        return YES;
+    }
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address") preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    return NO;
+}
+
 #pragma mark - IBActions
 - (IBAction)facebookTapped:(id)sender
 {
@@ -77,7 +97,9 @@
 
 - (IBAction)signInTapped:(id)sender
 {
-    [[CPLoginController sharedInstance] signInWithEmail:self.emailField.text];
+    if ([self validateInput]) {
+        [[CPLoginController sharedInstance] signInWithEmail:self.emailField.text];
+    }
 }
 
 #pragma mark - UITextFieldDelegate methods

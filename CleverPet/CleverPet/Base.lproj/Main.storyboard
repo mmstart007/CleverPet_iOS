@@ -128,7 +128,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="Vot-L9-Rqo"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="EC4-kn-l0k" id="KvE-rL-V0O"/>
                                                 </connections>
@@ -140,7 +140,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="lbZ-9e-huQ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="EC4-kn-l0k" id="ADh-qT-yLY"/>
                                                 </connections>
@@ -152,7 +152,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="bMz-h8-mzo"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="EC4-kn-l0k" id="T1y-aW-PY3"/>
                                                 </connections>
@@ -393,7 +393,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="Xp0-H4-Ado"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="cwW-8n-6D6" id="Mhd-mW-VUw"/>
                                                 </connections>
@@ -405,7 +405,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="TQc-2e-SsR"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="cwW-8n-6D6" id="Xjz-Eh-yfb"/>
                                                 </connections>
@@ -510,7 +510,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="cOV-Ao-epA"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="hXy-6L-II2" id="k0E-AW-Cu8"/>
                                                 </connections>
@@ -522,7 +522,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="ydO-Zz-Kr2"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="hXy-6L-II2" id="p4u-rA-b3e"/>
                                                 </connections>
@@ -534,7 +534,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="Lh5-bb-b0m"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="hXy-6L-II2" id="jiZ-Le-vea"/>
                                                 </connections>
@@ -546,7 +546,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="g4E-hA-rLU"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="hXy-6L-II2" id="TZw-pZ-xav"/>
                                                 </connections>
@@ -649,7 +649,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="miq-20-aYh"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="gSk-5P-G4a" id="iIq-ut-niq"/>
                                                 </connections>
