@@ -9,8 +9,8 @@
 @interface CPTileViewCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *bodyTextView;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) NSLayoutConstraint *widthConstraint;
+@property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
+@property (weak, nonatomic) IBOutlet UIView *colorBarView;
 @end
 
 @implementation CPTileViewCell {
@@ -19,20 +19,15 @@
 - (void)setTile:(CPTile *)tile {
     self.titleLabel.text = tile.title;
     self.bodyTextView.attributedText = tile.parsedBody;
-    self.imageView.image = tile.image;
+    self.cellImageView.image = tile.image;
+    self.colorBarView.backgroundColor = [UIColor colorWithRed:11/256.0 green:172/256.0 blue:193/256.0 alpha:1];
 }
 
 - (void)awakeFromNib
 {
-    for (UIView *view in @[self.titleLabel, self.bodyTextView, self.imageView]) {
-        view.layer.borderColor = [[UIColor redColor] CGColor];
-        view.layer.borderWidth = 3;
-    }
-}
-
-- (UICollectionViewLayoutAttributes *)preferredLayoutAttributesFittingAttributes:(UICollectionViewLayoutAttributes *)layoutAttributes
-{
-    layoutAttributes = [super preferredLayoutAttributesFittingAttributes:layoutAttributes];
-    return layoutAttributes;
+//    for (UIView *view in @[self.titleLabel, self.bodyTextView, self.cellImageView]) {
+//        view.layer.borderColor = [[UIColor redColor] CGColor];
+//        view.layer.borderWidth = 3;
+//    }
 }
 @end

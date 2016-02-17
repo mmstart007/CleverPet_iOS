@@ -8,7 +8,7 @@
 #import "CPTile.h"
 
 @interface CPMainScreenViewController () <UICollectionViewDelegate>
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CPTileCollectionViewDataSource *dataSource;
 @end
 
@@ -20,16 +20,11 @@
 {
     [super viewDidLoad];
 
-    CPTileCollectionViewDataSource *dataSource = [[CPTileCollectionViewDataSource alloc] initWithCollectionView:self.collectionView];
+    CPTileCollectionViewDataSource *dataSource = [[CPTileCollectionViewDataSource alloc] initWithCollectionView:self.tableView];
 
     self.dataSource = dataSource;
-    self.collectionView.dataSource = dataSource;
-    self.collectionView.delegate = dataSource;
-    
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake(200, 100);
-    self.collectionView.collectionViewLayout = layout;
-    [dataSource didSetLayout:layout];
+    self.tableView.delegate = dataSource;
+    self.tableView.dataSource = dataSource;
     
     [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(addTile) userInfo:nil repeats:YES];
 }
@@ -39,7 +34,11 @@
     CPTile *tile = [[CPTile alloc] init];
     tile.date = [NSDate date];
     tile.title = @"Hey it's a title.";
-    tile.body = @"Hey this is my *body*! Check out all the cool types of wrapping I support!\nWasn't that *fun*?";
+    if (arc4random_uniform(2)) {
+    tile.body = [NSString stringWithFormat:@"%@ Hey this is my *message body*! *Bacon* ipsum dolor amet *spare ribs* drumstick short ribs ham, shank hamburger ham hock leberkas tri-tip pig doner kielbasa bresaola fatback. Spare ribs landjaeger shoulder venison, pork belly short ribs jerky pastrami pork hamburger pork loin. Alcatra beef ribeye prosciutto rump. Turducken drumstick salami capicola pork chop jerky beef bresaola biltong picanha shoulder hamburger pork short loin. Filet mignon pastrami meatloaf tongue. Shank sirloin salami biltong jerky shoulder chicken corned beef, pastrami tongue sausage beef ribs chuck pork kielbasa.", tile.date];
+    } else {
+        tile.body = [NSString stringWithFormat:@"Hey this is my *message body*! %@", tile.date];
+    }
     tile.image = [UIImage imageNamed:@"vallhund"];
     
     [self.dataSource addTile:tile];

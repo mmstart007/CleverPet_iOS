@@ -7,10 +7,9 @@
 
 @class CPTile;
 
-@interface CPTileCollectionViewDataSource : NSObject<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface CPTileCollectionViewDataSource : NSObject<UITableViewDataSource, UITableViewDelegate>
 
-- (instancetype)initWithCollectionView:(UICollectionView *)collectionView;
+- (instancetype)initWithCollectionView:(UITableView *)tableView;
 
 - (void)addTile:(CPTile *)tile;
-- (void)didSetLayout:(UICollectionViewFlowLayout *)layout;
 @end

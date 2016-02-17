@@ -20,6 +20,7 @@
 		1827A9098315281E1E57C652 /* CPTileSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A50A4A6169E21622727F /* CPTileSection.m */; };
 		1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */; };
 		1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A57728C978A652728E14 /* CPTileViewCell.m */; };
+		1827AF5E85F809C8C7FE5FF5 /* CPMarkdownAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A880EFE262472A13F251 /* CPMarkdownAttributedString.m */; };
 		9F35FA18F408008B41416649 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A9E804D4BE6FFF4E3C06AD /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
@@ -39,9 +40,11 @@
 		1827A50A4A6169E21622727F /* CPTileSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileSection.m; sourceTree = "<group>"; };
 		1827A57728C978A652728E14 /* CPTileViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileViewCell.m; sourceTree = "<group>"; };
 		1827A6F613CFD7AD893E5A8F /* CPTileCollectionViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileCollectionViewDataSource.h; sourceTree = "<group>"; };
+		1827A6FE7F5549A6001D14E7 /* CPMarkdownAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMarkdownAttributedString.h; sourceTree = "<group>"; };
 		1827A708180DD5D390DB0EA8 /* CPMainScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainScreenViewController.h; sourceTree = "<group>"; };
 		1827A7B9850CB706EB4171D0 /* CPMainScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainScreenViewController.m; sourceTree = "<group>"; };
 		1827A87BCF9FE7F9424CC0A7 /* CPSimpleDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSimpleDate.h; sourceTree = "<group>"; };
+		1827A880EFE262472A13F251 /* CPMarkdownAttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMarkdownAttributedString.m; sourceTree = "<group>"; };
 		1827A89D02ED75C767F6D453 /* CPTileCollectionViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileCollectionViewDataSource.m; sourceTree = "<group>"; };
 		1827AA55CD84B5F8ACE22F8A /* CPTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTile.h; sourceTree = "<group>"; };
 		1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSimpleDate.m; sourceTree = "<group>"; };
@@ -99,6 +102,7 @@
 				1827AE900814435357461822 /* View */,
 				1827A89D02ED75C767F6D453 /* CPTileCollectionViewDataSource.m */,
 				1827A6F613CFD7AD893E5A8F /* CPTileCollectionViewDataSource.h */,
+				1827A9E78952C5B4B2C50430 /* Utils */,
 			);
 			path = CleverPet;
 			sourceTree = "<group>";
@@ -131,6 +135,15 @@
 				1827A708180DD5D390DB0EA8 /* CPMainScreenViewController.h */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		1827A9E78952C5B4B2C50430 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1827A880EFE262472A13F251 /* CPMarkdownAttributedString.m */,
+				1827A6FE7F5549A6001D14E7 /* CPMarkdownAttributedString.h */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		1827AE900814435357461822 /* View */ = {
@@ -275,6 +288,7 @@
 				1827A9098315281E1E57C652 /* CPTileSection.m in Sources */,
 				1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */,
 				1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */,
+				1827AF5E85F809C8C7FE5FF5 /* CPMarkdownAttributedString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

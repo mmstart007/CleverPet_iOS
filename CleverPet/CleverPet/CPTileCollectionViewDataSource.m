@@ -13,7 +13,7 @@
 
 @interface CPTileCollectionViewDataSource ()
 @property (strong, nonatomic) NSMutableArray<CPTile *> *tiles;
-@property (weak, nonatomic) UICollectionView *collectionView;
+@property (weak, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) CPTileViewCell *cell;
 @end
 
@@ -21,75 +21,27 @@
 
 }
 
-- (instancetype)initWithCollectionView:(UICollectionView *)collectionView {
+- (instancetype)initWithCollectionView:(UITableView *)tableView {
     self = [super init];
     if (self) {
-        self.collectionView = collectionView;
+        self.tableView = tableView;
+        self.tableView.estimatedRowHeight = 100;
 
-        [collectionView registerNib:[UINib nibWithNibName:@"CPTileViewCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:TILE_VIEW_CELL];
+        [tableView registerNib:[UINib nibWithNibName:@"CPTileViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:TILE_VIEW_CELL];
     }
 
     return self;
-}
-
-- (void)didSetLayout:(UICollectionViewFlowLayout *)layout
-{
-//    layout.estimatedItemSize = CGSizeMake([UIScreen mainScreen].bounds.size.width, 200);
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (!self.cell) {
-        self.cell = [[[NSBundle mainBundle] loadNibNamed:@"CPTileViewCell" owner:self options:nil] objectAtIndex:0];
-//        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.cell
-//                                                                      attribute:NSLayoutAttributeWidth
-//                                                                      relatedBy:NSLayoutRelationEqual
-//                                                                         toItem:nil
-//                                                                      attribute:NSLayoutAttributeNotAnAttribute
-//                                                                     multiplier:1.0
-//                                                                       constant:collectionView.bounds.size.width];
-//        [self.cell addConstraint:constraint];
-    }
-    
-    CGRect frame = self.cell.frame;
-    frame.size = CGSizeMake(collectionView.bounds.size.width, CGFLOAT_MAX);
-    self.cell.frame = frame;
-    
-    CPTile *tile = self.tiles[indexPath.item];
-    self.cell.tile = tile;
-    
-    [self.cell setNeedsLayout];
-    [self.cell layoutIfNeeded];
-    CGSize newSize = [self.cell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    
-    return newSize;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CPTileViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:TILE_VIEW_CELL forIndexPath:indexPath];
-    CPTile *tile = self.tiles[(NSUInteger) indexPath.item];
-    cell.tile = tile;
-    
-    return cell;
-}
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.tiles.count;
 }
 
 - (void)addTile:(CPTile *)tile {
     NSUInteger index = [self.tiles indexOfObject:tile inSortedRange:NSMakeRange(0, self.tiles.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(CPTile *a, CPTile *b) {
         return [a.date compare:b.date];
     }];
-
-    [self.collectionView performBatchUpdates:^{
-        [self.collectionView insertItemsAtIndexPaths:@[[NSIndexPath indexPathForItem:index inSection:0]]];
-        [self.tiles insertObject:tile atIndex:index];
-    } completion:nil];
+    
+    [self.tableView beginUpdates];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tiles insertObject:tile atIndex:index];
+    [self.tableView endUpdates];
 }
 
 - (NSMutableArray *)tiles {
@@ -98,6 +50,18 @@
     }
 
     return _tiles;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.tiles.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CPTileViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TILE_VIEW_CELL];
+    CPTile *tile = self.tiles[(NSUInteger) indexPath.item];
+    cell.tile = tile;
+
+    return cell;
 }
 
 @end

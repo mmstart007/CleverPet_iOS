@@ -7,7 +7,7 @@
 
 @class CPTile;
 
-@interface CPTileViewCell : UICollectionViewCell
+@interface CPTileViewCell : UITableViewCell
 
 @property (weak, nonatomic) CPTile *tile;
 
