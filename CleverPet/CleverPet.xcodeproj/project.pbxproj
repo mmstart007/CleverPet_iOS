@@ -13,6 +13,7 @@
 		0D36AA911C7243D600349D03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA8F1C7243D600349D03 /* Main.storyboard */; };
 		0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA921C7243D600349D03 /* Assets.xcassets */; };
 		0D36AA961C7243D600349D03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA941C7243D600349D03 /* LaunchScreen.storyboard */; };
+		97CC44561C754B67003C4258 /* breeds.csv in Resources */ = {isa = PBXBuildFile; fileRef = 97CC44551C754B67003C4258 /* breeds.csv */; };
 		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
 		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
 		97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */; };
@@ -60,6 +61,7 @@
 		12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
 		3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
+		97CC44551C754B67003C4258 /* breeds.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = breeds.csv; sourceTree = "<group>"; };
 		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
 		97EB7AB41C729F33007F1383 /* CPNascarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNascarViewController.m; sourceTree = "<group>"; };
 		97EB7AB61C72A300007F1383 /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		0D36AA851C7243D600349D03 /* CleverPet */ = {
 			isa = PBXGroup;
 			children = (
+				97CC44541C754B67003C4258 /* Resources */,
 				97EB7AE81C73B833007F1383 /* Util */,
 				97EB7AC31C73B826007F1383 /* Font */,
 				97EB7ABC1C72AAE3007F1383 /* Managers */,
@@ -191,6 +194,14 @@
 				97EB7AFE1C7400A9007F1383 /* CPPetPhotoViewController.m */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		97CC44541C754B67003C4258 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				97CC44551C754B67003C4258 /* breeds.csv */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		97EB7ABC1C72AAE3007F1383 /* Managers */ = {
@@ -329,6 +340,7 @@
 				97EB7ADC1C73B826007F1383 /* Omnes-Hairline.otf in Resources */,
 				0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */,
 				97EB7AD91C73B826007F1383 /* Omnes-BoldItalic.otf in Resources */,
+				97CC44561C754B67003C4258 /* breeds.csv in Resources */,
 				97EB7AE51C73B826007F1383 /* Omnes-SemiboldItalic.otf in Resources */,
 				97EB7AE31C73B826007F1383 /* Omnes-RegularItalic.otf in Resources */,
 				97EB7AE11C73B826007F1383 /* Omnes-MediumItalic.otf in Resources */,
