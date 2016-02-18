@@ -6,10 +6,9 @@
 //  Copyright © 2016 CleverPet, Inc. All rights reserved.
 //
 
-#import "CPPickerViewController.h"
-#import "CPTextField.h"
+#import "CPGenderPickerViewController.h"
 
-@interface CPPickerViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface CPGenderPickerViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -27,11 +26,12 @@
 
 @end
 
-@implementation CPPickerViewController
+@implementation CPGenderPickerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.dataArray = @[NSLocalizedString(@"Male", nil), NSLocalizedString(@"Female", nil)];
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -40,16 +40,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)setupBreedPicker
-{
-    
-}
-
-- (void)setupGenderPicker
-{
-    self.dataArray = @[NSLocalizedString(@"Male", nil), NSLocalizedString(@"Female", nil)];
 }
 
 #pragma mark - UITableViewDataSource methods

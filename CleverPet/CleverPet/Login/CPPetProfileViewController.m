@@ -8,14 +8,14 @@
 
 #import "CPPetProfileViewController.h"
 #import "CPTextField.h"
-#import "CPPickerViewController.h"
+#import "CPGenderPickerViewController.h"
 
 NSInteger const kNameFieldMinChars = 2;
 NSInteger const kNameFieldMaxChars = 10;
 NSInteger const kFamilyNameFieldMinChars = 1;
 NSInteger const kFamilyNameFieldMaxChars = 35;
 
-@interface CPPetProfileViewController ()<UITextFieldDelegate, CPPickerViewDelegate>
+@interface CPPetProfileViewController ()<UITextFieldDelegate, CPGenderPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subCopyLabel;
@@ -34,8 +34,7 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 @property (nonatomic, strong) NSCharacterSet *invalidNumericalCharacters;
 
 @property (nonatomic, strong) NSString *weightDescriptor;
-@property (nonatomic, strong) CPPickerViewController *genderPicker;
-@property (nonatomic, strong) CPPickerViewController *breedPicker;
+@property (nonatomic, strong) CPGenderPickerViewController *genderPicker;
 
 @end
 
@@ -61,8 +60,6 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     
     self.invalidNumericalCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789.,"] invertedSet];
     self.weightDescriptor = @"lbs";
-    
-    [self setupGenderInput];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -95,11 +92,6 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     self.continueButton.backgroundColor = [UIColor appLightTealColor];
     self.continueButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.continueButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
-}
-
-- (void)setupGenderInput
-{
-    
 }
 
 - (BOOL)validateInput
@@ -187,9 +179,8 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 {
     if (textField == self.genderField) {
         if (!self.genderPicker) {
-            CPPickerViewController *genderPicker = [self.storyboard instantiateViewControllerWithIdentifier:@"PickerViewController"];
+            CPGenderPickerViewController *genderPicker = [self.storyboard instantiateViewControllerWithIdentifier:@"GenderPicker"];
             genderPicker.delegate = self;
-            [genderPicker setupGenderPicker];
             textField.inputView = genderPicker.view;
             self.genderPicker = genderPicker;
         }
@@ -201,14 +192,11 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 }
 
 #pragma mark - CPPickerViewDelegate methods
-- (void)pickerViewController:(CPPickerViewController *)controller selectedString:(NSString *)string
+- (void)pickerViewController:(CPGenderPickerViewController *)controller selectedString:(NSString *)string
 {
     if (controller == self.genderPicker) {
         self.genderField.text = string;
         [self moveToNextTextFieldFrom:self.genderField];
-    } else if (controller == self.breedPicker) {
-        self.breedField.text = string;
-        [self moveToNextTextFieldFrom:self.breedField];
     }
 }
 

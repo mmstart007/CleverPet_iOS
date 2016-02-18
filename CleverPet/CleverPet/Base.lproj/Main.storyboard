@@ -80,10 +80,10 @@
             </objects>
             <point key="canvasLocation" x="362" y="461"/>
         </scene>
-        <!--Picker View Controller-->
+        <!--Gender Picker View Controller-->
         <scene sceneID="Ktj-rY-i5k">
             <objects>
-                <viewController storyboardIdentifier="PickerViewController" automaticallyAdjustsScrollViewInsets="NO" id="rYS-X1-dZy" customClass="CPPickerViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GenderPicker" automaticallyAdjustsScrollViewInsets="NO" id="rYS-X1-dZy" customClass="CPGenderPickerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qHK-Gp-o2p"/>
                         <viewControllerLayoutGuide type="bottom" id="ShT-Sh-p69"/>
