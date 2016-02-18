@@ -282,6 +282,17 @@
                                                     <outlet property="delegate" destination="EC4-kn-l0k" id="uNN-bu-Nby"/>
                                                 </connections>
                                             </textField>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="zAf-Of-DtD">
+                                                <rect key="frame" x="495" y="473" width="75" height="29"/>
+                                                <segments>
+                                                    <segment title="Lbs"/>
+                                                    <segment title="Kgs"/>
+                                                </segments>
+                                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <connections>
+                                                    <action selector="weightSwitchValueChanged:" destination="EC4-kn-l0k" eventType="valueChanged" id="SlL-iw-rgP"/>
+                                                </connections>
+                                            </segmentedControl>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -290,6 +301,7 @@
                                             <constraint firstAttribute="bottom" secondItem="oTN-ZN-WTl" secondAttribute="bottom" constant="20" id="8us-wJ-VEO"/>
                                             <constraint firstAttribute="trailing" secondItem="ca7-hY-gjw" secondAttribute="trailing" id="AtC-9k-dWh"/>
                                             <constraint firstItem="wWR-mt-VPz" firstAttribute="top" secondItem="bf5-vY-3nT" secondAttribute="top" constant="40" id="Cxu-of-ZPf"/>
+                                            <constraint firstItem="zAf-Of-DtD" firstAttribute="centerY" secondItem="oTN-ZN-WTl" secondAttribute="centerY" id="E54-dn-odS"/>
                                             <constraint firstItem="ca7-hY-gjw" firstAttribute="leading" secondItem="bf5-vY-3nT" secondAttribute="leading" id="FQm-U4-oG9"/>
                                             <constraint firstItem="NkG-UO-2EN" firstAttribute="leading" secondItem="bf5-vY-3nT" secondAttribute="leading" id="Fgx-Oy-181"/>
                                             <constraint firstAttribute="trailing" secondItem="QA8-9u-6o4" secondAttribute="trailing" id="HZa-99-Hn5"/>
@@ -305,6 +317,7 @@
                                             <constraint firstAttribute="trailing" secondItem="oTN-ZN-WTl" secondAttribute="trailing" id="hDz-PB-HV9"/>
                                             <constraint firstItem="oTN-ZN-WTl" firstAttribute="leading" secondItem="bf5-vY-3nT" secondAttribute="leading" id="jpH-Y1-p9u"/>
                                             <constraint firstItem="WWp-oX-tKQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bf5-vY-3nT" secondAttribute="leading" constant="20" id="muh-oU-Xg5"/>
+                                            <constraint firstAttribute="trailing" secondItem="zAf-Of-DtD" secondAttribute="trailing" constant="30" id="na4-ou-aka"/>
                                             <constraint firstItem="Haa-fd-jOd" firstAttribute="leading" secondItem="bf5-vY-3nT" secondAttribute="leading" id="nfn-Cb-5jb"/>
                                             <constraint firstItem="Svj-Zh-8Rf" firstAttribute="top" secondItem="ca7-hY-gjw" secondAttribute="bottom" constant="15" id="pkD-I5-ZsZ"/>
                                             <constraint firstAttribute="trailing" secondItem="Haa-fd-jOd" secondAttribute="trailing" id="qhG-7t-8tH"/>
@@ -346,6 +359,7 @@
                         <outlet property="nameField" destination="NkG-UO-2EN" id="GJD-Sd-6sQ"/>
                         <outlet property="subCopyLabel" destination="WWp-oX-tKQ" id="Ekw-1C-gWz"/>
                         <outlet property="weightField" destination="oTN-ZN-WTl" id="OH4-Ce-wN8"/>
+                        <outlet property="weightUnitSelector" destination="zAf-Of-DtD" id="b8o-DR-5BX"/>
                         <segue destination="muY-qc-SbR" kind="show" identifier="setPetPhoto" id="0rz-b7-jhR"/>
                     </connections>
                 </viewController>

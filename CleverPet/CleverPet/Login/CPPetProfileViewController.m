@@ -28,6 +28,7 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 @property (weak, nonatomic) IBOutlet CPTextField *weightField;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *continueButtonBottomConstraint;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *weightUnitSelector;
 
 @property (nonatomic, strong) NSArray *textFields;
 @property (nonatomic, strong) NSCharacterSet *invalidNameCharacters;
@@ -59,8 +60,12 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     [alphaSet formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
     self.invalidFamilyNameCharacters = [alphaSet invertedSet];
     
-    self.invalidNumericalCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789.,"] invertedSet];
-    self.weightDescriptor = @"lbs";
+    self.invalidNumericalCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
+    self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
+    
+    self.weightUnitSelector.tintColor = [UIColor appTextFieldPlaceholderColor];
+    [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appSignUpHeaderTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
+    [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appSignUpHeaderTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -134,7 +139,7 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 - (void)moveToNextTextFieldFrom:(UITextField*)textField
 {
     NSUInteger index = [self.textFields indexOfObject:textField];
-    if (index < [self.textFields count]) {
+    if (index+1 < [self.textFields count]) {
         [self.textFields[index+1] becomeFirstResponder];
     } else {
         // TODO: tap continue?
@@ -150,6 +155,13 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     }
 }
 
+- (IBAction)weightSwitchValueChanged:(id)sender
+{
+    NSString *newDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
+    self.weightField.text = [self.weightField.text stringByReplacingOccurrencesOfString:self.weightDescriptor withString:newDescriptor];
+    self.weightDescriptor = newDescriptor;
+}
+
 #pragma mark - UITextFieldDelegate methods
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -162,8 +174,12 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
         return [newString rangeOfCharacterFromSet:self.invalidFamilyNameCharacters options:NSCaseInsensitiveSearch].location == NSNotFound && [newString length] <= 35;
     }
     
-    if (textField == self.ageField || textField == self.weightField) {
+    if (textField == self.weightField) {
         return [newString rangeOfCharacterFromSet:self.invalidNumericalCharacters options:NSCaseInsensitiveSearch].location == NSNotFound;
+    }
+    
+    if (textField == self.ageField) {
+        return [newString rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet] options:NSCaseInsensitiveSearch].location == NSNotFound;
     }
     
     // Disable typing for gender/breed fields
@@ -194,6 +210,20 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     }
     
     return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == self.weightField) {
+        self.weightField.text = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == self.weightField) {
+        self.weightField.text = [NSString stringWithFormat:@"%@ %@", self.weightField.text, self.weightDescriptor];
+    }
 }
 
 #pragma mark - CPGenderPickerDelegate methods
