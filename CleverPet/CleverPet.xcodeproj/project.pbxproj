@@ -17,6 +17,8 @@
 		97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */; };
 		97CC445D1C7552C3003C4258 /* CPSimpleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC445B1C7552C3003C4258 /* CPSimpleTableViewCell.m */; };
 		97CC445E1C7552C3003C4258 /* CPSimpleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97CC445C1C7552C3003C4258 /* CPSimpleTableViewCell.xib */; };
+		97CC44651C76571F003C4258 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97CC44641C76571F003C4258 /* Settings.storyboard */; };
+		97CC44691C766A28003C4258 /* CPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44681C766A28003C4258 /* CPSettingsViewController.m */; };
 		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
 		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
 		97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */; };
@@ -70,6 +72,9 @@
 		97CC445A1C7552C3003C4258 /* CPSimpleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSimpleTableViewCell.h; sourceTree = "<group>"; };
 		97CC445B1C7552C3003C4258 /* CPSimpleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSimpleTableViewCell.m; sourceTree = "<group>"; };
 		97CC445C1C7552C3003C4258 /* CPSimpleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPSimpleTableViewCell.xib; sourceTree = "<group>"; };
+		97CC44641C76571F003C4258 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		97CC44671C766A28003C4258 /* CPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSettingsViewController.h; sourceTree = "<group>"; };
+		97CC44681C766A28003C4258 /* CPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSettingsViewController.m; sourceTree = "<group>"; };
 		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
 		97EB7AB41C729F33007F1383 /* CPNascarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNascarViewController.m; sourceTree = "<group>"; };
 		97EB7AB61C72A300007F1383 /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
@@ -148,6 +153,7 @@
 		0D36AA851C7243D600349D03 /* CleverPet */ = {
 			isa = PBXGroup;
 			children = (
+				97CC44661C7669B3003C4258 /* Settings */,
 				97CC44541C754B67003C4258 /* Resources */,
 				97EB7AE81C73B833007F1383 /* Util */,
 				97EB7AC31C73B826007F1383 /* Font */,
@@ -164,6 +170,7 @@
 				0D36AA861C7243D600349D03 /* Supporting Files */,
 				97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */,
 				97EB7AF41C73C9FD007F1383 /* View */,
+				97CC44641C76571F003C4258 /* Settings.storyboard */,
 			);
 			path = CleverPet;
 			sourceTree = "<group>";
@@ -221,6 +228,15 @@
 				97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */,
 			);
 			name = Pickers;
+			sourceTree = "<group>";
+		};
+		97CC44661C7669B3003C4258 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				97CC44671C766A28003C4258 /* CPSettingsViewController.h */,
+				97CC44681C766A28003C4258 /* CPSettingsViewController.m */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		97EB7ABC1C72AAE3007F1383 /* Managers */ = {
@@ -355,6 +371,7 @@
 				0D36AA961C7243D600349D03 /* LaunchScreen.storyboard in Resources */,
 				97EB7AE41C73B826007F1383 /* Omnes-Semibold.otf in Resources */,
 				97EB7ADF1C73B826007F1383 /* Omnes-LightItalic.otf in Resources */,
+				97CC44651C76571F003C4258 /* Settings.storyboard in Resources */,
 				97EB7AE61C73B826007F1383 /* Omnes-Thin.otf in Resources */,
 				97EB7ADE1C73B826007F1383 /* Omnes-Light.otf in Resources */,
 				97EB7AD81C73B826007F1383 /* Omnes-Bold.otf in Resources */,
@@ -449,6 +466,7 @@
 				97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */,
 				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
 				97EB7B081C75316F007F1383 /* CPGenderPickerViewController.m in Sources */,
+				97CC44691C766A28003C4258 /* CPSettingsViewController.m in Sources */,
 				97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

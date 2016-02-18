@@ -15,6 +15,9 @@ CGFloat const kTextFieldFontSize = 15.0;
 CGFloat const kSignInHeaderFontSize = 17.0;
 CGFloat const kSubCopyFontSize = 13.0;
 
+CGFloat const kTableCellTitleSize = 15.0;
+CGFloat const kTableCellSubTextSize = 10.0;
+
 @implementation UIFont(CleverPet)
 
 + (UIFont*)cpHairlineFontWithSize:(CGFloat)fontSize italic:(BOOL)italic
