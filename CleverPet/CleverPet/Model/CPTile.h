@@ -14,6 +14,8 @@
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) UIImage *image;
 
+@property (assign, nonatomic) BOOL hasLeftButton, hasRightButton;
+
 // Non-persisted properties
 @property (strong, nonatomic) NSAttributedString<Ignore>*parsedBody;
 @end
