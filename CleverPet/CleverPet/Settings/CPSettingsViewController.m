@@ -12,14 +12,10 @@ NSUInteger const kDeviceSection = 0;
 NSUInteger const kHelpSection = 1;
 NSUInteger const kAccountSection = 2;
 
-@interface CPSettingsViewController ()
-
-
-@end
-
 @interface CPSettingsBasicCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIView *separator;
 
 @end
 
@@ -33,10 +29,19 @@ NSUInteger const kAccountSection = 2;
 
 @end
 
+@interface CPSettingsViewController ()
+
+@property (weak, nonatomic) IBOutlet CPSettingsHubStatusCell *hubCell;
+
+@end
+
 @implementation CPSettingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.backgroundColor = [UIColor appBackgroundColor];
+    self.tableView.separatorColor = [UIColor redColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,7 +53,7 @@ NSUInteger const kAccountSection = 2;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // TODO: check hub state
-    if (section == kHelpSection) {
+    if (section == kHelpSection && YES) {
         return 2;
     }
     
@@ -101,20 +106,23 @@ NSUInteger const kAccountSection = 2;
     return headerView;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    // TODO: Check hub status
+    if (indexPath.section == kHelpSection && NO) {
+        // Offset our index path to account for the hidden chat with us cell
+        NSIndexPath *newIndexPath = [NSIndexPath indexPathForRow:indexPath.row+1 inSection:indexPath.section];
+        return [super tableView:tableView cellForRowAtIndexPath:newIndexPath];
+    }
+    
+    return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+}
+
 #pragma mark - UITableViewDelegate methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Hide separator if it's the last row in the section
-    if (indexPath.row == [tableView numberOfRowsInSection:indexPath.section] - 1) {
-        cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, tableView.bounds.size.width);
-    } else {
-        cell.separatorInset = UIEdgeInsetsZero;
-    }
 }
 
 /*
@@ -137,6 +145,7 @@ NSUInteger const kAccountSection = 2;
 {
     self.titleLabel.font = [UIFont cpLightFontWithSize:kTableCellTitleSize italic:NO];
     self.titleLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.separator.backgroundColor = [UIColor appBackgroundColor];
     // TODO: disclosure indicator image
 }
 
