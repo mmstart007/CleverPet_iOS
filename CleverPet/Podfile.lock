@@ -16,11 +16,13 @@ PODS:
     - AFNetworking/NSURLSession
   - AttributedMarkdown (0.9.2)
   - JSONModel (1.2.0)
+  - OAStackView (1.0.1)
 
 DEPENDENCIES:
   - AFNetworking
   - AttributedMarkdown (from `https://github.com/dreamwieber/AttributedMarkdown.git`)
   - JSONModel
+  - OAStackView
 
 EXTERNAL SOURCES:
   AttributedMarkdown:
@@ -35,5 +37,6 @@ SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   AttributedMarkdown: ac5060667280be8cc8ee33a46c73e4ec6b17ca1a
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
+  OAStackView: 95e7cb79cbea25c2342f496a44bdbe8bd4c8d510
 
 COCOAPODS: 0.38.2
