@@ -21,7 +21,6 @@
 		1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */; };
 		1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A57728C978A652728E14 /* CPTileViewCell.m */; };
 		1827AF5E85F809C8C7FE5FF5 /* CPMarkdownAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A880EFE262472A13F251 /* CPMarkdownAttributedString.m */; };
-		9F35FA18F408008B41416649 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A9E804D4BE6FFF4E3C06AD /* libPods-CleverPet.a */; };
 		97EB7AD61C73B826007F1383 /* Omnes-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC41C73B826007F1383 /* Omnes-Black.otf */; };
 		97EB7AD71C73B826007F1383 /* Omnes-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC51C73B826007F1383 /* Omnes-BlackItalic.otf */; };
 		97EB7AD81C73B826007F1383 /* Omnes-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AC61C73B826007F1383 /* Omnes-Bold.otf */; };
@@ -42,6 +41,7 @@
 		97EB7AE71C73B826007F1383 /* Omnes-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */; };
 		97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */; };
 		97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */; };
+		9F35FA18F408008B41416649 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A9E804D4BE6FFF4E3C06AD /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,8 +71,6 @@
 		1827ABB6A0821DBDEABC48C9 /* CPTileSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileSection.h; sourceTree = "<group>"; };
 		1827AD320F0C4F8FD18E36D8 /* CPTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTile.m; sourceTree = "<group>"; };
 		96A9E804D4BE6FFF4E3C06AD /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B84732F7BC0433516A62C96A /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
-		F69DE4571D744DF549FA8E73 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
 		97EB7AC41C73B826007F1383 /* Omnes-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Black.otf"; sourceTree = "<group>"; };
 		97EB7AC51C73B826007F1383 /* Omnes-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-BlackItalic.otf"; sourceTree = "<group>"; };
 		97EB7AC61C73B826007F1383 /* Omnes-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Bold.otf"; sourceTree = "<group>"; };
@@ -96,6 +94,8 @@
 		97EB7AEF1C73BEA9007F1383 /* UIColor+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CleverPet.h"; sourceTree = "<group>"; };
 		97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CleverPet.m"; sourceTree = "<group>"; };
 		97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CleverPet-Prefix.pch"; sourceTree = "<group>"; };
+		B84732F7BC0433516A62C96A /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
+		F69DE4571D744DF549FA8E73 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,15 +210,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		EA7AAA759335BC852E293C0E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B84732F7BC0433516A62C96A /* Pods-CleverPet.debug.xcconfig */,
-				F69DE4571D744DF549FA8E73 /* Pods-CleverPet.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		97EB7AC31C73B826007F1383 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +244,15 @@
 				97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		EA7AAA759335BC852E293C0E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B84732F7BC0433516A62C96A /* Pods-CleverPet.debug.xcconfig */,
+				F69DE4571D744DF549FA8E73 /* Pods-CleverPet.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -505,6 +505,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				INFOPLIST_FILE = CleverPet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.getcleverpet.ios.CleverPet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -520,6 +521,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				INFOPLIST_FILE = CleverPet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.getcleverpet.ios.CleverPet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
