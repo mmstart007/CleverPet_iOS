@@ -9,13 +9,14 @@
 #import "CPPetProfileViewController.h"
 #import "CPTextField.h"
 #import "CPGenderPickerViewController.h"
+#import "CPBreedPickerViewController.h"
 
 NSInteger const kNameFieldMinChars = 2;
 NSInteger const kNameFieldMaxChars = 10;
 NSInteger const kFamilyNameFieldMinChars = 1;
 NSInteger const kFamilyNameFieldMaxChars = 35;
 
-@interface CPPetProfileViewController ()<UITextFieldDelegate, CPGenderPickerViewDelegate>
+@interface CPPetProfileViewController ()<UITextFieldDelegate, CPGenderPickerViewDelegate, CPBreedPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subCopyLabel;
@@ -185,19 +186,30 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
             self.genderPicker = genderPicker;
         }
     } else if (textField == self.breedField) {
-        
+        CPBreedPickerViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
+        vc.delegate = self;
+        vc.selectedBreed = self.breedField.text;
+        [self presentViewController:vc animated:YES completion:nil];
+        return NO;
     }
     
     return YES;
 }
 
-#pragma mark - CPPickerViewDelegate methods
+#pragma mark - CPGenderPickerDelegate methods
 - (void)pickerViewController:(CPGenderPickerViewController *)controller selectedString:(NSString *)string
 {
     if (controller == self.genderPicker) {
         self.genderField.text = string;
         [self moveToNextTextFieldFrom:self.genderField];
     }
+}
+
+#pragma mark - CPBreedPickerDelegate methods
+- (void)selectedBreed:(NSString *)breedName
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    self.breedField.text = breedName;
 }
 
 #pragma mark - Keyboard

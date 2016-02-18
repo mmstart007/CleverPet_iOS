@@ -7,22 +7,13 @@
 //
 
 #import "CPGenderPickerViewController.h"
+#import "CPSimpleTableViewCell.h"
 
 @interface CPGenderPickerViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) NSArray *dataArray;
-
-@end
-
-@interface CPPickerViewCell : UITableViewCell
-
-@property (weak, nonatomic) IBOutlet UIView *stripeView;
-@property (weak, nonatomic) IBOutlet UILabel *displayLabel;
-@property (weak, nonatomic) IBOutlet UIView *separatorView;
-
-- (void)setupWithString:(NSString *)string;
 
 @end
 
@@ -35,6 +26,7 @@
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.tableView registerNib:[UINib nibWithNibName:@"CPSimpleTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,7 +47,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CPPickerViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PickerCell" forIndexPath:indexPath];
+    CPSimpleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     [cell setupWithString:self.dataArray[indexPath.row]];
     return cell;
 }
@@ -75,24 +67,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-@end
-
-@implementation CPPickerViewCell
-
-- (void)awakeFromNib
-{
-    self.stripeView.backgroundColor = [UIColor appTealColor];
-    self.backgroundColor = [UIColor appWhiteColor];
-    self.contentView.backgroundColor = [UIColor appWhiteColor];
-    self.separatorView.backgroundColor = [UIColor appBackgroundColor];
-    self.displayLabel.textColor = [UIColor appSignUpHeaderTextColor];
-    self.displayLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
-}
-
-- (void)setupWithString:(NSString *)string
-{
-    self.displayLabel.text = string;
-}
 
 @end

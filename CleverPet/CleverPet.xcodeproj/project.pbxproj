@@ -14,6 +14,9 @@
 		0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA921C7243D600349D03 /* Assets.xcassets */; };
 		0D36AA961C7243D600349D03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA941C7243D600349D03 /* LaunchScreen.storyboard */; };
 		97CC44561C754B67003C4258 /* breeds.csv in Resources */ = {isa = PBXBuildFile; fileRef = 97CC44551C754B67003C4258 /* breeds.csv */; };
+		97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */; };
+		97CC445D1C7552C3003C4258 /* CPSimpleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC445B1C7552C3003C4258 /* CPSimpleTableViewCell.m */; };
+		97CC445E1C7552C3003C4258 /* CPSimpleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97CC445C1C7552C3003C4258 /* CPSimpleTableViewCell.xib */; };
 		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
 		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
 		97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */; };
@@ -62,6 +65,11 @@
 		1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
 		3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
 		97CC44551C754B67003C4258 /* breeds.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = breeds.csv; sourceTree = "<group>"; };
+		97CC44571C754E93003C4258 /* CPBreedPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBreedPickerViewController.h; sourceTree = "<group>"; };
+		97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBreedPickerViewController.m; sourceTree = "<group>"; };
+		97CC445A1C7552C3003C4258 /* CPSimpleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSimpleTableViewCell.h; sourceTree = "<group>"; };
+		97CC445B1C7552C3003C4258 /* CPSimpleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSimpleTableViewCell.m; sourceTree = "<group>"; };
+		97CC445C1C7552C3003C4258 /* CPSimpleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPSimpleTableViewCell.xib; sourceTree = "<group>"; };
 		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
 		97EB7AB41C729F33007F1383 /* CPNascarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNascarViewController.m; sourceTree = "<group>"; };
 		97EB7AB61C72A300007F1383 /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
@@ -204,6 +212,17 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		97CC445F1C76382A003C4258 /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				97EB7B061C75316F007F1383 /* CPGenderPickerViewController.h */,
+				97EB7B071C75316F007F1383 /* CPGenderPickerViewController.m */,
+				97CC44571C754E93003C4258 /* CPBreedPickerViewController.h */,
+				97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */,
+			);
+			name = Pickers;
+			sourceTree = "<group>";
+		};
 		97EB7ABC1C72AAE3007F1383 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,10 +273,12 @@
 		97EB7AF41C73C9FD007F1383 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				97CC445F1C76382A003C4258 /* Pickers */,
 				97EB7AF51C73CA1B007F1383 /* CPTextField.h */,
 				97EB7AF61C73CA1B007F1383 /* CPTextField.m */,
-				97EB7B061C75316F007F1383 /* CPGenderPickerViewController.h */,
-				97EB7B071C75316F007F1383 /* CPGenderPickerViewController.m */,
+				97CC445A1C7552C3003C4258 /* CPSimpleTableViewCell.h */,
+				97CC445B1C7552C3003C4258 /* CPSimpleTableViewCell.m */,
+				97CC445C1C7552C3003C4258 /* CPSimpleTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -346,6 +367,7 @@
 				97EB7AE11C73B826007F1383 /* Omnes-MediumItalic.otf in Resources */,
 				97EB7AD61C73B826007F1383 /* Omnes-Black.otf in Resources */,
 				97EB7AE21C73B826007F1383 /* Omnes-Regular.otf in Resources */,
+				97CC445E1C7552C3003C4258 /* CPSimpleTableViewCell.xib in Resources */,
 				0D36AA911C7243D600349D03 /* Main.storyboard in Resources */,
 				97EB7AE01C73B826007F1383 /* Omnes-Medium.otf in Resources */,
 				97EB7ADD1C73B826007F1383 /* Omnes-HairlineItalic.otf in Resources */,
@@ -421,6 +443,8 @@
 				0D36AA8B1C7243D600349D03 /* AppDelegate.m in Sources */,
 				97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */,
 				97EB7ABF1C72AAFB007F1383 /* CPLoginController.m in Sources */,
+				97CC445D1C7552C3003C4258 /* CPSimpleTableViewCell.m in Sources */,
+				97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
 				97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */,
 				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
@@ -540,7 +564,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				INFOPLIST_FILE = CleverPet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.getcleverpet.ios.CleverPet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -556,7 +580,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				INFOPLIST_FILE = CleverPet/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.getcleverpet.ios.CleverPet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
