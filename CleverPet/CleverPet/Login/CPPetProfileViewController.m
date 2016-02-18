@@ -8,13 +8,14 @@
 
 #import "CPPetProfileViewController.h"
 #import "CPTextField.h"
+#import "CPPickerViewController.h"
 
 NSInteger const kNameFieldMinChars = 2;
 NSInteger const kNameFieldMaxChars = 10;
 NSInteger const kFamilyNameFieldMinChars = 1;
 NSInteger const kFamilyNameFieldMaxChars = 35;
 
-@interface CPPetProfileViewController ()<UITextFieldDelegate>
+@interface CPPetProfileViewController ()<UITextFieldDelegate, CPPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subCopyLabel;
@@ -33,6 +34,8 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 @property (nonatomic, strong) NSCharacterSet *invalidNumericalCharacters;
 
 @property (nonatomic, strong) NSString *weightDescriptor;
+@property (nonatomic, strong) CPPickerViewController *genderPicker;
+@property (nonatomic, strong) CPPickerViewController *breedPicker;
 
 @end
 
@@ -58,6 +61,8 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     
     self.invalidNumericalCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789.,"] invertedSet];
     self.weightDescriptor = @"lbs";
+    
+    [self setupGenderInput];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -90,6 +95,11 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     self.continueButton.backgroundColor = [UIColor appLightTealColor];
     self.continueButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.continueButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+}
+
+- (void)setupGenderInput
+{
+    
 }
 
 - (BOOL)validateInput
@@ -128,6 +138,17 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     return YES;
 }
 
+- (void)moveToNextTextFieldFrom:(UITextField*)textField
+{
+    NSUInteger index = [self.textFields indexOfObject:textField];
+    if (index < [self.textFields count]) {
+        [self.textFields[index+1] becomeFirstResponder];
+    } else {
+        // TODO: tap continue?
+        [textField resignFirstResponder];
+    }
+}
+
 #pragma mark - IBActions
 - (IBAction)continueTapped:(id)sender
 {
@@ -152,19 +173,43 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
         return [newString rangeOfCharacterFromSet:self.invalidNumericalCharacters options:NSCaseInsensitiveSearch].location == NSNotFound;
     }
     
-    return YES;
+    // Disable typing for gender/breed fields
+    return NO;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    NSUInteger index = [self.textFields indexOfObject:textField];
-    if (index < [self.textFields count]) {
-        [self.textFields[index+1] becomeFirstResponder];
-    } else {
-        // TODO: tap continue?
-        [textField resignFirstResponder];
-    }
+    [self moveToNextTextFieldFrom:textField];
     return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == self.genderField) {
+        if (!self.genderPicker) {
+            CPPickerViewController *genderPicker = [self.storyboard instantiateViewControllerWithIdentifier:@"PickerViewController"];
+            genderPicker.delegate = self;
+            [genderPicker setupGenderPicker];
+            textField.inputView = genderPicker.view;
+            self.genderPicker = genderPicker;
+        }
+    } else if (textField == self.breedField) {
+        
+    }
+    
+    return YES;
+}
+
+#pragma mark - CPPickerViewDelegate methods
+- (void)pickerViewController:(CPPickerViewController *)controller selectedString:(NSString *)string
+{
+    if (controller == self.genderPicker) {
+        self.genderField.text = string;
+        [self moveToNextTextFieldFrom:self.genderField];
+    } else if (controller == self.breedPicker) {
+        self.breedField.text = string;
+        [self moveToNextTextFieldFrom:self.breedField];
+    }
 }
 
 #pragma mark - Keyboard
