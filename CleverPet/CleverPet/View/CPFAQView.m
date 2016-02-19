@@ -64,7 +64,7 @@
     headerLabel.numberOfLines = 0;
     headerLabel.text = self.title;
     headerLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
-    headerLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    headerLabel.textColor = [UIColor appTitleTextColor];
     UIButton *expandButton = [UIButton buttonWithType:UIButtonTypeCustom];
     expandButton.translatesAutoresizingMaskIntoConstraints = NO;
     // TODO: carat image

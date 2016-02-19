@@ -20,7 +20,7 @@
 + (UIColor*)appWhiteColor;
 + (UIColor*)appBackgroundColor;
 + (UIColor*)appLightTealColor;
-+ (UIColor*)appSignUpHeaderTextColor;
++ (UIColor*)appTitleTextColor;
 + (UIColor*)appSubCopyTextColor;
 + (UIColor*)appTextFieldPlaceholderColor;
 

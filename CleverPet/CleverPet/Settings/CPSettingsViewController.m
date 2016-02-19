@@ -99,7 +99,7 @@ NSUInteger const kAccountSection = 2;
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     titleLabel.text = title;
     titleLabel.font = [UIFont cpLightFontWithSize:kTableCellTitleSize italic:NO];
-    titleLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    titleLabel.textColor = [UIColor appTitleTextColor];
     [headerView addSubview:titleLabel];
     [titleLabel sizeToFit];
     titleLabel.frame = CGRectMake(15.f, 0.f, titleLabel.bounds.size.width, headerView.bounds.size.height);
@@ -144,7 +144,7 @@ NSUInteger const kAccountSection = 2;
 - (void)awakeFromNib
 {
     self.titleLabel.font = [UIFont cpLightFontWithSize:kTableCellTitleSize italic:NO];
-    self.titleLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.titleLabel.textColor = [UIColor appTitleTextColor];
     self.separator.backgroundColor = [UIColor appBackgroundColor];
     // TODO: disclosure indicator image
 }
@@ -164,9 +164,9 @@ NSUInteger const kAccountSection = 2;
 {
     self.indicatorDot.layer.cornerRadius = self.indicatorDot.bounds.size.width*.5f;
     self.titleLabel.font = [UIFont cpLightFontWithSize:kTableCellTitleSize italic:NO];
-    self.titleLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.titleLabel.textColor = [UIColor appTitleTextColor];
     self.statusLabel.font = [UIFont cpLightFontWithSize:kTableCellSubTextSize italic:NO];
-    self.statusLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.statusLabel.textColor = [UIColor appTitleTextColor];
     // TODO: disclosure indicator image
 }
 

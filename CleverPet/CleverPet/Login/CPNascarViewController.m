@@ -53,9 +53,9 @@
 {
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.headerLabel.font = [UIFont cpLightFontWithSize:17.0 italic:NO];
-    self.headerLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.headerLabel.textColor = [UIColor appTitleTextColor];
     self.orLabel.font = [UIFont cpLightFontWithSize:15.0 italic:NO];
-    self.orLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.orLabel.textColor = [UIColor appTitleTextColor];
     
     self.facebookButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     self.googleButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
