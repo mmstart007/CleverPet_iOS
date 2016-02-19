@@ -6,6 +6,7 @@ target 'CleverPet' do
 pod 'GoogleIdentityToolkit'
 pod 'CHCSVParser'
 pod 'RBStoryboardLink'
+pod 'NMRangeSlider'
 
 end
 
