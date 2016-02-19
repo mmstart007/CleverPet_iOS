@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zOA-ft-mbW">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
@@ -138,7 +137,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="titleLabel" destination="mUb-FF-LcN" id="33B-Ea-lAX"/>
-                                            <segue destination="2Hv-gA-FZi" kind="show" id="zBm-6L-NGl"/>
+                                            <segue destination="Gnb-Zo-RjG" kind="show" id="60S-dd-QDI"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -192,14 +191,15 @@
         <!--CleverPet-->
         <scene sceneID="N6b-da-pPa">
             <objects>
-                <tableViewController id="2Hv-gA-FZi" customClass="CPFAQViewController" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rj5-qy-VWe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="2Hv-gA-FZi" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iQv-Vo-aSs">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="138" id="cjQ-jB-0a2" customClass="CPFAQTableCell">
-                                <rect key="frame" x="0.0" y="92" width="600" height="138"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="138"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cjQ-jB-0a2" id="ECR-Ag-nGZ">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="138"/>
@@ -290,9 +290,65 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="CleverPet" id="BAx-b7-hu8"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rj5-qy-VWe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="948" y="582"/>
+        </scene>
+        <!--FAQs-->
+        <scene sceneID="HnQ-vC-PR5">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Gnb-Zo-RjG" customClass="CPFAQViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XoC-gx-B3C"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vk8-YJ-Ctj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GL1-fY-CcM">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fI-tB-BQu">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CV9-fC-LEc">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eYd-Sw-c7N">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" id="D3I-sE-vAf"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="CV9-fC-LEc" secondAttribute="trailing" id="4vz-XO-UOL"/>
+                                    <constraint firstAttribute="bottom" secondItem="CV9-fC-LEc" secondAttribute="bottom" id="KGk-T2-zjc"/>
+                                    <constraint firstItem="CV9-fC-LEc" firstAttribute="top" secondItem="8fI-tB-BQu" secondAttribute="top" id="S3q-4N-BHs"/>
+                                    <constraint firstItem="CV9-fC-LEc" firstAttribute="leading" secondItem="8fI-tB-BQu" secondAttribute="leading" id="hgX-j1-JRR"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8fI-tB-BQu" firstAttribute="leading" secondItem="GL1-fY-CcM" secondAttribute="leading" id="2a9-9E-oD8"/>
+                            <constraint firstItem="CV9-fC-LEc" firstAttribute="width" secondItem="GL1-fY-CcM" secondAttribute="width" id="3Tf-sg-buB"/>
+                            <constraint firstItem="Vk8-YJ-Ctj" firstAttribute="top" secondItem="8fI-tB-BQu" secondAttribute="bottom" id="81o-kH-rcw"/>
+                            <constraint firstAttribute="trailing" secondItem="8fI-tB-BQu" secondAttribute="trailing" id="Kcf-qi-cC6"/>
+                            <constraint firstItem="8fI-tB-BQu" firstAttribute="top" secondItem="XoC-gx-B3C" secondAttribute="bottom" id="ogu-vM-2Bq"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="FAQs" id="aww-5T-EdC"/>
+                    <connections>
+                        <outlet property="scrollView" destination="8fI-tB-BQu" id="1kQ-na-JcY"/>
+                        <outlet property="stackView" destination="CV9-fC-LEc" id="Y3l-MF-e0I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="17l-Kh-N3l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="948" y="1284"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mGh-rn-TgI">

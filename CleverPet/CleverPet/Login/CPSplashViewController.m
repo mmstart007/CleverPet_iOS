@@ -55,7 +55,8 @@
 #pragma mark - IBActions
 - (IBAction)signInTapped:(id)sender
 {
-    [[CPLoginController sharedInstance] startSignin];
+//    [[CPLoginController sharedInstance] startSignin];
+    [self performSegueWithIdentifier:@"settings" sender:nil];
 }
 
 - (void)loginComplete:(NSNotification*)notification

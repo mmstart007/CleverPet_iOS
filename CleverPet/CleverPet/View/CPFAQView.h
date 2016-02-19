@@ -1,5 +1,5 @@
 //
-//  CPFAQViewController.h
+//  CPFAQView.h
 //  CleverPet
 //
 //  Created by Dan Wright on 2016-02-18.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CPFAQViewController : UIViewController
+@interface CPFAQView : UIView
+
+- (instancetype)initWithTitle:(NSString*)title andBody:(NSString*)body;
 
 @end
