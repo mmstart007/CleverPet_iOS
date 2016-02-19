@@ -66,7 +66,8 @@
         // TODO: display error
     } else {
         // TODO: skip profile set up if we've already done it
-        [self performSegueWithIdentifier:@"setupPetProfile" sender:nil];
+//        [self performSegueWithIdentifier:@"setupPetProfile" sender:nil];
+        [self performSegueWithIdentifier:@"settings" sender:nil];
     }
 }
 

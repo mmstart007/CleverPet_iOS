@@ -20,6 +20,7 @@
 		97CC44651C76571F003C4258 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97CC44641C76571F003C4258 /* Settings.storyboard */; };
 		97CC44691C766A28003C4258 /* CPSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44681C766A28003C4258 /* CPSettingsViewController.m */; };
 		97CC446C1C768A32003C4258 /* CPFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC446B1C768A32003C4258 /* CPFAQViewController.m */; };
+		97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC446E1C7694DB003C4258 /* CPHubSettingsViewController.m */; };
 		97CC44721C7699C7003C4258 /* CPFAQView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44711C7699C7003C4258 /* CPFAQView.m */; };
 		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
 		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
@@ -79,6 +80,8 @@
 		97CC44681C766A28003C4258 /* CPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSettingsViewController.m; sourceTree = "<group>"; };
 		97CC446A1C768A32003C4258 /* CPFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFAQViewController.h; sourceTree = "<group>"; };
 		97CC446B1C768A32003C4258 /* CPFAQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFAQViewController.m; sourceTree = "<group>"; };
+		97CC446D1C7694DB003C4258 /* CPHubSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHubSettingsViewController.h; sourceTree = "<group>"; };
+		97CC446E1C7694DB003C4258 /* CPHubSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHubSettingsViewController.m; sourceTree = "<group>"; };
 		97CC44701C7699C7003C4258 /* CPFAQView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFAQView.h; sourceTree = "<group>"; };
 		97CC44711C7699C7003C4258 /* CPFAQView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFAQView.m; sourceTree = "<group>"; };
 		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
@@ -243,6 +246,8 @@
 				97CC44681C766A28003C4258 /* CPSettingsViewController.m */,
 				97CC446A1C768A32003C4258 /* CPFAQViewController.h */,
 				97CC446B1C768A32003C4258 /* CPFAQViewController.m */,
+				97CC446D1C7694DB003C4258 /* CPHubSettingsViewController.h */,
+				97CC446E1C7694DB003C4258 /* CPHubSettingsViewController.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -475,6 +480,7 @@
 				97CC44721C7699C7003C4258 /* CPFAQView.m in Sources */,
 				97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
+				97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */,
 				97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */,
 				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
 				97EB7B081C75316F007F1383 /* CPGenderPickerViewController.m in Sources */,

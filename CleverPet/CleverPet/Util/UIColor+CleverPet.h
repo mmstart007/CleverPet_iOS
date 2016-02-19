@@ -20,7 +20,9 @@
 + (UIColor*)appWhiteColor;
 + (UIColor*)appBackgroundColor;
 + (UIColor*)appLightTealColor;
+// #333333
 + (UIColor*)appTitleTextColor;
+// #808080
 + (UIColor*)appSubCopyTextColor;
 + (UIColor*)appTextFieldPlaceholderColor;
 
