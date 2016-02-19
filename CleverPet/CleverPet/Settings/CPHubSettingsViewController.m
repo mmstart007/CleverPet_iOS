@@ -9,6 +9,7 @@
 typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, HubSetting_Off};
 
 #import "CPHubSettingsViewController.h"
+#import "CPHubSettingsButton.h"
 
 @interface CPHubSettingsViewController ()
 
@@ -28,13 +29,13 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 
 // On
 @property (weak, nonatomic) IBOutlet UIStackView *onView;
-@property (weak, nonatomic) IBOutlet UIButton *onButton;
+@property (weak, nonatomic) IBOutlet CPHubSettingsButton *onButton;
 @property (weak, nonatomic) IBOutlet UILabel *onHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *onBodyLabel;
 
 // Scheduled
 @property (weak, nonatomic) IBOutlet UIStackView *scheduledView;
-@property (weak, nonatomic) IBOutlet UIButton *scheduledButton;
+@property (weak, nonatomic) IBOutlet CPHubSettingsButton *scheduledButton;
 @property (weak, nonatomic) IBOutlet UILabel *scheduledHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scheduledBodyLabel;
 @property (weak, nonatomic) IBOutlet UIView *scheduledActiveView;
@@ -47,7 +48,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 
 // Off
 @property (weak, nonatomic) IBOutlet UIStackView *offView;
-@property (weak, nonatomic) IBOutlet UIButton *offButton;
+@property (weak, nonatomic) IBOutlet CPHubSettingsButton *offButton;
 @property (weak, nonatomic) IBOutlet UILabel *offHeader;
 @property (weak, nonatomic) IBOutlet UILabel *offBodyLabel;
 
@@ -58,7 +59,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *timeRangeLabels;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *separators;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *backgroundViews;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *stateButtons;
+@property (strong, nonatomic) IBOutletCollection(CPHubSettingsButton) NSArray *stateButtons;
 
 @property (nonatomic, assign) HubSetting currentHubSetting;
 
