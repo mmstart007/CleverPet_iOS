@@ -23,6 +23,7 @@
 		97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC446E1C7694DB003C4258 /* CPHubSettingsViewController.m */; };
 		97CC44721C7699C7003C4258 /* CPFAQView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44711C7699C7003C4258 /* CPFAQView.m */; };
 		97CC44821C77CA30003C4258 /* CPHubSettingsButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44811C77CA30003C4258 /* CPHubSettingsButton.m */; };
+		97CC44851C77E703003C4258 /* CPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44841C77E703003C4258 /* CPAppearance.m */; };
 		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
 		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
 		97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */; };
@@ -87,6 +88,8 @@
 		97CC44711C7699C7003C4258 /* CPFAQView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFAQView.m; sourceTree = "<group>"; };
 		97CC44801C77CA30003C4258 /* CPHubSettingsButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHubSettingsButton.h; sourceTree = "<group>"; };
 		97CC44811C77CA30003C4258 /* CPHubSettingsButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHubSettingsButton.m; sourceTree = "<group>"; };
+		97CC44831C77E703003C4258 /* CPAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAppearance.h; sourceTree = "<group>"; };
+		97CC44841C77E703003C4258 /* CPAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAppearance.m; sourceTree = "<group>"; };
 		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
 		97EB7AB41C729F33007F1383 /* CPNascarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNascarViewController.m; sourceTree = "<group>"; };
 		97EB7AB61C72A300007F1383 /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
@@ -298,6 +301,8 @@
 				97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */,
 				97EB7B001C7508E1007F1383 /* UIViewController+CleverPet.h */,
 				97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */,
+				97CC44831C77E703003C4258 /* CPAppearance.h */,
+				97CC44841C77E703003C4258 /* CPAppearance.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -473,6 +478,7 @@
 				97EB7AFF1C7400A9007F1383 /* CPPetPhotoViewController.m in Sources */,
 				97CC446C1C768A32003C4258 /* CPFAQViewController.m in Sources */,
 				97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */,
+				97CC44851C77E703003C4258 /* CPAppearance.m in Sources */,
 				97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */,
 				97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */,
 				0D36AA8E1C7243D600349D03 /* ViewController.m in Sources */,

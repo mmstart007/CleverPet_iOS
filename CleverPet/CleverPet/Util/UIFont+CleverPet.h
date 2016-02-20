@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+extern CGFloat const kNavBarTitleFontSize;
 extern CGFloat const kButtonTitleFontSize;
 extern CGFloat const kTextFieldFontSize;
 extern CGFloat const kSignInHeaderFontSize;

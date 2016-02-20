@@ -10,6 +10,7 @@
 
 NSString * const kFontName = @"Omnes";
 
+CGFloat const kNavBarTitleFontSize = 18.0;
 CGFloat const kButtonTitleFontSize = 15.0;
 CGFloat const kTextFieldFontSize = 15.0;
 CGFloat const kSignInHeaderFontSize = 17.0;

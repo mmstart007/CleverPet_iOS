@@ -41,7 +41,9 @@ NSUInteger const kAccountSection = 2;
     [super viewDidLoad];
     
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
-    self.tableView.separatorColor = [UIColor redColor];
+    self.tableView.separatorColor = [UIColor appBackgroundColor];
+    
+    // TODO: menu button
 }
 
 - (void)didReceiveMemoryWarning {
