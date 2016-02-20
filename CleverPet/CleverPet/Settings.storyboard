@@ -225,7 +225,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TjS-Tp-CD8">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="576"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYF-vZ-DXZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
@@ -358,7 +358,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jqZ-lY-SGW">
-                                                <rect key="frame" x="0.0" y="275" width="600" height="222"/>
+                                                <rect key="frame" x="0.0" y="275" width="600" height="226"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37Q-ax-DTC">
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
@@ -414,41 +414,61 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8qH-Db-Qvx">
-                                                        <rect key="frame" x="0.0" y="79" width="600" height="142"/>
+                                                        <rect key="frame" x="0.0" y="79" width="600" height="146"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekdays" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faN-Eh-i8e">
-                                                                <rect key="frame" x="15" y="0.0" width="52" height="14"/>
-                                                                <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="12"/>
-                                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53n-3L-6Dj">
-                                                                <rect key="frame" x="15" y="24" width="35" height="17"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVj-d7-Squ">
+                                                                <rect key="frame" x="550" y="99" width="35" height="17"/>
                                                                 <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQw-r2-RPk">
-                                                                <rect key="frame" x="550" y="24" width="35" height="17"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fm-tN-Hxo" customClass="NMRangeSlider">
+                                                                <rect key="frame" x="65" y="94" width="470" height="28"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="28" id="dse-QI-SSO"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <action selector="weekendSliderValueChanged:" destination="Lcj-q5-au9" eventType="valueChanged" id="Pse-aV-yAS"/>
+                                                                </connections>
+                                                            </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12am" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvg-jt-dnL">
+                                                                <rect key="frame" x="15" y="99" width="34" height="17"/>
                                                                 <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFK-Wk-iNx">
-                                                                <rect key="frame" x="15" y="71" width="53" height="14"/>
+                                                                <rect key="frame" x="15" y="73" width="53" height="14"/>
                                                                 <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="12"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvg-jt-dnL">
-                                                                <rect key="frame" x="15" y="95" width="35" height="17"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQw-r2-RPk">
+                                                                <rect key="frame" x="550" y="26" width="35" height="17"/>
                                                                 <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVj-d7-Squ">
-                                                                <rect key="frame" x="550" y="95" width="35" height="17"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Z5-mV-R4v" customClass="NMRangeSlider">
+                                                                <rect key="frame" x="65" y="21" width="470" height="28"/>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="28" id="eH7-Dz-y4I"/>
+                                                                </constraints>
+                                                                <connections>
+                                                                    <action selector="weekdaySliderValueChanged:" destination="Lcj-q5-au9" eventType="valueChanged" id="dLo-Jh-OPy"/>
+                                                                </connections>
+                                                            </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12am" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53n-3L-6Dj">
+                                                                <rect key="frame" x="15" y="26" width="34" height="17"/>
                                                                 <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
+                                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekdays" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faN-Eh-i8e">
+                                                                <rect key="frame" x="15" y="0.0" width="52" height="14"/>
+                                                                <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="12"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -457,9 +477,12 @@
                                                         <constraints>
                                                             <constraint firstItem="YQw-r2-RPk" firstAttribute="centerY" secondItem="53n-3L-6Dj" secondAttribute="centerY" id="2I3-CL-VFs"/>
                                                             <constraint firstAttribute="bottom" secondItem="Gvg-jt-dnL" secondAttribute="bottom" priority="999" constant="30" id="2W2-Yj-cdc"/>
+                                                            <constraint firstAttribute="trailing" secondItem="9Z5-mV-R4v" secondAttribute="trailing" constant="65" id="46A-Wk-ZKH"/>
+                                                            <constraint firstItem="9Z5-mV-R4v" firstAttribute="leading" secondItem="8qH-Db-Qvx" secondAttribute="leading" constant="65" id="6sX-CG-Fx9"/>
                                                             <constraint firstItem="ZVj-d7-Squ" firstAttribute="centerY" secondItem="Gvg-jt-dnL" secondAttribute="centerY" id="9Ox-XE-OPt"/>
+                                                            <constraint firstItem="0fm-tN-Hxo" firstAttribute="leading" secondItem="9Z5-mV-R4v" secondAttribute="leading" id="CVE-SP-QHM"/>
                                                             <constraint firstItem="ZFK-Wk-iNx" firstAttribute="leading" secondItem="8qH-Db-Qvx" secondAttribute="leading" constant="15" id="Gd2-6g-UKo"/>
-                                                            <constraint firstItem="Gvg-jt-dnL" firstAttribute="top" secondItem="ZFK-Wk-iNx" secondAttribute="bottom" priority="999" constant="10" id="O9x-a5-uee"/>
+                                                            <constraint firstItem="Gvg-jt-dnL" firstAttribute="top" secondItem="ZFK-Wk-iNx" secondAttribute="bottom" priority="999" constant="12" id="O9x-a5-uee"/>
                                                             <constraint firstItem="ZFK-Wk-iNx" firstAttribute="top" secondItem="53n-3L-6Dj" secondAttribute="bottom" priority="999" constant="30" id="VCy-pq-hLq"/>
                                                             <constraint firstItem="YQw-r2-RPk" firstAttribute="height" secondItem="53n-3L-6Dj" secondAttribute="height" id="Y06-Pc-3f7"/>
                                                             <constraint firstItem="Gvg-jt-dnL" firstAttribute="leading" secondItem="8qH-Db-Qvx" secondAttribute="leading" constant="15" id="c0d-O1-RGv"/>
@@ -469,11 +492,14 @@
                                                             <constraint firstItem="faN-Eh-i8e" firstAttribute="leading" secondItem="8qH-Db-Qvx" secondAttribute="leading" constant="15" id="jKH-qs-Avg"/>
                                                             <constraint firstItem="53n-3L-6Dj" firstAttribute="leading" secondItem="8qH-Db-Qvx" secondAttribute="leading" constant="15" id="kYs-vL-cpY"/>
                                                             <constraint firstItem="ZVj-d7-Squ" firstAttribute="height" secondItem="Gvg-jt-dnL" secondAttribute="height" id="kYw-Id-Mhd"/>
-                                                            <constraint firstItem="53n-3L-6Dj" firstAttribute="top" secondItem="faN-Eh-i8e" secondAttribute="bottom" priority="999" constant="10" id="nL6-bp-0wX"/>
+                                                            <constraint firstItem="0fm-tN-Hxo" firstAttribute="trailing" secondItem="9Z5-mV-R4v" secondAttribute="trailing" id="lPB-be-0nh"/>
+                                                            <constraint firstItem="53n-3L-6Dj" firstAttribute="top" secondItem="faN-Eh-i8e" secondAttribute="bottom" priority="999" constant="12" id="nL6-bp-0wX"/>
+                                                            <constraint firstItem="9Z5-mV-R4v" firstAttribute="centerY" secondItem="53n-3L-6Dj" secondAttribute="centerY" id="rx5-kj-PyL"/>
+                                                            <constraint firstItem="0fm-tN-Hxo" firstAttribute="centerY" secondItem="Gvg-jt-dnL" secondAttribute="centerY" id="xQO-xG-MFg"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="geR-Se-N7g">
-                                                        <rect key="frame" x="0.0" y="221" width="600" height="1"/>
+                                                        <rect key="frame" x="0.0" y="225" width="600" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" priority="999" constant="1" id="D22-lF-CLM"/>
@@ -482,7 +508,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wVv-vA-rHv">
-                                                <rect key="frame" x="0.0" y="497" width="600" height="79"/>
+                                                <rect key="frame" x="0.0" y="501" width="600" height="79"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTi-mm-Bma">
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
@@ -580,14 +606,17 @@
                         <outlet property="scheduledBodyLabel" destination="RZQ-zk-Os4" id="a3h-X0-ZkE"/>
                         <outlet property="scheduledButton" destination="0wO-w7-ubu" id="8EL-g7-6yu"/>
                         <outlet property="scheduledHeaderLabel" destination="HKn-5f-fQj" id="mBu-6E-X9C"/>
+                        <outlet property="scheduledHeaderView" destination="37Q-ax-DTC" id="BdR-tA-qFA"/>
                         <outlet property="scheduledView" destination="jqZ-lY-SGW" id="aPP-Ey-Ity"/>
                         <outlet property="scrollView" destination="Aba-Mq-AzZ" id="lWH-91-zr8"/>
                         <outlet property="stackView" destination="TjS-Tp-CD8" id="3ug-Nc-xwJ"/>
+                        <outlet property="weekDaySlider" destination="9Z5-mV-R4v" id="scr-U8-wLU"/>
                         <outlet property="weekdayRangeEndLabel" destination="YQw-r2-RPk" id="KGd-38-P0N"/>
                         <outlet property="weekdayRangeStartLabel" destination="53n-3L-6Dj" id="3eS-4f-h0W"/>
                         <outlet property="weekdaysLabel" destination="faN-Eh-i8e" id="438-FU-tzd"/>
                         <outlet property="weekendRangeEndLabel" destination="ZVj-d7-Squ" id="4Xz-Jz-HRr"/>
                         <outlet property="weekendRangeStartLabel" destination="Gvg-jt-dnL" id="fmO-Ls-XGV"/>
+                        <outlet property="weekendSlider" destination="0fm-tN-Hxo" id="3ir-Yu-nGY"/>
                         <outlet property="weekendsLabel" destination="ZFK-Wk-iNx" id="35V-tB-3a9"/>
                         <outletCollection property="headerLabels" destination="jyq-eU-ygW" id="lfd-jW-HEo"/>
                         <outletCollection property="bodyLabels" destination="iqP-dA-tZz" id="RNQ-eT-nog"/>
@@ -616,6 +645,8 @@
                         <outletCollection property="stateButtons" destination="Pm1-dg-Lpf" id="02k-hX-WaZ"/>
                         <outletCollection property="stateButtons" destination="0wO-w7-ubu" id="0BS-27-eHW"/>
                         <outletCollection property="stateButtons" destination="yPU-P3-6vk" id="xhE-od-rwV"/>
+                        <outletCollection property="sliders" destination="9Z5-mV-R4v" id="LWc-mg-qAy"/>
+                        <outletCollection property="sliders" destination="0fm-tN-Hxo" id="WNx-6e-MaP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tml-dV-lGg" userLabel="First Responder" sceneMemberID="firstResponder"/>

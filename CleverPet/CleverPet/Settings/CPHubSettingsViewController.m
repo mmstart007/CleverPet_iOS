@@ -10,6 +10,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 
 #import "CPHubSettingsViewController.h"
 #import "CPHubSettingsButton.h"
+#import "NMRangeSlider.h"
 
 @interface CPHubSettingsViewController ()
 
@@ -35,6 +36,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 
 // Scheduled
 @property (weak, nonatomic) IBOutlet UIStackView *scheduledView;
+@property (weak, nonatomic) IBOutlet UIView *scheduledHeaderView;
 @property (weak, nonatomic) IBOutlet CPHubSettingsButton *scheduledButton;
 @property (weak, nonatomic) IBOutlet UILabel *scheduledHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *scheduledBodyLabel;
@@ -42,9 +44,11 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (weak, nonatomic) IBOutlet UILabel *weekdaysLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weekdayRangeStartLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weekdayRangeEndLabel;
+@property (weak, nonatomic) IBOutlet NMRangeSlider *weekDaySlider;
 @property (weak, nonatomic) IBOutlet UILabel *weekendsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weekendRangeStartLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weekendRangeEndLabel;
+@property (weak, nonatomic) IBOutlet NMRangeSlider *weekendSlider;
 
 // Off
 @property (weak, nonatomic) IBOutlet UIStackView *offView;
@@ -60,6 +64,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *separators;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *backgroundViews;
 @property (strong, nonatomic) IBOutletCollection(CPHubSettingsButton) NSArray *stateButtons;
+@property (strong, nonatomic) IBOutletCollection(NMRangeSlider) NSArray *sliders;
 
 @property (nonatomic, assign) HubSetting currentHubSetting;
 
@@ -78,7 +83,10 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     self.headerView.backgroundColor = [UIColor appBackgroundColor];
     [self.backgroundViews makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:[UIColor appWhiteColor]];
     
+    [self.scheduledView bringSubviewToFront:self.scheduledHeaderView];
+    
     [self setupFonts];
+    [self setupSliders];
     
     // TODO: Hub listener, etc so we can display disconnected or waiting for data as appropriate when the state changes
     // TODO: hub setting, scheduled settings from server
@@ -105,6 +113,26 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     [self.timeRangeLabels makeObjectsPerformSelector:@selector(setTextColor:) withObject:[UIColor appTitleTextColor]];
 }
 
+- (void)setupSliders
+{
+    [self.sliders makeObjectsPerformSelector:@selector(setTintColor:) withObject:[UIColor appTealColor]];
+    // TODO: Generate images for slider background track, foreground track, and thumbs if if the default is not sufficient
+    self.weekDaySlider.minimumValue = 0;
+    self.weekDaySlider.maximumValue = 24;
+    self.weekDaySlider.stepValue = 1;
+    // TODO: pull starting state values
+    self.weekDaySlider.upperValue = 20;
+    self.weekDaySlider.lowerValue = 7;
+    [self updateWeekdayRange];
+    
+    self.weekendSlider.minimumValue = 0;
+    self.weekendSlider.maximumValue = 24;
+    self.weekendSlider.stepValue = 1;
+    self.weekendSlider.upperValue = 18;
+    self.weekendSlider.lowerValue = 12;
+    [self updateWeekendRange];
+}
+
 - (void)hubDisconnected
 {
     [self animateChanges:^{
@@ -113,14 +141,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
         self.disconnectedBodyLabel.text = @"This is some placeholder disconnected body text. Please update me";
         self.disconnectedSubHeaderLabel.text = @"This is a placeholder sub headline. Please update me";
         self.disconnectedSubBodyLabel.text = @"This is some placeholder disconnected sub body text. Please update me.";
-        self.disconnectedView.hidden = NO;
-        self.onView.hidden = YES;
-        self.scheduledView.hidden = YES;
-        self.offView.hidden = YES;
-        // I don't like this but was unable to get them hiding properly with constraints
-        for (UIButton *button in self.stateButtons) {
-            button.hidden = YES;
-        }
+        [self hideDisconnectedView:NO];
     }];
 }
 
@@ -132,38 +153,71 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
         self.disconnectedBodyLabel.text = @"This is some placeholder no data body text. Please update me";
         self.disconnectedSubHeaderLabel.text = @"This is a placeholder sub headline. Please update me";
         self.disconnectedSubBodyLabel.text = @"This is some placeholder no data sub body text. Please update me.";
-        self.disconnectedView.hidden = NO;
-        self.onView.hidden = YES;
-        self.scheduledView.hidden = YES;
-        self.offView.hidden = YES;
-        // I don't like this but was unable to get them hiding properly with constraints
-        for (UIButton *button in self.stateButtons) {
-            button.hidden = YES;
-        }
+        [self hideDisconnectedView:NO];
     }];
 }
 
 - (void)setupForHubSetting:(HubSetting)hubSetting
 {
     [self animateChanges:^{
-        self.disconnectedView.hidden = YES;
-        self.onView.hidden = NO;
+        [self hideDisconnectedView:YES];
         self.onButton.selected = hubSetting == HubSetting_On;
-        self.scheduledView.hidden = NO;
         self.scheduledButton.selected = hubSetting == HubSetting_Scheduled;
         self.scheduledActiveView.hidden = hubSetting != HubSetting_Scheduled;
-        self.offView.hidden = NO;
         self.offButton.selected = hubSetting == HubSetting_Off;
-        // I don't like this but was unable to get them hiding properly with constraints
-        for (UIButton *button in self.stateButtons) {
-            button.hidden = NO;
-        }
     }];
+}
+
+// TODO: a more appropriate name
+- (void)hideDisconnectedView:(BOOL)hidden
+{
+    self.disconnectedView.hidden = hidden;
+    self.onView.hidden = !hidden;
+    self.scheduledView.hidden = !hidden;
+    self.offView.hidden = !hidden;
+    [self hideButtonsAndSliders:!hidden];
+}
+
+- (void)hideButtonsAndSliders:(BOOL)hidden
+{
+    // I don't like this but was unable to get them hiding properly with constraints
+    for (UIButton *button in self.stateButtons) {
+        button.hidden = hidden;
+    }
+    for (NMRangeSlider *slider in self.sliders) {
+        slider.hidden = hidden;
+    }
 }
 
 - (void)animateChanges:(void (^)(void))animations
 {
     [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseInOut animations:animations completion:nil];
+}
+
+- (void)updateWeekdayRange
+{
+    self.weekdayRangeStartLabel.text = [self timeFromSliderValue:self.weekDaySlider.lowerValue];
+    self.weekdayRangeEndLabel.text = [self timeFromSliderValue:self.weekDaySlider.upperValue];
+}
+
+- (void)updateWeekendRange
+{
+    self.weekendRangeStartLabel.text = [self timeFromSliderValue:self.weekendSlider.lowerValue];
+    self.weekendRangeEndLabel.text = [self timeFromSliderValue:self.weekendSlider.upperValue];
+}
+
+- (NSString *)timeFromSliderValue:(CGFloat)value
+{
+    CGFloat roundedValue = roundf(value);
+    NSString *amPm = (roundedValue >= 12 && roundedValue < 24) ? NSLocalizedString(@"pm", nil) : NSLocalizedString(@"am", nil);
+    
+    if (roundedValue >= 13) {
+        roundedValue -= 12;
+    } else if (roundedValue < 1) {
+        roundedValue = 12;
+    }
+    
+    return [NSString stringWithFormat:@"%.0f %@", roundedValue, amPm];
 }
 
 #pragma mark - IBActions
@@ -172,6 +226,8 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     if (self.currentHubSetting != HubSetting_On) {
         self.currentHubSetting = HubSetting_On;
         [self setupForHubSetting:self.currentHubSetting];
+        
+        // TODO: Update hub
     }
 }
 
@@ -180,6 +236,8 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     if (self.currentHubSetting != HubSetting_Scheduled) {
         self.currentHubSetting = HubSetting_Scheduled;
         [self setupForHubSetting:self.currentHubSetting];
+        
+        // TODO: Update hub
     }
 }
 
@@ -188,7 +246,23 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     if (self.currentHubSetting != HubSetting_Off) {
         self.currentHubSetting = HubSetting_Off;
         [self setupForHubSetting:self.currentHubSetting];
+        
+        // TODO: Update hub
     }
+}
+
+- (IBAction)weekdaySliderValueChanged:(id)sender
+{
+    [self updateWeekdayRange];
+    
+    // TODO: Update hub
+}
+
+- (IBAction)weekendSliderValueChanged:(id)sender
+{
+    [self updateWeekendRange];
+    
+    // TODO: Update hub
 }
 
 /*
