@@ -5,6 +5,8 @@ target 'CleverPet' do
 
 pod 'GoogleIdentityToolkit'
 pod 'CHCSVParser'
+pod 'Spark-SDK'
+pod 'SparkSetup'
 
 end
 
