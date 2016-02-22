@@ -12,6 +12,7 @@
 
 + (instancetype)sharedInstance;
 
+- (void)applyConfig:(NSDictionary *)config;
 - (void)setAuthToken:(NSString *)authToken;
 - (void)presentSetupControllerOnController:(UIViewController*)controller;
 

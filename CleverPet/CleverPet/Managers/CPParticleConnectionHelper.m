@@ -9,9 +9,17 @@
 #import "CPParticleConnectionHelper.h"
 #import <SparkSetup/SparkSetup.h>
 
+NSString const * kParticleOrganizationName = @"particle_organization_name";
+NSString const * kParticleOrganizationSlug = @"particle_organization_slug";
+NSString const * kParticleProductName = @"particle_product_name";
+NSString const * kParticleProductSlug = @"particle_product_slug";
+
 @interface CPParticleConnectionHelper()<SparkSetupMainControllerDelegate>
 
-@property (nonatomic, strong) NSString *authToken;
+@property (nonatomic, strong) NSString *organizationName;
+@property (nonatomic, strong) NSString *organizationSlug;
+@property (nonatomic, strong) NSString *productName;
+@property (nonatomic, strong) NSString *productSlug;
 
 @end
 
@@ -23,7 +31,6 @@
     static CPParticleConnectionHelper *s_Instance;
     dispatch_once(&onceToken, ^{
         s_Instance = [[CPParticleConnectionHelper alloc] init];
-        [s_Instance setupCustomAppearance];
     });
     return s_Instance;
 }
@@ -34,7 +41,6 @@
     if (self) {
         // TODO: remove setup particle once the server is configured and vending oauth
         [self setupParticle];
-        [self setupCustomAppearance];
     }
     return self;
 }
@@ -50,7 +56,11 @@
 - (void)setupCustomAppearance
 {
     SparkSetupCustomization *customization = [SparkSetupCustomization sharedInstance];
-    customization.productName = @"CleverPet";
+    customization.productName = self.productName ? self.productName : @"CleverPet";
+    customization.productSlug = self.productSlug;
+    customization.organizationName = self.organizationName;
+    customization.organizationSlug = self.organizationSlug;
+    
     customization.pageBackgroundColor = [UIColor appBackgroundColor];
     customization.normalTextColor = [UIColor appSignUpHeaderTextColor];
     customization.linkTextColor = [UIColor appTealColor];
@@ -61,6 +71,14 @@
     customization.headerTextFontName = @"Omnes-Light";
 }
 
+- (void)applyConfig:(NSDictionary *)config
+{
+    self.productName = config[kParticleProductName];
+    self.productSlug = config[kParticleProductSlug];
+    self.organizationName = config[kParticleOrganizationName];
+    self.organizationSlug = config[kParticleOrganizationSlug];
+}
+
 - (void)setAuthToken:(NSString*)authToken
 {
     // TODO: will need to modify SparkCloud to accept
@@ -69,6 +87,7 @@
 
 - (void)presentSetupControllerOnController:(UIViewController *)controller
 {
+    [self setupCustomAppearance];
     SparkSetupMainController *setupController = [[SparkSetupMainController alloc] init];
     setupController.delegate = self;
     [controller presentViewController:setupController animated:YES completion:nil];
