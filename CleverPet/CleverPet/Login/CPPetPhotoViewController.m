@@ -7,6 +7,8 @@
 //
 
 #import "CPPetPhotoViewController.h"
+#import "CPLoginController.h"
+#import "CPParticleConnectionHelper.h"
 
 @interface CPPetPhotoViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -67,7 +69,14 @@
 
 - (IBAction)continueTapped:(id)sender
 {
-    // TODO: alert if no photo selected, and transition to dash
+    // TODO: spinner and disable interface
+    [[CPLoginController sharedInstance] completeSignUpWithPetImage:self.selectedImage completion:^(NSError *error) {
+        if (error) {
+            // TODO: display error
+        } else {
+            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
+        }
+    }];
 }
 
 - (void)promptForPhotoSource

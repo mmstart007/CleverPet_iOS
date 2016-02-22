@@ -70,12 +70,12 @@
 - (void)presentSetupControllerOnController:(UIViewController *)controller
 {
     SparkSetupMainController *setupController = [[SparkSetupMainController alloc] init];
+    setupController.delegate = self;
     [controller presentViewController:setupController animated:YES completion:nil];
 }
 
 - (void)sparkSetupViewController:(SparkSetupMainController *)controller didFinishWithResult:(SparkSetupMainControllerResult)result device:(SparkDevice *)device
 {
-    
 }
 
 @end
