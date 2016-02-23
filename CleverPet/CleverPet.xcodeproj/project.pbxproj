@@ -41,7 +41,6 @@
 		97EB7AE71C73B826007F1383 /* Omnes-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */; };
 		97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */; };
 		97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */; };
-		9F35FA18F408008B41416649 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96A9E804D4BE6FFF4E3C06AD /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,7 +69,6 @@
 		1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSimpleDate.m; sourceTree = "<group>"; };
 		1827ABB6A0821DBDEABC48C9 /* CPTileSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileSection.h; sourceTree = "<group>"; };
 		1827AD320F0C4F8FD18E36D8 /* CPTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTile.m; sourceTree = "<group>"; };
-		96A9E804D4BE6FFF4E3C06AD /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		97EB7AC41C73B826007F1383 /* Omnes-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Black.otf"; sourceTree = "<group>"; };
 		97EB7AC51C73B826007F1383 /* Omnes-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-BlackItalic.otf"; sourceTree = "<group>"; };
 		97EB7AC61C73B826007F1383 /* Omnes-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Bold.otf"; sourceTree = "<group>"; };
@@ -94,8 +92,6 @@
 		97EB7AEF1C73BEA9007F1383 /* UIColor+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CleverPet.h"; sourceTree = "<group>"; };
 		97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CleverPet.m"; sourceTree = "<group>"; };
 		97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CleverPet-Prefix.pch"; sourceTree = "<group>"; };
-		B84732F7BC0433516A62C96A /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
-		F69DE4571D744DF549FA8E73 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +99,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F35FA18F408008B41416649 /* libPods-CleverPet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,8 +110,6 @@
 			children = (
 				0D36AA851C7243D600349D03 /* CleverPet */,
 				0D36AA841C7243D600349D03 /* Products */,
-				EA7AAA759335BC852E293C0E /* Pods */,
-				2C65E458065A4E14BB6A4855 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -202,14 +195,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		2C65E458065A4E14BB6A4855 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				96A9E804D4BE6FFF4E3C06AD /* libPods-CleverPet.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		97EB7AC31C73B826007F1383 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,15 +231,6 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
-		EA7AAA759335BC852E293C0E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B84732F7BC0433516A62C96A /* Pods-CleverPet.debug.xcconfig */,
-				F69DE4571D744DF549FA8E73 /* Pods-CleverPet.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -262,11 +238,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0D36AA9A1C7243D600349D03 /* Build configuration list for PBXNativeTarget "CleverPet" */;
 			buildPhases = (
-				92CECB30215D1832EC5B89B1 /* Check Pods Manifest.lock */,
 				0D36AA7F1C7243D600349D03 /* Sources */,
 				0D36AA801C7243D600349D03 /* Frameworks */,
 				0D36AA811C7243D600349D03 /* Resources */,
-				CB93564FD167B6DF6F30C3BE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -340,39 +314,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		92CECB30215D1832EC5B89B1 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		CB93564FD167B6DF6F30C3BE /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0D36AA7F1C7243D600349D03 /* Sources */ = {
@@ -498,7 +439,6 @@
 		};
 		0D36AA9B1C7243D600349D03 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B84732F7BC0433516A62C96A /* Pods-CleverPet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
@@ -514,7 +454,6 @@
 		};
 		0D36AA9C1C7243D600349D03 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F69DE4571D744DF549FA8E73 /* Pods-CleverPet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ENABLE_BITCODE = NO;
