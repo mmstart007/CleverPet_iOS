@@ -55,8 +55,7 @@
 #pragma mark - IBActions
 - (IBAction)signInTapped:(id)sender
 {
-//    [[CPLoginController sharedInstance] startSignin];
-    [self performSegueWithIdentifier:@"settings" sender:nil];
+    [[CPLoginController sharedInstance] startSignin];
 }
 
 - (void)loginComplete:(NSNotification*)notification
@@ -66,8 +65,7 @@
         // TODO: display error
     } else {
         // TODO: skip profile set up if we've already done it
-//        [self performSegueWithIdentifier:@"setupPetProfile" sender:nil];
-        [self performSegueWithIdentifier:@"settings" sender:nil];
+        [self performSegueWithIdentifier:@"setupPetProfile" sender:nil];
     }
 }
 
