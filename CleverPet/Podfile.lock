@@ -1,4 +1,19 @@
 PODS:
+  - AFNetworking (3.0.4):
+    - AFNetworking/NSURLSession (= 3.0.4)
+    - AFNetworking/Reachability (= 3.0.4)
+    - AFNetworking/Security (= 3.0.4)
+    - AFNetworking/Serialization (= 3.0.4)
+    - AFNetworking/UIKit (= 3.0.4)
+  - AFNetworking/NSURLSession (3.0.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.0.4)
+  - AFNetworking/Security (3.0.4)
+  - AFNetworking/Serialization (3.0.4)
+  - AFNetworking/UIKit (3.0.4):
+    - AFNetworking/NSURLSession
   - CHCSVParser (2.1.0)
   - GoogleAppUtilities (1.0.0):
     - GoogleSymbolUtilities (~> 1.0)
@@ -23,12 +38,36 @@ PODS:
   - GoogleSymbolUtilities (1.0.3)
   - GoogleUtilities (1.0.1):
     - GoogleSymbolUtilities (~> 1.0)
+  - Spark-SDK (0.3.5):
+    - Spark-SDK/Helpers (= 0.3.5)
+    - Spark-SDK/SDK (= 0.3.5)
+  - Spark-SDK/Helpers (0.3.5)
+  - Spark-SDK/SDK (0.3.5):
+    - AFNetworking (~> 3.0)
+    - Spark-SDK/Helpers
+  - SparkSetup (0.3.3):
+    - SparkSetup/Comm (= 0.3.3)
+    - SparkSetup/Core (= 0.3.3)
+    - SparkSetup/Resources (= 0.3.3)
+  - SparkSetup/Comm (0.3.3)
+  - SparkSetup/Core (0.3.3):
+    - Spark-SDK
+    - SparkSetup/Comm
+    - SparkSetup/Resources
+  - SparkSetup/Resources (0.3.3)
 
 DEPENDENCIES:
   - CHCSVParser
   - GoogleIdentityToolkit
+  - Spark-SDK (from `Spark-SDK_Internal`)
+  - SparkSetup
+
+EXTERNAL SOURCES:
+  Spark-SDK:
+    :path: Spark-SDK_Internal
 
 SPEC CHECKSUMS:
+  AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   CHCSVParser: 3bcc7bdb72111a31222e95d57eacceefe4e537e8
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
   GoogleAuthUtilities: 049ffd3a297cdffd271451b82fd4e75304f15ef3
@@ -38,5 +77,7 @@ SPEC CHECKSUMS:
   GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
+  Spark-SDK: dbd947fd197f08655b5f458ec559de5c920e8e70
+  SparkSetup: f9618dd24548ab8a024efdaa65a89f63ed44a7ee
 
 COCOAPODS: 0.39.0
