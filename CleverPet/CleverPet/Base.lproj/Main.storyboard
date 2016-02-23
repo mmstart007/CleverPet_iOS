@@ -218,6 +218,13 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showStripe" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showDropShadow" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="horizontalTextInset">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="delegate" destination="EC4-kn-l0k" id="KvE-rL-V0O"/>
                                                 </connections>
@@ -230,6 +237,13 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showStripe" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showDropShadow" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="horizontalTextInset">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="delegate" destination="EC4-kn-l0k" id="ADh-qT-yLY"/>
                                                 </connections>
@@ -242,6 +256,13 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showStripe" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showDropShadow" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="horizontalTextInset">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="delegate" destination="EC4-kn-l0k" id="T1y-aW-PY3"/>
                                                 </connections>
@@ -254,20 +275,15 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showStripe" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showDropShadow" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="horizontalTextInset">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="delegate" destination="EC4-kn-l0k" id="Tma-7L-tFT"/>
-                                                </connections>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QA8-9u-6o4" customClass="CPTextField">
-                                                <rect key="frame" x="0.0" y="397" width="600" height="50"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="T6p-za-y1I"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="EC4-kn-l0k" id="sgy-CX-4yd"/>
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Weight Unit" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oTN-ZN-WTl" customClass="CPTextField">
@@ -278,6 +294,13 @@
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showStripe" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showDropShadow" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="horizontalTextInset">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <outlet property="delegate" destination="EC4-kn-l0k" id="uNN-bu-Nby"/>
                                                 </connections>
@@ -293,6 +316,25 @@
                                                     <action selector="weightSwitchValueChanged:" destination="EC4-kn-l0k" eventType="valueChanged" id="SlL-iw-rgP"/>
                                                 </connections>
                                             </segmentedControl>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QA8-9u-6o4" customClass="CPTextField">
+                                                <rect key="frame" x="0.0" y="397" width="600" height="50"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="T6p-za-y1I"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showStripe" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showDropShadow" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="horizontalTextInset">
+                                                        <real key="value" value="10"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <outlet property="delegate" destination="EC4-kn-l0k" id="sgy-CX-4yd"/>
+                                                </connections>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -392,16 +434,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TTr-OI-6Mb">
-                                <rect key="frame" x="0.0" y="182" width="320" height="230"/>
+                                <rect key="frame" x="0.0" y="182" width="320" height="180"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ASs-tW-5HR">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="ASs-tW-5HR" secondAttribute="height" multiplier="16:9" id="JOP-ih-UnF"/>
+                                            <constraint firstAttribute="width" secondItem="ASs-tW-5HR" secondAttribute="height" multiplier="32:13" id="JOP-ih-UnF"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Gs-TU-CGf">
-                                        <rect key="frame" x="0.0" y="180" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="130" width="320" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="HXf-T5-DbP"/>
                                         </constraints>
