@@ -136,7 +136,7 @@ Invoke a function on the device and pass a list of parameters to it, `resultCode
 
 **Objective-C**
 ```objc
-[myPhoton callFunction:@"digitalWrite" withArguments:@[@"D7",@1] completion:^(NSNumber *resultCode, NSError *error) {
+[myPhoton callFunction:@"digitalwrite" withArguments:@[@"D7",@1] completion:^(NSNumber *resultCode, NSError *error) {
     if (!error)
     {
         NSLog(@"LED on D7 successfully turned on");
@@ -146,7 +146,7 @@ Invoke a function on the device and pass a list of parameters to it, `resultCode
 **Swift**
 ```swift
 let funcArgs = ["D7",1]
-myPhoton!.callFunction("digitalWrite", withArguments: funcArgs) { (resultCode : NSNumber!, error : NSError!) -> Void in
+myPhoton!.callFunction("digitalwrite", withArguments: funcArgs) { (resultCode : NSNumber!, error : NSError!) -> Void in
     if (error == nil) {
         println("LED on D7 successfully turned on")
     }
@@ -373,7 +373,7 @@ func application(application: UIApplication, didFinishLaunchingWithOptions launc
 Be sure to replace `YourAppName` with your project name.
 
 ### Additional reference
-For additional reference check out the [Reference in Cocoadocs website](http://cocoadocs.org/docsets/Spark-SDK/) for full coverage of `SparkDevice` and `SparkCloud` functions and member variables. In addition you can consult the javadoc style comments in `SparkCloud.h` and `SparkDevice.h` for each public method. If Particle iOS Cloud SDK is integrated in your Xcode project you should be able to press `Esc` to get an auto-complete hints for each cloud and device method.
+For additional reference check out the [Reference in Cocoadocs website](http://cocoadocs.org/docsets/Spark-SDK/) for full coverage of `SparkDevice` and `SparkCloud` functions and member variables. In addition you can consult the javadoc style comments in `SparkCloud.h` and `SparkDevice.h` for each public method. If Particle iOS Cloud SDK is integrated in your XCode project you should be able to press `Esc` to get an auto-complete hints for each cloud and device method.
 
 ## Installation
 
@@ -385,7 +385,7 @@ To install the iOS Cloud SDK, simply add the following line to your Podfile on m
 pod "Spark-SDK"
 ```
 
-and then run `pod update`. A new `.xcworkspace` file will be created for you to open by Cocoapods, open that file workspace file in Xcode and you can start interacting with Particle cloud and devices by
+and then run `pod update`. A new `.xcworkspace` file will be created for you to open by Cocoapods, open that file workspace file in XCode and you can start interacting with Particle cloud and devices by
 adding `#import "Spark-SDK.h"`. (that is not required for swift projects)
 
 ## Communication

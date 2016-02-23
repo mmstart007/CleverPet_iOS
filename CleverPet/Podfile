@@ -5,7 +5,7 @@ target 'CleverPet' do
 
 pod 'GoogleIdentityToolkit'
 pod 'CHCSVParser'
-pod 'Spark-SDK', :git => 'https://github.com/dwrightffs/spark-sdk-ios.git', :branch => 'feature/access-token'
+pod 'Spark-SDK', :path => 'Spark-SDK_Internal'
 pod 'SparkSetup'
 
 end

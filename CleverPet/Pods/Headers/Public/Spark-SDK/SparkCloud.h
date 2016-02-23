@@ -1,1 +1,1 @@
-../../../Spark-SDK/Pod/Classes/SDK/SparkCloud.h
+../../../../Spark-SDK_Internal/Pod/Classes/SDK/SparkCloud.h

@@ -8,10 +8,8 @@
 
 #import "SparkAccessToken.h"
 #import "KeychainItemWrapper.h"
-#import <AFNetworking/AFHTTPSessionManager.h>
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
 #import "SparkCloud.h"
-
-NS_ASSUME_NONNULL_BEGIN
 
 NSString *const kSparkAccessTokenKeychainEntry = @"io.spark.api.Keychain.AccessToken";
 NSString *const kSparkAccessTokenExpiryDateKey = @"kSparkAccessTokenExpiryDateKey";
@@ -21,16 +19,14 @@ NSString *const kSparkAccessTokenStringKey = @"kSparkAccessTokenStringKey";
 #define ACCESS_TOKEN_EXPIRY_MARGIN  0
 
 @interface SparkAccessToken()
-
 @property (nonatomic, strong) NSDate *expiryDate;
 @property (nonatomic, strong) NSTimer *expiryTimer;
-@property (nonatomic, strong, readwrite) NSString *accessToken;
-
+@property (nonatomic, strong) NSString *accessToken;
 @end
 
 @implementation SparkAccessToken
 
--(nullable instancetype)initWithNewSession:(NSDictionary *)loginResponseDict
+-(instancetype)initWithNewSession:(NSDictionary *)loginResponseDict
 {
     self = [super init];
     if (self)
@@ -66,7 +62,15 @@ NSString *const kSparkAccessTokenStringKey = @"kSparkAccessTokenStringKey";
     return nil;
 }
 
--(nullable instancetype)initWithSavedSession
+
+-(void)accessTokenExpired:(NSTimer *)timer
+{
+    [self.expiryTimer invalidate];
+    [self.delegate SparkAccessToken:self didExpireAt:self.expiryDate];
+}
+
+
+-(instancetype)initWithSavedSession
 {
     self = [super init];
     if (self)
@@ -111,7 +115,7 @@ NSString *const kSparkAccessTokenStringKey = @"kSparkAccessTokenStringKey";
 }
 
 
--(nullable NSString *)accessToken
+-(NSString *)accessToken
 {
     // always return only a non-expired access token
     NSTimeInterval ti = [self.expiryDate timeIntervalSinceNow];
@@ -129,11 +133,6 @@ NSString *const kSparkAccessTokenStringKey = @"kSparkAccessTokenStringKey";
     self.accessToken = nil;
 }
 
--(void)accessTokenExpired:(NSTimer *)timer
-{
-    [self.expiryTimer invalidate];
-    [self.delegate sparkAccessToken:self didExpireAt:self.expiryDate];
-}
 
 -(void)dealloc
 {
@@ -141,5 +140,3 @@ NSString *const kSparkAccessTokenStringKey = @"kSparkAccessTokenStringKey";
 }
 
 @end
-
-NS_ASSUME_NONNULL_END

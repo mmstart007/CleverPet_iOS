@@ -8,14 +8,12 @@
 
 #import "SparkEvent.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
 @implementation SparkEvent
-
 -(instancetype)initWithEventDict:(NSDictionary *)eventDict
 {
     if (self = [super init])
-    {        
+    {
+        
         self.deviceID = eventDict[@"coreid"];
         self.data = eventDict[@"data"];
         self.event = eventDict[@"event"];
@@ -31,14 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
     }
     
     return self;
+    
 }
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<Event: %@, DeviceID: %@, Data: %@, Time: %@, TTL: %ld>",
-            self.event, self.deviceID, self.data, self.time, (long)self.ttl];
+    return [NSString stringWithFormat:@"<Event: %@, DeviceID: %@, Data: %@, Time: %@, TTL: %ld>",self.event,self.deviceID,self.data,self.time,(long)self.ttl];
 }
-
 @end
-
-NS_ASSUME_NONNULL_END

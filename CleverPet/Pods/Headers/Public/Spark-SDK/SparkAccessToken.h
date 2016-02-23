@@ -1,1 +1,1 @@
-../../../Spark-SDK/Pod/Classes/SDK/SparkAccessToken.h
+../../../../Spark-SDK_Internal/Pod/Classes/SDK/SparkAccessToken.h

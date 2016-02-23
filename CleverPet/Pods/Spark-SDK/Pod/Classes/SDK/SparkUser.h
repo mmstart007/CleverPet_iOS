@@ -19,19 +19,16 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface SparkUser : NSObject
-
 /**
  *  User name, should be a valid email address
  */
-@property (nonatomic, strong, nullable, readonly) NSString *user;
+@property (nonatomic, strong, readonly) NSString *user;
 
 /**
  *  Password string
  */
-@property (nonatomic, strong, nullable, readonly) NSString *password;
+@property (nonatomic, strong, readonly) NSString *password;
 
 /**
  *  Initialize SparkUser class with new credentials and store session in keychain
@@ -58,5 +55,3 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)removeSession;
 
 @end
-
-NS_ASSUME_NONNULL_END

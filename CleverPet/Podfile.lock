@@ -59,18 +59,12 @@ PODS:
 DEPENDENCIES:
   - CHCSVParser
   - GoogleIdentityToolkit
-  - Spark-SDK (from `https://github.com/dwrightffs/spark-sdk-ios.git`, branch `feature/access-token`)
+  - Spark-SDK (from `Spark-SDK_Internal`)
   - SparkSetup
 
 EXTERNAL SOURCES:
   Spark-SDK:
-    :branch: feature/access-token
-    :git: https://github.com/dwrightffs/spark-sdk-ios.git
-
-CHECKOUT OPTIONS:
-  Spark-SDK:
-    :commit: 85f947d0806ceeec61536b430dc32df5eb23016c
-    :git: https://github.com/dwrightffs/spark-sdk-ios.git
+    :path: Spark-SDK_Internal
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93

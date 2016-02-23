@@ -60,7 +60,7 @@ NSString const * kParticleProductSlug = @"particle_product_slug";
     customization.productSlug = self.productSlug;
     customization.organizationName = self.organizationName;
     customization.organizationSlug = self.organizationSlug;
-    customization.organization = YES;
+//    customization.organization = YES;
     
     customization.pageBackgroundColor = [UIColor appBackgroundColor];
     customization.normalTextColor = [UIColor appSignUpHeaderTextColor];
