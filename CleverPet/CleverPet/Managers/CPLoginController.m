@@ -10,6 +10,7 @@
 #import <GoogleIdentityToolkit/GITkit.h>
 #import "CPSignInViewController.h"
 #import "CPSignUpViewController.h"
+#import "CPParticleConnectionHelper.h"
 
 NSString * const kLoginCompleteNotification = @"NOTE_LoginComplete";
 NSString * const kLoginErrorKey = @"LoginError";
@@ -18,6 +19,7 @@ NSString * const kLoginErrorKey = @"LoginError";
 
 @property (nonatomic, strong) GITInterfaceManager *interfaceManager;
 @property (nonatomic, strong) NSDataDetector *emailDetector;
+@property (nonatomic, strong) NSDictionary *userInfo;
 
 @end
 
@@ -49,6 +51,18 @@ NSString * const kLoginErrorKey = @"LoginError";
 {
     NSArray *emailMatches = [self.emailDetector matchesInString:email options:kNilOptions range:NSMakeRange(0, [email length])];
     return [emailMatches count] == 1 && [[[emailMatches firstObject] URL].scheme isEqualToString:@"mailto"];
+}
+
+- (void)setPendingUserInfo:(NSDictionary *)userInfo
+{
+    self.userInfo = userInfo;
+}
+
+- (void)completeSignUpWithPetImage:(UIImage *)image completion:(void (^)(NSError *))completion
+{
+    // TODO: send user info up to the server. For now just launch the device claim flow
+    // TODO: verify we get back everything we need to create an access token(expires_in, access_token, token_type:bearer)
+    [[CPParticleConnectionHelper sharedInstance] setAccessToken:@{} completion:completion];
 }
 
 #pragma mark - Flow control
@@ -125,6 +139,8 @@ didFinishSignInWithToken:(NSString *)token
        account:(GITAccount *)account
          error:(NSError *)error
 {
+    // TODO: attempt to sign in on server. If the account doesn't exist, we need to perform the setup flow(pet profile/device setup). If we already set the pet profile info, we just need to do device setup
+    // For now, always hit that flow
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     userInfo[kLoginErrorKey] = error;
     [[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleteNotification object:nil userInfo:userInfo];

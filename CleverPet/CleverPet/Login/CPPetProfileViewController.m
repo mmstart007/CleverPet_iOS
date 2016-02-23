@@ -10,6 +10,7 @@
 #import "CPTextField.h"
 #import "CPGenderPickerViewController.h"
 #import "CPBreedPickerViewController.h"
+#import "CPLoginController.h"
 
 NSInteger const kNameFieldMinChars = 2;
 NSInteger const kNameFieldMaxChars = 10;
@@ -151,6 +152,8 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 - (IBAction)continueTapped:(id)sender
 {
     if ([self validateInput]) {
+        // TODO: bundle fields into dict
+        [[CPLoginController sharedInstance] setPendingUserInfo:@{}];
         [self performSegueWithIdentifier:@"setPetPhoto" sender:nil];
     }
 }

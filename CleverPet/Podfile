@@ -8,6 +8,8 @@ pod 'CHCSVParser'
 pod 'RBStoryboardLink'
 pod 'NMRangeSlider'
 pod 'OAStackView'
+pod 'Spark-SDK', :path => 'Spark-SDK_Internal'
+pod 'SparkSetup'
 
 end
 
