@@ -11,6 +11,7 @@
 
 @interface CPProfileSettingsViewController ()<UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *petImage;
 @property (weak, nonatomic) IBOutlet UIButton *editImageButton;
 
@@ -22,10 +23,13 @@
 @property (weak, nonatomic) IBOutlet CPTextField *genderField;
 @property (weak, nonatomic) IBOutlet CPTextField *neuteredField;
 
+@property (weak, nonatomic) IBOutlet UILabel *logoutLabel;
+@property (weak, nonatomic) IBOutlet UILabel *logoutX;
+
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *headerViews;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *headerLabels;
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *sectionViews;
-@property (strong, nonatomic) IBOutletCollection(UIView) NSArray *sectionTitles;
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *sectionTitles;
 
 @property (nonatomic, strong) NSString *weightDescriptor;
 
@@ -36,11 +40,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
+    
+    [self setupStyling];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupStyling
+{
+    self.view.backgroundColor = [UIColor appBackgroundColor];
+    [self.headerViews makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:[UIColor appBackgroundColor]];
+    [self.headerLabels makeObjectsPerformSelector:@selector(setFont:) withObject:[UIFont cpLightFontWithSize:kTableCellTitleSize italic:NO]];
+    [self.headerLabels makeObjectsPerformSelector:@selector(setTextColor:) withObject:[UIColor appTitleTextColor]];
+    [self.sectionViews makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:[UIColor appWhiteColor]];
+    [self.sectionTitles makeObjectsPerformSelector:@selector(setFont:) withObject:[UIFont cpLightFontWithSize:12 italic:NO]];
+    [self.sectionTitles makeObjectsPerformSelector:@selector(setTextColor:) withObject:[UIColor appSubCopyTextColor]];
+    
+    // TODO: background as an image if to get selected state
+    self.editImageButton.backgroundColor = [UIColor appTealColor];
+    self.editImageButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
+    [self.editImageButton setTitleColor:[UIColor appWhiteColor] forState:UIControlStateNormal];
+    
+    self.weightUnitSelector.tintColor = [UIColor appTextFieldPlaceholderColor];
+    [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
+    [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
+    
+    // TODO: x as button/image
+    self.logoutLabel.font = [UIFont cpLightFontWithSize:14 italic:NO];
+    self.logoutLabel.textColor = [UIColor appRedColor];
+    self.logoutX.textColor = [UIColor redColor];
 }
 
 #pragma mark - IBActions

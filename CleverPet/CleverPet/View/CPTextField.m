@@ -26,6 +26,7 @@ CGFloat const kCPTextFieldDefaultHorizontalInset = 0.f;
         self.showStripe = NO;
         self.showDropShadow = NO;
         self.horizontalTextInset = kCPTextFieldDefaultHorizontalInset;
+        self.fontSize = 15;
     }
     return self;
 }
@@ -51,7 +52,7 @@ CGFloat const kCPTextFieldDefaultHorizontalInset = 0.f;
     }
     
     self.textColor = [UIColor appTitleTextColor];
-    self.font = [UIFont cpLightFontWithSize:15.f italic:NO];
+    self.font = [UIFont cpLightFontWithSize:self.fontSize italic:NO];
 }
 
 - (void)setPlaceholder:(NSString *)placeholder
