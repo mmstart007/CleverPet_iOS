@@ -95,6 +95,7 @@ NSString const * kParticleProductSlug = @"particle_product_slug";
 
 - (void)sparkSetupViewController:(SparkSetupMainController *)controller didFinishWithResult:(SparkSetupMainControllerResult)result device:(SparkDevice *)device
 {
+    // TODO: Display error if we failed, and transition to dash if we succeeded
 }
 
 @end
