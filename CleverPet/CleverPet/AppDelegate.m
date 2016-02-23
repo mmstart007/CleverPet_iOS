@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <GoogleIdentityToolkit/GITkit.h>
 #import <GoogleSignin/GoogleSignin.h>
+#import "CPAppearance.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +22,7 @@
     // Override point for customization after application launch.
     
     [self setupGoogleIdentityToolkit];
+    [CPAppearance initCustomAppearance];
     
     return YES;
 }

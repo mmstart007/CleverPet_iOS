@@ -63,7 +63,7 @@ NSString const * kParticleProductSlug = @"particle_product_slug";
 //    customization.organization = YES;
     
     customization.pageBackgroundColor = [UIColor appBackgroundColor];
-    customization.normalTextColor = [UIColor appSignUpHeaderTextColor];
+    customization.normalTextColor = [UIColor appTitleTextColor];
     customization.linkTextColor = [UIColor appTealColor];
     customization.elementBackgroundColor = [UIColor appLightTealColor];
     customization.elementTextColor = [UIColor appTealColor];

@@ -38,6 +38,9 @@ PODS:
   - GoogleSymbolUtilities (1.0.3)
   - GoogleUtilities (1.0.1):
     - GoogleSymbolUtilities (~> 1.0)
+  - NMRangeSlider (1.2.1)
+  - OAStackView (1.0.1)
+  - RBStoryboardLink (0.1.4)
   - Spark-SDK (0.3.5):
     - Spark-SDK/Helpers (= 0.3.5)
     - Spark-SDK/SDK (= 0.3.5)
@@ -59,6 +62,9 @@ PODS:
 DEPENDENCIES:
   - CHCSVParser
   - GoogleIdentityToolkit
+  - NMRangeSlider
+  - OAStackView
+  - RBStoryboardLink
   - Spark-SDK (from `Spark-SDK_Internal`)
   - SparkSetup
 
@@ -77,6 +83,9 @@ SPEC CHECKSUMS:
   GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
+  NMRangeSlider: 317ded652431eb90501c8421d9cddc3930d891e6
+  OAStackView: 95e7cb79cbea25c2342f496a44bdbe8bd4c8d510
+  RBStoryboardLink: 0faae84aea6a5e8716c4469984d847d958c3fcb3
   Spark-SDK: dbd947fd197f08655b5f458ec559de5c920e8e70
   SparkSetup: f9618dd24548ab8a024efdaa65a89f63ed44a7ee
 

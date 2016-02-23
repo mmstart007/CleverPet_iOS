@@ -54,7 +54,7 @@
 {
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.headerLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
-    self.headerLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.headerLabel.textColor = [UIColor appTitleTextColor];
     self.signUpButton.backgroundColor = [UIColor appLightTealColor];
     [self.signUpButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.signUpButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];

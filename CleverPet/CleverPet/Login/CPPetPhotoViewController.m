@@ -43,7 +43,7 @@
 {
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.headerLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
-    self.headerLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.headerLabel.textColor = [UIColor appTitleTextColor];
     self.instructionLabel.font = [UIFont cpLightFontWithSize:kSubCopyFontSize italic:NO];
     self.instructionLabel.textColor = [UIColor appSubCopyTextColor];
     self.swapImageButton.backgroundColor = [UIColor appTealColor];

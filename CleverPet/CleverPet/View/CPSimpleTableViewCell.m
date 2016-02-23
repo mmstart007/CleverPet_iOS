@@ -24,7 +24,7 @@
     self.backgroundColor = [UIColor appWhiteColor];
     self.contentView.backgroundColor = [UIColor appWhiteColor];
     self.separatorView.backgroundColor = [UIColor appBackgroundColor];
-    self.displayLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.displayLabel.textColor = [UIColor appTitleTextColor];
     self.displayLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
 }
 

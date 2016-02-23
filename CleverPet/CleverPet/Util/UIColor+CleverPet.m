@@ -60,11 +60,13 @@
     return [UIColor colorWithRed:230.0/255.0 green:247.0/255.0 blue:249.0/255.0 alpha:1.0];
 }
 
-+ (UIColor*)appSignUpHeaderTextColor
+// #333333
++ (UIColor*)appTitleTextColor
 {
     return [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0];
 }
 
+// #808080
 + (UIColor*)appSubCopyTextColor
 {
     return [UIColor colorWithWhite:.5f alpha:1.f];
