@@ -6,5 +6,9 @@ pod 'JSONModel'
 pod 'AFNetworking'
 pod 'AttributedMarkdown', :git => 'https://github.com/dreamwieber/AttributedMarkdown.git'
 pod 'OAStackView'
+
+pod 'GoogleIdentityToolkit'
+pod 'CHCSVParser'
+
 end
 

@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <GoogleIdentityToolkit/GITkit.h>
+#import <GoogleSignin/GoogleSignin.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +19,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [self setupGoogleIdentityToolkit];
+    
     return YES;
 }
 
@@ -40,6 +45,25 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // Handle custom scheme redirect here.
+    return [GITClient handleOpenURL:url
+                  sourceApplication:sourceApplication
+                         annotation:annotation];
+}
+
+- (void)setupGoogleIdentityToolkit
+{
+    GITClient *gitkitClient = [GITClient sharedInstance];
+    gitkitClient.apiKey = @"AIzaSyBxl0DgIMUilfO7hp5W_YEKaUoUTsC97OI";
+    gitkitClient.widgetURL = @"http://localhost?placeholder";
+    gitkitClient.providers = @[kGITProviderGoogle];
+    [GIDSignIn sharedInstance].clientID = @"827475210510-mj08ki0l7mvr0gq9s3v5pgfp22rdiccf.apps.googleusercontent.com";
 }
 
 @end

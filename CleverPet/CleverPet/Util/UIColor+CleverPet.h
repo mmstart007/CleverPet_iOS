@@ -22,4 +22,8 @@
 + (UIColor*)appLightTealColor;
 + (UIColor*)appDarkGreyTextColor;
 + (UIColor*)appLightGreyColor;
++ (UIColor*)appSignUpHeaderTextColor;
++ (UIColor*)appSubCopyTextColor;
++ (UIColor*)appTextFieldPlaceholderColor;
+
 @end
