@@ -6,6 +6,14 @@
 @import UIKit;
 #import <JSONModel/JSONModel.h>
 
+typedef NS_ENUM(NSUInteger) {
+    CPTTMessage,
+    CPTTVideo,
+    CPTTReport,
+    CPTTGame,
+    CPTTMac,
+} CPTileType;
+
 @interface CPTile : NSObject
 // Persisted properties
 @property (strong, nonatomic) NSString *id;
@@ -13,6 +21,7 @@
 @property (strong, nonatomic) NSString *body;
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) UIImage *image;
+@property (assign, nonatomic) CPTileType tileType;
 
 @property (assign, nonatomic) BOOL hasLeftButton, hasRightButton;
 

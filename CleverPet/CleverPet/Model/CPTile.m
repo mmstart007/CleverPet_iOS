@@ -6,18 +6,16 @@
 #import "CPTile.h"
 #import "AttributedMarkdown/markdown_lib.h"
 #import "AttributedMarkdown/markdown_peg.h"
-#import "CPMarkdownAttributedString.h"
+#import "CPTileTextFormatter.h"
 @import UIKit;
 
 @implementation CPTile {
 
 }
 
-
-
 - (NSAttributedString *)parsedBody {
     if (!_parsedBody) {
-        _parsedBody = [CPMarkdownAttributedString attributedStringFromMarkdownString:self.body];
+        _parsedBody = [[CPTileTextFormatter instance] formatTileText:self.body forPet:nil];
     }
 
     return _parsedBody;

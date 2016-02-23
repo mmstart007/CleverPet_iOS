@@ -5,6 +5,7 @@
 
 #import "CPTileViewCell.h"
 #import "CPTile.h"
+#import "CPTileTextFormatter.h"
 
 @interface CPTileViewCell ()
 @property (weak, nonatomic) IBOutlet UILabel *tagTimeStampLabel;
@@ -23,6 +24,7 @@
 }
 
 - (void)setTile:(CPTile *)tile {
+    _tile = tile;
     self.titleLabel.text = tile.title;
     
 //    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -31,18 +33,46 @@
 //    [parsedBody addAttributes:@{NSBaselineOffsetAttributeName: @0, NSParagraphStyleAttributeName:paragraphStyle} range:NSMakeRange(0, parsedBody.length)];
     
     self.bodyTextView.attributedText = parsedBody;
-    self.colorBarView.backgroundColor = [UIColor appTealColor];
     
     self.cellImageViewHolder.hidden = !tile.image;
     self.cellImageView.image = tile.image;
-    
-    self.leftButton.backgroundColor = [UIColor appLightTealColor];
-    self.rightButton.backgroundColor = [UIColor appTealColor];
     
     self.leftButton.hidden = !tile.hasLeftButton;
     self.rightButton.hidden = !tile.hasRightButton;
     
     self.buttonHolder.hidden = !tile.hasLeftButton && !tile.hasRightButton;
+    
+    UIColor *tileColor = [UIColor blackColor];
+    UIColor *tileLightColor = [UIColor blackColor];
+    switch (tile.tileType) {
+        case CPTTGame:
+            tileColor = [UIColor appGreenColor];
+            tileLightColor = [UIColor appLightGreenColor];
+            break;
+        case CPTTMessage:
+            tileColor = [UIColor appTealColor];
+            tileLightColor = [UIColor appLightTealColor];
+            break;
+        case CPTTReport:
+            tileColor = [UIColor appRedColor];
+            tileLightColor = [UIColor appLightRedColor];
+            break;
+        case CPTTVideo:
+            tileColor = [UIColor appYellowColor];
+            tileLightColor = [UIColor appLightYellowColor];
+            break;
+        case CPTTMac:
+            break;
+    }
+    
+    self.colorBarView.backgroundColor = tileColor;
+    self.leftButton.backgroundColor = tileLightColor;
+    self.rightButton.backgroundColor = tileColor;
+    
+    [self setTextColor:[UIColor whiteColor] onButton:self.rightButton];
+    [self setTextColor:tileColor onButton:self.leftButton];
+    
+    self.tagTimeStampLabel.text = [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date];
 }
 
 - (void)setTextColor:(UIColor *)color onButton:(UIButton *)button
@@ -71,20 +101,26 @@
         button.titleLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
     }
     
-    [self setTextColor:[UIColor whiteColor] onButton:self.rightButton];
-    [self setTextColor:[UIColor appTealColor] onButton:self.leftButton];
-    
     self.backingView.layer.shadowColor = [UIColor colorWithWhite:.85 alpha:1].CGColor;
-    self.backingView.layer.shadowOffset = CGSizeMake(0, 1);
+    self.backingView.layer.shadowOffset = CGSizeMake(0, 2);
     self.backingView.layer.shadowOpacity = 1;
-    self.backingView.layer.shadowRadius = 1.5;
+    self.backingView.layer.shadowRadius = 3;
+    
+    self.layer.shouldRasterize = YES;
+    self.layer.rasterizationScale = [UIScreen mainScreen].scale;
+}
+
+- (void)prepareForReuse
+{
+    self.titleLabel.text = nil;
+    self.cellImageView.image = nil;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     CGRect shadowRect = self.backingView.bounds;
     shadowRect.size.height = shadowRect.size.height / 2;
-    shadowRect.origin.y+= shadowRect.size.height;
+    shadowRect.origin.y += shadowRect.size.height;
     shadowRect.origin.x -= 5;
     shadowRect.size.width += 10;
     

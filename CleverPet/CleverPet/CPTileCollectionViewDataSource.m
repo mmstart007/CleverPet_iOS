@@ -25,7 +25,7 @@
     self = [super init];
     if (self) {
         self.tableView = tableView;
-        self.tableView.estimatedRowHeight = 100;
+        self.tableView.estimatedRowHeight = 300;
 
         [tableView registerNib:[UINib nibWithNibName:@"CPTileViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:TILE_VIEW_CELL];
     }
@@ -35,7 +35,7 @@
 
 - (void)addTile:(CPTile *)tile {
     NSUInteger index = [self.tiles indexOfObject:tile inSortedRange:NSMakeRange(0, self.tiles.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(CPTile *a, CPTile *b) {
-        return [a.date compare:b.date];
+        return -[a.date compare:b.date];
     }];
     
     [self.tableView beginUpdates];

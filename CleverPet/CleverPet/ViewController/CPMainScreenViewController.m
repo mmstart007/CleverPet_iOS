@@ -54,8 +54,10 @@
             break;
     }
     
+    tile.tileType = arc4random_uniform(CPTTMac);
+    
     if (arc4random_uniform(2)) {
-        tile.image = [UIImage imageNamed:@"vallhund"];
+//        tile.image = [UIImage imageNamed:@"vallhund"];
     }
     
     tile.hasLeftButton = arc4random_uniform(2) != 0;
