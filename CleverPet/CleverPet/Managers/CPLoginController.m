@@ -61,8 +61,8 @@ NSString * const kLoginErrorKey = @"LoginError";
 - (void)completeSignUpWithPetImage:(UIImage *)image completion:(void (^)(NSError *))completion
 {
     // TODO: send user info up to the server. For now just launch the device claim flow
-    [[CPParticleConnectionHelper sharedInstance] setAuthToken:@"tempAuthToken"];
-    if (completion) completion(nil);
+    // TODO: verify we get back everything we need to create an access token(expires_in, access_token, token_type:bearer)
+    [[CPParticleConnectionHelper sharedInstance] setAccessToken:@{} completion:completion];
 }
 
 #pragma mark - Flow control

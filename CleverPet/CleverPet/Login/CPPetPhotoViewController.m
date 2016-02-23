@@ -72,7 +72,8 @@
     // TODO: spinner and disable interface
     [[CPLoginController sharedInstance] completeSignUpWithPetImage:self.selectedImage completion:^(NSError *error) {
         if (error) {
-            // TODO: display error
+            // TODO: display error. For now, begin the flow and allow user to log in to particle account
+            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
         } else {
             [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
         }

@@ -79,10 +79,10 @@ NSString const * kParticleProductSlug = @"particle_product_slug";
     self.organizationSlug = config[kParticleOrganizationSlug];
 }
 
-- (void)setAuthToken:(NSString*)authToken
+- (void)setAccessToken:(NSDictionary *)tokenInfo completion:(void (^)(NSError *))completion
 {
-    // TODO: will need to modify SparkCloud to accept
-    // Set access token on [SparkCloud sharedInstance] to simulate user login. We probably don't need to worry about token time outs
+    // Set access token on [SparkCloud sharedInstance] to simulate user login.
+    [[SparkCloud sharedInstance] loginWithAccessToken:tokenInfo completion:completion];
 }
 
 - (void)presentSetupControllerOnController:(UIViewController *)controller
