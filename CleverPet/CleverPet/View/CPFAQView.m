@@ -7,13 +7,14 @@
 //
 
 #import "CPFAQView.h"
+#import "OAStackView.h"
 
 @interface CPFAQView()
 
 @property (nonatomic, assign) BOOL isExpanded;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *body;
-@property (nonatomic, weak) UIStackView *stackView;
+@property (nonatomic, weak) OAStackView *stackView;
 @property (nonatomic, weak) UIView *headerView;
 @property (nonatomic, weak) UILabel *headerLabel;
 @property (nonatomic, weak) UIButton *expandButton;
@@ -39,7 +40,7 @@
 
 - (void)setupStackView
 {
-    UIStackView *stack = [[UIStackView alloc] init];
+    OAStackView *stack = [[OAStackView alloc] init];
     stack.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:stack];
     self.stackView = stack;

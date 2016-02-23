@@ -83,8 +83,6 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     self.headerView.backgroundColor = [UIColor appBackgroundColor];
     [self.backgroundViews makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:[UIColor appWhiteColor]];
     
-    [self.scheduledView bringSubviewToFront:self.scheduledHeaderView];
-    
     [self setupFonts];
     [self setupSliders];
     

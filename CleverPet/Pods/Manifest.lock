@@ -24,12 +24,14 @@ PODS:
   - GoogleUtilities (1.0.1):
     - GoogleSymbolUtilities (~> 1.0)
   - NMRangeSlider (1.2.1)
+  - OAStackView (1.0.1)
   - RBStoryboardLink (0.1.4)
 
 DEPENDENCIES:
   - CHCSVParser
   - GoogleIdentityToolkit
   - NMRangeSlider
+  - OAStackView
   - RBStoryboardLink
 
 SPEC CHECKSUMS:
@@ -43,6 +45,7 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
   NMRangeSlider: 317ded652431eb90501c8421d9cddc3930d891e6
+  OAStackView: 95e7cb79cbea25c2342f496a44bdbe8bd4c8d510
   RBStoryboardLink: 0faae84aea6a5e8716c4469984d847d958c3fcb3
 
 COCOAPODS: 0.39.0

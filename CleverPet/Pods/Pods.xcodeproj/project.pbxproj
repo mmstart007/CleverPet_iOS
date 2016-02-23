@@ -7,166 +7,223 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		05FBC19E4A36FA0C6F14D9EC6ACC2969 /* CHCSVParser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3428A32323812C578C723B9B872F9B49 /* CHCSVParser-dummy.m */; };
-		16AF4A21CFC2991253A9858C62723006 /* RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A8D9CBDDA9365B92D9E95E62C72FDF /* RBStoryboardLink.m */; };
+		001D506E87A5B7097BD094313297C453 /* OAStackViewAlignmentStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = 752189A3C359D5C71918E6E53D7080DF /* OAStackViewAlignmentStrategy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		007BEE4B816D0F346688D28697B78220 /* RBStoryboardLinkSource.h in Headers */ = {isa = PBXBuildFile; fileRef = A0111361677058550A0011AEFF981BCA /* RBStoryboardLinkSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		05FBC19E4A36FA0C6F14D9EC6ACC2969 /* CHCSVParser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F01BCA021FD59B50704F0BF9C9FA6E8 /* CHCSVParser-dummy.m */; };
+		08F5BAB208B4171F86C727B38D2E0D22 /* RBStoryboardLink-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 457C34F962ACD86F328F95A183F9007A /* RBStoryboardLink-dummy.m */; };
+		0B842171AC4FC59E806159A6A263898E /* _OALayoutGuide.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B5F33BEA3847826B33B1D490BFF6F72 /* _OALayoutGuide.m */; };
+		165AD11E9D34B83AC9262E2A78BED040 /* OAStackView+Hiding.m in Sources */ = {isa = PBXBuildFile; fileRef = 77530E0F9E7143A4A51FF9B56D87508B /* OAStackView+Hiding.m */; };
+		1760C1E3048B80673DA8F6F7EC78926D /* UIViewController+RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 40486222BF32F62519F968E492A61180 /* UIViewController+RBStoryboardLink.m */; };
 		17AB07D8D270B6E76FB5A5950A28A559 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
-		20222ADF69901D88CA3B210F5D486CCC /* RBStoryboardModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 751F96F06DA1B6257A53E51E2A6530F2 /* RBStoryboardModalSegue.m */; };
-		21204CD20784E06E0730CF4D40B8D5F7 /* NMRangeSlider-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 649066ACA2874D13D7FEA7CF03DEA5B8 /* NMRangeSlider-dummy.m */; };
-		25CF832B767D54D4A57B0E656B328B00 /* RBStoryboardLink-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA30D54794E42B22BF8B8B84F2411 /* RBStoryboardLink-dummy.m */; };
-		3479B66142F09E90CAB3B2C389993591 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */; };
-		34CF511567180377B1E13FCC4F9305AE /* RBStoryboardPopoverSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = EE40EF9F38324E16E0E681B18C72C837 /* RBStoryboardPopoverSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3B74EB84A5F899E3E6DBD8859AFC2E66 /* RBStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 303D47C9CEFCB10E9D5D60CB81097224 /* RBStoryboardSegue.m */; };
-		3ECCFEEB856385DFC1669A2E46CF069C /* UIViewController+RBStoryboardLink.h in Headers */ = {isa = PBXBuildFile; fileRef = F1626520044102310EE0111C1297422F /* UIViewController+RBStoryboardLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		54DDF45097514EE99A02F48AAAB013AE /* RBStoryboardPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDDF5372BCEEE956D96823717F141A0 /* RBStoryboardPushSegue.m */; };
-		580DAD54609994591B4E05E34135D717 /* RBStoryboardModalSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = FBCC1121C3AEA0331EF3D2B88E7340A7 /* RBStoryboardModalSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6790604D4AF73504B07C4F63DBA4B163 /* UIViewController+RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C20747E2517612199DBE730600D7178 /* UIViewController+RBStoryboardLink.m */; };
-		826D3469FF493187330F2173EB981F06 /* NMRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 94447074336E56C5797C47BA25D11EDA /* NMRangeSlider.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
-		88B2788CD0EF3558A6EA030E5086930D /* RBStoryboardLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 71EFAAB42C6C1ED4690D2E3DE3FEC511 /* RBStoryboardLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8A31D9DD6C3CB1C83E189E99F58ACF4C /* NMRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = F613FE1FB5DC12FCC93D9C57CFC5D7A4 /* NMRangeSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0E779F4F9C8CCA3D0A1E640C96C2984 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DCE762CEC91190909F471A405A280ED6 /* CHCSVParser.m */; };
-		B3134CF9B29F806AA70A19BDFF6D69EF /* CHCSVParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 689AB5D3EEC651197D50B2E0E575EBF5 /* CHCSVParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BC9FF7737FB49C5897BE6AD1F3C2B098 /* Pods-CleverPet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EF30A0D3A0F469EC21FE81DBE4392F /* Pods-CleverPet-dummy.m */; };
+		1CEE8224D31008BF139CB78383A1422E /* RBStoryboardModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3210A7E7DE46C99FC729F258912BC356 /* RBStoryboardModalSegue.m */; };
+		1F2B5F77B8ACFA9D6F6A3A55CB3A5221 /* RBStoryboardModalSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 03F76ADB08322EA335410A29D28CBDDC /* RBStoryboardModalSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		21204CD20784E06E0730CF4D40B8D5F7 /* NMRangeSlider-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 85BC95AB8C20B879D62FF09A0B919A01 /* NMRangeSlider-dummy.m */; };
+		213C38FDE6F21E59CD5765725AC2F57D /* RBStoryboardLink.h in Headers */ = {isa = PBXBuildFile; fileRef = D182570C250ADD5CAA688446C952182E /* RBStoryboardLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		21AEA0FDD27C27DB294CD0CC5E05CAA6 /* RBStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B0C17BAA8DF0AF04888FDB7CBCA6A1 /* RBStoryboardSegue.m */; };
+		2EBE97DEFD6D90D257553945B2A9657F /* OAStackViewAlignmentStrategyBaseline.m in Sources */ = {isa = PBXBuildFile; fileRef = 5C637808C0A6CF9A8B2C78CB479B2818 /* OAStackViewAlignmentStrategyBaseline.m */; };
+		326C3AE23F4A46F3C504CC1BE4442945 /* RBStoryboardPushSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 38E1AA587E69C7386DFA10977D77CF4F /* RBStoryboardPushSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33407DA99B39B7CA387D002B77CDBB74 /* _OALayoutGuide.h in Headers */ = {isa = PBXBuildFile; fileRef = 704D08706237A25D9D6462825E90CBC9 /* _OALayoutGuide.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33D64F339CF819A4AE3A74A0AD2BDF9B /* OAStackView+Hiding.h in Headers */ = {isa = PBXBuildFile; fileRef = E9FB1A415BE05F2D2D95145396C2E3DC /* OAStackView+Hiding.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		34997BA365E320B2BEC7EFA2BD381AB2 /* OAStackView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DC60D385B273F78C54A485676FA7FE2 /* OAStackView-dummy.m */; };
+		357028869021D2CF599B2A61B82072E0 /* OAStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 46FEF4E792BE9D570F7B49CA4A866226 /* OAStackView.m */; };
+		35722BC742B2854299603A40440EC847 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */; };
+		39603A15181F1E6022C4C369F1D2364D /* UIViewController+RBStoryboardLink.h in Headers */ = {isa = PBXBuildFile; fileRef = D77D20341C52C3BBF78BC12AB8F1BBA6 /* UIViewController+RBStoryboardLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3D977C720AB6528F46D1B882C456DF05 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		4988AD373FEAF0B3D3287075576289EB /* OAStackView+Constraint.h in Headers */ = {isa = PBXBuildFile; fileRef = EDB318A0108D6448CB74013646E457E7 /* OAStackView+Constraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		533B20F8D3529097D73E79A0E5A8C842 /* OAStackViewDistributionStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D64024E9FD037544A9C152335BC9BF8 /* OAStackViewDistributionStrategy.m */; };
+		543F919A9263D75AD09FD35D4119FBEF /* OAStackViewAlignmentStrategyBaseline.h in Headers */ = {isa = PBXBuildFile; fileRef = C5EC17A3227BE3CEB88F56968E60E08C /* OAStackViewAlignmentStrategyBaseline.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		591038ED211D779E95076845A6BB18CA /* Pods-CleverPet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EF30A0D3A0F469EC21FE81DBE4392F /* Pods-CleverPet-dummy.m */; };
+		5DA9D80A3BC3AA013585632EE9C13421 /* OAStackView+Traversal.m in Sources */ = {isa = PBXBuildFile; fileRef = D4BCCD9CE39657236B1C11981339677C /* OAStackView+Traversal.m */; };
+		68F5344C5ACDF2D38F1E3C08F5CF49FE /* OAStackView+Traversal.h in Headers */ = {isa = PBXBuildFile; fileRef = 649C4C5BB44CBAF3BEA124EEE4D9BB0B /* OAStackView+Traversal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		767CF70061A25805EA3C5EF29A2DB203 /* RBStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 39978A71A01A4CCB745E7A58B15B14AE /* RBStoryboardPopoverSegue.m */; };
+		7E098B1C7076A5C76F97172007C95272 /* OAStackView.h in Headers */ = {isa = PBXBuildFile; fileRef = ED7B411CC7FEB51342B94AC5383EFF0C /* OAStackView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		826D3469FF493187330F2173EB981F06 /* NMRangeSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D0EB2BB5AA69A6749F64660456FDCE /* NMRangeSlider.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		8A31D9DD6C3CB1C83E189E99F58ACF4C /* NMRangeSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 997CEE79774F78D7CF0B53F17432E341 /* NMRangeSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8FA5498B976319A4DB8A58B9E68F09EF /* OATransformLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F2E1FF4095EB6E0D2B26A95C91A0EF /* OATransformLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9AD30134017A03966BED6AAC705C7C92 /* OAStackView+Constraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CE81E2B1F0CD3002C37D13AE5A623D2 /* OAStackView+Constraint.m */; };
+		B0E779F4F9C8CCA3D0A1E640C96C2984 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 21EC02E35849D791B8AABE901C6C5D32 /* CHCSVParser.m */; };
+		B3134CF9B29F806AA70A19BDFF6D69EF /* CHCSVParser.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FA5585732B34A164EAEE588CD7632C /* CHCSVParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B8BEB3D6E5DBBDB63DE45874CE58D06F /* RBStoryboardPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9F3239F877037805E4F332AE5DB4D2 /* RBStoryboardPushSegue.m */; };
 		BDC6B4C77CAE197B8BB7D51CD79172AF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
-		C09FBED0F9F0D329EABE6837D51755FC /* RBStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = BE33294C49156264D7F32B25580493D3 /* RBStoryboardPopoverSegue.m */; };
-		D4BA7728CAE81FBB34440FE6C3AC9BB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
-		D86DA5473F5E765CC2C6FDE63239F8D5 /* RBStoryboardPushSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 0779766A84A32B32047BAE849C6585F1 /* RBStoryboardPushSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E1669AD0F7C61C1F4680F547C605ED30 /* RBStoryboardLinkSource.h in Headers */ = {isa = PBXBuildFile; fileRef = A9B8AA4358505244419BC9D065FD8D66 /* RBStoryboardLinkSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E3F900F9267FF404DA4FFFAE5E9D3FB6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
-		F87C743FEFE13F7FB9636235F7BEF1FB /* RBStoryboardSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 663FD955FEF0262F461AFD100970A13F /* RBStoryboardSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C54DEC14E8E3EAAA138E3EF7FFBC9F44 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		C5F887ADA2F1C872FAF9E7DACA3AA34C /* RBStoryboardSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 069945C7CE3F43FEB67F941888951A05 /* RBStoryboardSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CBB1612BD3819230D648B53F8DDE88AE /* OAStackViewAlignmentStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0D00ADA6B3F8844DBA08D78BB1EA7F /* OAStackViewAlignmentStrategy.m */; };
+		D1D5037FA8FFF097926BE7EB277588EF /* RBStoryboardPopoverSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D48F287D784C4CF1F974AC27573309 /* RBStoryboardPopoverSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E435F08EE0A5512F42BE789E75C2A7D5 /* RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D56445E33ADFF136421BA9DBDDE188C /* RBStoryboardLink.m */; };
+		E6C152B027DB17627EA8E7F35A3E2EA9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
+		E98B259CE519A4FBE933F01189D4402D /* OATransformLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 637F18CC5E68872693BF28EBC0823E13 /* OATransformLayer.m */; };
+		F6B4D403FAF6FD5DDE3AC036A520EB0C /* OAStackViewDistributionStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = 4E2F9FDE765BCCB62341FF83AAF04680 /* OAStackViewDistributionStrategy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		073F465FDE730AABE2CDA29663985A92 /* PBXContainerItemProxy */ = {
+		35C62250E40B9185687D27DE87C0ECA5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 97AB466A9931E35680ADE1D4646B4D52;
+			remoteGlobalIDString = C797DE4375AD54403983A2D67AE3DA34;
 			remoteInfo = RBStoryboardLink;
 		};
-		D35353F926C5A052E5B1E081CFB4AD50 /* PBXContainerItemProxy */ = {
+		630441D3FB02B2D6361AD4970BCB7042 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 124DDA19DF7E580D2E249D90FDA64B51;
-			remoteInfo = CHCSVParser;
+			remoteGlobalIDString = 9331DC06026102A6939CE75D29D7684E;
+			remoteInfo = OAStackView;
 		};
-		DAA6B6790B88CBA5F4200C6A45DB5641 /* PBXContainerItemProxy */ = {
+		70424A7E2ABAAD02326505533511AA13 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2728D1720063D2C4734E38C851F43244;
+			remoteInfo = "OAStackView-OAStackView";
+		};
+		BA090E6EF14CA82E970331AB042B6B71 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 3385E626FC7EEE5B718B9C301EBDCD43;
 			remoteInfo = NMRangeSlider;
 		};
+		E268C08258543F8D1FA10471290A8F32 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 124DDA19DF7E580D2E249D90FDA64B51;
+			remoteInfo = CHCSVParser;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		040491B38D43EA542CAD90444C81C6A1 /* slider-metal-handle-highlighted@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-handle-highlighted@2x.png"; path = "NMRangeSlider/MetalTheme/slider-metal-handle-highlighted@2x.png"; sourceTree = "<group>"; };
-		06FD6C770D1ADE33B69DBB9DA3E94D49 /* libOpenInChrome.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libOpenInChrome.a; path = Libraries/libOpenInChrome.a; sourceTree = "<group>"; };
-		0779766A84A32B32047BAE849C6585F1 /* RBStoryboardPushSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardPushSegue.h; path = Classes/RBStoryboardPushSegue.h; sourceTree = "<group>"; };
-		17CB8C8A52D818B4C5D9922CD7F39901 /* libGIPNSURL+FIFE.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGIPNSURL+FIFE.a"; path = "Libraries/libGIPNSURL+FIFE.a"; sourceTree = "<group>"; };
-		189D58EA6B53D827E5B4A363EAE7C7C6 /* libGTM_NSScannerJSON.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSScannerJSON.a; path = Libraries/libGTM_NSScannerJSON.a; sourceTree = "<group>"; };
-		1CD3FD3C40738A3F0788C678A9E1EC89 /* libGTMStackTrace.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMStackTrace.a; path = Libraries/libGTMStackTrace.a; sourceTree = "<group>"; };
-		273648804F120D1A6CDAA8A22ADC40BB /* GITkit.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GITkit.bundle; path = Resources/GITkit.bundle; sourceTree = "<group>"; };
+		01130CFCE56F970A5A3901639C641CD5 /* libGTLCore.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTLCore.a; path = Libraries/libGTLCore.a; sourceTree = "<group>"; };
+		03F76ADB08322EA335410A29D28CBDDC /* RBStoryboardModalSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardModalSegue.h; path = Classes/RBStoryboardModalSegue.h; sourceTree = "<group>"; };
+		069945C7CE3F43FEB67F941888951A05 /* RBStoryboardSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardSegue.h; path = Classes/RBStoryboardSegue.h; sourceTree = "<group>"; };
+		0710686A5DD81D4FB5428FB4E9237327 /* GITAccount.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITAccount.h; path = Headers/Public/GITAccount.h; sourceTree = "<group>"; };
+		0D86A921A7CC5C007028E07B641B06F8 /* libGTMOAuth2_external.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMOAuth2_external.a; path = Libraries/libGTMOAuth2_external.a; sourceTree = "<group>"; };
+		1317C40948A58BB635460F52F75659E9 /* slider-default7-handle@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-handle@2x.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-handle@2x.png"; sourceTree = "<group>"; };
+		13AE005545267DADDB652145090F5372 /* slider-default7-trackBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-trackBackground.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-trackBackground.png"; sourceTree = "<group>"; };
+		13D0A17F4ADAE57B03058079CF2E0C45 /* slider-default-trackCrossedOver.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-trackCrossedOver.png"; path = "NMRangeSlider/DefaultTheme/slider-default-trackCrossedOver.png"; sourceTree = "<group>"; };
+		1595D5BACBBDD6B0004783A445E6C629 /* slider-default-handle-highlighted@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-handle-highlighted@2x.png"; path = "NMRangeSlider/DefaultTheme/slider-default-handle-highlighted@2x.png"; sourceTree = "<group>"; };
+		1A2B8D0F23F09CFDA1C6EB16AB240E69 /* NMRangeSlider.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NMRangeSlider.xcconfig; sourceTree = "<group>"; };
+		1CC0EA371728D2FFCDC8EF5B6FF33928 /* CHCSVParser.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CHCSVParser.xcconfig; sourceTree = "<group>"; };
+		1D44FF4FD4BE30B0514D2723087E3E5F /* libSignIn.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libSignIn.a; path = Libraries/libSignIn.a; sourceTree = "<group>"; };
+		1D56445E33ADFF136421BA9DBDDE188C /* RBStoryboardLink.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardLink.m; path = Classes/RBStoryboardLink.m; sourceTree = "<group>"; };
+		1E2ED21AB6087E34F8F2A454C92CB128 /* GITAuth.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITAuth.h; path = Headers/Public/GITAuth.h; sourceTree = "<group>"; };
+		21EC02E35849D791B8AABE901C6C5D32 /* CHCSVParser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CHCSVParser.m; path = CHCSVParser/CHCSVParser/CHCSVParser.m; sourceTree = "<group>"; };
+		24B0C17BAA8DF0AF04888FDB7CBCA6A1 /* RBStoryboardSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardSegue.m; path = Classes/RBStoryboardSegue.m; sourceTree = "<group>"; };
 		27A2501A21795EB6D0064EB8852E959C /* Pods-CleverPet-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CleverPet-acknowledgements.plist"; sourceTree = "<group>"; };
-		2C0FA30D54794E42B22BF8B8B84F2411 /* RBStoryboardLink-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RBStoryboardLink-dummy.m"; sourceTree = "<group>"; };
-		300BE950EADE7D77CE78E93FDC32A33D /* libGITkit.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGITkit.a; path = Libraries/libGITkit.a; sourceTree = "<group>"; };
-		303D47C9CEFCB10E9D5D60CB81097224 /* RBStoryboardSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardSegue.m; path = Classes/RBStoryboardSegue.m; sourceTree = "<group>"; };
-		32D5BD361CF18097D79FD0B3F7BBE6AF /* slider-default-track@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-track@2x.png"; path = "NMRangeSlider/DefaultTheme/slider-default-track@2x.png"; sourceTree = "<group>"; };
-		32FCBAAFE062C1FFA9D1E016488357A3 /* NMRangeSlider.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = NMRangeSlider.xcconfig; sourceTree = "<group>"; };
-		33A8D9CBDDA9365B92D9E95E62C72FDF /* RBStoryboardLink.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardLink.m; path = Classes/RBStoryboardLink.m; sourceTree = "<group>"; };
-		3428A32323812C578C723B9B872F9B49 /* CHCSVParser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CHCSVParser-dummy.m"; sourceTree = "<group>"; };
-		3D347B175603F7A9AB74E853EDE3190C /* slider-metal-handle@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-handle@2x.png"; path = "NMRangeSlider/MetalTheme/slider-metal-handle@2x.png"; sourceTree = "<group>"; };
+		2A2F8ECD57406A05A5D5AE1C3F8B70B5 /* GITIDToken.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITIDToken.h; path = Headers/Public/GITIDToken.h; sourceTree = "<group>"; };
+		2D7617A81273D1CBB44B1A47B0B1F33A /* libNMRangeSlider.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNMRangeSlider.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DC60D385B273F78C54A485676FA7FE2 /* OAStackView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "OAStackView-dummy.m"; sourceTree = "<group>"; };
+		3210A7E7DE46C99FC729F258912BC356 /* RBStoryboardModalSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardModalSegue.m; path = Classes/RBStoryboardModalSegue.m; sourceTree = "<group>"; };
+		38E1AA587E69C7386DFA10977D77CF4F /* RBStoryboardPushSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardPushSegue.h; path = Classes/RBStoryboardPushSegue.h; sourceTree = "<group>"; };
+		39978A71A01A4CCB745E7A58B15B14AE /* RBStoryboardPopoverSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardPopoverSegue.m; path = Classes/RBStoryboardPopoverSegue.m; sourceTree = "<group>"; };
+		3F700ADD3E9E777ADDBB169BBDB109B5 /* libGTM_iPhone.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_iPhone.a; path = Libraries/libGTM_iPhone.a; sourceTree = "<group>"; };
+		403E531F2DE2AB8AE01E2423F4982562 /* GITkit.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GITkit.bundle; path = Resources/GITkit.bundle; sourceTree = "<group>"; };
+		40486222BF32F62519F968E492A61180 /* UIViewController+RBStoryboardLink.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+RBStoryboardLink.m"; path = "Classes/UIViewController+RBStoryboardLink.m"; sourceTree = "<group>"; };
 		40CBE0093CFF22C8536FEDAF6C8ED10D /* Pods-CleverPet-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CleverPet-frameworks.sh"; sourceTree = "<group>"; };
-		42C9004CC39A3DA509F8B5A52F32B537 /* slider-metal-track.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-track.png"; path = "NMRangeSlider/MetalTheme/slider-metal-track.png"; sourceTree = "<group>"; };
-		43F8FC2523560AAD91AACDD82838DA23 /* RBStoryboardLink-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RBStoryboardLink-prefix.pch"; sourceTree = "<group>"; };
-		46AEFB13D28DFB9429D76B4DAEE08AF9 /* slider-default7-trackCrossedOver.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-trackCrossedOver.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-trackCrossedOver.png"; sourceTree = "<group>"; };
-		4AB19DF176D1F194F5F6247287CBB75A /* libGTM_GTMURLBuilder.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_GTMURLBuilder.a; path = Libraries/libGTM_GTMURLBuilder.a; sourceTree = "<group>"; };
-		4DE768D2C85313690FF38C33C31F9E4C /* CHCSVParser-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CHCSVParser-prefix.pch"; sourceTree = "<group>"; };
-		51221749ADE852CB2E063359B813E84C /* GoogleSignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GoogleSignIn.h; path = Headers/Public/GoogleSignIn.h; sourceTree = "<group>"; };
-		518C37D92860CBA84513235528725A9A /* libGTM_Regex.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_Regex.a; path = Libraries/libGTM_Regex.a; sourceTree = "<group>"; };
-		5237531AC8E1B1B59B3E3C69F87A0AD5 /* slider-default7-handle@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-handle@2x.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-handle@2x.png"; sourceTree = "<group>"; };
-		56EAC8949A27C9E0809C4EA4F4C4E485 /* GIDSignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDSignIn.h; path = Headers/Public/GIDSignIn.h; sourceTree = "<group>"; };
-		5705AF3A791FE949F29AB3D559A6B6F7 /* libGTMOAuth2_internal.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMOAuth2_internal.a; path = Libraries/libGTMOAuth2_internal.a; sourceTree = "<group>"; };
-		580D62B862DA3DE0FCD15B2E1850388B /* slider-default-trackCrossedOver.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-trackCrossedOver.png"; path = "NMRangeSlider/DefaultTheme/slider-default-trackCrossedOver.png"; sourceTree = "<group>"; };
-		5B7D8815E0A4A18E93BB9BC8512085C5 /* slider-default-handle.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-handle.png"; path = "NMRangeSlider/DefaultTheme/slider-default-handle.png"; sourceTree = "<group>"; };
-		5D2780A0BD9A96066ED1EC7E6ECDF88A /* libGTM_DebugUtils.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_DebugUtils.a; path = Libraries/libGTM_DebugUtils.a; sourceTree = "<group>"; };
-		5D93D5C2D9545974C7580D89305FBD7E /* slider-default7-trackBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-trackBackground.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-trackBackground.png"; sourceTree = "<group>"; };
-		5FF9254070594FF3BD2A2B250C626B5A /* libSignIn.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libSignIn.a; path = Libraries/libSignIn.a; sourceTree = "<group>"; };
-		60A0FFFBD24D899EE486511725540469 /* slider-metal-trackBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-trackBackground@2x.png"; path = "NMRangeSlider/MetalTheme/slider-metal-trackBackground@2x.png"; sourceTree = "<group>"; };
-		649066ACA2874D13D7FEA7CF03DEA5B8 /* NMRangeSlider-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NMRangeSlider-dummy.m"; sourceTree = "<group>"; };
-		64E8A5122532B2CA69ADE29524E2C1B6 /* GIDAuthentication.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDAuthentication.h; path = Headers/Public/GIDAuthentication.h; sourceTree = "<group>"; };
-		663FD955FEF0262F461AFD100970A13F /* RBStoryboardSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardSegue.h; path = Classes/RBStoryboardSegue.h; sourceTree = "<group>"; };
-		66B424239F7A825AECAC462C813E1619 /* slider-metal-handle-highlighted.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-handle-highlighted.png"; path = "NMRangeSlider/MetalTheme/slider-metal-handle-highlighted.png"; sourceTree = "<group>"; };
-		689AB5D3EEC651197D50B2E0E575EBF5 /* CHCSVParser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CHCSVParser.h; path = CHCSVParser/CHCSVParser/CHCSVParser.h; sourceTree = "<group>"; };
-		69A96AD888B9B9322EBC12F6EFFE3FA8 /* libGTMSessionFetcher_full.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMSessionFetcher_full.a; path = Libraries/libGTMSessionFetcher_full.a; sourceTree = "<group>"; };
-		69EDC2A1F657DB5CEBA42299070C4A0A /* GoogleSignIn.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleSignIn.bundle; path = Resources/GoogleSignIn.bundle; sourceTree = "<group>"; };
-		6A356A40567AAE2CE03A0876CA6BCE10 /* libGTLCore.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTLCore.a; path = Libraries/libGTLCore.a; sourceTree = "<group>"; };
-		6BDDF5372BCEEE956D96823717F141A0 /* RBStoryboardPushSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardPushSegue.m; path = Classes/RBStoryboardPushSegue.m; sourceTree = "<group>"; };
-		6CB90FA41DE2E86BFA5A8A5BE431F8E2 /* GITIDToken.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITIDToken.h; path = Headers/Public/GITIDToken.h; sourceTree = "<group>"; };
+		416C7985FBC138410A06F24FAE28E066 /* libGTM_RoundedRectPath.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_RoundedRectPath.a; path = Libraries/libGTM_RoundedRectPath.a; sourceTree = "<group>"; };
+		43166149BCF12C8D640186A1F439AEA6 /* libGTM_Regex.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_Regex.a; path = Libraries/libGTM_Regex.a; sourceTree = "<group>"; };
+		450D24D9105A0265B00A4E5EC1B101AB /* libGTM_NSScannerJSON.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSScannerJSON.a; path = Libraries/libGTM_NSScannerJSON.a; sourceTree = "<group>"; };
+		457C34F962ACD86F328F95A183F9007A /* RBStoryboardLink-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RBStoryboardLink-dummy.m"; sourceTree = "<group>"; };
+		46FEF4E792BE9D570F7B49CA4A866226 /* OAStackView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OAStackView.m; path = Pod/Classes/OAStackView.m; sourceTree = "<group>"; };
+		479D19690BBB5EB02EA7B77152E62FDC /* libGTM_KVO.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_KVO.a; path = Libraries/libGTM_KVO.a; sourceTree = "<group>"; };
+		49D93ED2A4989B16557BA55BCCA45D9B /* GoogleSignIn.bundle */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "wrapper.plug-in"; name = GoogleSignIn.bundle; path = Resources/GoogleSignIn.bundle; sourceTree = "<group>"; };
+		4D5E9C475D05C4B02EAF7F32A27A6189 /* libGSDK_Overload.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGSDK_Overload.a; path = Libraries/libGSDK_Overload.a; sourceTree = "<group>"; };
+		4E2F9FDE765BCCB62341FF83AAF04680 /* OAStackViewDistributionStrategy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OAStackViewDistributionStrategy.h; path = Pod/Classes/OAStackViewDistributionStrategy.h; sourceTree = "<group>"; };
+		50C0F928CF123EFBF15A8935B28C2FD1 /* GITInterfaceManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITInterfaceManager.h; path = Headers/Public/GITInterfaceManager.h; sourceTree = "<group>"; };
+		546055E5EE72852C83F8C68B7BE30FF7 /* libGTM_NSDictionary+URLArguments.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_NSDictionary+URLArguments.a"; path = "Libraries/libGTM_NSDictionary+URLArguments.a"; sourceTree = "<group>"; };
+		55595258FDDC29E9515235B4100A398C /* NMRangeSlider-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NMRangeSlider-prefix.pch"; sourceTree = "<group>"; };
+		55927BF354AAF0A33453CBCF52B374F8 /* slider-default_trackBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default_trackBackground@2x.png"; path = "NMRangeSlider/DefaultTheme/slider-default_trackBackground@2x.png"; sourceTree = "<group>"; };
+		59B6225324FCA6D3D6AE1641EA645A1A /* libGTM_GTMURLBuilder.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_GTMURLBuilder.a; path = Libraries/libGTM_GTMURLBuilder.a; sourceTree = "<group>"; };
+		5A0117987A16D162F7C34187ECD08C2D /* slider-metal-handle-highlighted@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-handle-highlighted@2x.png"; path = "NMRangeSlider/MetalTheme/slider-metal-handle-highlighted@2x.png"; sourceTree = "<group>"; };
+		5A1327DCEE01C7FB5370F2D69937D9B7 /* libGTMSessionFetcher_full.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMSessionFetcher_full.a; path = Libraries/libGTMSessionFetcher_full.a; sourceTree = "<group>"; };
+		5A9F3239F877037805E4F332AE5DB4D2 /* RBStoryboardPushSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardPushSegue.m; path = Classes/RBStoryboardPushSegue.m; sourceTree = "<group>"; };
+		5ADDEB78AD4C23DBB0CDDF9A9753E4BD /* OAStackView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "OAStackView-prefix.pch"; sourceTree = "<group>"; };
+		5B5F33BEA3847826B33B1D490BFF6F72 /* _OALayoutGuide.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = _OALayoutGuide.m; path = Pod/Classes/_OALayoutGuide.m; sourceTree = "<group>"; };
+		5C1A7D4991AEAD0BD702D25109F0760F /* slider-default-handle-highlighted.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-handle-highlighted.png"; path = "NMRangeSlider/DefaultTheme/slider-default-handle-highlighted.png"; sourceTree = "<group>"; };
+		5C637808C0A6CF9A8B2C78CB479B2818 /* OAStackViewAlignmentStrategyBaseline.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OAStackViewAlignmentStrategyBaseline.m; path = Pod/Classes/OAStackViewAlignmentStrategyBaseline.m; sourceTree = "<group>"; };
+		5D10C8BA425F59BBD31B202070E71A49 /* libGTM_AddressBook.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_AddressBook.a; path = Libraries/libGTM_AddressBook.a; sourceTree = "<group>"; };
+		5E1A8E8494435FF79A2D6ED576CBF117 /* slider-default-track@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-track@2x.png"; path = "NMRangeSlider/DefaultTheme/slider-default-track@2x.png"; sourceTree = "<group>"; };
+		5F0D00ADA6B3F8844DBA08D78BB1EA7F /* OAStackViewAlignmentStrategy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OAStackViewAlignmentStrategy.m; path = Pod/Classes/OAStackViewAlignmentStrategy.m; sourceTree = "<group>"; };
+		6023E396DF8A8CC5D5787FDE8B8EAAA9 /* GIDGoogleUser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDGoogleUser.h; path = Headers/Public/GIDGoogleUser.h; sourceTree = "<group>"; };
+		60D48F287D784C4CF1F974AC27573309 /* RBStoryboardPopoverSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardPopoverSegue.h; path = Classes/RBStoryboardPopoverSegue.h; sourceTree = "<group>"; };
+		630EF0F38D49239D1BB3FCF8119E1061 /* UIViewController+SignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+SignIn.h"; path = "Headers/Public/UIViewController+SignIn.h"; sourceTree = "<group>"; };
+		637F18CC5E68872693BF28EBC0823E13 /* OATransformLayer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OATransformLayer.m; path = Pod/Classes/OATransformLayer.m; sourceTree = "<group>"; };
+		63CA76F641EA047949FC2BC87C832064 /* libGTM_SystemVersion.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_SystemVersion.a; path = Libraries/libGTM_SystemVersion.a; sourceTree = "<group>"; };
+		649C4C5BB44CBAF3BEA124EEE4D9BB0B /* OAStackView+Traversal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OAStackView+Traversal.h"; path = "Pod/Classes/OAStackView+Traversal.h"; sourceTree = "<group>"; };
+		6718EE1EFAB685B518F55B593DEC1019 /* libGTMSessionFetcher_core.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMSessionFetcher_core.a; path = Libraries/libGTMSessionFetcher_core.a; sourceTree = "<group>"; };
+		6720D1BFA84E62C26B4BEB5D68CE658C /* slider-default7-track.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-track.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-track.png"; sourceTree = "<group>"; };
+		6B29A36C7CB694A8079DD14141D937D8 /* slider-metal-handle@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-handle@2x.png"; path = "NMRangeSlider/MetalTheme/slider-metal-handle@2x.png"; sourceTree = "<group>"; };
 		6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		6EBCE8F60ADE85D9C9C3A5319DFE01C2 /* libGTM_RoundedRectPath.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_RoundedRectPath.a; path = Libraries/libGTM_RoundedRectPath.a; sourceTree = "<group>"; };
-		6EE9F52EF91760DCC4340C846AC86DDC /* slider-default7-handle.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-handle.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-handle.png"; sourceTree = "<group>"; };
-		71EFAAB42C6C1ED4690D2E3DE3FEC511 /* RBStoryboardLink.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardLink.h; path = Classes/RBStoryboardLink.h; sourceTree = "<group>"; };
-		72E85EB4C6C522691DC4EEB86E116B13 /* slider-metal-trackBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-trackBackground.png"; path = "NMRangeSlider/MetalTheme/slider-metal-trackBackground.png"; sourceTree = "<group>"; };
-		751F96F06DA1B6257A53E51E2A6530F2 /* RBStoryboardModalSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardModalSegue.m; path = Classes/RBStoryboardModalSegue.m; sourceTree = "<group>"; };
-		7665CBC3AEAD580B6860F7B1CF7070FC /* slider-default7-trackBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-trackBackground@2x.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-trackBackground@2x.png"; sourceTree = "<group>"; };
-		792A878BB75AE8A8891EBE9821B7BF11 /* GIDSignInButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDSignInButton.h; path = Headers/Public/GIDSignInButton.h; sourceTree = "<group>"; };
-		7AEACA4F5E86ED58DF3BEB46274CD1EF /* libNMRangeSlider.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNMRangeSlider.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F6E762EDBF67EC9A38E2F7AC8D400EC /* slider-default_trackBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default_trackBackground@2x.png"; path = "NMRangeSlider/DefaultTheme/slider-default_trackBackground@2x.png"; sourceTree = "<group>"; };
-		7F88EDFB9579D2D3B34E5817148F1FF3 /* libGTMOAuth2_external.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMOAuth2_external.a; path = Libraries/libGTMOAuth2_external.a; sourceTree = "<group>"; };
+		704D08706237A25D9D6462825E90CBC9 /* _OALayoutGuide.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = _OALayoutGuide.h; path = Pod/Classes/_OALayoutGuide.h; sourceTree = "<group>"; };
+		752189A3C359D5C71918E6E53D7080DF /* OAStackViewAlignmentStrategy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OAStackViewAlignmentStrategy.h; path = Pod/Classes/OAStackViewAlignmentStrategy.h; sourceTree = "<group>"; };
+		77530E0F9E7143A4A51FF9B56D87508B /* OAStackView+Hiding.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OAStackView+Hiding.m"; path = "Pod/Classes/OAStackView+Hiding.m"; sourceTree = "<group>"; };
+		7BAEF7517595EECE7D77EF73ED28EF92 /* libRBStoryboardLink.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRBStoryboardLink.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DC1E06A8476213C08008EB059CD9048 /* libGTMStackTrace.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMStackTrace.a; path = Libraries/libGTMStackTrace.a; sourceTree = "<group>"; };
+		7F01BCA021FD59B50704F0BF9C9FA6E8 /* CHCSVParser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "CHCSVParser-dummy.m"; sourceTree = "<group>"; };
+		81D0A6D950191DBB22C3322B90BE37E9 /* libGTM_StringEncoding.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_StringEncoding.a; path = Libraries/libGTM_StringEncoding.a; sourceTree = "<group>"; };
+		8279D54465628A35E2CF1ADAAC872E8B /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		82EF30A0D3A0F469EC21FE81DBE4392F /* Pods-CleverPet-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CleverPet-dummy.m"; sourceTree = "<group>"; };
-		85FB641384BDDF37D8AAE02E26C73A36 /* slider-metal-handle.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-handle.png"; path = "NMRangeSlider/MetalTheme/slider-metal-handle.png"; sourceTree = "<group>"; };
-		86C68B3B2F7A88540C030C3C85DF79C4 /* GITClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITClient.h; path = Headers/Public/GITClient.h; sourceTree = "<group>"; };
-		881B17EF66D98AC3D204D2A4ADCB0DF0 /* slider-default-handle@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-handle@2x.png"; path = "NMRangeSlider/DefaultTheme/slider-default-handle@2x.png"; sourceTree = "<group>"; };
-		8ECE1F8E60C03B7144721DBC4B5755B6 /* libGTM_NSDictionary+URLArguments.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_NSDictionary+URLArguments.a"; path = "Libraries/libGTM_NSDictionary+URLArguments.a"; sourceTree = "<group>"; };
-		8FCAF65C295624DC248D6A3627BD77F6 /* slider-default-trackBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-trackBackground.png"; path = "NMRangeSlider/DefaultTheme/slider-default-trackBackground.png"; sourceTree = "<group>"; };
-		902741032C22E3F6D57D4F84D582B80F /* libGTM_SystemVersion.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_SystemVersion.a; path = Libraries/libGTM_SystemVersion.a; sourceTree = "<group>"; };
-		93FAB80442D614815D51F6DD2210BB35 /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		94447074336E56C5797C47BA25D11EDA /* NMRangeSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMRangeSlider.m; path = NMRangeSlider/NMRangeSlider.m; sourceTree = "<group>"; };
-		99219CECEBCCAB644AF705DEFFD102F0 /* CHCSVParser.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = CHCSVParser.xcconfig; sourceTree = "<group>"; };
-		9C20747E2517612199DBE730600D7178 /* UIViewController+RBStoryboardLink.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIViewController+RBStoryboardLink.m"; path = "Classes/UIViewController+RBStoryboardLink.m"; sourceTree = "<group>"; };
-		9E0E47189EC5757B63E4350F224F8B3C /* GIDProfileData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDProfileData.h; path = Headers/Public/GIDProfileData.h; sourceTree = "<group>"; };
-		9F030807A7A92C6D596F04ADB2C88764 /* libGTM_StringEncoding.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_StringEncoding.a; path = Libraries/libGTM_StringEncoding.a; sourceTree = "<group>"; };
-		9F888D27E370CBFB11D6CB95DAADFAFA /* libRBStoryboardLink.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRBStoryboardLink.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		9FBCF4C9150D732C15DA03846B69AE76 /* slider-metal-track@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-track@2x.png"; path = "NMRangeSlider/MetalTheme/slider-metal-track@2x.png"; sourceTree = "<group>"; };
-		A3E0E59A2989A0C4F5CDA5B38B20637A /* slider-default7-track@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-track@2x.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-track@2x.png"; sourceTree = "<group>"; };
-		A53116224E498284DD353B79C0EBEAA6 /* libCHCSVParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCHCSVParser.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		849B3EDE3B5910E71778F2748388D05D /* libGTM_core.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_core.a; path = Libraries/libGTM_core.a; sourceTree = "<group>"; };
+		85BC95AB8C20B879D62FF09A0B919A01 /* NMRangeSlider-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "NMRangeSlider-dummy.m"; sourceTree = "<group>"; };
+		866AC0A6686CEFBCEF03DBFFE33EFED6 /* libOAStackView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOAStackView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		89BA551B0485DF8FF7D753D4C8D0655A /* libCHCSVParser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCHCSVParser.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B7572B1EB08641C34D8D9DBAD83892A /* slider-metal-track@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-track@2x.png"; path = "NMRangeSlider/MetalTheme/slider-metal-track@2x.png"; sourceTree = "<group>"; };
+		8DA6516B235789A958A47DEBAC2B2C18 /* GIDProfileData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDProfileData.h; path = Headers/Public/GIDProfileData.h; sourceTree = "<group>"; };
+		8DE0C30A37101E4A11827473CC19D94E /* slider-default7-trackCrossedOver@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-trackCrossedOver@2x.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-trackCrossedOver@2x.png"; sourceTree = "<group>"; };
+		8F30D2AE8432E63E5DDCEC887A33F577 /* RBStoryboardLink.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RBStoryboardLink.xcconfig; sourceTree = "<group>"; };
+		95999452EEE99CC15EF890FDB5F81D06 /* slider-default-trackCrossedOver@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-trackCrossedOver@2x.png"; path = "NMRangeSlider/DefaultTheme/slider-default-trackCrossedOver@2x.png"; sourceTree = "<group>"; };
+		997CEE79774F78D7CF0B53F17432E341 /* NMRangeSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMRangeSlider.h; path = NMRangeSlider/NMRangeSlider.h; sourceTree = "<group>"; };
+		9CE81E2B1F0CD3002C37D13AE5A623D2 /* OAStackView+Constraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OAStackView+Constraint.m"; path = "Pod/Classes/OAStackView+Constraint.m"; sourceTree = "<group>"; };
+		9D64024E9FD037544A9C152335BC9BF8 /* OAStackViewDistributionStrategy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = OAStackViewDistributionStrategy.m; path = Pod/Classes/OAStackViewDistributionStrategy.m; sourceTree = "<group>"; };
+		9FEA66DAFC868D18EB3815B3AFCF1405 /* RBStoryboardLink-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RBStoryboardLink-prefix.pch"; sourceTree = "<group>"; };
+		A0111361677058550A0011AEFF981BCA /* RBStoryboardLinkSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardLinkSource.h; path = Classes/RBStoryboardLinkSource.h; sourceTree = "<group>"; };
+		A3FA5585732B34A164EAEE588CD7632C /* CHCSVParser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CHCSVParser.h; path = CHCSVParser/CHCSVParser/CHCSVParser.h; sourceTree = "<group>"; };
+		A4958150F4A4E89585089C4028436BB6 /* libGTM_DebugUtils.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_DebugUtils.a; path = Libraries/libGTM_DebugUtils.a; sourceTree = "<group>"; };
 		A797D3DCFC5DFE904BB8A676AE0CF50B /* Pods-CleverPet-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CleverPet-acknowledgements.markdown"; sourceTree = "<group>"; };
-		A9B8AA4358505244419BC9D065FD8D66 /* RBStoryboardLinkSource.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardLinkSource.h; path = Classes/RBStoryboardLinkSource.h; sourceTree = "<group>"; };
-		A9D83CFE5DB5A34F2807D5945653D819 /* libGSDK_Overload.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGSDK_Overload.a; path = Libraries/libGSDK_Overload.a; sourceTree = "<group>"; };
-		AD39114B74BDF27B60AEDB60AADEAD26 /* NMRangeSlider-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "NMRangeSlider-prefix.pch"; sourceTree = "<group>"; };
-		B21CB7A7CF0C2024E26B731442E269A3 /* RBStoryboardLink.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = RBStoryboardLink.xcconfig; sourceTree = "<group>"; };
-		B525A10AB5475BAC0A92B5E4D86DDFF5 /* slider-default-track.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-track.png"; path = "NMRangeSlider/DefaultTheme/slider-default-track.png"; sourceTree = "<group>"; };
+		A8D0EB2BB5AA69A6749F64660456FDCE /* NMRangeSlider.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMRangeSlider.m; path = NMRangeSlider/NMRangeSlider.m; sourceTree = "<group>"; };
+		A9940C697EA740F2038EE204B0251D88 /* libGTM_NSStringXML.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSStringXML.a; path = Libraries/libGTM_NSStringXML.a; sourceTree = "<group>"; };
+		ACA3A44E39B6B5310162F6247DA5314B /* GITClient.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITClient.h; path = Headers/Public/GITClient.h; sourceTree = "<group>"; };
+		AD0DA39ED4F12A621FD87EB584DF5313 /* slider-metal-track.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-track.png"; path = "NMRangeSlider/MetalTheme/slider-metal-track.png"; sourceTree = "<group>"; };
+		AE40EB0F2A845B639292C53EB61712C7 /* libGTMOAuth2_internal.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMOAuth2_internal.a; path = Libraries/libGTMOAuth2_internal.a; sourceTree = "<group>"; };
+		B5DE4B31B478AA0A9BA55396D741BC54 /* slider-metal-handle-highlighted.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-handle-highlighted.png"; path = "NMRangeSlider/MetalTheme/slider-metal-handle-highlighted.png"; sourceTree = "<group>"; };
+		B8DB6AF3ECD2643C041AE623F810335A /* slider-default7-track@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-track@2x.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-track@2x.png"; sourceTree = "<group>"; };
+		B97DC2233F0C6C974EE51D320EEB2953 /* libGTM_UIFont+LineHeight.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_UIFont+LineHeight.a"; path = "Libraries/libGTM_UIFont+LineHeight.a"; sourceTree = "<group>"; };
+		B9DF310AD64281E947A1382C56D7BD0D /* slider-metal-trackBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-trackBackground.png"; path = "NMRangeSlider/MetalTheme/slider-metal-trackBackground.png"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		BE33294C49156264D7F32B25580493D3 /* RBStoryboardPopoverSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = RBStoryboardPopoverSegue.m; path = Classes/RBStoryboardPopoverSegue.m; sourceTree = "<group>"; };
+		C0D70C962835CD415B0F2E47BC3359B7 /* libOpenInChrome.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libOpenInChrome.a; path = Libraries/libOpenInChrome.a; sourceTree = "<group>"; };
 		C23A5C0DD82036938FE786262DFFA00B /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
+		C259A186C8575036F79196AC4AD64BE8 /* GITkit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITkit.h; path = Headers/Public/GITkit.h; sourceTree = "<group>"; };
 		C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		C462251132B527B52F284F9517E2DD35 /* libGTM_iPhone.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_iPhone.a; path = Libraries/libGTM_iPhone.a; sourceTree = "<group>"; };
-		C9998CA6E92FA3F0E89BC6DC7E9AF9CB /* GIDGoogleUser.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDGoogleUser.h; path = Headers/Public/GIDGoogleUser.h; sourceTree = "<group>"; };
-		DA314AF5F5B3247C31A3F5FAFC94C297 /* libGTM_core.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_core.a; path = Libraries/libGTM_core.a; sourceTree = "<group>"; };
-		DBDF6B5700F5A819D3A389896517711F /* libGTM_NSStringXML.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSStringXML.a; path = Libraries/libGTM_NSStringXML.a; sourceTree = "<group>"; };
-		DCE762CEC91190909F471A405A280ED6 /* CHCSVParser.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = CHCSVParser.m; path = CHCSVParser/CHCSVParser/CHCSVParser.m; sourceTree = "<group>"; };
-		E1E2BDDDD3A29BE7C28EE90342928C3A /* slider-default-handle-highlighted@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-handle-highlighted@2x.png"; path = "NMRangeSlider/DefaultTheme/slider-default-handle-highlighted@2x.png"; sourceTree = "<group>"; };
-		E24C91E9B70BDFFE6A8B1840C63B9F4F /* libGTMSessionFetcher_core.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTMSessionFetcher_core.a; path = Libraries/libGTMSessionFetcher_core.a; sourceTree = "<group>"; };
-		E5D3A49E5C2AD27EF0E3E66C5B145F8C /* GITInterfaceManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITInterfaceManager.h; path = Headers/Public/GITInterfaceManager.h; sourceTree = "<group>"; };
-		E78257436AFA019785359F871A139933 /* slider-default7-track.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-track.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-track.png"; sourceTree = "<group>"; };
-		E8D7C0AA26448560E2A2FD7C718E210A /* libGTM_KVO.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_KVO.a; path = Libraries/libGTM_KVO.a; sourceTree = "<group>"; };
+		C59A2043A17EA52184F804CFD12738C9 /* OAStackView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = OAStackView.xcconfig; sourceTree = "<group>"; };
+		C5BC283240566EE2E53C29E15258E9E7 /* slider-default-handle.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-handle.png"; path = "NMRangeSlider/DefaultTheme/slider-default-handle.png"; sourceTree = "<group>"; };
+		C5EC17A3227BE3CEB88F56968E60E08C /* OAStackViewAlignmentStrategyBaseline.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OAStackViewAlignmentStrategyBaseline.h; path = Pod/Classes/OAStackViewAlignmentStrategyBaseline.h; sourceTree = "<group>"; };
+		C766E4C5142B43FB53576703D3AED6FE /* libGITkit.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGITkit.a; path = Libraries/libGITkit.a; sourceTree = "<group>"; };
+		CD269F246F6ACE8300D15EF69CC120E1 /* slider-default7-trackBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-trackBackground@2x.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-trackBackground@2x.png"; sourceTree = "<group>"; };
+		CE331FF5F7E1566D5BCB6F0E3686E2D9 /* slider-metal-trackBackground@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-trackBackground@2x.png"; path = "NMRangeSlider/MetalTheme/slider-metal-trackBackground@2x.png"; sourceTree = "<group>"; };
+		CEFE439CF24D1A3404532C6B42850E81 /* GIDSignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDSignIn.h; path = Headers/Public/GIDSignIn.h; sourceTree = "<group>"; };
+		D0520C1E942AE7B20E0767DFB6891881 /* slider-default7-trackCrossedOver.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-trackCrossedOver.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-trackCrossedOver.png"; sourceTree = "<group>"; };
+		D0C8D6A65C350F8910EBDAD322F3755E /* slider-metal-handle.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-metal-handle.png"; path = "NMRangeSlider/MetalTheme/slider-metal-handle.png"; sourceTree = "<group>"; };
+		D182570C250ADD5CAA688446C952182E /* RBStoryboardLink.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardLink.h; path = Classes/RBStoryboardLink.h; sourceTree = "<group>"; };
+		D33442F2D1A68DE9CEC82F554244209E /* GIDSignInButton.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDSignInButton.h; path = Headers/Public/GIDSignInButton.h; sourceTree = "<group>"; };
+		D4BCCD9CE39657236B1C11981339677C /* OAStackView+Traversal.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "OAStackView+Traversal.m"; path = "Pod/Classes/OAStackView+Traversal.m"; sourceTree = "<group>"; };
+		D77D20341C52C3BBF78BC12AB8F1BBA6 /* UIViewController+RBStoryboardLink.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+RBStoryboardLink.h"; path = "Classes/UIViewController+RBStoryboardLink.h"; sourceTree = "<group>"; };
+		D860311AA143DEBE3E372EEB5EB3DC94 /* slider-default-track.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-track.png"; path = "NMRangeSlider/DefaultTheme/slider-default-track.png"; sourceTree = "<group>"; };
+		DD0742ECA55FD8968D7B55C95600354E /* slider-default-handle@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-handle@2x.png"; path = "NMRangeSlider/DefaultTheme/slider-default-handle@2x.png"; sourceTree = "<group>"; };
+		DEBA28EF79BBFAC49A701190EF54611B /* CHCSVParser-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CHCSVParser-prefix.pch"; sourceTree = "<group>"; };
+		DEDF7A61549F8A89F7D7F15EAE896733 /* OAStackView.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OAStackView.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2D4C91A5B58BD4067FB4BDEF2B40AE6 /* GoogleSignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GoogleSignIn.h; path = Headers/Public/GoogleSignIn.h; sourceTree = "<group>"; };
+		E3FF384BB558839C7C11720010D7369B /* slider-default7-handle.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-handle.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-handle.png"; sourceTree = "<group>"; };
 		E9747F37199D7E28A850FBB91870279B /* Pods-CleverPet-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CleverPet-resources.sh"; sourceTree = "<group>"; };
-		EB2DF86E0819A52F79260AC7098C6CF9 /* slider-default-trackCrossedOver@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-trackCrossedOver@2x.png"; path = "NMRangeSlider/DefaultTheme/slider-default-trackCrossedOver@2x.png"; sourceTree = "<group>"; };
-		EB85D93120E2C81BBBABBB1507DD3D6B /* slider-default7-trackCrossedOver@2x.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default7-trackCrossedOver@2x.png"; path = "NMRangeSlider/DefaultTheme7/slider-default7-trackCrossedOver@2x.png"; sourceTree = "<group>"; };
-		ECCBB82944FB7BC3919E0C3B5204F06F /* libGTM_UIFont+LineHeight.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGTM_UIFont+LineHeight.a"; path = "Libraries/libGTM_UIFont+LineHeight.a"; sourceTree = "<group>"; };
-		ECD5F38627B027C337F5FEC3B025876D /* UIViewController+SignIn.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+SignIn.h"; path = "Headers/Public/UIViewController+SignIn.h"; sourceTree = "<group>"; };
-		EE40EF9F38324E16E0E681B18C72C837 /* RBStoryboardPopoverSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardPopoverSegue.h; path = Classes/RBStoryboardPopoverSegue.h; sourceTree = "<group>"; };
-		EE69179B205DD030A6A76613D433DE39 /* libGTM_NSStringHTML.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSStringHTML.a; path = Libraries/libGTM_NSStringHTML.a; sourceTree = "<group>"; };
-		F1626520044102310EE0111C1297422F /* UIViewController+RBStoryboardLink.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIViewController+RBStoryboardLink.h"; path = "Classes/UIViewController+RBStoryboardLink.h"; sourceTree = "<group>"; };
-		F30A0FBD3247CE5D2456D4CD8A86E4D1 /* GITkit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITkit.h; path = Headers/Public/GITkit.h; sourceTree = "<group>"; };
-		F613FE1FB5DC12FCC93D9C57CFC5D7A4 /* NMRangeSlider.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = NMRangeSlider.h; path = NMRangeSlider/NMRangeSlider.h; sourceTree = "<group>"; };
-		F8078C9563C69D7EDFB248F03FAD26FE /* slider-default-handle-highlighted.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-handle-highlighted.png"; path = "NMRangeSlider/DefaultTheme/slider-default-handle-highlighted.png"; sourceTree = "<group>"; };
+		E9FB1A415BE05F2D2D95145396C2E3DC /* OAStackView+Hiding.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OAStackView+Hiding.h"; path = "Pod/Classes/OAStackView+Hiding.h"; sourceTree = "<group>"; };
+		ED7B411CC7FEB51342B94AC5383EFF0C /* OAStackView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OAStackView.h; path = Pod/Classes/OAStackView.h; sourceTree = "<group>"; };
+		EDB318A0108D6448CB74013646E457E7 /* OAStackView+Constraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "OAStackView+Constraint.h"; path = "Pod/Classes/OAStackView+Constraint.h"; sourceTree = "<group>"; };
+		F21FF819F47355CB4AB2A4DF87A20287 /* libGTM_NSStringHTML.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_NSStringHTML.a; path = Libraries/libGTM_NSStringHTML.a; sourceTree = "<group>"; };
+		F5F2E1FF4095EB6E0D2B26A95C91A0EF /* OATransformLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = OATransformLayer.h; path = Pod/Classes/OATransformLayer.h; sourceTree = "<group>"; };
+		F6E4629C2D7197DBA6D267A0B1B4274F /* slider-default-trackBackground.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = "slider-default-trackBackground.png"; path = "NMRangeSlider/DefaultTheme/slider-default-trackBackground.png"; sourceTree = "<group>"; };
 		F80C7D53107C8ECA0217F4DE492243B0 /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
-		FA186F4E2EF8BE02EBBF73240D13A93C /* libGTM_AddressBook.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libGTM_AddressBook.a; path = Libraries/libGTM_AddressBook.a; sourceTree = "<group>"; };
-		FB2BA5ADFE56731EC459AD5324BCF43C /* GITAuth.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITAuth.h; path = Headers/Public/GITAuth.h; sourceTree = "<group>"; };
-		FBCC1121C3AEA0331EF3D2B88E7340A7 /* RBStoryboardModalSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RBStoryboardModalSegue.h; path = Classes/RBStoryboardModalSegue.h; sourceTree = "<group>"; };
-		FE2B47410B09E1D698494EC38676B319 /* GITAccount.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GITAccount.h; path = Headers/Public/GITAccount.h; sourceTree = "<group>"; };
+		FB9D4B7E5BC370C2443BB9D141A91D9D /* libGIPNSURL+FIFE.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = "libGIPNSURL+FIFE.a"; path = "Libraries/libGIPNSURL+FIFE.a"; sourceTree = "<group>"; };
+		FF4A7A2C76C0D76717C22599EFF58317 /* GIDAuthentication.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GIDAuthentication.h; path = Headers/Public/GIDAuthentication.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,20 +235,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1CFB19E9AA6C6340C7AF2AB03EB58897 /* Frameworks */ = {
+		58EBCBDB9C685F6264F9EC67D388A1D4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4BA7728CAE81FBB34440FE6C3AC9BB7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		21382D18ECFEBDD8E959C232BF0F1C14 /* Frameworks */ = {
+		5D3DA317DCEDE22711F04AF3659D146A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3F900F9267FF404DA4FFFAE5E9D3FB6 /* Foundation.framework in Frameworks */,
-				3479B66142F09E90CAB3B2C389993591 /* UIKit.framework in Frameworks */,
+				C54DEC14E8E3EAAA138E3EF7FFBC9F44 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		663C6ADD6B080609C6410FDC3CFA185E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E6C152B027DB17627EA8E7F35A3E2EA9 /* Foundation.framework in Frameworks */,
+				35722BC742B2854299603A40440EC847 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,31 +267,46 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E568DDBFCB611887B5FA46B98CDFB701 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D977C720AB6528F46D1B882C456DF05 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00DB74BA615E2005C658A4DC67A1C986 /* GoogleAppUtilities */ = {
+		0EDCA5B876F5067A9377D898E145C7BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				C2DB020F11652AE1378C87D05F0101F7 /* Frameworks */,
+				5D10C8BA425F59BBD31B202070E71A49 /* libGTM_AddressBook.a */,
+				849B3EDE3B5910E71778F2748388D05D /* libGTM_core.a */,
+				A4958150F4A4E89585089C4028436BB6 /* libGTM_DebugUtils.a */,
+				59B6225324FCA6D3D6AE1641EA645A1A /* libGTM_GTMURLBuilder.a */,
+				3F700ADD3E9E777ADDBB169BBDB109B5 /* libGTM_iPhone.a */,
+				479D19690BBB5EB02EA7B77152E62FDC /* libGTM_KVO.a */,
+				546055E5EE72852C83F8C68B7BE30FF7 /* libGTM_NSDictionary+URLArguments.a */,
+				450D24D9105A0265B00A4E5EC1B101AB /* libGTM_NSScannerJSON.a */,
+				F21FF819F47355CB4AB2A4DF87A20287 /* libGTM_NSStringHTML.a */,
+				A9940C697EA740F2038EE204B0251D88 /* libGTM_NSStringXML.a */,
+				43166149BCF12C8D640186A1F439AEA6 /* libGTM_Regex.a */,
+				416C7985FBC138410A06F24FAE28E066 /* libGTM_RoundedRectPath.a */,
+				81D0A6D950191DBB22C3322B90BE37E9 /* libGTM_StringEncoding.a */,
+				63CA76F641EA047949FC2BC87C832064 /* libGTM_SystemVersion.a */,
+				B97DC2233F0C6C974EE51D320EEB2953 /* libGTM_UIFont+LineHeight.a */,
+				7DC1E06A8476213C08008EB059CD9048 /* libGTMStackTrace.a */,
 			);
-			path = GoogleAppUtilities;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		07B4F9D5F97BC02E95C3A5608DDAE90E /* GoogleSignIn */ = {
+		1653D127B3E90A586E49A8B97D1C3BC6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				64E8A5122532B2CA69ADE29524E2C1B6 /* GIDAuthentication.h */,
-				C9998CA6E92FA3F0E89BC6DC7E9AF9CB /* GIDGoogleUser.h */,
-				9E0E47189EC5757B63E4350F224F8B3C /* GIDProfileData.h */,
-				56EAC8949A27C9E0809C4EA4F4C4E485 /* GIDSignIn.h */,
-				792A878BB75AE8A8891EBE9821B7BF11 /* GIDSignInButton.h */,
-				51221749ADE852CB2E063359B813E84C /* GoogleSignIn.h */,
-				ECD5F38627B027C337F5FEC3B025876D /* UIViewController+SignIn.h */,
-				441AEA2268F9494444E8D393EFCB27CD /* Frameworks */,
-				19E363BC653E1F9CDC61E1F1EC3AA293 /* Resources */,
+				4D5E9C475D05C4B02EAF7F32A27A6189 /* libGSDK_Overload.a */,
 			);
-			path = GoogleSignIn;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		18340F12838DEE43507667CC74401EB1 /* iOS */ = {
@@ -239,29 +318,34 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		187EA346AE8F9C07BE06D152FD7A0A14 /* Frameworks */ = {
+		265A22D043FAD929CAA82CADC6E619B4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7F88EDFB9579D2D3B34E5817148F1FF3 /* libGTMOAuth2_external.a */,
-				5705AF3A791FE949F29AB3D559A6B6F7 /* libGTMOAuth2_internal.a */,
+				89BA551B0485DF8FF7D753D4C8D0655A /* libCHCSVParser.a */,
+				2D7617A81273D1CBB44B1A47B0B1F33A /* libNMRangeSlider.a */,
+				866AC0A6686CEFBCEF03DBFFE33EFED6 /* libOAStackView.a */,
+				8279D54465628A35E2CF1ADAAC872E8B /* libPods-CleverPet.a */,
+				7BAEF7517595EECE7D77EF73ED28EF92 /* libRBStoryboardLink.a */,
+				DEDF7A61549F8A89F7D7F15EAE896733 /* OAStackView.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2ACE81EFAE74F49719E0A7BDDD39D8F3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				01130CFCE56F970A5A3901639C641CD5 /* libGTLCore.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		19E363BC653E1F9CDC61E1F1EC3AA293 /* Resources */ = {
+		2DC2FF9E250F270AC900FFD10F347D6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				69EDC2A1F657DB5CEBA42299070C4A0A /* GoogleSignIn.bundle */,
+				FB9D4B7E5BC370C2443BB9D141A91D9D /* libGIPNSURL+FIFE.a */,
+				1D44FF4FD4BE30B0514D2723087E3E5F /* libSignIn.a */,
 			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		2621AECA3913B25253AF090984EA8975 /* GoogleParsingUtilities */ = {
-			isa = PBXGroup;
-			children = (
-				93431F12513AF7834A9CA26550073EFB /* Frameworks */,
-			);
-			path = GoogleParsingUtilities;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		2DE2E43139086931637C3EA39F04665E /* Targets Support Files */ = {
@@ -272,15 +356,6 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		33ED0B497FCF87F9B440CF38D2868F9C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E24C91E9B70BDFFE6A8B1840C63B9F4F /* libGTMSessionFetcher_core.a */,
-				69A96AD888B9B9322EBC12F6EFFE3FA8 /* libGTMSessionFetcher_full.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,61 +364,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		441AEA2268F9494444E8D393EFCB27CD /* Frameworks */ = {
+		5567E25C3F23038328337D182C5137B6 /* GoogleNetworkingUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				17CB8C8A52D818B4C5D9922CD7F39901 /* libGIPNSURL+FIFE.a */,
-				5FF9254070594FF3BD2A2B250C626B5A /* libSignIn.a */,
+				96864AD2EF5463CFEE8AE182D9492856 /* Frameworks */,
 			);
-			name = Frameworks;
+			path = GoogleNetworkingUtilities;
 			sourceTree = "<group>";
 		};
-		44A46B9385BFD655E532BE1B8E5E1D39 /* GoogleSymbolUtilities */ = {
+		6B2DA78740D6935A996397594DA766D4 /* GoogleAppUtilities */ = {
 			isa = PBXGroup;
 			children = (
-				FF3B4A0A9E1ADE85F03A0A8577C878E8 /* Frameworks */,
+				FA8622781BBB4A7E53AB67187D3FA929 /* Frameworks */,
 			);
-			path = GoogleSymbolUtilities;
-			sourceTree = "<group>";
-		};
-		4E6582E418ADB99CAD149202F3F66071 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				273648804F120D1A6CDAA8A22ADC40BB /* GITkit.bundle */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		5C9A3622286E2329EB7CDD558F71E723 /* CHCSVParser */ = {
-			isa = PBXGroup;
-			children = (
-				689AB5D3EEC651197D50B2E0E575EBF5 /* CHCSVParser.h */,
-				DCE762CEC91190909F471A405A280ED6 /* CHCSVParser.m */,
-				68EB7AE87DF9F9CA61A66D3814B38F71 /* Support Files */,
-			);
-			path = CHCSVParser;
-			sourceTree = "<group>";
-		};
-		62C0E03B0807D995F21FA22217098BC1 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				32FCBAAFE062C1FFA9D1E016488357A3 /* NMRangeSlider.xcconfig */,
-				649066ACA2874D13D7FEA7CF03DEA5B8 /* NMRangeSlider-dummy.m */,
-				AD39114B74BDF27B60AEDB60AADEAD26 /* NMRangeSlider-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/NMRangeSlider";
-			sourceTree = "<group>";
-		};
-		68EB7AE87DF9F9CA61A66D3814B38F71 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				99219CECEBCCAB644AF705DEFFD102F0 /* CHCSVParser.xcconfig */,
-				3428A32323812C578C723B9B872F9B49 /* CHCSVParser-dummy.m */,
-				4DE768D2C85313690FF38C33C31F9E4C /* CHCSVParser-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/CHCSVParser";
+			path = GoogleAppUtilities;
 			sourceTree = "<group>";
 		};
 		73C2B524AB3A9B09D03BF8CFE06653C9 /* Pods-CleverPet */ = {
@@ -361,60 +395,31 @@
 			path = "Target Support Files/Pods-CleverPet";
 			sourceTree = "<group>";
 		};
-		73C5960A4B9285E6C721B7C71133AB75 /* Frameworks */ = {
+		753EF4350FAB09DE8F2193B3B9C1B8CE /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				FA186F4E2EF8BE02EBBF73240D13A93C /* libGTM_AddressBook.a */,
-				DA314AF5F5B3247C31A3F5FAFC94C297 /* libGTM_core.a */,
-				5D2780A0BD9A96066ED1EC7E6ECDF88A /* libGTM_DebugUtils.a */,
-				4AB19DF176D1F194F5F6247287CBB75A /* libGTM_GTMURLBuilder.a */,
-				C462251132B527B52F284F9517E2DD35 /* libGTM_iPhone.a */,
-				E8D7C0AA26448560E2A2FD7C718E210A /* libGTM_KVO.a */,
-				8ECE1F8E60C03B7144721DBC4B5755B6 /* libGTM_NSDictionary+URLArguments.a */,
-				189D58EA6B53D827E5B4A363EAE7C7C6 /* libGTM_NSScannerJSON.a */,
-				EE69179B205DD030A6A76613D433DE39 /* libGTM_NSStringHTML.a */,
-				DBDF6B5700F5A819D3A389896517711F /* libGTM_NSStringXML.a */,
-				518C37D92860CBA84513235528725A9A /* libGTM_Regex.a */,
-				6EBCE8F60ADE85D9C9C3A5319DFE01C2 /* libGTM_RoundedRectPath.a */,
-				9F030807A7A92C6D596F04ADB2C88764 /* libGTM_StringEncoding.a */,
-				902741032C22E3F6D57D4F84D582B80F /* libGTM_SystemVersion.a */,
-				ECCBB82944FB7BC3919E0C3B5204F06F /* libGTM_UIFont+LineHeight.a */,
-				1CD3FD3C40738A3F0788C678A9E1EC89 /* libGTMStackTrace.a */,
+				1A2B8D0F23F09CFDA1C6EB16AB240E69 /* NMRangeSlider.xcconfig */,
+				85BC95AB8C20B879D62FF09A0B919A01 /* NMRangeSlider-dummy.m */,
+				55595258FDDC29E9515235B4100A398C /* NMRangeSlider-prefix.pch */,
 			);
-			name = Frameworks;
+			name = "Support Files";
+			path = "../Target Support Files/NMRangeSlider";
 			sourceTree = "<group>";
 		};
-		77DA4243CF27EF1DA82054B84B19651A /* Resources */ = {
+		754B9DA8F6F768BECEB984C7B1B5278E /* GoogleSignIn */ = {
 			isa = PBXGroup;
 			children = (
-				5B7D8815E0A4A18E93BB9BC8512085C5 /* slider-default-handle.png */,
-				F8078C9563C69D7EDFB248F03FAD26FE /* slider-default-handle-highlighted.png */,
-				E1E2BDDDD3A29BE7C28EE90342928C3A /* slider-default-handle-highlighted@2x.png */,
-				881B17EF66D98AC3D204D2A4ADCB0DF0 /* slider-default-handle@2x.png */,
-				B525A10AB5475BAC0A92B5E4D86DDFF5 /* slider-default-track.png */,
-				32D5BD361CF18097D79FD0B3F7BBE6AF /* slider-default-track@2x.png */,
-				8FCAF65C295624DC248D6A3627BD77F6 /* slider-default-trackBackground.png */,
-				580D62B862DA3DE0FCD15B2E1850388B /* slider-default-trackCrossedOver.png */,
-				EB2DF86E0819A52F79260AC7098C6CF9 /* slider-default-trackCrossedOver@2x.png */,
-				6EE9F52EF91760DCC4340C846AC86DDC /* slider-default7-handle.png */,
-				5237531AC8E1B1B59B3E3C69F87A0AD5 /* slider-default7-handle@2x.png */,
-				E78257436AFA019785359F871A139933 /* slider-default7-track.png */,
-				A3E0E59A2989A0C4F5CDA5B38B20637A /* slider-default7-track@2x.png */,
-				5D93D5C2D9545974C7580D89305FBD7E /* slider-default7-trackBackground.png */,
-				7665CBC3AEAD580B6860F7B1CF7070FC /* slider-default7-trackBackground@2x.png */,
-				46AEFB13D28DFB9429D76B4DAEE08AF9 /* slider-default7-trackCrossedOver.png */,
-				EB85D93120E2C81BBBABBB1507DD3D6B /* slider-default7-trackCrossedOver@2x.png */,
-				7F6E762EDBF67EC9A38E2F7AC8D400EC /* slider-default_trackBackground@2x.png */,
-				85FB641384BDDF37D8AAE02E26C73A36 /* slider-metal-handle.png */,
-				66B424239F7A825AECAC462C813E1619 /* slider-metal-handle-highlighted.png */,
-				040491B38D43EA542CAD90444C81C6A1 /* slider-metal-handle-highlighted@2x.png */,
-				3D347B175603F7A9AB74E853EDE3190C /* slider-metal-handle@2x.png */,
-				42C9004CC39A3DA509F8B5A52F32B537 /* slider-metal-track.png */,
-				9FBCF4C9150D732C15DA03846B69AE76 /* slider-metal-track@2x.png */,
-				72E85EB4C6C522691DC4EEB86E116B13 /* slider-metal-trackBackground.png */,
-				60A0FFFBD24D899EE486511725540469 /* slider-metal-trackBackground@2x.png */,
+				FF4A7A2C76C0D76717C22599EFF58317 /* GIDAuthentication.h */,
+				6023E396DF8A8CC5D5787FDE8B8EAAA9 /* GIDGoogleUser.h */,
+				8DA6516B235789A958A47DEBAC2B2C18 /* GIDProfileData.h */,
+				CEFE439CF24D1A3404532C6B42850E81 /* GIDSignIn.h */,
+				D33442F2D1A68DE9CEC82F554244209E /* GIDSignInButton.h */,
+				E2D4C91A5B58BD4067FB4BDEF2B40AE6 /* GoogleSignIn.h */,
+				630EF0F38D49239D1BB3FCF8119E1061 /* UIViewController+SignIn.h */,
+				2DC2FF9E250F270AC900FFD10F347D6F /* Frameworks */,
+				A39B84BC70BCF697806FDF2B6CEA3E26 /* Resources */,
 			);
-			name = Resources;
+			path = GoogleSignIn;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -422,151 +427,258 @@
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				F66F398BE7BF780DFD4236C04251C0AB /* Pods */,
-				CB0C5665F00B0413C7EE3B272E5B5BED /* Products */,
+				B5FF13474772401C18CBBC70B2FE1603 /* Pods */,
+				265A22D043FAD929CAA82CADC6E619B4 /* Products */,
 				2DE2E43139086931637C3EA39F04665E /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		807DE7BE16A9B8835488C2DFAF1BCE23 /* GoogleIdentityToolkit */ = {
+		81B2708F692177F06194368B340627E5 /* RBStoryboardLink */ = {
 			isa = PBXGroup;
 			children = (
-				FE2B47410B09E1D698494EC38676B319 /* GITAccount.h */,
-				FB2BA5ADFE56731EC459AD5324BCF43C /* GITAuth.h */,
-				86C68B3B2F7A88540C030C3C85DF79C4 /* GITClient.h */,
-				6CB90FA41DE2E86BFA5A8A5BE431F8E2 /* GITIDToken.h */,
-				E5D3A49E5C2AD27EF0E3E66C5B145F8C /* GITInterfaceManager.h */,
-				F30A0FBD3247CE5D2456D4CD8A86E4D1 /* GITkit.h */,
-				83339A9E8308451203DCA4A3CB8CD51E /* Frameworks */,
-				4E6582E418ADB99CAD149202F3F66071 /* Resources */,
-			);
-			path = GoogleIdentityToolkit;
-			sourceTree = "<group>";
-		};
-		83339A9E8308451203DCA4A3CB8CD51E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				300BE950EADE7D77CE78E93FDC32A33D /* libGITkit.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		849741992FB902F56BF15DD1543C2689 /* GoogleNetworkingUtilities */ = {
-			isa = PBXGroup;
-			children = (
-				33ED0B497FCF87F9B440CF38D2868F9C /* Frameworks */,
-			);
-			path = GoogleNetworkingUtilities;
-			sourceTree = "<group>";
-		};
-		93431F12513AF7834A9CA26550073EFB /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6A356A40567AAE2CE03A0876CA6BCE10 /* libGTLCore.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A028B36872D709573ABB4CE7433CE450 /* GoogleAuthUtilities */ = {
-			isa = PBXGroup;
-			children = (
-				187EA346AE8F9C07BE06D152FD7A0A14 /* Frameworks */,
-			);
-			path = GoogleAuthUtilities;
-			sourceTree = "<group>";
-		};
-		C2DB020F11652AE1378C87D05F0101F7 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				06FD6C770D1ADE33B69DBB9DA3E94D49 /* libOpenInChrome.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		CB0C5665F00B0413C7EE3B272E5B5BED /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A53116224E498284DD353B79C0EBEAA6 /* libCHCSVParser.a */,
-				7AEACA4F5E86ED58DF3BEB46274CD1EF /* libNMRangeSlider.a */,
-				93FAB80442D614815D51F6DD2210BB35 /* libPods-CleverPet.a */,
-				9F888D27E370CBFB11D6CB95DAADFAFA /* libRBStoryboardLink.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D1FF2EB33C00958015390CB7A2E5474E /* NMRangeSlider */ = {
-			isa = PBXGroup;
-			children = (
-				F613FE1FB5DC12FCC93D9C57CFC5D7A4 /* NMRangeSlider.h */,
-				94447074336E56C5797C47BA25D11EDA /* NMRangeSlider.m */,
-				77DA4243CF27EF1DA82054B84B19651A /* Resources */,
-				62C0E03B0807D995F21FA22217098BC1 /* Support Files */,
-			);
-			path = NMRangeSlider;
-			sourceTree = "<group>";
-		};
-		EF344BDAE5AC04ABB71ACDDE61E852DA /* RBStoryboardLink */ = {
-			isa = PBXGroup;
-			children = (
-				71EFAAB42C6C1ED4690D2E3DE3FEC511 /* RBStoryboardLink.h */,
-				33A8D9CBDDA9365B92D9E95E62C72FDF /* RBStoryboardLink.m */,
-				A9B8AA4358505244419BC9D065FD8D66 /* RBStoryboardLinkSource.h */,
-				FBCC1121C3AEA0331EF3D2B88E7340A7 /* RBStoryboardModalSegue.h */,
-				751F96F06DA1B6257A53E51E2A6530F2 /* RBStoryboardModalSegue.m */,
-				EE40EF9F38324E16E0E681B18C72C837 /* RBStoryboardPopoverSegue.h */,
-				BE33294C49156264D7F32B25580493D3 /* RBStoryboardPopoverSegue.m */,
-				0779766A84A32B32047BAE849C6585F1 /* RBStoryboardPushSegue.h */,
-				6BDDF5372BCEEE956D96823717F141A0 /* RBStoryboardPushSegue.m */,
-				663FD955FEF0262F461AFD100970A13F /* RBStoryboardSegue.h */,
-				303D47C9CEFCB10E9D5D60CB81097224 /* RBStoryboardSegue.m */,
-				F1626520044102310EE0111C1297422F /* UIViewController+RBStoryboardLink.h */,
-				9C20747E2517612199DBE730600D7178 /* UIViewController+RBStoryboardLink.m */,
-				F81EBC614B4A182273E83A8ACA216F6A /* Support Files */,
+				D182570C250ADD5CAA688446C952182E /* RBStoryboardLink.h */,
+				1D56445E33ADFF136421BA9DBDDE188C /* RBStoryboardLink.m */,
+				A0111361677058550A0011AEFF981BCA /* RBStoryboardLinkSource.h */,
+				03F76ADB08322EA335410A29D28CBDDC /* RBStoryboardModalSegue.h */,
+				3210A7E7DE46C99FC729F258912BC356 /* RBStoryboardModalSegue.m */,
+				60D48F287D784C4CF1F974AC27573309 /* RBStoryboardPopoverSegue.h */,
+				39978A71A01A4CCB745E7A58B15B14AE /* RBStoryboardPopoverSegue.m */,
+				38E1AA587E69C7386DFA10977D77CF4F /* RBStoryboardPushSegue.h */,
+				5A9F3239F877037805E4F332AE5DB4D2 /* RBStoryboardPushSegue.m */,
+				069945C7CE3F43FEB67F941888951A05 /* RBStoryboardSegue.h */,
+				24B0C17BAA8DF0AF04888FDB7CBCA6A1 /* RBStoryboardSegue.m */,
+				D77D20341C52C3BBF78BC12AB8F1BBA6 /* UIViewController+RBStoryboardLink.h */,
+				40486222BF32F62519F968E492A61180 /* UIViewController+RBStoryboardLink.m */,
+				F2EECB17D870F59848C1594E91650CB0 /* Support Files */,
 			);
 			path = RBStoryboardLink;
 			sourceTree = "<group>";
 		};
-		F66F398BE7BF780DFD4236C04251C0AB /* Pods */ = {
+		83FA70F3AFC70D4942BB3108FF7B37F5 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				5C9A3622286E2329EB7CDD558F71E723 /* CHCSVParser */,
-				00DB74BA615E2005C658A4DC67A1C986 /* GoogleAppUtilities */,
-				A028B36872D709573ABB4CE7433CE450 /* GoogleAuthUtilities */,
-				807DE7BE16A9B8835488C2DFAF1BCE23 /* GoogleIdentityToolkit */,
-				849741992FB902F56BF15DD1543C2689 /* GoogleNetworkingUtilities */,
-				2621AECA3913B25253AF090984EA8975 /* GoogleParsingUtilities */,
-				07B4F9D5F97BC02E95C3A5608DDAE90E /* GoogleSignIn */,
-				44A46B9385BFD655E532BE1B8E5E1D39 /* GoogleSymbolUtilities */,
-				F7AAFADFC331BB4BE4532F779F9BEBC6 /* GoogleUtilities */,
-				D1FF2EB33C00958015390CB7A2E5474E /* NMRangeSlider */,
-				EF344BDAE5AC04ABB71ACDDE61E852DA /* RBStoryboardLink */,
+				C59A2043A17EA52184F804CFD12738C9 /* OAStackView.xcconfig */,
+				2DC60D385B273F78C54A485676FA7FE2 /* OAStackView-dummy.m */,
+				5ADDEB78AD4C23DBB0CDDF9A9753E4BD /* OAStackView-prefix.pch */,
 			);
-			name = Pods;
+			name = "Support Files";
+			path = "../Target Support Files/OAStackView";
 			sourceTree = "<group>";
 		};
-		F7AAFADFC331BB4BE4532F779F9BEBC6 /* GoogleUtilities */ = {
+		85BFFFC7F03FBDCC4A259B468EA6D040 /* CHCSVParser */ = {
 			isa = PBXGroup;
 			children = (
-				73C5960A4B9285E6C721B7C71133AB75 /* Frameworks */,
+				A3FA5585732B34A164EAEE588CD7632C /* CHCSVParser.h */,
+				21EC02E35849D791B8AABE901C6C5D32 /* CHCSVParser.m */,
+				B7B5416B10A451DE13B55CE3C860BCBF /* Support Files */,
+			);
+			path = CHCSVParser;
+			sourceTree = "<group>";
+		};
+		8957343F5E56CE9745CC79F47C9DCFD7 /* NMRangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				997CEE79774F78D7CF0B53F17432E341 /* NMRangeSlider.h */,
+				A8D0EB2BB5AA69A6749F64660456FDCE /* NMRangeSlider.m */,
+				9522FF1103EFC231B1966564E88AEEE2 /* Resources */,
+				753EF4350FAB09DE8F2193B3B9C1B8CE /* Support Files */,
+			);
+			path = NMRangeSlider;
+			sourceTree = "<group>";
+		};
+		8C0F28CEEBFD9E9540580072077F69A0 /* GoogleUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				0EDCA5B876F5067A9377D898E145C7BD /* Frameworks */,
 			);
 			path = GoogleUtilities;
 			sourceTree = "<group>";
 		};
-		F81EBC614B4A182273E83A8ACA216F6A /* Support Files */ = {
+		9522FF1103EFC231B1966564E88AEEE2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B21CB7A7CF0C2024E26B731442E269A3 /* RBStoryboardLink.xcconfig */,
-				2C0FA30D54794E42B22BF8B8B84F2411 /* RBStoryboardLink-dummy.m */,
-				43F8FC2523560AAD91AACDD82838DA23 /* RBStoryboardLink-prefix.pch */,
+				C5BC283240566EE2E53C29E15258E9E7 /* slider-default-handle.png */,
+				5C1A7D4991AEAD0BD702D25109F0760F /* slider-default-handle-highlighted.png */,
+				1595D5BACBBDD6B0004783A445E6C629 /* slider-default-handle-highlighted@2x.png */,
+				DD0742ECA55FD8968D7B55C95600354E /* slider-default-handle@2x.png */,
+				D860311AA143DEBE3E372EEB5EB3DC94 /* slider-default-track.png */,
+				5E1A8E8494435FF79A2D6ED576CBF117 /* slider-default-track@2x.png */,
+				F6E4629C2D7197DBA6D267A0B1B4274F /* slider-default-trackBackground.png */,
+				13D0A17F4ADAE57B03058079CF2E0C45 /* slider-default-trackCrossedOver.png */,
+				95999452EEE99CC15EF890FDB5F81D06 /* slider-default-trackCrossedOver@2x.png */,
+				E3FF384BB558839C7C11720010D7369B /* slider-default7-handle.png */,
+				1317C40948A58BB635460F52F75659E9 /* slider-default7-handle@2x.png */,
+				6720D1BFA84E62C26B4BEB5D68CE658C /* slider-default7-track.png */,
+				B8DB6AF3ECD2643C041AE623F810335A /* slider-default7-track@2x.png */,
+				13AE005545267DADDB652145090F5372 /* slider-default7-trackBackground.png */,
+				CD269F246F6ACE8300D15EF69CC120E1 /* slider-default7-trackBackground@2x.png */,
+				D0520C1E942AE7B20E0767DFB6891881 /* slider-default7-trackCrossedOver.png */,
+				8DE0C30A37101E4A11827473CC19D94E /* slider-default7-trackCrossedOver@2x.png */,
+				55927BF354AAF0A33453CBCF52B374F8 /* slider-default_trackBackground@2x.png */,
+				D0C8D6A65C350F8910EBDAD322F3755E /* slider-metal-handle.png */,
+				B5DE4B31B478AA0A9BA55396D741BC54 /* slider-metal-handle-highlighted.png */,
+				5A0117987A16D162F7C34187ECD08C2D /* slider-metal-handle-highlighted@2x.png */,
+				6B29A36C7CB694A8079DD14141D937D8 /* slider-metal-handle@2x.png */,
+				AD0DA39ED4F12A621FD87EB584DF5313 /* slider-metal-track.png */,
+				8B7572B1EB08641C34D8D9DBAD83892A /* slider-metal-track@2x.png */,
+				B9DF310AD64281E947A1382C56D7BD0D /* slider-metal-trackBackground.png */,
+				CE331FF5F7E1566D5BCB6F0E3686E2D9 /* slider-metal-trackBackground@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		96864AD2EF5463CFEE8AE182D9492856 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6718EE1EFAB685B518F55B593DEC1019 /* libGTMSessionFetcher_core.a */,
+				5A1327DCEE01C7FB5370F2D69937D9B7 /* libGTMSessionFetcher_full.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		972EF093C1FB4B33F75E4F12F646304B /* GoogleSymbolUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				1653D127B3E90A586E49A8B97D1C3BC6 /* Frameworks */,
+			);
+			path = GoogleSymbolUtilities;
+			sourceTree = "<group>";
+		};
+		9888612497F54903B478853D4F2CB404 /* GoogleAuthUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				C3682C3B75076E00A1021D147D9E278A /* Frameworks */,
+			);
+			path = GoogleAuthUtilities;
+			sourceTree = "<group>";
+		};
+		9A3FFA0359B04F3F9BABB0AEF67C36B2 /* GoogleParsingUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				2ACE81EFAE74F49719E0A7BDDD39D8F3 /* Frameworks */,
+			);
+			path = GoogleParsingUtilities;
+			sourceTree = "<group>";
+		};
+		A39B84BC70BCF697806FDF2B6CEA3E26 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				49D93ED2A4989B16557BA55BCCA45D9B /* GoogleSignIn.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		B5FF13474772401C18CBBC70B2FE1603 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				85BFFFC7F03FBDCC4A259B468EA6D040 /* CHCSVParser */,
+				6B2DA78740D6935A996397594DA766D4 /* GoogleAppUtilities */,
+				9888612497F54903B478853D4F2CB404 /* GoogleAuthUtilities */,
+				BE8EEA5AF21A26B537BE21B22D17F5EE /* GoogleIdentityToolkit */,
+				5567E25C3F23038328337D182C5137B6 /* GoogleNetworkingUtilities */,
+				9A3FFA0359B04F3F9BABB0AEF67C36B2 /* GoogleParsingUtilities */,
+				754B9DA8F6F768BECEB984C7B1B5278E /* GoogleSignIn */,
+				972EF093C1FB4B33F75E4F12F646304B /* GoogleSymbolUtilities */,
+				8C0F28CEEBFD9E9540580072077F69A0 /* GoogleUtilities */,
+				8957343F5E56CE9745CC79F47C9DCFD7 /* NMRangeSlider */,
+				E615DDBDD266106919E5DD42BF356491 /* OAStackView */,
+				81B2708F692177F06194368B340627E5 /* RBStoryboardLink */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B7B5416B10A451DE13B55CE3C860BCBF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1CC0EA371728D2FFCDC8EF5B6FF33928 /* CHCSVParser.xcconfig */,
+				7F01BCA021FD59B50704F0BF9C9FA6E8 /* CHCSVParser-dummy.m */,
+				DEBA28EF79BBFAC49A701190EF54611B /* CHCSVParser-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/CHCSVParser";
+			sourceTree = "<group>";
+		};
+		BE8EEA5AF21A26B537BE21B22D17F5EE /* GoogleIdentityToolkit */ = {
+			isa = PBXGroup;
+			children = (
+				0710686A5DD81D4FB5428FB4E9237327 /* GITAccount.h */,
+				1E2ED21AB6087E34F8F2A454C92CB128 /* GITAuth.h */,
+				ACA3A44E39B6B5310162F6247DA5314B /* GITClient.h */,
+				2A2F8ECD57406A05A5D5AE1C3F8B70B5 /* GITIDToken.h */,
+				50C0F928CF123EFBF15A8935B28C2FD1 /* GITInterfaceManager.h */,
+				C259A186C8575036F79196AC4AD64BE8 /* GITkit.h */,
+				CE70E5AB47C841304B47F72F55BABC67 /* Frameworks */,
+				FA1D67846E0F67D77ABF91F2ECC8E7DF /* Resources */,
+			);
+			path = GoogleIdentityToolkit;
+			sourceTree = "<group>";
+		};
+		C3682C3B75076E00A1021D147D9E278A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0D86A921A7CC5C007028E07B641B06F8 /* libGTMOAuth2_external.a */,
+				AE40EB0F2A845B639292C53EB61712C7 /* libGTMOAuth2_internal.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE70E5AB47C841304B47F72F55BABC67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C766E4C5142B43FB53576703D3AED6FE /* libGITkit.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E615DDBDD266106919E5DD42BF356491 /* OAStackView */ = {
+			isa = PBXGroup;
+			children = (
+				704D08706237A25D9D6462825E90CBC9 /* _OALayoutGuide.h */,
+				5B5F33BEA3847826B33B1D490BFF6F72 /* _OALayoutGuide.m */,
+				ED7B411CC7FEB51342B94AC5383EFF0C /* OAStackView.h */,
+				46FEF4E792BE9D570F7B49CA4A866226 /* OAStackView.m */,
+				EDB318A0108D6448CB74013646E457E7 /* OAStackView+Constraint.h */,
+				9CE81E2B1F0CD3002C37D13AE5A623D2 /* OAStackView+Constraint.m */,
+				E9FB1A415BE05F2D2D95145396C2E3DC /* OAStackView+Hiding.h */,
+				77530E0F9E7143A4A51FF9B56D87508B /* OAStackView+Hiding.m */,
+				649C4C5BB44CBAF3BEA124EEE4D9BB0B /* OAStackView+Traversal.h */,
+				D4BCCD9CE39657236B1C11981339677C /* OAStackView+Traversal.m */,
+				752189A3C359D5C71918E6E53D7080DF /* OAStackViewAlignmentStrategy.h */,
+				5F0D00ADA6B3F8844DBA08D78BB1EA7F /* OAStackViewAlignmentStrategy.m */,
+				C5EC17A3227BE3CEB88F56968E60E08C /* OAStackViewAlignmentStrategyBaseline.h */,
+				5C637808C0A6CF9A8B2C78CB479B2818 /* OAStackViewAlignmentStrategyBaseline.m */,
+				4E2F9FDE765BCCB62341FF83AAF04680 /* OAStackViewDistributionStrategy.h */,
+				9D64024E9FD037544A9C152335BC9BF8 /* OAStackViewDistributionStrategy.m */,
+				F5F2E1FF4095EB6E0D2B26A95C91A0EF /* OATransformLayer.h */,
+				637F18CC5E68872693BF28EBC0823E13 /* OATransformLayer.m */,
+				83FA70F3AFC70D4942BB3108FF7B37F5 /* Support Files */,
+			);
+			path = OAStackView;
+			sourceTree = "<group>";
+		};
+		F2EECB17D870F59848C1594E91650CB0 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8F30D2AE8432E63E5DDCEC887A33F577 /* RBStoryboardLink.xcconfig */,
+				457C34F962ACD86F328F95A183F9007A /* RBStoryboardLink-dummy.m */,
+				9FEA66DAFC868D18EB3815B3AFCF1405 /* RBStoryboardLink-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/RBStoryboardLink";
 			sourceTree = "<group>";
 		};
-		FF3B4A0A9E1ADE85F03A0A8577C878E8 /* Frameworks */ = {
+		FA1D67846E0F67D77ABF91F2ECC8E7DF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A9D83CFE5DB5A34F2807D5945653D819 /* libGSDK_Overload.a */,
+				403E531F2DE2AB8AE01E2423F4982562 /* GITkit.bundle */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		FA8622781BBB4A7E53AB67187D3FA929 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C0D70C962835CD415B0F2E47BC3359B7 /* libOpenInChrome.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -574,20 +686,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		6D4A3C20971FCFF58A3F1302077F273B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				88B2788CD0EF3558A6EA030E5086930D /* RBStoryboardLink.h in Headers */,
-				E1669AD0F7C61C1F4680F547C605ED30 /* RBStoryboardLinkSource.h in Headers */,
-				580DAD54609994591B4E05E34135D717 /* RBStoryboardModalSegue.h in Headers */,
-				34CF511567180377B1E13FCC4F9305AE /* RBStoryboardPopoverSegue.h in Headers */,
-				D86DA5473F5E765CC2C6FDE63239F8D5 /* RBStoryboardPushSegue.h in Headers */,
-				F87C743FEFE13F7FB9636235F7BEF1FB /* RBStoryboardSegue.h in Headers */,
-				3ECCFEEB856385DFC1669A2E46CF069C /* UIViewController+RBStoryboardLink.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		769BD8BA648BB85D93A144D407337819 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -601,6 +699,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A31D9DD6C3CB1C83E189E99F58ACF4C /* NMRangeSlider.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A04E0FA1280CB3D0406CC1B04D784319 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				213C38FDE6F21E59CD5765725AC2F57D /* RBStoryboardLink.h in Headers */,
+				007BEE4B816D0F346688D28697B78220 /* RBStoryboardLinkSource.h in Headers */,
+				1F2B5F77B8ACFA9D6F6A3A55CB3A5221 /* RBStoryboardModalSegue.h in Headers */,
+				D1D5037FA8FFF097926BE7EB277588EF /* RBStoryboardPopoverSegue.h in Headers */,
+				326C3AE23F4A46F3C504CC1BE4442945 /* RBStoryboardPushSegue.h in Headers */,
+				C5F887ADA2F1C872FAF9E7DACA3AA34C /* RBStoryboardSegue.h in Headers */,
+				39603A15181F1E6022C4C369F1D2364D /* UIViewController+RBStoryboardLink.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C79B076F01B4806B439AF2FE83F35709 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33407DA99B39B7CA387D002B77CDBB74 /* _OALayoutGuide.h in Headers */,
+				4988AD373FEAF0B3D3287075576289EB /* OAStackView+Constraint.h in Headers */,
+				33D64F339CF819A4AE3A74A0AD2BDF9B /* OAStackView+Hiding.h in Headers */,
+				68F5344C5ACDF2D38F1E3C08F5CF49FE /* OAStackView+Traversal.h in Headers */,
+				7E098B1C7076A5C76F97172007C95272 /* OAStackView.h in Headers */,
+				001D506E87A5B7097BD094313297C453 /* OAStackViewAlignmentStrategy.h in Headers */,
+				543F919A9263D75AD09FD35D4119FBEF /* OAStackViewAlignmentStrategyBaseline.h in Headers */,
+				F6B4D403FAF6FD5DDE3AC036A520EB0C /* OAStackViewDistributionStrategy.h in Headers */,
+				8FA5498B976319A4DB8A58B9E68F09EF /* OATransformLayer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,27 +749,45 @@
 			);
 			name = CHCSVParser;
 			productName = CHCSVParser;
-			productReference = A53116224E498284DD353B79C0EBEAA6 /* libCHCSVParser.a */;
+			productReference = 89BA551B0485DF8FF7D753D4C8D0655A /* libCHCSVParser.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		15272408A1011333861DC707163D4584 /* Pods-CleverPet */ = {
+		192EB3DEF68B6DD00F1EF43AB17612AD /* Pods-CleverPet */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D0A5284AA40B0940D6B5174444574D81 /* Build configuration list for PBXNativeTarget "Pods-CleverPet" */;
+			buildConfigurationList = 786EC75AD844FF51554C06BE3755DDC4 /* Build configuration list for PBXNativeTarget "Pods-CleverPet" */;
 			buildPhases = (
-				3C6DD18B3CBC1A593316D3BB2C7C8454 /* Sources */,
-				1CFB19E9AA6C6340C7AF2AB03EB58897 /* Frameworks */,
+				FEB5BD0746CBC64DB12E163F9D2E60CA /* Sources */,
+				5D3DA317DCEDE22711F04AF3659D146A /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9C887A5E319360906DCCF904969C9F5B /* PBXTargetDependency */,
-				0FD09A9A2EE015EC0A21BB0C111C4974 /* PBXTargetDependency */,
-				204ED7AAF9EC4BAEA68002EF62A23CB2 /* PBXTargetDependency */,
+				B6C709ABEF48D312765AF81109BB843A /* PBXTargetDependency */,
+				C0E741CBA09A24EC453D9A1F87519E2B /* PBXTargetDependency */,
+				67CDDCD85E9E638240022F66B475F509 /* PBXTargetDependency */,
+				622A9E062F6D2B0E3562E949AD55A5E0 /* PBXTargetDependency */,
 			);
 			name = "Pods-CleverPet";
 			productName = "Pods-CleverPet";
-			productReference = 93FAB80442D614815D51F6DD2210BB35 /* libPods-CleverPet.a */;
+			productReference = 8279D54465628A35E2CF1ADAAC872E8B /* libPods-CleverPet.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		2728D1720063D2C4734E38C851F43244 /* OAStackView-OAStackView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8B91EC3FF6497E68A4753D6100332510 /* Build configuration list for PBXNativeTarget "OAStackView-OAStackView" */;
+			buildPhases = (
+				6ADCBC8547303953046616B69E960001 /* Sources */,
+				58EBCBDB9C685F6264F9EC67D388A1D4 /* Frameworks */,
+				6077AA372EF6CFA54CB4874175A107D1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OAStackView-OAStackView";
+			productName = "OAStackView-OAStackView";
+			productReference = DEDF7A61549F8A89F7D7F15EAE896733 /* OAStackView.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 		3385E626FC7EEE5B718B9C301EBDCD43 /* NMRangeSlider */ = {
 			isa = PBXNativeTarget;
@@ -657,16 +803,34 @@
 			);
 			name = NMRangeSlider;
 			productName = NMRangeSlider;
-			productReference = 7AEACA4F5E86ED58DF3BEB46274CD1EF /* libNMRangeSlider.a */;
+			productReference = 2D7617A81273D1CBB44B1A47B0B1F33A /* libNMRangeSlider.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		97AB466A9931E35680ADE1D4646B4D52 /* RBStoryboardLink */ = {
+		9331DC06026102A6939CE75D29D7684E /* OAStackView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 41410E90116785B8D57EB7C95A66FC05 /* Build configuration list for PBXNativeTarget "RBStoryboardLink" */;
+			buildConfigurationList = D45E6A4080164AB4506E2A6FD8977300 /* Build configuration list for PBXNativeTarget "OAStackView" */;
 			buildPhases = (
-				4171C527648ACB23517819D1402D0889 /* Sources */,
-				21382D18ECFEBDD8E959C232BF0F1C14 /* Frameworks */,
-				6D4A3C20971FCFF58A3F1302077F273B /* Headers */,
+				157A9500949A06CE744F134BDC556FCA /* Sources */,
+				E568DDBFCB611887B5FA46B98CDFB701 /* Frameworks */,
+				C79B076F01B4806B439AF2FE83F35709 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				37D619CD870A7A716AC605BEF80EF04C /* PBXTargetDependency */,
+			);
+			name = OAStackView;
+			productName = OAStackView;
+			productReference = 866AC0A6686CEFBCEF03DBFFE33EFED6 /* libOAStackView.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		C797DE4375AD54403983A2D67AE3DA34 /* RBStoryboardLink */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE3F164D9301914F08CA5575AD564F1E /* Build configuration list for PBXNativeTarget "RBStoryboardLink" */;
+			buildPhases = (
+				104BB874E93F4BDC164272A2091ECE1B /* Sources */,
+				663C6ADD6B080609C6410FDC3CFA185E /* Frameworks */,
+				A04E0FA1280CB3D0406CC1B04D784319 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -674,7 +838,7 @@
 			);
 			name = RBStoryboardLink;
 			productName = RBStoryboardLink;
-			productReference = 9F888D27E370CBFB11D6CB95DAADFAFA /* libRBStoryboardLink.a */;
+			productReference = 7BAEF7517595EECE7D77EF73ED28EF92 /* libRBStoryboardLink.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -694,38 +858,59 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = CB0C5665F00B0413C7EE3B272E5B5BED /* Products */;
+			productRefGroup = 265A22D043FAD929CAA82CADC6E619B4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				124DDA19DF7E580D2E249D90FDA64B51 /* CHCSVParser */,
 				3385E626FC7EEE5B718B9C301EBDCD43 /* NMRangeSlider */,
-				15272408A1011333861DC707163D4584 /* Pods-CleverPet */,
-				97AB466A9931E35680ADE1D4646B4D52 /* RBStoryboardLink */,
+				9331DC06026102A6939CE75D29D7684E /* OAStackView */,
+				2728D1720063D2C4734E38C851F43244 /* OAStackView-OAStackView */,
+				192EB3DEF68B6DD00F1EF43AB17612AD /* Pods-CleverPet */,
+				C797DE4375AD54403983A2D67AE3DA34 /* RBStoryboardLink */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXSourcesBuildPhase section */
-		3C6DD18B3CBC1A593316D3BB2C7C8454 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
+/* Begin PBXResourcesBuildPhase section */
+		6077AA372EF6CFA54CB4874175A107D1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC9FF7737FB49C5897BE6AD1F3C2B098 /* Pods-CleverPet-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4171C527648ACB23517819D1402D0889 /* Sources */ = {
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		104BB874E93F4BDC164272A2091ECE1B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25CF832B767D54D4A57B0E656B328B00 /* RBStoryboardLink-dummy.m in Sources */,
-				16AF4A21CFC2991253A9858C62723006 /* RBStoryboardLink.m in Sources */,
-				20222ADF69901D88CA3B210F5D486CCC /* RBStoryboardModalSegue.m in Sources */,
-				C09FBED0F9F0D329EABE6837D51755FC /* RBStoryboardPopoverSegue.m in Sources */,
-				54DDF45097514EE99A02F48AAAB013AE /* RBStoryboardPushSegue.m in Sources */,
-				3B74EB84A5F899E3E6DBD8859AFC2E66 /* RBStoryboardSegue.m in Sources */,
-				6790604D4AF73504B07C4F63DBA4B163 /* UIViewController+RBStoryboardLink.m in Sources */,
+				08F5BAB208B4171F86C727B38D2E0D22 /* RBStoryboardLink-dummy.m in Sources */,
+				E435F08EE0A5512F42BE789E75C2A7D5 /* RBStoryboardLink.m in Sources */,
+				1CEE8224D31008BF139CB78383A1422E /* RBStoryboardModalSegue.m in Sources */,
+				767CF70061A25805EA3C5EF29A2DB203 /* RBStoryboardPopoverSegue.m in Sources */,
+				B8BEB3D6E5DBBDB63DE45874CE58D06F /* RBStoryboardPushSegue.m in Sources */,
+				21AEA0FDD27C27DB294CD0CC5E05CAA6 /* RBStoryboardSegue.m in Sources */,
+				1760C1E3048B80673DA8F6F7EC78926D /* UIViewController+RBStoryboardLink.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		157A9500949A06CE744F134BDC556FCA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B842171AC4FC59E806159A6A263898E /* _OALayoutGuide.m in Sources */,
+				9AD30134017A03966BED6AAC705C7C92 /* OAStackView+Constraint.m in Sources */,
+				165AD11E9D34B83AC9262E2A78BED040 /* OAStackView+Hiding.m in Sources */,
+				5DA9D80A3BC3AA013585632EE9C13421 /* OAStackView+Traversal.m in Sources */,
+				34997BA365E320B2BEC7EFA2BD381AB2 /* OAStackView-dummy.m in Sources */,
+				357028869021D2CF599B2A61B82072E0 /* OAStackView.m in Sources */,
+				CBB1612BD3819230D648B53F8DDE88AE /* OAStackViewAlignmentStrategy.m in Sources */,
+				2EBE97DEFD6D90D257553945B2A9657F /* OAStackViewAlignmentStrategyBaseline.m in Sources */,
+				533B20F8D3529097D73E79A0E5A8C842 /* OAStackViewDistributionStrategy.m in Sources */,
+				E98B259CE519A4FBE933F01189D4402D /* OATransformLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,6 +923,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6ADCBC8547303953046616B69E960001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BB593B51751F0EBFBF22BE1A721BD74C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -747,37 +939,92 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FEB5BD0746CBC64DB12E163F9D2E60CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				591038ED211D779E95076845A6BB18CA /* Pods-CleverPet-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0FD09A9A2EE015EC0A21BB0C111C4974 /* PBXTargetDependency */ = {
+		37D619CD870A7A716AC605BEF80EF04C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = NMRangeSlider;
-			target = 3385E626FC7EEE5B718B9C301EBDCD43 /* NMRangeSlider */;
-			targetProxy = DAA6B6790B88CBA5F4200C6A45DB5641 /* PBXContainerItemProxy */;
+			name = "OAStackView-OAStackView";
+			target = 2728D1720063D2C4734E38C851F43244 /* OAStackView-OAStackView */;
+			targetProxy = 70424A7E2ABAAD02326505533511AA13 /* PBXContainerItemProxy */;
 		};
-		204ED7AAF9EC4BAEA68002EF62A23CB2 /* PBXTargetDependency */ = {
+		622A9E062F6D2B0E3562E949AD55A5E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = RBStoryboardLink;
-			target = 97AB466A9931E35680ADE1D4646B4D52 /* RBStoryboardLink */;
-			targetProxy = 073F465FDE730AABE2CDA29663985A92 /* PBXContainerItemProxy */;
+			target = C797DE4375AD54403983A2D67AE3DA34 /* RBStoryboardLink */;
+			targetProxy = 35C62250E40B9185687D27DE87C0ECA5 /* PBXContainerItemProxy */;
 		};
-		9C887A5E319360906DCCF904969C9F5B /* PBXTargetDependency */ = {
+		67CDDCD85E9E638240022F66B475F509 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OAStackView;
+			target = 9331DC06026102A6939CE75D29D7684E /* OAStackView */;
+			targetProxy = 630441D3FB02B2D6361AD4970BCB7042 /* PBXContainerItemProxy */;
+		};
+		B6C709ABEF48D312765AF81109BB843A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CHCSVParser;
 			target = 124DDA19DF7E580D2E249D90FDA64B51 /* CHCSVParser */;
-			targetProxy = D35353F926C5A052E5B1E081CFB4AD50 /* PBXContainerItemProxy */;
+			targetProxy = E268C08258543F8D1FA10471290A8F32 /* PBXContainerItemProxy */;
+		};
+		C0E741CBA09A24EC453D9A1F87519E2B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = NMRangeSlider;
+			target = 3385E626FC7EEE5B718B9C301EBDCD43 /* NMRangeSlider */;
+			targetProxy = BA090E6EF14CA82E970331AB042B6B71 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		09F9955A3380D007DFB3D87BD304FF8A /* Debug */ = {
+		5B223EC6A3CD28017B3AA7F5A8854B66 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B21CB7A7CF0C2024E26B731442E269A3 /* RBStoryboardLink.xcconfig */;
+			baseConfigurationReference = C23A5C0DD82036938FE786262DFFA00B /* Pods-CleverPet.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/RBStoryboardLink/RBStoryboardLink-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		62A8CED95E608EC4522E5F4F730ADC01 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CC0EA371728D2FFCDC8EF5B6FF33928 /* CHCSVParser.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CHCSVParser/CHCSVParser-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		637C94E8F1B1D152B6F2AD7AC402D899 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CC0EA371728D2FFCDC8EF5B6FF33928 /* CHCSVParser.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CHCSVParser/CHCSVParser-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -789,7 +1036,60 @@
 			};
 			name = Debug;
 		};
-		5CE5176205D06FF3FFE3DDDA9291E44B /* Debug */ = {
+		68D9A504D87F0004CC3CD608BA0E1D88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F30D2AE8432E63E5DDCEC887A33F577 /* RBStoryboardLink.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/RBStoryboardLink/RBStoryboardLink-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		7B074194F45283B2C7A20D9FE5F4656D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F80C7D53107C8ECA0217F4DE492243B0 /* Pods-CleverPet.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7D5F1C4F26FCB86F95D0ECFC280F9765 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C59A2043A17EA52184F804CFD12738C9 /* OAStackView.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/OAStackView/OAStackView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -821,56 +1121,32 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		6387ADB5AD19B298567C23B98E9A702D /* Release */ = {
+		B643A902FB9923332F4475EB1425C05D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99219CECEBCCAB644AF705DEFFD102F0 /* CHCSVParser.xcconfig */;
+			baseConfigurationReference = C59A2043A17EA52184F804CFD12738C9 /* OAStackView.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CHCSVParser/CHCSVParser-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = OAStackView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
 		};
-		6C0AB3B2A36343355964A14A08FC21BE /* Release */ = {
+		C1750D8B151CBD7023DE1108EB90AE9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B21CB7A7CF0C2024E26B731442E269A3 /* RBStoryboardLink.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/RBStoryboardLink/RBStoryboardLink-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		6DB11AD538A92026FDD1BCAC01FFCE5A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32FCBAAFE062C1FFA9D1E016488357A3 /* NMRangeSlider.xcconfig */;
+			baseConfigurationReference = 1A2B8D0F23F09CFDA1C6EB16AB240E69 /* NMRangeSlider.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/NMRangeSlider/NMRangeSlider-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -882,7 +1158,55 @@
 			};
 			name = Release;
 		};
-		74857149DC1E0D599B8A01A78349A926 /* Release */ = {
+		D4E36F23AF9F6AA68E691565CCE36657 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F30D2AE8432E63E5DDCEC887A33F577 /* RBStoryboardLink.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/RBStoryboardLink/RBStoryboardLink-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		D71935DD8815142E1BA39C720C383876 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C59A2043A17EA52184F804CFD12738C9 /* OAStackView.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/OAStackView/OAStackView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		E4EB5A13C9C3CB1FF0B61C6EB628A7A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C59A2043A17EA52184F804CFD12738C9 /* OAStackView.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				PRODUCT_NAME = OAStackView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		FB45FFD90572718D82AB9092B750F0CA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -909,72 +1233,20 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		9BFA6B1486FC1EDDCA15E6957C464FE0 /* Release */ = {
+		FF818C4892619D6040C29227D182C13A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C23A5C0DD82036938FE786262DFFA00B /* Pods-CleverPet.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		DBA70BAABB9621E51AA102C626561079 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99219CECEBCCAB644AF705DEFFD102F0 /* CHCSVParser.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/CHCSVParser/CHCSVParser-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F18335353C3F427F57BB1E962F0CAA82 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F80C7D53107C8ECA0217F4DE492243B0 /* Pods-CleverPet.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		FAFDE6A573339869DCE6FA285A461B8B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32FCBAAFE062C1FFA9D1E016488357A3 /* NMRangeSlider.xcconfig */;
+			baseConfigurationReference = 1A2B8D0F23F09CFDA1C6EB16AB240E69 /* NMRangeSlider.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/NMRangeSlider/NMRangeSlider-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -992,8 +1264,8 @@
 		2D3C8B0098ECEC2EFA18101CDBC42052 /* Build configuration list for PBXNativeTarget "CHCSVParser" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				DBA70BAABB9621E51AA102C626561079 /* Debug */,
-				6387ADB5AD19B298567C23B98E9A702D /* Release */,
+				637C94E8F1B1D152B6F2AD7AC402D899 /* Debug */,
+				62A8CED95E608EC4522E5F4F730ADC01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1001,17 +1273,26 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5CE5176205D06FF3FFE3DDDA9291E44B /* Debug */,
-				74857149DC1E0D599B8A01A78349A926 /* Release */,
+				A70CDAD61F90AC503C7D04CC22DA2923 /* Debug */,
+				FB45FFD90572718D82AB9092B750F0CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		41410E90116785B8D57EB7C95A66FC05 /* Build configuration list for PBXNativeTarget "RBStoryboardLink" */ = {
+		786EC75AD844FF51554C06BE3755DDC4 /* Build configuration list for PBXNativeTarget "Pods-CleverPet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				09F9955A3380D007DFB3D87BD304FF8A /* Debug */,
-				6C0AB3B2A36343355964A14A08FC21BE /* Release */,
+				7B074194F45283B2C7A20D9FE5F4656D /* Debug */,
+				5B223EC6A3CD28017B3AA7F5A8854B66 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8B91EC3FF6497E68A4753D6100332510 /* Build configuration list for PBXNativeTarget "OAStackView-OAStackView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4EB5A13C9C3CB1FF0B61C6EB628A7A4 /* Debug */,
+				B643A902FB9923332F4475EB1425C05D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1019,17 +1300,26 @@
 		ABFA414249A0033CDA50A8B5194B0C35 /* Build configuration list for PBXNativeTarget "NMRangeSlider" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FAFDE6A573339869DCE6FA285A461B8B /* Debug */,
-				6DB11AD538A92026FDD1BCAC01FFCE5A /* Release */,
+				FF818C4892619D6040C29227D182C13A /* Debug */,
+				C1750D8B151CBD7023DE1108EB90AE9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D0A5284AA40B0940D6B5174444574D81 /* Build configuration list for PBXNativeTarget "Pods-CleverPet" */ = {
+		CE3F164D9301914F08CA5575AD564F1E /* Build configuration list for PBXNativeTarget "RBStoryboardLink" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F18335353C3F427F57BB1E962F0CAA82 /* Debug */,
-				9BFA6B1486FC1EDDCA15E6957C464FE0 /* Release */,
+				D4E36F23AF9F6AA68E691565CCE36657 /* Debug */,
+				68D9A504D87F0004CC3CD608BA0E1D88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D45E6A4080164AB4506E2A6FD8977300 /* Build configuration list for PBXNativeTarget "OAStackView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7D5F1C4F26FCB86F95D0ECFC280F9765 /* Debug */,
+				D71935DD8815142E1BA39C720C383876 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -7,6 +7,7 @@ pod 'GoogleIdentityToolkit'
 pod 'CHCSVParser'
 pod 'RBStoryboardLink'
 pod 'NMRangeSlider'
+pod 'OAStackView'
 
 end
 

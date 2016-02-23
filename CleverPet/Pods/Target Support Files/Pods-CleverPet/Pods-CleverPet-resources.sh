@@ -86,6 +86,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "NMRangeSlider/NMRangeSlider/MetalTheme/slider-metal-track@2x.png"
   install_resource "NMRangeSlider/NMRangeSlider/MetalTheme/slider-metal-trackBackground.png"
   install_resource "NMRangeSlider/NMRangeSlider/MetalTheme/slider-metal-trackBackground@2x.png"
+  install_resource "${BUILT_PRODUCTS_DIR}/OAStackView.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "GoogleIdentityToolkit/Resources/GITkit.bundle"
@@ -116,6 +117,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "NMRangeSlider/NMRangeSlider/MetalTheme/slider-metal-track@2x.png"
   install_resource "NMRangeSlider/NMRangeSlider/MetalTheme/slider-metal-trackBackground.png"
   install_resource "NMRangeSlider/NMRangeSlider/MetalTheme/slider-metal-trackBackground@2x.png"
+  install_resource "${BUILT_PRODUCTS_DIR}/OAStackView.bundle"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
