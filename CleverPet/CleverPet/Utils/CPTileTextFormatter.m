@@ -43,7 +43,7 @@
     if (!_markdownAttributes)
     {
         UIFont *para = [UIFont cpLightFontWithSize:13 italic:NO];
-        UIColor *paraColor = [UIColor appLightGreyColor];
+        UIColor *paraColor = [UIColor appSubCopyTextColor];
         UIFont *emph = [UIFont cpMediumFontWithSize:13 italic:NO];
         
         NSDictionary *regularText = @{

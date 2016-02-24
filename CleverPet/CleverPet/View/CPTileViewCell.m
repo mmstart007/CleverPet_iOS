@@ -84,10 +84,10 @@
 - (void)awakeFromNib
 {    
     self.titleLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
-    self.titleLabel.textColor = [UIColor appGreyColor];
+    self.titleLabel.textColor = [UIColor appTitleTextColor];
     
     self.tagTimeStampLabel.font = [UIFont cpLightFontWithSize:10 italic:NO];
-    self.tagTimeStampLabel.textColor = [UIColor appLightGreyColor];
+    self.tagTimeStampLabel.textColor = [UIColor appSubCopyTextColor];
     
     self.bodyTextView.textContainer.lineFragmentPadding = 0;
     self.bodyTextView.textContainerInset = UIEdgeInsetsZero;
