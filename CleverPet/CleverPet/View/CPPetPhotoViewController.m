@@ -9,14 +9,15 @@
 #import "CPPetPhotoViewController.h"
 #import "CPLoginController.h"
 #import "CPParticleConnectionHelper.h"
+#import "BABCropperView.h"
 
 @interface CPPetPhotoViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *instructionLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *petImage;
 @property (weak, nonatomic) IBOutlet UIButton *swapImageButton;
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
+@property (weak, nonatomic) IBOutlet BABCropperView *cropView;
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
 
@@ -27,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.cropView.cropSize = self.cropView.bounds.size;
+    self.cropView.backgroundColor = [UIColor appBackgroundColor];
     if (self.selectedImage) {
         // Force update of image and button if we had an image set before segueing in
         self.selectedImage = self.selectedImage;
@@ -57,7 +60,7 @@
 - (void)setSelectedImage:(UIImage *)selectedImage
 {
     _selectedImage = selectedImage;
-    self.petImage.image = selectedImage;
+    self.cropView.image = selectedImage;
     [self.swapImageButton setTitle:NSLocalizedString(@"Swap Photo", @"Button title to upload a new pet photo") forState:UIControlStateNormal];
 }
 
@@ -70,14 +73,25 @@
 - (IBAction)continueTapped:(id)sender
 {
     // TODO: spinner and disable interface
-    [[CPLoginController sharedInstance] completeSignUpWithPetImage:self.selectedImage completion:^(NSError *error) {
-        if (error) {
-            // TODO: display error. For now, begin the flow and allow user to log in to particle account
-            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.cropView renderCroppedImage:^(UIImage *croppedImage, CGRect cropRect) {
+        BLOCK_SELF_REF_INSIDE();
+        // If we have a delegate, we came from settings, and should let the delegate pop us. Otherwise, we're part of the sign up flow, and need to block until user is created and then transition to the dashboard
+        if (self.delegate) {
+            [self.delegate selectedImage:croppedImage];
         } else {
-            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
+            [[CPLoginController sharedInstance] completeSignUpWithPetImage:croppedImage completion:^(NSError *error) {
+                if (error) {
+                    // TODO: display error. For now, begin the flow and allow user to log in to particle account
+                    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
+                } else {
+                    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
+                }
+            }];
         }
     }];
+    
+    
 }
 
 - (void)promptForPhotoSource
@@ -113,7 +127,7 @@
     if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
         
         self.imagePicker.sourceType = sourceType;
-        self.imagePicker.allowsEditing = YES;
+        self.imagePicker.allowsEditing = NO;
         
         if (sourceType == UIImagePickerControllerSourceTypeCamera) {
             self.imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
@@ -127,7 +141,7 @@
 #pragma mark - UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
 {
-    self.selectedImage = info[UIImagePickerControllerEditedImage];
+    self.selectedImage = info[UIImagePickerControllerOriginalImage];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

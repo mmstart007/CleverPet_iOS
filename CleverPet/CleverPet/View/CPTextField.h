@@ -10,4 +10,9 @@
 
 @interface CPTextField : UITextField
 
+@property (nonatomic, assign) IBInspectable BOOL showStripe;
+@property (nonatomic, assign) IBInspectable BOOL showDropShadow;
+@property (nonatomic, assign) IBInspectable CGFloat horizontalTextInset;
+@property (nonatomic, assign) IBInspectable CGFloat fontSize;
+
 @end

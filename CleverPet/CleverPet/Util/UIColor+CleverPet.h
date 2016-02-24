@@ -21,6 +21,7 @@
 + (UIColor*)appBlackColor;
 + (UIColor*)appGreyColor;
 + (UIColor*)appWhiteColor;
+// #f8f8f9
 + (UIColor*)appBackgroundColor;
 + (UIColor*)appLightTealColor;
 // #333333

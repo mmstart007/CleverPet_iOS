@@ -21,6 +21,11 @@
 		1827A9098315281E1E57C652 /* CPTileSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A50A4A6169E21622727F /* CPTileSection.m */; };
 		1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */; };
 		1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A57728C978A652728E14 /* CPTileViewCell.m */; };
+		9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2F71C7D08A2004874A7 /* CPProfileSettingsViewController.m */; };
+		9704E2FB1C7D260E004874A7 /* CPTextValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2FA1C7D260E004874A7 /* CPTextValidator.m */; };
+		9704E2FE1C7D2799004874A7 /* CPSharedUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2FD1C7D2799004874A7 /* CPSharedUtils.m */; };
+		9704E3041C7D2D4D004874A7 /* Pickers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9704E3031C7D2D4D004874A7 /* Pickers.storyboard */; };
+		9704E3071C7D34BD004874A7 /* CPPetPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E3061C7D34BD004874A7 /* CPPetPhotoViewController.m */; };
 		97CC44561C754B67003C4258 /* breeds.csv in Resources */ = {isa = PBXBuildFile; fileRef = 97CC44551C754B67003C4258 /* breeds.csv */; };
 		97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */; };
 		97CC445D1C7552C3003C4258 /* CPSimpleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC445B1C7552C3003C4258 /* CPSimpleTableViewCell.m */; };
@@ -60,9 +65,8 @@
 		97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */; };
 		97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF61C73CA1B007F1383 /* CPTextField.m */; };
 		97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */; };
-		97EB7AFF1C7400A9007F1383 /* CPPetPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AFE1C7400A9007F1383 /* CPPetPhotoViewController.m */; };
 		97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */; };
-		97EB7B081C75316F007F1383 /* CPGenderPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B071C75316F007F1383 /* CPGenderPickerViewController.m */; };
+		97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B071C75316F007F1383 /* CPPickerViewController.m */; };
 		BCD1938D360A74B45F4482F4 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +99,15 @@
 		1827AD320F0C4F8FD18E36D8 /* CPTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTile.m; sourceTree = "<group>"; };
 		1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
 		3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
+		9704E2F61C7D08A2004874A7 /* CPProfileSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPProfileSettingsViewController.h; sourceTree = "<group>"; };
+		9704E2F71C7D08A2004874A7 /* CPProfileSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPProfileSettingsViewController.m; sourceTree = "<group>"; };
+		9704E2F91C7D260E004874A7 /* CPTextValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTextValidator.h; sourceTree = "<group>"; };
+		9704E2FA1C7D260E004874A7 /* CPTextValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTextValidator.m; sourceTree = "<group>"; };
+		9704E2FC1C7D2799004874A7 /* CPSharedUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSharedUtils.h; sourceTree = "<group>"; };
+		9704E2FD1C7D2799004874A7 /* CPSharedUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSharedUtils.m; sourceTree = "<group>"; };
+		9704E3031C7D2D4D004874A7 /* Pickers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pickers.storyboard; sourceTree = "<group>"; };
+		9704E3051C7D32D2004874A7 /* CPPetPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetPhotoViewController.h; sourceTree = "<group>"; };
+		9704E3061C7D34BD004874A7 /* CPPetPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetPhotoViewController.m; sourceTree = "<group>"; };
 		97CC44551C754B67003C4258 /* breeds.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = breeds.csv; sourceTree = "<group>"; };
 		97CC44571C754E93003C4258 /* CPBreedPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBreedPickerViewController.h; sourceTree = "<group>"; };
 		97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBreedPickerViewController.m; sourceTree = "<group>"; };
@@ -153,12 +166,10 @@
 		97EB7AF61C73CA1B007F1383 /* CPTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTextField.m; sourceTree = "<group>"; };
 		97EB7AFA1C73F282007F1383 /* CPPetProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetProfileViewController.h; sourceTree = "<group>"; };
 		97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetProfileViewController.m; sourceTree = "<group>"; };
-		97EB7AFD1C7400A9007F1383 /* CPPetPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetPhotoViewController.h; sourceTree = "<group>"; };
-		97EB7AFE1C7400A9007F1383 /* CPPetPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetPhotoViewController.m; sourceTree = "<group>"; };
 		97EB7B001C7508E1007F1383 /* UIViewController+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CleverPet.h"; sourceTree = "<group>"; };
 		97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CleverPet.m"; sourceTree = "<group>"; };
-		97EB7B061C75316F007F1383 /* CPGenderPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGenderPickerViewController.h; sourceTree = "<group>"; };
-		97EB7B071C75316F007F1383 /* CPGenderPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGenderPickerViewController.m; sourceTree = "<group>"; };
+		97EB7B061C75316F007F1383 /* CPPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPickerViewController.h; sourceTree = "<group>"; };
+		97EB7B071C75316F007F1383 /* CPPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPickerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,7 +222,6 @@
 				0D36AA861C7243D600349D03 /* Supporting Files */,
 				1827A33D9223DD88F1F07633 /* Model */,
 				1827A78F146E373DB1371921 /* ViewController */,
-				1827AE900814435357461822 /* View */,
 				1827A9E78952C5B4B2C50430 /* Utils */,
 				97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */,
 				97EB7AF41C73C9FD007F1383 /* View */,
@@ -259,16 +269,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		1827AE900814435357461822 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				1827A57728C978A652728E14 /* CPTileViewCell.m */,
-				1827A1BFAE0043C9D902D1AC /* CPTileViewCell.h */,
-				0DD4BD301C739426006B3725 /* CPTileViewCell.xib */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		57ADBCB9E6A0A0D72BB97CA7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -291,8 +291,6 @@
 				97EB7AC11C73A97D007F1383 /* CPSignUpViewController.m */,
 				97EB7AFA1C73F282007F1383 /* CPPetProfileViewController.h */,
 				97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */,
-				97EB7AFD1C7400A9007F1383 /* CPPetPhotoViewController.h */,
-				97EB7AFE1C7400A9007F1383 /* CPPetPhotoViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -308,10 +306,13 @@
 		97CC445F1C76382A003C4258 /* Pickers */ = {
 			isa = PBXGroup;
 			children = (
-				97EB7B061C75316F007F1383 /* CPGenderPickerViewController.h */,
-				97EB7B071C75316F007F1383 /* CPGenderPickerViewController.m */,
+				9704E3051C7D32D2004874A7 /* CPPetPhotoViewController.h */,
+				9704E3061C7D34BD004874A7 /* CPPetPhotoViewController.m */,
+				97EB7B061C75316F007F1383 /* CPPickerViewController.h */,
+				97EB7B071C75316F007F1383 /* CPPickerViewController.m */,
 				97CC44571C754E93003C4258 /* CPBreedPickerViewController.h */,
 				97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */,
+				9704E3031C7D2D4D004874A7 /* Pickers.storyboard */,
 			);
 			name = Pickers;
 			sourceTree = "<group>";
@@ -325,6 +326,8 @@
 				97CC446B1C768A32003C4258 /* CPFAQViewController.m */,
 				97CC446D1C7694DB003C4258 /* CPHubSettingsViewController.h */,
 				97CC446E1C7694DB003C4258 /* CPHubSettingsViewController.m */,
+				9704E2F61C7D08A2004874A7 /* CPProfileSettingsViewController.h */,
+				9704E2F71C7D08A2004874A7 /* CPProfileSettingsViewController.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -378,6 +381,10 @@
 				97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */,
 				97CC44831C77E703003C4258 /* CPAppearance.h */,
 				97CC44841C77E703003C4258 /* CPAppearance.m */,
+				9704E2F91C7D260E004874A7 /* CPTextValidator.h */,
+				9704E2FA1C7D260E004874A7 /* CPTextValidator.m */,
+				9704E2FC1C7D2799004874A7 /* CPSharedUtils.h */,
+				9704E2FD1C7D2799004874A7 /* CPSharedUtils.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -385,16 +392,19 @@
 		97EB7AF41C73C9FD007F1383 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				97CC445F1C76382A003C4258 /* Pickers */,
-				97EB7AF51C73CA1B007F1383 /* CPTextField.h */,
-				97EB7AF61C73CA1B007F1383 /* CPTextField.m */,
-				97CC445A1C7552C3003C4258 /* CPSimpleTableViewCell.h */,
-				97CC445B1C7552C3003C4258 /* CPSimpleTableViewCell.m */,
-				97CC445C1C7552C3003C4258 /* CPSimpleTableViewCell.xib */,
 				97CC44701C7699C7003C4258 /* CPFAQView.h */,
 				97CC44711C7699C7003C4258 /* CPFAQView.m */,
 				97CC44801C77CA30003C4258 /* CPHubSettingsButton.h */,
 				97CC44811C77CA30003C4258 /* CPHubSettingsButton.m */,
+				97CC445A1C7552C3003C4258 /* CPSimpleTableViewCell.h */,
+				97CC445B1C7552C3003C4258 /* CPSimpleTableViewCell.m */,
+				97CC445C1C7552C3003C4258 /* CPSimpleTableViewCell.xib */,
+				97EB7AF51C73CA1B007F1383 /* CPTextField.h */,
+				97EB7AF61C73CA1B007F1383 /* CPTextField.m */,
+				1827A1BFAE0043C9D902D1AC /* CPTileViewCell.h */,
+				1827A57728C978A652728E14 /* CPTileViewCell.m */,
+				0DD4BD301C739426006B3725 /* CPTileViewCell.xib */,
+				97CC445F1C76382A003C4258 /* Pickers */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -485,6 +495,7 @@
 				97EB7AD61C73B826007F1383 /* Omnes-Black.otf in Resources */,
 				97EB7AE21C73B826007F1383 /* Omnes-Regular.otf in Resources */,
 				97CC445E1C7552C3003C4258 /* CPSimpleTableViewCell.xib in Resources */,
+				9704E3041C7D2D4D004874A7 /* Pickers.storyboard in Resources */,
 				0D36AA911C7243D600349D03 /* Main.storyboard in Resources */,
 				0DD4BD311C739426006B3725 /* CPTileViewCell.xib in Resources */,
 				97EB7AE01C73B826007F1383 /* Omnes-Medium.otf in Resources */,
@@ -552,7 +563,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				97CC44881C7BB6D8003C4258 /* CPParticleConnectionHelper.m in Sources */,
-				97EB7AFF1C7400A9007F1383 /* CPPetPhotoViewController.m in Sources */,
 				97CC446C1C768A32003C4258 /* CPFAQViewController.m in Sources */,
 				97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */,
 				97CC44851C77E703003C4258 /* CPAppearance.m in Sources */,
@@ -560,12 +570,15 @@
 				97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */,
 				0D36AA8E1C7243D600349D03 /* ViewController.m in Sources */,
 				97EB7AC21C73A97D007F1383 /* CPSignUpViewController.m in Sources */,
+				9704E2FE1C7D2799004874A7 /* CPSharedUtils.m in Sources */,
 				97CC44821C77CA30003C4258 /* CPHubSettingsButton.m in Sources */,
 				97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */,
 				0D36AA8B1C7243D600349D03 /* AppDelegate.m in Sources */,
+				9704E2FB1C7D260E004874A7 /* CPTextValidator.m in Sources */,
 				97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */,
 				97EB7ABF1C72AAFB007F1383 /* CPLoginController.m in Sources */,
 				97CC445D1C7552C3003C4258 /* CPSimpleTableViewCell.m in Sources */,
+				9704E3071C7D34BD004874A7 /* CPPetPhotoViewController.m in Sources */,
 				97CC44721C7699C7003C4258 /* CPFAQView.m in Sources */,
 				97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
@@ -577,9 +590,10 @@
 				1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */,
 				97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */,
 				97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */,
+				9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */,
 				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
 				0D8AC9871C7CEACD0096F339 /* CPTileTextFormatter.m in Sources */,
-				97EB7B081C75316F007F1383 /* CPGenderPickerViewController.m in Sources */,
+				97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */,
 				97CC44691C766A28003C4258 /* CPSettingsViewController.m in Sources */,
 				97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */,
 			);

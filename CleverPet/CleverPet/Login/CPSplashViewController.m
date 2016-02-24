@@ -29,13 +29,13 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginComplete:) name:kLoginCompleteNotification object:nil];
+    REG_SELF_FOR_NOTIFICATION(kLoginCompleteNotification, loginComplete:);
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    UNREG_SELF_FOR_ALL_NOTIFICATIONS();
 }
 
 - (void)didReceiveMemoryWarning {

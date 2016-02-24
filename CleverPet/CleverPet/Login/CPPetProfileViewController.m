@@ -8,16 +8,12 @@
 
 #import "CPPetProfileViewController.h"
 #import "CPTextField.h"
-#import "CPGenderPickerViewController.h"
+#import "CPPickerViewController.h"
 #import "CPBreedPickerViewController.h"
 #import "CPLoginController.h"
+#import "CPTextValidator.h"
 
-NSInteger const kNameFieldMinChars = 2;
-NSInteger const kNameFieldMaxChars = 10;
-NSInteger const kFamilyNameFieldMinChars = 1;
-NSInteger const kFamilyNameFieldMaxChars = 35;
-
-@interface CPPetProfileViewController ()<UITextFieldDelegate, CPGenderPickerViewDelegate, CPBreedPickerDelegate>
+@interface CPPetProfileViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subCopyLabel;
@@ -32,12 +28,10 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *weightUnitSelector;
 
 @property (nonatomic, strong) NSArray *textFields;
-@property (nonatomic, strong) NSCharacterSet *invalidNameCharacters;
-@property (nonatomic, strong) NSCharacterSet *invalidFamilyNameCharacters;
-@property (nonatomic, strong) NSCharacterSet *invalidNumericalCharacters;
 
 @property (nonatomic, strong) NSString *weightDescriptor;
-@property (nonatomic, strong) CPGenderPickerViewController *genderPicker;
+@property (nonatomic, strong) CPPickerViewController *genderPicker;
+@property (nonatomic, strong) CPTextValidator *textValidator;
 
 @end
 
@@ -51,35 +45,26 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     [self setupStyling];
     self.textFields = @[self.nameField, self.familyField, self.breedField, self.genderField, self.ageField, self.weightField];
     
-    NSMutableCharacterSet *alphaSet = [NSMutableCharacterSet alphanumericCharacterSet];
-    // alpha includes letter, numbers and marks, we want to remove marks
-    [alphaSet formIntersectionWithCharacterSet:[[NSCharacterSet nonBaseCharacterSet] invertedSet]];
-    self.invalidNameCharacters = [alphaSet invertedSet];
-    
-    // Family name additionally allows spaces
-    [alphaSet addCharactersInString:@" "];
-    [alphaSet formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
-    self.invalidFamilyNameCharacters = [alphaSet invertedSet];
-    
-    self.invalidNumericalCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
     self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
     
     self.weightUnitSelector.tintColor = [UIColor appTextFieldPlaceholderColor];
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
+    self.textValidator = [[CPTextValidator alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    REG_SELF_FOR_NOTIFICATION(UIKeyboardWillShowNotification, keyboardWillShow:);
+    REG_SELF_FOR_NOTIFICATION(UIKeyboardWillHideNotification, keyboardWillHide:);
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewDidDisappear:animated];
+    UNREG_SELF_FOR_ALL_NOTIFICATIONS();
 }
 
 - (void)didReceiveMemoryWarning {
@@ -103,6 +88,7 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 
 - (BOOL)validateInput
 {
+    // TODO: pull this validation out(to the pet profile object?) so we can use it from settings as well
     if ([self.nameField.text length] < kNameFieldMinChars || [self.nameField.text length] > kNameFieldMaxChars) {
         [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Name must be between %d and %d characters long", @"Error message when name name does not fit requirements. First %d is minimum number of characters, second is maximum"), kNameFieldMinChars, kNameFieldMaxChars]];
         return NO;
@@ -170,19 +156,19 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 {
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (textField == self.nameField) {
-        return [newString rangeOfCharacterFromSet:self.invalidNameCharacters options:NSCaseInsensitiveSearch].location == NSNotFound && [newString length] <= 10;
+        return [self.textValidator isValidPetNameText:newString];
     }
     
     if (textField == self.familyField) {
-        return [newString rangeOfCharacterFromSet:self.invalidFamilyNameCharacters options:NSCaseInsensitiveSearch].location == NSNotFound && [newString length] <= 35;
+        return [self.textValidator isValidFamilyNameText:newString];
     }
     
     if (textField == self.weightField) {
-        return [newString rangeOfCharacterFromSet:self.invalidNumericalCharacters options:NSCaseInsensitiveSearch].location == NSNotFound;
+        return [self.textValidator isValidPetWeightText:newString];
     }
     
     if (textField == self.ageField) {
-        return [newString rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet] options:NSCaseInsensitiveSearch].location == NSNotFound;
+        return [self.textValidator isValidPetAgeText:newString];
     }
     
     // Disable typing for gender/breed fields
@@ -199,13 +185,16 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 {
     if (textField == self.genderField) {
         if (!self.genderPicker) {
-            CPGenderPickerViewController *genderPicker = [self.storyboard instantiateViewControllerWithIdentifier:@"GenderPicker"];
+            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+            CPPickerViewController *genderPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
+            [genderPicker setupForPickingGender];
             genderPicker.delegate = self;
             textField.inputView = genderPicker.view;
             self.genderPicker = genderPicker;
         }
     } else if (textField == self.breedField) {
-        CPBreedPickerViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
+        UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+        CPBreedPickerViewController *vc = [pickerStoryboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
         vc.delegate = self;
         vc.selectedBreed = self.breedField.text;
         [self presentViewController:vc animated:YES completion:nil];
@@ -229,8 +218,8 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     }
 }
 
-#pragma mark - CPGenderPickerDelegate methods
-- (void)pickerViewController:(CPGenderPickerViewController *)controller selectedString:(NSString *)string
+#pragma mark - CPPickerDelegate methods
+- (void)pickerViewController:(CPPickerViewController *)controller selectedString:(NSString *)string
 {
     if (controller == self.genderPicker) {
         self.genderField.text = string;
