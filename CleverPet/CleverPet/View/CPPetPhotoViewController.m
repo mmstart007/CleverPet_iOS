@@ -69,15 +69,22 @@
 
 - (IBAction)continueTapped:(id)sender
 {
-    // TODO: spinner and disable interface
-    [[CPLoginController sharedInstance] completeSignUpWithPetImage:self.selectedImage completion:^(NSError *error) {
-        if (error) {
-            // TODO: display error. For now, begin the flow and allow user to log in to particle account
-            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
-        } else {
-            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
-        }
-    }];
+    // TODO: Crop image appropriately
+    
+    // If we have a delegate, we came from settings, and should let the delegate pop us. Otherwise, we're part of the sign up flow, and need to block until user is created and then transition to the dashboard
+    if (self.delegate) {
+        [self.delegate selectedImage:self.selectedImage];
+    } else {
+        // TODO: spinner and disable interface
+        [[CPLoginController sharedInstance] completeSignUpWithPetImage:self.selectedImage completion:^(NSError *error) {
+            if (error) {
+                // TODO: display error. For now, begin the flow and allow user to log in to particle account
+                [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
+            } else {
+                [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
+            }
+        }];
+    }
 }
 
 - (void)promptForPhotoSource

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Breed Picker View Controller-->
@@ -104,6 +105,104 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yd7-zn-LcU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-370" y="624"/>
+        </scene>
+        <!--Pet Photo View Controller-->
+        <scene sceneID="5a8-iz-PEe">
+            <objects>
+                <viewController storyboardIdentifier="PetPhotoPicker" id="BVO-30-aOl" customClass="CPPetPhotoViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xql-hc-yJ5"/>
+                        <viewControllerLayoutGuide type="bottom" id="KR6-GG-IaX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ne8-tN-wlq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pet Profile Photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qib-Ak-DQt">
+                                <rect key="frame" x="96" y="50" width="128" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload a photo of your dog and position it inside the silhouette below." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcA-Wh-6Mf">
+                                <rect key="frame" x="37" y="91" width="247" height="61"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3qN-O6-J78">
+                                <rect key="frame" x="0.0" y="182" width="320" height="180"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xkk-C9-KYK">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="xkk-C9-KYK" secondAttribute="height" multiplier="32:13" id="JVe-ri-q1A"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmt-Wb-4oC">
+                                        <rect key="frame" x="0.0" y="130" width="320" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="D33-r2-jUG"/>
+                                        </constraints>
+                                        <state key="normal" title="Upload Photo"/>
+                                        <connections>
+                                            <action selector="swapPhotoTapped:" destination="BVO-30-aOl" eventType="touchUpInside" id="vHU-Cy-HNE"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="lmt-Wb-4oC" firstAttribute="top" secondItem="xkk-C9-KYK" secondAttribute="bottom" id="3jE-BK-Njx"/>
+                                    <constraint firstItem="lmt-Wb-4oC" firstAttribute="leading" secondItem="3qN-O6-J78" secondAttribute="leading" id="EvB-Yn-hd7"/>
+                                    <constraint firstItem="xkk-C9-KYK" firstAttribute="top" secondItem="3qN-O6-J78" secondAttribute="top" id="N1F-Zb-54P"/>
+                                    <constraint firstAttribute="trailing" secondItem="xkk-C9-KYK" secondAttribute="trailing" id="NQv-jY-pAp"/>
+                                    <constraint firstItem="xkk-C9-KYK" firstAttribute="leading" secondItem="3qN-O6-J78" secondAttribute="leading" id="Vcw-Pv-Zbw"/>
+                                    <constraint firstAttribute="trailing" secondItem="lmt-Wb-4oC" secondAttribute="trailing" id="oyp-o9-7iq"/>
+                                    <constraint firstAttribute="bottom" secondItem="lmt-Wb-4oC" secondAttribute="bottom" id="zw6-sM-YwQ"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qtl-Ca-brp">
+                                <rect key="frame" x="0.0" y="430" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="X0T-0M-Wjj"/>
+                                </constraints>
+                                <state key="normal" title="Continue"/>
+                                <connections>
+                                    <action selector="continueTapped:" destination="BVO-30-aOl" eventType="touchUpInside" id="zMf-gh-s1q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="3qN-O6-J78" secondAttribute="trailing" id="6Ol-Nn-lWb"/>
+                            <constraint firstItem="Qib-Ak-DQt" firstAttribute="centerX" secondItem="ne8-tN-wlq" secondAttribute="centerX" id="6uA-Te-RTe"/>
+                            <constraint firstItem="Qib-Ak-DQt" firstAttribute="top" secondItem="Xql-hc-yJ5" secondAttribute="bottom" constant="30" id="EQH-p7-fTZ"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fcA-Wh-6Mf" secondAttribute="trailing" constant="20" id="FAL-2F-7ab"/>
+                            <constraint firstItem="KR6-GG-IaX" firstAttribute="top" secondItem="Qtl-Ca-brp" secondAttribute="bottom" id="FbO-f3-dEx"/>
+                            <constraint firstItem="3qN-O6-J78" firstAttribute="leading" secondItem="ne8-tN-wlq" secondAttribute="leading" id="OHI-aH-PVp"/>
+                            <constraint firstItem="fcA-Wh-6Mf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ne8-tN-wlq" secondAttribute="leading" constant="20" id="TKa-wz-x5u"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qib-Ak-DQt" secondAttribute="trailing" constant="20" id="TKb-dY-VPW"/>
+                            <constraint firstItem="fcA-Wh-6Mf" firstAttribute="top" secondItem="Qib-Ak-DQt" secondAttribute="bottom" constant="20" id="V67-oR-fs4"/>
+                            <constraint firstItem="Qtl-Ca-brp" firstAttribute="leading" secondItem="ne8-tN-wlq" secondAttribute="leading" id="Ycc-au-GB3"/>
+                            <constraint firstItem="3qN-O6-J78" firstAttribute="top" secondItem="fcA-Wh-6Mf" secondAttribute="bottom" constant="30" id="gZu-Uy-UhY"/>
+                            <constraint firstAttribute="trailing" secondItem="Qtl-Ca-brp" secondAttribute="trailing" id="od7-Du-nyi"/>
+                            <constraint firstItem="Qib-Ak-DQt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ne8-tN-wlq" secondAttribute="leading" constant="20" id="q7U-7W-JTn"/>
+                            <constraint firstItem="fcA-Wh-6Mf" firstAttribute="centerX" secondItem="ne8-tN-wlq" secondAttribute="centerX" id="zoT-1l-xCa"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="480"/>
+                    <connections>
+                        <outlet property="continueButton" destination="Qtl-Ca-brp" id="XlJ-te-gET"/>
+                        <outlet property="headerLabel" destination="Qib-Ak-DQt" id="2ym-K6-k1e"/>
+                        <outlet property="instructionLabel" destination="fcA-Wh-6Mf" id="4o5-lC-eWd"/>
+                        <outlet property="petImage" destination="xkk-C9-KYK" id="VnP-Bt-0bS"/>
+                        <outlet property="swapImageButton" destination="lmt-Wb-4oC" id="EpW-BH-qoA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fAG-1W-b59" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="248" y="1027"/>
         </scene>
     </scenes>
 </document>

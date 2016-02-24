@@ -11,8 +11,9 @@
 #import "CPTextValidator.h"
 #import "CPPickerViewController.h"
 #import "CPBreedPickerViewController.h"
+#import "CPPetPhotoViewController.h"
 
-@interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate>
+@interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate, CPPetPhotoDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *petImage;
@@ -200,6 +201,22 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
     self.breedField.text = breedName;
+}
+
+#pragma mark - CPPetPhotoDelegate methods
+- (void)selectedImage:(UIImage *)image
+{
+    self.petImage.image = image;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[CPPetPhotoViewController class]])
+    {
+        ((CPPetPhotoViewController*)segue.destinationViewController).delegate = self;
+    }
 }
 
 #pragma mark - Keyboard
