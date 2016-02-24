@@ -8,12 +8,12 @@
 
 #import "CPPetProfileViewController.h"
 #import "CPTextField.h"
-#import "CPGenderPickerViewController.h"
+#import "CPPickerViewController.h"
 #import "CPBreedPickerViewController.h"
 #import "CPLoginController.h"
 #import "CPTextValidator.h"
 
-@interface CPPetProfileViewController ()<UITextFieldDelegate, CPGenderPickerViewDelegate, CPBreedPickerDelegate>
+@interface CPPetProfileViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *subCopyLabel;
@@ -30,7 +30,7 @@
 @property (nonatomic, strong) NSArray *textFields;
 
 @property (nonatomic, strong) NSString *weightDescriptor;
-@property (nonatomic, strong) CPGenderPickerViewController *genderPicker;
+@property (nonatomic, strong) CPPickerViewController *genderPicker;
 @property (nonatomic, strong) CPTextValidator *textValidator;
 
 @end
@@ -184,13 +184,16 @@
 {
     if (textField == self.genderField) {
         if (!self.genderPicker) {
-            CPGenderPickerViewController *genderPicker = [self.storyboard instantiateViewControllerWithIdentifier:@"GenderPicker"];
+            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+            CPPickerViewController *genderPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
+            [genderPicker setupForPickingGender];
             genderPicker.delegate = self;
             textField.inputView = genderPicker.view;
             self.genderPicker = genderPicker;
         }
     } else if (textField == self.breedField) {
-        CPBreedPickerViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
+        UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+        CPBreedPickerViewController *vc = [pickerStoryboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
         vc.delegate = self;
         vc.selectedBreed = self.breedField.text;
         [self presentViewController:vc animated:YES completion:nil];
@@ -214,8 +217,8 @@
     }
 }
 
-#pragma mark - CPGenderPickerDelegate methods
-- (void)pickerViewController:(CPGenderPickerViewController *)controller selectedString:(NSString *)string
+#pragma mark - CPPickerDelegate methods
+- (void)pickerViewController:(CPPickerViewController *)controller selectedString:(NSString *)string
 {
     if (controller == self.genderPicker) {
         self.genderField.text = string;

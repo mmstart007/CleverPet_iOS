@@ -9,8 +9,10 @@
 #import "CPProfileSettingsViewController.h"
 #import "CPTextField.h"
 #import "CPTextValidator.h"
+#import "CPPickerViewController.h"
+#import "CPBreedPickerViewController.h"
 
-@interface CPProfileSettingsViewController ()<UITextFieldDelegate>
+@interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *petImage;
@@ -35,6 +37,10 @@
 @property (nonatomic, strong) NSString *weightDescriptor;
 @property (nonatomic, strong) NSArray *textFields;
 @property (nonatomic, strong) CPTextValidator *textValidator;
+
+@property (nonatomic, strong) CPPickerViewController *genderPicker;
+@property (nonatomic, strong) CPPickerViewController *neuteredPicker;
+@property (nonatomic, strong) CPBreedPickerViewController *breedPicker;
 
 @end
 
@@ -143,6 +149,57 @@
     
     // Disable typing for gender/breed fields
     return NO;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    if (textField == self.genderField) {
+        if (!self.genderPicker) {
+            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+            CPPickerViewController *genderPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
+            [genderPicker setupForPickingGender];
+            genderPicker.delegate = self;
+            textField.inputView = genderPicker.view;
+            self.genderPicker = genderPicker;
+        }
+    } else if (textField == self.neuteredField) {
+        if (!self.neuteredPicker) {
+            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+            CPPickerViewController *neuteredPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
+            [neuteredPicker setupForPickingNeutered];
+            neuteredPicker.delegate = self;
+            textField.inputView = neuteredPicker.view;
+            self.neuteredPicker = neuteredPicker;
+        }
+    } else if (textField == self.breedField) {
+        UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+        CPBreedPickerViewController *vc = [pickerStoryboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
+        vc.delegate = self;
+        vc.selectedBreed = self.breedField.text;
+        [self presentViewController:vc animated:YES completion:nil];
+        return NO;
+    }
+    
+    return YES;
+}
+
+#pragma mark - CPPickerDelegate methods
+- (void)pickerViewController:(CPPickerViewController *)controller selectedString:(NSString *)string
+{
+    if (controller == self.genderPicker) {
+        self.genderField.text = string;
+        [self moveToNextTextFieldFrom:self.genderField];
+    } else if (controller == self.neuteredPicker) {
+        self.neuteredField.text = string;
+        [self.neuteredField resignFirstResponder];
+    }
+}
+
+#pragma mark - CPBreedPickerDelegate methods
+- (void)selectedBreed:(NSString *)breedName
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    self.breedField.text = breedName;
 }
 
 #pragma mark - Keyboard
