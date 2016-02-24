@@ -11,6 +11,6 @@
 @interface CPConfigManager : NSObject
 
 + (instancetype)sharedInstance;
-- (void)loadConfigWithCompletion:(void (^)(NSError *error))completion;
+- (ASYNC)loadConfigWithCompletion:(void (^)(NSError *error))completion;
 
 @end

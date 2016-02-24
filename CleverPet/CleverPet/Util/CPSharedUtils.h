@@ -60,3 +60,5 @@ extern NSInteger const kNameFieldMinChars;
 extern NSInteger const kNameFieldMaxChars;
 extern NSInteger const kFamilyNameFieldMinChars;
 extern NSInteger const kFamilyNameFieldMaxChars;
+
+#define ASYNC void

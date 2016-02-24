@@ -68,6 +68,7 @@
 		97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */; };
 		97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B071C75316F007F1383 /* CPPickerViewController.m */; };
 		97F7284E1C7E416A005E65C2 /* CPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F7284D1C7E416A005E65C2 /* CPConfigManager.m */; };
+		97F728511C7E588C005E65C2 /* CPAppEngineCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */; };
 		BCD1938D360A74B45F4482F4 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
@@ -173,6 +174,8 @@
 		97EB7B071C75316F007F1383 /* CPPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPickerViewController.m; sourceTree = "<group>"; };
 		97F7284C1C7E416A005E65C2 /* CPConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPConfigManager.h; sourceTree = "<group>"; };
 		97F7284D1C7E416A005E65C2 /* CPConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPConfigManager.m; sourceTree = "<group>"; };
+		97F7284F1C7E588C005E65C2 /* CPAppEngineCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAppEngineCommunicationManager.h; sourceTree = "<group>"; };
+		97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAppEngineCommunicationManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,6 +349,8 @@
 				97CC44871C7BB6D8003C4258 /* CPParticleConnectionHelper.m */,
 				97F7284C1C7E416A005E65C2 /* CPConfigManager.h */,
 				97F7284D1C7E416A005E65C2 /* CPConfigManager.m */,
+				97F7284F1C7E588C005E65C2 /* CPAppEngineCommunicationManager.h */,
+				97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -568,6 +573,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97CC44881C7BB6D8003C4258 /* CPParticleConnectionHelper.m in Sources */,
+				97F728511C7E588C005E65C2 /* CPAppEngineCommunicationManager.m in Sources */,
 				97CC446C1C768A32003C4258 /* CPFAQViewController.m in Sources */,
 				97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */,
 				97CC44851C77E703003C4258 /* CPAppearance.m in Sources */,

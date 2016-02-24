@@ -11,6 +11,7 @@
 #import "CPSignInViewController.h"
 #import "CPSignUpViewController.h"
 #import "CPParticleConnectionHelper.h"
+#import "CPAppEngineCommunicationManager.h"
 
 NSString * const kLoginCompleteNotification = @"NOTE_LoginComplete";
 NSString * const kLoginErrorKey = @"LoginError";
@@ -139,11 +140,14 @@ didFinishSignInWithToken:(NSString *)token
        account:(GITAccount *)account
          error:(NSError *)error
 {
+    [[CPAppEngineCommunicationManager sharedInstance] loginWithUserId:account.localID completion:^(CPLoginResult result, NSError *error) {
+        NSInteger breakpoint = 0;
+    }];
     // TODO: attempt to sign in on server. If the account doesn't exist, we need to perform the setup flow(pet profile/device setup). If we already set the pet profile info, we just need to do device setup
     // For now, always hit that flow
-    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-    userInfo[kLoginErrorKey] = error;
-    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleteNotification object:nil userInfo:userInfo];
+//    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+//    userInfo[kLoginErrorKey] = error;
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleteNotification object:nil userInfo:userInfo];
 }
 
 @end

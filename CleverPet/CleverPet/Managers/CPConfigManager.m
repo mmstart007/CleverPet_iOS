@@ -8,6 +8,7 @@
 
 #import "CPConfigManager.h"
 #import "CPParticleConnectionHelper.h"
+#import "CPAppEngineCommunicationManager.h"
 #import <AFNetworking/AFNetworking.h>
 
 NSString * const kConfigUrl = @"https://storage.googleapis.com/cleverpet-app/configs/config.json";
@@ -39,16 +40,23 @@ NSString * const kConfigUrl = @"https://storage.googleapis.com/cleverpet-app/con
     return self;
 }
 
-- (void)loadConfigWithCompletion:(void (^)(NSError *))completion
+- (ASYNC)loadConfigWithCompletion:(void (^)(NSError *))completion
 {
+    BLOCK_SELF_REF_OUTSIDE();
     [self.sessionManager GET:kConfigUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        // Apply config
+        BLOCK_SELF_REF_INSIDE();
         // TODO: version check, deprecation message, etc
-        [[CPParticleConnectionHelper sharedInstance] applyConfig:responseObject];
+        [self applyConfig:responseObject];
         if (completion) completion(nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (completion) completion(error);
     }];
+}
+
+- (void)applyConfig:(NSDictionary *)configData
+{
+    [[CPParticleConnectionHelper sharedInstance] applyConfig:configData];
+    [[CPAppEngineCommunicationManager sharedInstance] applyConfig:configData];
 }
 
 @end
