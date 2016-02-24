@@ -80,7 +80,15 @@
 - (NSAttributedString *)attributedStringFromMarkdownString:(NSString *)markdownString {
     NSMutableAttributedString *temp = [markdown_to_attr_string(markdownString, 0, self.markdownAttributes) mutableCopy];
     NSCharacterSet *charSet = [NSCharacterSet whitespaceAndNewlineCharacterSet];
-    NSRange range = [temp.string rangeOfCharacterFromSet:charSet
+    
+    NSRange range = [temp.string rangeOfCharacterFromSet:charSet];
+    
+    while (range.length != 0 && range.location == 0) {
+        [temp replaceCharactersInRange:range withString:@""];
+        range = [temp.string rangeOfCharacterFromSet:charSet];
+    }
+    
+    range = [temp.string rangeOfCharacterFromSet:charSet
                                                  options:NSBackwardsSearch];
     
     while (range.length != 0 && NSMaxRange(range) == temp.length) {
