@@ -8,6 +8,7 @@
 
 #import "CPSplashViewController.h"
 #import "CPLoginController.h"
+#import "CPConfigManager.h"
 
 @interface CPSplashViewController ()
 
@@ -24,6 +25,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupStyling];
+    self.signInButton.hidden = YES;
+    [[CPConfigManager sharedInstance] loadConfigWithCompletion:^(NSError *error) {
+        // TODO: display error
+        if (!error) {
+            [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                self.signInButton.hidden = NO;
+            } completion:nil];
+        }
+    }];
 }
 
 - (void)viewDidAppear:(BOOL)animated

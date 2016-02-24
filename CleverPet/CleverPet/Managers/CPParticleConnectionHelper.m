@@ -9,10 +9,10 @@
 #import "CPParticleConnectionHelper.h"
 #import <SparkSetup/SparkSetup.h>
 
-NSString const * kParticleOrganizationName = @"particle_organization_name";
-NSString const * kParticleOrganizationSlug = @"particle_organization_slug";
-NSString const * kParticleProductName = @"particle_product_name";
-NSString const * kParticleProductSlug = @"particle_product_slug";
+NSString * const kParticleOrganizationName = @"particle_organization_name";
+NSString * const kParticleOrganizationSlug = @"particle_organization_slug";
+NSString * const kParticleProductName = @"particle_product_name";
+NSString * const kParticleProductSlug = @"particle_product_slug";
 
 @interface CPParticleConnectionHelper()<SparkSetupMainControllerDelegate>
 

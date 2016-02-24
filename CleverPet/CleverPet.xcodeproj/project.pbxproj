@@ -67,6 +67,7 @@
 		97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */; };
 		97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */; };
 		97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B071C75316F007F1383 /* CPPickerViewController.m */; };
+		97F7284E1C7E416A005E65C2 /* CPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F7284D1C7E416A005E65C2 /* CPConfigManager.m */; };
 		BCD1938D360A74B45F4482F4 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
@@ -170,6 +171,8 @@
 		97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CleverPet.m"; sourceTree = "<group>"; };
 		97EB7B061C75316F007F1383 /* CPPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPickerViewController.h; sourceTree = "<group>"; };
 		97EB7B071C75316F007F1383 /* CPPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPickerViewController.m; sourceTree = "<group>"; };
+		97F7284C1C7E416A005E65C2 /* CPConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPConfigManager.h; sourceTree = "<group>"; };
+		97F7284D1C7E416A005E65C2 /* CPConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPConfigManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,6 +344,8 @@
 				97EB7ABE1C72AAFB007F1383 /* CPLoginController.m */,
 				97CC44861C7BB6D8003C4258 /* CPParticleConnectionHelper.h */,
 				97CC44871C7BB6D8003C4258 /* CPParticleConnectionHelper.m */,
+				97F7284C1C7E416A005E65C2 /* CPConfigManager.h */,
+				97F7284D1C7E416A005E65C2 /* CPConfigManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -586,6 +591,7 @@
 				1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */,
 				1827A1A2D601B2388415D37D /* CPTileCollectionViewDataSource.m in Sources */,
 				1827A9098315281E1E57C652 /* CPTileSection.m in Sources */,
+				97F7284E1C7E416A005E65C2 /* CPConfigManager.m in Sources */,
 				1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */,
 				1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */,
 				97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */,
