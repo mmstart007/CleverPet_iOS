@@ -27,12 +27,7 @@
     _tile = tile;
     self.titleLabel.text = tile.title;
     
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//    paragraphStyle.alignment = NSTextAlignmentJustified;
-    NSMutableAttributedString *parsedBody = [tile.parsedBody mutableCopy];
-//    [parsedBody addAttributes:@{NSBaselineOffsetAttributeName: @0, NSParagraphStyleAttributeName:paragraphStyle} range:NSMakeRange(0, parsedBody.length)];
-    
-    self.bodyTextView.attributedText = parsedBody;
+    self.bodyTextView.attributedText = tile.parsedBody;
     
     self.cellImageViewHolder.hidden = !tile.image;
     self.cellImageView.image = tile.image;
