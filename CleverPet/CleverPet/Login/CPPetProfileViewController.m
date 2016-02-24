@@ -10,6 +10,7 @@
 #import "CPTextField.h"
 #import "CPGenderPickerViewController.h"
 #import "CPBreedPickerViewController.h"
+#import "CPLoginController.h"
 
 NSInteger const kNameFieldMinChars = 2;
 NSInteger const kNameFieldMaxChars = 10;
@@ -64,8 +65,8 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
     
     self.weightUnitSelector.tintColor = [UIColor appTextFieldPlaceholderColor];
-    [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appSignUpHeaderTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
-    [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appSignUpHeaderTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
+    [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
+    [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -91,7 +92,7 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.headerLabel.text = NSLocalizedString(@"Pet's Profile", @"Title text for pets profile");
     self.headerLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
-    self.headerLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.headerLabel.textColor = [UIColor appTitleTextColor];
     self.subCopyLabel.text = NSLocalizedString(@"Placeholder sub copy", @"Sub copy text for pets profile");
     self.subCopyLabel.font = [UIFont cpLightFontWithSize:kSubCopyFontSize italic:NO];
     self.subCopyLabel.textColor = [UIColor appSubCopyTextColor];
@@ -151,6 +152,8 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 - (IBAction)continueTapped:(id)sender
 {
     if ([self validateInput]) {
+        // TODO: bundle fields into dict
+        [[CPLoginController sharedInstance] setPendingUserInfo:@{}];
         [self performSegueWithIdentifier:@"setPetPhoto" sender:nil];
     }
 }

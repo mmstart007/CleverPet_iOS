@@ -1,0 +1,1 @@
+../../../../Spark-SDK_Internal/Pod/Classes/Helpers/EventSource.h

@@ -32,7 +32,7 @@ CGFloat const kCPTextFieldHorizontalInset = 10.f;
     self.layer.shadowRadius = 3;
     self.layer.shadowOffset = CGSizeMake(0.f, 1.f);
     
-    self.textColor = [UIColor appSignUpHeaderTextColor];
+    self.textColor = [UIColor appTitleTextColor];
     self.font = [UIFont cpLightFontWithSize:15.f italic:NO];
 }
 

@@ -53,7 +53,7 @@
 {
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.headerLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
-    self.headerLabel.textColor = [UIColor appSignUpHeaderTextColor];
+    self.headerLabel.textColor = [UIColor appTitleTextColor];
     self.forgotPasswordButton.titleLabel.font = [UIFont cpLightFontWithSize:12.f italic:NO];
     [self.forgotPasswordButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.signInButton.backgroundColor = [UIColor appLightTealColor];
