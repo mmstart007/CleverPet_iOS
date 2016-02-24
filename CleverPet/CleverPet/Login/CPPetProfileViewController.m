@@ -11,11 +11,7 @@
 #import "CPGenderPickerViewController.h"
 #import "CPBreedPickerViewController.h"
 #import "CPLoginController.h"
-
-NSInteger const kNameFieldMinChars = 2;
-NSInteger const kNameFieldMaxChars = 10;
-NSInteger const kFamilyNameFieldMinChars = 1;
-NSInteger const kFamilyNameFieldMaxChars = 35;
+#import "CPTextValidator.h"
 
 @interface CPPetProfileViewController ()<UITextFieldDelegate, CPGenderPickerViewDelegate, CPBreedPickerDelegate>
 
@@ -32,12 +28,10 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *weightUnitSelector;
 
 @property (nonatomic, strong) NSArray *textFields;
-@property (nonatomic, strong) NSCharacterSet *invalidNameCharacters;
-@property (nonatomic, strong) NSCharacterSet *invalidFamilyNameCharacters;
-@property (nonatomic, strong) NSCharacterSet *invalidNumericalCharacters;
 
 @property (nonatomic, strong) NSString *weightDescriptor;
 @property (nonatomic, strong) CPGenderPickerViewController *genderPicker;
+@property (nonatomic, strong) CPTextValidator *textValidator;
 
 @end
 
@@ -51,22 +45,12 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
     [self setupStyling];
     self.textFields = @[self.nameField, self.familyField, self.breedField, self.genderField, self.ageField, self.weightField];
     
-    NSMutableCharacterSet *alphaSet = [NSMutableCharacterSet alphanumericCharacterSet];
-    // alpha includes letter, numbers and marks, we want to remove marks
-    [alphaSet formIntersectionWithCharacterSet:[[NSCharacterSet nonBaseCharacterSet] invertedSet]];
-    self.invalidNameCharacters = [alphaSet invertedSet];
-    
-    // Family name additionally allows spaces
-    [alphaSet addCharactersInString:@" "];
-    [alphaSet formUnionWithCharacterSet:[NSCharacterSet punctuationCharacterSet]];
-    self.invalidFamilyNameCharacters = [alphaSet invertedSet];
-    
-    self.invalidNumericalCharacters = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
     self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
     
     self.weightUnitSelector.tintColor = [UIColor appTextFieldPlaceholderColor];
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
+    self.textValidator = [[CPTextValidator alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -170,19 +154,19 @@ NSInteger const kFamilyNameFieldMaxChars = 35;
 {
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if (textField == self.nameField) {
-        return [newString rangeOfCharacterFromSet:self.invalidNameCharacters options:NSCaseInsensitiveSearch].location == NSNotFound && [newString length] <= 10;
+        return [self.textValidator isValidPetNameText:newString];
     }
     
     if (textField == self.familyField) {
-        return [newString rangeOfCharacterFromSet:self.invalidFamilyNameCharacters options:NSCaseInsensitiveSearch].location == NSNotFound && [newString length] <= 35;
+        return [self.textValidator isValidFamilyNameText:newString];
     }
     
     if (textField == self.weightField) {
-        return [newString rangeOfCharacterFromSet:self.invalidNumericalCharacters options:NSCaseInsensitiveSearch].location == NSNotFound;
+        return [self.textValidator isValidPetWeightText:newString];
     }
     
     if (textField == self.ageField) {
-        return [newString rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet] options:NSCaseInsensitiveSearch].location == NSNotFound;
+        return [self.textValidator isValidPetAgeText:newString];
     }
     
     // Disable typing for gender/breed fields

@@ -8,6 +8,7 @@
 
 #import "CPProfileSettingsViewController.h"
 #import "CPTextField.h"
+#import "CPTextValidator.h"
 
 @interface CPProfileSettingsViewController ()<UITextFieldDelegate>
 
@@ -32,6 +33,8 @@
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *sectionTitles;
 
 @property (nonatomic, strong) NSString *weightDescriptor;
+@property (nonatomic, strong) NSArray *textFields;
+@property (nonatomic, strong) CPTextValidator *textValidator;
 
 @end
 
@@ -41,7 +44,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.textFields = @[self.nameField, self.familyNameField, self.breedField, self.weightField, self.genderField, self.neuteredField];
     self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
+    self.textValidator = [[CPTextValidator alloc] init];
     
     [self setupStyling];
 }
@@ -89,6 +94,17 @@
     self.logoutX.textColor = [UIColor redColor];
 }
 
+- (void)moveToNextTextFieldFrom:(UITextField*)textField
+{
+    NSUInteger index = [self.textFields indexOfObject:textField];
+    if (index+1 < [self.textFields count]) {
+        [self.textFields[index+1] becomeFirstResponder];
+    } else {
+        // TODO: tap continue?
+        [textField resignFirstResponder];
+    }
+}
+
 #pragma mark - IBActions
 - (IBAction)editImageTapped:(id)sender
 {
@@ -102,15 +118,31 @@
     self.weightDescriptor = newDescriptor;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - UITextFieldDelegate methods
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self moveToNextTextFieldFrom:textField];
+    return YES;
 }
-*/
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (textField == self.nameField) {
+        return [self.textValidator isValidPetNameText:newString];
+    }
+    
+    if (textField == self.familyNameField) {
+        return [self.textValidator isValidFamilyNameText:newString];
+    }
+    
+    if (textField == self.weightField) {
+        return [self.textValidator isValidPetWeightText:newString];
+    }
+    
+    // Disable typing for gender/breed fields
+    return NO;
+}
 
 #pragma mark - Keyboard
 - (void)keyboardWillShow:(NSNotification *)note
