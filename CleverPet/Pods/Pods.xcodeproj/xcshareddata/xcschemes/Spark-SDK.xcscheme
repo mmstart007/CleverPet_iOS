@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '379A351861D8E86F65E00E0D'
+               BlueprintIdentifier = '55CC268FB709036B75164F7F'
                BlueprintName = 'Spark-SDK'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libSpark-SDK.a'>

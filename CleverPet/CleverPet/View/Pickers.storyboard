@@ -133,12 +133,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3qN-O6-J78">
                                 <rect key="frame" x="0.0" y="174" width="320" height="290"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xkk-C9-KYK">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="xkk-C9-KYK" secondAttribute="height" multiplier="4:3" id="JVe-ri-q1A"/>
-                                        </constraints>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmt-Wb-4oC">
                                         <rect key="frame" x="0.0" y="240" width="320" height="50"/>
                                         <constraints>
@@ -149,14 +143,21 @@
                                             <action selector="swapPhotoTapped:" destination="BVO-30-aOl" eventType="touchUpInside" id="vHU-Cy-HNE"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UYg-kL-GV4" customClass="BABCropperView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="UYg-kL-GV4" secondAttribute="height" multiplier="4:3" id="4rH-YS-ZLu"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="lmt-Wb-4oC" firstAttribute="top" secondItem="xkk-C9-KYK" secondAttribute="bottom" id="3jE-BK-Njx"/>
+                                    <constraint firstItem="UYg-kL-GV4" firstAttribute="leading" secondItem="3qN-O6-J78" secondAttribute="leading" id="AUa-EL-QVS"/>
+                                    <constraint firstItem="lmt-Wb-4oC" firstAttribute="top" secondItem="UYg-kL-GV4" secondAttribute="bottom" id="DfN-bg-SOb"/>
                                     <constraint firstItem="lmt-Wb-4oC" firstAttribute="leading" secondItem="3qN-O6-J78" secondAttribute="leading" id="EvB-Yn-hd7"/>
-                                    <constraint firstItem="xkk-C9-KYK" firstAttribute="top" secondItem="3qN-O6-J78" secondAttribute="top" id="N1F-Zb-54P"/>
-                                    <constraint firstAttribute="trailing" secondItem="xkk-C9-KYK" secondAttribute="trailing" id="NQv-jY-pAp"/>
-                                    <constraint firstItem="xkk-C9-KYK" firstAttribute="leading" secondItem="3qN-O6-J78" secondAttribute="leading" id="Vcw-Pv-Zbw"/>
+                                    <constraint firstAttribute="trailing" secondItem="UYg-kL-GV4" secondAttribute="trailing" id="KGS-ZB-Uve"/>
+                                    <constraint firstItem="UYg-kL-GV4" firstAttribute="top" secondItem="3qN-O6-J78" secondAttribute="top" id="nrc-KA-fX4"/>
                                     <constraint firstAttribute="trailing" secondItem="lmt-Wb-4oC" secondAttribute="trailing" id="oyp-o9-7iq"/>
                                     <constraint firstAttribute="bottom" secondItem="lmt-Wb-4oC" secondAttribute="bottom" id="zw6-sM-YwQ"/>
                                 </constraints>
@@ -194,9 +195,9 @@
                     <size key="freeformSize" width="320" height="480"/>
                     <connections>
                         <outlet property="continueButton" destination="Qtl-Ca-brp" id="XlJ-te-gET"/>
+                        <outlet property="cropView" destination="UYg-kL-GV4" id="P9O-Dv-pZm"/>
                         <outlet property="headerLabel" destination="Qib-Ak-DQt" id="2ym-K6-k1e"/>
                         <outlet property="instructionLabel" destination="fcA-Wh-6Mf" id="4o5-lC-eWd"/>
-                        <outlet property="petImage" destination="xkk-C9-KYK" id="VnP-Bt-0bS"/>
                         <outlet property="swapImageButton" destination="lmt-Wb-4oC" id="EpW-BH-qoA"/>
                     </connections>
                 </viewController>
