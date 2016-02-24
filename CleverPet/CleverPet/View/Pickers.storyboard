@@ -125,22 +125,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload a photo of your dog and position it inside the silhouette below." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcA-Wh-6Mf">
-                                <rect key="frame" x="37" y="91" width="247" height="61"/>
+                                <rect key="frame" x="37" y="83" width="247" height="61"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3qN-O6-J78">
-                                <rect key="frame" x="0.0" y="182" width="320" height="180"/>
+                                <rect key="frame" x="0.0" y="174" width="320" height="290"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xkk-C9-KYK">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="xkk-C9-KYK" secondAttribute="height" multiplier="32:13" id="JVe-ri-q1A"/>
+                                            <constraint firstAttribute="width" secondItem="xkk-C9-KYK" secondAttribute="height" multiplier="4:3" id="JVe-ri-q1A"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmt-Wb-4oC">
-                                        <rect key="frame" x="0.0" y="130" width="320" height="50"/>
+                                        <rect key="frame" x="0.0" y="240" width="320" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="D33-r2-jUG"/>
                                         </constraints>
@@ -182,7 +182,7 @@
                             <constraint firstItem="3qN-O6-J78" firstAttribute="leading" secondItem="ne8-tN-wlq" secondAttribute="leading" id="OHI-aH-PVp"/>
                             <constraint firstItem="fcA-Wh-6Mf" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ne8-tN-wlq" secondAttribute="leading" constant="20" id="TKa-wz-x5u"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qib-Ak-DQt" secondAttribute="trailing" constant="20" id="TKb-dY-VPW"/>
-                            <constraint firstItem="fcA-Wh-6Mf" firstAttribute="top" secondItem="Qib-Ak-DQt" secondAttribute="bottom" constant="20" id="V67-oR-fs4"/>
+                            <constraint firstItem="fcA-Wh-6Mf" firstAttribute="top" secondItem="Qib-Ak-DQt" secondAttribute="bottom" constant="12" id="V67-oR-fs4"/>
                             <constraint firstItem="Qtl-Ca-brp" firstAttribute="leading" secondItem="ne8-tN-wlq" secondAttribute="leading" id="Ycc-au-GB3"/>
                             <constraint firstItem="3qN-O6-J78" firstAttribute="top" secondItem="fcA-Wh-6Mf" secondAttribute="bottom" constant="30" id="gZu-Uy-UhY"/>
                             <constraint firstAttribute="trailing" secondItem="Qtl-Ca-brp" secondAttribute="trailing" id="od7-Du-nyi"/>

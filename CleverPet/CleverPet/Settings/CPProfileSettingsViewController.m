@@ -51,6 +51,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    // TODO: populate fields from pet profile object
+    
     self.textFields = @[self.nameField, self.familyNameField, self.breedField, self.weightField, self.genderField, self.neuteredField];
     self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
     self.textValidator = [[CPTextValidator alloc] init];
@@ -215,7 +217,10 @@
 {
     if ([segue.destinationViewController isKindOfClass:[CPPetPhotoViewController class]])
     {
-        ((CPPetPhotoViewController*)segue.destinationViewController).delegate = self;
+        CPPetPhotoViewController *photoPicker = segue.destinationViewController;
+        photoPicker.delegate = self;
+        // TODO: pull image from pet profile object
+        photoPicker.selectedImage = self.petImage.image;
     }
 }
 
