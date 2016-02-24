@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#define DeclareColor(NAME) + (UIColor*)app##NAME##Color
+#define UIColorFromRGB(RGB) [UIColor colorWithRed:((RGB)>>16)/255.0 green:(((RGB)>>8)&0xFF)/255.0 blue:((RGB)&0xFF)/255.0 alpha:1.0]
+
 @interface UIColor(CleverPet)
 
 + (UIColor*)appGreenColor;
@@ -27,4 +30,8 @@
 + (UIColor*)appSubCopyTextColor;
 + (UIColor*)appTextFieldPlaceholderColor;
 
+DeclareColor(LightRed);
+DeclareColor(LightGreen);
+DeclareColor(LightOrange);
+DeclareColor(LightYellow);
 @end

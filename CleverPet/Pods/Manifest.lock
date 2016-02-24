@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
+  - AttributedMarkdown (0.9.2)
   - BABCropperView (0.4.6)
   - CHCSVParser (2.1.0)
   - GoogleAppUtilities (1.0.0):
@@ -39,6 +40,7 @@ PODS:
   - GoogleSymbolUtilities (1.0.3)
   - GoogleUtilities (1.0.1):
     - GoogleSymbolUtilities (~> 1.0)
+  - JSONModel (1.2.0)
   - NMRangeSlider (1.2.1)
   - OAStackView (1.0.1)
   - RBStoryboardLink (0.1.4)
@@ -61,9 +63,12 @@ PODS:
   - SparkSetup/Resources (0.3.3)
 
 DEPENDENCIES:
+  - AFNetworking
+  - AttributedMarkdown (from `https://github.com/dreamwieber/AttributedMarkdown.git`)
   - BABCropperView
   - CHCSVParser
   - GoogleIdentityToolkit
+  - JSONModel
   - NMRangeSlider
   - OAStackView
   - RBStoryboardLink
@@ -71,11 +76,19 @@ DEPENDENCIES:
   - SparkSetup
 
 EXTERNAL SOURCES:
+  AttributedMarkdown:
+    :git: https://github.com/dreamwieber/AttributedMarkdown.git
   Spark-SDK:
     :path: Spark-SDK_Internal
 
+CHECKOUT OPTIONS:
+  AttributedMarkdown:
+    :commit: 4aef3c80e0ffe6c7011c20c7f703ea56af774861
+    :git: https://github.com/dreamwieber/AttributedMarkdown.git
+
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  AttributedMarkdown: ac5060667280be8cc8ee33a46c73e4ec6b17ca1a
   BABCropperView: 908858c9fd17e9bb6d2446f3ae56172c14363974
   CHCSVParser: 3bcc7bdb72111a31222e95d57eacceefe4e537e8
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
@@ -86,6 +99,7 @@ SPEC CHECKSUMS:
   GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
+  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   NMRangeSlider: 317ded652431eb90501c8421d9cddc3930d891e6
   OAStackView: 95e7cb79cbea25c2342f496a44bdbe8bd4c8d510
   RBStoryboardLink: 0faae84aea6a5e8716c4469984d847d958c3fcb3

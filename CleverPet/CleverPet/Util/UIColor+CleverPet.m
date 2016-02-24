@@ -8,6 +8,12 @@
 
 #import "UIColor+CleverPet.h"
 
+#define UIColorFromRGB(RGB) [UIColor colorWithRed:((RGB)>>16)/255.0 green:(((RGB)>>8)&0xFF)/255.0 blue:((RGB)&0xFF)/255.0 alpha:1.0]
+#define DefineColor(NAME, RGB) + (UIColor*)app##NAME##Color\
+{\
+return UIColorFromRGB(RGB);\
+}
+
 @implementation UIColor(CleverPet)
 
 + (UIColor*)appGreenColor
@@ -78,4 +84,8 @@
     return [UIColor colorWithRed:197.0/255.0 green:197.0/255.0 blue:197.0/255.0 alpha:1.0];
 }
 
+DefineColor(LightRed, 0xfae5d6);
+DefineColor(LightGreen, 0xecf2dc);
+DefineColor(LightOrange, 0xf2c2a2);
+DefineColor(LightYellow, 0xf6dea0);
 @end
