@@ -101,12 +101,12 @@ NSString * const kLoginErrorKey = @"LoginError";
 - (UIViewController*)signInControllerWithAccount:(GITAccount *)account
 {
     // TODO: auto sign in with cached user
-    return [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"SignInStart"];
+    return [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"SignInStart"];
 }
 
 - (UIViewController *)legacySignInControllerWithEmail:(NSString *)email
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     CPSignInViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SignIn"];
     vc.email = email;
     return vc;
@@ -114,7 +114,7 @@ NSString * const kLoginErrorKey = @"LoginError";
 
 - (UIViewController *)legacySignUpControllerWithEmail:(NSString *)email
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
     CPSignUpViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"SignUp"];
     vc.email = email;
     return vc;
@@ -140,14 +140,60 @@ didFinishSignInWithToken:(NSString *)token
        account:(GITAccount *)account
          error:(NSError *)error
 {
+    BLOCK_SELF_REF_OUTSIDE();
     [[CPAppEngineCommunicationManager sharedInstance] loginWithUserId:account.localID completion:^(CPLoginResult result, NSError *error) {
-        NSInteger breakpoint = 0;
+        BLOCK_SELF_REF_INSIDE();
+        if (result == CPLoginResult_Failure) {
+            // TODO: nicer error handling
+            [[self getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
+        } else {
+            [self presentUIForLoginResult:result];
+        }
     }];
-    // TODO: attempt to sign in on server. If the account doesn't exist, we need to perform the setup flow(pet profile/device setup). If we already set the pet profile info, we just need to do device setup
-    // For now, always hit that flow
-//    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-//    userInfo[kLoginErrorKey] = error;
-//    [[NSNotificationCenter defaultCenter] postNotificationName:kLoginCompleteNotification object:nil userInfo:userInfo];
+}
+
+#pragma mark - UI flow
+- (void)presentUIForLoginResult:(CPLoginResult)result
+{
+    switch (result) {
+        case CPLoginResult_Failure:
+        {
+            NSAssert(NO, @"Login failure should have been handled already");
+            break;
+        }
+        case CPLoginResult_UserWithoutPetProfile:
+        {
+            UIViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"PetProfileSetup"];
+            [[self getRootNavController] pushViewController:vc animated:YES];
+            break;
+        }
+        case CPLoginResult_UserWithoutDevice:
+        {
+            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController]];
+            break;
+        }
+        case CPLoginResult_UserWithSetupCompleted:
+        {
+            // Swap our root controller for the main screen
+            UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScreen"];
+            UIWindow *window = [[UIApplication sharedApplication].delegate window];
+            [window setRootViewController:vc];
+            [window makeKeyAndVisible];
+            
+            CATransition *animation = [CATransition animation];
+            [animation setDuration:.3f];
+            [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+            [animation setType:kCATransitionFade];
+            [window.layer addAnimation:animation forKey:@"crossFade"];
+            break;
+        }
+    }
+}
+
+- (UINavigationController*)getRootNavController
+{
+    // TODO: handle when our root is not a nav controller
+    return (UINavigationController*)[[[UIApplication sharedApplication].delegate window] rootViewController];
 }
 
 @end

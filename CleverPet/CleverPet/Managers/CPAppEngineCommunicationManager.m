@@ -44,7 +44,7 @@ NSString * const kEmailKey = @"email";
 - (ASYNC)loginWithUserId:(NSString *)userId completion:(void (^)(CPLoginResult, NSError *))completion
 {
     //TEMP
-    if (completion) completion(CPLoginResult_NewUser, nil);
+    if (completion) completion(CPLoginResult_UserWithoutPetProfile, nil);
     // TODO: address this once login/creation have been unified. For now, try to login, and if it fails with no user, go creation
     NSDictionary *params = @{kEmailKey:userId};
 //    [self.sessionManager PUT:kUserLoginPath parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

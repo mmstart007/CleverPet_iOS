@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_NewUser, CPLoginResult_UserWithoutProfile, CPLoginResult_UserWithoutDevice, CPLoginResult_UserWithSetupCompleted, CPLoginResult_Failure};
+typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile, CPLoginResult_UserWithoutDevice, CPLoginResult_UserWithSetupCompleted, CPLoginResult_Failure};
 
 @interface CPAppEngineCommunicationManager : NSObject
 

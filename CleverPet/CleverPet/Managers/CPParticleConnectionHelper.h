@@ -14,6 +14,6 @@
 
 - (void)applyConfig:(NSDictionary *)config;
 - (void)setAccessToken:(NSDictionary*)tokenInfo completion:(void (^)(NSError *error))completion;
-- (void)presentSetupControllerOnController:(UIViewController*)controller;
+- (void)presentSetupControllerOnController:(UINavigationController*)controller;
 
 @end

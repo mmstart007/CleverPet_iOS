@@ -87,7 +87,7 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
     [[SparkCloud sharedInstance] loginWithAccessToken:tokenInfo completion:completion];
 }
 
-- (void)presentSetupControllerOnController:(UIViewController *)controller
+- (void)presentSetupControllerOnController:(UINavigationController *)controller
 {
     [self setupCustomAppearance];
     SparkSetupMainController *setupController = [[SparkSetupMainController alloc] init];
@@ -97,7 +97,7 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
 
 - (void)sparkSetupViewController:(SparkSetupMainController *)controller didFinishWithResult:(SparkSetupMainControllerResult)result device:(SparkDevice *)device
 {
-    // TODO: Display error if we failed, and transition to dash if we succeeded
+    // TODO: Display error, handle cancellation, etc
 }
 
 @end

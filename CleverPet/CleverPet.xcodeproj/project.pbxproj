@@ -26,6 +26,7 @@
 		9704E2FE1C7D2799004874A7 /* CPSharedUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2FD1C7D2799004874A7 /* CPSharedUtils.m */; };
 		9704E3041C7D2D4D004874A7 /* Pickers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9704E3031C7D2D4D004874A7 /* Pickers.storyboard */; };
 		9704E3071C7D34BD004874A7 /* CPPetPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E3061C7D34BD004874A7 /* CPPetPhotoViewController.m */; };
+		97C8AA951C7E6AE500BABD4D /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C8AA941C7E6AE500BABD4D /* Login.storyboard */; };
 		97CC44561C754B67003C4258 /* breeds.csv in Resources */ = {isa = PBXBuildFile; fileRef = 97CC44551C754B67003C4258 /* breeds.csv */; };
 		97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */; };
 		97CC445D1C7552C3003C4258 /* CPSimpleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC445B1C7552C3003C4258 /* CPSimpleTableViewCell.m */; };
@@ -110,6 +111,7 @@
 		9704E3031C7D2D4D004874A7 /* Pickers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pickers.storyboard; sourceTree = "<group>"; };
 		9704E3051C7D32D2004874A7 /* CPPetPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetPhotoViewController.h; sourceTree = "<group>"; };
 		9704E3061C7D34BD004874A7 /* CPPetPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetPhotoViewController.m; sourceTree = "<group>"; };
+		97C8AA941C7E6AE500BABD4D /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		97CC44551C754B67003C4258 /* breeds.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = breeds.csv; sourceTree = "<group>"; };
 		97CC44571C754E93003C4258 /* CPBreedPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBreedPickerViewController.h; sourceTree = "<group>"; };
 		97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBreedPickerViewController.m; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 				97EB7AC11C73A97D007F1383 /* CPSignUpViewController.m */,
 				97EB7AFA1C73F282007F1383 /* CPPetProfileViewController.h */,
 				97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */,
+				97C8AA941C7E6AE500BABD4D /* Login.storyboard */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 				97EB7AD61C73B826007F1383 /* Omnes-Black.otf in Resources */,
 				97EB7AE21C73B826007F1383 /* Omnes-Regular.otf in Resources */,
 				97CC445E1C7552C3003C4258 /* CPSimpleTableViewCell.xib in Resources */,
+				97C8AA951C7E6AE500BABD4D /* Login.storyboard in Resources */,
 				9704E3041C7D2D4D004874A7 /* Pickers.storyboard in Resources */,
 				0D36AA911C7243D600349D03 /* Main.storyboard in Resources */,
 				0DD4BD311C739426006B3725 /* CPTileViewCell.xib in Resources */,
