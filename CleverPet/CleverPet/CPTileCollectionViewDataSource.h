@@ -10,7 +10,7 @@
 @class CPTileCollectionViewDataSource;
 
 @protocol CPTileCollectionViewDataSourceScrollDelegate <NSObject>
-- (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible;
+- (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible headerStatsFade:(CGFloat)headerStatsFade;
 @end
 
 @interface CPTileCollectionViewDataSource : NSObject<UITableViewDataSource, UITableViewDelegate>

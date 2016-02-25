@@ -23,6 +23,8 @@
 		0DE13B4A1C7EA52300648834 /* CPTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B491C7EA52300648834 /* CPTableHeaderView.m */; };
 		0DE13B591C7ECE3400648834 /* CPMainScreenHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DE13B581C7ECE3400648834 /* CPMainScreenHeaderView.xib */; };
 		0DE13B5C1C7ECF3B00648834 /* CPMainScreenHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B5B1C7ECF3B00648834 /* CPMainScreenHeaderView.m */; };
+		0DE13B5F1C7EDF7900648834 /* CPMainScreenStatsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B5E1C7EDF7900648834 /* CPMainScreenStatsHeaderView.m */; };
+		0DE13B611C7EDFAC00648834 /* CPMainScreenStatsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DE13B601C7EDFAC00648834 /* CPMainScreenStatsHeaderView.xib */; };
 		1827A1A2D601B2388415D37D /* CPTileCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A89D02ED75C767F6D453 /* CPTileCollectionViewDataSource.m */; };
 		1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AD320F0C4F8FD18E36D8 /* CPTile.m */; };
 		1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A7B9850CB706EB4171D0 /* CPMainScreenViewController.m */; };
@@ -105,6 +107,9 @@
 		0DE13B581C7ECE3400648834 /* CPMainScreenHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPMainScreenHeaderView.xib; sourceTree = "<group>"; };
 		0DE13B5A1C7ECF3B00648834 /* CPMainScreenHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainScreenHeaderView.h; sourceTree = "<group>"; };
 		0DE13B5B1C7ECF3B00648834 /* CPMainScreenHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainScreenHeaderView.m; sourceTree = "<group>"; };
+		0DE13B5D1C7EDF7900648834 /* CPMainScreenStatsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainScreenStatsHeaderView.h; sourceTree = "<group>"; };
+		0DE13B5E1C7EDF7900648834 /* CPMainScreenStatsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainScreenStatsHeaderView.m; sourceTree = "<group>"; };
+		0DE13B601C7EDFAC00648834 /* CPMainScreenStatsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPMainScreenStatsHeaderView.xib; sourceTree = "<group>"; };
 		12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1827A1BFAE0043C9D902D1AC /* CPTileViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileViewCell.h; sourceTree = "<group>"; };
 		1827A50A4A6169E21622727F /* CPTileSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileSection.m; sourceTree = "<group>"; };
@@ -439,6 +444,9 @@
 				0DE13B581C7ECE3400648834 /* CPMainScreenHeaderView.xib */,
 				0DE13B5A1C7ECF3B00648834 /* CPMainScreenHeaderView.h */,
 				0DE13B5B1C7ECF3B00648834 /* CPMainScreenHeaderView.m */,
+				0DE13B5D1C7EDF7900648834 /* CPMainScreenStatsHeaderView.h */,
+				0DE13B5E1C7EDF7900648834 /* CPMainScreenStatsHeaderView.m */,
+				0DE13B601C7EDFAC00648834 /* CPMainScreenStatsHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -533,6 +541,7 @@
 				97CC445E1C7552C3003C4258 /* CPSimpleTableViewCell.xib in Resources */,
 				9704E3041C7D2D4D004874A7 /* Pickers.storyboard in Resources */,
 				0D36AA911C7243D600349D03 /* Main.storyboard in Resources */,
+				0DE13B611C7EDFAC00648834 /* CPMainScreenStatsHeaderView.xib in Resources */,
 				0DD4BD311C739426006B3725 /* CPTileViewCell.xib in Resources */,
 				97EB7AE01C73B826007F1383 /* Omnes-Medium.otf in Resources */,
 				97EB7ADD1C73B826007F1383 /* Omnes-HairlineItalic.otf in Resources */,
@@ -626,6 +635,7 @@
 				1827A1A2D601B2388415D37D /* CPTileCollectionViewDataSource.m in Sources */,
 				0DE13B5C1C7ECF3B00648834 /* CPMainScreenHeaderView.m in Sources */,
 				1827A9098315281E1E57C652 /* CPTileSection.m in Sources */,
+				0DE13B5F1C7EDF7900648834 /* CPMainScreenStatsHeaderView.m in Sources */,
 				1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */,
 				0DE13B4A1C7EA52300648834 /* CPTableHeaderView.m in Sources */,
 				1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */,

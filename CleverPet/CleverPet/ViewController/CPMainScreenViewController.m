@@ -8,6 +8,7 @@
 #import "CPTile.h"
 #import "CPPetStatsView.h"
 #import "CPMainScreenHeaderView.h"
+#import "CPMainScreenStatsHeaderView.h"
 #import "UIView+CPShadowEffect.h"
 
 @interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceScrollDelegate>
@@ -17,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property (strong, nonatomic) CPMainScreenHeaderView *mainScreenHeaderView;
+@property (strong, nonatomic) CPMainScreenStatsHeaderView *mainScreenStatsHeaderView;
 @end
 
 @implementation CPMainScreenViewController {
@@ -31,9 +33,13 @@
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
 
     self.mainScreenHeaderView = [CPMainScreenHeaderView loadFromNib];
+    self.mainScreenStatsHeaderView = [CPMainScreenStatsHeaderView loadFromNib];
     
     [self.headerView addSubview:self.mainScreenHeaderView];
+    [self.headerView addSubview:self.mainScreenStatsHeaderView];
     self.headerView.clipsToBounds = NO;
+
+    self.mainScreenStatsHeaderView.alpha = 0;
     
     CPTileCollectionViewDataSource *dataSource = [[CPTileCollectionViewDataSource alloc] initWithCollectionView:self.tableView];
     dataSource.scrollDelegate = self;
@@ -51,13 +57,16 @@
     }
 }
 
-- (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible
+- (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible headerStatsFade:(CGFloat)headerStatsFade
 {
     if (!headerPhotoVisible) {
-        [self.headerView.subviews[0] applyCleverPetShadow];
+        [self.headerView applyCleverPetShadow];
     } else {
-        [self.headerView.subviews[0] removeCleverPetShadow];
+        [self.headerView removeCleverPetShadow];
     }
+    
+    self.mainScreenStatsHeaderView.alpha = headerStatsFade;
+    self.mainScreenHeaderView.alpha = 1 - headerStatsFade;
 }
 
 - (void)addTileForDate:(NSDate *)date

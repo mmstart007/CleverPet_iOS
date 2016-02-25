@@ -20,6 +20,9 @@
 @property (weak, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) CPTileViewCell *cell;
 @property (strong, nonatomic) CPTableHeaderView *tableHeaderView;
+
+@property (assign, nonatomic) CGFloat headerImageHeight;
+@property (assign, nonatomic) CGFloat headerStatsHeight;
 @end
 
 @implementation CPTileCollectionViewDataSource {
@@ -35,6 +38,9 @@
         
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
         CGFloat height = width / (640.0/262.0);
+        
+        self.headerImageHeight = height;
+        self.headerStatsHeight = 140;
         
         self.tableHeaderView = [[CPTableHeaderView alloc] initWithImage:[UIImage imageNamed:@"vallhund"] frame:CGRectMake(0, 0, width, height)];
 
@@ -53,7 +59,11 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.scrollDelegate dataSource:self headerPhotoVisible:[self.tableHeaderView scrollViewDidScroll:scrollView]];
+    [self.tableHeaderView scrollViewDidScroll:scrollView];
+        
+    CGFloat fade = MIN(1, MAX(0, scrollView.contentOffset.y - self.headerImageHeight) / self.headerStatsHeight);
+    
+    [self.scrollDelegate dataSource:self headerPhotoVisible:scrollView.contentOffset.y < self.headerImageHeight - 4 headerStatsFade:fade];
 }
 
 - (void)addTile:(CPTile *)tile {
@@ -112,7 +122,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == HEADER_VIEW_SECTION) {
-        return 140;
+        return self.headerStatsHeight;
     } else {
         return 50;
     }
