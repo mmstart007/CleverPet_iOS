@@ -52,6 +52,8 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 
 - (ASYNC)loginWithUser:(GITAccount*)userAccount completion:(void (^)(CPLoginResult, NSError *))completion
 {
+    NSParameterAssert(userAccount);
+    NSParameterAssert(userAccount.localID);
     // TODO: address this once login/creation have been unified. For now, try to login, and if it fails with no user, go creation
     NSDictionary *params = @{kEmailKey:userAccount.localID};
     BLOCK_SELF_REF_OUTSIDE();

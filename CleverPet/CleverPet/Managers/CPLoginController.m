@@ -61,6 +61,7 @@ NSString * const kLoginErrorKey = @"LoginError";
 
 - (void)completeSignUpWithPetImage:(UIImage *)image completion:(void (^)(NSError *))completion
 {
+    // TODO: image storage
     // TODO: send user info up to the server. For now just launch the device claim flow
     // TODO: verify we get back everything we need to create an access token(expires_in, access_token, token_type:bearer)
     [[CPParticleConnectionHelper sharedInstance] setAccessToken:@{} completion:completion];
@@ -140,16 +141,20 @@ didFinishSignInWithToken:(NSString *)token
        account:(GITAccount *)account
          error:(NSError *)error
 {
-    BLOCK_SELF_REF_OUTSIDE();
-    [[CPAppEngineCommunicationManager sharedInstance] loginWithUser:account completion:^(CPLoginResult result, NSError *error) {
-        BLOCK_SELF_REF_INSIDE();
-        if (result == CPLoginResult_Failure) {
-            // TODO: nicer error handling
-            [[self getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
-        } else {
-            [self presentUIForLoginResult:result];
-        }
-    }];
+    if (error) {
+        [[self getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
+    } else {
+        BLOCK_SELF_REF_OUTSIDE();
+        [[CPAppEngineCommunicationManager sharedInstance] loginWithUser:account completion:^(CPLoginResult result, NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            if (result == CPLoginResult_Failure) {
+                // TODO: nicer error handling
+                [[self getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
+            } else {
+                [self presentUIForLoginResult:result];
+            }
+        }];
+    }
 }
 
 #pragma mark - UI flow

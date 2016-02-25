@@ -71,6 +71,7 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
     customization.boldTextFontName = @"Omnes-Bold";
     customization.headerTextFontName = @"Omnes-Light";
     customization.disableLogOutOption = YES;
+    customization.networkNamePrefix = @"Clever";
 }
 
 - (void)applyConfig:(NSDictionary *)config
