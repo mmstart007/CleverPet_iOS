@@ -54,7 +54,7 @@
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
     self.textValidator = [[CPTextValidator alloc] init];
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    self.dateFormatter.dateFormat = @"Y-m-d";
+    self.dateFormatter.dateFormat = @"Y-M-d";
 }
 
 - (void)viewDidAppear:(BOOL)animated

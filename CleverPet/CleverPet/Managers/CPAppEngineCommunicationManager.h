@@ -19,6 +19,6 @@ typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile,
 - (void)applyConfig:(NSDictionary*)configData;
 
 - (ASYNC)loginWithUser:(GITAccount*)userAccount completion:(void (^)(CPLoginResult result, NSError *error))completion;
-- (ASYNC)updatePetProfileWithInfo:(NSDictionary *)petInfo completion:(void (^)(NSError *))completion;
+- (ASYNC)createPetProfileWithInfo:(NSDictionary *)petInfo completion:(void (^)(NSString *petId, NSError *))completion;
 
 @end

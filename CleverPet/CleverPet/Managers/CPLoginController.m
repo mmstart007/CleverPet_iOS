@@ -12,6 +12,7 @@
 #import "CPSignUpViewController.h"
 #import "CPParticleConnectionHelper.h"
 #import "CPAppEngineCommunicationManager.h"
+#import "CPFileUtils.h"
 
 NSString * const kLoginCompleteNotification = @"NOTE_LoginComplete";
 NSString * const kLoginErrorKey = @"LoginError";
@@ -64,12 +65,14 @@ NSString * const kLoginErrorKey = @"LoginError";
     // TODO: image storage
     // TODO: verification
     BLOCK_SELF_REF_OUTSIDE();
-    [[CPAppEngineCommunicationManager sharedInstance] updatePetProfileWithInfo:self.userInfo completion:^(NSError *error) {
+    [[CPAppEngineCommunicationManager sharedInstance] createPetProfileWithInfo:self.userInfo completion:^(NSString *petId, NSError *error) {
         BLOCK_SELF_REF_INSIDE();
         if (error) {
             [[self getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
         } else {
-            [self presentUIForLoginResult:CPLoginResult_UserWithoutDevice];
+            [CPFileUtils saveImage:image forPet:petId];
+            // TODO: bring back UserWithoutDevice state
+            [self presentUIForLoginResult:CPLoginResult_UserWithSetupCompleted];
         }
     }];
 }
