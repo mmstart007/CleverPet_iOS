@@ -7,11 +7,16 @@
 #import "CPTileCollectionViewDataSource.h"
 #import "CPTile.h"
 #import "CPPetStatsView.h"
+#import "CPMainScreenHeaderView.h"
+#import "UIView+CPShadowEffect.h"
 
-@interface CPMainScreenViewController () <UICollectionViewDelegate>
+@interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceScrollDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CPTileCollectionViewDataSource *dataSource;
 @property (strong, nonatomic) CPPetStatsView *petStatsView;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+
+@property (strong, nonatomic) CPMainScreenHeaderView *mainScreenHeaderView;
 @end
 
 @implementation CPMainScreenViewController {
@@ -25,7 +30,13 @@
     self.tableView.backgroundView.backgroundColor = [UIColor appBackgroundColor];
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
 
+    self.mainScreenHeaderView = [CPMainScreenHeaderView loadFromNib];
+    
+    [self.headerView addSubview:self.mainScreenHeaderView];
+    self.headerView.clipsToBounds = NO;
+    
     CPTileCollectionViewDataSource *dataSource = [[CPTileCollectionViewDataSource alloc] initWithCollectionView:self.tableView];
+    dataSource.scrollDelegate = self;
 
     self.dataSource = dataSource;
     self.tableView.delegate = dataSource;
@@ -34,9 +45,18 @@
     [dataSource postInit];
     
     NSDate *startDate = [NSDate date];
-    for (NSUInteger i = 0; i < 1000; i++) {
+    for (NSUInteger i = 0; i < 100; i++) {
         NSDate *date = [startDate dateByAddingTimeInterval:-60.0 * i];
         [self addTileForDate:date];
+    }
+}
+
+- (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible
+{
+    if (!headerPhotoVisible) {
+        [self.headerView.subviews[0] applyCleverPetShadow];
+    } else {
+        [self.headerView.subviews[0] removeCleverPetShadow];
     }
 }
 
@@ -44,17 +64,28 @@
 {
     CPTile *tile = [[CPTile alloc] init];
     tile.date = date;
-    tile.title = @"Hey it's a title.";
     
     switch (arc4random_uniform(3)) {
         case 0:
-            tile.body = [NSString stringWithFormat:@"%@ Hey this is my *message body*! *Bacon* ipsum dolor amet *spare ribs* drumstick short ribs ham, shank hamburger ham hock leberkas tri-tip pig doner kielbasa bresaola fatback. Spare ribs landjaeger shoulder venison, pork belly short ribs jerky pastrami pork hamburger pork loin. Alcatra beef ribeye prosciutto rump. Turducken drumstick salami capicola pork chop jerky beef bresaola biltong picanha shoulder hamburger pork short loin. Filet mignon pastrami meatloaf tongue. Shank sirloin salami biltong jerky shoulder chicken corned beef, pastrami tongue sausage beef ribs chuck pork kielbasa.", tile.date];
+            tile.title = @"Let's try CleverPet!";
             break;
         case 1:
-            tile.body = [NSString stringWithFormat:@"Hey this is my *message body*! %@", tile.date];
+            tile.title = @"Get your dog ready!";
             break;
         case 2:
-            tile.body = [NSString stringWithFormat:@"- Make sure your dog is around\n- Make sure your dog is hungry\n- Get your dog to eat!\n\n\n\n%@", tile.date];
+            tile.title = @"CleverPet is empty!";
+            break;
+    }
+    
+    switch (arc4random_uniform(3)) {
+        case 0:
+            tile.body = [NSString stringWithFormat:@"Hey this is my *message body*! *Bacon* ipsum dolor amet *spare ribs* drumstick short ribs ham, shank hamburger ham hock leberkas tri-tip pig doner kielbasa bresaola fatback. Spare ribs landjaeger shoulder venison, pork belly short ribs jerky pastrami pork hamburger pork loin. Alcatra beef ribeye prosciutto rump. Turducken drumstick salami capicola pork chop jerky beef bresaola biltong picanha shoulder hamburger pork short loin. Filet mignon pastrami meatloaf tongue. Shank sirloin salami biltong jerky shoulder chicken corned beef, pastrami tongue sausage beef ribs chuck pork kielbasa."];
+            break;
+        case 1:
+            tile.body = [NSString stringWithFormat:@"Hey this is my *message body*!"];
+            break;
+        case 2:
+            tile.body = [NSString stringWithFormat:@"- Make sure your dog is around\n- Make sure your dog is hungry\n- Get your dog to eat!"];
             break;
     }
     

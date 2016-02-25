@@ -16,4 +16,12 @@
     self.layer.shadowOpacity = 1;
     self.layer.shadowRadius = 1;
 }
+
+- (void)removeCleverPetShadow
+{
+    self.layer.shadowOpacity = 0;
+    self.layer.shadowColor = nil;
+    self.layer.shadowRadius = 0;
+    self.layer.shadowOffset = CGSizeZero;
+}
 @end

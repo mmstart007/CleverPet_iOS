@@ -8,6 +8,8 @@
 @interface CPSimpleDate : NSObject <NSObject>
 @property (assign, nonatomic) NSInteger year, month, day;
 
+- (instancetype)initWithDate:(NSDate *)date;
+
 - (NSComparisonResult)compareToSimpleDate:(CPSimpleDate *)other;
 + (NSComparisonResult(^)(CPSimpleDate *a, CPSimpleDate *b))comparator;
 @end

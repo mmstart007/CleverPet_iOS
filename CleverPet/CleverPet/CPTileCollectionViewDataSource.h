@@ -7,7 +7,15 @@
 
 @class CPTile;
 
+@class CPTileCollectionViewDataSource;
+
+@protocol CPTileCollectionViewDataSourceScrollDelegate <NSObject>
+- (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible;
+@end
+
 @interface CPTileCollectionViewDataSource : NSObject<UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) id<CPTileCollectionViewDataSourceScrollDelegate> scrollDelegate;
 
 - (instancetype)initWithCollectionView:(UITableView *)tableView;
 

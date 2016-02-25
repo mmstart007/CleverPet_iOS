@@ -12,12 +12,16 @@
 @property (strong, nonatomic) NSLayoutConstraint *heightLayoutConstraint, *bottomLayoutConstraint, *containerLayoutConstraint;
 
 @property (strong, nonatomic) UIView *containerView;
+
+@property (assign, nonatomic) CGFloat originalHeight;
 @end
 
 @implementation CPTableHeaderView
 - (instancetype)initWithImage:(UIImage *)image frame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
+        self.originalHeight = frame.size.height;
+        
         self.backgroundColor = [UIColor whiteColor];
         
         self.containerView = [[UIView alloc] init];
@@ -46,12 +50,14 @@
     return self;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (BOOL)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     self.containerLayoutConstraint.constant = scrollView.contentInset.top;
     CGFloat offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top);
     self.containerView.clipsToBounds = offsetY <= 0;
     self.bottomLayoutConstraint.constant = offsetY >= 0 ? 0 : -offsetY / 2;
     self.heightLayoutConstraint.constant = MAX(offsetY + scrollView.contentInset.top, scrollView.contentInset.top);
+    
+    return scrollView.contentOffset.y < (self.originalHeight - 4);
 }
 @end

@@ -1,5 +1,5 @@
 //
-//  UIView+CPShadowEffect.h
+//  CPMainScreenHeaderView.h
 //  CleverPet
 //
 //  Created by Daryl at Finger Foods on 2016-02-24.
@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (CPShadowEffect)
-- (void)applyCleverPetShadow;
-- (void)removeCleverPetShadow;
+@interface CPMainScreenHeaderView : UIView
++ (instancetype)loadFromNib;
 @end

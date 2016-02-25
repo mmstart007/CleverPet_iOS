@@ -21,6 +21,8 @@
 		0DE13B421C7E9CA300648834 /* CPMainTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DE13B411C7E9CA300648834 /* CPMainTableSectionHeader.xib */; };
 		0DE13B451C7E9CB100648834 /* CPMainTableSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B441C7E9CB100648834 /* CPMainTableSectionHeader.m */; };
 		0DE13B4A1C7EA52300648834 /* CPTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B491C7EA52300648834 /* CPTableHeaderView.m */; };
+		0DE13B591C7ECE3400648834 /* CPMainScreenHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DE13B581C7ECE3400648834 /* CPMainScreenHeaderView.xib */; };
+		0DE13B5C1C7ECF3B00648834 /* CPMainScreenHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B5B1C7ECF3B00648834 /* CPMainScreenHeaderView.m */; };
 		1827A1A2D601B2388415D37D /* CPTileCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A89D02ED75C767F6D453 /* CPTileCollectionViewDataSource.m */; };
 		1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AD320F0C4F8FD18E36D8 /* CPTile.m */; };
 		1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A7B9850CB706EB4171D0 /* CPMainScreenViewController.m */; };
@@ -100,6 +102,9 @@
 		0DE13B441C7E9CB100648834 /* CPMainTableSectionHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainTableSectionHeader.m; sourceTree = "<group>"; };
 		0DE13B481C7EA52300648834 /* CPTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTableHeaderView.h; sourceTree = "<group>"; };
 		0DE13B491C7EA52300648834 /* CPTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTableHeaderView.m; sourceTree = "<group>"; };
+		0DE13B581C7ECE3400648834 /* CPMainScreenHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPMainScreenHeaderView.xib; sourceTree = "<group>"; };
+		0DE13B5A1C7ECF3B00648834 /* CPMainScreenHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainScreenHeaderView.h; sourceTree = "<group>"; };
+		0DE13B5B1C7ECF3B00648834 /* CPMainScreenHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainScreenHeaderView.m; sourceTree = "<group>"; };
 		12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1827A1BFAE0043C9D902D1AC /* CPTileViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileViewCell.h; sourceTree = "<group>"; };
 		1827A50A4A6169E21622727F /* CPTileSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileSection.m; sourceTree = "<group>"; };
@@ -414,9 +419,6 @@
 				97CC44711C7699C7003C4258 /* CPFAQView.m */,
 				97CC44801C77CA30003C4258 /* CPHubSettingsButton.h */,
 				97CC44811C77CA30003C4258 /* CPHubSettingsButton.m */,
-				1827A57728C978A652728E14 /* CPTileViewCell.m */,
-				1827A1BFAE0043C9D902D1AC /* CPTileViewCell.h */,
-				0DD4BD301C739426006B3725 /* CPTileViewCell.xib */,
 				0D1F1C541C7E228900EAF336 /* CPPetStatsView.h */,
 				0D1F1C551C7E228900EAF336 /* CPPetStatsView.m */,
 				0D1F1C571C7E229500EAF336 /* CPPetStatsView.xib */,
@@ -434,6 +436,9 @@
 				1827A57728C978A652728E14 /* CPTileViewCell.m */,
 				0DD4BD301C739426006B3725 /* CPTileViewCell.xib */,
 				97CC445F1C76382A003C4258 /* Pickers */,
+				0DE13B581C7ECE3400648834 /* CPMainScreenHeaderView.xib */,
+				0DE13B5A1C7ECF3B00648834 /* CPMainScreenHeaderView.h */,
+				0DE13B5B1C7ECF3B00648834 /* CPMainScreenHeaderView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -535,6 +540,7 @@
 				97EB7AE71C73B826007F1383 /* Omnes-ThinItalic.otf in Resources */,
 				97EB7ADA1C73B826007F1383 /* Omnes-ExtraLight.otf in Resources */,
 				97EB7AD71C73B826007F1383 /* Omnes-BlackItalic.otf in Resources */,
+				0DE13B591C7ECE3400648834 /* CPMainScreenHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -618,6 +624,7 @@
 				1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */,
 				1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */,
 				1827A1A2D601B2388415D37D /* CPTileCollectionViewDataSource.m in Sources */,
+				0DE13B5C1C7ECF3B00648834 /* CPMainScreenHeaderView.m in Sources */,
 				1827A9098315281E1E57C652 /* CPTileSection.m in Sources */,
 				1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */,
 				0DE13B4A1C7EA52300648834 /* CPTableHeaderView.m in Sources */,

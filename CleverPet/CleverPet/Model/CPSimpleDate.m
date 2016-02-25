@@ -19,6 +19,27 @@ NSComparisonResult compareIntegers(NSInteger a, NSInteger b) {
 
 }
 
++ (NSCalendar *)calendar {
+    static NSCalendar *s_calendar = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_calendar = [NSCalendar autoupdatingCurrentCalendar];
+    });
+    
+    return s_calendar;
+}
+
+- (instancetype)initWithDate:(NSDate *)date {
+    if (self = [super init]) {
+        NSDateComponents *dateComponents = [[[self class] calendar] components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear fromDate:date];
+        self.day = dateComponents.day;
+        self.month = dateComponents.month;
+        self.year = dateComponents.year;
+    }
+    
+    return self;
+}
+
 - (NSComparisonResult)compareToSimpleDate:(CPSimpleDate *)other {
     NSComparisonResult result = compareIntegers(self.year, other.year);
     if (result == NSOrderedSame) {

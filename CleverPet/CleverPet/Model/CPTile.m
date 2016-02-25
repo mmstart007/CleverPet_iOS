@@ -21,6 +21,15 @@
     return _parsedBody;
 }
 
+- (CPSimpleDate<Ignore> *)simpleDate
+{
+    if (!_simpleDate) {
+        _simpleDate = [[CPSimpleDate alloc] initWithDate:self.date];
+    }
+    
+    return _simpleDate;
+}
+
 - (void)setBody:(NSString *)body {
     self.parsedBody = nil;
     _body = body;

@@ -53,7 +53,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.tableHeaderView scrollViewDidScroll:scrollView];
+    [self.scrollDelegate dataSource:self headerPhotoVisible:[self.tableHeaderView scrollViewDidScroll:scrollView]];
 }
 
 - (void)addTile:(CPTile *)tile {

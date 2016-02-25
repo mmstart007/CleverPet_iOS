@@ -68,7 +68,7 @@
     [self setTextColor:[UIColor whiteColor] onButton:self.rightButton];
     [self setTextColor:tileColor onButton:self.leftButton];
     
-    self.tagTimeStampLabel.text = [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date];
+    self.tagTimeStampLabel.text = [NSString stringWithFormat:@"Device Message | %@", [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
 }
 
 - (void)setTextColor:(UIColor *)color onButton:(UIButton *)button
