@@ -9,9 +9,8 @@
 
 typedef NS_ENUM(NSUInteger) {
     CPTTMessage,
-    CPTTVideo,
     CPTTReport,
-    CPTTGame,
+    CPTTChallenge,
     CPTTMac,
 } CPTileType;
 
@@ -24,7 +23,7 @@ typedef NS_ENUM(NSUInteger) {
 @property (strong, nonatomic) UIImage *image;
 @property (assign, nonatomic) CPTileType tileType;
 
-@property (assign, nonatomic) BOOL hasLeftButton, hasRightButton;
+@property (strong, nonatomic) NSString *affirmativeButtonText, *negativeButtonText;
 
 // Non-persisted properties
 @property (strong, nonatomic) NSAttributedString<Ignore>*parsedBody;

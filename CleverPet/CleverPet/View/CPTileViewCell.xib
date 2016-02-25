@@ -13,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="524" height="725"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GFj-N0-VFo" id="3td-Nu-00i">
-                <rect key="frame" x="0.0" y="0.0" width="524" height="725"/>
+                <rect key="frame" x="0.0" y="0.0" width="524" height="724.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0u6-1i-n8I">
@@ -115,11 +115,11 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="6Dk-NI-weI" userLabel="Buttons">
                                         <rect key="frame" x="0.0" y="679" width="521" height="30"/>
                                         <subviews>
-                                            <button contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZlO-nl-F4D">
+                                            <button contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZlO-nl-F4D">
                                                 <rect key="frame" x="0.0" y="0.0" width="261" height="30"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
-                                            <button contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p07-iq-B3X">
+                                            <button contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="p07-iq-B3X">
                                                 <rect key="frame" x="261" y="0.0" width="261" height="30"/>
                                                 <state key="normal" title="Button"/>
                                             </button>
@@ -166,14 +166,14 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
+                <outlet property="affirmativeButton" destination="p07-iq-B3X" id="NHb-UX-cB5"/>
                 <outlet property="backingView" destination="0u6-1i-n8I" id="8GI-IO-TcK"/>
                 <outlet property="bodyTextView" destination="bUp-6L-bG7" id="nsi-lv-n3E"/>
                 <outlet property="buttonHolder" destination="6Dk-NI-weI" id="XH7-pk-7yL"/>
                 <outlet property="cellImageView" destination="udP-f0-9IX" id="iLg-gE-ZLh"/>
                 <outlet property="cellImageViewHolder" destination="XGV-Yo-AgZ" id="KIS-fS-orX"/>
                 <outlet property="colorBarView" destination="GMI-nY-l0A" id="ydE-9H-ct0"/>
-                <outlet property="leftButton" destination="ZlO-nl-F4D" id="LDh-82-4v5"/>
-                <outlet property="rightButton" destination="p07-iq-B3X" id="lYD-Uc-Ssd"/>
+                <outlet property="negativeButton" destination="ZlO-nl-F4D" id="Nt6-JO-xab"/>
                 <outlet property="tagTimeStampLabel" destination="yNm-et-SFa" id="I2c-gY-QbK"/>
                 <outlet property="titleLabel" destination="n9r-4T-ZV3" id="gXc-oF-pl4"/>
             </connections>

@@ -54,7 +54,7 @@
     NSDate *startDate = [NSDate date];
     for (NSUInteger i = 0; i < 100; i++) {
         NSDate *date = [startDate dateByAddingTimeInterval:-60.0 * i];
-        [self addTileForDate:date];
+        [self addTileForDate:date index:i];
     }
 }
 
@@ -70,43 +70,31 @@
     self.mainScreenHeaderView.alpha = pow((1 - headerStatsFade), 2);
 }
 
-- (void)addTileForDate:(NSDate *)date
+- (void)addTileForDate:(NSDate *)date index:(NSUInteger)index
 {
     CPTile *tile = [[CPTile alloc] init];
     tile.date = date;
     
-    switch (arc4random_uniform(3)) {
-        case 0:
-            tile.title = @"Let's try CleverPet!";
+    tile.tileType = index % CPTTMac;
+    switch (tile.tileType) {
+        case CPTTChallenge:
+            tile.negativeButtonText = @"Restart";
+            tile.title = @"Challenge 9: The Challenging";
+            tile.body = @"Here's an example of a *Challenge* tile! Challenge your dog with this challenge!";
             break;
-        case 1:
-            tile.title = @"Get your dog ready!";
+        case CPTTMessage:
+            tile.title = @"Hands off, paws only!";
+            tile.affirmativeButtonText = @"Got it.";
+            tile.negativeButtonText = @"Explain.";
+            tile.body = @"Do not touch the touchpads for Bagel as he is learning.";
             break;
-        case 2:
-            tile.title = @"CleverPet is empty!";
+        case CPTTReport:
+            tile.affirmativeButtonText = @"Read";
+            tile.body = @"Here's a report for your dog!\n\n- He ate 57 kibble!\n- He did 32 plays!\n- His lifetime score increased by 200!";
             break;
-    }
-    
-    switch (arc4random_uniform(3)) {
-        case 0:
-            tile.body = [NSString stringWithFormat:@"Hey this is my *message body*! *Bacon* ipsum dolor amet *spare ribs* drumstick short ribs ham, shank hamburger ham hock leberkas tri-tip pig doner kielbasa bresaola fatback. Spare ribs landjaeger shoulder venison, pork belly short ribs jerky pastrami pork hamburger pork loin. Alcatra beef ribeye prosciutto rump. Turducken drumstick salami capicola pork chop jerky beef bresaola biltong picanha shoulder hamburger pork short loin. Filet mignon pastrami meatloaf tongue. Shank sirloin salami biltong jerky shoulder chicken corned beef, pastrami tongue sausage beef ribs chuck pork kielbasa."];
-            break;
-        case 1:
-            tile.body = [NSString stringWithFormat:@"Hey this is my *message body*!"];
-            break;
-        case 2:
-            tile.body = [NSString stringWithFormat:@"- Make sure your dog is around\n- Make sure your dog is hungry\n- Get your dog to eat!"];
+        case CPTTMac:
             break;
     }
-    
-    tile.tileType = arc4random_uniform(CPTTMac);
-    
-    if (arc4random_uniform(2)) {
-//        tile.image = [UIImage imageNamed:@"vallhund"];
-    }
-    
-    tile.hasLeftButton = arc4random_uniform(2) != 0;
-    tile.hasRightButton = arc4random_uniform(2) != 0;
     
     [self.dataSource addTile:tile];
 }
