@@ -14,7 +14,6 @@
         <!--Pet Profile View Controller-->
         <scene sceneID="EgD-KI-R79">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="K2p-az-vPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="PetProfileSetup" id="Tpf-WM-h2I" customClass="CPPetProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="R3k-L9-aVm"/>
@@ -244,9 +243,10 @@
                         <outlet property="subCopyLabel" destination="p2a-pI-4Fh" id="urt-Cv-o1j"/>
                         <outlet property="weightField" destination="bpR-1D-xrx" id="XGT-Iw-Xx7"/>
                         <outlet property="weightUnitSelector" destination="gd7-K5-WJf" id="GPN-TF-5ty"/>
-                        <segue destination="PsM-cF-91Y" kind="custom" identifier="setPetPhoto" customClass="RBStoryboardModalSegue" id="dOm-JW-ocI"/>
+                        <segue destination="PsM-cF-91Y" kind="custom" identifier="setPetPhoto" customClass="RBStoryboardPushSegue" id="dOm-JW-ocI"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K2p-az-vPf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="362" y="1287"/>
         </scene>
