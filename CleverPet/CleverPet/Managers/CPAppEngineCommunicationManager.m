@@ -118,7 +118,17 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             NSString *errorMessage = jsonResponse[kErrorKey];
             if (completion) completion(CPLoginResult_Failure, [self errorForMessage:errorMessage]);
         } else {
-            // TODO: Hey
+            // TODO: For now, iterate over animals and pull the first one that is not test_breed
+            NSArray *animals = jsonResponse[@"animals"];
+            for (NSDictionary *animal in animals) {
+                if ([animal[kBreedKey] isEqualToString:@"test_breed"]) {
+                    // Cram it into a model, and hold it for now
+                    
+                    // TEMP: Shortcutting device setup
+                    if (completion) completion(CPLoginResult_UserWithSetupCompleted, nil);
+                    return;
+                }
+            }
             if (completion) completion(CPLoginResult_UserWithoutPetProfile, nil);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
