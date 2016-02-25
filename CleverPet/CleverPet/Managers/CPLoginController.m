@@ -187,7 +187,7 @@ didFinishSignInWithToken:(NSString *)token
         case CPLoginResult_UserWithSetupCompleted:
         {
             // Swap our root controller for the main screen
-            UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScreen"];
+            UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScreenNav"];
             UIWindow *window = [[UIApplication sharedApplication].delegate window];
             [window setRootViewController:vc];
             [window makeKeyAndVisible];

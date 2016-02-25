@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lOe-QP-hca">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -117,6 +117,13 @@
                                     <constraint firstAttribute="height" constant="44" id="uz7-hZ-i1g"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shB-wE-uzr">
+                                <rect key="frame" x="518" y="20" width="57" height="44"/>
+                                <state key="normal" title="Settings"/>
+                                <connections>
+                                    <segue destination="2ah-pR-ex1" kind="custom" customClass="RBStoryboardPushSegue" id="mxY-5t-TCr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -124,11 +131,15 @@
                             <constraint firstItem="GBJ-0a-7Ra" firstAttribute="top" secondItem="COo-hD-jEx" secondAttribute="bottom" id="6iJ-UQ-e3f"/>
                             <constraint firstItem="2qS-l4-Sgx" firstAttribute="leading" secondItem="nfr-Zf-dyM" secondAttribute="leading" id="Gx1-X2-D8d"/>
                             <constraint firstAttribute="trailing" secondItem="2qS-l4-Sgx" secondAttribute="trailing" id="PAw-LN-d1J"/>
+                            <constraint firstItem="shB-wE-uzr" firstAttribute="centerY" secondItem="GBJ-0a-7Ra" secondAttribute="centerY" id="VTh-Rg-cC7"/>
                             <constraint firstAttribute="trailing" secondItem="GBJ-0a-7Ra" secondAttribute="trailing" id="ZCv-Oa-Epr"/>
+                            <constraint firstItem="shB-wE-uzr" firstAttribute="trailing" secondItem="GBJ-0a-7Ra" secondAttribute="trailing" constant="-25" id="aMb-mO-X7g"/>
                             <constraint firstItem="GBJ-0a-7Ra" firstAttribute="leading" secondItem="nfr-Zf-dyM" secondAttribute="leading" id="ceN-Ad-ZZ7"/>
                             <constraint firstItem="2qS-l4-Sgx" firstAttribute="top" secondItem="GBJ-0a-7Ra" secondAttribute="bottom" id="v6o-he-jYY"/>
+                            <constraint firstItem="shB-wE-uzr" firstAttribute="height" secondItem="GBJ-0a-7Ra" secondAttribute="height" id="vvw-pE-pke"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="h4a-OR-UPo"/>
                     <connections>
                         <outlet property="headerView" destination="GBJ-0a-7Ra" id="jbx-vc-j54"/>
                         <outlet property="tableView" destination="2qS-l4-Sgx" id="G5u-8A-sLf"/>
@@ -136,7 +147,44 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s90-9a-YcT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1126" y="461"/>
+            <point key="canvasLocation" x="362" y="1288"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rXn-Pp-WtL">
+            <objects>
+                <navigationController storyboardIdentifier="MainScreenNav" navigationBarHidden="YES" id="zDC-l0-S3W" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xv8-DC-84m">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="6GF-VJ-Q3o" kind="relationship" relationship="rootViewController" id="C6l-DG-e3x"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M6K-nO-9pU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-382" y="1288"/>
+        </scene>
+        <!--Storyboard Link-->
+        <scene sceneID="X0o-Fh-KKV">
+            <objects>
+                <viewController id="2ah-pR-ex1" customClass="RBStoryboardLink" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2nT-rZ-cd5"/>
+                        <viewControllerLayoutGuide type="bottom" id="ksG-ja-PId"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jBi-7d-lRJ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="storyboardName" value="Settings"/>
+                    </userDefinedRuntimeAttributes>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LeM-hC-yc3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1144" y="1288"/>
         </scene>
     </scenes>
 </document>
