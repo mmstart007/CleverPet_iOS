@@ -5,6 +5,7 @@
 
 @import UIKit;
 #import <JSONModel/JSONModel.h>
+#import "CPSimpleDate.h"
 
 typedef NS_ENUM(NSUInteger) {
     CPTTMessage,
@@ -27,4 +28,5 @@ typedef NS_ENUM(NSUInteger) {
 
 // Non-persisted properties
 @property (strong, nonatomic) NSAttributedString<Ignore>*parsedBody;
+@property (strong, nonatomic) CPSimpleDate<Ignore> *simpleDate;
 @end

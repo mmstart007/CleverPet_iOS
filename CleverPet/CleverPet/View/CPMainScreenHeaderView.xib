@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CPMainScreenHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iRv-7Y-zj8">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bagel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SgD-4O-VJM">
+                            <rect key="frame" x="278" y="11" width="43" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="bl5-uG-DJo"/>
+                        <constraint firstItem="SgD-4O-VJM" firstAttribute="centerX" secondItem="iRv-7Y-zj8" secondAttribute="centerX" id="elu-Dv-EEx"/>
+                        <constraint firstItem="SgD-4O-VJM" firstAttribute="centerY" secondItem="iRv-7Y-zj8" secondAttribute="centerY" id="t4y-UH-C2Z"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="iRv-7Y-zj8" secondAttribute="bottom" id="2Rx-Nn-VsH"/>
+                <constraint firstItem="iRv-7Y-zj8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="DLD-OJ-pWo"/>
+                <constraint firstAttribute="trailing" secondItem="iRv-7Y-zj8" secondAttribute="trailing" id="Wmj-0g-ZrD"/>
+                <constraint firstItem="iRv-7Y-zj8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qrB-eQ-CSw"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="centerLabel" destination="SgD-4O-VJM" id="aC0-Df-04x"/>
+            </connections>
+        </view>
+    </objects>
+</document>
