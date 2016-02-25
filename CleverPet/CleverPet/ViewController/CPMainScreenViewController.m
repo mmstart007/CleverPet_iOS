@@ -6,10 +6,12 @@
 #import "CPMainScreenViewController.h"
 #import "CPTileCollectionViewDataSource.h"
 #import "CPTile.h"
+#import "CPPetStatsView.h"
 
 @interface CPMainScreenViewController () <UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CPTileCollectionViewDataSource *dataSource;
+@property (strong, nonatomic) CPPetStatsView *petStatsView;
 @end
 
 @implementation CPMainScreenViewController {
@@ -28,6 +30,8 @@
     self.dataSource = dataSource;
     self.tableView.delegate = dataSource;
     self.tableView.dataSource = dataSource;
+    
+    [dataSource postInit];
     
     NSDate *startDate = [NSDate date];
     for (NSUInteger i = 0; i < 1000; i++) {

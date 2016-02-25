@@ -29,6 +29,8 @@
 + (UIColor*)appSubCopyTextColor;
 + (UIColor*)appTextFieldPlaceholderColor;
 
+
+DeclareColor(Divider);
 DeclareColor(LightRed);
 DeclareColor(LightGreen);
 DeclareColor(LightOrange);

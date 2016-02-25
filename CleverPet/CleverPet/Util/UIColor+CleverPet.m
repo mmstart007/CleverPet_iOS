@@ -83,6 +83,7 @@ return UIColorFromRGB(RGB);\
     return [UIColor colorWithRed:197.0/255.0 green:197.0/255.0 blue:197.0/255.0 alpha:1.0];
 }
 
+DefineColor(Divider, 0xe5e5e5);
 DefineColor(LightRed, 0xfae5d6);
 DefineColor(LightGreen, 0xecf2dc);
 DefineColor(LightOrange, 0xf2c2a2);

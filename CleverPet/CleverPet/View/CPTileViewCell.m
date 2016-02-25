@@ -6,6 +6,7 @@
 #import "CPTileViewCell.h"
 #import "CPTile.h"
 #import "CPTileTextFormatter.h"
+#import "UIView+CPShadowEffect.h"
 
 @interface CPTileViewCell ()
 @property (weak, nonatomic) IBOutlet UILabel *tagTimeStampLabel;
@@ -96,10 +97,7 @@
         button.titleLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
     }
     
-    self.backingView.layer.shadowColor = [UIColor colorWithWhite:.85 alpha:1].CGColor;
-    self.backingView.layer.shadowOffset = CGSizeMake(0, 2);
-    self.backingView.layer.shadowOpacity = 1;
-    self.backingView.layer.shadowRadius = 3;
+    [self.backingView applyCleverPetShadow];
     
     self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = [UIScreen mainScreen].scale;
@@ -109,16 +107,5 @@
 {
     self.titleLabel.text = nil;
     self.cellImageView.image = nil;
-}
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    CGRect shadowRect = self.backingView.bounds;
-    shadowRect.size.height = shadowRect.size.height / 2;
-    shadowRect.origin.y += shadowRect.size.height;
-    shadowRect.origin.x -= 5;
-    shadowRect.size.width += 10;
-    
-    self.backingView.layer.shadowPath = [UIBezierPath bezierPathWithRect:shadowRect].CGPath;
 }
 @end
