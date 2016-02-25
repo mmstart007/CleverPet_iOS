@@ -61,4 +61,19 @@ extern NSInteger const kNameFieldMaxChars;
 extern NSInteger const kFamilyNameFieldMinChars;
 extern NSInteger const kFamilyNameFieldMaxChars;
 
+#pragma mark - JSON keys
+extern NSString * const kErrorKey;
+// User keys
+extern NSString * const kEmailKey;
+extern NSString * const kFirstNameKey;
+extern NSString * const kLastNameKey;
+extern NSString * const kAuthTokenKey;
+// Pet keys
+extern NSString * const kNameKey;
+extern NSString * const kFamilyNameKey;
+extern NSString * const kGenderKey;
+extern NSString * const kBreedKey;
+extern NSString * const kWeightKey;
+extern NSString * const kDOBKey;
+
 #define ASYNC void

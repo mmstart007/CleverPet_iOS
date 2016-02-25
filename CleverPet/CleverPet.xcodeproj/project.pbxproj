@@ -22,10 +22,14 @@
 		1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */; };
 		1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A57728C978A652728E14 /* CPTileViewCell.m */; };
 		9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2F71C7D08A2004874A7 /* CPProfileSettingsViewController.m */; };
-		9704E2FB1C7D260E004874A7 /* CPTextValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2FA1C7D260E004874A7 /* CPTextValidator.m */; };
-		9704E2FE1C7D2799004874A7 /* CPSharedUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2FD1C7D2799004874A7 /* CPSharedUtils.m */; };
 		9704E3041C7D2D4D004874A7 /* Pickers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9704E3031C7D2D4D004874A7 /* Pickers.storyboard */; };
 		9704E3071C7D34BD004874A7 /* CPPetPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E3061C7D34BD004874A7 /* CPPetPhotoViewController.m */; };
+		971A1EEF1C7E94C500F7D5D7 /* CPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 971A1EE41C7E94C500F7D5D7 /* CPAppearance.m */; };
+		971A1EF01C7E94C500F7D5D7 /* CPSharedUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 971A1EE61C7E94C500F7D5D7 /* CPSharedUtils.m */; };
+		971A1EF11C7E94C500F7D5D7 /* CPTextValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 971A1EE81C7E94C500F7D5D7 /* CPTextValidator.m */; };
+		971A1EF21C7E94C500F7D5D7 /* UIColor+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 971A1EEA1C7E94C500F7D5D7 /* UIColor+CleverPet.m */; };
+		971A1EF31C7E94C500F7D5D7 /* UIFont+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 971A1EEC1C7E94C500F7D5D7 /* UIFont+CleverPet.m */; };
+		971A1EF41C7E94C500F7D5D7 /* UIViewController+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 971A1EEE1C7E94C500F7D5D7 /* UIViewController+CleverPet.m */; };
 		97C8AA951C7E6AE500BABD4D /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C8AA941C7E6AE500BABD4D /* Login.storyboard */; };
 		97CC44561C754B67003C4258 /* breeds.csv in Resources */ = {isa = PBXBuildFile; fileRef = 97CC44551C754B67003C4258 /* breeds.csv */; };
 		97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */; };
@@ -37,7 +41,6 @@
 		97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC446E1C7694DB003C4258 /* CPHubSettingsViewController.m */; };
 		97CC44721C7699C7003C4258 /* CPFAQView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44711C7699C7003C4258 /* CPFAQView.m */; };
 		97CC44821C77CA30003C4258 /* CPHubSettingsButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44811C77CA30003C4258 /* CPHubSettingsButton.m */; };
-		97CC44851C77E703003C4258 /* CPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44841C77E703003C4258 /* CPAppearance.m */; };
 		97CC44881C7BB6D8003C4258 /* CPParticleConnectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44871C7BB6D8003C4258 /* CPParticleConnectionHelper.m */; };
 		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
 		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
@@ -62,11 +65,8 @@
 		97EB7AE51C73B826007F1383 /* Omnes-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD31C73B826007F1383 /* Omnes-SemiboldItalic.otf */; };
 		97EB7AE61C73B826007F1383 /* Omnes-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD41C73B826007F1383 /* Omnes-Thin.otf */; };
 		97EB7AE71C73B826007F1383 /* Omnes-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */; };
-		97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */; };
-		97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */; };
 		97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AF61C73CA1B007F1383 /* CPTextField.m */; };
 		97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */; };
-		97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */; };
 		97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B071C75316F007F1383 /* CPPickerViewController.m */; };
 		97F7284E1C7E416A005E65C2 /* CPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F7284D1C7E416A005E65C2 /* CPConfigManager.m */; };
 		97F728511C7E588C005E65C2 /* CPAppEngineCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */; };
@@ -104,13 +104,21 @@
 		3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
 		9704E2F61C7D08A2004874A7 /* CPProfileSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPProfileSettingsViewController.h; sourceTree = "<group>"; };
 		9704E2F71C7D08A2004874A7 /* CPProfileSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPProfileSettingsViewController.m; sourceTree = "<group>"; };
-		9704E2F91C7D260E004874A7 /* CPTextValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTextValidator.h; sourceTree = "<group>"; };
-		9704E2FA1C7D260E004874A7 /* CPTextValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTextValidator.m; sourceTree = "<group>"; };
-		9704E2FC1C7D2799004874A7 /* CPSharedUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSharedUtils.h; sourceTree = "<group>"; };
-		9704E2FD1C7D2799004874A7 /* CPSharedUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSharedUtils.m; sourceTree = "<group>"; };
 		9704E3031C7D2D4D004874A7 /* Pickers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pickers.storyboard; sourceTree = "<group>"; };
 		9704E3051C7D32D2004874A7 /* CPPetPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetPhotoViewController.h; sourceTree = "<group>"; };
 		9704E3061C7D34BD004874A7 /* CPPetPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetPhotoViewController.m; sourceTree = "<group>"; };
+		971A1EE31C7E94C500F7D5D7 /* CPAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAppearance.h; sourceTree = "<group>"; };
+		971A1EE41C7E94C500F7D5D7 /* CPAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAppearance.m; sourceTree = "<group>"; };
+		971A1EE51C7E94C500F7D5D7 /* CPSharedUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSharedUtils.h; sourceTree = "<group>"; };
+		971A1EE61C7E94C500F7D5D7 /* CPSharedUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSharedUtils.m; sourceTree = "<group>"; };
+		971A1EE71C7E94C500F7D5D7 /* CPTextValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTextValidator.h; sourceTree = "<group>"; };
+		971A1EE81C7E94C500F7D5D7 /* CPTextValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTextValidator.m; sourceTree = "<group>"; };
+		971A1EE91C7E94C500F7D5D7 /* UIColor+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CleverPet.h"; sourceTree = "<group>"; };
+		971A1EEA1C7E94C500F7D5D7 /* UIColor+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CleverPet.m"; sourceTree = "<group>"; };
+		971A1EEB1C7E94C500F7D5D7 /* UIFont+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+CleverPet.h"; sourceTree = "<group>"; };
+		971A1EEC1C7E94C500F7D5D7 /* UIFont+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CleverPet.m"; sourceTree = "<group>"; };
+		971A1EED1C7E94C500F7D5D7 /* UIViewController+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CleverPet.h"; sourceTree = "<group>"; };
+		971A1EEE1C7E94C500F7D5D7 /* UIViewController+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CleverPet.m"; sourceTree = "<group>"; };
 		97C8AA941C7E6AE500BABD4D /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		97CC44551C754B67003C4258 /* breeds.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = breeds.csv; sourceTree = "<group>"; };
 		97CC44571C754E93003C4258 /* CPBreedPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBreedPickerViewController.h; sourceTree = "<group>"; };
@@ -129,8 +137,6 @@
 		97CC44711C7699C7003C4258 /* CPFAQView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFAQView.m; sourceTree = "<group>"; };
 		97CC44801C77CA30003C4258 /* CPHubSettingsButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHubSettingsButton.h; sourceTree = "<group>"; };
 		97CC44811C77CA30003C4258 /* CPHubSettingsButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHubSettingsButton.m; sourceTree = "<group>"; };
-		97CC44831C77E703003C4258 /* CPAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAppearance.h; sourceTree = "<group>"; };
-		97CC44841C77E703003C4258 /* CPAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAppearance.m; sourceTree = "<group>"; };
 		97CC44861C7BB6D8003C4258 /* CPParticleConnectionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPParticleConnectionHelper.h; sourceTree = "<group>"; };
 		97CC44871C7BB6D8003C4258 /* CPParticleConnectionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPParticleConnectionHelper.m; sourceTree = "<group>"; };
 		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
@@ -161,17 +167,11 @@
 		97EB7AD31C73B826007F1383 /* Omnes-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		97EB7AD41C73B826007F1383 /* Omnes-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-Thin.otf"; sourceTree = "<group>"; };
 		97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Omnes-ThinItalic.otf"; sourceTree = "<group>"; };
-		97EB7AE91C73B858007F1383 /* UIFont+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+CleverPet.h"; sourceTree = "<group>"; };
-		97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+CleverPet.m"; sourceTree = "<group>"; };
-		97EB7AEF1C73BEA9007F1383 /* UIColor+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CleverPet.h"; sourceTree = "<group>"; };
-		97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CleverPet.m"; sourceTree = "<group>"; };
 		97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CleverPet-Prefix.pch"; sourceTree = "<group>"; };
 		97EB7AF51C73CA1B007F1383 /* CPTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTextField.h; sourceTree = "<group>"; };
 		97EB7AF61C73CA1B007F1383 /* CPTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTextField.m; sourceTree = "<group>"; };
 		97EB7AFA1C73F282007F1383 /* CPPetProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetProfileViewController.h; sourceTree = "<group>"; };
 		97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetProfileViewController.m; sourceTree = "<group>"; };
-		97EB7B001C7508E1007F1383 /* UIViewController+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CleverPet.h"; sourceTree = "<group>"; };
-		97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CleverPet.m"; sourceTree = "<group>"; };
 		97EB7B061C75316F007F1383 /* CPPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPickerViewController.h; sourceTree = "<group>"; };
 		97EB7B071C75316F007F1383 /* CPPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPickerViewController.m; sourceTree = "<group>"; };
 		97F7284C1C7E416A005E65C2 /* CPConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPConfigManager.h; sourceTree = "<group>"; };
@@ -215,7 +215,6 @@
 			children = (
 				97CC44661C7669B3003C4258 /* Settings */,
 				97CC44541C754B67003C4258 /* Resources */,
-				97EB7AE81C73B833007F1383 /* Util */,
 				97EB7AC31C73B826007F1383 /* Font */,
 				97EB7ABC1C72AAE3007F1383 /* Managers */,
 				974868B11C725A990031BEEF /* Login */,
@@ -271,8 +270,20 @@
 		1827A9E78952C5B4B2C50430 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				971A1EE31C7E94C500F7D5D7 /* CPAppearance.h */,
+				971A1EE41C7E94C500F7D5D7 /* CPAppearance.m */,
+				971A1EE51C7E94C500F7D5D7 /* CPSharedUtils.h */,
+				971A1EE61C7E94C500F7D5D7 /* CPSharedUtils.m */,
+				971A1EE71C7E94C500F7D5D7 /* CPTextValidator.h */,
+				971A1EE81C7E94C500F7D5D7 /* CPTextValidator.m */,
 				0D8AC9851C7CEACD0096F339 /* CPTileTextFormatter.h */,
 				0D8AC9861C7CEACD0096F339 /* CPTileTextFormatter.m */,
+				971A1EE91C7E94C500F7D5D7 /* UIColor+CleverPet.h */,
+				971A1EEA1C7E94C500F7D5D7 /* UIColor+CleverPet.m */,
+				971A1EEB1C7E94C500F7D5D7 /* UIFont+CleverPet.h */,
+				971A1EEC1C7E94C500F7D5D7 /* UIFont+CleverPet.m */,
+				971A1EED1C7E94C500F7D5D7 /* UIViewController+CleverPet.h */,
+				971A1EEE1C7E94C500F7D5D7 /* UIViewController+CleverPet.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -381,25 +392,6 @@
 				97EB7AD51C73B826007F1383 /* Omnes-ThinItalic.otf */,
 			);
 			path = Font;
-			sourceTree = "<group>";
-		};
-		97EB7AE81C73B833007F1383 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				97EB7AE91C73B858007F1383 /* UIFont+CleverPet.h */,
-				97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */,
-				97EB7AEF1C73BEA9007F1383 /* UIColor+CleverPet.h */,
-				97EB7AF01C73BEA9007F1383 /* UIColor+CleverPet.m */,
-				97EB7B001C7508E1007F1383 /* UIViewController+CleverPet.h */,
-				97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */,
-				97CC44831C77E703003C4258 /* CPAppearance.h */,
-				97CC44841C77E703003C4258 /* CPAppearance.m */,
-				9704E2F91C7D260E004874A7 /* CPTextValidator.h */,
-				9704E2FA1C7D260E004874A7 /* CPTextValidator.m */,
-				9704E2FC1C7D2799004874A7 /* CPSharedUtils.h */,
-				9704E2FD1C7D2799004874A7 /* CPSharedUtils.m */,
-			);
-			path = Util;
 			sourceTree = "<group>";
 		};
 		97EB7AF41C73C9FD007F1383 /* View */ = {
@@ -580,16 +572,15 @@
 				97F728511C7E588C005E65C2 /* CPAppEngineCommunicationManager.m in Sources */,
 				97CC446C1C768A32003C4258 /* CPFAQViewController.m in Sources */,
 				97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */,
-				97CC44851C77E703003C4258 /* CPAppearance.m in Sources */,
 				97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */,
 				97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */,
 				0D36AA8E1C7243D600349D03 /* ViewController.m in Sources */,
+				971A1EF21C7E94C500F7D5D7 /* UIColor+CleverPet.m in Sources */,
+				971A1EF31C7E94C500F7D5D7 /* UIFont+CleverPet.m in Sources */,
 				97EB7AC21C73A97D007F1383 /* CPSignUpViewController.m in Sources */,
-				9704E2FE1C7D2799004874A7 /* CPSharedUtils.m in Sources */,
 				97CC44821C77CA30003C4258 /* CPHubSettingsButton.m in Sources */,
 				97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */,
 				0D36AA8B1C7243D600349D03 /* AppDelegate.m in Sources */,
-				9704E2FB1C7D260E004874A7 /* CPTextValidator.m in Sources */,
 				97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */,
 				97EB7ABF1C72AAFB007F1383 /* CPLoginController.m in Sources */,
 				97CC445D1C7552C3003C4258 /* CPSimpleTableViewCell.m in Sources */,
@@ -597,21 +588,22 @@
 				97CC44721C7699C7003C4258 /* CPFAQView.m in Sources */,
 				97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
+				971A1EF01C7E94C500F7D5D7 /* CPSharedUtils.m in Sources */,
+				971A1EEF1C7E94C500F7D5D7 /* CPAppearance.m in Sources */,
 				1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */,
 				1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */,
+				971A1EF11C7E94C500F7D5D7 /* CPTextValidator.m in Sources */,
 				1827A1A2D601B2388415D37D /* CPTileCollectionViewDataSource.m in Sources */,
 				1827A9098315281E1E57C652 /* CPTileSection.m in Sources */,
 				97F7284E1C7E416A005E65C2 /* CPConfigManager.m in Sources */,
 				1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */,
 				1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */,
 				97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */,
-				97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */,
 				9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */,
-				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
 				0D8AC9871C7CEACD0096F339 /* CPTileTextFormatter.m in Sources */,
 				97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */,
+				971A1EF41C7E94C500F7D5D7 /* UIViewController+CleverPet.m in Sources */,
 				97CC44691C766A28003C4258 /* CPSettingsViewController.m in Sources */,
-				97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

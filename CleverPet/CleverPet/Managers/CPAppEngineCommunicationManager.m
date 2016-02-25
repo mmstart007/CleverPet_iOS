@@ -15,11 +15,7 @@ NSString * const kNewUserPath = @"users/new";
 NSString * const kUserLoginPath = @"users/login";
 NSString * const kUserInfoPath = @"users/info";
 
-NSString * const kErrorKey = @"error";
-NSString * const kEmailKey = @"email";
-NSString * const kFirstNameKey = @"first_name";
-NSString * const kLastNameKey = @"last_name";
-NSString * const kAuthTokenKey = @"auth_token";
+NSString * const kCreatePetProfilePath = @"animals";
 
 // TODO: error codes or something so this isn't string matching
 NSString * const kNoUserAccountError = @"No account exists for the given email address";
@@ -130,6 +126,13 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     }];
 }
 
+#pragma mark - Pet profile
+- (ASYNC)updatePetProfileWithInfo:(NSDictionary *)petInfo completion:(void (^)(NSError *))completion
+{
+    
+}
+
+#pragma mark - Util
 // TODO: user object
 - (void)setAuthToken:(NSString *)authToken
 {
