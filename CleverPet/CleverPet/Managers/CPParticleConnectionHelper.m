@@ -9,10 +9,10 @@
 #import "CPParticleConnectionHelper.h"
 #import <SparkSetup/SparkSetup.h>
 
-NSString const * kParticleOrganizationName = @"particle_organization_name";
-NSString const * kParticleOrganizationSlug = @"particle_organization_slug";
-NSString const * kParticleProductName = @"particle_product_name";
-NSString const * kParticleProductSlug = @"particle_product_slug";
+NSString * const kParticleOrganizationName = @"particle_organization_name";
+NSString * const kParticleOrganizationSlug = @"particle_organization_slug";
+NSString * const kParticleProductName = @"particle_product_name";
+NSString * const kParticleProductSlug = @"particle_product_slug";
 
 @interface CPParticleConnectionHelper()<SparkSetupMainControllerDelegate>
 
@@ -71,6 +71,7 @@ NSString const * kParticleProductSlug = @"particle_product_slug";
     customization.boldTextFontName = @"Omnes-Bold";
     customization.headerTextFontName = @"Omnes-Light";
     customization.disableLogOutOption = YES;
+    customization.networkNamePrefix = @"Clever";
 }
 
 - (void)applyConfig:(NSDictionary *)config
@@ -87,7 +88,7 @@ NSString const * kParticleProductSlug = @"particle_product_slug";
     [[SparkCloud sharedInstance] loginWithAccessToken:tokenInfo completion:completion];
 }
 
-- (void)presentSetupControllerOnController:(UIViewController *)controller
+- (void)presentSetupControllerOnController:(UINavigationController *)controller
 {
     [self setupCustomAppearance];
     SparkSetupMainController *setupController = [[SparkSetupMainController alloc] init];
@@ -97,7 +98,7 @@ NSString const * kParticleProductSlug = @"particle_product_slug";
 
 - (void)sparkSetupViewController:(SparkSetupMainController *)controller didFinishWithResult:(SparkSetupMainControllerResult)result device:(SparkDevice *)device
 {
-    // TODO: Display error if we failed, and transition to dash if we succeeded
+    // TODO: Display error, handle cancellation, etc
 }
 
 @end

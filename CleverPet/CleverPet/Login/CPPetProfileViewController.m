@@ -32,6 +32,8 @@
 @property (nonatomic, strong) NSString *weightDescriptor;
 @property (nonatomic, strong) CPPickerViewController *genderPicker;
 @property (nonatomic, strong) CPTextValidator *textValidator;
+// TODO: pull this out somewhere
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 
 @end
 
@@ -51,6 +53,8 @@
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
     self.textValidator = [[CPTextValidator alloc] init];
+    self.dateFormatter = [[NSDateFormatter alloc] init];
+    self.dateFormatter.dateFormat = @"Y-m-d";
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -138,8 +142,7 @@
 - (IBAction)continueTapped:(id)sender
 {
     if ([self validateInput]) {
-        // TODO: bundle fields into dict
-        [[CPLoginController sharedInstance] setPendingUserInfo:@{}];
+        [[CPLoginController sharedInstance] setPendingUserInfo:@{kNameKey:self.nameField.text, kFamilyNameKey:self.familyField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:@([self.weightField.text integerValue]), kDOBKey:[self getDOB]}];
         [self performSegueWithIdentifier:@"setPetPhoto" sender:nil];
     }
 }
@@ -216,6 +219,15 @@
     if (textField == self.weightField) {
         self.weightField.text = [NSString stringWithFormat:@"%@ %@", self.weightField.text, self.weightDescriptor];
     }
+}
+
+- (NSString*)getDOB
+{
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *componentsToAdd = [[NSDateComponents alloc] init];
+    componentsToAdd.year = -[self.ageField.text integerValue];
+    
+    return [self.dateFormatter stringFromDate:[calendar dateByAddingComponents:componentsToAdd toDate:[NSDate date] options:kNilOptions]];
 }
 
 #pragma mark - CPPickerDelegate methods
