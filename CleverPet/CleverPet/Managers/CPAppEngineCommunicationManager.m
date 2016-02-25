@@ -14,8 +14,7 @@ NSString * const kAppEngineBaseUrl = @"app_server_url";
 NSString * const kNewUserPath = @"users/new";
 NSString * const kUserLoginPath = @"users/login";
 NSString * const kUserInfoPath = @"users/info";
-
-NSString * const kCreatePetProfilePath = @"animals";
+NSString * const kPetProfilePath = @"animals";
 
 // TODO: error codes or something so this isn't string matching
 NSString * const kNoUserAccountError = @"No account exists for the given email address";
@@ -113,7 +112,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 // TODO: remove. For now, this is where we have to check pet profile and device
 - (ASYNC)fetchUserCompletion:(void (^)(CPLoginResult, NSError *))completion
 {
-    [self.sessionManager GET:kCreatePetProfilePath parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.sessionManager GET:kPetProfilePath parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
             NSString *errorMessage = jsonResponse[kErrorKey];
@@ -130,7 +129,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 #pragma mark - Pet profile
 - (ASYNC)updatePetProfileWithInfo:(NSDictionary *)petInfo completion:(void (^)(NSError *))completion
 {
-    [self.sessionManager POST:kCreatePetProfilePath parameters:petInfo progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.sessionManager POST:kPetProfilePath parameters:petInfo progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
             NSString *errorMessage = jsonResponse[kErrorKey];
@@ -144,7 +143,6 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 }
 
 #pragma mark - Util
-// TODO: user object
 - (void)setAuthToken:(NSString *)authToken
 {
     [self.sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", authToken] forHTTPHeaderField:@"Authorization"];
