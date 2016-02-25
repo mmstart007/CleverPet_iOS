@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CPMainScreenStatsHeaderView : UIView
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 + (instancetype)loadFromNib;
 @end

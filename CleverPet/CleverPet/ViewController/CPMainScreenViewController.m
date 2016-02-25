@@ -34,6 +34,7 @@
 
     self.mainScreenHeaderView = [CPMainScreenHeaderView loadFromNib];
     self.mainScreenStatsHeaderView = [CPMainScreenStatsHeaderView loadFromNib];
+    self.mainScreenStatsHeaderView.imageView.image = [UIImage imageNamed:@"vallhund"];
     
     [self.headerView addSubview:self.mainScreenHeaderView];
     [self.headerView addSubview:self.mainScreenStatsHeaderView];
@@ -66,7 +67,7 @@
     }
     
     self.mainScreenStatsHeaderView.alpha = headerStatsFade;
-    self.mainScreenHeaderView.alpha = 1 - headerStatsFade;
+    self.mainScreenHeaderView.alpha = pow((1 - headerStatsFade), 2);
 }
 
 - (void)addTileForDate:(NSDate *)date

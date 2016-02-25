@@ -68,8 +68,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcg-ja-Stc" userLabel="Kibbles View Holder">
                                     <rect key="frame" x="0.0" y="90" width="300" height="105"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2J0-Vq-gMg">
-                                            <rect key="frame" x="123" y="30" width="57" height="41"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2J0-Vq-gMg">
+                                            <rect key="frame" x="122" y="32" width="57" height="41"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="239" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Heh-Ht-FJO">
                                                     <rect key="frame" x="0.0" y="0.0" width="57" height="21"/>
@@ -114,8 +114,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JZ8-O3-a8m" userLabel="Plays View Holder">
                                     <rect key="frame" x="300" y="90" width="300" height="105"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xsr-Ad-Dln">
-                                            <rect key="frame" x="131" y="30" width="41" height="41"/>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xsr-Ad-Dln">
+                                            <rect key="frame" x="130" y="32" width="41" height="41"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byb-IT-vJC">
                                                     <rect key="frame" x="0.0" y="0.0" width="41" height="21"/>
@@ -204,7 +204,7 @@
                 <outlet property="lifetimePointsTitleLabel" destination="LgD-2L-S91" id="Ywm-gU-xX0"/>
                 <outlet property="playsLabel" destination="byb-IT-vJC" id="b5b-TD-fnx"/>
                 <outlet property="playsTitleLabel" destination="SCT-os-1fM" id="8YI-OO-f6e"/>
-                <outlet property="progressView" destination="TA2-4D-hfp" id="ppG-d8-CbF"/>
+                <outlet property="progressView" destination="TA2-4D-hfp" id="CDb-No-rOx"/>
                 <outlet property="shadowView" destination="mhW-yj-jzT" id="Jm6-wg-K0N"/>
             </connections>
             <point key="canvasLocation" x="185" y="-135"/>

@@ -8,6 +8,7 @@
 
 #import "CPPetStatsView.h"
 #import "UIView+CPShadowEffect.h"
+#import "CPLabelUtils.h"
 
 @interface CPPetStatsView ()
 @property (weak, nonatomic) IBOutlet UILabel *playsTitleLabel;
@@ -45,12 +46,8 @@
     self.dividerView.backgroundColor = [UIColor appDividerColor];
     
     [self.shadowView applyCleverPetShadow];
-}
-
-void ApplyFontAndColorToLabels(UIFont *font, UIColor *color, NSArray<UILabel *> *labels) {
-    for (UILabel *label in labels) {
-        label.font = font;
-        label.textColor = color;
-    }
+    
+    self.progressView.progressTintColor = [UIColor appTealColor];
+    self.progressView.trackTintColor = [UIColor appDividerColor];
 }
 @end
