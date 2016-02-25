@@ -62,9 +62,16 @@ NSString * const kLoginErrorKey = @"LoginError";
 - (void)completeSignUpWithPetImage:(UIImage *)image completion:(void (^)(NSError *))completion
 {
     // TODO: image storage
-    // TODO: send user info up to the server. For now just launch the device claim flow
-    // TODO: verify we get back everything we need to create an access token(expires_in, access_token, token_type:bearer)
-    [[CPParticleConnectionHelper sharedInstance] setAccessToken:@{} completion:completion];
+    // TODO: verification
+    BLOCK_SELF_REF_OUTSIDE();
+    [[CPAppEngineCommunicationManager sharedInstance] updatePetProfileWithInfo:self.userInfo completion:^(NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (error) {
+            [[self getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
+        } else {
+            [self presentUIForLoginResult:CPLoginResult_UserWithoutDevice];
+        }
+    }];
 }
 
 #pragma mark - Flow control
@@ -197,6 +204,7 @@ didFinishSignInWithToken:(NSString *)token
 
 - (UINavigationController*)getRootNavController
 {
+    // TODO: Need to get the actual top level controller navController = visibleViewController, viewController = probably presentedViewController
     // TODO: handle when our root is not a nav controller
     return (UINavigationController*)[[[UIApplication sharedApplication].delegate window] rootViewController];
 }

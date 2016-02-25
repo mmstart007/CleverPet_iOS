@@ -110,9 +110,10 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     }];
 }
 
+// TODO: remove. For now, this is where we have to check pet profile and device
 - (ASYNC)fetchUserCompletion:(void (^)(CPLoginResult, NSError *))completion
 {
-    [self.sessionManager GET:kUserInfoPath parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.sessionManager GET:kCreatePetProfilePath parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
             NSString *errorMessage = jsonResponse[kErrorKey];
@@ -129,7 +130,17 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 #pragma mark - Pet profile
 - (ASYNC)updatePetProfileWithInfo:(NSDictionary *)petInfo completion:(void (^)(NSError *))completion
 {
-    
+    [self.sessionManager POST:kCreatePetProfilePath parameters:petInfo progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        if (jsonResponse[kErrorKey]) {
+            NSString *errorMessage = jsonResponse[kErrorKey];
+            if (completion) completion([self errorForMessage:errorMessage]);
+        } else {
+            if (completion) completion(nil);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (completion) completion(error);
+    }];
 }
 
 #pragma mark - Util
