@@ -12,6 +12,7 @@
 #import "CPPickerViewController.h"
 #import "CPBreedPickerViewController.h"
 #import "CPPetPhotoViewController.h"
+#import "CPUserManager.h"
 
 @interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate, CPPetPhotoDelegate>
 
@@ -43,6 +44,8 @@
 @property (nonatomic, strong) CPPickerViewController *neuteredPicker;
 @property (nonatomic, strong) CPBreedPickerViewController *breedPicker;
 
+@property (nonatomic, strong) CPPet *pet;
+
 @end
 
 @implementation CPProfileSettingsViewController
@@ -56,6 +59,9 @@
     self.textFields = @[self.nameField, self.familyNameField, self.breedField, self.weightField, self.genderField, self.neuteredField];
     self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
     self.textValidator = [[CPTextValidator alloc] init];
+    
+    self.pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
+    self.petImage.image = [self.pet petPhoto];
     
     [self setupStyling];
 }

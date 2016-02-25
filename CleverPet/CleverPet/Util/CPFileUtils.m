@@ -13,7 +13,7 @@
 + (void)saveImage:(UIImage *)image forPet:(NSString *)petId
 {
     [CPFileUtils createMediaFolder];
-    NSString *imagePath = [CPFileUtils mediaFolderPath];
+    NSString *imagePath = [self pathForPetImage:petId];
     if (image) {
         [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];;
     } else {

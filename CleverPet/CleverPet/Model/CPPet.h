@@ -21,4 +21,6 @@
 
 // TODO: Score/protocol/other nonsense
 
+- (UIImage *)petPhoto;
+
 @end
