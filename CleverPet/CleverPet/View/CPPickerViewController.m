@@ -42,7 +42,7 @@
 
 - (void)setupForPickingNeutered
 {
-    self.dataArray = @[NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), NSLocalizedString(@"Not Indicated", )];
+    self.dataArray = @[NSLocalizedString(@"Altered", nil), NSLocalizedString(@"Unaltered", nil), NSLocalizedString(@"Unspecified", )];
 }
 
 #pragma mark - UITableViewDataSource methods

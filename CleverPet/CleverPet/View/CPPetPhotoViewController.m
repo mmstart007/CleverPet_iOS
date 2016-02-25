@@ -81,12 +81,7 @@
             [self.delegate selectedImage:croppedImage];
         } else {
             [[CPLoginController sharedInstance] completeSignUpWithPetImage:croppedImage completion:^(NSError *error) {
-                if (error) {
-                    // TODO: display error. For now, begin the flow and allow user to log in to particle account
-                    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
-                } else {
-                    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self];
-                }
+                // TODO: display error
             }];
         }
     }];
