@@ -6,24 +6,25 @@
 //  Copyright © 2016 CleverPet, Inc. All rights reserved.
 //
 
-#import "CPGenderPickerViewController.h"
+#import "CPPickerViewController.h"
 #import "CPSimpleTableViewCell.h"
 
-@interface CPGenderPickerViewController ()<UITableViewDataSource, UITableViewDelegate>
+@interface CPPickerViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *separator;
 
 @property (nonatomic, strong) NSArray *dataArray;
 
 @end
 
-@implementation CPGenderPickerViewController
+@implementation CPPickerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.dataArray = @[NSLocalizedString(@"Male", nil), NSLocalizedString(@"Female", nil)];
     self.view.backgroundColor = [UIColor appBackgroundColor];
+    self.separator.backgroundColor = [UIColor appBackgroundColor];
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView registerNib:[UINib nibWithNibName:@"CPSimpleTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
@@ -32,6 +33,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setupForPickingGender
+{
+    self.dataArray = @[NSLocalizedString(@"Male", nil), NSLocalizedString(@"Female", nil)];
+}
+
+- (void)setupForPickingNeutered
+{
+    self.dataArray = @[NSLocalizedString(@"Yes", nil), NSLocalizedString(@"No", nil), NSLocalizedString(@"Not Indicated", )];
 }
 
 #pragma mark - UITableViewDataSource methods
