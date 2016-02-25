@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class GITAccount;
+
 typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile, CPLoginResult_UserWithoutDevice, CPLoginResult_UserWithSetupCompleted, CPLoginResult_Failure};
 
 @interface CPAppEngineCommunicationManager : NSObject
@@ -16,6 +18,6 @@ typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile,
 
 - (void)applyConfig:(NSDictionary*)configData;
 
-- (ASYNC)loginWithUserId:(NSString*)userId completion:(void (^)(CPLoginResult result, NSError *error))completion;
+- (ASYNC)loginWithUser:(GITAccount*)userAccount completion:(void (^)(CPLoginResult result, NSError *error))completion;
 
 @end

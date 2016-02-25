@@ -141,7 +141,7 @@ didFinishSignInWithToken:(NSString *)token
          error:(NSError *)error
 {
     BLOCK_SELF_REF_OUTSIDE();
-    [[CPAppEngineCommunicationManager sharedInstance] loginWithUserId:account.localID completion:^(CPLoginResult result, NSError *error) {
+    [[CPAppEngineCommunicationManager sharedInstance] loginWithUser:account completion:^(CPLoginResult result, NSError *error) {
         BLOCK_SELF_REF_INSIDE();
         if (result == CPLoginResult_Failure) {
             // TODO: nicer error handling
