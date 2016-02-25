@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CPPetPhotoDelegate <NSObject>
+
+- (void)selectedImage:(UIImage *)image;
+
+@end
+
 @interface CPPetPhotoViewController : UIViewController
 
 @property (nonatomic, strong) UIImage *selectedImage;
+@property (nonatomic, weak) id<CPPetPhotoDelegate> delegate;
 
 @end
