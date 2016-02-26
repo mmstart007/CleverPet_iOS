@@ -10,4 +10,12 @@
 @implementation CPTileSection {
 
 }
+
+- (NSMutableArray *)tiles {
+    if (!_tiles) {
+        _tiles = [[NSMutableArray alloc] init];
+    }
+
+    return _tiles;
+}
 @end

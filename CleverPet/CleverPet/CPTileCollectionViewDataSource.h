@@ -19,6 +19,6 @@
 
 - (instancetype)initWithCollectionView:(UITableView *)tableView;
 
-- (void)addTile:(CPTile *)tile;
+- (void)addTile:(CPTile *)tile withAnimation:(BOOL)withAnimation;
 - (void)postInit;
 @end

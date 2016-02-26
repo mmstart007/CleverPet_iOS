@@ -9,6 +9,6 @@
 @class CPSimpleDate;
 
 @interface CPTileSection : NSObject
-@property (assign, nonatomic) CPSimpleDate *simpleDate;
+@property (strong, nonatomic) CPSimpleDate *simpleDate;
 @property (strong, nonatomic) NSMutableArray<CPTile *> *tiles;
 @end

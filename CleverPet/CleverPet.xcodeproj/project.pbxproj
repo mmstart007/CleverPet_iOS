@@ -26,6 +26,7 @@
 		0DE13B5F1C7EDF7900648834 /* CPMainScreenStatsHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B5E1C7EDF7900648834 /* CPMainScreenStatsHeaderView.m */; };
 		0DE13B611C7EDFAC00648834 /* CPMainScreenStatsHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DE13B601C7EDFAC00648834 /* CPMainScreenStatsHeaderView.xib */; };
 		0DE13B631C7EE9DF00648834 /* CPLabelUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B621C7EE9DF00648834 /* CPLabelUtils.m */; };
+		0DE13B671C7FABB200648834 /* CPTileDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B661C7FABB200648834 /* CPTileDataManager.m */; };
 		1827A1A2D601B2388415D37D /* CPTileCollectionViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A89D02ED75C767F6D453 /* CPTileCollectionViewDataSource.m */; };
 		1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AD320F0C4F8FD18E36D8 /* CPTile.m */; };
 		1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A7B9850CB706EB4171D0 /* CPMainScreenViewController.m */; };
@@ -116,6 +117,8 @@
 		0DE13B601C7EDFAC00648834 /* CPMainScreenStatsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPMainScreenStatsHeaderView.xib; sourceTree = "<group>"; };
 		0DE13B621C7EE9DF00648834 /* CPLabelUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLabelUtils.m; sourceTree = "<group>"; };
 		0DE13B641C7EE9FC00648834 /* CPLabelUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPLabelUtils.h; sourceTree = "<group>"; };
+		0DE13B651C7FABB200648834 /* CPTileDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileDataManager.h; sourceTree = "<group>"; };
+		0DE13B661C7FABB200648834 /* CPTileDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileDataManager.m; sourceTree = "<group>"; };
 		12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1827A1BFAE0043C9D902D1AC /* CPTileViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileViewCell.h; sourceTree = "<group>"; };
 		1827A50A4A6169E21622727F /* CPTileSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileSection.m; sourceTree = "<group>"; };
@@ -383,6 +386,8 @@
 				97F7284D1C7E416A005E65C2 /* CPConfigManager.m */,
 				97F7284F1C7E588C005E65C2 /* CPAppEngineCommunicationManager.h */,
 				97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */,
+				0DE13B651C7FABB200648834 /* CPTileDataManager.h */,
+				0DE13B661C7FABB200648834 /* CPTileDataManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -651,6 +656,7 @@
 				0D1F1C561C7E228900EAF336 /* CPPetStatsView.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
 				1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */,
+				0DE13B671C7FABB200648834 /* CPTileDataManager.m in Sources */,
 				1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */,
 				0DE13B631C7EE9DF00648834 /* CPLabelUtils.m in Sources */,
 				1827A1A2D601B2388415D37D /* CPTileCollectionViewDataSource.m in Sources */,

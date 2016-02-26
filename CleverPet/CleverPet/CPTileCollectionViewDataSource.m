@@ -4,11 +4,11 @@
 //
 
 #import "CPTileCollectionViewDataSource.h"
-#import "CPTileSection.h"
 #import "CPTile.h"
 #import "CPTileViewCell.h"
-#import "CPPetStatsView.h"
 #import "CPTableHeaderView.h"
+#import "CPTileDataManager.h"
+#import "CPMainTableSectionHeader.h"
 
 #define TILE_VIEW_CELL @"TILE_VIEW_CELL"
 #define PET_STATS_HEADER @"PET_STATS_HEADER"
@@ -16,7 +16,7 @@
 #define HEADER_VIEW_SECTION 0
 
 @interface CPTileCollectionViewDataSource ()
-@property (strong, nonatomic) NSMutableArray<CPTile *> *tiles;
+@property (strong, nonatomic) CPTileDataManager *tileDataManager;
 @property (weak, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) CPTileViewCell *cell;
 @property (strong, nonatomic) CPTableHeaderView *tableHeaderView;
@@ -37,7 +37,7 @@
         self.tableView.estimatedRowHeight = 100;
         
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        CGFloat height = width / (640.0/262.0);
+        CGFloat height = width / (640.0f/262.0f);
         
         self.headerImageHeight = height;
         self.headerStatsHeight = 140;
@@ -47,6 +47,8 @@
         [tableView registerNib:[UINib nibWithNibName:@"CPTileViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:TILE_VIEW_CELL];
         [tableView registerNib:[UINib nibWithNibName:@"CPPetStatsView" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:PET_STATS_HEADER];
         [tableView registerNib:[UINib nibWithNibName:@"CPMainTableSectionHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:SECTION_HEADER];
+        
+        self.tileDataManager = [[CPTileDataManager alloc] init];
     }
 
     return self;
@@ -66,41 +68,42 @@
     [self.scrollDelegate dataSource:self headerPhotoVisible:scrollView.contentOffset.y < self.headerImageHeight - 4 headerStatsFade:fade];
 }
 
-- (void)addTile:(CPTile *)tile {
-    NSUInteger index = [self.tiles indexOfObject:tile inSortedRange:NSMakeRange(0, self.tiles.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(CPTile *a, CPTile *b) {
-        return -[a.date compare:b.date];
-    }];
+- (void)addTile:(CPTile *)tile withAnimation:(BOOL)withAnimation {
+    CPInsertionInfo insertionInfo = [self.tileDataManager addTile:tile];
     
-    [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:1]] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self.tiles insertObject:tile atIndex:index];
-    [self.tableView endUpdates];
-}
-
-- (NSMutableArray *)tiles {
-    if (!_tiles) {
-        _tiles = [[NSMutableArray alloc] init];
+    if (withAnimation) {
+        [self.tableView beginUpdates];
+        
+        if (insertionInfo.isNewSection && insertionInfo.sectionIndex != NSNotFound) {
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:insertionInfo.sectionIndex + 1] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        
+        if (insertionInfo.rowIndex != NSNotFound) {
+            [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:insertionInfo.rowIndex inSection:insertionInfo.sectionIndex + 1]] withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        
+        [self.tableView endUpdates];
+    } else {
+        [self.tableView reloadData];
     }
-
-    return _tiles;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1 + [self.tileDataManager sectionCount];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == HEADER_VIEW_SECTION) {
         return 0;
     } else {
-        return self.tiles.count;
+        return [self.tileDataManager tileCountForSection:section - 1];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     CPTileViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TILE_VIEW_CELL];
-    CPTile *tile = self.tiles[(NSUInteger) indexPath.item];
+    CPTile *tile = [self.tileDataManager tileForRow:indexPath.row inSection:indexPath.section - 1];
     cell.tile = tile;
     return cell;
 }
@@ -110,7 +113,10 @@
     if (section == HEADER_VIEW_SECTION) {
         return [tableView dequeueReusableHeaderFooterViewWithIdentifier:PET_STATS_HEADER];
     } else {
-        return [tableView dequeueReusableHeaderFooterViewWithIdentifier:SECTION_HEADER];
+        CPMainTableSectionHeader *sectionHeader = [tableView dequeueReusableHeaderFooterViewWithIdentifier:SECTION_HEADER];
+        CPSimpleDate *sectionHeaderDate = [self.tileDataManager sectionHeaderAtIndex:section - 1];
+        sectionHeader.sectionHeaderLabel.text = [NSString stringWithFormat:@"%@/%@/%@", @(sectionHeaderDate.year), @(sectionHeaderDate.month), @(sectionHeaderDate.day)];
+        return sectionHeader;
     }
 }
 

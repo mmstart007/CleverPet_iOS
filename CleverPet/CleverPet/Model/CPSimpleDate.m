@@ -29,6 +29,18 @@ NSComparisonResult compareIntegers(NSInteger a, NSInteger b) {
     return s_calendar;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    CPSimpleDate *copy = [[[self class] allocWithZone:zone] init];
+
+    if (copy != nil) {
+        copy.year = self.year;
+        copy.month = self.month;
+        copy.day = self.day;
+    }
+
+    return copy;
+}
+
 - (instancetype)initWithDate:(NSDate *)date {
     if (self = [super init]) {
         NSDateComponents *dateComponents = [[[self class] calendar] components:NSCalendarUnitDay|NSCalendarUnitMonth|NSCalendarUnitYear fromDate:date];
@@ -57,4 +69,40 @@ NSComparisonResult compareIntegers(NSInteger a, NSInteger b) {
         return [a compareToSimpleDate:b];
     };
 }
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"CPSimpleDate: %@/%@/%@", @(self.year), @(self.month), @(self.day)];
+}
+
+- (BOOL)isEqual:(id)other {
+    if (other == self)
+        return YES;
+    if (!other || ![[other class] isEqual:[self class]])
+        return NO;
+
+    return [self isEqualToDate:other];
+}
+
+- (BOOL)isEqualToDate:(CPSimpleDate *)date {
+    if (self == date)
+        return YES;
+    if (date == nil)
+        return NO;
+    if (self.year != date.year)
+        return NO;
+    if (self.month != date.month)
+        return NO;
+    if (self.day != date.day)
+        return NO;
+    return YES;
+}
+
+- (NSUInteger)hash {
+    NSUInteger hash = (NSUInteger) self.year;
+    hash = hash * 31u + self.month;
+    hash = hash * 31u + self.day;
+    return hash;
+}
+
 @end

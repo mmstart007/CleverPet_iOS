@@ -53,7 +53,7 @@
     
     NSDate *startDate = [NSDate date];
     for (NSUInteger i = 0; i < 100; i++) {
-        NSDate *date = [startDate dateByAddingTimeInterval:-60.0 * i];
+        NSDate *date = [startDate dateByAddingTimeInterval:-60.0 * 60.0 * 4 * i];
         [self addTileForDate:date index:i];
     }
 }
@@ -96,6 +96,6 @@
             break;
     }
     
-    [self.dataSource addTile:tile];
+    [self.dataSource addTile:tile withAnimation:NO];
 }
 @end
