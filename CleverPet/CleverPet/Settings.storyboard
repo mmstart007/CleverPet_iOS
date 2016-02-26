@@ -248,7 +248,7 @@
                                                         <state key="normal" title="Edit"/>
                                                         <connections>
                                                             <action selector="editImageTapped:" destination="3WD-7U-wgO" eventType="touchUpInside" id="OeO-1C-mwn"/>
-                                                            <segue destination="kkD-fH-BRQ" kind="custom" identifier="setPetPhoto" customClass="RBStoryboardPushSegue" id="MDZ-n7-65O"/>
+                                                            <segue destination="kkD-fH-BRQ" kind="custom" identifier="setPetPhoto" customClass="RBStoryboardModalSegue" id="MDZ-n7-65O"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>

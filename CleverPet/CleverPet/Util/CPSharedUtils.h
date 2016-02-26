@@ -75,5 +75,6 @@ extern NSString * const kGenderKey;
 extern NSString * const kBreedKey;
 extern NSString * const kWeightKey;
 extern NSString * const kDOBKey;
+extern NSString * const kAlteredKey;
 
 #define ASYNC void

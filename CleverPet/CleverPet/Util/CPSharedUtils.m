@@ -27,6 +27,7 @@ NSString * const kGenderKey = @"gender";
 NSString * const kBreedKey = @"breed";
 NSString * const kWeightKey = @"weight";
 NSString * const kDOBKey = @"date_of_birth";
+NSString * const kAlteredKey = @"altered";
 
 @implementation CPSharedUtils
 

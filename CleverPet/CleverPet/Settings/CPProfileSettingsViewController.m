@@ -45,6 +45,7 @@
 @property (nonatomic, strong) CPBreedPickerViewController *breedPicker;
 
 @property (nonatomic, strong) CPPet *pet;
+@property (nonatomic, weak) UIBarButtonItem *pseudoBackButton;
 
 @end
 
@@ -69,9 +70,19 @@
     self.weightField.text = [NSString stringWithFormat:@"%d %@", self.pet.weight, self.weightDescriptor];
     // Uppercase first letter of word, since it's all lower case coming from the server
     self.genderField.text = [self.pet.gender stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.gender substringToIndex:1] uppercaseString]];
-    self.neuteredField.text = [self.pet.altered isEqualToString:@"unspecified"] ? nil : [self.pet.altered stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.altered substringToIndex:1] uppercaseString]];
+//    self.neuteredField.text = [self.pet.altered isEqualToString:@"unspecified"] ? nil : [self.pet.altered stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.altered substringToIndex:1] uppercaseString]];
     
     [self setupStyling];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    // TODO: button image
+    [button setTitle:@"Back" forState:UIControlStateNormal];
+    [button sizeToFit];
+    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [button addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = barButton;
+    self.pseudoBackButton = barButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,6 +151,23 @@
     NSString *newDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
     self.weightField.text = [self.weightField.text stringByReplacingOccurrencesOfString:self.weightDescriptor withString:newDescriptor];
     self.weightDescriptor = newDescriptor;
+}
+
+- (void)backButtonTapped:(id)sender
+{
+    NSString *alteredString = [self.neuteredField.text lowercaseString];
+    if ([alteredString length] == 0) {
+        alteredString = @"unspecified";
+    }
+    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kAlteredKey:alteredString};
+    [CPPet validateInput:petInfo isInitialSetup:NO completion:^(BOOL isValidInput, NSString *errorMessage) {
+        if (isValidInput) {
+            [[CPUserManager sharedInstance] updatePetInfo:petInfo];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", nil) andMessage:errorMessage];
+        }
+    }];
 }
 
 #pragma mark - UITextFieldDelegate methods
@@ -236,7 +264,8 @@
 #pragma mark - CPPetPhotoDelegate methods
 - (void)selectedImage:(UIImage *)image
 {
-    self.petImage.image = image;
+    [[CPUserManager sharedInstance] updatePetPhoto:image];
+    self.petImage.image = [self.pet petPhoto];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

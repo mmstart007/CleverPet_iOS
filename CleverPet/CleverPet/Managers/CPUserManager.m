@@ -7,6 +7,8 @@
 //
 
 #import "CPUserManager.h"
+#import "CPAppEngineCommunicationManager.h"
+#import "CPFileUtils.h"
 
 @interface CPUserManager()
 
@@ -42,6 +44,33 @@
     NSError *error;
     self.currentUser.pet = [[CPPet alloc] initWithDictionary:petInfo error:&error];
     [self saveUserToDefaults];
+}
+
+- (void)updatePetInfo:(NSDictionary *)petInfo
+{
+    // TODO: shortcut if nothing has changed
+    
+    NSDictionary *currentPetInfo = [self.currentUser.pet toDictionary];
+    NSError *error;
+    [self.currentUser.pet mergeFromDictionary:petInfo useKeyMapping:YES error:&error];
+    
+    BLOCK_SELF_REF_OUTSIDE();
+    [[CPAppEngineCommunicationManager sharedInstance] updatePet:self.currentUser.pet.petId withInfo:petInfo completion:^(NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        // TODO: Handle failure somehow
+        if (error) {
+            // reset back to original info
+            [self.currentUser.pet mergeFromDictionary:currentPetInfo useKeyMapping:YES error:nil];
+        } else {
+            [self saveUserToDefaults];
+        }
+    }];
+}
+
+- (void)updatePetPhoto:(UIImage *)image
+{
+    [self.currentUser.pet setPetPhoto:image];
+    [CPFileUtils saveImage:image forPet:self.currentUser.pet.petId];
 }
 
 - (CPUser*)getCurrentUser
