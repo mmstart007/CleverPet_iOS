@@ -96,6 +96,7 @@
         }
     };
     
+    // TODO: Only rerender the image if we've changed images, or zoomed/panned. Will require modifying the pod
     if (self.cropView.image) {
         [self.cropView renderCroppedImage:imageSelectedBlock];
     } else {

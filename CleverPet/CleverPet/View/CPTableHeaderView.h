@@ -10,5 +10,6 @@
 
 @interface CPTableHeaderView : UIView
 - (instancetype)initWithImage:(UIImage *)image frame:(CGRect)frame;
+- (void)updateImage:(UIImage*)image;
 - (BOOL)scrollViewDidScroll:(UIScrollView *)scrollView;
 @end

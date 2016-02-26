@@ -121,6 +121,11 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     }
 }
 
+- (void)updatePetImage:(UIImage *)petImage
+{
+    [self.tableHeaderView updateImage:petImage];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1 + [self.tileDataManager sectionCount];

@@ -12,6 +12,7 @@
 @property (strong, nonatomic) NSLayoutConstraint *heightLayoutConstraint, *bottomLayoutConstraint, *containerLayoutConstraint;
 
 @property (strong, nonatomic) UIView *containerView;
+@property (nonatomic, weak) UIImageView *imageView;
 
 @property (assign, nonatomic) CGFloat originalHeight;
 @end
@@ -40,6 +41,7 @@
         imageView.contentMode = UIViewContentModeScaleAspectFill;
         imageView.image = image;
         [self.containerView addSubview:imageView];
+        self.imageView = imageView;
         [self.containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[imageView]|" options:0 metrics:nil views:@{@"imageView":imageView}]];
         self.bottomLayoutConstraint = [NSLayoutConstraint constraintWithItem:imageView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.containerView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0];
         [self.containerView addConstraint:self.bottomLayoutConstraint];
@@ -48,6 +50,13 @@
     }
     
     return self;
+}
+
+- (void)updateImage:(UIImage *)image
+{
+    if (![self.imageView.image isEqual:image]) {
+        self.imageView.image = image;
+    }
 }
 
 - (BOOL)scrollViewDidScroll:(UIScrollView *)scrollView
