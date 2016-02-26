@@ -17,7 +17,7 @@
 
 @property (weak, nonatomic) id<CPTileCollectionViewDataSourceScrollDelegate> scrollDelegate;
 
-- (instancetype)initWithCollectionView:(UITableView *)tableView;
+- (instancetype)initWithCollectionView:(UITableView *)tableView andPetImage:(UIImage *)petImage;
 
 - (void)addTile:(CPTile *)tile;
 - (void)postInit;
