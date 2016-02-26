@@ -63,6 +63,14 @@
     self.pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
     self.petImage.image = [self.pet petPhoto];
     
+    self.nameField.text = self.pet.name;
+    self.familyNameField.text = self.pet.familyName;
+    self.breedField.text = self.pet.breed;
+    self.weightField.text = [NSString stringWithFormat:@"%d %@", self.pet.weight, self.weightDescriptor];
+    // Uppercase first letter of word, since it's all lower case coming from the server
+    self.genderField.text = [self.pet.gender stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.gender substringToIndex:1] uppercaseString]];
+    self.neuteredField.text = [self.pet.altered isEqualToString:@"unspecified"] ? nil : [self.pet.altered stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.altered substringToIndex:1] uppercaseString]];
+    
     [self setupStyling];
 }
 
@@ -135,6 +143,20 @@
 }
 
 #pragma mark - UITextFieldDelegate methods
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == self.weightField) {
+        self.weightField.text = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == self.weightField) {
+        self.weightField.text = [NSString stringWithFormat:@"%@ %@", self.weightField.text, self.weightDescriptor];
+    }
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self moveToNextTextFieldFrom:textField];
