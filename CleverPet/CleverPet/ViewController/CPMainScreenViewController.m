@@ -93,24 +93,31 @@
     CPTile *tile = [[CPTile alloc] init];
     tile.date = date;
     
-    tile.tileType = index % CPTTMac;
-    switch (tile.tileType) {
-        case CPTTChallenge:
+    switch (index % 4) {
+        case 0:
+            tile.tileType = CPTTChallenge;
             tile.negativeButtonText = @"Restart";
-            tile.title = @"Challenge 9: The Challenging";
-            tile.body = @"Here's an example of a *Challenge* tile! Challenge your dog with this challenge!";
+            tile.title = @"Challenge 9: Learning double sequence";
+            tile.body = @"Your pup is learning a sequence of lights -- s/he'll need to trigger the touchpads in the order the lights come on.";
             break;
-        case CPTTMessage:
+        case 1:
+            tile.tileType = CPTTMessage;
             tile.title = @"Hands off, paws only!";
             tile.affirmativeButtonText = @"Got it.";
             tile.negativeButtonText = @"Explain.";
-            tile.body = @"Do not touch the touchpads for Bagel as he is learning.";
+            tile.body = @"Do not touch the touchpads for your dog as he is learning.";
             break;
-        case CPTTReport:
-            tile.affirmativeButtonText = @"Read";
-            tile.body = @"Here's a report for your dog!\n\n- He ate 57 kibble!\n- He did 32 plays!\n- His lifetime score increased by 200!";
+        case 2:
+            tile.tileType = CPTTMessage;
+            tile.title = @"Challenge Met!";
+            tile.affirmativeButtonText = @"Ok";
+            tile.body = @"Your pup solved multiple puzzles made from sequences of three lighted touchpads! Give your dog extra scritches!";
+            tile.image = [UIImage imageNamed:@"award"];
             break;
-        case CPTTMac:
+        case 3:
+            tile.tileType = CPTTMessage;
+            tile.title = @"Silly human, touchpads are for dogs!";
+            tile.body = @"From now on, the Hub is set to respond to your dog's actions. If you touch the touchpads, it may impact the accuracy of your dog's progress, and slow your dog's learning.";
             break;
     }
     
