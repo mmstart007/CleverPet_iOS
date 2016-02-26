@@ -10,6 +10,7 @@
 #import "CPMainScreenHeaderView.h"
 #import "CPMainScreenStatsHeaderView.h"
 #import "UIView+CPShadowEffect.h"
+#import "CPUserManager.h"
 
 @interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceScrollDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -19,6 +20,8 @@
 
 @property (strong, nonatomic) CPMainScreenHeaderView *mainScreenHeaderView;
 @property (strong, nonatomic) CPMainScreenStatsHeaderView *mainScreenStatsHeaderView;
+
+@property (nonatomic, strong) CPPet *currentPet;
 @end
 
 @implementation CPMainScreenViewController {
@@ -29,12 +32,15 @@
 {
     [super viewDidLoad];
     
+    self.currentPet = [[CPUserManager sharedInstance] getCurrentUser].pet;
+    
     self.tableView.backgroundView.backgroundColor = [UIColor appBackgroundColor];
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
-
+    
     self.mainScreenHeaderView = [CPMainScreenHeaderView loadFromNib];
+    [self.mainScreenHeaderView setupForPet:self.currentPet];
     self.mainScreenStatsHeaderView = [CPMainScreenStatsHeaderView loadFromNib];
-    self.mainScreenStatsHeaderView.imageView.image = [UIImage imageNamed:@"vallhund"];
+    self.mainScreenStatsHeaderView.imageView.image = [self.currentPet petPhoto];;
     
     [self.headerView addSubview:self.mainScreenHeaderView];
     [self.headerView addSubview:self.mainScreenStatsHeaderView];
@@ -42,7 +48,7 @@
 
     self.mainScreenStatsHeaderView.alpha = 0;
     
-    CPTileCollectionViewDataSource *dataSource = [[CPTileCollectionViewDataSource alloc] initWithCollectionView:self.tableView];
+    CPTileCollectionViewDataSource *dataSource = [[CPTileCollectionViewDataSource alloc] initWithCollectionView:self.tableView andPetImage:[self.currentPet petPhoto]];
     dataSource.scrollDelegate = self;
 
     self.dataSource = dataSource;
@@ -56,6 +62,12 @@
         NSDate *date = [startDate dateByAddingTimeInterval:-60.0 * 60.0 * 4 * i];
         [self addTileForDate:date index:i];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible headerStatsFade:(CGFloat)headerStatsFade

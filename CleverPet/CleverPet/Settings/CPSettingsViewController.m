@@ -32,6 +32,7 @@ NSUInteger const kAccountSection = 2;
 @interface CPSettingsViewController ()
 
 @property (weak, nonatomic) IBOutlet CPSettingsHubStatusCell *hubCell;
+@property (weak, nonatomic) UIBarButtonItem *psuedoBackButton;
 
 @end
 
@@ -43,12 +44,32 @@ NSUInteger const kAccountSection = 2;
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
     self.tableView.separatorColor = [UIColor appBackgroundColor];
     
-    // TODO: menu button
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    // TODO: button image
+    [button setTitle:@"Settings" forState:UIControlStateNormal];
+    [button sizeToFit];
+    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [button addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = barButton;
+    self.psuedoBackButton = barButton;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - IBActions
+- (void)menuButtonTapped:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
