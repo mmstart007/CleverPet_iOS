@@ -75,8 +75,9 @@
 
 - (IBAction)continueTapped:(id)sender
 {
+    
     BLOCK_SELF_REF_OUTSIDE();
-    [self.cropView renderCroppedImage:^(UIImage *croppedImage, CGRect cropRect) {
+    void (^imageSelectedBlock)(UIImage *, CGRect) = ^(UIImage *croppedImage, CGRect cropRect){
         BLOCK_SELF_REF_INSIDE();
         // If we have a delegate, we came from settings, and should let the delegate pop us. Otherwise, we're part of the sign up flow, and need to block until user is created and then transition to the dashboard
         if (self.delegate) {
@@ -92,7 +93,13 @@
                 }
             }];
         }
-    }];
+    };
+    
+    if (self.cropView.image) {
+        [self.cropView renderCroppedImage:imageSelectedBlock];
+    } else {
+        imageSelectedBlock(nil, CGRectZero);
+    }
 }
 
 - (void)showLoadingSpinner:(BOOL)show

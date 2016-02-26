@@ -35,7 +35,8 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (weak, nonatomic) IBOutlet UILabel *onBodyLabel;
 
 // Scheduled
-@property (weak, nonatomic) IBOutlet UIStackView *scheduledView;
+@property (weak, nonatomic) IBOutlet UIView *scheduledView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scheduledHeaderSpacingConstraint;
 @property (weak, nonatomic) IBOutlet UIView *scheduledHeaderView;
 @property (weak, nonatomic) IBOutlet CPHubSettingsButton *scheduledButton;
 @property (weak, nonatomic) IBOutlet UILabel *scheduledHeaderLabel;
@@ -89,7 +90,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     // TODO: Hub listener, etc so we can display disconnected or waiting for data as appropriate when the state changes
     // TODO: hub setting, scheduled settings from server
     self.currentHubSetting = HubSetting_Scheduled;
-    [self setupForHubSetting:self.currentHubSetting];
+    [self setupForHubSetting:self.currentHubSetting animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -140,7 +141,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
         self.disconnectedSubHeaderLabel.text = @"This is a placeholder sub headline. Please update me";
         self.disconnectedSubBodyLabel.text = @"This is some placeholder disconnected sub body text. Please update me.";
         [self hideDisconnectedView:NO];
-    }];
+    } withDuration:.3];
 }
 
 - (void)hubNoData
@@ -152,18 +153,19 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
         self.disconnectedSubHeaderLabel.text = @"This is a placeholder sub headline. Please update me";
         self.disconnectedSubBodyLabel.text = @"This is some placeholder no data sub body text. Please update me.";
         [self hideDisconnectedView:NO];
-    }];
+    } withDuration:.3];
 }
 
-- (void)setupForHubSetting:(HubSetting)hubSetting
+- (void)setupForHubSetting:(HubSetting)hubSetting animated:(BOOL)animated
 {
     [self animateChanges:^{
         [self hideDisconnectedView:YES];
         self.onButton.selected = hubSetting == HubSetting_On;
         self.scheduledButton.selected = hubSetting == HubSetting_Scheduled;
-        self.scheduledActiveView.hidden = hubSetting != HubSetting_Scheduled;
+        self.scheduledHeaderSpacingConstraint.constant = hubSetting == HubSetting_Scheduled ? self.scheduledActiveView.bounds.size.height : 0;
         self.offButton.selected = hubSetting == HubSetting_Off;
-    }];
+        [self.view layoutIfNeeded];
+    } withDuration:(animated ? .3 : 0)];
 }
 
 // TODO: a more appropriate name
@@ -187,9 +189,9 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     }
 }
 
-- (void)animateChanges:(void (^)(void))animations
+- (void)animateChanges:(void (^)(void))animations withDuration:(NSTimeInterval)duration
 {
-    [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseInOut animations:animations completion:nil];
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseInOut animations:animations completion:nil];
 }
 
 - (void)updateWeekdayRange
@@ -223,7 +225,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 {
     if (self.currentHubSetting != HubSetting_On) {
         self.currentHubSetting = HubSetting_On;
-        [self setupForHubSetting:self.currentHubSetting];
+        [self setupForHubSetting:self.currentHubSetting animated:YES];
         
         // TODO: Update hub
     }
@@ -233,7 +235,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 {
     if (self.currentHubSetting != HubSetting_Scheduled) {
         self.currentHubSetting = HubSetting_Scheduled;
-        [self setupForHubSetting:self.currentHubSetting];
+        [self setupForHubSetting:self.currentHubSetting animated:YES];
         
         // TODO: Update hub
     }
@@ -243,7 +245,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 {
     if (self.currentHubSetting != HubSetting_Off) {
         self.currentHubSetting = HubSetting_Off;
-        [self setupForHubSetting:self.currentHubSetting];
+        [self setupForHubSetting:self.currentHubSetting animated:YES];
         
         // TODO: Update hub
     }
