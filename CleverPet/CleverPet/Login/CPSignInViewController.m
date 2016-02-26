@@ -9,6 +9,7 @@
 #import "CPSignInViewController.h"
 #import "CPLoginController.h"
 #import "CPTextField.h"
+#import "CPLoadingView.h"
 
 @interface CPSignInViewController ()<UITextFieldDelegate>
 
@@ -19,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signInButtonBottomConstraint;
+@property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
 
 @end
 
@@ -83,7 +85,9 @@
 - (IBAction)signInTapped:(id)sender
 {
     if ([self validateInput]) {
+        self.loadingView.hidden = NO;
         [[CPLoginController sharedInstance] verifyPassword:self.passwordField.text forEmail:self.emailField.text failure:^{
+            self.loadingView.hidden = YES;
             [self displayErrorAlertWithTitle:NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails") andMessage:NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails")];
         }];
     }

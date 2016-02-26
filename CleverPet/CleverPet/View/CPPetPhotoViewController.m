@@ -10,6 +10,7 @@
 #import "CPLoginController.h"
 #import "CPParticleConnectionHelper.h"
 #import "BABCropperView.h"
+#import "CPLoadingView.h"
 
 @interface CPPetPhotoViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -20,8 +21,7 @@
 @property (weak, nonatomic) IBOutlet BABCropperView *cropView;
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
-@property (weak, nonatomic) IBOutlet UIView *fadeView;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (weak, nonatomic) IBOutlet CPLoadingView *fadeView;
 
 @end
 
@@ -58,7 +58,6 @@
     self.continueButton.backgroundColor = [UIColor appLightTealColor];
     self.continueButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.continueButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
-    self.spinner.color = [UIColor appTealColor];
 }
 
 - (void)setSelectedImage:(UIImage *)selectedImage

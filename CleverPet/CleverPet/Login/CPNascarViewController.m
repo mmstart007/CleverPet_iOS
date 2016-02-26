@@ -9,6 +9,7 @@
 #import "CPNascarViewController.h"
 #import "CPLoginController.h"
 #import "CPTextField.h"
+#import "CPLoadingView.h"
 
 @interface CPNascarViewController ()<UITextFieldDelegate>
 
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signInButtonBottomConstraint;
+@property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
 
 @end
 
@@ -80,17 +82,20 @@
 #pragma mark - IBActions
 - (IBAction)facebookTapped:(id)sender
 {
+    self.loadingView.hidden = NO;
     [[CPLoginController sharedInstance] signInWithFacebook];
 }
 
 - (IBAction)googleTapped:(id)sender
 {
+    self.loadingView.hidden = NO;
     [[CPLoginController sharedInstance] signInWithGoogle];
 }
 
 - (IBAction)signInTapped:(id)sender
 {
     if ([self validateInput]) {
+        self.loadingView.hidden = NO;
         [[CPLoginController sharedInstance] signInWithEmail:self.emailField.text];
     }
 }

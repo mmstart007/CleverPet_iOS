@@ -9,6 +9,7 @@
 #import "CPSplashViewController.h"
 #import "CPLoginController.h"
 #import "CPConfigManager.h"
+#import "CPLoadingView.h"
 
 @interface CPSplashViewController ()<CPLoginControllerDelegate>
 
@@ -16,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 @property (weak, nonatomic) IBOutlet UILabel *taglineLabel;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UIView *fadeView;
 
 @end
@@ -50,7 +50,6 @@
     self.signInButton.backgroundColor = [UIColor appLightTealColor];
     [self.signInButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.signInButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:0];
-    [self.spinner setColor:[UIColor appTealColor]];
 }
 
 - (void)showLoadingSpinner:(BOOL)show

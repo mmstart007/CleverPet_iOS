@@ -172,18 +172,9 @@
                                     <action selector="continueTapped:" destination="BVO-30-aOl" eventType="touchUpInside" id="zMf-gh-s1q"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3b-fM-66p">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z3b-fM-66p" customClass="CPLoadingView">
                                 <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                                <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Bhg-Xt-uTU">
-                                        <rect key="frame" x="142" y="212" width="37" height="37"/>
-                                    </activityIndicatorView>
-                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="Bhg-Xt-uTU" firstAttribute="centerY" secondItem="Z3b-fM-66p" secondAttribute="centerY" id="83O-1J-ob4"/>
-                                    <constraint firstItem="Bhg-Xt-uTU" firstAttribute="centerX" secondItem="Z3b-fM-66p" secondAttribute="centerX" id="LxM-dH-zFg"/>
-                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -216,7 +207,6 @@
                         <outlet property="fadeView" destination="Z3b-fM-66p" id="7d3-Ee-bma"/>
                         <outlet property="headerLabel" destination="Qib-Ak-DQt" id="2ym-K6-k1e"/>
                         <outlet property="instructionLabel" destination="fcA-Wh-6Mf" id="4o5-lC-eWd"/>
-                        <outlet property="spinner" destination="Bhg-Xt-uTU" id="e7F-jN-f5r"/>
                         <outlet property="swapImageButton" destination="lmt-Wb-4oC" id="EpW-BH-qoA"/>
                     </connections>
                 </viewController>

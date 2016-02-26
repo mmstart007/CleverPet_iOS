@@ -9,6 +9,7 @@
 #import "CPSignUpViewController.h"
 #import "CPLoginController.h"
 #import "CPTextField.h"
+#import "CPLoadingView.h"
 
 @interface CPSignUpViewController ()<UITextFieldDelegate>
 
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signUpButtonBottomConstraint;
+@property (weak, nonatomic) IBOutlet CPLoadingView *loginView;
 
 @end
 
@@ -94,6 +96,7 @@
 - (IBAction)signUpTapped:(id)sender
 {
     if ([self validateInput]) {
+        self.loginView.hidden = NO;
         [[CPLoginController sharedInstance] signUpWithEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] displayName:[self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] andPassword:self.passwordField.text];
     }
 }
