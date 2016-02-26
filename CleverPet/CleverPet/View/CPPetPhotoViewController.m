@@ -30,7 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.cropView.cropSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.width*.75f);
+    // Crop at double our view size so the resulting image isn't so garbage
+    self.cropView.cropSize = CGSizeMake(self.view.bounds.size.width*2, self.view.bounds.size.width*.75*2);
     self.cropView.backgroundColor = [UIColor appBackgroundColor];
     if (self.selectedImage) {
         // Force update of image and button if we had an image set before segueing in
