@@ -538,6 +538,7 @@
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="G5v-Co-YYS" firstAttribute="centerY" secondItem="BlS-We-bZS" secondAttribute="centerY" id="7ki-b9-1M3"/>
                                                     <constraint firstItem="HFp-CZ-WUh" firstAttribute="centerY" secondItem="BlS-We-bZS" secondAttribute="centerY" id="Cfo-hN-cdY"/>
@@ -610,6 +611,7 @@
                         <outlet property="editImageButton" destination="UrT-BF-B7x" id="XQi-IH-ry7"/>
                         <outlet property="familyNameField" destination="K2E-s8-X3j" id="Vw2-rB-NEj"/>
                         <outlet property="genderField" destination="CkZ-T2-hpv" id="YKZ-gQ-eM7"/>
+                        <outlet property="logoutContainer" destination="BlS-We-bZS" id="de7-xo-3c3"/>
                         <outlet property="logoutLabel" destination="G5v-Co-YYS" id="OFP-aN-sCv"/>
                         <outlet property="logoutX" destination="HFp-CZ-WUh" id="b9m-N1-Vh4"/>
                         <outlet property="nameField" destination="q4u-aE-pAF" id="eex-qj-4Ju"/>

@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet CPTextField *genderField;
 @property (weak, nonatomic) IBOutlet CPTextField *neuteredField;
 
+@property (weak, nonatomic) IBOutlet UIView *logoutContainer;
 @property (weak, nonatomic) IBOutlet UILabel *logoutLabel;
 @property (weak, nonatomic) IBOutlet UILabel *logoutX;
 
@@ -46,6 +47,7 @@
 
 @property (nonatomic, strong) CPPet *pet;
 @property (nonatomic, weak) UIBarButtonItem *pseudoBackButton;
+@property (nonatomic, weak) UITapGestureRecognizer *logoutRecognizer;
 
 @end
 
@@ -83,6 +85,10 @@
     [button addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = barButton;
     self.pseudoBackButton = barButton;
+    
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoutTapped:)];
+    [self.logoutContainer addGestureRecognizer:recognizer];
+    self.logoutRecognizer = recognizer;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -168,6 +174,11 @@
             [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", nil) andMessage:errorMessage];
         }
     }];
+}
+
+- (void)logoutTapped:(UITapGestureRecognizer*)recognizer
+{
+    [[CPUserManager sharedInstance] logout];
 }
 
 #pragma mark - UITextFieldDelegate methods

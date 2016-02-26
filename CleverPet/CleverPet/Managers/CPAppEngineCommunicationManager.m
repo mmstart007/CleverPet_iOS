@@ -183,4 +183,9 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     return [NSError errorWithDomain:NSStringFromClass([self class]) code:0 userInfo:@{NSLocalizedDescriptionKey:message}];
 }
 
+- (void)clearAuth
+{
+    [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
+}
+
 @end

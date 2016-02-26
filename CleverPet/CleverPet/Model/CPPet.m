@@ -53,8 +53,11 @@
     
     // Age only present during initial setup
     if (isInitialSetup) {
-        if (completion) completion(NO, NSLocalizedString(@"Please enter your pets age", @"Error message when pet age is empty"));
-        return;
+        NSString *age = proposedInput[kDOBKey];
+        if ([age length] == 0) {
+            if (completion) completion(NO, NSLocalizedString(@"Please enter your pets age", @"Error message when pet age is empty"));
+            return;
+        }
     }
         
     NSString *weight = proposedInput[kWeightKey];

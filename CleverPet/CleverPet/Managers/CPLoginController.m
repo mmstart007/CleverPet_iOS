@@ -13,6 +13,7 @@
 #import "CPParticleConnectionHelper.h"
 #import "CPAppEngineCommunicationManager.h"
 #import "CPFileUtils.h"
+#import "CPUserManager.h"
 
 NSString * const kLoginCompleteNotification = @"NOTE_LoginComplete";
 NSString * const kLoginErrorKey = @"LoginError";
@@ -210,6 +211,29 @@ didFinishSignInWithToken:(NSString *)token
     // TODO: Need to get the actual top level controller navController = visibleViewController, viewController = probably presentedViewController
     // TODO: handle when our root is not a nav controller
     return (UINavigationController*)[[[UIApplication sharedApplication].delegate window] rootViewController];
+}
+
+- (void)logout
+{
+    [[CPAppEngineCommunicationManager sharedInstance] clearAuth];
+    [[GITAuth sharedInstance] signOut];
+    
+    // Interface manager setup is tied into the root controller when it's instantiated, so reset it
+    self.interfaceManager = [[GITInterfaceManager alloc] init];
+    self.interfaceManager.delegate = self;
+    [GITClient sharedInstance].delegate = self;
+    
+    // Swap root controller for splash
+    UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    [window setRootViewController:vc];
+    [window makeKeyAndVisible];
+    
+    CATransition *animation = [CATransition animation];
+    [animation setDuration:.3f];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+    [animation setType:kCATransitionFade];
+    [window.layer addAnimation:animation forKey:@"crossFade"];
 }
 
 @end

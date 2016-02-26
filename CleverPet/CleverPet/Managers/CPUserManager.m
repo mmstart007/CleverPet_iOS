@@ -9,6 +9,7 @@
 #import "CPUserManager.h"
 #import "CPAppEngineCommunicationManager.h"
 #import "CPFileUtils.h"
+#import "CPLoginController.h"
 
 @interface CPUserManager()
 
@@ -94,6 +95,12 @@
 - (NSString*)defaultsKeyForUser:(NSString *)userId
 {
     return [NSString stringWithFormat:@"User: %@", userId];
+}
+
+- (void)logout
+{
+    self.currentUser = nil;
+    [[CPLoginController sharedInstance] logout];
 }
 
 @end

@@ -29,4 +29,6 @@ extern NSString * const kLoginErrorKey;
 
 - (BOOL)isValidEmail:(NSString*)email;
 
+- (void)logout;
+
 @end

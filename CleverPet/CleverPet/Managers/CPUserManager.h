@@ -19,4 +19,6 @@
 - (void)updatePetPhoto:(UIImage*)image;
 - (CPUser*)getCurrentUser;
 
+- (void)logout;
+
 @end

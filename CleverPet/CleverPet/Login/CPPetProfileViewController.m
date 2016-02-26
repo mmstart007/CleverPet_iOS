@@ -192,11 +192,14 @@
 
 - (NSString*)getDOB
 {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *componentsToAdd = [[NSDateComponents alloc] init];
-    componentsToAdd.year = -[self.ageField.text integerValue];
-    
-    return [self.dateFormatter stringFromDate:[calendar dateByAddingComponents:componentsToAdd toDate:[NSDate date] options:kNilOptions]];
+    if ([self.ageField.text length] > 0) {
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *componentsToAdd = [[NSDateComponents alloc] init];
+        componentsToAdd.year = -[self.ageField.text integerValue];
+        
+        return [self.dateFormatter stringFromDate:[calendar dateByAddingComponents:componentsToAdd toDate:[NSDate date] options:kNilOptions]];
+    }
+    return @"";
 }
 
 #pragma mark - CPPickerDelegate methods
