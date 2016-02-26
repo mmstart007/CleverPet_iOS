@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet BABCropperView *cropView;
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
+@property (weak, nonatomic) IBOutlet UIView *fadeView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 @end
 
@@ -55,6 +57,7 @@
     self.continueButton.backgroundColor = [UIColor appLightTealColor];
     self.continueButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.continueButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    self.spinner.color = [UIColor appTealColor];
 }
 
 - (void)setSelectedImage:(UIImage *)selectedImage
@@ -72,7 +75,6 @@
 
 - (IBAction)continueTapped:(id)sender
 {
-    // TODO: spinner and disable interface
     BLOCK_SELF_REF_OUTSIDE();
     [self.cropView renderCroppedImage:^(UIImage *croppedImage, CGRect cropRect) {
         BLOCK_SELF_REF_INSIDE();
@@ -80,13 +82,24 @@
         if (self.delegate) {
             [self.delegate selectedImage:croppedImage];
         } else {
+            [self showLoadingSpinner:YES];
+            BLOCK_SELF_REF_OUTSIDE();
             [[CPLoginController sharedInstance] completeSignUpWithPetImage:croppedImage completion:^(NSError *error) {
-                // TODO: display error
+                BLOCK_SELF_REF_INSIDE();
+                [self showLoadingSpinner:NO];
+                if (error) {
+                    [self displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
+                }
             }];
         }
     }];
-    
-    
+}
+
+- (void)showLoadingSpinner:(BOOL)show
+{
+    [UIView animateWithDuration:.3 animations:^{
+        self.fadeView.hidden = !show;
+    }];
 }
 
 - (void)promptForPhotoSource

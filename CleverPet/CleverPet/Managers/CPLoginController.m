@@ -15,14 +15,12 @@
 #import "CPFileUtils.h"
 #import "CPUserManager.h"
 
-NSString * const kLoginCompleteNotification = @"NOTE_LoginComplete";
-NSString * const kLoginErrorKey = @"LoginError";
-
 @interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate>
 
 @property (nonatomic, strong) GITInterfaceManager *interfaceManager;
 @property (nonatomic, strong) NSDataDetector *emailDetector;
 @property (nonatomic, strong) NSDictionary *userInfo;
+@property (nonatomic, weak) id<CPLoginControllerDelegate> delegate;
 
 @end
 
@@ -68,9 +66,8 @@ NSString * const kLoginErrorKey = @"LoginError";
     BLOCK_SELF_REF_OUTSIDE();
     [[CPAppEngineCommunicationManager sharedInstance] createPetProfileWithInfo:self.userInfo completion:^(NSString *petId, NSError *error) {
         BLOCK_SELF_REF_INSIDE();
-        if (error) {
-            [[self getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
-        } else {
+        if (completion) completion(error);
+        if (!error) {
             [CPFileUtils saveImage:image forPet:petId];
             // TODO: bring back UserWithoutDevice state
             [self presentUIForLoginResult:CPLoginResult_UserWithSetupCompleted];
@@ -79,8 +76,9 @@ NSString * const kLoginErrorKey = @"LoginError";
 }
 
 #pragma mark - Flow control
-- (void)startSignin
+- (void)startSigninWithDelegate:(id<CPLoginControllerDelegate>)delegate
 {
+    self.delegate = delegate;
     [self.interfaceManager startSignIn];
 }
 
@@ -153,14 +151,14 @@ didFinishSignInWithToken:(NSString *)token
          error:(NSError *)error
 {
     if (error) {
-        [[self getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
+        [self.delegate loginAttemptFailed:error.localizedDescription];
     } else {
         BLOCK_SELF_REF_OUTSIDE();
         [[CPAppEngineCommunicationManager sharedInstance] loginWithUser:account completion:^(CPLoginResult result, NSError *error) {
             BLOCK_SELF_REF_INSIDE();
             if (result == CPLoginResult_Failure) {
                 // TODO: nicer error handling
-                [[self getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
+                [self.delegate loginAttemptFailed:error.localizedDescription];
             } else {
                 [self presentUIForLoginResult:result];
             }

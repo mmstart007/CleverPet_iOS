@@ -10,12 +10,14 @@
 #import "CPLoginController.h"
 #import "CPConfigManager.h"
 
-@interface CPSplashViewController ()
+@interface CPSplashViewController ()<CPLoginControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 @property (weak, nonatomic) IBOutlet UILabel *taglineLabel;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (weak, nonatomic) IBOutlet UIView *fadeView;
 
 @end
 
@@ -36,18 +38,6 @@
     }];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    REG_SELF_FOR_NOTIFICATION(kLoginCompleteNotification, loginComplete:);
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    UNREG_SELF_FOR_ALL_NOTIFICATIONS();
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -60,23 +50,29 @@
     self.signInButton.backgroundColor = [UIColor appLightTealColor];
     [self.signInButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.signInButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:0];
+    [self.spinner setColor:[UIColor appTealColor]];
+}
+
+- (void)showLoadingSpinner:(BOOL)show
+{
+    [UIView animateWithDuration:.3 animations:^{
+        self.fadeView.hidden = !show;
+        self.signInButton.hidden = show;
+    }];
 }
 
 #pragma mark - IBActions
 - (IBAction)signInTapped:(id)sender
 {
-    [[CPLoginController sharedInstance] startSignin];
+    [[CPLoginController sharedInstance] startSigninWithDelegate:self];
+    [self showLoadingSpinner:YES];
 }
 
-- (void)loginComplete:(NSNotification*)notification
+#pragma mark - CPLoginControllerDelegate methods
+- (void)loginAttemptFailed:(NSString *)message
 {
-    NSDictionary *userInfo = notification.userInfo;
-    if (userInfo[kLoginErrorKey]) {
-        // TODO: display error
-    } else {
-        // TODO: skip profile set up if we've already done it
-        [self performSegueWithIdentifier:@"setupPetProfile" sender:nil];
-    }
+    [self showLoadingSpinner:NO];
+    [self displayErrorAlertWithTitle:NSLocalizedString(@"Error", @"Login error alert title") andMessage:message];
 }
 
 /*

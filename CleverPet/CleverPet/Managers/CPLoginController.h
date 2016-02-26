@@ -10,14 +10,17 @@
 
 @class GITAccount;
 
-extern NSString * const kLoginCompleteNotification;
-extern NSString * const kLoginErrorKey;
+@protocol CPLoginControllerDelegate <NSObject>
+
+- (void)loginAttemptFailed:(NSString*)message;
+
+@end
 
 @interface CPLoginController : NSObject
 
 + (instancetype)sharedInstance;
 
-- (void)startSignin;
+- (void)startSigninWithDelegate:(id<CPLoginControllerDelegate>)delegate;
 - (void)signInWithEmail:(NSString*)email;
 - (void)verifyPassword:(NSString *)password forEmail:(NSString*)email failure:(void (^)(void))failure;
 - (void)signUpWithEmail:(NSString*)email displayName:(NSString*)displayName andPassword:(NSString*)password;
