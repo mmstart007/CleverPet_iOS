@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lOe-QP-hca">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lOe-QP-hca">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -138,7 +138,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shB-wE-uzr">
-                                <rect key="frame" x="531" y="20" width="44" height="44"/>
+                                <rect key="frame" x="540" y="20" width="44" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="shB-wE-uzr" secondAttribute="height" multiplier="1:1" id="TJW-id-vz5"/>
                                 </constraints>
@@ -156,7 +156,7 @@
                             <constraint firstAttribute="trailing" secondItem="2qS-l4-Sgx" secondAttribute="trailing" id="PAw-LN-d1J"/>
                             <constraint firstItem="shB-wE-uzr" firstAttribute="centerY" secondItem="GBJ-0a-7Ra" secondAttribute="centerY" id="VTh-Rg-cC7"/>
                             <constraint firstAttribute="trailing" secondItem="GBJ-0a-7Ra" secondAttribute="trailing" id="ZCv-Oa-Epr"/>
-                            <constraint firstItem="shB-wE-uzr" firstAttribute="trailing" secondItem="GBJ-0a-7Ra" secondAttribute="trailing" constant="-25" id="aMb-mO-X7g"/>
+                            <constraint firstItem="shB-wE-uzr" firstAttribute="trailing" secondItem="GBJ-0a-7Ra" secondAttribute="trailing" constant="-16" id="aMb-mO-X7g"/>
                             <constraint firstItem="GBJ-0a-7Ra" firstAttribute="leading" secondItem="nfr-Zf-dyM" secondAttribute="leading" id="ceN-Ad-ZZ7"/>
                             <constraint firstItem="2qS-l4-Sgx" firstAttribute="top" secondItem="GBJ-0a-7Ra" secondAttribute="bottom" id="v6o-he-jYY"/>
                             <constraint firstItem="shB-wE-uzr" firstAttribute="height" secondItem="GBJ-0a-7Ra" secondAttribute="height" id="vvw-pE-pke"/>

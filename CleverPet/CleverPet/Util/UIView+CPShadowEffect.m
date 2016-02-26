@@ -11,17 +11,21 @@
 @implementation UIView (CPShadowEffect)
 - (void)applyCleverPetShadow
 {
-    self.layer.shadowColor = [UIColor colorWithWhite:.85 alpha:1].CGColor;
-    self.layer.shadowOffset = CGSizeMake(0, 2);
-    self.layer.shadowOpacity = 1;
-    self.layer.shadowRadius = 1;
+    if (self.layer.shadowOpacity != 1) {
+        self.layer.shadowColor = [UIColor colorWithWhite:.85 alpha:1].CGColor;
+        self.layer.shadowOffset = CGSizeMake(0, 2);
+        self.layer.shadowOpacity = 1;
+        self.layer.shadowRadius = 1;
+    }
 }
 
 - (void)removeCleverPetShadow
 {
-    self.layer.shadowOpacity = 0;
-    self.layer.shadowColor = nil;
-    self.layer.shadowRadius = 0;
-    self.layer.shadowOffset = CGSizeZero;
+    if (self.layer.shadowOpacity != 0) {
+        self.layer.shadowOpacity = 0;
+        self.layer.shadowColor = nil;
+        self.layer.shadowRadius = 0;
+        self.layer.shadowOffset = CGSizeZero;
+    }
 }
 @end

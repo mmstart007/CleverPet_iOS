@@ -2,27 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Omnes-Black.otf</string>
-		<string>Omnes-BlackItalic.otf</string>
-		<string>Omnes-Bold.otf</string>
-		<string>Omes-BoldItalic.otf</string>
-		<string>Omnes-ExtraLight.otf</string>
-		<string>OmnesExtraLightItalic.otf</string>
-		<string>Omnes-Hairline.otf</string>
-		<string>Omnes-HairlineItalic.otf</string>
-		<string>Omnes-Light.otf</string>
-		<string>Omnes-LightItalic.otf</string>
-		<string>Omnes-Medium.otf</string>
-		<string>Omnes-MediumItalic.otf</string>
-		<string>Omnes-Regular.otf</string>
-		<string>Omnes-RegularItalic.otf</string>
-		<string>Omnes-Semibold.otf</string>
-		<string>Omnes-SemiboldItalic.otf</string>
-		<string>Omnes-Thin.otf</string>
-		<string>Omnes-ThinItalic.otf</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -67,14 +46,36 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Omnes-Black.otf</string>
+		<string>Omnes-BlackItalic.otf</string>
+		<string>Omnes-Bold.otf</string>
+		<string>Omes-BoldItalic.otf</string>
+		<string>Omnes-ExtraLight.otf</string>
+		<string>OmnesExtraLightItalic.otf</string>
+		<string>Omnes-Hairline.otf</string>
+		<string>Omnes-HairlineItalic.otf</string>
+		<string>Omnes-Light.otf</string>
+		<string>Omnes-LightItalic.otf</string>
+		<string>Omnes-Medium.otf</string>
+		<string>Omnes-MediumItalic.otf</string>
+		<string>Omnes-Regular.otf</string>
+		<string>Omnes-RegularItalic.otf</string>
+		<string>Omnes-Semibold.otf</string>
+		<string>Omnes-SemiboldItalic.otf</string>
+		<string>Omnes-Thin.otf</string>
+		<string>Omnes-ThinItalic.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

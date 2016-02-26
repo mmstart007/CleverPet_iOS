@@ -55,8 +55,17 @@
     self.containerLayoutConstraint.constant = scrollView.contentInset.top;
     CGFloat offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top);
     self.containerView.clipsToBounds = offsetY <= 0;
-    self.bottomLayoutConstraint.constant = offsetY >= 0 ? 0 : -offsetY / 2;
-    self.heightLayoutConstraint.constant = MAX(offsetY + scrollView.contentInset.top, scrollView.contentInset.top);
+    
+    CGFloat bottomConstant = offsetY >= 0 ? 0 : -offsetY / 2;
+    
+    if (self.bottomLayoutConstraint.constant != bottomConstant && -offsetY < self.originalHeight) {
+        self.bottomLayoutConstraint.constant = bottomConstant;
+    }
+    
+    CGFloat topConstant = MAX(offsetY + scrollView.contentInset.top, scrollView.contentInset.top);
+    if (self.heightLayoutConstraint.constant != topConstant) {
+        self.heightLayoutConstraint.constant = topConstant;
+    }
     
     return scrollView.contentOffset.y < (self.originalHeight - 4);
 }

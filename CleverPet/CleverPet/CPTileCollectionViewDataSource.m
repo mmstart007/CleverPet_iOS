@@ -23,6 +23,8 @@
 
 @property (assign, nonatomic) CGFloat headerImageHeight;
 @property (assign, nonatomic) CGFloat headerStatsHeight;
+
+@property (strong, nonatomic) NSMutableArray<CPTileViewCell *> *precachedTableViewCells;
 @end
 
 @implementation CPTileCollectionViewDataSource {
@@ -47,9 +49,19 @@
         [tableView registerNib:[UINib nibWithNibName:@"CPMainTableSectionHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:SECTION_HEADER];
         
         self.tileDataManager = [[CPTileDataManager alloc] init];
+        
+        [self precacheTableViewCells];
     }
 
     return self;
+}
+
+- (void)precacheTableViewCells {
+    self.precachedTableViewCells = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < 100; i++) {
+        [self.precachedTableViewCells addObject:[self.tableView dequeueReusableCellWithIdentifier:TILE_VIEW_CELL]];
+    }
 }
 
 - (void)postInit
@@ -123,7 +135,12 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CPTileViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TILE_VIEW_CELL];
+    CPTileViewCell *cell = [self.precachedTableViewCells lastObject];
+    if (cell) {
+        [self.precachedTableViewCells removeLastObject];
+    } else {
+        cell = [tableView dequeueReusableCellWithIdentifier:TILE_VIEW_CELL];
+    }
     CPTile *tile = [self.tileDataManager tileForRow:indexPath.row inSection:indexPath.section - 1];
     cell.tile = tile;
     return cell;
@@ -171,8 +188,6 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         }
         
         self.sizingCell.tile = tile;
-        
-        NSLog(@"%@", indexPath);
         
         CGSize size = [self.sizingCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
         tile.cachedRowHeight = size.height;

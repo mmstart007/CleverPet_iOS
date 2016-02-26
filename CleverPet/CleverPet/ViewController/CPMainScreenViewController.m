@@ -78,8 +78,14 @@
         [self.headerView removeCleverPetShadow];
     }
     
-    self.mainScreenStatsHeaderView.alpha = headerStatsFade;
-    self.mainScreenHeaderView.alpha = pow((1 - headerStatsFade), 2);
+    if (self.mainScreenHeaderView.alpha != headerStatsFade) {
+        self.mainScreenStatsHeaderView.alpha = headerStatsFade;
+    }
+    
+    double alphaValue = pow((1 - headerStatsFade), 2);
+    if (self.mainScreenHeaderView.alpha != alphaValue) {
+        self.mainScreenHeaderView.alpha = alphaValue;
+    }
 }
 
 - (void)addTileForDate:(NSDate *)date index:(NSUInteger)index
