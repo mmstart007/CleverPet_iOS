@@ -69,7 +69,7 @@
     self.nameField.text = self.pet.name;
     self.familyNameField.text = self.pet.familyName;
     self.breedField.text = self.pet.breed;
-    self.weightField.text = [NSString stringWithFormat:@"%d %@", self.pet.weight, self.weightDescriptor];
+    self.weightField.text = [NSString stringWithFormat:@"%ld %@", (long)self.pet.weight, self.weightDescriptor];
     // Uppercase first letter of word, since it's all lower case coming from the server
     self.genderField.text = [self.pet.gender stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.gender substringToIndex:1] uppercaseString]];
 //    self.neuteredField.text = [self.pet.altered isEqualToString:@"unspecified"] ? nil : [self.pet.altered stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.altered substringToIndex:1] uppercaseString]];
@@ -79,6 +79,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     // TODO: button image
     [button setTitle:@"Back" forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
     [button sizeToFit];
     [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
