@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *affirmativeButton;
 @property (weak, nonatomic) IBOutlet UIStackView *buttonHolder;
 @property (weak, nonatomic) IBOutlet UIView *backingView;
+@property (strong, nonatomic) IBOutlet UIView *colouredDotView;
 @end
 
 @implementation CPTileViewCell {
@@ -69,6 +70,8 @@
     [self setTextColor:tileColor onButton:self.negativeButton];
     
     self.tagTimeStampLabel.text = [NSString stringWithFormat:@"Device Message | %@", [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
+    
+    self.colouredDotView.backgroundColor = tileColor;
 }
 
 - (void)setTextColor:(UIColor *)color onButton:(UIButton *)button
@@ -112,6 +115,9 @@
     
     self.layer.shouldRasterize = YES;
     self.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
+    self.colouredDotView.layer.cornerRadius = 2;
+    self.colouredDotView.clipsToBounds = YES;
 }
 
 - (void)prepareForReuse
