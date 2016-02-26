@@ -49,23 +49,36 @@
 
 - (void)updatePetInfo:(NSDictionary *)petInfo
 {
-    // TODO: shortcut if nothing has changed
-    
     NSDictionary *currentPetInfo = [self.currentUser.pet toDictionary];
-    NSError *error;
-    [self.currentUser.pet mergeFromDictionary:petInfo useKeyMapping:YES error:&error];
-    
-    BLOCK_SELF_REF_OUTSIDE();
-    [[CPAppEngineCommunicationManager sharedInstance] updatePet:self.currentUser.pet.petId withInfo:petInfo completion:^(NSError *error) {
-        BLOCK_SELF_REF_INSIDE();
-        // TODO: Handle failure somehow
-        if (error) {
-            // reset back to original info
-            [self.currentUser.pet mergeFromDictionary:currentPetInfo useKeyMapping:YES error:nil];
-        } else {
-            [self saveUserToDefaults];
+    BOOL shouldUpdate = NO;
+    // Don't need to do anything if no fields have been updated
+    for (NSString *key in petInfo) {
+        if (!currentPetInfo[key] || ![currentPetInfo[key] isEqual:petInfo[key]]) {
+            shouldUpdate = YES;
+            // Additional checking for weight, as passed in pet info will be a string, but toDict weight will be a number. Will have to do the same thing for any other primitives we may add
+            if ([key isEqualToString:kWeightKey]) {
+                shouldUpdate = [petInfo[key] integerValue] != [currentPetInfo[key] integerValue];
+            }
+            break;
         }
-    }];
+    }
+    
+    if (shouldUpdate) {
+        NSError *error;
+        [self.currentUser.pet mergeFromDictionary:petInfo useKeyMapping:YES error:&error];
+        
+        BLOCK_SELF_REF_OUTSIDE();
+        [[CPAppEngineCommunicationManager sharedInstance] updatePet:self.currentUser.pet.petId withInfo:petInfo completion:^(NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            // TODO: Handle failure somehow
+            if (error) {
+                // reset back to original info
+                [self.currentUser.pet mergeFromDictionary:currentPetInfo useKeyMapping:YES error:nil];
+            } else {
+                [self saveUserToDefaults];
+            }
+        }];
+    }
 }
 
 - (void)updatePetPhoto:(UIImage *)image
