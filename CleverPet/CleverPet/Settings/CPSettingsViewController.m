@@ -32,7 +32,7 @@ NSUInteger const kAccountSection = 2;
 @interface CPSettingsViewController ()
 
 @property (weak, nonatomic) IBOutlet CPSettingsHubStatusCell *hubCell;
-@property (weak, nonatomic) UIBarButtonItem *psuedoBackButton;
+@property (weak, nonatomic) UIBarButtonItem *pseudoBackButton;
 
 @end
 
@@ -46,13 +46,12 @@ NSUInteger const kAccountSection = 2;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     // TODO: button image
-    [button setTitle:@"Settings" forState:UIControlStateNormal];
-    [button sizeToFit];
-    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
+    [button setFrame:CGRectMake(0, 0, 40, 40)];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     [button addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = barButton;
-    self.psuedoBackButton = barButton;
+    self.pseudoBackButton = barButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated

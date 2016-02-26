@@ -12,6 +12,7 @@
 #import "CPBreedPickerViewController.h"
 #import "CPLoginController.h"
 #import "CPTextValidator.h"
+#import "CPPet.h"
 
 @interface CPPetProfileViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate>
 
@@ -90,43 +91,6 @@
     [self.continueButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
 }
 
-- (BOOL)validateInput
-{
-    // TODO: pull this validation out(to the pet profile object?) so we can use it from settings as well
-    if ([self.nameField.text length] < kNameFieldMinChars || [self.nameField.text length] > kNameFieldMaxChars) {
-        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Name must be between %d and %d characters long", @"Error message when name name does not fit requirements. First %d is minimum number of characters, second is maximum"), kNameFieldMinChars, kNameFieldMaxChars]];
-        return NO;
-    }
-    
-    if ([self.familyField.text length] < kFamilyNameFieldMinChars || [self.familyField.text length] > kFamilyNameFieldMaxChars) {
-        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Family name must be between %d and %d characters long", @"Error message when family name does not fit requirements. First %d is minimum number of characters, second is maximum"), kFamilyNameFieldMinChars, kFamilyNameFieldMaxChars]];
-        return NO;
-    }
-    
-    if ([self.breedField.text length] == 0) {
-        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:NSLocalizedString(@"Please enter the breed of your pet", @"Error message when pet breed is empty")];
-        return NO;
-    }
-    
-    if ([self.genderField.text length] == 0) {
-        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:NSLocalizedString(@"Please enter the gender of your pet", @"Error message when pet gender is empty")];
-        return NO;
-    }
-    
-    if ([self.ageField.text length] == 0) {
-        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:NSLocalizedString(@"Please enter your pets age", @"Error message when pet age is empty")];
-        return NO;
-    }
-    
-    NSString *weight = [self.weightField.text stringByReplacingOccurrencesOfString:self.weightDescriptor withString:@""];
-    weight = [weight stringByReplacingOccurrencesOfString:@" " withString:@""];
-    if ([weight length] == 0) {
-        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:NSLocalizedString(@"Please enter your pets weight", @"Error message when pet weight is empty")];
-    }
-    
-    return YES;
-}
-
 - (void)moveToNextTextFieldFrom:(UITextField*)textField
 {
     NSUInteger index = [self.textFields indexOfObject:textField];
@@ -141,10 +105,15 @@
 #pragma mark - IBActions
 - (IBAction)continueTapped:(id)sender
 {
-    if ([self validateInput]) {
-        [[CPLoginController sharedInstance] setPendingUserInfo:@{kNameKey:self.nameField.text, kFamilyNameKey:self.familyField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:@([self.weightField.text integerValue]), kDOBKey:[self getDOB]}];
-        [self performSegueWithIdentifier:@"setPetPhoto" sender:nil];
-    }
+    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kDOBKey:[self getDOB]};
+    [CPPet validateInput:petInfo isInitialSetup:YES completion:^(BOOL isValidInput, NSString *errorMessage) {
+        if (isValidInput) {
+            [[CPLoginController sharedInstance] setPendingUserInfo:petInfo];
+            [self performSegueWithIdentifier:@"setPetPhoto" sender:nil];
+        } else {
+            [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:errorMessage];
+        }
+    }];
 }
 
 - (IBAction)weightSwitchValueChanged:(id)sender
@@ -223,11 +192,14 @@
 
 - (NSString*)getDOB
 {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *componentsToAdd = [[NSDateComponents alloc] init];
-    componentsToAdd.year = -[self.ageField.text integerValue];
-    
-    return [self.dateFormatter stringFromDate:[calendar dateByAddingComponents:componentsToAdd toDate:[NSDate date] options:kNilOptions]];
+    if ([self.ageField.text length] > 0) {
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *componentsToAdd = [[NSDateComponents alloc] init];
+        componentsToAdd.year = -[self.ageField.text integerValue];
+        
+        return [self.dateFormatter stringFromDate:[calendar dateByAddingComponents:componentsToAdd toDate:[NSDate date] options:kNilOptions]];
+    }
+    return @"";
 }
 
 #pragma mark - CPPickerDelegate methods

@@ -248,7 +248,7 @@
                                                         <state key="normal" title="Edit"/>
                                                         <connections>
                                                             <action selector="editImageTapped:" destination="3WD-7U-wgO" eventType="touchUpInside" id="OeO-1C-mwn"/>
-                                                            <segue destination="kkD-fH-BRQ" kind="custom" identifier="setPetPhoto" customClass="RBStoryboardPushSegue" id="MDZ-n7-65O"/>
+                                                            <segue destination="kkD-fH-BRQ" kind="custom" identifier="setPetPhoto" customClass="RBStoryboardModalSegue" id="MDZ-n7-65O"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -471,7 +471,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="obH-Zu-ApT">
                                                 <rect key="frame" x="0.0" y="510" width="320" height="65"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Neutered / Spayed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF8-QS-oVX">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Altered" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LF8-QS-oVX">
                                                         <rect key="frame" x="15" y="15" width="290" height="15"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -538,6 +538,7 @@
                                                     </label>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="G5v-Co-YYS" firstAttribute="centerY" secondItem="BlS-We-bZS" secondAttribute="centerY" id="7ki-b9-1M3"/>
                                                     <constraint firstItem="HFp-CZ-WUh" firstAttribute="centerY" secondItem="BlS-We-bZS" secondAttribute="centerY" id="Cfo-hN-cdY"/>
@@ -610,6 +611,7 @@
                         <outlet property="editImageButton" destination="UrT-BF-B7x" id="XQi-IH-ry7"/>
                         <outlet property="familyNameField" destination="K2E-s8-X3j" id="Vw2-rB-NEj"/>
                         <outlet property="genderField" destination="CkZ-T2-hpv" id="YKZ-gQ-eM7"/>
+                        <outlet property="logoutContainer" destination="BlS-We-bZS" id="de7-xo-3c3"/>
                         <outlet property="logoutLabel" destination="G5v-Co-YYS" id="OFP-aN-sCv"/>
                         <outlet property="logoutX" destination="HFp-CZ-WUh" id="b9m-N1-Vh4"/>
                         <outlet property="nameField" destination="q4u-aE-pAF" id="eex-qj-4Ju"/>

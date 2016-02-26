@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet CPTextField *genderField;
 @property (weak, nonatomic) IBOutlet CPTextField *neuteredField;
 
+@property (weak, nonatomic) IBOutlet UIView *logoutContainer;
 @property (weak, nonatomic) IBOutlet UILabel *logoutLabel;
 @property (weak, nonatomic) IBOutlet UILabel *logoutX;
 
@@ -45,6 +46,8 @@
 @property (nonatomic, strong) CPBreedPickerViewController *breedPicker;
 
 @property (nonatomic, strong) CPPet *pet;
+@property (nonatomic, weak) UIBarButtonItem *pseudoBackButton;
+@property (nonatomic, weak) UITapGestureRecognizer *logoutRecognizer;
 
 @end
 
@@ -63,7 +66,30 @@
     self.pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
     self.petImage.image = [self.pet petPhoto];
     
+    self.nameField.text = self.pet.name;
+    self.familyNameField.text = self.pet.familyName;
+    self.breedField.text = self.pet.breed;
+    self.weightField.text = [NSString stringWithFormat:@"%ld %@", (long)self.pet.weight, self.weightDescriptor];
+    // Uppercase first letter of word, since it's all lower case coming from the server
+    self.genderField.text = [self.pet.gender stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.gender substringToIndex:1] uppercaseString]];
+//    self.neuteredField.text = [self.pet.altered isEqualToString:@"unspecified"] ? nil : [self.pet.altered stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.altered substringToIndex:1] uppercaseString]];
+    
     [self setupStyling];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    // TODO: button image
+    [button setTitle:@"Back" forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
+    [button sizeToFit];
+    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [button addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = barButton;
+    self.pseudoBackButton = barButton;
+    
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoutTapped:)];
+    [self.logoutContainer addGestureRecognizer:recognizer];
+    self.logoutRecognizer = recognizer;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -134,7 +160,43 @@
     self.weightDescriptor = newDescriptor;
 }
 
+- (void)backButtonTapped:(id)sender
+{
+    NSString *alteredString = [self.neuteredField.text lowercaseString];
+    if ([alteredString length] == 0) {
+        alteredString = @"unspecified";
+    }
+    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kAlteredKey:alteredString};
+    [CPPet validateInput:petInfo isInitialSetup:NO completion:^(BOOL isValidInput, NSString *errorMessage) {
+        if (isValidInput) {
+            [[CPUserManager sharedInstance] updatePetInfo:petInfo];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", nil) andMessage:errorMessage];
+        }
+    }];
+}
+
+- (void)logoutTapped:(UITapGestureRecognizer*)recognizer
+{
+    [[CPUserManager sharedInstance] logout];
+}
+
 #pragma mark - UITextFieldDelegate methods
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (textField == self.weightField) {
+        self.weightField.text = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
+    }
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    if (textField == self.weightField) {
+        self.weightField.text = [NSString stringWithFormat:@"%@ %@", self.weightField.text, self.weightDescriptor];
+    }
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self moveToNextTextFieldFrom:textField];
@@ -214,7 +276,8 @@
 #pragma mark - CPPetPhotoDelegate methods
 - (void)selectedImage:(UIImage *)image
 {
-    self.petImage.image = image;
+    [[CPUserManager sharedInstance] updatePetPhoto:image];
+    self.petImage.image = [self.pet petPhoto];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

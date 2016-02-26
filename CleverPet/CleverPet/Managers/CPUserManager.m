@@ -7,6 +7,9 @@
 //
 
 #import "CPUserManager.h"
+#import "CPAppEngineCommunicationManager.h"
+#import "CPFileUtils.h"
+#import "CPLoginController.h"
 
 @interface CPUserManager()
 
@@ -44,6 +47,33 @@
     [self saveUserToDefaults];
 }
 
+- (void)updatePetInfo:(NSDictionary *)petInfo
+{
+    // TODO: shortcut if nothing has changed
+    
+    NSDictionary *currentPetInfo = [self.currentUser.pet toDictionary];
+    NSError *error;
+    [self.currentUser.pet mergeFromDictionary:petInfo useKeyMapping:YES error:&error];
+    
+    BLOCK_SELF_REF_OUTSIDE();
+    [[CPAppEngineCommunicationManager sharedInstance] updatePet:self.currentUser.pet.petId withInfo:petInfo completion:^(NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        // TODO: Handle failure somehow
+        if (error) {
+            // reset back to original info
+            [self.currentUser.pet mergeFromDictionary:currentPetInfo useKeyMapping:YES error:nil];
+        } else {
+            [self saveUserToDefaults];
+        }
+    }];
+}
+
+- (void)updatePetPhoto:(UIImage *)image
+{
+    [self.currentUser.pet setPetPhoto:image];
+    [CPFileUtils saveImage:image forPet:self.currentUser.pet.petId];
+}
+
 - (CPUser*)getCurrentUser
 {
     return self.currentUser;
@@ -65,6 +95,12 @@
 - (NSString*)defaultsKeyForUser:(NSString *)userId
 {
     return [NSString stringWithFormat:@"User: %@", userId];
+}
+
+- (void)logout
+{
+    self.currentUser = nil;
+    [[CPLoginController sharedInstance] logout];
 }
 
 @end

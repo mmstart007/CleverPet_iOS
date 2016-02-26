@@ -14,7 +14,7 @@
 @property (nonatomic, assign) BOOL isExpanded;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *body;
-@property (nonatomic, weak) OAStackView *stackView;
+@property (nonatomic, weak) id stackView;
 @property (nonatomic, weak) UIView *headerView;
 @property (nonatomic, weak) UILabel *headerLabel;
 @property (nonatomic, weak) UIButton *expandButton;
@@ -40,12 +40,20 @@
 
 - (void)setupStackView
 {
-    OAStackView *stack = [[OAStackView alloc] init];
-    stack.translatesAutoresizingMaskIntoConstraints = NO;
+    // Nonsense to use only use oastack view before 9. Not super happy about it, but to get decent animations for the demo
+    // Not a robust way of checking
+    id stack;
+    if (SYSTEM_VERSION_LESS_THAN(@"9.0")) {
+        stack = [[OAStackView alloc] init];
+    } else {
+        stack = [[UIStackView alloc] init];
+    }
+    
+    [stack setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:stack];
     self.stackView = stack;
-    self.stackView.backgroundColor = [UIColor clearColor];
-    self.stackView.axis = UILayoutConstraintAxisVertical;
+    [self.stackView setBackgroundColor:[UIColor clearColor]];
+    [self.stackView setAxis:UILayoutConstraintAxisVertical];
     
     NSDictionary *viewsDict = @{@"stack":self.stackView};
     NSArray *verticalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-15-[stack]-15-|" options:kNilOptions metrics:nil views:viewsDict];

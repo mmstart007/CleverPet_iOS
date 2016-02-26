@@ -21,6 +21,8 @@
 
 // TODO: Score/protocol/other nonsense
 
++ (void)validateInput:(NSDictionary*)proposedInput isInitialSetup:(BOOL)isInitialSetup completion:(void (^)(BOOL isValidInput, NSString *errorMessage))completion;
 - (UIImage *)petPhoto;
+- (void)setPetPhoto:(UIImage*)image;
 
 @end
