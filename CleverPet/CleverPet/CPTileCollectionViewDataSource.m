@@ -68,6 +68,29 @@
     [self.scrollDelegate dataSource:self headerPhotoVisible:scrollView.contentOffset.y < self.headerImageHeight - 4 headerStatsFade:fade];
 }
 
+NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
+    static NSCalendar *s_calendar = nil;
+    static NSDateFormatter *s_dateFormatter = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_calendar = [NSCalendar autoupdatingCurrentCalendar];
+        s_dateFormatter = [[NSDateFormatter alloc] init];
+        [s_dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+        [s_dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+        [s_dateFormatter setDoesRelativeDateFormatting:YES];
+    });
+    
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    dateComponents.timeZone = [NSTimeZone localTimeZone];
+    dateComponents.year = simpleDate.year;
+    dateComponents.month = simpleDate.month;
+    dateComponents.day = simpleDate.day;
+    
+    NSDate *date = [s_calendar dateFromComponents:dateComponents];
+    return [s_dateFormatter stringFromDate:date];
+}
+
 - (void)addTile:(CPTile *)tile withAnimation:(BOOL)withAnimation {
     CPInsertionInfo insertionInfo = [self.tileDataManager addTile:tile];
     
@@ -115,7 +138,7 @@
     } else {
         CPMainTableSectionHeader *sectionHeader = [tableView dequeueReusableHeaderFooterViewWithIdentifier:SECTION_HEADER];
         CPSimpleDate *sectionHeaderDate = [self.tileDataManager sectionHeaderAtIndex:section - 1];
-        sectionHeader.sectionHeaderLabel.text = [NSString stringWithFormat:@"%@/%@/%@", @(sectionHeaderDate.year), @(sectionHeaderDate.month), @(sectionHeaderDate.day)];
+        sectionHeader.sectionHeaderLabel.text = FormatSimpleDateForRelative(sectionHeaderDate);
         return sectionHeader;
     }
 }
