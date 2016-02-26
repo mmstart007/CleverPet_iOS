@@ -14,11 +14,13 @@
 #import "CPPetPhotoViewController.h"
 #import "CPUserManager.h"
 
-@interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate, CPPetPhotoDelegate>
+@interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate, CPPetPhotoDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *imageContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *petImage;
 @property (weak, nonatomic) IBOutlet UIButton *editImageButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet CPTextField *nameField;
 @property (weak, nonatomic) IBOutlet CPTextField *familyNameField;
@@ -290,6 +292,18 @@
         photoPicker.delegate = self;
         // TODO: pull image from pet profile object
         photoPicker.selectedImage = self.petImage.image;
+    }
+}
+
+#pragma mark - Scrolling
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top);
+    self.imageContainer.clipsToBounds = offsetY <= 0;
+    
+    CGFloat topConstant = MAX(offsetY + scrollView.contentInset.top, scrollView.contentInset.top);
+    if (self.imageHeightConstraint.constant != topConstant) {
+        self.imageHeightConstraint.constant = topConstant;
     }
 }
 
