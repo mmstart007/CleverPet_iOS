@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class CPPet;
+
 @interface CPMainScreenHeaderView : UIView
 + (instancetype)loadFromNib;
+- (void)setupForPet:(CPPet*)pet;
 @end

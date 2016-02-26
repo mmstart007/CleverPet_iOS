@@ -9,12 +9,13 @@
 #import "CPAppEngineCommunicationManager.h"
 #import <AFNetworking/AFNetworking.h>
 #import "GITAccount.h"
+#import "CPUserManager.h"
 
 NSString * const kAppEngineBaseUrl = @"app_server_url";
 NSString * const kNewUserPath = @"users/new";
 NSString * const kUserLoginPath = @"users/login";
 NSString * const kUserInfoPath = @"users/info";
-NSString * const kPetProfilePath = @"animals";
+NSString * const kCreatePetProfilePath = @"animals";
 
 // TODO: error codes or something so this isn't string matching
 NSString * const kNoUserAccountError = @"No account exists for the given email address";
@@ -67,6 +68,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             // Check for auth token
             if (jsonResponse[kAuthTokenKey]) {
                 [self setAuthToken:jsonResponse[kAuthTokenKey]];
+                [[CPUserManager sharedInstance] userLoggedIn:jsonResponse];
                 [self fetchUserCompletion:completion];
                 //                if (completion) completion(CPLoginResult_UserWithoutPetProfile, nil);
             } else {
@@ -86,7 +88,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         nameComponents = @[@"Missing"];
     }
     
-    NSDictionary *params = @{kEmailKey:userAccount.localID, kFirstNameKey:[nameComponents firstObject], kLastNameKey:[nameComponents lastObject], @"provider":userAccount.providerID, @"testing":@NO};
+    NSDictionary *params = @{kEmailKey:userAccount.localID, kFirstNameKey:[nameComponents firstObject], kLastNameKey:[nameComponents lastObject], @"provider":(userAccount.providerID ? userAccount.providerID : @"email"), @"testing":@NO};
     BLOCK_SELF_REF_OUTSIDE();
     [self.sessionManager POST:kNewUserPath parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
@@ -98,6 +100,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             // Check for auth token
             if (jsonResponse[kAuthTokenKey]) {
                 [self setAuthToken:jsonResponse[kAuthTokenKey]];
+                [[CPUserManager sharedInstance] userLoggedIn:jsonResponse];
                 [self fetchUserCompletion:completion];
 //                if (completion) completion(CPLoginResult_UserWithoutPetProfile, nil);
             } else {
@@ -112,43 +115,41 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 // TODO: remove. For now, this is where we have to check pet profile and device
 - (ASYNC)fetchUserCompletion:(void (^)(CPLoginResult, NSError *))completion
 {
-    [self.sessionManager GET:kPetProfilePath parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        if (jsonResponse[kErrorKey]) {
-            NSString *errorMessage = jsonResponse[kErrorKey];
-            if (completion) completion(CPLoginResult_Failure, [self errorForMessage:errorMessage]);
-        } else {
-            // TODO: For now, iterate over animals and pull the first one that is not test_breed
-            NSArray *animals = jsonResponse[@"animals"];
-            for (NSDictionary *animal in animals) {
-                if ([animal[kBreedKey] isEqualToString:@"test_breed"]) {
-                    // Cram it into a model, and hold it for now
-                    
-                    // TEMP: Shortcutting device setup
-                    if (completion) completion(CPLoginResult_UserWithSetupCompleted, nil);
-                    return;
-                }
-            }
-            if (completion) completion(CPLoginResult_UserWithoutPetProfile, nil);
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (completion) completion(CPLoginResult_Failure, error);
-    }];
+    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
+    if (completion) completion((currentUser.pet ? CPLoginResult_UserWithSetupCompleted : CPLoginResult_UserWithoutPetProfile), nil);
 }
 
 #pragma mark - Pet profile
-- (ASYNC)updatePetProfileWithInfo:(NSDictionary *)petInfo completion:(void (^)(NSError *))completion
+- (ASYNC)createPetProfileWithInfo:(NSDictionary *)petInfo completion:(void (^)(NSString *, NSError *))completion
 {
-    [self.sessionManager POST:kPetProfilePath parameters:petInfo progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.sessionManager POST:kCreatePetProfilePath parameters:petInfo progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        BLOCK_SELF_REF_INSIDE();
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
             NSString *errorMessage = jsonResponse[kErrorKey];
-            if (completion) completion([self errorForMessage:errorMessage]);
+            if (completion) completion(nil, [self errorForMessage:errorMessage]);
         } else {
-            if (completion) completion(nil);
+            [self lookupPetInfo:jsonResponse[@"animal_ID"] completion:completion];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (completion) completion(error);
+        if (completion) completion(nil, error);
+    }];
+}
+
+- (ASYNC)lookupPetInfo:(NSString *)petId completion:(void (^)(NSString *, NSError *))completion
+{
+    [self.sessionManager GET:[NSString stringWithFormat:@"animals/%@", petId] parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        if (jsonResponse[kErrorKey]) {
+            NSString *errorMessage = jsonResponse[kErrorKey];
+            if (completion) completion(nil, [self errorForMessage:errorMessage]);
+        } else {
+            [[CPUserManager sharedInstance] userCreatedPet:jsonResponse];
+            if (completion) completion(jsonResponse[@"animal_ID"], nil);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (completion) completion(nil, error);
     }];
 }
 

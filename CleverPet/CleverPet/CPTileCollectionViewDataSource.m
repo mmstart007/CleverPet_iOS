@@ -29,7 +29,7 @@
 
 }
 
-- (instancetype)initWithCollectionView:(UITableView *)tableView {
+- (instancetype)initWithCollectionView:(UITableView *)tableView andPetImage:(UIImage *)petImage {
     self = [super init];
     if (self) {
         self.tableView = tableView;
@@ -42,7 +42,7 @@
         self.headerImageHeight = height;
         self.headerStatsHeight = 140;
         
-        self.tableHeaderView = [[CPTableHeaderView alloc] initWithImage:[UIImage imageNamed:@"vallhund"] frame:CGRectMake(0, 0, width, height)];
+        self.tableHeaderView = [[CPTableHeaderView alloc] initWithImage:petImage frame:CGRectMake(0, 0, width, height)];
 
         [tableView registerNib:[UINib nibWithNibName:@"CPTileViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:TILE_VIEW_CELL];
         [tableView registerNib:[UINib nibWithNibName:@"CPPetStatsView" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:PET_STATS_HEADER];

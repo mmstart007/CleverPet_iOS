@@ -7,6 +7,7 @@
 //
 
 #import "CPMainScreenHeaderView.h"
+#import "CPPet.h"
 
 @interface CPMainScreenHeaderView ()
 @property (weak, nonatomic) IBOutlet UILabel *centerLabel;
@@ -20,6 +21,11 @@
 - (void)awakeFromNib {
     self.centerLabel.font = [UIFont cpLightFontWithSize:18 italic:NO];
     self.centerLabel.textColor = [UIColor appTealColor];
+}
+
+- (void)setupForPet:(CPPet*)pet
+{
+    self.centerLabel.text = pet.name;
 }
 
 @end
