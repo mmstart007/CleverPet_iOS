@@ -28,4 +28,6 @@ typedef NS_ENUM(NSUInteger) {
 // Non-persisted properties
 @property (strong, nonatomic) NSAttributedString<Ignore>*parsedBody;
 @property (strong, nonatomic) CPSimpleDate<Ignore> *simpleDate;
+
+@property (assign, nonatomic) CGFloat cachedRowHeight;
 @end

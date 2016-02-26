@@ -18,7 +18,7 @@
 @interface CPTileCollectionViewDataSource ()
 @property (strong, nonatomic) CPTileDataManager *tileDataManager;
 @property (weak, nonatomic) UITableView *tableView;
-@property (strong, nonatomic) CPTileViewCell *cell;
+@property (strong, nonatomic) CPTileViewCell *sizingCell;
 @property (strong, nonatomic) CPTableHeaderView *tableHeaderView;
 
 @property (assign, nonatomic) CGFloat headerImageHeight;
@@ -33,8 +33,6 @@
     self = [super init];
     if (self) {
         self.tableView = tableView;
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 100;
         
         CGFloat width = [UIScreen mainScreen].bounds.size.width;
         CGFloat height = width / (640.0f/262.0f);
@@ -143,17 +141,42 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     }
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     return nil;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == HEADER_VIEW_SECTION) {
         return self.headerStatsHeight;
     } else {
         return 50;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == HEADER_VIEW_SECTION) {
+        return 0;
+    } else {
+        CPTile *tile = [self.tileDataManager tileForRow:indexPath.row inSection:indexPath.section - 1];
+        
+        if (tile.cachedRowHeight != 0) {
+            return tile.cachedRowHeight;
+        }
+        
+        if (!self.sizingCell) {
+            self.sizingCell = [self.tableView dequeueReusableCellWithIdentifier:TILE_VIEW_CELL];
+            NSLayoutConstraint *layoutConstraint = [NSLayoutConstraint constraintWithItem:self.sizingCell.contentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0 constant:[UIScreen mainScreen].bounds.size.width];
+            [self.sizingCell.contentView addConstraint:layoutConstraint];
+        }
+        
+        self.sizingCell.tile = tile;
+        
+        NSLog(@"%@", indexPath);
+        
+        CGSize size = [self.sizingCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        tile.cachedRowHeight = size.height;
+        return size.height;
     }
 }
 
