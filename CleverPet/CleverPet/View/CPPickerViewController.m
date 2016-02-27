@@ -8,6 +8,7 @@
 
 #import "CPPickerViewController.h"
 #import "CPSimpleTableViewCell.h"
+#import "CPGenderUtils.h"
 
 @interface CPPickerViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -40,9 +41,9 @@
     self.dataArray = @[NSLocalizedString(@"Male", nil), NSLocalizedString(@"Female", nil)];
 }
 
-- (void)setupForPickingNeutered
+- (void)setupForPickingNeuteredWithGender:(NSString *)gender
 {
-    self.dataArray = @[NSLocalizedString(@"Altered", nil), NSLocalizedString(@"Unaltered", nil), NSLocalizedString(@"Unspecified", )];
+    self.dataArray = @[[CPGenderUtils stringForAlteredState:kGenderNeutralAltered withGender:gender], [CPGenderUtils stringForAlteredState:kGenderNeutralUnaltered withGender:gender], [CPGenderUtils stringForAlteredState:kGenderNeutralUnspecified withGender:gender]];
 }
 
 #pragma mark - UITableViewDataSource methods

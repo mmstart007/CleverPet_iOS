@@ -59,7 +59,7 @@
             if ([key isEqualToString:kWeightKey]) {
                 shouldUpdate = [petInfo[key] integerValue] != [currentPetInfo[key] integerValue];
             }
-            break;
+            if (shouldUpdate) break;
         }
     }
     

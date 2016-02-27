@@ -77,6 +77,10 @@ extern NSString * const kWeightKey;
 extern NSString * const kDOBKey;
 extern NSString * const kAlteredKey;
 
+// Gender keys. Correspond to the gender values returned by the server.
+extern NSString * const kMaleKey;
+extern NSString * const kFemaleKey;
+
 #define ASYNC void
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 

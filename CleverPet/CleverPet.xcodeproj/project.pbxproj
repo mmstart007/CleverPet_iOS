@@ -43,6 +43,7 @@
 		979D84491C7FB79400ADB6B0 /* CPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D84481C7FB79400ADB6B0 /* CPUser.m */; };
 		979D844C1C7FB7A100ADB6B0 /* CPPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D844B1C7FB7A100ADB6B0 /* CPPet.m */; };
 		979D844F1C80FCB200ADB6B0 /* CPLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D844E1C80FCB200ADB6B0 /* CPLoadingView.m */; };
+		979D84521C810F5600ADB6B0 /* CPGenderUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D84511C810F5600ADB6B0 /* CPGenderUtils.m */; };
 		97C8AA951C7E6AE500BABD4D /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C8AA941C7E6AE500BABD4D /* Login.storyboard */; };
 		97CC44561C754B67003C4258 /* breeds.csv in Resources */ = {isa = PBXBuildFile; fileRef = 97CC44551C754B67003C4258 /* breeds.csv */; };
 		97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */; };
@@ -158,6 +159,8 @@
 		979D844B1C7FB7A100ADB6B0 /* CPPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPet.m; sourceTree = "<group>"; };
 		979D844D1C80FCB200ADB6B0 /* CPLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLoadingView.h; sourceTree = "<group>"; };
 		979D844E1C80FCB200ADB6B0 /* CPLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLoadingView.m; sourceTree = "<group>"; };
+		979D84501C810F5600ADB6B0 /* CPGenderUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGenderUtils.h; sourceTree = "<group>"; };
+		979D84511C810F5600ADB6B0 /* CPGenderUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGenderUtils.m; sourceTree = "<group>"; };
 		97C8AA941C7E6AE500BABD4D /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		97CC44551C754B67003C4258 /* breeds.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = breeds.csv; sourceTree = "<group>"; };
 		97CC44571C754E93003C4258 /* CPBreedPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBreedPickerViewController.h; sourceTree = "<group>"; };
@@ -459,6 +462,8 @@
 				0DE13B641C7EE9FC00648834 /* CPLabelUtils.h */,
 				979D84411C7FA50700ADB6B0 /* CPFileUtils.h */,
 				979D84421C7FA50700ADB6B0 /* CPFileUtils.m */,
+				979D84501C810F5600ADB6B0 /* CPGenderUtils.h */,
+				979D84511C810F5600ADB6B0 /* CPGenderUtils.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -674,6 +679,7 @@
 				97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */,
 				0D36AA8B1C7243D600349D03 /* AppDelegate.m in Sources */,
 				9704E2FB1C7D260E004874A7 /* CPTextValidator.m in Sources */,
+				979D84521C810F5600ADB6B0 /* CPGenderUtils.m in Sources */,
 				97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */,
 				97EB7ABF1C72AAFB007F1383 /* CPLoginController.m in Sources */,
 				979D844C1C7FB7A100ADB6B0 /* CPPet.m in Sources */,

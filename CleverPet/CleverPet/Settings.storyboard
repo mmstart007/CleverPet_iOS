@@ -608,6 +608,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="754"/>
                     <connections>
+                        <outlet property="alteredHeader" destination="LF8-QS-oVX" id="aUZ-xG-jVs"/>
                         <outlet property="breedField" destination="8Ca-ul-pxE" id="4aa-zf-9lZ"/>
                         <outlet property="editImageButton" destination="UrT-BF-B7x" id="XQi-IH-ry7"/>
                         <outlet property="familyNameField" destination="K2E-s8-X3j" id="Vw2-rB-NEj"/>
