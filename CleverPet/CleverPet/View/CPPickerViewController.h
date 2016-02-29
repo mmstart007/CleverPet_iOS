@@ -21,6 +21,7 @@
 @property (nonatomic, weak) id<CPPickerViewDelegate> delegate;
 
 - (void)setupForPickingGender;
-- (void)setupForPickingNeutered;
+- (void)setupForPickingNeuteredWithGender:(NSString*)gender;
+- (void)updateHeightWithMaximum:(CGFloat)maxHeight;
 
 @end

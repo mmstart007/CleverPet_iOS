@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 extern CGFloat const kNavBarTitleFontSize;
+extern CGFloat const kBackButtonTitleFontSize;
 extern CGFloat const kButtonTitleFontSize;
 extern CGFloat const kTextFieldFontSize;
 extern CGFloat const kSignInHeaderFontSize;
@@ -20,7 +21,6 @@ extern CGFloat const kTableCellSubTextSize;
 
 @interface UIFont(CleverPet)
 
-+ (UIFont*)cpHairlineFontWithSize:(CGFloat)fontSize italic:(BOOL)italic;
 + (UIFont*)cpThinFontWithSize:(CGFloat)fontSize italic:(BOOL)italic;
 + (UIFont*)cpExtraLightFontWithSize:(CGFloat)fontSize italic:(BOOL)italic;
 + (UIFont*)cpLightFontWithSize:(CGFloat)fontSize italic:(BOOL)italic;
@@ -28,6 +28,7 @@ extern CGFloat const kTableCellSubTextSize;
 + (UIFont*)cpMediumFontWithSize:(CGFloat)fontSize italic:(BOOL)italic;
 + (UIFont*)cpSemiboldFontWithSize:(CGFloat)fontSize italic:(BOOL)italic;
 + (UIFont*)cpBoldFontWithSize:(CGFloat)fontSize italic:(BOOL)italic;
++ (UIFont*)cpExtraBoldFontWithSize:(CGFloat)fontSize italic:(BOOL)italic;
 + (UIFont*)cpBlackFontWithSize:(CGFloat)fontSize italic:(BOOL)italic;
 
 @end

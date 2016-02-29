@@ -13,12 +13,15 @@
 #import "CPBreedPickerViewController.h"
 #import "CPPetPhotoViewController.h"
 #import "CPUserManager.h"
+#import "CPGenderUtils.h"
 
-@interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate, CPPetPhotoDelegate>
+@interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate, CPPetPhotoDelegate, UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *imageContainer;
 @property (weak, nonatomic) IBOutlet UIImageView *petImage;
 @property (weak, nonatomic) IBOutlet UIButton *editImageButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet CPTextField *nameField;
 @property (weak, nonatomic) IBOutlet CPTextField *familyNameField;
@@ -26,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet CPTextField *weightField;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *weightUnitSelector;
 @property (weak, nonatomic) IBOutlet CPTextField *genderField;
+@property (weak, nonatomic) IBOutlet UILabel *alteredHeader;
 @property (weak, nonatomic) IBOutlet CPTextField *neuteredField;
 
 @property (weak, nonatomic) IBOutlet UIView *logoutContainer;
@@ -72,8 +76,9 @@
     self.weightField.text = [NSString stringWithFormat:@"%ld %@", (long)self.pet.weight, self.weightDescriptor];
     // Uppercase first letter of word, since it's all lower case coming from the server
     self.genderField.text = [self.pet.gender stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.gender substringToIndex:1] uppercaseString]];
-//    self.neuteredField.text = [self.pet.altered isEqualToString:@"unspecified"] ? nil : [self.pet.altered stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.altered substringToIndex:1] uppercaseString]];
+    self.neuteredField.text = [CPGenderUtils stringForAlteredState:self.pet.altered withGender:self.pet.gender];
     
+    [self updateAlteredHeaderForGender:self.pet.gender];
     [self setupStyling];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -136,6 +141,11 @@
     self.logoutX.textColor = [UIColor redColor];
 }
 
+- (void)updateAlteredHeaderForGender:(NSString*)gender
+{
+    self.alteredHeader.text = [CPGenderUtils alteredFieldHeaderForGender:gender];
+}
+
 - (void)moveToNextTextFieldFrom:(UITextField*)textField
 {
     NSUInteger index = [self.textFields indexOfObject:textField];
@@ -162,9 +172,9 @@
 
 - (void)backButtonTapped:(id)sender
 {
-    NSString *alteredString = [self.neuteredField.text lowercaseString];
+    NSString *alteredString = [CPGenderUtils genderNeutralStringForAlteredState:self.neuteredField.text];
     if ([alteredString length] == 0) {
-        alteredString = @"unspecified";
+        alteredString = kGenderNeutralUnspecified;
     }
     NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kAlteredKey:alteredString};
     [CPPet validateInput:petInfo isInitialSetup:NO completion:^(BOOL isValidInput, NSString *errorMessage) {
@@ -229,6 +239,8 @@
             UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
             CPPickerViewController *genderPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
             [genderPicker setupForPickingGender];
+            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
+            [genderPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
             genderPicker.delegate = self;
             textField.inputView = genderPicker.view;
             self.genderPicker = genderPicker;
@@ -237,7 +249,9 @@
         if (!self.neuteredPicker) {
             UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
             CPPickerViewController *neuteredPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
-            [neuteredPicker setupForPickingNeutered];
+            [neuteredPicker setupForPickingNeuteredWithGender:[self.genderField.text lowercaseString]];
+            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
+            [neuteredPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
             neuteredPicker.delegate = self;
             textField.inputView = neuteredPicker.view;
             self.neuteredPicker = neuteredPicker;
@@ -258,8 +272,14 @@
 - (void)pickerViewController:(CPPickerViewController *)controller selectedString:(NSString *)string
 {
     if (controller == self.genderPicker) {
+        if (![string isEqualToString:self.genderField.text]) {
+            [self updateAlteredHeaderForGender:string];
+            self.neuteredField.text = [CPGenderUtils stringForAlteredState:[CPGenderUtils genderNeutralStringForAlteredState:self.neuteredField.text] withGender:string];
+            // Need to rebuild this picker with the appropriate terminology
+            self.neuteredPicker = nil;
+        }
         self.genderField.text = string;
-        [self moveToNextTextFieldFrom:self.genderField];
+        [self.genderField resignFirstResponder];
     } else if (controller == self.neuteredPicker) {
         self.neuteredField.text = string;
         [self.neuteredField resignFirstResponder];
@@ -290,6 +310,18 @@
         photoPicker.delegate = self;
         // TODO: pull image from pet profile object
         photoPicker.selectedImage = self.petImage.image;
+    }
+}
+
+#pragma mark - Scrolling
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat offsetY = -(scrollView.contentOffset.y + scrollView.contentInset.top);
+    self.imageContainer.clipsToBounds = offsetY <= 0;
+    
+    CGFloat topConstant = MAX(offsetY + scrollView.contentInset.top, scrollView.contentInset.top);
+    if (self.imageHeightConstraint.constant != topConstant) {
+        self.imageHeightConstraint.constant = topConstant;
     }
 }
 

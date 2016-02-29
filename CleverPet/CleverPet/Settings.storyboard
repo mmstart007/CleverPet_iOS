@@ -5,26 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="Omnes-Light.otf">
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-            <string>Omnes-Light</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--CleverPet-->
         <scene sceneID="9HW-bm-MdW">
@@ -176,7 +156,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0f-EU-8zE">
                                                     <rect key="frame" x="15" y="0.0" width="537" height="50"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -224,8 +204,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="754"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ll-na-eLD">
-                                <rect key="frame" x="0.0" y="64" width="320" height="690"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ll-na-eLD">
+                                <rect key="frame" x="0.0" y="20" width="320" height="734"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RGD-tz-vdr">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="690"/>
@@ -235,9 +215,6 @@
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0vD-h4-9Cf">
                                                         <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" secondItem="0vD-h4-9Cf" secondAttribute="height" multiplier="32:13" id="O6j-6r-EqV"/>
-                                                        </constraints>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UrT-BF-B7x">
                                                         <rect key="frame" x="220" y="80" width="100" height="50"/>
@@ -255,10 +232,11 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="0vD-h4-9Cf" secondAttribute="trailing" id="BzB-8o-aqw"/>
+                                                    <constraint firstAttribute="bottom" secondItem="0vD-h4-9Cf" secondAttribute="bottom" id="H3t-00-Niw"/>
+                                                    <constraint firstAttribute="width" secondItem="z1C-hx-cnF" secondAttribute="height" multiplier="32:13" id="JbD-ug-hkR"/>
                                                     <constraint firstItem="0vD-h4-9Cf" firstAttribute="leading" secondItem="z1C-hx-cnF" secondAttribute="leading" id="PJw-34-5z4"/>
-                                                    <constraint firstAttribute="bottom" secondItem="0vD-h4-9Cf" secondAttribute="bottom" id="QwQ-AO-HUI"/>
+                                                    <constraint firstItem="0vD-h4-9Cf" firstAttribute="height" secondItem="z1C-hx-cnF" secondAttribute="height" id="UpQ-ZJ-GVn"/>
                                                     <constraint firstAttribute="bottom" secondItem="UrT-BF-B7x" secondAttribute="bottom" id="Yrf-Nf-kaS"/>
-                                                    <constraint firstItem="0vD-h4-9Cf" firstAttribute="top" secondItem="z1C-hx-cnF" secondAttribute="top" id="raG-8t-8HR"/>
                                                     <constraint firstAttribute="trailing" secondItem="UrT-BF-B7x" secondAttribute="trailing" id="ujC-z2-NuV"/>
                                                 </constraints>
                                             </view>
@@ -592,6 +570,9 @@
                                     <constraint firstAttribute="bottom" secondItem="RGD-tz-vdr" secondAttribute="bottom" id="SR1-0t-PsU"/>
                                     <constraint firstItem="RGD-tz-vdr" firstAttribute="top" secondItem="7ll-na-eLD" secondAttribute="top" id="atz-ed-KgR"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="3WD-7U-wgO" id="doz-pX-RTG"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -607,10 +588,13 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="754"/>
                     <connections>
+                        <outlet property="alteredHeader" destination="LF8-QS-oVX" id="aUZ-xG-jVs"/>
                         <outlet property="breedField" destination="8Ca-ul-pxE" id="4aa-zf-9lZ"/>
                         <outlet property="editImageButton" destination="UrT-BF-B7x" id="XQi-IH-ry7"/>
                         <outlet property="familyNameField" destination="K2E-s8-X3j" id="Vw2-rB-NEj"/>
                         <outlet property="genderField" destination="CkZ-T2-hpv" id="YKZ-gQ-eM7"/>
+                        <outlet property="imageContainer" destination="z1C-hx-cnF" id="j3T-An-25X"/>
+                        <outlet property="imageHeightConstraint" destination="UpQ-ZJ-GVn" id="Lq4-HB-Y3f"/>
                         <outlet property="logoutContainer" destination="BlS-We-bZS" id="de7-xo-3c3"/>
                         <outlet property="logoutLabel" destination="G5v-Co-YYS" id="OFP-aN-sCv"/>
                         <outlet property="logoutX" destination="HFp-CZ-WUh" id="b9m-N1-Vh4"/>
@@ -679,8 +663,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aba-Mq-AzZ">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TjS-Tp-CD8">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="590"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TjS-Tp-CD8">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="595"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYF-vZ-DXZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
@@ -700,32 +684,32 @@
                                                     <constraint firstAttribute="trailing" secondItem="dQq-PQ-VUe" secondAttribute="trailing" constant="15" id="hXs-J7-kM4"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LTD-Ge-8nT">
-                                                <rect key="frame" x="0.0" y="50" width="600" height="151"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LTD-Ge-8nT">
+                                                <rect key="frame" x="0.0" y="50" width="600" height="153"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Disconnected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jyq-eU-ygW">
-                                                        <rect key="frame" x="15" y="15" width="570" height="17"/>
-                                                        <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
+                                                        <rect key="frame" x="15" y="15" width="570" height="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqP-dA-tZz">
-                                                        <rect key="frame" x="15" y="37" width="570" height="29"/>
+                                                        <rect key="frame" x="15" y="38" width="570" height="32"/>
                                                         <string key="text">stretching to another linestretching to another linestretching to another linestretching to another linestretching to another linestretching to another linestretching to another line</string>
-                                                        <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sub-heading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q8M-oz-hOa">
-                                                        <rect key="frame" x="15" y="81" width="570" height="15"/>
-                                                        <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="13"/>
+                                                        <rect key="frame" x="15" y="85" width="570" height="16"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mmq-qA-k6a">
-                                                        <rect key="frame" x="15" y="101" width="570" height="29"/>
+                                                        <rect key="frame" x="15" y="106" width="570" height="32"/>
                                                         <string key="text">stretching to another linestretching to another linestretching to another linestretching to another linestretching to another linestretching to another linestretching to another line</string>
-                                                        <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="13"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -747,14 +731,14 @@
                                                     <constraint firstAttribute="trailing" secondItem="iqP-dA-tZz" secondAttribute="trailing" constant="15" id="zlx-dD-q9r"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Dsj-92-Tzi">
-                                                <rect key="frame" x="0.0" y="201" width="600" height="82"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Dsj-92-Tzi">
+                                                <rect key="frame" x="0.0" y="203" width="600" height="83"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Phb-6A-OR6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="81"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Phb-6A-OR6">
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="82"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pm1-dg-Lpf" customClass="CPHubSettingsButton">
-                                                                <rect key="frame" x="552" y="23" width="33" height="33"/>
+                                                                <rect key="frame" x="552" y="25" width="33" height="33"/>
                                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="33" id="dgA-SD-kHO"/>
@@ -765,18 +749,18 @@
                                                                 </connections>
                                                             </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fdf-1t-aYa">
-                                                                <rect key="frame" x="15" y="15" width="522" height="49"/>
+                                                                <rect key="frame" x="15" y="15" width="522" height="52"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9l-0J-VCO">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="522" height="17"/>
-                                                                        <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="522" height="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ibn-7k-0Db">
-                                                                        <rect key="frame" x="0.0" y="22" width="522" height="27"/>
+                                                                        <rect key="frame" x="0.0" y="23" width="522" height="29"/>
                                                                         <string key="text">stretching to another linestretching to another linestretching to another linestretching to another linestretching to another linestretching to another linestretching to another line</string>
-                                                                        <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="12"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -803,8 +787,8 @@
                                                             <constraint firstAttribute="bottom" secondItem="Fdf-1t-aYa" secondAttribute="bottom" priority="999" constant="15" id="eaJ-qj-4QY"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iXe-fk-O5U">
-                                                        <rect key="frame" x="0.0" y="81" width="600" height="1"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iXe-fk-O5U">
+                                                        <rect key="frame" x="0.0" y="82" width="600" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" priority="999" constant="1" id="btS-lF-oEQ"/>
@@ -812,20 +796,20 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hOP-tI-pX9">
-                                                <rect key="frame" x="0.0" y="283" width="600" height="226"/>
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hOP-tI-pX9">
+                                                <rect key="frame" x="0.0" y="286" width="600" height="227"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8qH-Db-Qvx">
-                                                        <rect key="frame" x="0.0" y="77" width="600" height="146"/>
+                                                        <rect key="frame" x="0.0" y="76" width="600" height="150"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVj-d7-Squ">
-                                                                <rect key="frame" x="550" y="99" width="35" height="17"/>
-                                                                <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
+                                                                <rect key="frame" x="547" y="102" width="38" height="18"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fm-tN-Hxo" customClass="NMRangeSlider">
-                                                                <rect key="frame" x="65" y="94" width="470" height="28"/>
+                                                                <rect key="frame" x="65" y="98" width="470" height="28"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="28" id="dse-QI-SSO"/>
@@ -835,25 +819,25 @@
                                                                 </connections>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12am" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvg-jt-dnL">
-                                                                <rect key="frame" x="15" y="99" width="34" height="17"/>
-                                                                <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
+                                                                <rect key="frame" x="15" y="102" width="37" height="18"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekends" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFK-Wk-iNx">
-                                                                <rect key="frame" x="15" y="73" width="53" height="14"/>
-                                                                <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="12"/>
+                                                                <rect key="frame" x="15" y="75" width="59" height="15"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12pm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQw-r2-RPk">
-                                                                <rect key="frame" x="550" y="26" width="35" height="17"/>
-                                                                <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
+                                                                <rect key="frame" x="547" y="27" width="38" height="18"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Z5-mV-R4v" customClass="NMRangeSlider">
-                                                                <rect key="frame" x="65" y="21" width="470" height="28"/>
+                                                                <rect key="frame" x="65" y="23" width="470" height="28"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="28" id="eH7-Dz-y4I"/>
@@ -863,14 +847,14 @@
                                                                 </connections>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12am" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53n-3L-6Dj">
-                                                                <rect key="frame" x="15" y="26" width="34" height="17"/>
-                                                                <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
+                                                                <rect key="frame" x="15" y="27" width="38" height="18"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekdays" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="faN-Eh-i8e">
-                                                                <rect key="frame" x="15" y="0.0" width="52" height="14"/>
-                                                                <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="12"/>
+                                                                <rect key="frame" x="15" y="0.0" width="58" height="15"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -896,15 +880,15 @@
                                                             <constraint firstItem="ZVj-d7-Squ" firstAttribute="height" secondItem="Gvg-jt-dnL" secondAttribute="height" id="kYw-Id-Mhd"/>
                                                             <constraint firstItem="0fm-tN-Hxo" firstAttribute="trailing" secondItem="9Z5-mV-R4v" secondAttribute="trailing" id="lPB-be-0nh"/>
                                                             <constraint firstItem="53n-3L-6Dj" firstAttribute="top" secondItem="faN-Eh-i8e" secondAttribute="bottom" priority="999" constant="12" id="nL6-bp-0wX"/>
-                                                            <constraint firstItem="9Z5-mV-R4v" firstAttribute="centerY" secondItem="53n-3L-6Dj" secondAttribute="centerY" id="rx5-kj-PyL"/>
-                                                            <constraint firstItem="0fm-tN-Hxo" firstAttribute="centerY" secondItem="Gvg-jt-dnL" secondAttribute="centerY" id="xQO-xG-MFg"/>
+                                                            <constraint firstItem="9Z5-mV-R4v" firstAttribute="centerY" secondItem="53n-3L-6Dj" secondAttribute="centerY" constant="1" id="rx5-kj-PyL"/>
+                                                            <constraint firstItem="0fm-tN-Hxo" firstAttribute="centerY" secondItem="Gvg-jt-dnL" secondAttribute="centerY" constant="1" id="xQO-xG-MFg"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37Q-ax-DTC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="82"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wO-w7-ubu" customClass="CPHubSettingsButton">
-                                                                <rect key="frame" x="552" y="23" width="33" height="33"/>
+                                                                <rect key="frame" x="552" y="25" width="33" height="33"/>
                                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="33" id="qUD-Ax-y3I"/>
@@ -915,18 +899,18 @@
                                                                 </connections>
                                                             </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2AH-zT-qpU">
-                                                                <rect key="frame" x="15" y="15" width="522" height="49"/>
+                                                                <rect key="frame" x="15" y="15" width="522" height="52"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scheduled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKn-5f-fQj">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="522" height="17"/>
-                                                                        <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="522" height="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZQ-zk-Os4">
-                                                                        <rect key="frame" x="0.0" y="22" width="522" height="27"/>
+                                                                        <rect key="frame" x="0.0" y="23" width="522" height="29"/>
                                                                         <string key="text">stretching to another linestretching to another linestretching to another linestretching to another linestretching to another linestretching to another linestretching to another line</string>
-                                                                        <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="12"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -954,7 +938,7 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="geR-Se-N7g">
-                                                        <rect key="frame" x="0.0" y="223" width="600" height="1"/>
+                                                        <rect key="frame" x="0.0" y="226" width="600" height="1"/>
                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" priority="999" constant="1" id="D22-lF-CLM"/>
@@ -975,14 +959,14 @@
                                                     <constraint firstAttribute="trailing" secondItem="8qH-Db-Qvx" secondAttribute="trailing" id="w65-DI-smd"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wVv-vA-rHv">
-                                                <rect key="frame" x="0.0" y="509" width="600" height="81"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wVv-vA-rHv">
+                                                <rect key="frame" x="0.0" y="513" width="600" height="82"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JTi-mm-Bma">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="81"/>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTi-mm-Bma">
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="82"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPU-P3-6vk" customClass="CPHubSettingsButton">
-                                                                <rect key="frame" x="552" y="23" width="33" height="33"/>
+                                                                <rect key="frame" x="552" y="25" width="33" height="33"/>
                                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="33" id="dmj-Io-YCA"/>
@@ -993,18 +977,18 @@
                                                                 </connections>
                                                             </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ti-ig-9q0">
-                                                                <rect key="frame" x="15" y="15" width="522" height="49"/>
+                                                                <rect key="frame" x="15" y="15" width="522" height="52"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9o-qh-ga6">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="522" height="17"/>
-                                                                        <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="15"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="522" height="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmk-7V-flH">
-                                                                        <rect key="frame" x="0.0" y="22" width="522" height="27"/>
+                                                                        <rect key="frame" x="0.0" y="23" width="522" height="29"/>
                                                                         <string key="text">stretching to another linestretching to another linestretching to another linestretching to another linestretching to another linestretching to another linestretching to another line</string>
-                                                                        <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="12"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
@@ -1135,8 +1119,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8fI-tB-BQu">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fI-tB-BQu">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="CV9-fC-LEc">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>

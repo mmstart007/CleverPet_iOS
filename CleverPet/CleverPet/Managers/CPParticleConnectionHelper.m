@@ -67,9 +67,9 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
     customization.linkTextColor = [UIColor appTealColor];
     customization.elementBackgroundColor = [UIColor appLightTealColor];
     customization.elementTextColor = [UIColor appTealColor];
-    customization.normalTextFontName = @"Omnes-Light";
-    customization.boldTextFontName = @"Omnes-Bold";
-    customization.headerTextFontName = @"Omnes-Light";
+    customization.normalTextFontName = @"Raleway Light";
+    customization.boldTextFontName = @"Raleway Bold";
+    customization.headerTextFontName = @"Raleway Light";
     customization.disableLogOutOption = YES;
     customization.networkNamePrefix = @"Clever";
 }

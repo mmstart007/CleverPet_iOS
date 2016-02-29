@@ -61,14 +61,12 @@ CGFloat const kCPTextFieldDefaultHorizontalInset = 0.f;
     [self setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName:[UIColor appTextFieldPlaceholderColor], NSFontAttributeName:self.font}]];
 }
 
-- (CGRect)textRectForBounds:(CGRect)bounds
+- (BOOL)resignFirstResponder
 {
-    return CGRectInset(bounds, 2*self.horizontalTextInset, 0.5f);
-}
-
-- (CGRect)editingRectForBounds:(CGRect)bounds
-{
-    return CGRectInset(bounds, 2*self.horizontalTextInset, 0.5f);
+    BOOL resigned = [super resignFirstResponder];
+    // Fix for text jumping when moving to next text field
+    [self layoutIfNeeded];
+    return resigned;
 }
 
 /*

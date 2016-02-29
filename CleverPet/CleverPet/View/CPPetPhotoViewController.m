@@ -10,6 +10,7 @@
 #import "CPLoginController.h"
 #import "CPParticleConnectionHelper.h"
 #import "BABCropperView.h"
+#import "CPLoadingView.h"
 
 @interface CPPetPhotoViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -20,8 +21,7 @@
 @property (weak, nonatomic) IBOutlet BABCropperView *cropView;
 
 @property (nonatomic, strong) UIImagePickerController *imagePicker;
-@property (weak, nonatomic) IBOutlet UIView *fadeView;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (weak, nonatomic) IBOutlet CPLoadingView *fadeView;
 
 @end
 
@@ -30,7 +30,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.cropView.cropSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.width*.75f);
+    // Crop at double our view size so the resulting image isn't so garbage
+    self.cropView.cropSize = CGSizeMake(self.view.bounds.size.width*2, self.view.bounds.size.width*.75*2);
     self.cropView.backgroundColor = [UIColor appBackgroundColor];
     if (self.selectedImage) {
         // Force update of image and button if we had an image set before segueing in
@@ -57,7 +58,6 @@
     self.continueButton.backgroundColor = [UIColor appLightTealColor];
     self.continueButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.continueButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
-    self.spinner.color = [UIColor appTealColor];
 }
 
 - (void)setSelectedImage:(UIImage *)selectedImage
@@ -95,6 +95,7 @@
         }
     };
     
+    // TODO: Only rerender the image if we've changed images, or zoomed/panned. Will require modifying the pod
     if (self.cropView.image) {
         [self.cropView renderCroppedImage:imageSelectedBlock];
     } else {

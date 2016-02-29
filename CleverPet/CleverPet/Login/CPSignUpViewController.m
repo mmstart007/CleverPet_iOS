@@ -9,6 +9,7 @@
 #import "CPSignUpViewController.h"
 #import "CPLoginController.h"
 #import "CPTextField.h"
+#import "CPLoadingView.h"
 
 @interface CPSignUpViewController ()<UITextFieldDelegate>
 
@@ -20,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *signUpButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signUpButtonBottomConstraint;
+@property (weak, nonatomic) IBOutlet CPLoadingView *loginView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end
 
@@ -44,6 +47,7 @@
 {
     [super viewDidDisappear:animated];
     UNREG_SELF_FOR_ALL_NOTIFICATIONS();
+    self.loginView.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,6 +63,8 @@
     self.signUpButton.backgroundColor = [UIColor appLightTealColor];
     [self.signUpButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.signUpButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
+    [self.cancelButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    self.cancelButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
 - (BOOL)validateInput
@@ -94,8 +100,14 @@
 - (IBAction)signUpTapped:(id)sender
 {
     if ([self validateInput]) {
+        self.loginView.hidden = NO;
         [[CPLoginController sharedInstance] signUpWithEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] displayName:[self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] andPassword:self.passwordField.text];
     }
+}
+
+- (IBAction)cancelTapped:(id)sender
+{
+    [[CPLoginController sharedInstance] loginViewPressedCancel:self];
 }
 
 #pragma mark - UITextFieldDelegate methods
