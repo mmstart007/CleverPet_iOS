@@ -9,6 +9,7 @@
 #import "CPNascarViewController.h"
 #import "CPLoginController.h"
 #import "CPTextField.h"
+#import "CPLoadingView.h"
 
 @interface CPNascarViewController ()<UITextFieldDelegate>
 
@@ -20,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signInButtonBottomConstraint;
+@property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end
 
@@ -48,6 +51,7 @@
 {
     [super viewDidDisappear:animated];
     UNREG_SELF_FOR_ALL_NOTIFICATIONS();
+    self.loadingView.hidden = YES;
 }
 
 - (void)setupStyling
@@ -63,6 +67,8 @@
     self.signInButton.backgroundColor = [UIColor appLightTealColor];
     [self.signInButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.signInButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
+    [self.cancelButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    self.cancelButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
 - (BOOL)validateInput
@@ -80,19 +86,27 @@
 #pragma mark - IBActions
 - (IBAction)facebookTapped:(id)sender
 {
+    self.loadingView.hidden = NO;
     [[CPLoginController sharedInstance] signInWithFacebook];
 }
 
 - (IBAction)googleTapped:(id)sender
 {
+    self.loadingView.hidden = NO;
     [[CPLoginController sharedInstance] signInWithGoogle];
 }
 
 - (IBAction)signInTapped:(id)sender
 {
     if ([self validateInput]) {
+        self.loadingView.hidden = NO;
         [[CPLoginController sharedInstance] signInWithEmail:self.emailField.text];
     }
+}
+
+- (IBAction)cancelTapped:(id)sender
+{
+    [[CPLoginController sharedInstance] loginViewPressedCancel:self];
 }
 
 #pragma mark - UITextFieldDelegate methods

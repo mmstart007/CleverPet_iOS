@@ -8,6 +8,7 @@
 
 #import "CPPickerViewController.h"
 #import "CPSimpleTableViewCell.h"
+#import "CPGenderUtils.h"
 
 @interface CPPickerViewController ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -28,6 +29,7 @@
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView registerNib:[UINib nibWithNibName:@"CPSimpleTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
+    self.view.autoresizingMask = UIViewAutoresizingNone;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,9 +42,17 @@
     self.dataArray = @[NSLocalizedString(@"Male", nil), NSLocalizedString(@"Female", nil)];
 }
 
-- (void)setupForPickingNeutered
+- (void)setupForPickingNeuteredWithGender:(NSString *)gender
 {
-    self.dataArray = @[NSLocalizedString(@"Altered", nil), NSLocalizedString(@"Unaltered", nil), NSLocalizedString(@"Unspecified", )];
+    self.dataArray = @[[CPGenderUtils stringForAlteredState:kGenderNeutralAltered withGender:gender], [CPGenderUtils stringForAlteredState:kGenderNeutralUnaltered withGender:gender], [CPGenderUtils stringForAlteredState:kGenderNeutralUnspecified withGender:gender]];
+}
+
+- (void)updateHeightWithMaximum:(CGFloat)maxHeight
+{
+    // Update our frame size with the lower of our table content size, or the provided max height
+    CGRect currentBounds = self.view.bounds;
+    currentBounds.size.height = MIN(self.tableView.contentSize.height, maxHeight);
+    self.view.bounds = currentBounds;
 }
 
 #pragma mark - UITableViewDataSource methods

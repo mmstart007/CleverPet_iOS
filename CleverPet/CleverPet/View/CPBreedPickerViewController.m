@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet CPTextField *textField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *separator;
 
 @end
 
@@ -32,7 +33,8 @@
     self.breedsArray = [breedsArray valueForKeyPath:@"@unionOfArrays.self"];
     self.textField.text = self.selectedBreed;
     [self filterBreedsByString:self.selectedBreed];
-    self.view.backgroundColor = [UIColor appBackgroundColor];
+    self.view.backgroundColor = [UIColor appWhiteColor];
+    self.separator.backgroundColor = [UIColor appBackgroundColor];
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
     [self.tableView registerNib:[UINib nibWithNibName:@"CPSimpleTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

@@ -8,6 +8,7 @@
 
 #import "CPLoginController.h"
 #import <GoogleIdentityToolkit/GITkit.h>
+#import "CPNascarViewController.h"
 #import "CPSignInViewController.h"
 #import "CPSignUpViewController.h"
 #import "CPParticleConnectionHelper.h"
@@ -105,6 +106,12 @@
 - (void)signInWithGoogle
 {
     [[GITAuth sharedInstance] signInWithProviderID:kGITProviderGoogle];
+}
+
+- (void)loginViewPressedCancel:(UIViewController *)viewController
+{
+    [self.delegate loginAttemptCancelled];
+    [self.interfaceManager popViewController];
 }
 
 #pragma mark - GITInterfaceManagerDelegate

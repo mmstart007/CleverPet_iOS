@@ -68,6 +68,12 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    // Update pet name/image
+    // TODO: maybe a notification when pet info is updated so we don't always have to do this?
+    [self.mainScreenHeaderView setupForPet:self.currentPet];
+    if ([self.tableView.dataSource respondsToSelector:@selector(updatePetImage:)]) {
+        [self.tableView.dataSource performSelector:@selector(updatePetImage:) withObject:[self.currentPet petPhoto]];
+    }
 }
 
 - (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible headerStatsFade:(CGFloat)headerStatsFade

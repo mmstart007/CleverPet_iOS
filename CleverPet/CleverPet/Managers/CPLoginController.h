@@ -13,6 +13,7 @@
 @protocol CPLoginControllerDelegate <NSObject>
 
 - (void)loginAttemptFailed:(NSString*)message;
+- (void)loginAttemptCancelled;
 
 @end
 
@@ -26,6 +27,8 @@
 - (void)signUpWithEmail:(NSString*)email displayName:(NSString*)displayName andPassword:(NSString*)password;
 - (void)signInWithFacebook;
 - (void)signInWithGoogle;
+
+- (void)loginViewPressedCancel:(UIViewController*)viewController;
 
 - (void)setPendingUserInfo:(NSDictionary *)userInfo;
 - (void)completeSignUpWithPetImage:(UIImage*)image completion:(void (^)(NSError *error))completion;

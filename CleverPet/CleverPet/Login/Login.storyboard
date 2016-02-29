@@ -11,7 +11,7 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Pet Profile View Controller-->
+        <!--Pet Profile-->
         <scene sceneID="EgD-KI-R79">
             <objects>
                 <viewController storyboardIdentifier="PetProfileSetup" id="Tpf-WM-h2I" customClass="CPPetProfileViewController" sceneMemberID="viewController">
@@ -33,8 +33,8 @@
                                     <action selector="continueTapped:" destination="Tpf-WM-h2I" eventType="touchUpInside" id="BP1-76-tsc"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cz1-Cw-dDc">
-                                <rect key="frame" x="0.0" y="20" width="600" height="530"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cz1-Cw-dDc">
+                                <rect key="frame" x="0.0" y="64" width="600" height="486"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8eG-5W-OXW">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="532"/>
@@ -231,6 +231,7 @@
                             <constraint firstItem="FrJ-CI-AME" firstAttribute="top" secondItem="JjL-R6-7AE" secondAttribute="bottom" id="mY0-3B-oNL"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Pet Profile" id="4Co-0Y-3z3"/>
                     <connections>
                         <outlet property="ageField" destination="ImT-HO-OFo" id="UG2-uj-wX6"/>
                         <outlet property="breedField" destination="YJ0-ue-Nwj" id="UHi-Hd-ER7"/>
@@ -367,24 +368,45 @@
                                     <action selector="signInTapped:" destination="oPR-Or-REb" eventType="touchUpInside" id="7NM-7M-8Yi"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pby-Qf-XrA">
+                                <rect key="frame" x="15" y="20" width="56" height="34"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelTapped:" destination="oPR-Or-REb" eventType="touchUpInside" id="igR-5L-Isz"/>
+                                </connections>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3B-0X-HFZ" customClass="CPLoadingView">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="H0B-49-wPG" firstAttribute="leading" secondItem="qX5-7H-AQ2" secondAttribute="leading" id="3xm-Hu-HXK"/>
                             <constraint firstItem="v6X-lm-cXg" firstAttribute="leading" secondItem="qX5-7H-AQ2" secondAttribute="leading" id="90Z-S3-0Wm"/>
                             <constraint firstAttribute="trailing" secondItem="v6X-lm-cXg" secondAttribute="trailing" id="AcE-uF-dzd"/>
+                            <constraint firstItem="FAZ-ga-bpe" firstAttribute="top" secondItem="v3B-0X-HFZ" secondAttribute="bottom" id="EIa-4H-QGj"/>
                             <constraint firstItem="96S-Y2-KXS" firstAttribute="width" secondItem="qX5-7H-AQ2" secondAttribute="width" id="NEL-JA-lnB"/>
                             <constraint firstItem="H0B-49-wPG" firstAttribute="top" secondItem="v6X-lm-cXg" secondAttribute="bottom" id="Qoy-Ma-Pn7"/>
                             <constraint firstItem="FAZ-ga-bpe" firstAttribute="top" secondItem="H0B-49-wPG" secondAttribute="bottom" id="RNn-xw-xrg"/>
+                            <constraint firstAttribute="trailing" secondItem="v3B-0X-HFZ" secondAttribute="trailing" id="S6h-hJ-NrZ"/>
                             <constraint firstItem="v6X-lm-cXg" firstAttribute="top" secondItem="dIi-aL-o3J" secondAttribute="bottom" id="acV-n6-Q5C"/>
+                            <constraint firstItem="v3B-0X-HFZ" firstAttribute="leading" secondItem="qX5-7H-AQ2" secondAttribute="leading" id="dUp-F5-Dhe"/>
                             <constraint firstAttribute="trailing" secondItem="H0B-49-wPG" secondAttribute="trailing" id="du0-pb-4B1"/>
+                            <constraint firstItem="v3B-0X-HFZ" firstAttribute="top" secondItem="dIi-aL-o3J" secondAttribute="bottom" id="nxQ-E1-tyS"/>
+                            <constraint firstItem="pby-Qf-XrA" firstAttribute="top" secondItem="dIi-aL-o3J" secondAttribute="bottom" id="qtH-Ji-tBV"/>
+                            <constraint firstItem="pby-Qf-XrA" firstAttribute="leading" secondItem="qX5-7H-AQ2" secondAttribute="leading" constant="15" id="r5r-8o-4pt"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="pby-Qf-XrA" id="PQX-Cu-1K4"/>
                         <outlet property="emailField" destination="PeX-Fy-vYd" id="qjD-YX-E5k"/>
                         <outlet property="facebookButton" destination="l76-Qu-1Hv" id="Itm-sA-Caj"/>
                         <outlet property="googleButton" destination="UOY-lu-j4i" id="VcH-tB-hNo"/>
                         <outlet property="headerLabel" destination="4h6-nR-KHD" id="hKb-GF-3am"/>
+                        <outlet property="loadingView" destination="v3B-0X-HFZ" id="ERV-nd-eqI"/>
                         <outlet property="orLabel" destination="me7-Re-p6f" id="jYv-VI-cZy"/>
                         <outlet property="scrollView" destination="v6X-lm-cXg" id="Cxh-4f-M4P"/>
                         <outlet property="signInButton" destination="H0B-49-wPG" id="shb-bM-p8Y"/>
@@ -485,23 +507,44 @@
                                     <action selector="signInTapped:" destination="fdh-CA-guS" eventType="touchUpInside" id="uNL-gO-6OU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NMJ-XE-WOg">
+                                <rect key="frame" x="15" y="20" width="56" height="34"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelTapped:" destination="fdh-CA-guS" eventType="touchUpInside" id="N5B-ZC-OyA"/>
+                                </connections>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fEU-Nv-IGm" customClass="CPLoadingView">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="fEU-Nv-IGm" firstAttribute="leading" secondItem="POQ-Ne-W3D" secondAttribute="leading" id="2Yi-Cp-kna"/>
                             <constraint firstItem="cSi-kc-lbl" firstAttribute="leading" secondItem="POQ-Ne-W3D" secondAttribute="leading" id="C8L-5Q-0c9"/>
                             <constraint firstItem="eGH-UA-cQn" firstAttribute="leading" secondItem="POQ-Ne-W3D" secondAttribute="leading" id="D6g-C0-16f"/>
+                            <constraint firstItem="NMJ-XE-WOg" firstAttribute="leading" secondItem="POQ-Ne-W3D" secondAttribute="leading" constant="15" id="FO4-eA-6X6"/>
                             <constraint firstAttribute="trailing" secondItem="eGH-UA-cQn" secondAttribute="trailing" id="G9q-2Q-5Be"/>
+                            <constraint firstItem="fEU-Nv-IGm" firstAttribute="top" secondItem="wg3-8C-ku7" secondAttribute="bottom" id="O6m-fy-0rG"/>
                             <constraint firstAttribute="trailing" secondItem="cSi-kc-lbl" secondAttribute="trailing" id="QgA-Ic-v5k"/>
                             <constraint firstItem="7Kj-Dt-KQk" firstAttribute="top" secondItem="eGH-UA-cQn" secondAttribute="bottom" id="cHC-IT-sci"/>
                             <constraint firstItem="qCD-z3-N40" firstAttribute="width" secondItem="POQ-Ne-W3D" secondAttribute="width" id="ebo-cz-60z"/>
+                            <constraint firstAttribute="trailing" secondItem="fEU-Nv-IGm" secondAttribute="trailing" id="hBX-4o-5EJ"/>
+                            <constraint firstItem="NMJ-XE-WOg" firstAttribute="top" secondItem="wg3-8C-ku7" secondAttribute="bottom" id="iPI-6x-X43"/>
                             <constraint firstItem="cSi-kc-lbl" firstAttribute="top" secondItem="wg3-8C-ku7" secondAttribute="bottom" id="jf1-St-mtm"/>
                             <constraint firstItem="eGH-UA-cQn" firstAttribute="top" secondItem="cSi-kc-lbl" secondAttribute="bottom" id="tBk-cf-WZu"/>
+                            <constraint firstItem="7Kj-Dt-KQk" firstAttribute="top" secondItem="fEU-Nv-IGm" secondAttribute="bottom" id="vKW-NU-t0c"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="NMJ-XE-WOg" id="qfy-cD-0XQ"/>
                         <outlet property="emailField" destination="Ubz-U1-JHA" id="EK1-XO-bCN"/>
                         <outlet property="forgotPasswordButton" destination="rsC-3x-tVq" id="ZWy-A1-EH7"/>
                         <outlet property="headerLabel" destination="O5u-kq-IdF" id="vpE-ac-vWC"/>
+                        <outlet property="loadingView" destination="fEU-Nv-IGm" id="dCl-2Z-tqa"/>
                         <outlet property="passwordField" destination="Nyy-lp-dRx" id="gh9-Ta-Dv4"/>
                         <outlet property="scrollView" destination="cSi-kc-lbl" id="9II-Fk-94k"/>
                         <outlet property="signInButton" destination="eGH-UA-cQn" id="2Y6-ix-g7K"/>
@@ -623,22 +666,43 @@
                                     <action selector="signUpTapped:" destination="hJh-iH-aNR" eventType="touchUpInside" id="6Vq-6G-D6D"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aU7-pJ-2UY">
+                                <rect key="frame" x="15" y="20" width="56" height="34"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelTapped:" destination="hJh-iH-aNR" eventType="touchUpInside" id="Rd4-XH-1Nm"/>
+                                </connections>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Ex-u7-G64" customClass="CPLoadingView">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DYg-Jq-cK8" firstAttribute="top" secondItem="7q3-l0-EQY" secondAttribute="bottom" id="06e-ec-Mex"/>
+                            <constraint firstItem="5Ex-u7-G64" firstAttribute="top" secondItem="PeJ-Um-wc2" secondAttribute="bottom" id="AxR-JB-Fsc"/>
+                            <constraint firstItem="aU7-pJ-2UY" firstAttribute="top" secondItem="PeJ-Um-wc2" secondAttribute="bottom" id="Ii4-jU-Z77"/>
+                            <constraint firstItem="aU7-pJ-2UY" firstAttribute="leading" secondItem="yA8-k1-YPM" secondAttribute="leading" constant="15" id="LnK-zA-m65"/>
                             <constraint firstItem="7q3-l0-EQY" firstAttribute="leading" secondItem="yA8-k1-YPM" secondAttribute="leading" id="Nqi-3Y-HYo"/>
                             <constraint firstItem="lqE-g5-Lix" firstAttribute="width" secondItem="yA8-k1-YPM" secondAttribute="width" id="Tzq-hw-q8m"/>
+                            <constraint firstAttribute="trailing" secondItem="5Ex-u7-G64" secondAttribute="trailing" id="WFn-eV-xNH"/>
                             <constraint firstItem="7q3-l0-EQY" firstAttribute="top" secondItem="PeJ-Um-wc2" secondAttribute="bottom" id="X8a-V6-fDf"/>
+                            <constraint firstItem="5Ex-u7-G64" firstAttribute="leading" secondItem="yA8-k1-YPM" secondAttribute="leading" id="ciA-L4-3mw"/>
                             <constraint firstAttribute="trailing" secondItem="DYg-Jq-cK8" secondAttribute="trailing" id="jDn-iR-pOL"/>
                             <constraint firstAttribute="trailing" secondItem="7q3-l0-EQY" secondAttribute="trailing" id="mMF-bb-LiY"/>
                             <constraint firstItem="DYg-Jq-cK8" firstAttribute="leading" secondItem="yA8-k1-YPM" secondAttribute="leading" id="pKZ-h5-vWz"/>
+                            <constraint firstItem="2p5-mK-11Y" firstAttribute="top" secondItem="5Ex-u7-G64" secondAttribute="bottom" id="ptL-b7-mce"/>
                             <constraint firstItem="2p5-mK-11Y" firstAttribute="top" secondItem="DYg-Jq-cK8" secondAttribute="bottom" id="vSX-s1-bBT"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="aU7-pJ-2UY" id="DVO-cN-HWB"/>
                         <outlet property="emailField" destination="TlM-24-esV" id="Ysf-vv-I6i"/>
                         <outlet property="headerLabel" destination="XOi-oH-GFH" id="LrO-kX-t1J"/>
+                        <outlet property="loginView" destination="5Ex-u7-G64" id="ER5-Ac-Rt0"/>
                         <outlet property="nameField" destination="y0n-Qg-Q7p" id="kxQ-yD-9vB"/>
                         <outlet property="passwordField" destination="QQd-SS-I0m" id="tVx-wj-3wa"/>
                         <outlet property="scrollView" destination="7q3-l0-EQY" id="W3M-FO-GTX"/>
