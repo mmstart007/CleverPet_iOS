@@ -809,7 +809,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0fm-tN-Hxo" customClass="NMRangeSlider">
-                                                                <rect key="frame" x="65" y="97" width="470" height="28"/>
+                                                                <rect key="frame" x="65" y="98" width="470" height="28"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="28" id="dse-QI-SSO"/>
@@ -837,7 +837,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Z5-mV-R4v" customClass="NMRangeSlider">
-                                                                <rect key="frame" x="65" y="22" width="470" height="28"/>
+                                                                <rect key="frame" x="65" y="23" width="470" height="28"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="28" id="eH7-Dz-y4I"/>
@@ -847,8 +847,8 @@
                                                                 </connections>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12am" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53n-3L-6Dj">
-                                                                <rect key="frame" x="15" y="27" width="37" height="18"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                <rect key="frame" x="15" y="27" width="38" height="18"/>
+                                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -880,8 +880,8 @@
                                                             <constraint firstItem="ZVj-d7-Squ" firstAttribute="height" secondItem="Gvg-jt-dnL" secondAttribute="height" id="kYw-Id-Mhd"/>
                                                             <constraint firstItem="0fm-tN-Hxo" firstAttribute="trailing" secondItem="9Z5-mV-R4v" secondAttribute="trailing" id="lPB-be-0nh"/>
                                                             <constraint firstItem="53n-3L-6Dj" firstAttribute="top" secondItem="faN-Eh-i8e" secondAttribute="bottom" priority="999" constant="12" id="nL6-bp-0wX"/>
-                                                            <constraint firstItem="9Z5-mV-R4v" firstAttribute="centerY" secondItem="53n-3L-6Dj" secondAttribute="centerY" id="rx5-kj-PyL"/>
-                                                            <constraint firstItem="0fm-tN-Hxo" firstAttribute="centerY" secondItem="Gvg-jt-dnL" secondAttribute="centerY" id="xQO-xG-MFg"/>
+                                                            <constraint firstItem="9Z5-mV-R4v" firstAttribute="centerY" secondItem="53n-3L-6Dj" secondAttribute="centerY" constant="1" id="rx5-kj-PyL"/>
+                                                            <constraint firstItem="0fm-tN-Hxo" firstAttribute="centerY" secondItem="Gvg-jt-dnL" secondAttribute="centerY" constant="1" id="xQO-xG-MFg"/>
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="37Q-ax-DTC">

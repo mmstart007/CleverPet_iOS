@@ -28,8 +28,8 @@
                                     <action selector="continueTapped:" destination="Tpf-WM-h2I" eventType="touchUpInside" id="BP1-76-tsc"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Cz1-Cw-dDc">
-                                <rect key="frame" x="0.0" y="64" width="600" height="486"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cz1-Cw-dDc">
+                                <rect key="frame" x="0.0" y="20" width="600" height="530"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8eG-5W-OXW">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="532"/>
