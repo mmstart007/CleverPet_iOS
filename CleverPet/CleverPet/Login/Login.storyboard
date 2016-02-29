@@ -5,11 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="Omnes-Light.otf">
-            <string>Omnes-Light</string>
-        </mutableArray>
-    </customFonts>
     <scenes>
         <!--Pet Profile-->
         <scene sceneID="EgD-KI-R79">
@@ -447,7 +442,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="ViU-JX-RMd"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Omnes-Light" family="Omnes" pointSize="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="fdh-CA-guS" id="hio-mg-40G"/>
