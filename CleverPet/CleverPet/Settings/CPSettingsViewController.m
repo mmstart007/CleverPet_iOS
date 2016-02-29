@@ -7,10 +7,13 @@
 //
 
 #import "CPSettingsViewController.h"
+#import <Intercom/Intercom.h>
 
 NSUInteger const kDeviceSection = 0;
 NSUInteger const kHelpSection = 1;
 NSUInteger const kAccountSection = 2;
+
+NSUInteger const kHelpSectionChatWithUsRow = 0;
 
 @interface CPSettingsBasicCell : UITableViewCell
 
@@ -145,6 +148,10 @@ NSUInteger const kAccountSection = 2;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (indexPath.section == kHelpSection && indexPath.row == kHelpSectionChatWithUsRow) {
+        [Intercom presentConversationList];
+    }
 }
 
 /*

@@ -40,6 +40,7 @@ PODS:
   - GoogleSymbolUtilities (1.0.3)
   - GoogleUtilities (1.0.1):
     - GoogleSymbolUtilities (~> 1.0)
+  - Intercom (2.3.19)
   - JSONModel (1.2.0)
   - NMRangeSlider (1.2.1)
   - OAStackView (1.0.1)
@@ -68,6 +69,7 @@ DEPENDENCIES:
   - BABCropperView
   - CHCSVParser
   - GoogleIdentityToolkit
+  - Intercom
   - JSONModel
   - NMRangeSlider
   - OAStackView
@@ -99,6 +101,7 @@ SPEC CHECKSUMS:
   GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
+  Intercom: de20d3f2eeb7798aac66b26a7a7b92979211e05c
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   NMRangeSlider: 317ded652431eb90501c8421d9cddc3930d891e6
   OAStackView: 95e7cb79cbea25c2342f496a44bdbe8bd4c8d510

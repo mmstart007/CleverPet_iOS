@@ -10,6 +10,7 @@
 #import <GoogleIdentityToolkit/GITkit.h>
 #import <GoogleSignin/GoogleSignin.h>
 #import "CPAppearance.h"
+#import <Intercom/Intercom.h>
 
 @interface AppDelegate ()
 
@@ -23,6 +24,9 @@
     
     [self setupGoogleIdentityToolkit];
     [CPAppearance initCustomAppearance];
+    
+    // Initialize Intercom
+    [Intercom setApiKey:@"ios_sdk-7acac94f6c642142e21fd6e6be0bbc7b4d38f7cc" forAppId:@"swragh2u"];
     
     return YES;
 }

@@ -60,6 +60,7 @@ install_resource()
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "GoogleIdentityToolkit/Resources/GITkit.bundle"
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "Intercom/Intercom.bundle"
   install_resource "NMRangeSlider/NMRangeSlider/DefaultTheme/slider-default-handle-highlighted.png"
   install_resource "NMRangeSlider/NMRangeSlider/DefaultTheme/slider-default-handle-highlighted@2x.png"
   install_resource "NMRangeSlider/NMRangeSlider/DefaultTheme/slider-default-handle.png"
@@ -93,6 +94,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "GoogleIdentityToolkit/Resources/GITkit.bundle"
   install_resource "GoogleSignIn/Resources/GoogleSignIn.bundle"
+  install_resource "Intercom/Intercom.bundle"
   install_resource "NMRangeSlider/NMRangeSlider/DefaultTheme/slider-default-handle-highlighted.png"
   install_resource "NMRangeSlider/NMRangeSlider/DefaultTheme/slider-default-handle-highlighted@2x.png"
   install_resource "NMRangeSlider/NMRangeSlider/DefaultTheme/slider-default-handle.png"

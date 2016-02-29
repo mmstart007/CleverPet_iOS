@@ -14,6 +14,7 @@
 #import "CPAppEngineCommunicationManager.h"
 #import "CPFileUtils.h"
 #import "CPUserManager.h"
+#import <Intercom/Intercom.h>
 
 @interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate>
 
@@ -160,6 +161,8 @@ didFinishSignInWithToken:(NSString *)token
                 // TODO: nicer error handling
                 [self.delegate loginAttemptFailed:error.localizedDescription];
             } else {
+                [Intercom registerUserWithUserId:account.localID email:account.email];
+                
                 [self presentUIForLoginResult:result];
             }
         }];
@@ -213,6 +216,8 @@ didFinishSignInWithToken:(NSString *)token
 
 - (void)logout
 {
+    [Intercom reset];
+    
     [[CPAppEngineCommunicationManager sharedInstance] clearAuth];
     [[GITAuth sharedInstance] signOut];
     
