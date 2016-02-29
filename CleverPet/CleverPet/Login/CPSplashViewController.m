@@ -74,6 +74,11 @@
     [self displayErrorAlertWithTitle:NSLocalizedString(@"Error", @"Login error alert title") andMessage:message];
 }
 
+- (void)loginAttemptCancelled
+{
+    [self showLoadingSpinner:NO];
+}
+
 /*
 #pragma mark - Navigation
 

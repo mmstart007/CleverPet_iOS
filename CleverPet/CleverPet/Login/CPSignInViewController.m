@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signInButtonBottomConstraint;
 @property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end
 
@@ -45,6 +46,7 @@
 {
     [super viewDidDisappear:animated];
     UNREG_SELF_FOR_ALL_NOTIFICATIONS();
+    self.loadingView.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,6 +64,8 @@
     self.signInButton.backgroundColor = [UIColor appLightTealColor];
     [self.signInButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.signInButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
+    [self.cancelButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    self.cancelButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
 - (BOOL)validateInput
@@ -91,6 +95,11 @@
             [self displayErrorAlertWithTitle:NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails") andMessage:NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails")];
         }];
     }
+}
+
+- (IBAction)cancelTapped:(id)sender
+{
+    [[CPLoginController sharedInstance] loginViewPressedCancel:self];
 }
 
 #pragma mark - UITextFieldDelegate methods
