@@ -22,5 +22,6 @@
 
 - (void)setupForPickingGender;
 - (void)setupForPickingNeuteredWithGender:(NSString*)gender;
+- (void)updateHeightWithMaximum:(CGFloat)maxHeight;
 
 @end

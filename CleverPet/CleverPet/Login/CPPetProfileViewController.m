@@ -172,6 +172,8 @@
             UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
             CPPickerViewController *genderPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
             [genderPicker setupForPickingGender];
+            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
+            [genderPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
             genderPicker.delegate = self;
             textField.inputView = genderPicker.view;
             self.genderPicker = genderPicker;
