@@ -75,6 +75,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
         [self applyConfig:responseObject];
         if (completion) completion(nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // TODO: Perhaps ignore the timer the next time we see if we should check so the user isn't shut out of the app?
         if (completion) completion(error);
     }];
 }
