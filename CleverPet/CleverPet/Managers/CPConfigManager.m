@@ -12,6 +12,9 @@
 #import <AFNetworking/AFNetworking.h>
 
 NSString * const kConfigUrl = @"https://storage.googleapis.com/cleverpet-app/configs/config.json";
+NSString * const kMinimumVersionKey = @"minimum_required_version";
+NSString * const kDeprecationMessageKey = @"deprecation_message";
+NSString * const kDefaultDeprecationMessage = @"Your app does not meet the minimum version. Do something about it.";
 
 @interface CPConfigManager()
 
@@ -45,7 +48,18 @@ NSString * const kConfigUrl = @"https://storage.googleapis.com/cleverpet-app/con
     BLOCK_SELF_REF_OUTSIDE();
     [self.sessionManager GET:kConfigUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
-        // TODO: version check, deprecation message, etc
+        NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+        NSString *minimumVersion = responseObject[kMinimumVersionKey];
+        if (minimumVersion) {
+            if ([version compare:minimumVersion options:NSNumericSearch] == NSOrderedAscending) {
+                NSString *deprecationMessage = responseObject[kDeprecationMessageKey];
+                if ([deprecationMessage length] == 0) {
+                    deprecationMessage = kDefaultDeprecationMessage;
+                }
+                if (completion) completion([NSError errorWithDomain:@"AppVersion" code:1 userInfo:@{NSLocalizedDescriptionKey:deprecationMessage}]);
+                return;
+            }
+        }
         [self applyConfig:responseObject];
         if (completion) completion(nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -57,6 +71,7 @@ NSString * const kConfigUrl = @"https://storage.googleapis.com/cleverpet-app/con
 {
     [[CPParticleConnectionHelper sharedInstance] applyConfig:configData];
     [[CPAppEngineCommunicationManager sharedInstance] applyConfig:configData];
+    // TODO: apply config to firebase
 }
 
 @end
