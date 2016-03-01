@@ -14,6 +14,7 @@
 NSString * const kAppEngineBaseUrl = @"app_server_url";
 NSString * const kNewUserPath = @"users/new";
 NSString * const kUserLoginPath = @"users/login";
+NSString * const kUserLogoutPath = @"users/logout";
 NSString * const kUserInfoPath = @"users/info";
 NSString * const kPetProfilePath = @"animals";
 #define SPECIFIC_PET_PROFILE(petId) [NSString stringWithFormat:@"%@/%@", kPetProfilePath, petId]
@@ -79,6 +80,17 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         if (completion) completion(CPLoginResult_Failure, error);
     }];
+}
+
+- (ASYNC)logoutWithCompletion:(void (^)(NSError *))completion
+{
+    [self.sessionManager PUT:kUserLogoutPath parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (completion) completion(nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (completion) completion(error);
+    }];
+    // Clear our auth header regardless of if the call is successful or not, as we've already dumped the user back to login
+    [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
 }
 
 - (ASYNC)createUser:(GITAccount*)userAccount completion:(void (^)(CPLoginResult, NSError *))completion
@@ -181,11 +193,6 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 {
     // TODO: error codes
     return [NSError errorWithDomain:NSStringFromClass([self class]) code:0 userInfo:@{NSLocalizedDescriptionKey:message}];
-}
-
-- (void)clearAuth
-{
-    [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
 }
 
 @end
