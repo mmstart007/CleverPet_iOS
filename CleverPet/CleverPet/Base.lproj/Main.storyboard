@@ -23,6 +23,44 @@
             </objects>
             <point key="canvasLocation" x="-382" y="461"/>
         </scene>
+        <!--Config View Controller-->
+        <scene sceneID="ssB-Qx-GYd">
+            <objects>
+                <viewController storyboardIdentifier="ConfigView" modalTransitionStyle="crossDissolve" id="EGt-0m-FDw" customClass="CPConfigViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RUR-5z-JCt"/>
+                        <viewControllerLayoutGuide type="bottom" id="YMg-je-ick"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FAb-Fv-lcZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aDM-mp-Fl9">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="otv-r7-ch9">
+                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aDM-mp-Fl9" secondAttribute="trailing" id="IYs-he-ore"/>
+                            <constraint firstItem="otv-r7-ch9" firstAttribute="centerX" secondItem="FAb-Fv-lcZ" secondAttribute="centerX" id="PWb-yq-uD0"/>
+                            <constraint firstItem="aDM-mp-Fl9" firstAttribute="top" secondItem="RUR-5z-JCt" secondAttribute="bottom" id="Q1S-lo-Gpa"/>
+                            <constraint firstItem="aDM-mp-Fl9" firstAttribute="leading" secondItem="FAb-Fv-lcZ" secondAttribute="leading" id="RId-i8-eV9"/>
+                            <constraint firstItem="YMg-je-ick" firstAttribute="top" secondItem="aDM-mp-Fl9" secondAttribute="bottom" id="eMy-WR-qqv"/>
+                            <constraint firstItem="otv-r7-ch9" firstAttribute="centerY" secondItem="FAb-Fv-lcZ" secondAttribute="centerY" id="pHj-uZ-EEa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImage" destination="aDM-mp-Fl9" id="9bF-fk-KtT"/>
+                        <outlet property="spinner" destination="otv-r7-ch9" id="f19-V1-qxh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="29Y-8V-MnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="362" y="-324"/>
+        </scene>
         <!--Splash View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
