@@ -50,7 +50,8 @@ NSString * const kDefaultDeprecationMessage = @"Your app does not meet the minim
         BLOCK_SELF_REF_INSIDE();
         NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
         NSString *minimumVersion = responseObject[kMinimumVersionKey];
-        if (minimumVersion) {
+        // Ignore the minimum version set on our test config
+        if (minimumVersion && ![minimumVersion isEqualToString:@"test"]) {
             if ([version compare:minimumVersion options:NSNumericSearch] == NSOrderedAscending) {
                 NSString *deprecationMessage = responseObject[kDeprecationMessageKey];
                 if ([deprecationMessage length] == 0) {
