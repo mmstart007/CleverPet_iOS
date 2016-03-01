@@ -95,10 +95,12 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 
 - (ASYNC)logoutWithCompletion:(void (^)(NSError *))completion
 {
+    BLOCK_SELF_REF_OUTSIDE();
     [self.sessionManager PUT:kUserLogoutPath parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (completion) completion(nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (completion) completion(error);
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
     }];
     // Clear our auth header regardless of if the call is successful or not, as we've already dumped the user back to login
     [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
@@ -148,7 +150,8 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             [self lookupPetInfo:jsonResponse[@"animal_ID"] completion:completion];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (completion) completion(nil, error);
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion(nil, [self convertAFNetworkingErroToServerError:error]);
     }];
 }
 
@@ -165,13 +168,16 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (completion) completion(nil);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (completion) completion(error);
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
     }];
 }
 
 - (ASYNC)lookupPetInfo:(NSString *)petId completion:(void (^)(NSString *, NSError *))completion
 {
+    BLOCK_SELF_REF_OUTSIDE();
     [self.sessionManager GET:SPECIFIC_PET_PROFILE(petId) parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        BLOCK_SELF_REF_INSIDE();
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
             NSString *errorMessage = jsonResponse[kErrorKey];
@@ -181,7 +187,8 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (completion) completion(jsonResponse[@"animal_ID"], nil);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (completion) completion(nil, error);
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion(nil, [self convertAFNetworkingErroToServerError:error]);
     }];
 }
 
@@ -189,6 +196,15 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 - (void)setAuthToken:(NSString *)authToken
 {
     [self.sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", authToken] forHTTPHeaderField:@"Authorization"];
+}
+
+- (NSError *)convertAFNetworkingErroToServerError:(NSError*)error
+{
+    NSInteger errorCode = [error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
+    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] options:kNilOptions error:nil];
+    NSString *errorMessage = responseDict[kErrorKey] ? responseDict[kErrorKey] : [[NSString alloc] initWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+    NSError *newError = [NSError errorWithDomain:NSStringFromClass([self class]) code:errorCode userInfo:@{NSLocalizedDescriptionKey:errorMessage}];
+    return newError;
 }
 
 - (NSError*)errorForMessage:(NSString *)message
