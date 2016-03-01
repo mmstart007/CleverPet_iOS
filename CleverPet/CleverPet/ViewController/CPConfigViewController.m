@@ -14,6 +14,7 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
 
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImage;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) NSDate *loadedDate;
 @property (nonatomic, strong) NSTimer *dismissTimer;
 
@@ -27,6 +28,8 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.spinner.color = [UIColor appTealColor];
     self.loadedDate = [NSDate date];
+    self.messageLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
+    self.messageLabel.textColor = [UIColor appTitleTextColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,11 +50,12 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
     } else {
         [self.spinner stopAnimating];
     }
+    self.messageLabel.hidden = !isAnimating;
 }
 
 - (void)displayErrorAlertWithTitle:(NSString *)title andMessage:(NSString *)message
 {
-    [self.spinner stopAnimating];
+    [self setAnimating:NO];
     [super displayErrorAlertWithTitle:title andMessage:message];
 }
 
