@@ -224,13 +224,6 @@ didFinishSignInWithToken:(NSString *)token
 - (void)logout
 {
     [Intercom reset];
-    
-    // TODO: unregister for push notifications
-    [[CPAppEngineCommunicationManager sharedInstance] logoutWithCompletion:^(NSError *error) {
-        if (error) {
-            // TODO: save the user id and device id to attempt to unregister on the server again later?
-        }
-    }];
     [[GITAuth sharedInstance] signOut];
     
     // Interface manager setup is tied into the root controller when it's instantiated, so reset it

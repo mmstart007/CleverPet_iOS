@@ -11,6 +11,8 @@
 #import "CPFileUtils.h"
 #import "CPLoginController.h"
 
+NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
+
 @interface CPUserManager()
 
 @property (nonatomic, strong) CPUser *currentUser;
@@ -112,9 +114,47 @@
 
 - (void)logout
 {
+    CPUser *currentUser = self.currentUser;
+    
+    // TODO: Handle pending logouts that have failed. On app resume or reachability change? If we get a successful login, theoretically we can clear any pending logouts as long as the server only allows a specific push token to be associated with a single user
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[self defaultsKeyForUser:self.currentUser.userId]];
     self.currentUser = nil;
+    [self addUserToPendingLogouts:currentUser];
+    
+    BLOCK_SELF_REF_OUTSIDE();
+    [[CPAppEngineCommunicationManager sharedInstance] logoutWithCompletion:^(NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (!error) {
+            [self removeUserFromPendingLogouts:currentUser];
+        }
+    }];
     [[CPLoginController sharedInstance] logout];
+}
+
+- (void)addUserToPendingLogouts:(CPUser*)user
+{
+    // Write our user id and device token to defaults so we can attempt to remove the push on the server at a later point if the logout call fails
+    NSMutableDictionary *pendingLogouts = [[[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts] mutableCopy];
+    if (!pendingLogouts) {
+        pendingLogouts = [NSMutableDictionary dictionary];
+    }
+    
+    // TODO: Add push token to user object
+    pendingLogouts[user.userId] = @"pushToken";
+    [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)removeUserFromPendingLogouts:(CPUser*)user
+{
+    NSMutableDictionary *pendingLogouts = [[[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts] mutableCopy];
+    if (!pendingLogouts) {
+        return;
+    }
+    
+    pendingLogouts[user.userId] = nil;
+    [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end
