@@ -28,9 +28,13 @@
     // Do any additional setup after loading the view.
     [self setupStyling];
     self.signInButton.hidden = YES;
+    BLOCK_SELF_REF_OUTSIDE();
     [[CPConfigManager sharedInstance] loadConfigWithCompletion:^(NSError *error) {
-        // TODO: display error
-        if (!error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (error) {
+            // TODO: ship off to the app store or something
+            [self displayErrorAlertWithTitle:NSLocalizedString(@"App Version Out of Date", @"Title for alert shown when using out of date version of the app") andMessage:error.localizedDescription];
+        } else {
             [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.signInButton.hidden = NO;
             } completion:nil];
