@@ -112,6 +112,7 @@
 
 - (void)logout
 {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[self defaultsKeyForUser:self.currentUser.userId]];
     self.currentUser = nil;
     [[CPLoginController sharedInstance] logout];
 }
