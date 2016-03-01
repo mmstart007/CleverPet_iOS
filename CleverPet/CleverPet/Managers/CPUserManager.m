@@ -117,7 +117,6 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     CPUser *currentUser = self.currentUser;
     
     // TODO: Handle pending logouts that have failed. On app resume or reachability change? If we get a successful login, theoretically we can clear any pending logouts as long as the server only allows a specific push token to be associated with a single user
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[self defaultsKeyForUser:self.currentUser.userId]];
     self.currentUser = nil;
     [self addUserToPendingLogouts:currentUser];
     
