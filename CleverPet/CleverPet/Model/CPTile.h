@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger) {
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) UIImage *image;
 @property (assign, nonatomic) CPTileType tileType;
+@property (assign, nonatomic) BOOL isSwipeable;
 
 @property (strong, nonatomic) NSString *affirmativeButtonText, *negativeButtonText;
 

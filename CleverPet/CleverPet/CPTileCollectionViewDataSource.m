@@ -15,7 +15,7 @@
 #define SECTION_HEADER @"SECTION_HEADER"
 #define HEADER_VIEW_SECTION 0
 
-@interface CPTileCollectionViewDataSource ()
+@interface CPTileCollectionViewDataSource () <CPTileViewCellDelegate>
 @property (strong, nonatomic) CPTileDataManager *tileDataManager;
 @property (weak, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) CPTileViewCell *sizingCell;
@@ -148,6 +148,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     }
     CPTile *tile = [self.tileDataManager tileForRow:indexPath.row inSection:indexPath.section - 1];
     cell.tile = tile;
+    cell.delegate = self;
     return cell;
 }
 
@@ -200,4 +201,8 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     }
 }
 
+#pragma mark - CPTileViewCellDelegate methods
+- (void)didSwipeTileViewCell:(CPTileViewCell *)tileViewCell {
+    // TODO: Get rid of the tile here
+}
 @end

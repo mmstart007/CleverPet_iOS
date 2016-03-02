@@ -20,6 +20,16 @@
 @property (weak, nonatomic) IBOutlet UIStackView *buttonHolder;
 @property (weak, nonatomic) IBOutlet UIView *backingView;
 @property (strong, nonatomic) IBOutlet UIView *colouredDotView;
+
+
+@property (weak, nonatomic) IBOutlet UIView *swipedColorView;
+
+// The relative priority of these 2 constraints controls whether the swiped color view covers
+// or doesn't cover the cell. One should always be greater than the other to prevent constraint conflicts.
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *colorViewNotCoveringConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *colorViewCoveringConstraint;
+
+@property (strong, nonatomic) NSMutableArray<UISwipeGestureRecognizer *> *swipeGestureRecognizers;
 @end
 
 @implementation CPTileViewCell {
@@ -63,6 +73,7 @@
     }
     
     self.colorBarView.backgroundColor = tileColor;
+    self.swipedColorView.backgroundColor = tileColor;
     self.affirmativeButton.backgroundColor = tileColor;
     self.negativeButton.backgroundColor = tileLightColor;
     
@@ -72,6 +83,30 @@
     self.tagTimeStampLabel.text = [NSString stringWithFormat:@"Device Message | %@", [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
     
     self.colouredDotView.backgroundColor = tileColor;
+}
+
+- (void)swipeGestureRecognized:(UISwipeGestureRecognizer *)recognizer {
+    if (self.tile.isSwipeable && [self.swipeGestureRecognizers containsObject:recognizer]) {
+        [self setSwipedMode:YES withAnimation:YES];
+        [self.delegate didSwipeTileViewCell:self];
+    }
+}
+
+- (void)setSwipedMode:(BOOL)swipedMode withAnimation:(BOOL)animated {
+    if (animated) {
+        [self layoutIfNeeded];
+    }
+
+    self.colorViewCoveringConstraint.priority = swipedMode ? 999 : 998;
+    self.colorViewNotCoveringConstraint.priority = swipedMode ? 998 : 999;
+    
+    if (animated) {
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+            [self layoutIfNeeded];
+        } completion:nil];
+    } else {
+        [self layoutIfNeeded];
+    }
 }
 
 - (void)setTextColor:(UIColor *)color onButton:(UIButton *)button
@@ -118,11 +153,20 @@
     
     self.colouredDotView.layer.cornerRadius = 2;
     self.colouredDotView.clipsToBounds = YES;
+    
+    self.swipeGestureRecognizers = [[NSMutableArray alloc] init];
+    for (NSNumber *gestureDirection in @[@(UISwipeGestureRecognizerDirectionLeft), @(UISwipeGestureRecognizerDirectionRight)]) {
+        UISwipeGestureRecognizer *gestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipeGestureRecognized:)];
+        gestureRecognizer.direction = gestureDirection.unsignedIntegerValue;
+        [self.swipeGestureRecognizers addObject:gestureRecognizer];
+        [self addGestureRecognizer:gestureRecognizer];
+    }
 }
 
 - (void)prepareForReuse
 {
     self.titleLabel.text = nil;
     self.cellImageView.image = nil;
+    [self setSwipedMode:NO withAnimation:NO];
 }
 @end

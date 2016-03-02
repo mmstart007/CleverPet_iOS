@@ -6,8 +6,15 @@
 #import <UIKit/UIKit.h>
 
 @class CPTile;
+@class CPTileViewCell;
+
+@protocol CPTileViewCellDelegate <NSObject>
+- (void)didSwipeTileViewCell:(CPTileViewCell *)tileViewCell;
+@end
 
 @interface CPTileViewCell : UITableViewCell
+
+@property (weak, nonatomic) id<CPTileViewCellDelegate> delegate;
 
 @property (weak, nonatomic) CPTile *tile;
 
