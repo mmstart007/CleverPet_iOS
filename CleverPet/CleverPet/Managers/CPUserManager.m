@@ -130,6 +130,11 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     [[CPLoginController sharedInstance] logout];
 }
 
+- (void)clearCurrentUser
+{
+    self.currentUser = nil;
+}
+
 - (void)addUserToPendingLogouts:(CPUser*)user
 {
     // Write our user id and device token to defaults so we can attempt to remove the push on the server at a later point if the logout call fails

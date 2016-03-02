@@ -10,6 +10,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "GITAccount.h"
 #import "CPUserManager.h"
+#import "CPParticleConnectionHelper.h"
 
 NSString * const kAppEngineBaseUrl = @"app_server_url";
 NSString * const kNewUserPath = @"users/new";
@@ -48,36 +49,33 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     self.sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
 }
 
-- (ASYNC)loginWithUser:(GITAccount*)userAccount completion:(void (^)(CPLoginResult, NSError *))completion
+- (ASYNC)loginWithAuthToken:(NSString *)gitKitToken completion:(void (^)(CPLoginResult, NSError *))completion
 {
-    NSParameterAssert(userAccount);
-    NSParameterAssert(userAccount.localID);
-    // TODO: address this once login/creation have been unified. For now, try to login, and if it fails with no user, go creation
-    NSDictionary *params = @{kEmailKey:userAccount.localID};
+    NSParameterAssert(gitKitToken);
     BLOCK_SELF_REF_OUTSIDE();
-    [self.sessionManager PUT:kUserLoginPath parameters:params success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    // Set our auth token
+    [self setAuthToken:gitKitToken];
+    [self.sessionManager POST:kUserLoginPath parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
-        // If we failed because our account didn't exist, make the sign up call
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
             NSString *errorMessage = jsonResponse[kErrorKey];
-            if ([errorMessage isEqualToString:kNoUserAccountError]) {
-                [self createUser:userAccount completion:completion];
-            } else {
-                if (completion) completion(CPLoginResult_Failure, [self errorForMessage:errorMessage]);
-            }
+            if (completion) completion(CPLoginResult_Failure, [self errorForMessage:errorMessage]);
         } else {
-            // Check for auth token
-            if (jsonResponse[kAuthTokenKey]) {
+            // Check for required auth tokens
+            if (jsonResponse[kAuthTokenKey] && jsonResponse[kParticleAuthTokenKey] && jsonResponse[kFirebaseAuthTokenKey]) {
                 [self setAuthToken:jsonResponse[kAuthTokenKey]];
                 [[CPUserManager sharedInstance] userLoggedIn:jsonResponse];
-                [self fetchUserCompletion:completion];
-                //                if (completion) completion(CPLoginResult_UserWithoutPetProfile, nil);
+                [self userLoggedIn:jsonResponse completion:completion];
             } else {
+                // TODO: update message with specific token missing
                 if (completion) completion(CPLoginResult_Failure, [self errorForMessage:NSLocalizedString(@"Missing auth token", nil)]);
             }
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        BLOCK_SELF_REF_INSIDE();
+        // Clear the auth header as we will now be in a fresh login state
+        [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
         if (completion) completion(CPLoginResult_Failure, error);
     }];
 }
@@ -93,43 +91,32 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
 }
 
-- (ASYNC)createUser:(GITAccount*)userAccount completion:(void (^)(CPLoginResult, NSError *))completion
-{
-    // TODO: make this more robust, or hopefully kill it
-    NSArray *nameComponents = [userAccount.displayName componentsSeparatedByString:@" "];
-    if ([nameComponents count] == 0) {
-        nameComponents = @[@"Missing"];
-    }
-    
-    NSDictionary *params = @{kEmailKey:userAccount.localID, kFirstNameKey:[nameComponents firstObject], kLastNameKey:[nameComponents lastObject], @"provider":(userAccount.providerID ? userAccount.providerID : @"email"), @"testing":@NO};
-    BLOCK_SELF_REF_OUTSIDE();
-    [self.sessionManager POST:kNewUserPath parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        BLOCK_SELF_REF_INSIDE();
-        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
-        if (jsonResponse[kErrorKey]) {
-            NSString *errorMessage = jsonResponse[kErrorKey];
-            if (completion) completion(CPLoginResult_Failure, [self errorForMessage:errorMessage]);
-        } else {
-            // Check for auth token
-            if (jsonResponse[kAuthTokenKey]) {
-                [self setAuthToken:jsonResponse[kAuthTokenKey]];
-                [[CPUserManager sharedInstance] userLoggedIn:jsonResponse];
-                [self fetchUserCompletion:completion];
-//                if (completion) completion(CPLoginResult_UserWithoutPetProfile, nil);
-            } else {
-                if (completion) completion(CPLoginResult_Failure, [self errorForMessage:NSLocalizedString(@"Missing auth token", nil)]);
-            }
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (completion) completion(CPLoginResult_Failure, error);
-    }];
-}
-
-// TODO: remove. For now, this is where we have to check pet profile and device
-- (ASYNC)fetchUserCompletion:(void (^)(CPLoginResult, NSError *))completion
+- (ASYNC)userLoggedIn:(NSDictionary *)userInfo completion:(void (^)(CPLoginResult, NSError *))completion
 {
     CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
-    if (completion) completion((currentUser.pet ? CPLoginResult_UserWithSetupCompleted : CPLoginResult_UserWithoutPetProfile), nil);
+    
+    void (^particleAuthSet)(NSError *) = ^(NSError *error){
+        if (error) {
+            [[CPUserManager sharedInstance] clearCurrentUser];
+            if (completion) completion(CPLoginResult_Failure, error);
+        } else {
+            CPLoginResult result = CPLoginResult_UserWithSetupCompleted;
+            if (!currentUser.pet) {
+                result = CPLoginResult_UserWithoutPetProfile;
+            } else if (!userInfo[@"device"]) {
+                result = CPLoginResult_UserWithoutDevice;
+            }
+            if (completion) completion(result, nil);
+        }
+    };
+    
+    // TODO: Update with the proper keys/etc from feature/hub-settings-networking
+    if (!userInfo[@"device"]) {
+        // If we have no device, we need to set the auth token for particle
+        [[CPParticleConnectionHelper sharedInstance] setAccessToken:userInfo[kParticleAuthTokenKey] completion:particleAuthSet];
+    } else {
+        particleAuthSet(nil);
+    }
 }
 
 #pragma mark - Pet profile
@@ -143,6 +130,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             NSString *errorMessage = jsonResponse[kErrorKey];
             if (completion) completion(nil, [self errorForMessage:errorMessage]);
         } else {
+            // TODO: is this still necessary?
             [self lookupPetInfo:jsonResponse[@"animal_ID"] completion:completion];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
