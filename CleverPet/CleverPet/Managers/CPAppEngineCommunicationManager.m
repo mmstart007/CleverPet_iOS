@@ -154,7 +154,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (completion) completion(nil, [self errorForMessage:errorMessage]);
         } else {
             // TODO: is this still necessary?
-            [self lookupPetInfo:jsonResponse[@"animal_ID"] completion:completion];
+            [self lookupPetInfo:jsonResponse[kPetIdKey] completion:completion];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
@@ -193,7 +193,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (completion) completion(nil, [self errorForMessage:errorMessage]);
         } else {
             [[CPUserManager sharedInstance] userCreatedPet:jsonResponse];
-            if (completion) completion(jsonResponse[@"animal_ID"], nil);
+            if (completion) completion(jsonResponse[kPetIdKey], nil);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
@@ -251,6 +251,26 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (completion) completion([self errorForMessage:errorMessage]);
         } else {
             [[CPUserManager sharedInstance] userCreatedDevice:jsonResponse];
+            [self lookupDeviceSchedules:deviceId completion:completion];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+    }];
+}
+
+- (ASYNC)lookupDeviceSchedules:(NSString *)deviceId completion:(void (^)(NSError *error))completion
+{
+    NSParameterAssert(deviceId);
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.sessionManager GET:SPECIFIC_DEVICE_SCHEDULES(deviceId) parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        BLOCK_SELF_REF_INSIDE();
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        if (jsonResponse[kErrorKey]) {
+            NSString *errorMessage = jsonResponse[kErrorKey];
+            if (completion) completion([self errorForMessage:errorMessage]);
+        } else {
+            [[CPUserManager sharedInstance] fetchedDeviceSchedules:jsonResponse];
             if (completion) completion(nil);
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

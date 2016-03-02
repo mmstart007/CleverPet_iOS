@@ -20,6 +20,7 @@
 
 - (void)userCreatedDevice:(NSDictionary*)deviceInfo;
 - (void)updateDeviceInfo:(NSDictionary*)deviceInfo;
+- (void)fetchedDeviceSchedules:(NSDictionary*)scheduleInfo;
 
 - (CPUser*)getCurrentUser;
 

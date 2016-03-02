@@ -64,6 +64,7 @@ extern NSInteger const kFamilyNameFieldMaxChars;
 #pragma mark - JSON keys
 extern NSString * const kErrorKey;
 // User keys
+extern NSString * const kUserIdKey;
 extern NSString * const kEmailKey;
 extern NSString * const kFirstNameKey;
 extern NSString * const kLastNameKey;
@@ -71,6 +72,7 @@ extern NSString * const kAuthTokenKey;
 extern NSString * const kParticleAuthTokenKey;
 extern NSString * const kFirebaseAuthTokenKey;
 // Pet keys
+extern NSString * const kPetIdKey;
 extern NSString * const kNameKey;
 extern NSString * const kFamilyNameKey;
 extern NSString * const kGenderKey;
@@ -87,9 +89,12 @@ extern NSString * const kFemaleKey;
 extern NSString * const kDeviceIdKey;
 extern NSString * const kParticleIdKey;
 extern NSString * const kModeKey;
+extern NSString * const kSchedulesKey;
 extern NSString * const kActiveMode;
 extern NSString * const kStandbyMode;
 extern NSString * const kSchedulerMode;
+// Schedule keys
+extern NSString * const kScheduleIdKey;
 extern NSString * const kWeekdayStartKey;
 extern NSString * const kWeekdayEndKey;
 extern NSString * const kWeekendStartKey;

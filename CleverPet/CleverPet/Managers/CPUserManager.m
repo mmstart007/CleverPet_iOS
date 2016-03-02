@@ -114,6 +114,17 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     // TODO: Schedule update
 }
 
+- (void)fetchedDeviceSchedules:(NSDictionary *)scheduleInfo
+{
+    NSError *error;
+    NSArray *schedules = [CPDeviceSchedule arrayOfModelsFromDictionaries:scheduleInfo[kSchedulesKey] error:&error];
+    // TODO: put in the correct schedule by checking days on
+    // TODO: account for not receiving the correct number of schedules
+    self.currentUser.device.weekdaySchedule = [schedules firstObject];
+    self.currentUser.device.weekendSchedule = [schedules lastObject];
+    [self saveUserToDefaults];
+}
+
 - (CPUser*)getCurrentUser
 {
     return self.currentUser;

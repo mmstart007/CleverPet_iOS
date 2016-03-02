@@ -209,6 +209,7 @@ didFinishSignInWithToken:(NSString *)token
             [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
             [animation setType:kCATransitionFade];
             [window.layer addAnimation:animation forKey:@"crossFade"];
+            // TODO: it's taking forever(~4 seconds) for the main screen to actually be presented after calling this code. Investigate with time profiler
             break;
         }
     }
