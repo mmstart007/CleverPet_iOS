@@ -26,6 +26,16 @@
     return self;
 }
 
+- (NSUInteger)rowCount {
+    NSUInteger rowCount = self.sectionCount;
+    
+    for (CPTileSection *tileSection in [self.tileSections allValues]) {
+        rowCount += tileSection.tiles.count;
+    }
+    
+    return rowCount;
+}
+
 - (NSUInteger)sectionCount {
     return self.tileSectionList.count;
 }
@@ -38,8 +48,8 @@
     return [self tileSectionForIndex:section].tiles.count;
 }
 
-- (CPTile *)tileForRow:(NSUInteger)row inSection:(NSUInteger)section {
-    return [self tileSectionForIndex:section].tiles[row];
+- (CPTile *)tileForInternalIndexPath:(NSIndexPath *)indexPath {
+    return [self tileSectionForIndex:indexPath.section].tiles[indexPath.row];
 }
 
 - (CPTileSection *)tileSectionForIndex:(NSUInteger)index {
@@ -52,32 +62,45 @@
     }];
 }
 
-- (CPInsertionInfo)addTile:(CPTile *)tile {
+- (NSUInteger)indexOfSectionStart:(CPTileSection *)tileSection {
+    NSUInteger indexOfSectionStart = 0;
+    NSUInteger indexOfSection = [self indexOfSection:tileSection];
+    
+    for (NSUInteger i = 0; i < indexOfSection; i++) {
+        CPTileSection *tileSection = self.tileSectionList[i];
+        indexOfSectionStart += 1 + tileSection.tiles.count;
+    }
+    
+    return indexOfSectionStart;
+}
+
+- (NSIndexSet *)addTile:(CPTile *)tile {
     CPSimpleDate *simpleDate = [[CPSimpleDate alloc] initWithDate:tile.date];
     CPTileSection *tileSection = self.tileSections[simpleDate];
-
-    CPInsertionInfo insertionInfo = {
-            .isNewSection = NO,
-            .rowIndex = NSNotFound,
-            .sectionIndex = NSNotFound
-    };
+    
+    NSUInteger sectionStart = NSNotFound;
+    NSMutableIndexSet *newIndexes = [[NSMutableIndexSet alloc] init];
 
     if (!tileSection) {
-        insertionInfo.isNewSection = YES;
         tileSection = [[CPTileSection alloc] init];
         tileSection.simpleDate = simpleDate;
-        insertionInfo.sectionIndex = [self insertTileSection:tileSection];
+        
+        [self insertTileSection:tileSection];
+        sectionStart = [self indexOfSectionStart:tileSection];
+        [newIndexes addIndex:sectionStart];
     } else {
-        insertionInfo.sectionIndex = [self indexOfSection:tileSection];
+        sectionStart = [self indexOfSectionStart:tileSection];
     }
 
-    insertionInfo.rowIndex = [tileSection.tiles indexOfObject:tile inSortedRange:NSMakeRange(0, tileSection.tiles.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(CPTile *tile1, CPTile *tile2) {
+    NSUInteger rowIndex = [tileSection.tiles indexOfObject:tile inSortedRange:NSMakeRange(0, tileSection.tiles.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(CPTile *tile1, CPTile *tile2) {
         return -[tile1.date compare:tile2.date];
     }];
 
-    [tileSection.tiles insertObject:tile atIndex:insertionInfo.rowIndex];
+    [tileSection.tiles insertObject:tile atIndex:rowIndex];
 
-    return insertionInfo;
+    [newIndexes addIndex:sectionStart + 1 + rowIndex];
+    
+    return [newIndexes copy];
 }
 
 - (NSUInteger)insertTileSection:(CPTileSection *)tileSection {
@@ -92,5 +115,31 @@
     self.tileSections[tileSection.simpleDate] = tileSection;
 
     return index;
+}
+
+- (NSIndexPath *)indexPathFromCellIndex:(NSUInteger)cellIndex {
+    NSUInteger section = 0, row = 0;
+    
+    NSInteger cellIndexTemp = cellIndex;
+    
+    // Find the section that it's in
+    CPTileSection *tileSection = nil;
+    while (cellIndexTemp >= 0 && section < self.tileSectionList.count) {
+        tileSection = self.tileSectionList[section];
+        cellIndexTemp -= 1 + tileSection.tiles.count;
+        section++;
+    }
+    
+    section -= 1;
+    cellIndexTemp += 1 + tileSection.tiles.count;
+    tileSection = self.tileSectionList[section];
+    
+    if (cellIndexTemp == 0) {
+        row = NSNotFound; // refers to the section header for a given section
+    } else {
+        row = cellIndexTemp - 1;
+    }
+    
+    return [NSIndexPath indexPathForRow:row inSection:section];
 }
 @end

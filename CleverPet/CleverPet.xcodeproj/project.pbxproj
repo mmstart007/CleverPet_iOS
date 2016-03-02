@@ -15,6 +15,8 @@
 		0D36AA911C7243D600349D03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA8F1C7243D600349D03 /* Main.storyboard */; };
 		0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA921C7243D600349D03 /* Assets.xcassets */; };
 		0D36AA961C7243D600349D03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA941C7243D600349D03 /* LaunchScreen.storyboard */; };
+		0D6512AA1C8678BA0086D593 /* CPMainTableDateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6512A81C8678BA0086D593 /* CPMainTableDateHeader.m */; };
+		0D6512AB1C8678BA0086D593 /* CPMainTableDateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D6512A91C8678BA0086D593 /* CPMainTableDateHeader.xib */; };
 		0D8AC9871C7CEACD0096F339 /* CPTileTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AC9861C7CEACD0096F339 /* CPTileTextFormatter.m */; };
 		0DD4BD311C739426006B3725 /* CPTileViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4BD301C739426006B3725 /* CPTileViewCell.xib */; };
 		0DE13B401C7E9A6A00648834 /* UIView+CPShadowEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B3F1C7E9A6A00648834 /* UIView+CPShadowEffect.m */; };
@@ -106,6 +108,9 @@
 		0D36AA921C7243D600349D03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D36AA951C7243D600349D03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D36AA971C7243D600349D03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D6512A71C8678BA0086D593 /* CPMainTableDateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainTableDateHeader.h; sourceTree = "<group>"; };
+		0D6512A81C8678BA0086D593 /* CPMainTableDateHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainTableDateHeader.m; sourceTree = "<group>"; };
+		0D6512A91C8678BA0086D593 /* CPMainTableDateHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPMainTableDateHeader.xib; sourceTree = "<group>"; };
 		0D8AC9851C7CEACD0096F339 /* CPTileTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileTextFormatter.h; sourceTree = "<group>"; };
 		0D8AC9861C7CEACD0096F339 /* CPTileTextFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileTextFormatter.m; sourceTree = "<group>"; };
 		0DD4BD301C739426006B3725 /* CPTileViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPTileViewCell.xib; sourceTree = "<group>"; };
@@ -503,6 +508,9 @@
 				0DE13B601C7EDFAC00648834 /* CPMainScreenStatsHeaderView.xib */,
 				979D844D1C80FCB200ADB6B0 /* CPLoadingView.h */,
 				979D844E1C80FCB200ADB6B0 /* CPLoadingView.m */,
+				0D6512A71C8678BA0086D593 /* CPMainTableDateHeader.h */,
+				0D6512A81C8678BA0086D593 /* CPMainTableDateHeader.m */,
+				0D6512A91C8678BA0086D593 /* CPMainTableDateHeader.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -595,6 +603,7 @@
 				979D84661C84FAF200ADB6B0 /* Raleway-BlackItalic.ttf in Resources */,
 				979D84751C84FAF200ADB6B0 /* Raleway-Thin.ttf in Resources */,
 				979D84741C84FAF200ADB6B0 /* Raleway-SemiBoldItalic.ttf in Resources */,
+				0D6512AB1C8678BA0086D593 /* CPMainTableDateHeader.xib in Resources */,
 				979D846F1C84FAF200ADB6B0 /* Raleway-LightItalic.ttf in Resources */,
 				979D84681C84FAF200ADB6B0 /* Raleway-BoldItalic.ttf in Resources */,
 				97C8AA951C7E6AE500BABD4D /* Login.storyboard in Resources */,
@@ -713,6 +722,7 @@
 				97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */,
 				9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */,
 				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
+				0D6512AA1C8678BA0086D593 /* CPMainTableDateHeader.m in Sources */,
 				0D8AC9871C7CEACD0096F339 /* CPTileTextFormatter.m in Sources */,
 				97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */,
 				97CC44691C766A28003C4258 /* CPSettingsViewController.m in Sources */,

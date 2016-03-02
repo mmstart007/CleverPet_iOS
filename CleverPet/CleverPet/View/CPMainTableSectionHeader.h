@@ -8,13 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
+@interface CPMainTableSectionHeaderFilter : NSObject
++ (instancetype)filterWithName:(NSString *)filterName;
+- (instancetype)initWithFilterName:(NSString *)filterName;
+
+@property (strong, nonatomic) NSString *filterName;
+@end
+
 @class CPMainTableSectionHeader;
 @protocol CPMainTableSectionHeaderDelegate <NSObject>
-- (void)sectionHeader:(CPMainTableSectionHeader *)sectionHeader didChangeToFilter:(id)filter;
+- (void)sectionHeader:(CPMainTableSectionHeader *)sectionHeader didChangeToFilter:(CPMainTableSectionHeaderFilter *)filter;
 @end
 
 @interface CPMainTableSectionHeader : UITableViewHeaderFooterView
-@property (weak, nonatomic) IBOutlet UILabel *sectionHeaderLabel;
 
-@property (assign, nonatomic) BOOL hasFilterAction;
+@property (weak, nonatomic) id<CPMainTableSectionHeaderDelegate> delegate;
+
+- (void)addFilter:(CPMainTableSectionHeaderFilter *)filter;
+
+- (void)setCurrentFilterObject:(CPMainTableSectionHeaderFilter *)filterObject withAnimation:(BOOL)animate;
+
+@property (assign, nonatomic) BOOL shouldShowFilters;
+@property (assign, nonatomic) BOOL hasFiltersSetup;
 @end
