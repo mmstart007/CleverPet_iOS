@@ -164,6 +164,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 
 - (ASYNC)updatePet:(NSString *)petId withInfo:(NSDictionary *)petInfo completion:(void (^)(NSError *))completion
 {
+    NSParameterAssert(petId);
     BLOCK_SELF_REF_OUTSIDE();
     [self.sessionManager PUT:SPECIFIC_PET_PROFILE(petId) parameters:petInfo success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
@@ -182,6 +183,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 
 - (ASYNC)lookupPetInfo:(NSString *)petId completion:(void (^)(NSString *, NSError *))completion
 {
+    NSParameterAssert(petId);
     BLOCK_SELF_REF_OUTSIDE();
     [self.sessionManager GET:SPECIFIC_PET_PROFILE(petId) parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
@@ -220,6 +222,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 
 - (ASYNC)updateDevice:(NSString *)deviceId mode:(NSString *)mode completion:(void (^)(NSError *))completion
 {
+    NSParameterAssert(deviceId);
     BLOCK_SELF_REF_OUTSIDE();
     [self.sessionManager PUT:SPECIFIC_DEVICE_MODE(deviceId) parameters:@{kModeKey:mode} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
@@ -238,6 +241,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 
 - (ASYNC)lookupDeviceInfo:(NSString *)deviceId completion:(void (^)(NSError *error))completion
 {
+    NSParameterAssert(deviceId);
     BLOCK_SELF_REF_OUTSIDE();
     [self.sessionManager GET:SPECIFIC_DEVICE(deviceId) parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
