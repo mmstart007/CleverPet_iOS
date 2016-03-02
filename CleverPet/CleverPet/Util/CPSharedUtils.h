@@ -83,6 +83,22 @@ extern NSString * const kAlteredKey;
 extern NSString * const kMaleKey;
 extern NSString * const kFemaleKey;
 
+// Device Keys
+extern NSString * const kDeviceIdKey;
+extern NSString * const kParticleIdKey;
+extern NSString * const kModeKey;
+extern NSString * const kActiveMode;
+extern NSString * const kStandbyMode;
+extern NSString * const kSchedulerMode;
+extern NSString * const kWeekdayStartKey;
+extern NSString * const kWeekdayEndKey;
+extern NSString * const kWeekendStartKey;
+extern NSString * const kWeekendEndKey;
+extern NSString * const kIsActiveKey;
+extern NSString * const kStartTimeKey;
+extern NSString * const kEndTimeKey;
+extern NSString * const kDaysOnKey;
+
 #define ASYNC void
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 

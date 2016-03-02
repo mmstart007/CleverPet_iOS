@@ -33,6 +33,21 @@ NSString * const kAlteredKey = @"altered";
 //Gender keys
 NSString * const kMaleKey = @"male";
 NSString * const kFemaleKey = @"female";
+// Device Keys
+NSString * const kDeviceIdKey = @"device_ID";
+NSString * const kParticleIdKey = @"particle_ID";
+NSString * const kModeKey = @"mode";
+NSString * const kActiveMode = @"active";
+NSString * const kStandbyMode = @"standby";
+NSString * const kSchedulerMode = @"scheduler";
+NSString * const kWeekdayStartKey = @"weekdayStart";
+NSString * const kWeekdayEndKey = @"weekdayEnd";
+NSString * const kWeekendStartKey = @"weekendStart";
+NSString * const kWeekendEndKey = @"weekendEnd";
+NSString * const kIsActiveKey = @"is_active";
+NSString * const kStartTimeKey = @"start_time";
+NSString * const kEndTimeKey = @"end_time";
+NSString * const kDaysOnKey = @"days_on";
 
 @implementation CPSharedUtils
 
