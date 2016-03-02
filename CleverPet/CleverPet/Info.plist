@@ -28,7 +28,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.getcleverpet.app.ios</string>
-				<string>com.googleusercontent.apps.827475210510-mj08ki0l7mvr0gq9s3v5pgfp22rdiccf</string>
+				<string>com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75</string>
 			</array>
 		</dict>
 		<dict>
@@ -38,7 +38,7 @@
 			<string>gitkit</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.827475210510-vmug7emmajv055k1e855ik2mpc0uvdjg</string>
+				<string>com.googleusercontent.apps.879679195763-cq2jj2mah1hifvneh9jgfdclsqr3olvm</string>
 			</array>
 		</dict>
 	</array>

@@ -68,10 +68,10 @@
 - (void)setupGoogleIdentityToolkit
 {
     GITClient *gitkitClient = [GITClient sharedInstance];
-    gitkitClient.apiKey = @"AIzaSyBxl0DgIMUilfO7hp5W_YEKaUoUTsC97OI";
+    gitkitClient.apiKey = @"AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA";
     gitkitClient.widgetURL = @"http://localhost?placeholder";
     gitkitClient.providers = @[kGITProviderGoogle];
-    [GIDSignIn sharedInstance].clientID = @"827475210510-mj08ki0l7mvr0gq9s3v5pgfp22rdiccf.apps.googleusercontent.com";
+    [GIDSignIn sharedInstance].clientID = @"879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com";
 }
 
 @end
