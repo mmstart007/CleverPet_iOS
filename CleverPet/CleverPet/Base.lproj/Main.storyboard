@@ -23,6 +23,53 @@
             </objects>
             <point key="canvasLocation" x="-382" y="461"/>
         </scene>
+        <!--Config View Controller-->
+        <scene sceneID="ssB-Qx-GYd">
+            <objects>
+                <viewController storyboardIdentifier="ConfigView" modalTransitionStyle="crossDissolve" id="EGt-0m-FDw" customClass="CPConfigViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RUR-5z-JCt"/>
+                        <viewControllerLayoutGuide type="bottom" id="YMg-je-ick"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FAb-Fv-lcZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aDM-mp-Fl9">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                            </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="otv-r7-ch9">
+                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checking Server Config ..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ke8-zx-6te">
+                                <rect key="frame" x="200" y="245" width="200" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="aDM-mp-Fl9" secondAttribute="trailing" id="IYs-he-ore"/>
+                            <constraint firstItem="Ke8-zx-6te" firstAttribute="centerX" secondItem="FAb-Fv-lcZ" secondAttribute="centerX" id="NYE-rh-ZSC"/>
+                            <constraint firstItem="otv-r7-ch9" firstAttribute="centerX" secondItem="FAb-Fv-lcZ" secondAttribute="centerX" id="PWb-yq-uD0"/>
+                            <constraint firstItem="aDM-mp-Fl9" firstAttribute="top" secondItem="RUR-5z-JCt" secondAttribute="bottom" id="Q1S-lo-Gpa"/>
+                            <constraint firstItem="aDM-mp-Fl9" firstAttribute="leading" secondItem="FAb-Fv-lcZ" secondAttribute="leading" id="RId-i8-eV9"/>
+                            <constraint firstItem="YMg-je-ick" firstAttribute="top" secondItem="aDM-mp-Fl9" secondAttribute="bottom" id="eMy-WR-qqv"/>
+                            <constraint firstItem="otv-r7-ch9" firstAttribute="centerY" secondItem="FAb-Fv-lcZ" secondAttribute="centerY" id="pHj-uZ-EEa"/>
+                            <constraint firstItem="otv-r7-ch9" firstAttribute="top" secondItem="Ke8-zx-6te" secondAttribute="bottom" constant="15" id="rT8-LL-7wU"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backgroundImage" destination="aDM-mp-Fl9" id="9bF-fk-KtT"/>
+                        <outlet property="messageLabel" destination="Ke8-zx-6te" id="yj7-pQ-kWy"/>
+                        <outlet property="spinner" destination="otv-r7-ch9" id="f19-V1-qxh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="29Y-8V-MnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="362" y="-324"/>
+        </scene>
         <!--Splash View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>

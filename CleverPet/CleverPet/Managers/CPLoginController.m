@@ -224,8 +224,6 @@ didFinishSignInWithToken:(NSString *)token
 - (void)logout
 {
     [Intercom reset];
-    
-    [[CPAppEngineCommunicationManager sharedInstance] clearAuth];
     [[GITAuth sharedInstance] signOut];
     
     // Interface manager setup is tied into the root controller when it's instantiated, so reset it

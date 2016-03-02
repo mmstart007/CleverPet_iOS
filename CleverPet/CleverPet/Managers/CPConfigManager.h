@@ -12,5 +12,6 @@
 
 + (instancetype)sharedInstance;
 - (ASYNC)loadConfigWithCompletion:(void (^)(NSError *error))completion;
+- (void)appEnteredForeground;
 
 @end
