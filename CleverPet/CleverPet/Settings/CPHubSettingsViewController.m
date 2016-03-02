@@ -11,6 +11,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 #import "CPHubSettingsViewController.h"
 #import "CPHubSettingsButton.h"
 #import "NMRangeSlider.h"
+#import "CPUserManager.h"
 
 @interface CPHubSettingsViewController ()
 
@@ -68,6 +69,9 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (strong, nonatomic) IBOutletCollection(NMRangeSlider) NSArray *sliders;
 
 @property (nonatomic, assign) HubSetting currentHubSetting;
+@property (nonatomic, strong) NSDictionary *hubSettingToModeMap;
+@property (nonatomic, strong) NSDictionary *modeToHubSettingMap;
+@property (nonatomic, strong) CPDevice *currentDevice;
 
 @end
 
@@ -76,6 +80,9 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.hubSettingToModeMap = @{@(HubSetting_Off):kStandbyMode, @(HubSetting_On):kActiveMode, @(HubSetting_Scheduled):kSchedulerMode};
+    self.modeToHubSettingMap = @{kStandbyMode:@(HubSetting_Off), kActiveMode:@(HubSetting_On), kSchedulerMode:@(HubSetting_Scheduled)};
     
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.scrollView.backgroundColor = [UIColor clearColor];
@@ -87,10 +94,20 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     [self setupFonts];
     [self setupSliders];
     
+    self.currentDevice = [[CPUserManager sharedInstance] getCurrentUser].device;
     // TODO: Hub listener, etc so we can display disconnected or waiting for data as appropriate when the state changes
     // TODO: hub setting, scheduled settings from server
-    self.currentHubSetting = HubSetting_Scheduled;
+    self.currentHubSetting = [self.modeToHubSettingMap[self.currentDevice.mode] integerValue];
     [self setupForHubSetting:self.currentHubSetting animated:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // TODO: schedule nonsense
+    // TODO: We shouldn't do this if we've disappeared because of the version check
+    // TODO: should we save on moving to background?
+    [[CPUserManager sharedInstance] updateDeviceInfo:@{kModeKey:self.hubSettingToModeMap[@(self.currentHubSetting)]}];
 }
 
 - (void)didReceiveMemoryWarning {

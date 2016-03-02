@@ -17,6 +17,10 @@
 - (void)userCreatedPet:(NSDictionary*)petInfo;
 - (void)updatePetInfo:(NSDictionary*)petInfo;
 - (void)updatePetPhoto:(UIImage*)image;
+
+- (void)userCreatedDevice:(NSDictionary*)deviceInfo;
+- (void)updateDeviceInfo:(NSDictionary*)deviceInfo;
+
 - (CPUser*)getCurrentUser;
 
 - (void)logout;

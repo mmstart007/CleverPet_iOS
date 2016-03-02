@@ -20,6 +20,13 @@ NSString * const kUserInfoPath = @"users/info";
 NSString * const kPetProfilePath = @"animals";
 #define SPECIFIC_PET_PROFILE(petId) [NSString stringWithFormat:@"%@/%@", kPetProfilePath, petId]
 
+NSString * const kDevicePath = @"devices";
+NSString * const kSchedulesPathFragment = @"schedules";
+NSString * const kModePathFragment = @"mode";
+#define SPECIFIC_DEVICE(deviceId) [NSString stringWithFormat:@"%@/%@", kDevicePath, deviceId]
+#define SPECIFIC_DEVICE_SCHEDULES(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment]
+#define SPECIFIC_DEVICE_MODE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kModePathFragment]
+
 // TODO: error codes or something so this isn't string matching
 NSString * const kNoUserAccountError = @"No account exists for the given email address";
 
@@ -189,6 +196,62 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
         if (completion) completion(nil, [self convertAFNetworkingErroToServerError:error]);
+    }];
+}
+
+#pragma mark - Device
+- (ASYNC)createDevice:(SparkDevice *)device completion:(void (^)(NSError *))completion
+{
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.sessionManager POST:kDevicePath parameters:@{kParticleIdKey:device.id, kNameKey:device.name} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        BLOCK_SELF_REF_INSIDE();
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        if (jsonResponse[kErrorKey]) {
+            NSString *errorMessage = jsonResponse[kErrorKey];
+            if (completion) completion([self errorForMessage:errorMessage]);
+        } else {
+            [self lookupDeviceInfo:jsonResponse[kDeviceIdKey] completion:completion];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+    }];
+}
+
+- (ASYNC)updateDevice:(NSString *)deviceId mode:(NSString *)mode completion:(void (^)(NSError *))completion
+{
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.sessionManager PUT:SPECIFIC_DEVICE_MODE(deviceId) parameters:@{kModeKey:mode} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        BLOCK_SELF_REF_INSIDE();
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        if (jsonResponse[kErrorKey]) {
+            NSString *errorMessage = jsonResponse[kErrorKey];
+            if (completion) completion([self errorForMessage:errorMessage]);
+        } else {
+            if (completion) completion(nil);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+    }];
+}
+
+- (ASYNC)lookupDeviceInfo:(NSString *)deviceId completion:(void (^)(NSError *error))completion
+{
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.sessionManager GET:SPECIFIC_DEVICE(deviceId) parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        BLOCK_SELF_REF_INSIDE();
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        if (jsonResponse[kErrorKey]) {
+            NSString *errorMessage = jsonResponse[kErrorKey];
+            if (completion) completion([self errorForMessage:errorMessage]);
+        } else {
+            [[CPUserManager sharedInstance] userCreatedDevice:jsonResponse];
+            if (completion) completion(nil);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
     }];
 }
 

@@ -23,4 +23,7 @@ typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile,
 - (ASYNC)createPetProfileWithInfo:(NSDictionary *)petInfo completion:(void (^)(NSString *petId, NSError *))completion;
 - (ASYNC)updatePet:(NSString*)petId withInfo:(NSDictionary*)petInfo completion:(void (^)(NSError *error))completion;
 
+- (ASYNC)createDevice:(SparkDevice*)device completion:(void (^)(NSError *error))completion;
+- (ASYNC)updateDevice:(NSString*)deviceId mode:(NSString*)mode completion:(void (^)(NSError *error))completion;
+
 @end

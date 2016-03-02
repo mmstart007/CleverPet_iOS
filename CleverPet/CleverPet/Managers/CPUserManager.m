@@ -81,6 +81,39 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     [CPFileUtils saveImage:image forPet:self.currentUser.pet.petId];
 }
 
+#pragma mark - Device
+- (void)userCreatedDevice:(NSDictionary *)deviceInfo
+{
+    NSError *error;
+    self.currentUser.device = [[CPDevice alloc] initWithDictionary:deviceInfo error:&error];
+    [self saveUserToDefaults];
+}
+
+- (void)updateDeviceInfo:(NSDictionary *)deviceInfo
+{
+    if (deviceInfo[kModeKey]) {
+        NSString *oldMode = self.currentUser.device.mode;
+        NSString *newMode = deviceInfo[kModeKey];
+        if (![oldMode isEqualToString:newMode]) {
+            self.currentUser.device.mode = newMode;
+            
+            BLOCK_SELF_REF_OUTSIDE();
+            [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId mode:newMode completion:^(NSError *error) {
+                BLOCK_SELF_REF_INSIDE();
+                // TODO: Handle failure
+                if (error) {
+                    // Reset back to original mode
+                    self.currentUser.device.mode = oldMode;
+                } else {
+                    [self saveUserToDefaults];
+                }
+            }];
+        }
+    }
+    
+    // TODO: Schedule update
+}
+
 - (CPUser*)getCurrentUser
 {
     return self.currentUser;
