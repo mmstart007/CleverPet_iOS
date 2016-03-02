@@ -81,6 +81,9 @@
     NSUInteger sectionStart = NSNotFound;
     NSMutableIndexSet *newIndexes = [[NSMutableIndexSet alloc] init];
 
+    // We're going to be creating a new section for this tile since one didn't already exist,
+    // so we need to add the new index of the section header to the list of indexes to
+    // animate.
     if (!tileSection) {
         tileSection = [[CPTileSection alloc] init];
         tileSection.simpleDate = simpleDate;
@@ -92,15 +95,50 @@
         sectionStart = [self indexOfSectionStart:tileSection];
     }
 
-    NSUInteger rowIndex = [tileSection.tiles indexOfObject:tile inSortedRange:NSMakeRange(0, tileSection.tiles.count) options:NSBinarySearchingInsertionIndex usingComparator:^NSComparisonResult(CPTile *tile1, CPTile *tile2) {
-        return -[tile1.date compare:tile2.date];
-    }];
-
+    NSUInteger rowIndex = [tileSection indexOfTile:tile forInsertion:YES];
     [tileSection.tiles insertObject:tile atIndex:rowIndex];
 
     [newIndexes addIndex:sectionStart + 1 + rowIndex];
     
     return [newIndexes copy];
+}
+
+- (NSIndexSet *)deleteTile:(CPTile *)tile {
+    CPSimpleDate *simpleDate = [[CPSimpleDate alloc] initWithDate:tile.date];
+    CPTileSection *tileSection = self.tileSections[simpleDate];
+    
+    // We don't have this tile, so do nothing.
+    if (!tileSection) {
+        return [NSIndexSet indexSet];
+    }
+    
+    NSUInteger sectionStart = [self indexOfSectionStart:tileSection];
+    NSUInteger tileIndex = [tileSection indexOfTile:tile forInsertion:NO];
+    
+    // Couldn't find the tile in the section, so do nothing.
+    if (tileIndex == NSNotFound) {
+        return [NSIndexSet indexSet];
+    }
+    
+    NSMutableIndexSet *deletedIndexes = [[NSMutableIndexSet alloc] init];
+    
+    // Deleting this tile will get rid of the section, so we need to get rid of the section header index as well.
+    if (tileSection.tiles.count == 1) {
+        [deletedIndexes addIndex:sectionStart];
+        
+        // Delete the section
+        [self.tileSections removeObjectForKey:simpleDate];
+        NSUInteger tileSectionIndex = [self indexOfSection:tileSection];
+        [self.tileSectionList removeObjectAtIndex:tileSectionIndex];
+    } else {
+        // And delete the actual tile from the data source representation
+        [tileSection.tiles removeObjectAtIndex:tileIndex];
+    }
+    
+    // Finally, add the index of the tile within the bigger list of headers + tile indexes.
+    [deletedIndexes addIndex:sectionStart + 1 + tileIndex];
+    
+    return [deletedIndexes copy];
 }
 
 - (NSUInteger)insertTileSection:(CPTileSection *)tileSection {
@@ -117,6 +155,7 @@
     return index;
 }
 
+// TODO - This could probably use some optimization
 - (NSIndexPath *)indexPathFromCellIndex:(NSUInteger)cellIndex {
     NSUInteger section = 0, row = 0;
     

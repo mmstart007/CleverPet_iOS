@@ -87,12 +87,11 @@
 
 - (void)swipeGestureRecognized:(UISwipeGestureRecognizer *)recognizer {
     if (self.tile.isSwipeable && [self.swipeGestureRecognizers containsObject:recognizer]) {
-        [self setSwipedMode:YES withAnimation:YES];
-        [self.delegate didSwipeTileViewCell:self];
+        [self setSwipedMode:YES withAnimation:YES callDelegateMethod:YES];
     }
 }
 
-- (void)setSwipedMode:(BOOL)swipedMode withAnimation:(BOOL)animated {
+- (void)setSwipedMode:(BOOL)swipedMode withAnimation:(BOOL)animated callDelegateMethod:(BOOL)callDelegateMethod {
     if (animated) {
         [self layoutIfNeeded];
     }
@@ -103,9 +102,16 @@
     if (animated) {
         [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
             [self layoutIfNeeded];
-        } completion:nil];
+        } completion:^(BOOL finished) {
+            if (callDelegateMethod) {
+                [self.delegate didSwipeTileViewCell:self];
+            }
+        }];
     } else {
         [self layoutIfNeeded];
+        if (callDelegateMethod) {
+            [self.delegate didSwipeTileViewCell:self];
+        }
     }
 }
 
@@ -132,7 +138,9 @@
 }
 
 - (void)awakeFromNib
-{    
+{
+    self.contentView.backgroundColor = [UIColor appBackgroundColor];
+    
     self.titleLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
     self.titleLabel.textColor = [UIColor appTitleTextColor];
     
@@ -167,6 +175,6 @@
 {
     self.titleLabel.text = nil;
     self.cellImageView.image = nil;
-    [self setSwipedMode:NO withAnimation:NO];
+    [self setSwipedMode:NO withAnimation:NO callDelegateMethod:NO];
 }
 @end

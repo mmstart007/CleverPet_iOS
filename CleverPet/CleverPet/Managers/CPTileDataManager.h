@@ -15,6 +15,7 @@
 - (NSUInteger)tileCountForSection:(NSUInteger)section;
 - (CPTile *)tileForInternalIndexPath:(NSIndexPath *)indexPath;
 - (NSIndexSet *)addTile:(CPTile *)tile;
+- (NSIndexSet *)deleteTile:(CPTile *)tile;
 
 - (NSUInteger)rowCount;
 - (NSIndexPath *)indexPathFromCellIndex:(NSUInteger)cellIndex;

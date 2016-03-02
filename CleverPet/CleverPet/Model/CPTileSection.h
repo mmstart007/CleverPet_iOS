@@ -11,4 +11,6 @@
 @interface CPTileSection : NSObject
 @property (strong, nonatomic) CPSimpleDate *simpleDate;
 @property (strong, nonatomic) NSMutableArray<CPTile *> *tiles;
+
+- (NSUInteger)indexOfTile:(CPTile *)tile forInsertion:(BOOL)forInsertion;
 @end

@@ -98,8 +98,9 @@
 {
     CPTile *tile = [[CPTile alloc] init];
     tile.date = date;
+    tile.isSwipeable = YES;
     
-    switch (index % 4) {
+    switch (index % 5) {
         case 0:
             tile.tileType = CPTTChallenge;
             tile.negativeButtonText = @"Restart";
@@ -124,6 +125,11 @@
             tile.tileType = CPTTMessage;
             tile.title = @"Silly human, touchpads are for dogs!";
             tile.body = @"From now on, the Hub is set to respond to your dog's actions. If you touch the touchpads, it may impact the accuracy of your dog's progress, and slow your dog's learning.";
+            break;
+        case 4:
+            tile.tileType = CPTTReport;
+            tile.title = @"Cool, it's a report!";
+            tile.body = @"Yep here's a report. Eat it.";
             break;
     }
     
