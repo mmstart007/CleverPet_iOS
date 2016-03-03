@@ -14,6 +14,8 @@
 @property (nonatomic, strong) NSString *endTimeString;
 @property (nonatomic, strong) NSString *daysOn;
 @property (nonatomic, assign) BOOL isActive;
+@property (nonatomic, assign) NSInteger startTime;
+@property (nonatomic, assign) NSInteger endTime;
 
 @end
 
@@ -46,7 +48,6 @@
 
 + (BOOL)isWeekdaySchedule
 {
-    
     return NO;
 }
 
