@@ -136,16 +136,15 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     self.weekDaySlider.minimumValue = 0;
     self.weekDaySlider.maximumValue = 24;
     self.weekDaySlider.stepValue = 1;
-    // TODO: pull starting state values
-    self.weekDaySlider.upperValue = 20;
-    self.weekDaySlider.lowerValue = 7;
+    self.weekDaySlider.upperValue = self.currentDevice.weekdaySchedule.endTime;
+    self.weekDaySlider.lowerValue = self.currentDevice.weekdaySchedule.startTime;
     [self updateWeekdayRange];
     
     self.weekendSlider.minimumValue = 0;
     self.weekendSlider.maximumValue = 24;
     self.weekendSlider.stepValue = 1;
-    self.weekendSlider.upperValue = 18;
-    self.weekendSlider.lowerValue = 12;
+    self.weekendSlider.upperValue = self.currentDevice.weekendSchedule.endTime;
+    self.weekendSlider.lowerValue = self.currentDevice.weekendSchedule.startTime;
     [self updateWeekendRange];
 }
 
