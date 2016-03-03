@@ -81,6 +81,89 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     [CPFileUtils saveImage:image forPet:self.currentUser.pet.petId];
 }
 
+#pragma mark - Device
+- (void)userCreatedDevice:(NSDictionary *)deviceInfo
+{
+    NSError *error;
+    self.currentUser.device = [[CPDevice alloc] initWithDictionary:deviceInfo error:&error];
+}
+
+- (void)updateDeviceInfo:(NSDictionary *)deviceInfo
+{
+    if (deviceInfo[kModeKey]) {
+        NSString *oldMode = self.currentUser.device.mode;
+        NSString *newMode = deviceInfo[kModeKey];
+        if (![oldMode isEqualToString:newMode]) {
+            self.currentUser.device.mode = newMode;
+            
+            BLOCK_SELF_REF_OUTSIDE();
+            [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId mode:newMode completion:^(NSError *error) {
+                BLOCK_SELF_REF_INSIDE();
+                // TODO: Handle failure
+                if (error) {
+                    // Reset back to original mode
+                    self.currentUser.device.mode = oldMode;
+                }
+            }];
+        }
+    }
+    
+    BLOCK_SELF_REF_OUTSIDE();
+    void (^scheduleHandler)(CPDeviceSchedule *, NSDictionary *) = ^(CPDeviceSchedule *schedule, NSDictionary *scheduleInfo){
+        BLOCK_SELF_REF_INSIDE();
+        NSInteger startTime = [scheduleInfo[kStartTimeKey] integerValue];
+        NSInteger endTime = [scheduleInfo[kEndTimeKey] integerValue];
+        // TODO: handle midnight(24)
+        
+        if (schedule.startTime != startTime || schedule.endTime != endTime) {
+            NSDictionary *previousSchedule = [schedule toDictionary];
+            [schedule updateStartTime:startTime];
+            [schedule updateEndTime:endTime];
+            NSDictionary *newSchedule = [schedule toDictionary];
+            
+            BLOCK_SELF_REF_OUTSIDE();
+            [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId schedule:schedule.scheduleId withInfo:newSchedule completion:^(NSError *error) {
+                BLOCK_SELF_REF_INSIDE();
+                if (error) {
+                    // TODO: handle failure
+                    [schedule mergeFromDictionary:previousSchedule useKeyMapping:YES error:nil];
+                }
+            }];
+        }
+    };
+    
+    if (deviceInfo[kWeekdayKey]) {
+        NSDictionary *weekdaySchedule = deviceInfo[kWeekdayKey];
+        scheduleHandler(self.currentUser.device.weekdaySchedule, weekdaySchedule);
+    }
+    
+    if (deviceInfo[kWeekendKey]) {
+        NSDictionary *weekendSchedule = deviceInfo[kWeekendKey];
+        scheduleHandler(self.currentUser.device.weekendSchedule, weekendSchedule);
+    }
+}
+
+- (void)fetchedDeviceSchedules:(NSDictionary *)scheduleInfo
+{
+    NSError *error;
+    NSArray *schedules = [CPDeviceSchedule arrayOfModelsFromDictionaries:scheduleInfo[kSchedulesKey] error:&error];
+//    // This is not robust, but will do for now
+//    for (CPDeviceSchedule *schedule in schedules) {
+//        // If Monday is present, we're a weekday. If not, we're a weekend
+//        unichar daysOn = [schedule.daysOn characterAtIndex:0];
+//        BOOL isWeekend = (daysOn & (1 << 0)) >> 0;
+//        if (isWeekend) {
+//            self.currentUser.device.weekendSchedule = schedule;
+//        } else {
+//            self.currentUser.device.weekdaySchedule = schedule;
+//        }
+//    }
+    // TODO: put in the correct schedule by checking days on
+    // TODO: account for not receiving the correct number of schedules
+    self.currentUser.device.weekdaySchedule = [schedules firstObject];
+    self.currentUser.device.weekendSchedule = [schedules lastObject];
+}
+
 - (CPUser*)getCurrentUser
 {
     return self.currentUser;

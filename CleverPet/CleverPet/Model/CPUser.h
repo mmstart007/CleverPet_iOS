@@ -8,10 +8,12 @@
 
 #import <JSONModel/JSONModel.h>
 #import "CPPet.h"
+#import "CPDevice.h"
 
 @interface CPUser : JSONModel
 
 @property (nonatomic, strong) NSString<Optional> *userId;
 @property (nonatomic, strong) CPPet<Optional> *pet;
+@property (nonatomic, strong) CPDevice<Optional> *device;
 
 @end

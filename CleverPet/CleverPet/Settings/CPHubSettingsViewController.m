@@ -11,6 +11,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 #import "CPHubSettingsViewController.h"
 #import "CPHubSettingsButton.h"
 #import "NMRangeSlider.h"
+#import "CPUserManager.h"
 
 @interface CPHubSettingsViewController ()
 
@@ -68,6 +69,9 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (strong, nonatomic) IBOutletCollection(NMRangeSlider) NSArray *sliders;
 
 @property (nonatomic, assign) HubSetting currentHubSetting;
+@property (nonatomic, strong) NSDictionary *hubSettingToModeMap;
+@property (nonatomic, strong) NSDictionary *modeToHubSettingMap;
+@property (nonatomic, strong) CPDevice *currentDevice;
 
 @end
 
@@ -77,6 +81,9 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.hubSettingToModeMap = @{@(HubSetting_Off):kStandbyMode, @(HubSetting_On):kActiveMode, @(HubSetting_Scheduled):kSchedulerMode};
+    self.modeToHubSettingMap = @{kStandbyMode:@(HubSetting_Off), kActiveMode:@(HubSetting_On), kSchedulerMode:@(HubSetting_Scheduled)};
+    
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.scrollView.backgroundColor = [UIColor clearColor];
     self.stackView.backgroundColor = [UIColor clearColor];
@@ -85,12 +92,22 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     [self.backgroundViews makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:[UIColor appWhiteColor]];
     
     [self setupFonts];
-    [self setupSliders];
     
+    self.currentDevice = [[CPUserManager sharedInstance] getCurrentUser].device;
+    [self setupSliders];
     // TODO: Hub listener, etc so we can display disconnected or waiting for data as appropriate when the state changes
     // TODO: hub setting, scheduled settings from server
-    self.currentHubSetting = HubSetting_Scheduled;
+    self.currentHubSetting = [self.modeToHubSettingMap[self.currentDevice.mode] integerValue];
     [self setupForHubSetting:self.currentHubSetting animated:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // TODO: schedule nonsense
+    // TODO: We shouldn't do this if we've disappeared because of the version check
+    // TODO: should we save on moving to background?
+    [[CPUserManager sharedInstance] updateDeviceInfo:@{kModeKey:self.hubSettingToModeMap[@(self.currentHubSetting)], kWeekdayKey:@{kStartTimeKey:@(self.weekDaySlider.lowerValue), kEndTimeKey:@(self.weekDaySlider.upperValue)}, kWeekendKey:@{kStartTimeKey:@(self.weekendSlider.lowerValue), kEndTimeKey:@(self.weekendSlider.upperValue)}}];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -119,16 +136,15 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     self.weekDaySlider.minimumValue = 0;
     self.weekDaySlider.maximumValue = 24;
     self.weekDaySlider.stepValue = 1;
-    // TODO: pull starting state values
-    self.weekDaySlider.upperValue = 20;
-    self.weekDaySlider.lowerValue = 7;
+    self.weekDaySlider.upperValue = self.currentDevice.weekdaySchedule.endTime;
+    self.weekDaySlider.lowerValue = self.currentDevice.weekdaySchedule.startTime;
     [self updateWeekdayRange];
     
     self.weekendSlider.minimumValue = 0;
     self.weekendSlider.maximumValue = 24;
     self.weekendSlider.stepValue = 1;
-    self.weekendSlider.upperValue = 18;
-    self.weekendSlider.lowerValue = 12;
+    self.weekendSlider.upperValue = self.currentDevice.weekendSchedule.endTime;
+    self.weekendSlider.lowerValue = self.currentDevice.weekendSchedule.startTime;
     [self updateWeekendRange];
 }
 

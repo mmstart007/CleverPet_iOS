@@ -19,7 +19,7 @@
 
 + (JSONKeyMapper*)keyMapper
 {
-    return [JSONKeyMapper mapper:[JSONKeyMapper mapperFromUnderscoreCaseToCamelCase] withExceptions:@{@"animal_ID":@"petId"}];
+    return [JSONKeyMapper mapper:[JSONKeyMapper mapperFromUnderscoreCaseToCamelCase] withExceptions:@{kPetIdKey:@"petId"}];
 }
 
 + (void)validateInput:(NSDictionary*)proposedInput isInitialSetup:(BOOL)isInitialSetup completion:(void (^)(BOOL, NSString *))completion

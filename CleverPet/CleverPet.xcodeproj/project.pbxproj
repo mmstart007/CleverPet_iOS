@@ -42,6 +42,8 @@
 		9704E3041C7D2D4D004874A7 /* Pickers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9704E3031C7D2D4D004874A7 /* Pickers.storyboard */; };
 		9704E3071C7D34BD004874A7 /* CPPetPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E3061C7D34BD004874A7 /* CPPetPhotoViewController.m */; };
 		971D63011C863D0A006C9F80 /* CPConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D63001C863D0A006C9F80 /* CPConfigViewController.m */; };
+		971D630C1C88B0A7006C9F80 /* CPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D63091C88B0A7006C9F80 /* CPDevice.m */; };
+		971D630D1C88B0A7006C9F80 /* CPDeviceSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D630B1C88B0A7006C9F80 /* CPDeviceSchedule.m */; };
 		979D84431C7FA50700ADB6B0 /* CPFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D84421C7FA50700ADB6B0 /* CPFileUtils.m */; };
 		979D84461C7FB73700ADB6B0 /* CPUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D84451C7FB73700ADB6B0 /* CPUserManager.m */; };
 		979D84491C7FB79400ADB6B0 /* CPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D84481C7FB79400ADB6B0 /* CPUser.m */; };
@@ -161,6 +163,10 @@
 		9704E3061C7D34BD004874A7 /* CPPetPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetPhotoViewController.m; sourceTree = "<group>"; };
 		971D62FF1C863D0A006C9F80 /* CPConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPConfigViewController.h; sourceTree = "<group>"; };
 		971D63001C863D0A006C9F80 /* CPConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPConfigViewController.m; sourceTree = "<group>"; };
+		971D63081C88B0A7006C9F80 /* CPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDevice.h; sourceTree = "<group>"; };
+		971D63091C88B0A7006C9F80 /* CPDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDevice.m; sourceTree = "<group>"; };
+		971D630A1C88B0A7006C9F80 /* CPDeviceSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDeviceSchedule.h; sourceTree = "<group>"; };
+		971D630B1C88B0A7006C9F80 /* CPDeviceSchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDeviceSchedule.m; sourceTree = "<group>"; };
 		979D84411C7FA50700ADB6B0 /* CPFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFileUtils.h; sourceTree = "<group>"; };
 		979D84421C7FA50700ADB6B0 /* CPFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFileUtils.m; sourceTree = "<group>"; };
 		979D84441C7FB73700ADB6B0 /* CPUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUserManager.h; sourceTree = "<group>"; };
@@ -323,6 +329,10 @@
 				979D84481C7FB79400ADB6B0 /* CPUser.m */,
 				979D844A1C7FB7A100ADB6B0 /* CPPet.h */,
 				979D844B1C7FB7A100ADB6B0 /* CPPet.m */,
+				971D63081C88B0A7006C9F80 /* CPDevice.h */,
+				971D63091C88B0A7006C9F80 /* CPDevice.m */,
+				971D630A1C88B0A7006C9F80 /* CPDeviceSchedule.h */,
+				971D630B1C88B0A7006C9F80 /* CPDeviceSchedule.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -710,10 +720,12 @@
 				979D84461C7FB73700ADB6B0 /* CPUserManager.m in Sources */,
 				97CC445D1C7552C3003C4258 /* CPSimpleTableViewCell.m in Sources */,
 				9704E3071C7D34BD004874A7 /* CPPetPhotoViewController.m in Sources */,
+				971D630C1C88B0A7006C9F80 /* CPDevice.m in Sources */,
 				97CC44721C7699C7003C4258 /* CPFAQView.m in Sources */,
 				97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */,
 				0D1F1C561C7E228900EAF336 /* CPPetStatsView.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
+				971D630D1C88B0A7006C9F80 /* CPDeviceSchedule.m in Sources */,
 				1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */,
 				0DE13B671C7FABB200648834 /* CPTileDataManager.m in Sources */,
 				1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */,
