@@ -18,4 +18,10 @@
 
     return _tiles;
 }
+
+- (NSUInteger)indexOfTile:(CPTile *)tile forInsertion:(BOOL)forInsertion {
+    return [self.tiles indexOfObject:tile inSortedRange:NSMakeRange(0, self.tiles.count) options:forInsertion ? NSBinarySearchingInsertionIndex : NSBinarySearchingFirstEqual usingComparator:^NSComparisonResult(CPTile *tile1, CPTile *tile2) {
+        return -[tile1.date compare:tile2.date];
+    }];
+}
 @end
