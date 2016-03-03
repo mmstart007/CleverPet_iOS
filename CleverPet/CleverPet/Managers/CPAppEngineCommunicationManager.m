@@ -54,7 +54,19 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     NSParameterAssert(gitKitToken);
     BLOCK_SELF_REF_OUTSIDE();
     // Set our auth token
-    [self setAuthToken:gitKitToken];
+    // TODO: No cookie, bring back auth header
+//    [self setAuthToken:gitKitToken];
+    
+    NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray *cookies = [cookieStorage cookies];
+    for (NSHTTPCookie *cookie in cookies) {
+        if ([cookie.name isEqualToString:@"gtoken"]) {
+            [cookieStorage deleteCookie:cookie];
+        }
+    }
+    NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:@{NSHTTPCookieDomain:@"dev-erpetcloud.appspot.com", NSHTTPCookiePath:@"/", NSHTTPCookieName:@"gtoken", NSHTTPCookieValue:gitKitToken}];
+    [cookieStorage setCookie:cookie];
+    
     [self.sessionManager POST:kUserLoginPath parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
