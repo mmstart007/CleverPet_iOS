@@ -92,9 +92,9 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     [self.backgroundViews makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:[UIColor appWhiteColor]];
     
     [self setupFonts];
-    [self setupSliders];
     
     self.currentDevice = [[CPUserManager sharedInstance] getCurrentUser].device;
+    [self setupSliders];
     // TODO: Hub listener, etc so we can display disconnected or waiting for data as appropriate when the state changes
     // TODO: hub setting, scheduled settings from server
     self.currentHubSetting = [self.modeToHubSettingMap[self.currentDevice.mode] integerValue];
