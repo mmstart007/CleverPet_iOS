@@ -33,20 +33,14 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 
 - (void)userLoggedIn:(NSDictionary *)userInfo
 {
-    NSString *userId = userInfo[@"user_id"];
-    [self loadUserFromDefaults:userId];
-    if (!self.currentUser) {
-        NSError *error;
-        self.currentUser = [[CPUser alloc] initWithDictionary:userInfo error:&error];
-        [self saveUserToDefaults];
-    }
+    NSError *error;
+    self.currentUser = [[CPUser alloc] initWithDictionary:userInfo error:&error];
 }
 
 - (void)userCreatedPet:(NSDictionary *)petInfo
 {
     NSError *error;
     self.currentUser.pet = [[CPPet alloc] initWithDictionary:petInfo error:&error];
-    [self saveUserToDefaults];
 }
 
 - (void)updatePetInfo:(NSDictionary *)petInfo
@@ -76,8 +70,6 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
             if (error) {
                 // reset back to original info
                 [self.currentUser.pet mergeFromDictionary:currentPetInfo useKeyMapping:YES error:nil];
-            } else {
-                [self saveUserToDefaults];
             }
         }];
     }
@@ -92,24 +84,6 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 - (CPUser*)getCurrentUser
 {
     return self.currentUser;
-}
-
-- (void)loadUserFromDefaults:(NSString *)userId
-{
-    NSError *error;
-    self.currentUser = [[CPUser alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] valueForKey:[self defaultsKeyForUser:userId]] error:&error];
-}
-
-- (void)saveUserToDefaults
-{
-    NSDictionary *dict = [self.currentUser toDictionary];
-    [[NSUserDefaults standardUserDefaults] setValue:dict forKey:[self defaultsKeyForUser:self.currentUser.userId]];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (NSString*)defaultsKeyForUser:(NSString *)userId
-{
-    return [NSString stringWithFormat:@"User: %@", userId];
 }
 
 - (void)logout
@@ -144,7 +118,8 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     }
     
     // TODO: Add push token to user object
-    pendingLogouts[user.userId] = @"pushToken";
+    // TODO: we aren't getting user id back from the server, either figure out something to use as an identifier(email probably works), or ask for the id
+//    pendingLogouts[user.userId] = @"pushToken";
     [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -156,7 +131,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
         return;
     }
     
-    pendingLogouts[user.userId] = nil;
+//    pendingLogouts[user.userId] = nil;
     [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

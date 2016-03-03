@@ -75,7 +75,8 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (completion) completion(CPLoginResult_Failure, [self errorForMessage:errorMessage]);
         } else {
             // Check for required auth tokens
-            if (jsonResponse[kAuthTokenKey] && jsonResponse[kParticleAuthTokenKey] && jsonResponse[kFirebaseAuthTokenKey]) {
+            // TODO: bring back particle and firebase auth
+            if (jsonResponse[kAuthTokenKey]) {
                 [self setAuthToken:jsonResponse[kAuthTokenKey]];
                 [[CPUserManager sharedInstance] userLoggedIn:jsonResponse];
                 [self userLoggedIn:jsonResponse completion:completion];
@@ -115,20 +116,21 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             CPLoginResult result = CPLoginResult_UserWithSetupCompleted;
             if (!currentUser.pet) {
                 result = CPLoginResult_UserWithoutPetProfile;
-            } else if (!userInfo[@"device"]) {
+            } else if (!userInfo[@"device"]) { // TODO: This check is failing, but once the device branch is merged, it's actually an object so it's not a real issue
                 result = CPLoginResult_UserWithoutDevice;
             }
             if (completion) completion(result, nil);
         }
     };
     
+    // TODO: bring back when particle auth is working
     // TODO: Update with the proper keys/etc from feature/hub-settings-networking
-    if (!userInfo[@"device"]) {
-        // If we have no device, we need to set the auth token for particle
-        [[CPParticleConnectionHelper sharedInstance] setAccessToken:userInfo[kParticleAuthTokenKey] completion:particleAuthSet];
-    } else {
+//    if (!userInfo[@"device"] || [userInfo[@"device"] isKindOfClass:[NSNull class]]) {
+//        // If we have no device, we need to set the auth token for particle
+//        [[CPParticleConnectionHelper sharedInstance] setAccessToken:userInfo[kParticleAuthTokenKey] completion:particleAuthSet];
+//    } else {
         particleAuthSet(nil);
-    }
+//    }
 }
 
 #pragma mark - Pet profile
