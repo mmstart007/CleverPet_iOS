@@ -11,6 +11,7 @@
 #import "GITAccount.h"
 #import "CPUserManager.h"
 #import "CPParticleConnectionHelper.h"
+#import <Spark-SDK/SparkDevice.h>
 
 NSString * const kAppEngineBaseUrl = @"app_server_url";
 NSString * const kNewUserPath = @"users/new";
@@ -125,7 +126,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             CPLoginResult result = CPLoginResult_UserWithSetupCompleted;
             if (!currentUser.pet) {
                 result = CPLoginResult_UserWithoutPetProfile;
-            } else if (!userInfo[@"device"]) { // TODO: This check is failing, but once the device branch is merged, it's actually an object so it's not a real issue
+            } else if (!currentUser.device) {
                 result = CPLoginResult_UserWithoutDevice;
             }
             if (completion) completion(result, nil);

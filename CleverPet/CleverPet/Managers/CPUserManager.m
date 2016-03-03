@@ -86,7 +86,6 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 {
     NSError *error;
     self.currentUser.device = [[CPDevice alloc] initWithDictionary:deviceInfo error:&error];
-    [self saveUserToDefaults];
 }
 
 - (void)updateDeviceInfo:(NSDictionary *)deviceInfo
@@ -104,8 +103,6 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
                 if (error) {
                     // Reset back to original mode
                     self.currentUser.device.mode = oldMode;
-                } else {
-                    [self saveUserToDefaults];
                 }
             }];
         }
@@ -122,7 +119,6 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     // TODO: account for not receiving the correct number of schedules
     self.currentUser.device.weekdaySchedule = [schedules firstObject];
     self.currentUser.device.weekendSchedule = [schedules lastObject];
-    [self saveUserToDefaults];
 }
 
 - (CPUser*)getCurrentUser

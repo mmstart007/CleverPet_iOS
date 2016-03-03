@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class GITAccount;
+@class SparkDevice;
 
 typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile, CPLoginResult_UserWithoutDevice, CPLoginResult_UserWithSetupCompleted, CPLoginResult_Failure};
 
