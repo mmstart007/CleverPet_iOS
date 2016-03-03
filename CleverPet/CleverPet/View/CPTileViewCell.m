@@ -97,12 +97,7 @@
     
     [self setTextColor:[UIColor whiteColor] onButton:self.affirmativeButton];
     [self setTextColor:tileColor onButton:self.negativeButton];
-    
-    self.videoLayoutImageView.layer.borderColor = [UIColor redColor].CGColor;
-    self.videoLayoutImageView.layer.borderWidth = 3;
-    
-    self.tagTimeStampLabel.superview.layer.borderColor = [UIColor redColor].CGColor;
-    self.tagTimeStampLabel.superview.layer.borderWidth = 3;
+
     self.tagTimeStampLabel.text = [NSString stringWithFormat:@"Device Message | %@", [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
     
     self.colouredDotView.backgroundColor = tileColor;
