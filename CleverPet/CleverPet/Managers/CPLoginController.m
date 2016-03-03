@@ -162,7 +162,7 @@ didFinishSignInWithToken:(NSString *)token
         [self.delegate loginAttemptFailed:error.localizedDescription];
     } else {
         BLOCK_SELF_REF_OUTSIDE();
-        [[CPAppEngineCommunicationManager sharedInstance] loginWithUser:account completion:^(CPLoginResult result, NSError *error) {
+        [[CPAppEngineCommunicationManager sharedInstance] loginWithAuthToken:token completion:^(CPLoginResult result, NSError *error) {
             BLOCK_SELF_REF_INSIDE();
             if (result == CPLoginResult_Failure) {
                 // TODO: nicer error handling

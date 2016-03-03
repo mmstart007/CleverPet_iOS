@@ -20,6 +20,8 @@ NSString * const kEmailKey = @"email";
 NSString * const kFirstNameKey = @"first_name";
 NSString * const kLastNameKey = @"last_name";
 NSString * const kAuthTokenKey = @"auth_token";
+NSString * const kParticleAuthTokenKey = @"particle_oauth_token";
+NSString * const kFirebaseAuthTokenKey = @"firebase_oauth_token";
 // Pet keys
 NSString * const kNameKey = @"name";
 NSString * const kFamilyNameKey = @"family_name";

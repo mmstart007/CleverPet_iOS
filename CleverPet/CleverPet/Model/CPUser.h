@@ -11,7 +11,7 @@
 
 @interface CPUser : JSONModel
 
-@property (nonatomic, strong) NSString *userId;
+@property (nonatomic, strong) NSString<Optional> *userId;
 @property (nonatomic, strong) CPPet<Optional> *pet;
 
 @end
