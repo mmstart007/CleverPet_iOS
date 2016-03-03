@@ -12,7 +12,6 @@
 
 @property (nonatomic, strong) NSString *startTimeString;
 @property (nonatomic, strong) NSString *endTimeString;
-@property (nonatomic, strong) NSString *daysOn;
 @property (nonatomic, assign) BOOL isActive;
 @property (nonatomic, assign) NSInteger startTime;
 @property (nonatomic, assign) NSInteger endTime;
@@ -41,7 +40,7 @@
     static NSDateFormatter *s_stringToIntFormatter;
     dispatch_once(&onceToken, ^{
         s_stringToIntFormatter = [[NSDateFormatter alloc] init];
-        s_stringToIntFormatter.dateFormat = @"%hh:%mm:%ss";
+        s_stringToIntFormatter.dateFormat = @"HH:mm:ss";
     });
     return s_stringToIntFormatter;
 }

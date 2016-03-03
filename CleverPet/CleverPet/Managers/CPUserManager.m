@@ -115,6 +115,17 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 {
     NSError *error;
     NSArray *schedules = [CPDeviceSchedule arrayOfModelsFromDictionaries:scheduleInfo[kSchedulesKey] error:&error];
+//    // This is not robust, but will do for now
+//    for (CPDeviceSchedule *schedule in schedules) {
+//        // If Monday is present, we're a weekday. If not, we're a weekend
+//        unichar daysOn = [schedule.daysOn characterAtIndex:0];
+//        BOOL isWeekend = (daysOn & (1 << 0)) >> 0;
+//        if (isWeekend) {
+//            self.currentUser.device.weekendSchedule = schedule;
+//        } else {
+//            self.currentUser.device.weekdaySchedule = schedule;
+//        }
+//    }
     // TODO: put in the correct schedule by checking days on
     // TODO: account for not receiving the correct number of schedules
     self.currentUser.device.weekdaySchedule = [schedules firstObject];

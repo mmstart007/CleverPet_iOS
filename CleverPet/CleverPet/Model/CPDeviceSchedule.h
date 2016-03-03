@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *scheduleId;
 @property (nonatomic, assign, readonly) NSInteger startTime;
 @property (nonatomic, assign, readonly) NSInteger endTime;
+@property (nonatomic, strong) NSString *daysOn;
 
 + (BOOL)isWeekdaySchedule;
 - (void)updateStartTime:(NSInteger)startTime;

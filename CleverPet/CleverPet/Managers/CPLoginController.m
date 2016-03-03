@@ -17,7 +17,7 @@
 #import "CPUserManager.h"
 #import <Intercom/Intercom.h>
 
-@interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate>
+@interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate, CPParticleConnectionDelegate>
 
 @property (nonatomic, strong) GITInterfaceManager *interfaceManager;
 @property (nonatomic, strong) NSDataDetector *emailDetector;
@@ -71,8 +71,7 @@
         if (completion) completion(error);
         if (!error) {
             [CPFileUtils saveImage:image forPet:petId];
-            // TODO: bring back UserWithoutDevice state
-            [self presentUIForLoginResult:CPLoginResult_UserWithSetupCompleted];
+            [self presentUIForLoginResult:CPLoginResult_UserWithoutDevice];
         }
     }];
 }
@@ -176,6 +175,30 @@ didFinishSignInWithToken:(NSString *)token
     }
 }
 
+#pragma mark - CPParticleConnectionDelegate methods
+- (void)deviceClaimed:(NSDictionary *)deviceInfo
+{
+    BLOCK_SELF_REF_OUTSIDE();
+    [[CPAppEngineCommunicationManager sharedInstance] createDevice:deviceInfo completion:^(NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (error) {
+            // TODO: display error to user and relaunch device claim flow
+        } else {
+            [self presentUIForLoginResult:CPLoginResult_UserWithSetupCompleted];
+        }
+    }];
+}
+
+- (void)deviceClaimCanceled
+{
+    // TODO: Inform the user they cannot proceed without a particle device and relaunch device claim flow
+}
+
+- (void)deviceClaimFailed
+{
+    // TODO: Present instructional message to user before relaunching device claim flow
+}
+
 #pragma mark - UI flow
 - (void)presentUIForLoginResult:(CPLoginResult)result
 {
@@ -193,7 +216,9 @@ didFinishSignInWithToken:(NSString *)token
         }
         case CPLoginResult_UserWithoutDevice:
         {
-            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController]];
+            // TODO: remove this hack
+            [self deviceClaimed:nil];
+//            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
             break;
         }
         case CPLoginResult_UserWithSetupCompleted:

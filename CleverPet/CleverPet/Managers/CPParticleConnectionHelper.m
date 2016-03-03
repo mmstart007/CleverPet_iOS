@@ -20,6 +20,7 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
 @property (nonatomic, strong) NSString *organizationSlug;
 @property (nonatomic, strong) NSString *productName;
 @property (nonatomic, strong) NSString *productSlug;
+@property (nonatomic, weak) id<CPParticleConnectionDelegate> delegate;
 
 @end
 
@@ -71,7 +72,7 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
     customization.boldTextFontName = @"Raleway Bold";
     customization.headerTextFontName = @"Raleway Light";
     customization.disableLogOutOption = YES;
-    customization.networkNamePrefix = @"Clever";
+//    customization.networkNamePrefix = @"Clever";
 }
 
 - (void)applyConfig:(NSDictionary *)config
@@ -88,8 +89,9 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
     [[SparkCloud sharedInstance] loginWithAccessToken:tokenInfo completion:completion];
 }
 
-- (void)presentSetupControllerOnController:(UINavigationController *)controller
+- (void)presentSetupControllerOnController:(UINavigationController *)controller withDelegate:(id<CPParticleConnectionDelegate>)delegate
 {
+    self.delegate = delegate;
     [self setupCustomAppearance];
     SparkSetupMainController *setupController = [[SparkSetupMainController alloc] init];
     setupController.delegate = self;
@@ -98,7 +100,15 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
 
 - (void)sparkSetupViewController:(SparkSetupMainController *)controller didFinishWithResult:(SparkSetupMainControllerResult)result device:(SparkDevice *)device
 {
-    // TODO: Display error, handle cancellation, etc
+    if (result == SparkSetupMainControllerResultSuccess) {
+        [self.delegate deviceClaimed:@{kParticleIdKey:device.id, kNameKey:device.name}];
+    } else {
+        if (result == SparkSetupMainControllerResultUserCancel) {
+            [self.delegate deviceClaimCanceled];
+        } else {
+            [self.delegate deviceClaimFailed];
+        }
+    }
 }
 
 @end

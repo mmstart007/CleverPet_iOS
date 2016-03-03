@@ -129,7 +129,18 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             } else if (!currentUser.device) {
                 result = CPLoginResult_UserWithoutDevice;
             }
-            if (completion) completion(result, nil);
+            
+            if (currentUser.device && (!currentUser.device.weekdaySchedule || !currentUser.device.weekendSchedule)) {
+                [self lookupDeviceSchedules:currentUser.device.deviceId completion:^(NSError *error) {
+                    if (error) {
+                        if (completion) completion(CPLoginResult_Failure, error);
+                    } else {
+                        if (completion) completion(result, nil);
+                    }
+                }];
+            } else {
+                if (completion) completion(result, nil);
+            }
         }
     };
     
@@ -203,10 +214,11 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 }
 
 #pragma mark - Device
-- (ASYNC)createDevice:(SparkDevice *)device completion:(void (^)(NSError *))completion
+- (ASYNC)createDevice:(NSDictionary *)deviceInfo completion:(void (^)(NSError *))completion
 {
     BLOCK_SELF_REF_OUTSIDE();
-    [self.sessionManager POST:kDevicePath parameters:@{kParticleIdKey:device.id, kNameKey:device.name} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    // TODO: remove this hack
+    [self.sessionManager POST:kDevicePath parameters:@{kParticleIdKey:@"DansTestParticle", kNameKey:@"Dans Test Particle"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
