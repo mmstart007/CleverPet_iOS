@@ -11,9 +11,11 @@
 @interface CPDeviceSchedule : JSONModel
 
 @property (nonatomic, strong) NSString *scheduleId;
-@property (nonatomic, strong) NSString *startTime;
-@property (nonatomic, strong) NSString *endTime;
-@property (nonatomic, strong) NSString *daysOn;
-@property (nonatomic, assign) BOOL isActive;
+@property (nonatomic, assign, readonly) NSInteger startTime;
+@property (nonatomic, assign, readonly) NSInteger endTime;
+
++ (BOOL)isWeekdaySchedule;
+- (void)updateStartTime:(NSInteger)startTime;
+- (void)updateEndTime:(NSInteger)endTime;
 
 @end
