@@ -95,10 +95,8 @@ extern NSString * const kStandbyMode;
 extern NSString * const kSchedulerMode;
 // Schedule keys
 extern NSString * const kScheduleIdKey;
-extern NSString * const kWeekdayStartKey;
-extern NSString * const kWeekdayEndKey;
-extern NSString * const kWeekendStartKey;
-extern NSString * const kWeekendEndKey;
+extern NSString * const kWeekdayKey;
+extern NSString * const kWeekendKey;
 extern NSString * const kIsActiveKey;
 extern NSString * const kStartTimeKey;
 extern NSString * const kEndTimeKey;

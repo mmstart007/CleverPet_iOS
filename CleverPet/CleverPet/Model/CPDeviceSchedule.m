@@ -59,6 +59,20 @@
     return self;
 }
 
+- (void)mergeFromDictionary:(NSDictionary *)dict useKeyMapping:(BOOL)useKeyMapping error:(NSError *__autoreleasing *)error
+{
+    [super mergeFromDictionary:dict useKeyMapping:useKeyMapping error:error];
+    [self parseTimeStrings];
+}
+
+- (NSDictionary *)toDictionary
+{
+    NSMutableDictionary *dict = [[super toDictionary] mutableCopy];
+    // Default toDict sends isActive as 1 or 0, where the server needs it to be true or false
+    dict[kIsActiveKey] = dict[kIsActiveKey] ? @"true" : @"false";
+    return dict;
+}
+
 - (void)parseTimeStrings
 {
     NSDateFormatter *formatter = [CPDeviceSchedule timeFormatter];

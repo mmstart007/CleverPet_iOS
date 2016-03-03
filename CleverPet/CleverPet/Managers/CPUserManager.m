@@ -108,7 +108,39 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
         }
     }
     
-    // TODO: Schedule update
+    BLOCK_SELF_REF_OUTSIDE();
+    void (^scheduleHandler)(CPDeviceSchedule *, NSDictionary *) = ^(CPDeviceSchedule *schedule, NSDictionary *scheduleInfo){
+        BLOCK_SELF_REF_INSIDE();
+        NSInteger startTime = [scheduleInfo[kStartTimeKey] integerValue];
+        NSInteger endTime = [scheduleInfo[kEndTimeKey] integerValue];
+        // TODO: handle midnight(24)
+        
+        if (schedule.startTime != startTime || schedule.endTime != endTime) {
+            NSDictionary *previousSchedule = [schedule toDictionary];
+            [schedule updateStartTime:startTime];
+            [schedule updateEndTime:endTime];
+            NSDictionary *newSchedule = [schedule toDictionary];
+            
+            BLOCK_SELF_REF_OUTSIDE();
+            [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId schedule:schedule.scheduleId withInfo:newSchedule completion:^(NSError *error) {
+                BLOCK_SELF_REF_INSIDE();
+                if (error) {
+                    // TODO: handle failure
+                    [schedule mergeFromDictionary:previousSchedule useKeyMapping:YES error:nil];
+                }
+            }];
+        }
+    };
+    
+    if (deviceInfo[kWeekdayKey]) {
+        NSDictionary *weekdaySchedule = deviceInfo[kWeekdayKey];
+        scheduleHandler(self.currentUser.device.weekdaySchedule, weekdaySchedule);
+    }
+    
+    if (deviceInfo[kWeekendKey]) {
+        NSDictionary *weekendSchedule = deviceInfo[kWeekendKey];
+        scheduleHandler(self.currentUser.device.weekendSchedule, weekendSchedule);
+    }
 }
 
 - (void)fetchedDeviceSchedules:(NSDictionary *)scheduleInfo

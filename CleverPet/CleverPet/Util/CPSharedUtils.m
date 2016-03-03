@@ -45,10 +45,8 @@ NSString * const kStandbyMode = @"standby";
 NSString * const kSchedulerMode = @"scheduler";
 //Schedule keys
 NSString * const kScheduleIdKey = @"schedule_ID";
-NSString * const kWeekdayStartKey = @"weekdayStart";
-NSString * const kWeekdayEndKey = @"weekdayEnd";
-NSString * const kWeekendStartKey = @"weekendStart";
-NSString * const kWeekendEndKey = @"weekendEnd";
+NSString * const kWeekdayKey = @"weekday";
+NSString * const kWeekendKey = @"weekend";
 NSString * const kIsActiveKey = @"is_active";
 NSString * const kStartTimeKey = @"start_time";
 NSString * const kEndTimeKey = @"end_time";

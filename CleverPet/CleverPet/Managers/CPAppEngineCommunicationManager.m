@@ -27,6 +27,7 @@ NSString * const kModePathFragment = @"mode";
 #define SPECIFIC_DEVICE(deviceId) [NSString stringWithFormat:@"%@/%@", kDevicePath, deviceId]
 #define SPECIFIC_DEVICE_SCHEDULES(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment]
 #define SPECIFIC_DEVICE_MODE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kModePathFragment]
+#define SPECIFIC_SCHEDULE(deviceId, scheduleId) [NSString stringWithFormat:@"%@/%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment, scheduleId]
 
 // TODO: error codes or something so this isn't string matching
 NSString * const kNoUserAccountError = @"No account exists for the given email address";
@@ -238,6 +239,26 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     NSParameterAssert(deviceId);
     BLOCK_SELF_REF_OUTSIDE();
     [self.sessionManager PUT:SPECIFIC_DEVICE_MODE(deviceId) parameters:@{kModeKey:mode} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        BLOCK_SELF_REF_INSIDE();
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        if (jsonResponse[kErrorKey]) {
+            NSString *errorMessage = jsonResponse[kErrorKey];
+            if (completion) completion([self errorForMessage:errorMessage]);
+        } else {
+            if (completion) completion(nil);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+    }];
+}
+
+- (ASYNC)updateDevice:(NSString *)deviceId schedule:(NSString *)scheduleId withInfo:(NSDictionary *)scheduleInfo completion:(void (^)(NSError *))completion
+{
+    NSParameterAssert(scheduleId);
+    NSParameterAssert(scheduleInfo);
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.sessionManager PUT:SPECIFIC_SCHEDULE(deviceId, scheduleId) parameters:scheduleInfo success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
