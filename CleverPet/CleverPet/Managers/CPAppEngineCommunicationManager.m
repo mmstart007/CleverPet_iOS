@@ -219,7 +219,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 {
     BLOCK_SELF_REF_OUTSIDE();
     // TODO: remove this hack
-    [self.sessionManager POST:kDevicePath parameters:@{kParticleIdKey:@"DansTestParticle", kNameKey:@"Dans Test Particle"} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.sessionManager POST:kDevicePath parameters:deviceInfo progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
