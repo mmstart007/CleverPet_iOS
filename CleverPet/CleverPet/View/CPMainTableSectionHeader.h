@@ -8,13 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CPMainTableSectionHeaderFilter : NSObject
-+ (instancetype)filterWithName:(NSString *)filterName;
-- (instancetype)initWithFilterName:(NSString *)filterName;
-
-@property (strong, nonatomic) NSString *filterName;
-@end
-
+@class CPMainTableSectionHeaderFilter;
 @class CPMainTableSectionHeader;
 @protocol CPMainTableSectionHeaderDelegate <NSObject>
 - (void)sectionHeader:(CPMainTableSectionHeader *)sectionHeader didChangeToFilter:(CPMainTableSectionHeaderFilter *)filter;

@@ -11,6 +11,7 @@ typedef NS_ENUM(NSUInteger) {
     CPTTMessage,
     CPTTReport,
     CPTTChallenge,
+    CPTTVideo,
     CPTTMac,
 } CPTileType;
 

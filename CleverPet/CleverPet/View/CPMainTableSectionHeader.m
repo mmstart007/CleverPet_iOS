@@ -7,23 +7,7 @@
 //
 
 #import "CPMainTableSectionHeader.h"
-
-@interface CPMainTableSectionHeaderFilter ()
-@end
-
-@implementation CPMainTableSectionHeaderFilter
-+ (instancetype)filterWithName:(NSString *)filterName {
-    return [[[self class] alloc] initWithFilterName:filterName];
-}
-
-- (instancetype)initWithFilterName:(NSString *)filterName {
-    if (self = [super init]) {
-        self.filterName = filterName;
-    }
-    
-    return self;
-}
-@end
+#include "CPMainTableSectionHeaderFilter.h"
 
 @interface CPMainTableSectionHeader ()
 @property (strong, nonatomic) NSMutableArray<CPMainTableSectionHeaderFilter *> *filters;

@@ -100,7 +100,7 @@
     tile.date = date;
     tile.isSwipeable = YES;
     
-    switch (index % 5) {
+    switch (index % 6) {
         case 0:
             tile.tileType = CPTTChallenge;
             tile.negativeButtonText = @"Restart";
@@ -130,6 +130,11 @@
             tile.tileType = CPTTReport;
             tile.title = @"Cool, it's a report!";
             tile.body = @"Yep here's a report. Eat it.";
+            break;
+        case 5:
+            tile.tileType = CPTTVideo;
+            tile.title = @"Watch a dog do a thing!";
+            tile.body = @"Watch closely, this dog is about to do a thing. Don't miss the thing.";
             break;
     }
     

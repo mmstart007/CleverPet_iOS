@@ -10,6 +10,7 @@
 #import "CPTileDataManager.h"
 #import "CPMainTableSectionHeader.h"
 #import "CPMainTableDateHeader.h"
+#import "CPMainTableSectionHeaderFilter.h"
 
 #define TILE_VIEW_CELL @"TILE_VIEW_CELL"
 #define PET_STATS_HEADER @"PET_STATS_HEADER"
@@ -18,7 +19,6 @@
 #define HEADER_VIEW_SECTION 0
 
 @interface CPTileCollectionViewDataSource () <CPTileViewCellDelegate, CPMainTableSectionHeaderDelegate>
-@property (strong, nonatomic) CPTileDataManager *tileDataManager;
 @property (weak, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) CPTileViewCell *sizingCell;
 @property (strong, nonatomic) CPTableHeaderView *tableHeaderView;
@@ -30,6 +30,7 @@
 
 @property (strong, nonatomic) NSArray<CPMainTableSectionHeaderFilter *> *filters;
 @property (strong, nonatomic) CPMainTableSectionHeaderFilter *currentFilter;
+@property (strong, nonatomic) NSMutableDictionary<CPMainTableSectionHeaderFilter *, CPTileDataManager *> *tileDataManagers;
 @end
 
 @implementation CPTileCollectionViewDataSource {
@@ -55,8 +56,6 @@
         [tableView registerNib:[UINib nibWithNibName:@"CPPetStatsView" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:PET_STATS_HEADER];
         [tableView registerNib:[UINib nibWithNibName:@"CPMainTableSectionHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:SECTION_HEADER];
         
-        self.tileDataManager = [[CPTileDataManager alloc] init];
-        
         [self precacheTableViewCells];
         
         self.filters = @[
@@ -65,10 +64,20 @@
                          [CPMainTableSectionHeaderFilter filterWithName:@"Device Messages"]
                          ];
         
+        self.tileDataManagers = [[NSMutableDictionary alloc] init];
+        
+        for (CPMainTableSectionHeaderFilter *filter in self.filters) {
+            self.tileDataManagers[filter] = [[CPTileDataManager alloc] init];
+        }
+        
         self.currentFilter = self.filters[0];
     }
     
     return self;
+}
+
+- (CPTileDataManager *)currentTileDataManager {
+    return self.tileDataManagers[self.currentFilter];
 }
 
 - (void)precacheTableViewCells {
@@ -90,7 +99,9 @@
     
     CGFloat fade = MIN(1, MAX(0, scrollView.contentOffset.y - self.headerImageHeight) / self.headerStatsHeight);
     
-    [self.scrollDelegate dataSource:self headerPhotoVisible:scrollView.contentOffset.y < self.headerImageHeight - 4 headerStatsFade:fade];
+    [self.scrollDelegate dataSource:self
+                 headerPhotoVisible:scrollView.contentOffset.y < self.headerImageHeight - 4
+                    headerStatsFade:fade];
 }
 
 NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
@@ -117,7 +128,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 }
 
 - (void)addTile:(CPTile *)tile withAnimation:(BOOL)withAnimation {
-    NSIndexSet *indexSet = [self.tileDataManager addTile:tile];
+    NSIndexSet *indexSet = [self.currentTileDataManager addTile:tile];
     UITableViewRowAnimation animation;
     
     if (withAnimation) {
@@ -136,7 +147,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 }
 
 - (void)deleteTile:(CPTile *)tile withAnimation:(BOOL)withAnimation {
-    NSIndexSet *deletedIndexes = [self.tileDataManager deleteTile:tile];
+    NSIndexSet *deletedIndexes = [self.currentTileDataManager deleteTile:tile];
     
     // Only need to animate changes if there were changes.
     if (deletedIndexes.count > 0) {
@@ -154,7 +165,8 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         }];
         
         [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView deleteRowsAtIndexPaths:indexPaths
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.tableView endUpdates];
     }
 }
@@ -173,17 +185,17 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     if (section == HEADER_VIEW_SECTION) {
         return 0;
     } else {
-        return [self.tileDataManager rowCount];
+        return [self.currentTileDataManager rowCount];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSIndexPath *innerIndexPath = [self.tileDataManager indexPathFromCellIndex:indexPath.row];
+    NSIndexPath *innerIndexPath = [self.currentTileDataManager indexPathFromCellIndex:indexPath.row];
     
     if (innerIndexPath.row == NSNotFound) {
         // Header type cell
-        CPSimpleDate *tileHeader = [self.tileDataManager sectionHeaderAtIndex:innerIndexPath.section];
+        CPSimpleDate *tileHeader = [self.currentTileDataManager sectionHeaderAtIndex:innerIndexPath.section];
         CPMainTableDateHeader *sectionHeader = [tableView dequeueReusableCellWithIdentifier:DATE_HEADER];
         sectionHeader.mainLabel.text = FormatSimpleDateForRelative(tileHeader);
         return sectionHeader;
@@ -195,7 +207,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
             cell = [tableView dequeueReusableCellWithIdentifier:TILE_VIEW_CELL];
         }
         
-        CPTile *tile = [self.tileDataManager tileForInternalIndexPath:innerIndexPath];
+        CPTile *tile = [self.currentTileDataManager tileForInternalIndexPath:innerIndexPath];
         cell.tile = tile;
         cell.delegate = self;
         return cell;
@@ -240,18 +252,24 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     if (indexPath.section == HEADER_VIEW_SECTION) {
         return 0;
     } else {
-        NSIndexPath *internalIndexPath = [self.tileDataManager indexPathFromCellIndex:indexPath.row];
+        NSIndexPath *internalIndexPath = [self.currentTileDataManager indexPathFromCellIndex:indexPath.row];
         if (internalIndexPath.row == NSNotFound) {
             return 50;
         } else {
-            CPTile *tile = [self.tileDataManager tileForInternalIndexPath:internalIndexPath];
+            CPTile *tile = [self.currentTileDataManager tileForInternalIndexPath:internalIndexPath];
             if (tile.cachedRowHeight != 0) {
                 return tile.cachedRowHeight;
             }
             
             if (!self.sizingCell) {
                 self.sizingCell = [self.tableView dequeueReusableCellWithIdentifier:TILE_VIEW_CELL];
-                NSLayoutConstraint *layoutConstraint = [NSLayoutConstraint constraintWithItem:self.sizingCell.contentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0 constant:[UIScreen mainScreen].bounds.size.width];
+                NSLayoutConstraint *layoutConstraint = [NSLayoutConstraint constraintWithItem:self.sizingCell.contentView
+                                                                                    attribute:NSLayoutAttributeWidth
+                                                                                    relatedBy:NSLayoutRelationEqual
+                                                                                       toItem:nil
+                                                                                    attribute:NSLayoutAttributeWidth
+                                                                                   multiplier:1.0
+                                                                                     constant:[UIScreen mainScreen].bounds.size.width];
                 [self.sizingCell.contentView addConstraint:layoutConstraint];
             }
             

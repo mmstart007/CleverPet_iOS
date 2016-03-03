@@ -9,6 +9,7 @@
 #import "UIView+CPShadowEffect.h"
 
 @interface CPTileViewCell ()
+@property (weak, nonatomic) IBOutlet UIStackView *messageTileContentView;
 @property (weak, nonatomic) IBOutlet UILabel *tagTimeStampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UITextView *bodyTextView;
@@ -29,6 +30,11 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *colorViewNotCoveringConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *colorViewCoveringConstraint;
 
+// Video layout specific stuff
+@property (weak, nonatomic) IBOutlet UIView *videoContentView;
+@property (weak, nonatomic) IBOutlet UITextView *videoLayoutTextView;
+@property (weak, nonatomic) IBOutlet UIImageView *videoLayoutImageView;
+
 @property (strong, nonatomic) NSMutableArray<UISwipeGestureRecognizer *> *swipeGestureRecognizers;
 @end
 
@@ -41,10 +47,17 @@
     self.titleLabel.hidden = !tile.title;
     self.titleLabel.text = tile.title;
     
-    self.bodyTextView.attributedText = tile.parsedBody;
+    self.messageTileContentView.hidden = tile.tileType == CPTTVideo;
+    self.videoLayoutImageView.hidden = tile.tileType != CPTTVideo;
     
-    self.cellImageViewHolder.hidden = !tile.image;
-    self.cellImageView.image = tile.image;
+    if (tile.tileType == CPTTVideo) {
+        self.videoLayoutTextView.attributedText = tile.parsedBody;
+        self.videoLayoutImageView.image = tile.image;
+    } else {
+        self.bodyTextView.attributedText = tile.parsedBody;
+        self.cellImageViewHolder.hidden = !tile.image;
+        self.cellImageView.image = tile.image;
+    }
     
     self.affirmativeButton.hidden = !tile.affirmativeButtonText;
     self.negativeButton.hidden = !tile.negativeButtonText;
@@ -68,6 +81,11 @@
         case CPTTChallenge:
             tileColor = [UIColor appTealColor];
             tileLightColor = [UIColor appLightTealColor];
+            break;
+        case CPTTVideo:
+            tileColor = [UIColor appYellowColor];
+            tileLightColor = [UIColor appLightYellowColor];
+            break;
         case CPTTMac:
             break;
     }
@@ -80,6 +98,11 @@
     [self setTextColor:[UIColor whiteColor] onButton:self.affirmativeButton];
     [self setTextColor:tileColor onButton:self.negativeButton];
     
+    self.videoLayoutImageView.layer.borderColor = [UIColor redColor].CGColor;
+    self.videoLayoutImageView.layer.borderWidth = 3;
+    
+    self.tagTimeStampLabel.superview.layer.borderColor = [UIColor redColor].CGColor;
+    self.tagTimeStampLabel.superview.layer.borderWidth = 3;
     self.tagTimeStampLabel.text = [NSString stringWithFormat:@"Device Message | %@", [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
     
     self.colouredDotView.backgroundColor = tileColor;
@@ -149,6 +172,8 @@
     
     self.bodyTextView.textContainer.lineFragmentPadding = 0;
     self.bodyTextView.textContainerInset = UIEdgeInsetsZero;
+    self.videoLayoutTextView.textContainer.lineFragmentPadding = self.bodyTextView.textContainer.lineFragmentPadding;
+    self.videoLayoutTextView.textContainerInset = self.bodyTextView.textContainerInset;
     
     for (UIButton *button in @[self.affirmativeButton, self.negativeButton]) {
         button.titleLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
@@ -175,6 +200,11 @@
 {
     self.titleLabel.text = nil;
     self.cellImageView.image = nil;
+    
+    self.bodyTextView.text = nil;
+    self.videoLayoutImageView.image = nil;
+    self.videoLayoutTextView.text = nil;
+    
     [self setSwipedMode:NO withAnimation:NO callDelegateMethod:NO];
 }
 @end
