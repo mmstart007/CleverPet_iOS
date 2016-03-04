@@ -108,8 +108,8 @@
     if (textField == self.emailField) {
         [self.passwordField becomeFirstResponder];
     } else {
-        // TODO: Proceed with sign in?
         [textField resignFirstResponder];
+        [self signInTapped:nil];
     }
     return YES;
 }

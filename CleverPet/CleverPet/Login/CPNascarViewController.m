@@ -113,7 +113,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    // TODO: Proceed with sign in?
+    [self signInTapped:nil];
     return YES;
 }
 
