@@ -76,8 +76,7 @@
     headerLabel.textColor = [UIColor appTitleTextColor];
     UIButton *expandButton = [UIButton buttonWithType:UIButtonTypeCustom];
     expandButton.translatesAutoresizingMaskIntoConstraints = NO;
-    // TODO: carat image
-    expandButton.backgroundColor = [UIColor lightGrayColor];
+    [expandButton setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateNormal];
     [view addSubview:headerLabel];
     [view addSubview:expandButton];
     self.headerLabel = headerLabel;
@@ -118,6 +117,7 @@
     // TODO: put tap on the header or entire view?
     self.isExpanded = !self.isExpanded;
     
+    // TODO: reverse direction of contract animation if possible
     CGAffineTransform targetTransform = self.isExpanded ? CGAffineTransformMakeRotation(M_PI) : CGAffineTransformIdentity;
     
     [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseInOut animations:^{

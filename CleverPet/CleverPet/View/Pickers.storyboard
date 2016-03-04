@@ -161,13 +161,20 @@
                                             <constraint firstAttribute="width" secondItem="UYg-kL-GV4" secondAttribute="height" multiplier="4:3" id="4rH-YS-ZLu"/>
                                         </constraints>
                                     </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pet mask" translatesAutoresizingMaskIntoConstraints="NO" id="Pig-2Y-VpS">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="Pig-2Y-VpS" firstAttribute="centerX" secondItem="UYg-kL-GV4" secondAttribute="centerX" id="2VM-sx-WFw"/>
+                                    <constraint firstItem="Pig-2Y-VpS" firstAttribute="centerY" secondItem="UYg-kL-GV4" secondAttribute="centerY" id="9fp-fN-zRk"/>
                                     <constraint firstItem="UYg-kL-GV4" firstAttribute="leading" secondItem="3qN-O6-J78" secondAttribute="leading" id="AUa-EL-QVS"/>
                                     <constraint firstItem="lmt-Wb-4oC" firstAttribute="top" secondItem="UYg-kL-GV4" secondAttribute="bottom" id="DfN-bg-SOb"/>
                                     <constraint firstItem="lmt-Wb-4oC" firstAttribute="leading" secondItem="3qN-O6-J78" secondAttribute="leading" id="EvB-Yn-hd7"/>
                                     <constraint firstAttribute="trailing" secondItem="UYg-kL-GV4" secondAttribute="trailing" id="KGS-ZB-Uve"/>
+                                    <constraint firstItem="Pig-2Y-VpS" firstAttribute="height" secondItem="UYg-kL-GV4" secondAttribute="height" id="aCB-Tx-mwe"/>
+                                    <constraint firstItem="Pig-2Y-VpS" firstAttribute="width" secondItem="UYg-kL-GV4" secondAttribute="width" id="i6d-8F-QOz"/>
                                     <constraint firstItem="UYg-kL-GV4" firstAttribute="top" secondItem="3qN-O6-J78" secondAttribute="top" id="nrc-KA-fX4"/>
                                     <constraint firstAttribute="trailing" secondItem="lmt-Wb-4oC" secondAttribute="trailing" id="oyp-o9-7iq"/>
                                     <constraint firstAttribute="bottom" secondItem="lmt-Wb-4oC" secondAttribute="bottom" id="zw6-sM-YwQ"/>
@@ -226,4 +233,7 @@
             <point key="canvasLocation" x="248" y="1027"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pet mask" width="320" height="241"/>
+    </resources>
 </document>
