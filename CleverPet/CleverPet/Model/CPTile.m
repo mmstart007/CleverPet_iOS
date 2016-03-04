@@ -13,6 +13,17 @@
 
 }
 
++ (NSDateFormatter*)dateFormatter
+{
+    static dispatch_once_t onceToken;
+    static NSDateFormatter *s_tileDateFormatter;
+    dispatch_once(&onceToken, ^{
+        s_tileDateFormatter = [[NSDateFormatter alloc] init];
+        s_tileDateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSSSS";
+    });
+    return s_tileDateFormatter;
+}
+
 + (JSONKeyMapper*)keyMapper
 {
     return [JSONKeyMapper mapper:[JSONKeyMapper mapperFromUnderscoreCaseToCamelCase] withExceptions:@{}];
@@ -26,12 +37,27 @@
     return NO;
 }
 
++ (BOOL)propertyIsOptional:(NSString *)propertyName
+{
+    if ([propertyName isEqualToString:@"userDeletable"]) {
+        return YES;
+    }
+    return NO;
+}
+
 - (NSAttributedString *)parsedBody {
     if (!_parsedBody) {
         _parsedBody = [[CPTileTextFormatter instance] formatTileText:self.message forPet:nil];
     }
 
     return _parsedBody;
+}
+
+// TODO: Pull this out into a custom transformer if we're receiving this format of date everywhere
+- (void)setDateWithNSString:(NSString*)string
+{
+    NSDateFormatter *formatter = [CPTile dateFormatter];
+    _date = [formatter dateFromString:string];
 }
 
 - (CPSimpleDate<Ignore> *)simpleDate
@@ -53,6 +79,20 @@
     } else if ([template isEqualToString:@"video"]) {
         _tileType = CPTTVideo;
     } else if ([template isEqualToString:@"report"]) {
+        _tileType = CPTTReport;
+    }
+}
+
+- (void)setCategory:(NSString *)category
+{
+    _category = category;
+    // TODO: challenge?
+    // TODO: static strings
+    if ([category isEqualToString:@"image"] || [category isEqualToString:@"message"]) {
+        _tileType = CPTTMessage;
+    } else if ([category isEqualToString:@"video"]) {
+        _tileType = CPTTVideo;
+    } else if ([category isEqualToString:@"report"]) {
         _tileType = CPTTReport;
     }
 }
