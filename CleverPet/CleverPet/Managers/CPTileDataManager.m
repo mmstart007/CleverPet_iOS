@@ -190,13 +190,18 @@
 - (void)refreshTiles
 {
     // TODO: self.filter
+    BLOCK_SELF_REF_OUTSIDE();
     [[CPTileCommunicationManager sharedInstance] refreshTiles:nil completion:^(NSDictionary *tileInfo, NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
         // TODO: pass error/message back up the chain
         if (!error) {
             // TODO: Clear our backing data on refresh?
             // Parse our tile objects, and slam into the backing data.
-            NSArray *tiles = [CPTile ]
-            
+            NSError *modelError;
+            NSArray *tiles = [CPTile arrayOfModelsFromDictionaries:tileInfo[kTilesKey] error:&modelError];
+            for (CPTile *tile in tiles) {
+                [self addTile:tile];
+            }
             // Hold onto our paging cursor for future use
             self.cursor = tileInfo[kCursorKey];
             self.moreTiles = [tileInfo[kModeKey] boolValue];

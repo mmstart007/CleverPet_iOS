@@ -15,17 +15,28 @@ typedef NS_ENUM(NSUInteger) {
     CPTTMac,
 } CPTileType;
 
-@interface CPTile : NSObject
+@interface CPTile : JSONModel
 // Persisted properties
-@property (strong, nonatomic) NSString *id;
-@property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) NSString *body;
+@property (nonatomic, strong) NSString *category;
 @property (strong, nonatomic) NSDate *date;
-@property (strong, nonatomic) UIImage *image;
-@property (assign, nonatomic) CPTileType tileType;
-@property (assign, nonatomic) BOOL isSwipeable;
+@property (nonatomic, strong) NSString<Optional> *imageUrl;
+@property (nonatomic, strong) NSString *message;
+@property (nonatomic, strong) NSString<Optional> *primaryButtonText;
+@property (nonatomic, strong) NSString<Optional> *primaryButtonUrl;
+@property (nonatomic, assign) NSInteger priority;
+@property (nonatomic, strong) NSString<Optional> *secondaryButtonText;
+@property (nonatomic, strong) NSString<Optional> *secondaryButtonUrl;
+// TODO: Template v category nonsense
+@property (nonatomic, strong) NSString *template;
+@property (nonatomic, strong) NSString *tileId;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, assign) BOOL userDeletable;
+// TODO: can probably remove
+@property (nonatomic, strong) NSString *userId;
+@property (nonatomic, strong) NSString<Optional> *videoThumbnailUrl;
+@property (nonatomic, strong) NSString *videoUrl;
 
-@property (strong, nonatomic) NSString *affirmativeButtonText, *negativeButtonText;
+@property (assign, nonatomic) CPTileType tileType;
 
 // Non-persisted properties
 @property (strong, nonatomic) NSAttributedString<Ignore>*parsedBody;

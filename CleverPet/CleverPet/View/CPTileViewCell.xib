@@ -247,7 +247,6 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
-                <outlet property="affirmativeButton" destination="p07-iq-B3X" id="NHb-UX-cB5"/>
                 <outlet property="backingView" destination="0u6-1i-n8I" id="8GI-IO-TcK"/>
                 <outlet property="bodyTextView" destination="bUp-6L-bG7" id="nsi-lv-n3E"/>
                 <outlet property="buttonHolder" destination="6Dk-NI-weI" id="XH7-pk-7yL"/>
@@ -258,7 +257,8 @@
                 <outlet property="colorViewNotCoveringConstraint" destination="sWN-vn-2aE" id="SZI-yl-XAs"/>
                 <outlet property="colouredDotView" destination="qzG-M2-IlP" id="3FU-da-Ijt"/>
                 <outlet property="messageTileContentView" destination="WZK-qE-0J1" id="x8e-M9-9uf"/>
-                <outlet property="negativeButton" destination="ZlO-nl-F4D" id="Nt6-JO-xab"/>
+                <outlet property="primaryButton" destination="p07-iq-B3X" id="Mbz-NJ-uGp"/>
+                <outlet property="secondaryButton" destination="ZlO-nl-F4D" id="qHE-gK-l9B"/>
                 <outlet property="swipedColorView" destination="zPr-Vl-QaO" id="2B5-P3-RpQ"/>
                 <outlet property="tagTimeStampLabel" destination="yNm-et-SFa" id="I2c-gY-QbK"/>
                 <outlet property="titleLabel" destination="n9r-4T-ZV3" id="gXc-oF-pl4"/>

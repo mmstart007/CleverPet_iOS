@@ -16,8 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
 @property (weak, nonatomic) IBOutlet UIView *colorBarView;
 @property (weak, nonatomic) IBOutlet UIView *cellImageViewHolder;
-@property (weak, nonatomic) IBOutlet UIButton *negativeButton;
-@property (weak, nonatomic) IBOutlet UIButton *affirmativeButton;
+@property (weak, nonatomic) IBOutlet UIButton *secondaryButton;
+@property (weak, nonatomic) IBOutlet UIButton *primaryButton;
 @property (weak, nonatomic) IBOutlet UIStackView *buttonHolder;
 @property (weak, nonatomic) IBOutlet UIView *backingView;
 @property (strong, nonatomic) IBOutlet UIView *colouredDotView;
@@ -52,20 +52,20 @@
     
     if (tile.tileType == CPTTVideo) {
         self.videoLayoutTextView.attributedText = tile.parsedBody;
-        self.videoLayoutImageView.image = tile.image;
+        [self.videoLayoutImageView setImageWithURL:[NSURL URLWithString:tile.videoThumbnailUrl]];
     } else {
         self.bodyTextView.attributedText = tile.parsedBody;
-        self.cellImageViewHolder.hidden = !tile.image;
-        self.cellImageView.image = tile.image;
+        self.cellImageViewHolder.hidden = !tile.imageUrl;
+        [self.cellImageView setImageWithURL:[NSURL URLWithString:tile.imageUrl]];
     }
     
-    self.affirmativeButton.hidden = !tile.affirmativeButtonText;
-    self.negativeButton.hidden = !tile.negativeButtonText;
+    self.primaryButton.hidden = !tile.primaryButtonText;
+    self.secondaryButton.hidden = !tile.secondaryButtonText;
     
-    [self setButtonTitle:tile.affirmativeButtonText onButton:self.affirmativeButton];
-    [self setButtonTitle:tile.negativeButtonText onButton:self.negativeButton];
+    [self setButtonTitle:tile.primaryButtonText onButton:self.primaryButton];
+    [self setButtonTitle:tile.secondaryButtonText onButton:self.secondaryButton];
     
-    self.buttonHolder.hidden = self.affirmativeButton.hidden && self.negativeButton.hidden;
+    self.buttonHolder.hidden = self.primaryButton.hidden && self.secondaryButton.hidden;
     
     UIColor *tileColor = [UIColor blackColor];
     UIColor *tileLightColor = [UIColor blackColor];
@@ -92,11 +92,11 @@
     
     self.colorBarView.backgroundColor = tileColor;
     self.swipedColorView.backgroundColor = tileColor;
-    self.affirmativeButton.backgroundColor = tileColor;
-    self.negativeButton.backgroundColor = tileLightColor;
+    self.primaryButton.backgroundColor = tileColor;
+    self.secondaryButton.backgroundColor = tileLightColor;
     
-    [self setTextColor:[UIColor whiteColor] onButton:self.affirmativeButton];
-    [self setTextColor:tileColor onButton:self.negativeButton];
+    [self setTextColor:[UIColor whiteColor] onButton:self.primaryButton];
+    [self setTextColor:tileColor onButton:self.secondaryButton];
 
     self.tagTimeStampLabel.text = [NSString stringWithFormat:@"Device Message | %@", [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
     
@@ -104,7 +104,7 @@
 }
 
 - (void)swipeGestureRecognized:(UISwipeGestureRecognizer *)recognizer {
-    if (self.tile.isSwipeable && [self.swipeGestureRecognizers containsObject:recognizer]) {
+    if (self.tile.userDeletable && [self.swipeGestureRecognizers containsObject:recognizer]) {
         [self setSwipedMode:YES withAnimation:YES callDelegateMethod:YES];
     }
 }
@@ -170,7 +170,7 @@
     self.videoLayoutTextView.textContainer.lineFragmentPadding = self.bodyTextView.textContainer.lineFragmentPadding;
     self.videoLayoutTextView.textContainerInset = self.bodyTextView.textContainerInset;
     
-    for (UIButton *button in @[self.affirmativeButton, self.negativeButton]) {
+    for (UIButton *button in @[self.primaryButton, self.secondaryButton]) {
         button.titleLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
     }
     

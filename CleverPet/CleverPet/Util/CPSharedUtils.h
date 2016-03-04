@@ -54,6 +54,7 @@ removeObserver:self]
 #import "UIFont+CleverPet.h"
 #import "UIColor+CleverPet.h"
 #import "UIViewController+CleverPet.h"
+#import "UIImageView+AFNetworking.h"
 
 #pragma mark - Data field max and min values
 extern NSInteger const kNameFieldMinChars;
