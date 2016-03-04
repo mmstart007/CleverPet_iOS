@@ -52,9 +52,11 @@
     
     if (tile.tileType == CPTTVideo) {
         self.videoLayoutTextView.attributedText = tile.parsedBody;
+        self.bodyTextView.attributedText = nil;
         [self.videoLayoutImageView setImageWithURL:tile.videoThumbnailUrl];
     } else {
         self.bodyTextView.attributedText = tile.parsedBody;
+        self.videoLayoutTextView.attributedText = nil;
         self.cellImageViewHolder.hidden = !tile.imageUrl;
         [self.cellImageView setImageWithURL:tile.imageUrl];
     }
