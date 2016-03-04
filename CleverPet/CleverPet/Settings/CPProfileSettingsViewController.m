@@ -34,7 +34,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *logoutContainer;
 @property (weak, nonatomic) IBOutlet UILabel *logoutLabel;
-@property (weak, nonatomic) IBOutlet UILabel *logoutX;
 
 @property (strong, nonatomic) IBOutletCollection(UIView) NSArray *headerViews;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *headerLabels;
@@ -138,7 +137,6 @@
     // TODO: x as button/image
     self.logoutLabel.font = [UIFont cpLightFontWithSize:14 italic:NO];
     self.logoutLabel.textColor = [UIColor appRedColor];
-    self.logoutX.textColor = [UIColor redColor];
 }
 
 - (void)updateAlteredHeaderForGender:(NSString*)gender
