@@ -19,4 +19,6 @@
 
 - (NSUInteger)rowCount;
 - (NSIndexPath *)indexPathFromCellIndex:(NSUInteger)cellIndex;
+
+- (BOOL)hasMoreTiles;
 @end

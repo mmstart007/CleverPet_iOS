@@ -9,10 +9,13 @@
 #import "CPTileDataManager.h"
 #import "CPSimpleDate.h"
 #import "CPTile.h"
+#import "CPTileCommunicationManager.h"
 
 @interface CPTileDataManager ()
 @property (strong, nonatomic) NSMutableDictionary<CPSimpleDate *, CPTileSection *> *tileSections;
 @property (strong, nonatomic) NSMutableArray<CPTileSection *> *tileSectionList;
+@property (nonatomic, assign) BOOL moreTiles;
+@property (nonatomic, strong) NSString *cursor;
 @end
 
 @implementation CPTileDataManager
@@ -21,6 +24,7 @@
     if (self) {
         self.tileSectionList = [[NSMutableArray alloc] init];
         self.tileSections = [[NSMutableDictionary alloc] init];
+        [self refreshTiles];
     }
 
     return self;
@@ -181,4 +185,35 @@
     
     return [NSIndexPath indexPathForRow:row inSection:section];
 }
+
+#pragma mark - Networking
+- (void)refreshTiles
+{
+    // TODO: self.filter
+    [[CPTileCommunicationManager sharedInstance] refreshTiles:nil completion:^(NSDictionary *tileInfo, NSError *error) {
+        // TODO: pass error/message back up the chain
+        if (!error) {
+            // TODO: Clear our backing data on refresh?
+            // Parse our tile objects, and slam into the backing data.
+            NSArray *tiles = [CPTile ]
+            
+            // Hold onto our paging cursor for future use
+            self.cursor = tileInfo[kCursorKey];
+            self.moreTiles = [tileInfo[kModeKey] boolValue];
+        }
+    }];
+}
+
+- (void)getNextTiles
+{
+    if (self.moreTiles) {
+        
+    }
+}
+
+- (BOOL)hasMoreTiles
+{
+    return self.moreTiles;
+}
+
 @end

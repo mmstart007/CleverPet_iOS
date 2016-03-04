@@ -58,6 +58,12 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     self.sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
 }
 
+- (AFHTTPSessionManager*)getSessionManager
+{
+    return self.sessionManager;
+}
+
+#pragma mark - Login and user calls
 - (ASYNC)loginWithAuthToken:(NSString *)gitKitToken completion:(void (^)(CPLoginResult, NSError *))completion
 {
     NSParameterAssert(gitKitToken);

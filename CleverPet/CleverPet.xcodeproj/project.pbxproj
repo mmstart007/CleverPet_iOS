@@ -44,6 +44,7 @@
 		971D63011C863D0A006C9F80 /* CPConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D63001C863D0A006C9F80 /* CPConfigViewController.m */; };
 		971D630C1C88B0A7006C9F80 /* CPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D63091C88B0A7006C9F80 /* CPDevice.m */; };
 		971D630D1C88B0A7006C9F80 /* CPDeviceSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D630B1C88B0A7006C9F80 /* CPDeviceSchedule.m */; };
+		971D63101C88FFC2006C9F80 /* CPTileCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D630F1C88FFC2006C9F80 /* CPTileCommunicationManager.m */; };
 		979D84431C7FA50700ADB6B0 /* CPFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D84421C7FA50700ADB6B0 /* CPFileUtils.m */; };
 		979D84461C7FB73700ADB6B0 /* CPUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D84451C7FB73700ADB6B0 /* CPUserManager.m */; };
 		979D84491C7FB79400ADB6B0 /* CPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D84481C7FB79400ADB6B0 /* CPUser.m */; };
@@ -167,6 +168,8 @@
 		971D63091C88B0A7006C9F80 /* CPDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDevice.m; sourceTree = "<group>"; };
 		971D630A1C88B0A7006C9F80 /* CPDeviceSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDeviceSchedule.h; sourceTree = "<group>"; };
 		971D630B1C88B0A7006C9F80 /* CPDeviceSchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPDeviceSchedule.m; sourceTree = "<group>"; };
+		971D630E1C88FFC2006C9F80 /* CPTileCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileCommunicationManager.h; sourceTree = "<group>"; };
+		971D630F1C88FFC2006C9F80 /* CPTileCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileCommunicationManager.m; sourceTree = "<group>"; };
 		979D84411C7FA50700ADB6B0 /* CPFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFileUtils.h; sourceTree = "<group>"; };
 		979D84421C7FA50700ADB6B0 /* CPFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFileUtils.m; sourceTree = "<group>"; };
 		979D84441C7FB73700ADB6B0 /* CPUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUserManager.h; sourceTree = "<group>"; };
@@ -438,6 +441,8 @@
 				0DE13B661C7FABB200648834 /* CPTileDataManager.m */,
 				979D84441C7FB73700ADB6B0 /* CPUserManager.h */,
 				979D84451C7FB73700ADB6B0 /* CPUserManager.m */,
+				971D630E1C88FFC2006C9F80 /* CPTileCommunicationManager.h */,
+				971D630F1C88FFC2006C9F80 /* CPTileCommunicationManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -713,6 +718,7 @@
 				97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */,
 				0D36AA8B1C7243D600349D03 /* AppDelegate.m in Sources */,
 				9704E2FB1C7D260E004874A7 /* CPTextValidator.m in Sources */,
+				971D63101C88FFC2006C9F80 /* CPTileCommunicationManager.m in Sources */,
 				979D84521C810F5600ADB6B0 /* CPGenderUtils.m in Sources */,
 				97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */,
 				97EB7ABF1C72AAFB007F1383 /* CPLoginController.m in Sources */,

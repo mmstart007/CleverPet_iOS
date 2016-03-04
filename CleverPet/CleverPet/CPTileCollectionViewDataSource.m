@@ -67,6 +67,7 @@
         self.tileDataManagers = [[NSMutableDictionary alloc] init];
         
         for (CPMainTableSectionHeaderFilter *filter in self.filters) {
+            // TODO: init tile data manager with filter
             self.tileDataManagers[filter] = [[CPTileDataManager alloc] init];
         }
         

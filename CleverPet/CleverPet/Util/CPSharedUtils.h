@@ -101,6 +101,10 @@ extern NSString * const kIsActiveKey;
 extern NSString * const kStartTimeKey;
 extern NSString * const kEndTimeKey;
 extern NSString * const kDaysOnKey;
+// Tile keys
+extern NSString * const kCursorKey;
+extern NSString * const kMoreKey;
+extern NSString * const kTilesKey;
 
 #define ASYNC void
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)

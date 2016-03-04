@@ -10,6 +10,7 @@
 
 @class GITAccount;
 @class SparkDevice;
+@class AFHTTPSessionManager;
 
 typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile, CPLoginResult_UserWithoutDevice, CPLoginResult_UserWithSetupCompleted, CPLoginResult_Failure};
 
@@ -18,6 +19,7 @@ typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile,
 + (instancetype)sharedInstance;
 
 - (void)applyConfig:(NSDictionary*)configData;
+- (AFHTTPSessionManager*)getSessionManager;
 
 - (ASYNC)loginWithAuthToken:(NSString*)gitKitToken completion:(void (^)(CPLoginResult result, NSError *error))completion;
 - (ASYNC)logoutWithCompletion:(void (^)(NSError *error))completion;
