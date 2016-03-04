@@ -14,11 +14,13 @@
 - (CPSimpleDate *)sectionHeaderAtIndex:(NSUInteger)index;
 - (NSUInteger)tileCountForSection:(NSUInteger)section;
 - (CPTile *)tileForInternalIndexPath:(NSIndexPath *)indexPath;
-- (NSIndexSet *)addTile:(CPTile *)tile;
-- (NSIndexSet *)deleteTile:(CPTile *)tile;
 
 - (NSUInteger)rowCount;
 - (NSIndexPath *)indexPathFromCellIndex:(NSUInteger)cellIndex;
 
+- (NSIndexSet *)addTile:(CPTile *)tile;
+- (NSIndexSet *)deleteTile:(CPTile *)tile;
+- (ASYNC)refreshTiles:(void (^)(NSIndexSet *indexes, NSError *error))completion;
+- (ASYNC)pageMoreTiles:(void (^)(NSIndexSet *indexes, NSError *error))completion;
 - (BOOL)hasMoreTiles;
 @end

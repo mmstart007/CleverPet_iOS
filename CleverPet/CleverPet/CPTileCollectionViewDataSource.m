@@ -72,6 +72,7 @@
         }
         
         self.currentFilter = self.filters[0];
+        [self refreshTilesWithAnimation:YES];
     }
     
     return self;
@@ -298,4 +299,21 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     // TODO: Get rid of the tile here
     [self deleteTile:tileViewCell.tile withAnimation:YES];
 }
+
+#pragma mark - Data source management
+- (void)refreshTilesWithAnimation:(BOOL)withAnimation
+{
+    CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
+    BLOCK_SELF_REF_OUTSIDE();
+    [currentManager refreshTiles:^(NSIndexSet *indexes, NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (error) {
+            // TODO: display error
+        } else if (currentManager == self.tileDataManagers[self.currentFilter]) {
+            // TODO: animate from old data to new data instead of refresh?
+            [self.tableView reloadData];
+        }
+    }];
+}
+
 @end

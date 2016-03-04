@@ -24,7 +24,6 @@
     if (self) {
         self.tileSectionList = [[NSMutableArray alloc] init];
         self.tileSections = [[NSMutableDictionary alloc] init];
-        [self refreshTiles];
     }
 
     return self;
@@ -78,6 +77,7 @@
     return indexOfSectionStart;
 }
 
+#pragma mark - Backing data manipulation
 - (NSIndexSet *)addTile:(CPTile *)tile {
     CPSimpleDate *simpleDate = [[CPSimpleDate alloc] initWithDate:tile.date];
     CPTileSection *tileSection = self.tileSections[simpleDate];
@@ -108,6 +108,7 @@
 }
 
 - (NSIndexSet *)deleteTile:(CPTile *)tile {
+    // TODO: web call to delete
     CPSimpleDate *simpleDate = [[CPSimpleDate alloc] initWithDate:tile.date];
     CPTileSection *tileSection = self.tileSections[simpleDate];
     
@@ -143,6 +144,44 @@
     [deletedIndexes addIndex:sectionStart + 1 + tileIndex];
     
     return [deletedIndexes copy];
+}
+
+- (ASYNC)refreshTiles:(void (^)(NSIndexSet *indexes, NSError *error))completion
+{
+    // TODO: self.filter
+    BLOCK_SELF_REF_OUTSIDE();
+    [[CPTileCommunicationManager sharedInstance] refreshTiles:nil completion:^(NSDictionary *tileInfo, NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
+        // TODO: pass error/message back up the chain
+        if (!error) {
+            // TODO: Clear our backing data on refresh?
+            [self.tileSectionList removeAllObjects];
+            [self.tileSections removeAllObjects];
+            // Parse our tile objects, and slam into the backing data.
+            NSError *modelError;
+            NSArray *tiles = [CPTile arrayOfModelsFromDictionaries:tileInfo[kTilesKey] error:&modelError];
+            for (CPTile *tile in tiles) {
+                [indexes addIndexes:[self addTile:tile]];
+            }
+            // Hold onto our paging cursor for future use
+            self.cursor = tileInfo[kCursorKey];
+            self.moreTiles = [tileInfo[kModeKey] boolValue];
+        }
+        if (completion) completion(indexes, error);
+    }];
+}
+
+- (void)getNextTiles
+{
+    if (self.moreTiles) {
+        
+    }
+}
+
+- (BOOL)hasMoreTiles
+{
+    return self.moreTiles;
 }
 
 - (NSUInteger)insertTileSection:(CPTileSection *)tileSection {
@@ -184,41 +223,6 @@
     }
     
     return [NSIndexPath indexPathForRow:row inSection:section];
-}
-
-#pragma mark - Networking
-- (void)refreshTiles
-{
-    // TODO: self.filter
-    BLOCK_SELF_REF_OUTSIDE();
-    [[CPTileCommunicationManager sharedInstance] refreshTiles:nil completion:^(NSDictionary *tileInfo, NSError *error) {
-        BLOCK_SELF_REF_INSIDE();
-        // TODO: pass error/message back up the chain
-        if (!error) {
-            // TODO: Clear our backing data on refresh?
-            // Parse our tile objects, and slam into the backing data.
-            NSError *modelError;
-            NSArray *tiles = [CPTile arrayOfModelsFromDictionaries:tileInfo[kTilesKey] error:&modelError];
-            for (CPTile *tile in tiles) {
-                [self addTile:tile];
-            }
-            // Hold onto our paging cursor for future use
-            self.cursor = tileInfo[kCursorKey];
-            self.moreTiles = [tileInfo[kModeKey] boolValue];
-        }
-    }];
-}
-
-- (void)getNextTiles
-{
-    if (self.moreTiles) {
-        
-    }
-}
-
-- (BOOL)hasMoreTiles
-{
-    return self.moreTiles;
 }
 
 @end
