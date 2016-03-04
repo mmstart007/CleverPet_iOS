@@ -76,9 +76,11 @@
         self.image = [CPFileUtils getImageForPet:self.petId];
     }
     
-    // TODO: placeholder image
-    
-    return self.image;
+    if (self.image) {
+        return self.image;
+    } else {
+        return [UIImage imageNamed:@"pet placeholder"];
+    }
 }
 
 - (void)setPetPhoto:(UIImage *)image
