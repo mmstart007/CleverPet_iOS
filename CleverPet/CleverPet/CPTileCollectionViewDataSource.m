@@ -18,6 +18,8 @@
 #define DATE_HEADER @"DATE_HEADER"
 #define HEADER_VIEW_SECTION 0
 
+CGFloat const kPagingThreshhold = 200.f;
+
 @interface CPTileCollectionViewDataSource () <CPTileViewCellDelegate, CPMainTableSectionHeaderDelegate>
 @property (weak, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) CPTileViewCell *sizingCell;
@@ -64,15 +66,20 @@
                          [CPMainTableSectionHeaderFilter filterWithName:@"Device Messages"]
                          ];
         
+        self.currentFilter = self.filters[0];
+        
         self.tileDataManagers = [[NSMutableDictionary alloc] init];
         
         for (CPMainTableSectionHeaderFilter *filter in self.filters) {
             // TODO: init tile data manager with filter
+            // Run through our refresh call for the first manager so we populate the table. Call refresh on the others so their content is ready when we change between filters
             self.tileDataManagers[filter] = [[CPTileDataManager alloc] init];
+            if ([self.tileDataManagers count] == 1) {
+                [self refreshTilesWithAnimation:YES];
+            } else {
+                [self.tileDataManagers[filter] refreshTiles:nil];
+            }
         }
-        
-        self.currentFilter = self.filters[0];
-        [self refreshTilesWithAnimation:YES];
     }
     
     return self;
@@ -104,6 +111,16 @@
     [self.scrollDelegate dataSource:self
                  headerPhotoVisible:scrollView.contentOffset.y < self.headerImageHeight - 4
                     headerStatsFade:fade];
+    
+    // TODO: loading section
+    // TODO: trigger page if our initial content size is less than our bounds, and we have more tiles
+    // Start paging if we've reached our threshhold
+    if ([self.tileDataManagers[self.currentFilter] allowPaging]) {
+        CGFloat offsetY = scrollView.contentOffset.y + scrollView.bounds.size.height;
+        if (scrollView.contentSize.height - offsetY > kPagingThreshhold) {
+            [self pageMoreTilesWithAnimation:YES];
+        }
+    }
 }
 
 NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
@@ -129,8 +146,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     return [s_dateFormatter stringFromDate:date];
 }
 
-- (void)addTile:(CPTile *)tile withAnimation:(BOOL)withAnimation {
-    NSIndexSet *indexSet = [self.currentTileDataManager addTile:tile];
+- (void)addTiles:(NSIndexSet *)tileIndexes withAnimation:(BOOL)withAnimation {
     UITableViewRowAnimation animation;
     
     if (withAnimation) {
@@ -141,7 +157,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     
     [self.tableView beginUpdates];
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-    [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+    [tileIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
         [indexPaths addObject:[NSIndexPath indexPathForItem:idx inSection:1]];
     }];
     [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:animation];
@@ -258,6 +274,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         if (internalIndexPath.row == NSNotFound) {
             return 50;
         } else {
+            // TODO: separate cache for each filter
             CPTile *tile = [self.currentTileDataManager tileForInternalIndexPath:internalIndexPath];
             if (tile.cachedRowHeight != 0) {
                 return tile.cachedRowHeight;
@@ -301,6 +318,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 }
 
 #pragma mark - Data source management
+// TODO: kill page if we refresh
 - (void)refreshTilesWithAnimation:(BOOL)withAnimation
 {
     CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
@@ -312,6 +330,20 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         } else if (currentManager == self.tileDataManagers[self.currentFilter]) {
             // TODO: animate from old data to new data instead of refresh?
             [self.tableView reloadData];
+        }
+    }];
+}
+
+- (void)pageMoreTilesWithAnimation:(BOOL)withAnimation
+{
+    CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
+    BLOCK_SELF_REF_OUTSIDE();
+    [currentManager pageMoreTiles:^(NSIndexSet *indexes, NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (error) {
+            // TODO: display error
+        } else if (currentManager == self.tileDataManagers[self.currentFilter]) {
+            [self addTiles:indexes withAnimation:YES];
         }
     }];
 }

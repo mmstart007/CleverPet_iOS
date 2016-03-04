@@ -19,8 +19,6 @@
 
 - (instancetype)initWithCollectionView:(UITableView *)tableView andPetImage:(UIImage *)petImage;
 
-- (void)addTile:(CPTile *)tile withAnimation:(BOOL)withAnimation;
-- (void)deleteTile:(CPTile *)tile withAnimation:(BOOL)withAnimation;
 - (void)postInit;
 - (void)updatePetImage:(UIImage*)petImage;
 @end

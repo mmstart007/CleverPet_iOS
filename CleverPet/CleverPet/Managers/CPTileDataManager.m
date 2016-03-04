@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSMutableArray<CPTileSection *> *tileSectionList;
 @property (nonatomic, assign) BOOL moreTiles;
 @property (nonatomic, strong) NSString *cursor;
+@property (nonatomic, assign) BOOL requestInProgress;
 @end
 
 @implementation CPTileDataManager
@@ -150,8 +151,10 @@
 {
     // TODO: self.filter
     BLOCK_SELF_REF_OUTSIDE();
+    self.requestInProgress = YES;
     [[CPTileCommunicationManager sharedInstance] refreshTiles:nil completion:^(NSDictionary *tileInfo, NSError *error) {
         BLOCK_SELF_REF_INSIDE();
+        self.requestInProgress = NO;
         NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
         // TODO: pass error/message back up the chain
         if (!error) {
@@ -172,16 +175,35 @@
     }];
 }
 
-- (void)getNextTiles
+- (ASYNC)pageMoreTiles:(void (^)(NSIndexSet *, NSError *))completion
 {
-    if (self.moreTiles) {
-        
+    if (self.moreTiles && self.cursor) {
+        self.requestInProgress = YES;
+        BLOCK_SELF_REF_OUTSIDE();
+        // TODO: self.filter
+        [[CPTileCommunicationManager sharedInstance] getNextPage:nil withCursor:self.cursor completion:^(NSDictionary *tileInfo, NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            self.requestInProgress = NO;
+            NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
+            if (!error) {
+                NSError *modelError;
+                NSArray *tiles = [CPTile arrayOfModelsFromDictionaries:tileInfo[kTilesKey] error:&modelError];
+                for (CPTile *tile in tiles) {
+                    [indexes addIndexes:[self addTile:tile]];
+                }
+                self.cursor = tileInfo[kCursorKey];
+                self.moreTiles = [tileInfo[kModeKey] boolValue];
+            }
+            if (completion) completion(indexes, error);
+        }];
+    } else {
+        if (completion) completion([NSIndexSet indexSet], nil);
     }
 }
 
-- (BOOL)hasMoreTiles
+- (BOOL)allowPaging
 {
-    return self.moreTiles;
+    return !self.requestInProgress && self.moreTiles;
 }
 
 - (NSUInteger)insertTileSection:(CPTileSection *)tileSection {

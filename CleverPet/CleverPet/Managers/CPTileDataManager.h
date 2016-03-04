@@ -22,5 +22,5 @@
 - (NSIndexSet *)deleteTile:(CPTile *)tile;
 - (ASYNC)refreshTiles:(void (^)(NSIndexSet *indexes, NSError *error))completion;
 - (ASYNC)pageMoreTiles:(void (^)(NSIndexSet *indexes, NSError *error))completion;
-- (BOOL)hasMoreTiles;
+- (BOOL)allowPaging;
 @end
