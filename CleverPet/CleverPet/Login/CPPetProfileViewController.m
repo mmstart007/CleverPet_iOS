@@ -109,8 +109,8 @@
     if (index+1 < [self.textFields count]) {
         [self.textFields[index+1] becomeFirstResponder];
     } else {
-        // TODO: tap continue?
         [textField resignFirstResponder];
+        [self continueTapped:nil];
     }
 }
 

@@ -120,8 +120,8 @@
     } else if(textField == self.passwordField) {
         [self.verifyField becomeFirstResponder];
     } else {
-        // TODO: Proceed with sign in?
         [textField resignFirstResponder];
+        [self signUpTapped:nil];
     }
     return YES;
 }
