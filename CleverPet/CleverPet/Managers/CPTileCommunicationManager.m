@@ -68,4 +68,16 @@ NSString * const kTilesPath = @"users/tiles";
     }];
 }
 
+- (ASYNC)handleButtonPressWithPath:(NSString *)buttonPath completion:(void (^)(NSError *error))completion
+{
+    // TODO: extra args
+    [self.sessionManager PUT:buttonPath parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        // TODO: error handling if required
+        if (completion) completion(nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // TODO: error parsing
+        if (completion) completion(error);
+    }];
+}
+
 @end

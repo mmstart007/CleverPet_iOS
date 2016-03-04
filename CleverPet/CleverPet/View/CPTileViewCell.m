@@ -7,6 +7,7 @@
 #import "CPTile.h"
 #import "CPTileTextFormatter.h"
 #import "UIView+CPShadowEffect.h"
+#import "CPTileCommunicationManager.h"
 
 @interface CPTileViewCell ()
 @property (weak, nonatomic) IBOutlet UIStackView *messageTileContentView;
@@ -21,8 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIStackView *buttonHolder;
 @property (weak, nonatomic) IBOutlet UIView *backingView;
 @property (strong, nonatomic) IBOutlet UIView *colouredDotView;
-
-
 @property (weak, nonatomic) IBOutlet UIView *swipedColorView;
 
 // The relative priority of these 2 constraints controls whether the swiped color view covers
@@ -36,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *videoLayoutImageView;
 
 @property (strong, nonatomic) NSMutableArray<UISwipeGestureRecognizer *> *swipeGestureRecognizers;
+
 @end
 
 @implementation CPTileViewCell {
@@ -202,6 +202,38 @@
     self.videoLayoutImageView.image = nil;
     self.videoLayoutTextView.text = nil;
     
+    
     [self setSwipedMode:NO withAnimation:NO callDelegateMethod:NO];
+    // TODO: cancel request response block somehow. Maybe mark request in progress on the tile so we have the correct state when scrolling back to a tile if the request takes a long time?
+    [self requestInProgress:NO];
 }
+
+- (void)requestInProgress:(BOOL)inProgress
+{
+    self.primaryButton.enabled = !inProgress;
+    self.secondaryButton.enabled = !inProgress;
+}
+
+- (IBAction)secondaryButtonTapped:(id)sender
+{
+    [self buttonTappedWithPath:self.tile.secondaryButtonUrl];
+}
+
+- (IBAction)primaryButtonTapped:(id)sender
+{
+    [self buttonTappedWithPath:self.tile.primaryButtonUrl];
+}
+     
+- (void)buttonTappedWithPath:(NSString *)path
+{
+    // TODO: chain this back up through the data source -> data manager -> communications manager instead of calling directly?
+    [self requestInProgress:YES];
+    BLOCK_SELF_REF_OUTSIDE();
+    [[CPTileCommunicationManager sharedInstance] handleButtonPressWithPath:path completion:^(NSError *error){
+        BLOCK_SELF_REF_INSIDE();
+        // TODO: display error;
+        [self requestInProgress:NO];
+    }];
+}
+
 @end

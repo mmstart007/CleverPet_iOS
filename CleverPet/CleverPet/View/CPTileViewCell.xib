@@ -181,9 +181,15 @@
                                         <subviews>
                                             <button contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZlO-nl-F4D">
                                                 <rect key="frame" x="0.0" y="0.0" width="310" height="30"/>
+                                                <connections>
+                                                    <action selector="secondaryButtonTapped:" destination="GFj-N0-VFo" eventType="touchUpInside" id="NDr-nR-whE"/>
+                                                </connections>
                                             </button>
                                             <button contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="p07-iq-B3X">
                                                 <rect key="frame" x="310" y="0.0" width="309" height="30"/>
+                                                <connections>
+                                                    <action selector="primaryButtonTapped:" destination="GFj-N0-VFo" eventType="touchUpInside" id="YnT-M6-ljS"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
