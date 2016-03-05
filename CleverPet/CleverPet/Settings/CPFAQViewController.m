@@ -8,7 +8,8 @@
 
 #import "CPFAQViewController.h"
 #import "CPFAQView.h"
-#import "CHCSVParser.h"
+#import "CPTileTextFormatter.h"
+#import "CPUserManager.h"
 
 @interface CPFAQViewController ()
 
@@ -23,6 +24,8 @@
 {
     [super viewDidLoad];
     
+    CPTileTextFormatter *formatter = [CPTileTextFormatter instance];
+    CPPet *pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
     NSArray *faqs = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"faqs" withExtension:@"json"]] options:kNilOptions error:nil];
     
     // TODO: make sure the parsing is still valid if faqs are updated is updated
@@ -30,10 +33,10 @@
     for (NSDictionary *dict in faqs) {
         NSString *title, *body;
         if ([dict[@"Question"] isKindOfClass:[NSString class]]) {
-            title = dict[@"Question"];
+            title = [formatter filterString:dict[@"Question"] forPet:pet name:YES gender:YES];
         }
         if ([dict[@"Answer"] isKindOfClass:[NSString class]]) {
-            body = dict[@"Answer"];
+            body = [formatter filterString:dict[@"Answer"] forPet:pet name:YES gender:YES];
         }
         
         if (!title && !body) {

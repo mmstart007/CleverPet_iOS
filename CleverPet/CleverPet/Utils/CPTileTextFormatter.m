@@ -10,6 +10,7 @@
 #import <AttributedMarkdown/markdown_lib.h>
 #import <AttributedMarkdown/markdown_peg.h>
 #import "CPTile.h"
+#import "CPPet.h"
 
 @interface CPTileTextFormatter ()
 @property (strong, nonatomic) NSDictionary *markdownAttributes;
@@ -104,4 +105,53 @@
 {
     return [self attributedStringFromMarkdownString:tileText];
 }
+
+- (NSString*)filterString:(NSString*)string forPet:(CPPet *)pet name:(BOOL)filterName gender:(BOOL)filterGender
+{
+    NSMutableString *sanitizedString = [NSMutableString string];
+    NSScanner *scanner = [NSScanner scannerWithString:string];
+    scanner.charactersToBeSkipped = nil;
+    
+    while ([scanner scanLocation] < [string length] - 1) {
+        NSString *preReplacementString;
+        NSString *replacementString;
+        
+        [scanner scanUpToString:@"{{" intoString:&preReplacementString];
+        if (preReplacementString) {
+            [sanitizedString appendString:preReplacementString];
+        }
+        
+        [scanner scanString:@"{{" intoString:nil];
+        [scanner scanUpToString:@"}}" intoString:&replacementString];
+        [scanner scanString:@"}}" intoString:nil];
+        
+        if (replacementString) {
+            NSString *replacedToken = [self replaceToken:replacementString forPet:pet];
+            if (replacedToken) {
+                [sanitizedString appendString:replacedToken];
+            }
+        }
+    }
+    
+    return [sanitizedString copy];
+}
+
+- (NSString*)replaceToken:(NSString*)string forPet:(CPPet*)pet
+{
+    NSScanner *scanner = [NSScanner scannerWithString:string];
+    scanner.charactersToBeSkipped = nil;
+    NSString *prePipeToken, *postPipeToken;
+    [scanner scanUpToString:@"|" intoString:&prePipeToken];
+    if ([scanner scanLocation] < [string length] - 1) {
+        [scanner scanString:@"|" intoString:nil];
+        postPipeToken = [[scanner string] substringFromIndex:[scanner scanLocation]];
+        return [pet.gender isEqualToString:kMaleKey] ? prePipeToken : postPipeToken;
+    } else {
+        if ([prePipeToken isEqualToString:@"dog_name"]) {
+            return pet.name;
+        }
+        return prePipeToken;
+    }
+}
+
 @end
