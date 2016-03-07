@@ -12,7 +12,8 @@
 
 // TODO: appropriate path for filter
 NSString * const kTilesPath = @"users/tiles";
-#define TILE_PAGE_SIZE @(5)
+#define TILE_FILTER_PATH(filter) [NSString stringWithFormat:@"users/tiles/%@", filter]
+#define TILE_PAGE_SIZE @(50)
 
 @interface CPTileCommunicationManager()
 
@@ -61,7 +62,12 @@ NSString * const kTilesPath = @"users/tiles";
     if ([cursor length] > 0) {
         params[kCursorKey] = cursor;
     }
-    [self.sessionManager GET:kTilesPath parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    
+    // TODO: when filters are working
+//    NSString *path = filter ? TILE_FILTER_PATH(filter) : kTilesPath;
+    NSString *path = kTilesPath;
+    
+    [self.sessionManager GET:path parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (completion) completion(jsonResponse, nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -15,6 +15,13 @@ typedef NS_ENUM(NSUInteger) {
     CPTTMac,
 } CPTileType;
 
+// TODO: other templates
+typedef NS_ENUM(NSUInteger){
+    CPTileTemplateMessage,
+    CPTileTemplateVideo,
+    CPTileTemplateReport
+}CPTileTemplate;
+
 @interface CPTile : JSONModel
 // Persisted properties
 @property (nonatomic, strong) NSString *category;
@@ -37,6 +44,7 @@ typedef NS_ENUM(NSUInteger) {
 @property (nonatomic, strong) NSURL<Optional> *videoUrl;
 
 @property (assign, nonatomic) CPTileType tileType;
+@property (assign, nonatomic) CPTileTemplate templateType;
 
 // Non-persisted properties
 @property (strong, nonatomic) NSAttributedString<Ignore>*parsedBody;

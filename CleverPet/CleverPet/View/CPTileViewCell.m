@@ -50,7 +50,7 @@
     self.messageTileContentView.hidden = tile.tileType == CPTTVideo;
     self.videoLayoutImageView.hidden = tile.tileType != CPTTVideo;
     
-    if (tile.tileType == CPTTVideo) {
+    if (tile.templateType == CPTileTemplateVideo) {
         self.videoLayoutTextView.attributedText = tile.parsedBody;
         self.bodyTextView.attributedText = nil;
         [self.videoLayoutImageView setImageWithURL:tile.videoThumbnailUrl];
@@ -60,6 +60,7 @@
         self.cellImageViewHolder.hidden = !tile.imageUrl;
         [self.cellImageView setImageWithURL:tile.imageUrl];
     }
+    // TODO: report template
     
     self.primaryButton.hidden = !tile.primaryButtonText;
     self.secondaryButton.hidden = !tile.secondaryButtonText;
@@ -92,6 +93,7 @@
             break;
     }
     
+    // TODO: convert button background colors to images, or set alpha on them or something, so they look disabled
     self.colorBarView.backgroundColor = tileColor;
     self.swipedColorView.backgroundColor = tileColor;
     self.primaryButton.backgroundColor = tileColor;

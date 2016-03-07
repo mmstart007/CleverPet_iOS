@@ -17,17 +17,26 @@
 @property (nonatomic, assign) BOOL moreTiles;
 @property (nonatomic, strong) NSString *cursor;
 @property (nonatomic, assign) BOOL requestInProgress;
+@property (nonatomic, strong) NSString *filter;
 @end
 
 @implementation CPTileDataManager
-- (instancetype)init {
+
+- (instancetype)initWithFilter:(NSString *)filter
+{
     self = [super init];
     if (self) {
+        self.filter = [filter lowercaseString];
         self.tileSectionList = [[NSMutableArray alloc] init];
         self.tileSections = [[NSMutableDictionary alloc] init];
     }
-
     return self;
+}
+
+- (instancetype)init
+{
+    NSAssert(NO, @"[CPTileDataManager init] - initWithFilter: should be used instead");
+    return [self initWithFilter:nil];
 }
 
 - (NSUInteger)rowCount {
@@ -152,7 +161,7 @@
     // TODO: self.filter
     BLOCK_SELF_REF_OUTSIDE();
     self.requestInProgress = YES;
-    [[CPTileCommunicationManager sharedInstance] refreshTiles:nil completion:^(NSDictionary *tileInfo, NSError *error) {
+    [[CPTileCommunicationManager sharedInstance] refreshTiles:self.filter completion:^(NSDictionary *tileInfo, NSError *error) {
         BLOCK_SELF_REF_INSIDE();
         self.requestInProgress = NO;
         NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
@@ -181,7 +190,7 @@
         self.requestInProgress = YES;
         BLOCK_SELF_REF_OUTSIDE();
         // TODO: self.filter
-        [[CPTileCommunicationManager sharedInstance] getNextPage:nil withCursor:self.cursor completion:^(NSDictionary *tileInfo, NSError *error) {
+        [[CPTileCommunicationManager sharedInstance] getNextPage:self.filter withCursor:self.cursor completion:^(NSDictionary *tileInfo, NSError *error) {
             BLOCK_SELF_REF_INSIDE();
             self.requestInProgress = NO;
             NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];

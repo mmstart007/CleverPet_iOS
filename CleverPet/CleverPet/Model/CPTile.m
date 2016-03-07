@@ -31,7 +31,7 @@
 
 + (BOOL)propertyIsIgnored:(NSString *)propertyName
 {
-    if ([propertyName isEqualToString:@"cachedRowHeight"] || [propertyName isEqualToString:@"tileType"]) {
+    if ([propertyName isEqualToString:@"cachedRowHeight"] || [propertyName isEqualToString:@"tileType"] || [propertyName isEqualToString:@"templateType"]) {
         return YES;
     }
     return NO;
@@ -69,17 +69,31 @@
     return _simpleDate;
 }
 
+- (void)setCategory:(NSString *)category
+{
+    _category = category;
+    if ([category isEqualToString:@"message"]) {
+        _tileType = CPTTMessage;
+    } else if ([category isEqualToString:@"challenge"]) {
+        _tileType = CPTTChallenge;
+    } else if ([category isEqualToString:@"report"]) {
+        _tileType = CPTTReport;
+    } else if ([category isEqualToString:@"video"]) {
+        _tileType = CPTTVideo;
+    }
+}
+
 - (void)setTemplate:(NSString *)template
 {
     _template = template;
     // TODO: challenge?
     // TODO: static strings
-    if ([template isEqualToString:@"image"] || [template isEqualToString:@"message"]) {
-        _tileType = CPTTMessage;
+    if ([template isEqualToString:@"message"]) {
+        _templateType = CPTileTemplateMessage;
     } else if ([template isEqualToString:@"video"]) {
-        _tileType = CPTTVideo;
+        _templateType = CPTileTemplateVideo;
     } else if ([template isEqualToString:@"report"]) {
-        _tileType = CPTTReport;
+        _templateType = CPTileTemplateReport;
     }
 }
 

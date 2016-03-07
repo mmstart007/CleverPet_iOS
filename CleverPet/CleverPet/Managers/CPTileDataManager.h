@@ -10,6 +10,7 @@
 #import "CPTileSection.h"
 
 @interface CPTileDataManager : NSObject
+- (instancetype)initWithFilter:(NSString *)filter;
 - (NSUInteger)sectionCount;
 - (CPSimpleDate *)sectionHeaderAtIndex:(NSUInteger)index;
 - (NSUInteger)tileCountForSection:(NSUInteger)section;

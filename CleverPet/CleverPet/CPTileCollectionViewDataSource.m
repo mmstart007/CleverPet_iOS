@@ -61,20 +61,23 @@ CGFloat const kPagingThreshhold = 200.f;
         [self precacheTableViewCells];
         
         self.filters = @[
+                         [CPMainTableSectionHeaderFilter filterWithName:@"Latest"],
                          [CPMainTableSectionHeaderFilter filterWithName:@"Reports"],
                          [CPMainTableSectionHeaderFilter filterWithName:@"Videos"],
-                         [CPMainTableSectionHeaderFilter filterWithName:@"Device Messages"]
+                         [CPMainTableSectionHeaderFilter filterWithName:@"Challenges"]
                          ];
         
         self.currentFilter = self.filters[0];
         
         self.tileDataManagers = [[NSMutableDictionary alloc] init];
-        
+        // TODO: clean this up
+        self.tileDataManagers[self.filters[0]] = [[CPTileDataManager alloc] initWithFilter:nil];
+        self.tileDataManagers[self.filters[1]] = [[CPTileDataManager alloc] initWithFilter:@"report"];
+        self.tileDataManagers[self.filters[2]] = [[CPTileDataManager alloc] initWithFilter:@"video"];
+        self.tileDataManagers[self.filters[3]] = [[CPTileDataManager alloc] initWithFilter:@"challenge"];
         for (CPMainTableSectionHeaderFilter *filter in self.filters) {
-            // TODO: init tile data manager with filter
             // Run through our refresh call for the first manager so we populate the table. Call refresh on the others so their content is ready when we change between filters
-            self.tileDataManagers[filter] = [[CPTileDataManager alloc] init];
-            if ([self.tileDataManagers count] == 1) {
+            if ([filter isEqualToFilter:self.currentFilter]) {
                 [self refreshTilesWithAnimation:YES];
             } else {
                 [self.tileDataManagers[filter] refreshTiles:nil];
