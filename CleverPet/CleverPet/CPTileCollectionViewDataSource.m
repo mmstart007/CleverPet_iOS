@@ -11,6 +11,7 @@
 #import "CPMainTableSectionHeader.h"
 #import "CPMainTableDateHeader.h"
 #import "CPMainTableSectionHeaderFilter.h"
+#import "CPTileCommunicationManager.h"
 
 #define TILE_VIEW_CELL @"TILE_VIEW_CELL"
 #define PET_STATS_HEADER @"PET_STATS_HEADER"
@@ -111,7 +112,7 @@ CGFloat const kPagingThreshhold = 200.f;
     
     CGFloat fade = MIN(1, MAX(0, scrollView.contentOffset.y - self.headerImageHeight) / self.headerStatsHeight);
     
-    [self.scrollDelegate dataSource:self
+    [self.delegate dataSource:self
                  headerPhotoVisible:scrollView.contentOffset.y < self.headerImageHeight - 4
                     headerStatsFade:fade];
     
@@ -197,6 +198,13 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     [self.tableHeaderView updateImage:petImage];
 }
 
+- (void)videoPlaybackCompletedForTile:(CPTile *)tile
+{
+    // Inform the server video playback completed for the tile. We don't care if this was successful or not
+    [[CPTileCommunicationManager sharedInstance] handleButtonPressWithPath:tile.secondaryButtonUrl completion:nil];
+}
+
+#pragma mark - UITableView delegate and data source methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
@@ -318,6 +326,11 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 - (void)didSwipeTileViewCell:(CPTileViewCell *)tileViewCell {
     // TODO: Get rid of the tile here
     [self deleteTile:tileViewCell.tile withAnimation:YES];
+}
+
+- (void)playVideoForCell:(CPTileViewCell *)tileViewCell
+{
+    [self.delegate playVideoForTile:tileViewCell.tile];
 }
 
 #pragma mark - Data source management

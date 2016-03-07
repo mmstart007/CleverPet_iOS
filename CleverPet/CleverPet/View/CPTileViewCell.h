@@ -10,6 +10,7 @@
 
 @protocol CPTileViewCellDelegate <NSObject>
 - (void)didSwipeTileViewCell:(CPTileViewCell *)tileViewCell;
+- (void)playVideoForCell:(CPTileViewCell *)tileViewCell;
 @end
 
 @interface CPTileViewCell : UITableViewCell

@@ -12,7 +12,7 @@
 #import "UIView+CPShadowEffect.h"
 #import "CPUserManager.h"
 
-@interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceScrollDelegate>
+@interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CPTileCollectionViewDataSource *dataSource;
 @property (strong, nonatomic) CPPetStatsView *petStatsView;
@@ -22,6 +22,7 @@
 @property (strong, nonatomic) CPMainScreenStatsHeaderView *mainScreenStatsHeaderView;
 
 @property (nonatomic, strong) CPPet *currentPet;
+@property (nonatomic, strong) CPTile *playingTile;
 @end
 
 @implementation CPMainScreenViewController {
@@ -49,7 +50,7 @@
     self.mainScreenStatsHeaderView.alpha = 0;
     
     CPTileCollectionViewDataSource *dataSource = [[CPTileCollectionViewDataSource alloc] initWithCollectionView:self.tableView andPetImage:[self.currentPet petPhoto]];
-    dataSource.scrollDelegate = self;
+    dataSource.delegate = self;
 
     self.dataSource = dataSource;
     self.tableView.delegate = dataSource;
@@ -70,6 +71,7 @@
     }
 }
 
+#pragma mark - CPTileCollectionViewDataSourceDelegate
 - (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible headerStatsFade:(CGFloat)headerStatsFade
 {
     if (!headerPhotoVisible) {
@@ -86,6 +88,12 @@
     if (self.mainScreenHeaderView.alpha != alphaValue) {
         self.mainScreenHeaderView.alpha = alphaValue;
     }
+}
+
+- (void)playVideoForTile:(CPTile *)tile
+{
+    self.playingTile = tile;
+    // TODO: cancel playback if in progress, and play video for the tile
 }
 
 @end

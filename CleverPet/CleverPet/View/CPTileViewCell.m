@@ -31,6 +31,7 @@
 
 // Video layout specific stuff
 @property (weak, nonatomic) IBOutlet UIView *videoContentView;
+@property (weak, nonatomic) IBOutlet UIView *videoImageContainer;
 @property (weak, nonatomic) IBOutlet UITextView *videoLayoutTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *videoLayoutImageView;
 
@@ -54,19 +55,28 @@
         self.videoLayoutTextView.attributedText = tile.parsedBody;
         self.bodyTextView.attributedText = nil;
         [self.videoLayoutImageView setImageWithURL:tile.videoThumbnailUrl];
+        [self.cellImageView cancelImageDownloadTask];
+        self.cellImageView.image = nil;
+        self.videoImageContainer.hidden = NO;
     } else {
         self.bodyTextView.attributedText = tile.parsedBody;
         self.videoLayoutTextView.attributedText = nil;
         self.cellImageViewHolder.hidden = !tile.imageUrl;
         [self.cellImageView setImageWithURL:tile.imageUrl];
+        [self.videoLayoutImageView cancelImageDownloadTask];
+        self.videoLayoutImageView.image = nil;
+        self.videoImageContainer.hidden = YES;
     }
     // TODO: report template
     
     self.primaryButton.hidden = !tile.primaryButtonText;
     self.secondaryButton.hidden = !tile.secondaryButtonText;
     
-    [self setButtonTitle:tile.primaryButtonText onButton:self.primaryButton];
-    [self setButtonTitle:tile.secondaryButtonText onButton:self.secondaryButton];
+    // Ignore button titles for video tiles
+    if (tile.templateType != CPTileTemplateVideo) {
+        [self setButtonTitle:tile.primaryButtonText onButton:self.primaryButton];
+        [self setButtonTitle:tile.secondaryButtonText onButton:self.secondaryButton];
+    }
     
     self.buttonHolder.hidden = self.primaryButton.hidden && self.secondaryButton.hidden;
     
@@ -216,6 +226,7 @@
     self.secondaryButton.enabled = !inProgress;
 }
 
+#pragma mark - IBActions
 - (IBAction)secondaryButtonTapped:(id)sender
 {
     [self buttonTappedWithPath:self.tile.secondaryButtonUrl];
@@ -225,7 +236,13 @@
 {
     [self buttonTappedWithPath:self.tile.primaryButtonUrl];
 }
-     
+
+- (IBAction)playVideoTapped:(id)sender
+{
+    [self.delegate playVideoForCell:self];
+    [self primaryButtonTapped:nil];
+}
+
 - (void)buttonTappedWithPath:(NSString *)path
 {
     // TODO: chain this back up through the data source -> data manager -> communications manager instead of calling directly?
