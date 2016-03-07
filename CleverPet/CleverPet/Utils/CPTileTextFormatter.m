@@ -112,25 +112,35 @@
     NSScanner *scanner = [NSScanner scannerWithString:string];
     scanner.charactersToBeSkipped = nil;
     
-    while ([scanner scanLocation] < [string length] - 1) {
-        NSString *preReplacementString;
-        NSString *replacementString;
-        
-        [scanner scanUpToString:@"{{" intoString:&preReplacementString];
-        if (preReplacementString) {
-            [sanitizedString appendString:preReplacementString];
-        }
-        
-        [scanner scanString:@"{{" intoString:nil];
-        [scanner scanUpToString:@"}}" intoString:&replacementString];
-        [scanner scanString:@"}}" intoString:nil];
-        
-        if (replacementString) {
-            NSString *replacedToken = [self replaceToken:replacementString forPet:pet];
-            if (replacedToken) {
-                [sanitizedString appendString:replacedToken];
+    if (filterName || filterGender) {
+        while ([scanner scanLocation] < [string length] - 1) {
+            NSString *preReplacementString;
+            NSString *replacementToken;
+            
+            [scanner scanUpToString:@"{{" intoString:&preReplacementString];
+            if (preReplacementString) {
+                [sanitizedString appendString:preReplacementString];
+            }
+            
+            [scanner scanString:@"{{" intoString:nil];
+            [scanner scanUpToString:@"}}" intoString:&replacementToken];
+            [scanner scanString:@"}}" intoString:nil];
+            
+            // This will just remove {{}} with no content in the middle, which I think is ok
+            if (replacementToken) {
+                if ((filterName && [replacementToken isEqualToString:@"dog_name"]) || (filterGender && [replacementToken rangeOfString:@"|"].location != NSNotFound)) {
+                    NSString *replacedToken = [self replaceToken:replacementToken forPet:pet];
+                    if (replacedToken) {
+                        [sanitizedString appendString:replacedToken];
+                    }
+                } else {
+                    // We're ignoring this token type, reinsert it with {{}}
+                    [sanitizedString appendFormat:@"{{%@}}", replacementToken];
+                }
             }
         }
+    } else {
+        return string;
     }
     
     return [sanitizedString copy];
