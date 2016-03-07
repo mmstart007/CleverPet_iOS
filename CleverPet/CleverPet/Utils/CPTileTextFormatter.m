@@ -10,6 +10,7 @@
 #import <AttributedMarkdown/markdown_lib.h>
 #import <AttributedMarkdown/markdown_peg.h>
 #import "CPTile.h"
+#import "CPPet.h"
 
 @interface CPTileTextFormatter ()
 @property (strong, nonatomic) NSDictionary *markdownAttributes;
@@ -104,4 +105,63 @@
 {
     return [self attributedStringFromMarkdownString:tileText];
 }
+
+- (NSString*)filterString:(NSString*)string forPet:(CPPet *)pet name:(BOOL)filterName gender:(BOOL)filterGender
+{
+    NSMutableString *sanitizedString = [NSMutableString string];
+    NSScanner *scanner = [NSScanner scannerWithString:string];
+    scanner.charactersToBeSkipped = nil;
+    
+    if (filterName || filterGender) {
+        while ([scanner scanLocation] < [string length] - 1) {
+            NSString *preReplacementString;
+            NSString *replacementToken;
+            
+            [scanner scanUpToString:@"{{" intoString:&preReplacementString];
+            if (preReplacementString) {
+                [sanitizedString appendString:preReplacementString];
+            }
+            
+            [scanner scanString:@"{{" intoString:nil];
+            [scanner scanUpToString:@"}}" intoString:&replacementToken];
+            [scanner scanString:@"}}" intoString:nil];
+            
+            // This will just remove {{}} with no content in the middle, which I think is ok
+            if (replacementToken) {
+                if ((filterName && [replacementToken isEqualToString:@"dog_name"]) || (filterGender && [replacementToken rangeOfString:@"|"].location != NSNotFound)) {
+                    NSString *replacedToken = [self replaceToken:replacementToken forPet:pet];
+                    if (replacedToken) {
+                        [sanitizedString appendString:replacedToken];
+                    }
+                } else {
+                    // We're ignoring this token type, reinsert it with {{}}
+                    [sanitizedString appendFormat:@"{{%@}}", replacementToken];
+                }
+            }
+        }
+    } else {
+        return string;
+    }
+    
+    return [sanitizedString copy];
+}
+
+- (NSString*)replaceToken:(NSString*)string forPet:(CPPet*)pet
+{
+    NSScanner *scanner = [NSScanner scannerWithString:string];
+    scanner.charactersToBeSkipped = nil;
+    NSString *prePipeToken, *postPipeToken;
+    [scanner scanUpToString:@"|" intoString:&prePipeToken];
+    if ([scanner scanLocation] < [string length] - 1) {
+        [scanner scanString:@"|" intoString:nil];
+        postPipeToken = [[scanner string] substringFromIndex:[scanner scanLocation]];
+        return [pet.gender isEqualToString:kMaleKey] ? prePipeToken : postPipeToken;
+    } else {
+        if ([prePipeToken isEqualToString:@"dog_name"]) {
+            return pet.name;
+        }
+        return prePipeToken;
+    }
+}
+
 @end

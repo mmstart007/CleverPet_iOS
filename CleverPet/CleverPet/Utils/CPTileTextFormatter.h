@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+@class CPPet;
+
 @interface CPTileTextFormatter : NSObject
 + (instancetype)instance;
 - (NSAttributedString *)formatTileText:(NSString *)tileText forPet:(id)pet;
 - (NSDateFormatter *)relativeDateFormatter;
+- (NSString *)filterString:(NSString*)string forPet:(CPPet*)pet name:(BOOL)filterName gender:(BOOL)filterGender;
 @end
