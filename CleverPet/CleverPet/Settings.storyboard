@@ -503,27 +503,23 @@
                                                 <rect key="frame" x="0.0" y="625" width="320" height="65"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Log Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5v-Co-YYS">
-                                                        <rect key="frame" x="15" y="22" width="263" height="21"/>
+                                                        <rect key="frame" x="15" y="22" width="61" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFp-CZ-WUh">
-                                                        <rect key="frame" x="293" y="22" width="12" height="21"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logout" translatesAutoresizingMaskIntoConstraints="NO" id="Q8a-W7-foH">
+                                                        <rect key="frame" x="291" y="26" width="14" height="14"/>
+                                                    </imageView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="G5v-Co-YYS" firstAttribute="centerY" secondItem="BlS-We-bZS" secondAttribute="centerY" id="7ki-b9-1M3"/>
-                                                    <constraint firstItem="HFp-CZ-WUh" firstAttribute="centerY" secondItem="BlS-We-bZS" secondAttribute="centerY" id="Cfo-hN-cdY"/>
                                                     <constraint firstItem="G5v-Co-YYS" firstAttribute="leading" secondItem="BlS-We-bZS" secondAttribute="leading" constant="15" id="OZW-vd-xd4"/>
-                                                    <constraint firstAttribute="trailing" secondItem="HFp-CZ-WUh" secondAttribute="trailing" constant="15" id="ZOM-Ru-cxY"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Q8a-W7-foH" secondAttribute="trailing" constant="15" id="RuD-rf-yM3"/>
+                                                    <constraint firstItem="Q8a-W7-foH" firstAttribute="centerY" secondItem="BlS-We-bZS" secondAttribute="centerY" id="WNn-wr-W01"/>
                                                     <constraint firstAttribute="height" constant="65" id="mdC-j8-zga"/>
-                                                    <constraint firstItem="HFp-CZ-WUh" firstAttribute="leading" secondItem="G5v-Co-YYS" secondAttribute="trailing" constant="15" id="y76-xK-1f0"/>
                                                 </constraints>
                                             </view>
                                         </subviews>
@@ -597,7 +593,6 @@
                         <outlet property="imageHeightConstraint" destination="UpQ-ZJ-GVn" id="Lq4-HB-Y3f"/>
                         <outlet property="logoutContainer" destination="BlS-We-bZS" id="de7-xo-3c3"/>
                         <outlet property="logoutLabel" destination="G5v-Co-YYS" id="OFP-aN-sCv"/>
-                        <outlet property="logoutX" destination="HFp-CZ-WUh" id="b9m-N1-Vh4"/>
                         <outlet property="nameField" destination="q4u-aE-pAF" id="eex-qj-4Ju"/>
                         <outlet property="neuteredField" destination="vdb-15-A3W" id="1Hd-0Z-ebe"/>
                         <outlet property="petImage" destination="0vD-h4-9Cf" id="ICs-wx-lWn"/>
@@ -1162,4 +1157,7 @@
             <point key="canvasLocation" x="987" y="582"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logout" width="14" height="14"/>
+    </resources>
 </document>

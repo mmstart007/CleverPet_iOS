@@ -18,7 +18,7 @@
 @property (nonatomic, weak) UIView *headerView;
 @property (nonatomic, weak) UILabel *headerLabel;
 @property (nonatomic, weak) UIButton *expandButton;
-@property (nonatomic, weak) UILabel *bodyLabel;
+@property (nonatomic, weak) UITextView *bodyLabel;
 
 @end
 
@@ -76,8 +76,7 @@
     headerLabel.textColor = [UIColor appTitleTextColor];
     UIButton *expandButton = [UIButton buttonWithType:UIButtonTypeCustom];
     expandButton.translatesAutoresizingMaskIntoConstraints = NO;
-    // TODO: carat image
-    expandButton.backgroundColor = [UIColor lightGrayColor];
+    [expandButton setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateNormal];
     [view addSubview:headerLabel];
     [view addSubview:expandButton];
     self.headerLabel = headerLabel;
@@ -101,11 +100,13 @@
 
 - (void)setupBodyLabel
 {
-    UILabel *bodyLabel = [[UILabel alloc] init];
+    UITextView *bodyLabel = [[UITextView alloc] init];
     bodyLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    bodyLabel.numberOfLines = 0;
     [bodyLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisVertical];
     bodyLabel.hidden = !self.isExpanded;
+    bodyLabel.scrollEnabled = NO;
+    bodyLabel.editable = NO;
+    bodyLabel.dataDetectorTypes = UIDataDetectorTypeLink;
     [self.stackView addArrangedSubview:bodyLabel];
     self.bodyLabel = bodyLabel;
     self.bodyLabel.text = self.body;
@@ -118,6 +119,7 @@
     // TODO: put tap on the header or entire view?
     self.isExpanded = !self.isExpanded;
     
+    // TODO: reverse direction of contract animation if possible
     CGAffineTransform targetTransform = self.isExpanded ? CGAffineTransformMakeRotation(M_PI) : CGAffineTransformIdentity;
     
     [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseInOut animations:^{

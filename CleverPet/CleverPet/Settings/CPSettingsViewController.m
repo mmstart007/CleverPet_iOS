@@ -175,7 +175,8 @@ NSUInteger const kHelpSectionChatWithUsRow = 0;
     self.titleLabel.font = [UIFont cpLightFontWithSize:kTableCellTitleSize italic:NO];
     self.titleLabel.textColor = [UIColor appTitleTextColor];
     self.separator.backgroundColor = [UIColor appBackgroundColor];
-    // TODO: disclosure indicator image
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure"]];
+    self.accessoryView = imageView;
 }
 
 - (void)setupWithTitle:(NSString*)title
@@ -196,7 +197,8 @@ NSUInteger const kHelpSectionChatWithUsRow = 0;
     self.titleLabel.textColor = [UIColor appTitleTextColor];
     self.statusLabel.font = [UIFont cpLightFontWithSize:kTableCellSubTextSize italic:NO];
     self.statusLabel.textColor = [UIColor appTitleTextColor];
-    // TODO: disclosure indicator image
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure"]];
+    self.accessoryView = imageView;
 }
 
 - (void)updateWithHubStatus
