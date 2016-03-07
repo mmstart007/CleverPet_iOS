@@ -12,6 +12,7 @@
 
 // TODO: appropriate path for filter
 NSString * const kTilesPath = @"users/tiles";
+#define TILE_PAGE_SIZE @(5)
 
 @interface CPTileCommunicationManager()
 
@@ -55,9 +56,10 @@ NSString * const kTilesPath = @"users/tiles";
 {
     // TODO: filter appropriate url
     // TODO: Page size or rely on the servers internal batch size?
-    NSDictionary *params;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[kPageSizeKey] = TILE_PAGE_SIZE;
     if ([cursor length] > 0) {
-        params = @{kCursorKey:cursor};
+        params[kCursorKey] = cursor;
     }
     [self.sessionManager GET:kTilesPath parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];

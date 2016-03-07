@@ -83,20 +83,6 @@
     }
 }
 
-- (void)setCategory:(NSString *)category
-{
-    _category = category;
-    // TODO: challenge?
-    // TODO: static strings
-    if ([category isEqualToString:@"image"] || [category isEqualToString:@"message"]) {
-        _tileType = CPTTMessage;
-    } else if ([category isEqualToString:@"video"]) {
-        _tileType = CPTTVideo;
-    } else if ([category isEqualToString:@"report"]) {
-        _tileType = CPTTReport;
-    }
-}
-
 - (void)setMessage:(NSString *)message {
     self.parsedBody = nil;
     _message = message;

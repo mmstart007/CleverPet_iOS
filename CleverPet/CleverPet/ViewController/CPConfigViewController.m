@@ -73,7 +73,7 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
 - (void)performDismiss
 {
     self.dismissTimer = nil;
-    [self dismissViewControllerAnimated:YES completion:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

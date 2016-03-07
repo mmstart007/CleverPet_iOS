@@ -169,7 +169,7 @@
             }
             // Hold onto our paging cursor for future use
             self.cursor = tileInfo[kCursorKey];
-            self.moreTiles = [tileInfo[kModeKey] boolValue];
+            self.moreTiles = [tileInfo[kMoreKey] boolValue];
         }
         if (completion) completion(indexes, error);
     }];
@@ -192,7 +192,7 @@
                     [indexes addIndexes:[self addTile:tile]];
                 }
                 self.cursor = tileInfo[kCursorKey];
-                self.moreTiles = [tileInfo[kModeKey] boolValue];
+                self.moreTiles = [tileInfo[kMoreKey] boolValue];
             }
             if (completion) completion(indexes, error);
         }];

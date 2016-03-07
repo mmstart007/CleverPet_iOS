@@ -106,6 +106,7 @@ extern NSString * const kDaysOnKey;
 extern NSString * const kCursorKey;
 extern NSString * const kMoreKey;
 extern NSString * const kTilesKey;
+extern NSString * const kPageSizeKey;
 
 #define ASYNC void
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)

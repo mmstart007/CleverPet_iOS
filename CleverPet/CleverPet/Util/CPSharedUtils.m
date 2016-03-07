@@ -55,6 +55,7 @@ NSString * const kDaysOnKey = @"days_on";
 NSString * const kCursorKey = @"cursor";
 NSString * const kMoreKey = @"more";
 NSString * const kTilesKey = @"tiles";
+NSString * const kPageSizeKey = @"num_entries";
 
 @implementation CPSharedUtils
 
