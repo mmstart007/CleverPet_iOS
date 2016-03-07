@@ -18,7 +18,7 @@
 @property (nonatomic, weak) UIView *headerView;
 @property (nonatomic, weak) UILabel *headerLabel;
 @property (nonatomic, weak) UIButton *expandButton;
-@property (nonatomic, weak) UILabel *bodyLabel;
+@property (nonatomic, weak) UITextView *bodyLabel;
 
 @end
 
@@ -100,11 +100,13 @@
 
 - (void)setupBodyLabel
 {
-    UILabel *bodyLabel = [[UILabel alloc] init];
+    UITextView *bodyLabel = [[UITextView alloc] init];
     bodyLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    bodyLabel.numberOfLines = 0;
     [bodyLabel setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisVertical];
     bodyLabel.hidden = !self.isExpanded;
+    bodyLabel.scrollEnabled = NO;
+    bodyLabel.editable = NO;
+    bodyLabel.dataDetectorTypes = UIDataDetectorTypeLink;
     [self.stackView addArrangedSubview:bodyLabel];
     self.bodyLabel = bodyLabel;
     self.bodyLabel.text = self.body;
