@@ -120,7 +120,7 @@
     }
 }
 
-- (void)addFilter:(CPMainTableSectionHeaderFilter *)filter
+- (void)addFilter:(CPMainTableSectionHeaderFilter *)filter withColor:(UIColor *)color
 {
     UILabel *label = [[UILabel alloc] init];
     label.text = filter.filterName;
@@ -142,8 +142,25 @@
     
     [self.verticalConstraints addObject:centerYConstraint];
     
+    UIView *colorDotView;
+    if (color) {
+        colorDotView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 4.f, 4.f)];
+        colorDotView.translatesAutoresizingMaskIntoConstraints = NO;
+        colorDotView.layer.cornerRadius = colorDotView.bounds.size.width*.5f;
+        colorDotView.backgroundColor = color;
+        [self addSubview:colorDotView];
+        NSLayoutConstraint *colorHeight = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:4.f];
+        [self addConstraint:colorHeight];
+        NSLayoutConstraint *colorWidth = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:4.f];
+        [self addConstraint:colorWidth];
+        NSLayoutConstraint *colorY = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:label attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+        [self addConstraint:colorY];
+        NSLayoutConstraint *colorSpacing = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:label attribute:NSLayoutAttributeLeading multiplier:1 constant:-4.f];
+        [self addConstraint:colorSpacing];
+    }
+    
     if (self.lastLabel) {
-        NSLayoutConstraint *spacingConstraint = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.lastLabel attribute:NSLayoutAttributeTrailing multiplier:1 constant:32];
+        NSLayoutConstraint *spacingConstraint = [NSLayoutConstraint constraintWithItem:(colorDotView ? colorDotView : label) attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.lastLabel attribute:NSLayoutAttributeTrailing multiplier:1 constant:32];
         [self addConstraint:spacingConstraint];
     } else {
         [self setCurrentFilter:0 withAnimation:NO];

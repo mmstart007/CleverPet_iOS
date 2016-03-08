@@ -252,7 +252,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         
         if (!sectionHeader.hasFiltersSetup) {
             for (CPMainTableSectionHeaderFilter *filter in self.filters) {
-                [sectionHeader addFilter:filter];
+                [sectionHeader addFilter:filter withColor:filter.color];
             }
             
             sectionHeader.hasFiltersSetup = YES;
