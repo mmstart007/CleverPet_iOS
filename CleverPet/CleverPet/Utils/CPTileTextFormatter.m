@@ -103,16 +103,17 @@
 
 - (NSAttributedString *)formatTileText:(NSString *)tileText forPet:(id)pet
 {
-    return [self attributedStringFromMarkdownString:tileText];
+    return [self attributedStringFromMarkdownString:[self filterString:tileText forPet:pet name:YES gender:YES]];
 }
 
 - (NSString*)filterString:(NSString*)string forPet:(CPPet *)pet name:(BOOL)filterName gender:(BOOL)filterGender
 {
-    NSMutableString *sanitizedString = [NSMutableString string];
-    NSScanner *scanner = [NSScanner scannerWithString:string];
-    scanner.charactersToBeSkipped = nil;
-    
-    if (filterName || filterGender) {
+    if (string && (filterName || filterGender)) {
+        
+        NSMutableString *sanitizedString = [NSMutableString string];
+        NSScanner *scanner = [NSScanner scannerWithString:string];
+        scanner.charactersToBeSkipped = nil;
+        
         while ([scanner scanLocation] < [string length] - 1) {
             NSString *preReplacementString;
             NSString *replacementToken;
@@ -139,29 +140,32 @@
                 }
             }
         }
-    } else {
-        return string;
+        
+        return sanitizedString;
     }
     
-    return [sanitizedString copy];
+    return string;
 }
 
 - (NSString*)replaceToken:(NSString*)string forPet:(CPPet*)pet
 {
-    NSScanner *scanner = [NSScanner scannerWithString:string];
-    scanner.charactersToBeSkipped = nil;
-    NSString *prePipeToken, *postPipeToken;
-    [scanner scanUpToString:@"|" intoString:&prePipeToken];
-    if ([scanner scanLocation] < [string length] - 1) {
-        [scanner scanString:@"|" intoString:nil];
-        postPipeToken = [[scanner string] substringFromIndex:[scanner scanLocation]];
-        return [pet.gender isEqualToString:kMaleKey] ? prePipeToken : postPipeToken;
-    } else {
-        if ([prePipeToken isEqualToString:@"dog_name"]) {
-            return pet.name;
+    if (string) {
+        NSScanner *scanner = [NSScanner scannerWithString:string];
+        scanner.charactersToBeSkipped = nil;
+        NSString *prePipeToken, *postPipeToken;
+        [scanner scanUpToString:@"|" intoString:&prePipeToken];
+        if ([scanner scanLocation] < [string length] - 1) {
+            [scanner scanString:@"|" intoString:nil];
+            postPipeToken = [[scanner string] substringFromIndex:[scanner scanLocation]];
+            return [pet.gender isEqualToString:kMaleKey] ? prePipeToken : postPipeToken;
+        } else {
+            if ([prePipeToken isEqualToString:@"dog_name"]) {
+                return pet.name;
+            }
+            return prePipeToken;
         }
-        return prePipeToken;
     }
+    return string;
 }
 
 @end

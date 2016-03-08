@@ -7,6 +7,7 @@
 #import "AttributedMarkdown/markdown_lib.h"
 #import "AttributedMarkdown/markdown_peg.h"
 #import "CPTileTextFormatter.h"
+#import "CPUserManager.h"
 @import UIKit;
 
 @implementation CPTile {
@@ -47,7 +48,8 @@
 
 - (NSAttributedString *)parsedBody {
     if (!_parsedBody) {
-        _parsedBody = [[CPTileTextFormatter instance] formatTileText:self.message forPet:nil];
+        // TODO: pass the pet in somewhere?
+        _parsedBody = [[CPTileTextFormatter instance] formatTileText:self.message forPet:[[CPUserManager sharedInstance] getCurrentUser].pet];
     }
 
     return _parsedBody;

@@ -8,6 +8,7 @@
 #import "CPTileTextFormatter.h"
 #import "UIView+CPShadowEffect.h"
 #import "CPTileCommunicationManager.h"
+#import "CPUserManager.h"
 
 @interface CPTileViewCell ()
 @property (weak, nonatomic) IBOutlet UIStackView *messageTileContentView;
@@ -46,7 +47,9 @@
     _tile = tile;
     
     self.titleLabel.hidden = !tile.title;
-    self.titleLabel.text = tile.title;
+    // TODO: pass in pet
+    CPPet *pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
+    self.titleLabel.text = [[CPTileTextFormatter instance] filterString:tile.title forPet:pet name:YES gender:YES];
     
     self.messageTileContentView.hidden = tile.templateType == CPTileTemplateVideo;
     self.videoLayoutImageView.hidden = tile.templateType != CPTileTemplateVideo;
@@ -75,8 +78,8 @@
     
     // Ignore button titles for video tiles
     if (tile.templateType != CPTileTemplateVideo) {
-        [self setButtonTitle:tile.primaryButtonText onButton:self.primaryButton];
-        [self setButtonTitle:tile.secondaryButtonText onButton:self.secondaryButton];
+        [self setButtonTitle:[[CPTileTextFormatter instance] filterString:tile.primaryButtonText forPet:pet name:YES gender:YES] onButton:self.primaryButton];
+        [self setButtonTitle:[[CPTileTextFormatter instance] filterString:tile.secondaryButtonText forPet:pet name:YES gender:YES] onButton:self.secondaryButton];
     }
     
     self.buttonHolder.hidden = self.primaryButton.hidden && self.secondaryButton.hidden;
