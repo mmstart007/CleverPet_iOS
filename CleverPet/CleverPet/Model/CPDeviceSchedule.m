@@ -75,26 +75,46 @@
 
 - (void)parseTimeStrings
 {
-    NSDateFormatter *formatter = [CPDeviceSchedule timeFormatter];
-    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
-    NSDate *startDate = [formatter dateFromString:self.startTimeString];
-    self.startTime = [currentCalendar component:NSCalendarUnitHour fromDate:startDate];
-    NSDate *endDate = [formatter dateFromString:self.endTimeString];
-    self.endTime = [currentCalendar component:NSCalendarUnitHour fromDate:endDate];
+    self.startTime = [self hourFromString:self.startTimeString];
+    self.endTime = [self hourFromString:self.endTimeString];;
 }
 
 - (void)updateStartTime:(NSInteger)startTime
 {
     self.startTime = startTime;
-    NSDate *newDate = [[NSCalendar currentCalendar] dateBySettingUnit:NSCalendarUnitHour value:startTime ofDate:[NSDate date] options:kNilOptions];
-    self.startTimeString = [[CPDeviceSchedule timeFormatter] stringFromDate:newDate];
+    self.startTimeString = [self timeStringForTime:startTime];
 }
 
 - (void)updateEndTime:(NSInteger)endTime
 {
     self.endTime = endTime;
-    NSDate *newDate = [[NSCalendar currentCalendar] dateBySettingUnit:NSCalendarUnitHour value:endTime ofDate:[NSDate date] options:kNilOptions];
-    self.endTimeString = [[CPDeviceSchedule timeFormatter] stringFromDate:newDate];
+    self.endTimeString = [self timeStringForTime:endTime];
+}
+
+- (NSString*)timeStringForTime:(NSInteger)time
+{
+    NSDate *newDate;
+    if (time == 24) {
+        // Convert next midnight to 23:59:59
+        newDate = [[NSCalendar currentCalendar] dateBySettingHour:23 minute:59 second:59 ofDate:[NSDate date] options:kNilOptions];
+    } else {
+        newDate = [[NSCalendar currentCalendar] dateBySettingUnit:NSCalendarUnitHour value:time ofDate:[NSDate date] options:kNilOptions];
+    }
+    
+    return [[CPDeviceSchedule timeFormatter] stringFromDate:newDate];
+}
+
+- (NSInteger)hourFromString:(NSString*)timeString
+{
+    NSDateFormatter *formatter = [CPDeviceSchedule timeFormatter];
+    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
+    NSDate *date = [formatter dateFromString:timeString];
+    NSDateComponents *components = [currentCalendar components:NSCalendarUnitHour|NSCalendarUnitMinute fromDate:date];
+    NSInteger hour = components.hour;
+    if (components.hour == 23 && components.minute > 0) {
+        hour = 24;
+    }
+    return hour;
 }
 
 @end
