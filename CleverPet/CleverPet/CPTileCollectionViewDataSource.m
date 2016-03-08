@@ -19,7 +19,7 @@
 #define DATE_HEADER @"DATE_HEADER"
 #define HEADER_VIEW_SECTION 0
 
-CGFloat const kPagingThreshhold = 200.f;
+CGFloat const kPagingThreshhold = 100.f;
 
 @interface CPTileCollectionViewDataSource () <CPTileViewCellDelegate, CPMainTableSectionHeaderDelegate>
 @property (weak, nonatomic) UITableView *tableView;
@@ -34,6 +34,7 @@ CGFloat const kPagingThreshhold = 200.f;
 @property (strong, nonatomic) NSArray<CPMainTableSectionHeaderFilter *> *filters;
 @property (strong, nonatomic) CPMainTableSectionHeaderFilter *currentFilter;
 @property (strong, nonatomic) NSMutableDictionary<CPMainTableSectionHeaderFilter *, CPTileDataManager *> *tileDataManagers;
+@property (nonatomic, weak) UIActivityIndicatorView *footerSpinner;
 @end
 
 @implementation CPTileCollectionViewDataSource {
@@ -60,6 +61,7 @@ CGFloat const kPagingThreshhold = 200.f;
         [tableView registerNib:[UINib nibWithNibName:@"CPMainTableSectionHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:SECTION_HEADER];
         
         [self precacheTableViewCells];
+        [self setupTableFooter];
         
         self.filters = @[
                          [CPMainTableSectionHeaderFilter filterWithName:@"Latest"],
@@ -84,14 +86,11 @@ CGFloat const kPagingThreshhold = 200.f;
                 [self.tileDataManagers[filter] refreshTiles:nil];
             }
         }
-        
-        [self setupTableFooter];
     }
     
     return self;
 }
 
-// TODO: activity indicator if we're loading
 - (void)setupTableFooter
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 40.f)];
@@ -102,6 +101,17 @@ CGFloat const kPagingThreshhold = 200.f;
     NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
     NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
     [view addConstraints:@[centerX, centerY]];
+    
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.color = [UIColor appGreyColor];
+    spinner.hidesWhenStopped = YES;
+    spinner.translatesAutoresizingMaskIntoConstraints = NO;
+    [view addSubview:spinner];
+    self.footerSpinner = spinner;
+    NSLayoutConstraint *spinnerCenterY = [NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    NSLayoutConstraint *spinnerSpacing = [NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:logo attribute:NSLayoutAttributeLeading multiplier:1 constant:-10];
+    [view addConstraints:@[spinnerCenterY, spinnerSpacing]];
+    
     self.tableView.tableFooterView = view;
 }
 
@@ -137,7 +147,7 @@ CGFloat const kPagingThreshhold = 200.f;
     // Start paging if we've reached our threshhold
     if ([self.tileDataManagers[self.currentFilter] allowPaging]) {
         CGFloat offsetY = scrollView.contentOffset.y + scrollView.bounds.size.height;
-        if (scrollView.contentSize.height - offsetY > kPagingThreshhold) {
+        if (scrollView.contentSize.height - offsetY < kPagingThreshhold) {
             [self pageMoreTilesWithAnimation:YES];
         }
     }
@@ -353,10 +363,12 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 // TODO: kill page if we refresh
 - (void)refreshTilesWithAnimation:(BOOL)withAnimation
 {
+    [self.footerSpinner startAnimating];
     CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
     BLOCK_SELF_REF_OUTSIDE();
     [currentManager refreshTiles:^(NSIndexSet *indexes, NSError *error) {
         BLOCK_SELF_REF_INSIDE();
+        [self.footerSpinner stopAnimating];
         if (error) {
             // TODO: display error
         } else if (currentManager == self.tileDataManagers[self.currentFilter]) {
@@ -368,10 +380,12 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 
 - (void)pageMoreTilesWithAnimation:(BOOL)withAnimation
 {
+    [self.footerSpinner startAnimating];
     CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
     BLOCK_SELF_REF_OUTSIDE();
     [currentManager pageMoreTiles:^(NSIndexSet *indexes, NSError *error) {
         BLOCK_SELF_REF_INSIDE();
+        [self.footerSpinner stopAnimating];
         if (error) {
             // TODO: display error
         } else if (currentManager == self.tileDataManagers[self.currentFilter]) {

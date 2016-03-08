@@ -13,7 +13,7 @@
 // TODO: appropriate path for filter
 NSString * const kTilesPath = @"users/tiles";
 #define TILE_FILTER_PATH(filter) [NSString stringWithFormat:@"users/tiles/%@", filter]
-#define TILE_PAGE_SIZE @(50)
+#define TILE_PAGE_SIZE @(5)
 
 @interface CPTileCommunicationManager()
 
