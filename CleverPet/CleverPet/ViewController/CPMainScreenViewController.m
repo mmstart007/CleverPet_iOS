@@ -11,8 +11,10 @@
 #import "CPMainScreenStatsHeaderView.h"
 #import "UIView+CPShadowEffect.h"
 #import "CPUserManager.h"
+@import AVKit;
+@import AVFoundation;
 
-@interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceDelegate>
+@interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceDelegate, AVPlayerViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CPTileCollectionViewDataSource *dataSource;
 @property (strong, nonatomic) CPPetStatsView *petStatsView;
@@ -23,6 +25,7 @@
 
 @property (nonatomic, strong) CPPet *currentPet;
 @property (nonatomic, strong) CPTile *playingTile;
+@property (nonatomic, strong) AVPlayerViewController *playerController;
 @end
 
 @implementation CPMainScreenViewController {
@@ -56,6 +59,8 @@
     self.tableView.delegate = dataSource;
     self.tableView.dataSource = dataSource;
     
+    self.playerController = [[AVPlayerViewController alloc] init];
+    
     [dataSource postInit];
 }
 
@@ -69,6 +74,13 @@
     if ([self.tableView.dataSource respondsToSelector:@selector(updatePetImage:)]) {
         [self.tableView.dataSource performSelector:@selector(updatePetImage:) withObject:[self.currentPet petPhoto]];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    self.playingTile = nil;
 }
 
 #pragma mark - CPTileCollectionViewDataSourceDelegate
@@ -92,8 +104,28 @@
 
 - (void)playVideoForTile:(CPTile *)tile
 {
-    self.playingTile = tile;
-    // TODO: cancel playback if in progress, and play video for the tile
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    if (tile != self.playingTile) {
+        self.playingTile = tile;
+        AVPlayerItem *item = [AVPlayerItem playerItemWithURL:tile.videoUrl];
+        if (self.playerController.player) {
+            [self.playerController.player replaceCurrentItemWithPlayerItem:item];
+        } else {
+            self.playerController.player = [AVPlayer playerWithPlayerItem:item];
+        }
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    self.playerController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:self.playerController animated:YES completion:nil];
+    [self.playerController.player play];
+}
+
+- (void)videoPlayedToEnd:(NSNotification*)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    [self.dataSource videoPlaybackCompletedForTile:self.playingTile];
+    self.playingTile = nil;
 }
 
 @end
