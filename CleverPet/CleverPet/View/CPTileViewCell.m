@@ -48,8 +48,8 @@
     self.titleLabel.hidden = !tile.title;
     self.titleLabel.text = tile.title;
     
-    self.messageTileContentView.hidden = tile.tileType == CPTTVideo;
-    self.videoLayoutImageView.hidden = tile.tileType != CPTTVideo;
+    self.messageTileContentView.hidden = tile.templateType == CPTileTemplateVideo;
+    self.videoLayoutImageView.hidden = tile.templateType != CPTileTemplateVideo;
     
     if (tile.templateType == CPTileTemplateVideo) {
         self.videoLayoutTextView.attributedText = tile.parsedBody;
@@ -57,6 +57,7 @@
         [self.videoLayoutImageView setImageWithURL:tile.videoThumbnailUrl];
         [self.cellImageView cancelImageDownloadTask];
         self.cellImageView.image = nil;
+        self.cellImageViewHolder.hidden = YES;
         self.videoImageContainer.hidden = NO;
     } else {
         self.bodyTextView.attributedText = tile.parsedBody;
@@ -210,9 +211,9 @@
     self.titleLabel.text = nil;
     self.cellImageView.image = nil;
     
-    self.bodyTextView.text = nil;
+    self.bodyTextView.attributedText = nil;
     self.videoLayoutImageView.image = nil;
-    self.videoLayoutTextView.text = nil;
+    self.videoLayoutTextView.attributedText = nil;
     
     
     [self setSwipedMode:NO withAnimation:NO callDelegateMethod:NO];
