@@ -228,6 +228,9 @@
 {
     self.primaryButton.enabled = !inProgress;
     self.secondaryButton.enabled = !inProgress;
+    // Set alpha on the buttons so they look disabled-ish
+    self.primaryButton.alpha = inProgress ? .5f : 1.f;
+    self.secondaryButton.alpha = inProgress ? .5f : 1.f;
 }
 
 #pragma mark - IBActions
@@ -255,7 +258,7 @@
     [[CPTileCommunicationManager sharedInstance] handleButtonPressWithPath:path completion:^(NSError *error){
         BLOCK_SELF_REF_INSIDE();
         // TODO: display error;
-        [self requestInProgress:NO];
+        // TODO: Reactivate buttons? probably not
     }];
 }
 
