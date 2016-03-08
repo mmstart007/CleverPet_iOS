@@ -84,6 +84,7 @@
 		97CC44821C77CA30003C4258 /* CPHubSettingsButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44811C77CA30003C4258 /* CPHubSettingsButton.m */; };
 		97CC44851C77E703003C4258 /* CPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44841C77E703003C4258 /* CPAppearance.m */; };
 		97CC44881C7BB6D8003C4258 /* CPParticleConnectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44871C7BB6D8003C4258 /* CPParticleConnectionHelper.m */; };
+		97D258211C8F5F17002C4CC6 /* CPPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D258201C8F5F17002C4CC6 /* CPPlayerViewController.m */; };
 		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
 		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
 		97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */; };
@@ -225,6 +226,8 @@
 		97CC44841C77E703003C4258 /* CPAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAppearance.m; sourceTree = "<group>"; };
 		97CC44861C7BB6D8003C4258 /* CPParticleConnectionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPParticleConnectionHelper.h; sourceTree = "<group>"; };
 		97CC44871C7BB6D8003C4258 /* CPParticleConnectionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPParticleConnectionHelper.m; sourceTree = "<group>"; };
+		97D2581F1C8F5F17002C4CC6 /* CPPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlayerViewController.h; sourceTree = "<group>"; };
+		97D258201C8F5F17002C4CC6 /* CPPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlayerViewController.m; sourceTree = "<group>"; };
 		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
 		97EB7AB41C729F33007F1383 /* CPNascarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNascarViewController.m; sourceTree = "<group>"; };
 		97EB7AB61C72A300007F1383 /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
@@ -349,6 +352,8 @@
 				971D63001C863D0A006C9F80 /* CPConfigViewController.m */,
 				1827A7B9850CB706EB4171D0 /* CPMainScreenViewController.m */,
 				1827A708180DD5D390DB0EA8 /* CPMainScreenViewController.h */,
+				97D2581F1C8F5F17002C4CC6 /* CPPlayerViewController.h */,
+				97D258201C8F5F17002C4CC6 /* CPPlayerViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -737,6 +742,7 @@
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
 				971D630D1C88B0A7006C9F80 /* CPDeviceSchedule.m in Sources */,
 				1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */,
+				97D258211C8F5F17002C4CC6 /* CPPlayerViewController.m in Sources */,
 				0DE13B671C7FABB200648834 /* CPTileDataManager.m in Sources */,
 				1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */,
 				0DE13B631C7EE9DF00648834 /* CPLabelUtils.m in Sources */,

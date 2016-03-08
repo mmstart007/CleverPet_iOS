@@ -11,7 +11,7 @@
 #import "CPMainScreenStatsHeaderView.h"
 #import "UIView+CPShadowEffect.h"
 #import "CPUserManager.h"
-@import AVKit;
+#import "CPPlayerViewController.h"
 @import AVFoundation;
 
 @interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceDelegate, AVPlayerViewControllerDelegate>
@@ -25,7 +25,7 @@
 
 @property (nonatomic, strong) CPPet *currentPet;
 @property (nonatomic, strong) CPTile *playingTile;
-@property (nonatomic, strong) AVPlayerViewController *playerController;
+@property (nonatomic, strong) CPPlayerViewController *playerController;
 @end
 
 @implementation CPMainScreenViewController {
@@ -59,7 +59,7 @@
     self.tableView.delegate = dataSource;
     self.tableView.dataSource = dataSource;
     
-    self.playerController = [[AVPlayerViewController alloc] init];
+    self.playerController = [[CPPlayerViewController alloc] init];
     
     [dataSource postInit];
 }
