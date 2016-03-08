@@ -84,9 +84,25 @@ CGFloat const kPagingThreshhold = 200.f;
                 [self.tileDataManagers[filter] refreshTiles:nil];
             }
         }
+        
+        [self setupTableFooter];
     }
     
     return self;
+}
+
+// TODO: activity indicator if we're loading
+- (void)setupTableFooter
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 40.f)];
+    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    logo.translatesAutoresizingMaskIntoConstraints = NO;
+    [view addSubview:logo];
+    // center image in footer
+    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    [view addConstraints:@[centerX, centerY]];
+    self.tableView.tableFooterView = view;
 }
 
 - (CPTileDataManager *)currentTileDataManager {
