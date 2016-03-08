@@ -201,9 +201,9 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NK3-k1-v1Y">
                                         <rect key="frame" x="0.0" y="0.0" width="197" height="679"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yq0-R9-1Ty">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yq0-R9-1Ty">
                                         <rect key="frame" x="0.0" y="0.0" width="197" height="679"/>
-                                        <state key="normal" title="Play me"/>
+                                        <state key="normal" image="play"/>
                                         <connections>
                                             <action selector="playVideoTapped:" destination="GFj-N0-VFo" eventType="touchUpInside" id="hqo-ZR-O8V"/>
                                         </connections>
@@ -297,4 +297,7 @@
             <point key="canvasLocation" x="761" y="1198.5"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="play" width="30" height="30"/>
+    </resources>
 </document>
