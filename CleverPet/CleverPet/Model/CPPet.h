@@ -23,6 +23,7 @@
 
 + (void)validateInput:(NSDictionary*)proposedInput isInitialSetup:(BOOL)isInitialSetup completion:(void (^)(BOOL isValidInput, NSString *errorMessage))completion;
 - (UIImage *)petPhoto;
+- (UIImage *)petPhotoForPicker;
 - (void)setPetPhoto:(UIImage*)image;
 
 @end

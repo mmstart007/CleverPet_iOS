@@ -27,7 +27,7 @@
 			<string>google</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.getcleverpet.app.ios</string>
+				<string>io.cleverpet.app.ios</string>
 				<string>com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75</string>
 			</array>
 		</dict>

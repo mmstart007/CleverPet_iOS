@@ -306,8 +306,7 @@
     {
         CPPetPhotoViewController *photoPicker = segue.destinationViewController;
         photoPicker.delegate = self;
-        // TODO: pull image from pet profile object
-        photoPicker.selectedImage = self.petImage.image;
+        photoPicker.selectedImage = [self.pet petPhotoForPicker];
     }
 }
 

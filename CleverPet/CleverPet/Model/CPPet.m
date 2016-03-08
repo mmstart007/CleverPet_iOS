@@ -83,6 +83,15 @@
     }
 }
 
+- (UIImage*)petPhotoForPicker
+{
+    if (!self.image) {
+        self.image = [CPFileUtils getImageForPet:self.petId];
+    }
+    
+    return self.image;
+}
+
 - (void)setPetPhoto:(UIImage *)image
 {
     self.image = image;
