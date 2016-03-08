@@ -350,7 +350,8 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 #pragma mark - CPTileViewCellDelegate methods
 
 - (void)didSwipeTileViewCell:(CPTileViewCell *)tileViewCell {
-    // TODO: Get rid of the tile here
+    // We don't particularly care about success or failure here, so just update the ui
+    [[CPTileCommunicationManager sharedInstance] handleTileSwipe:tileViewCell.tile.tileId completion:nil];
     [self deleteTile:tileViewCell.tile withAnimation:YES];
 }
 

@@ -13,6 +13,8 @@
 // TODO: appropriate path for filter
 NSString * const kTilesPath = @"users/tiles";
 #define TILE_FILTER_PATH(filter) [NSString stringWithFormat:@"users/tiles/%@", filter]
+#define SPECIFIC_TILE_PATH(tileId) [NSString stringWithFormat:@"tiles/%@", tileId]
+#define REMOVE_TILE(tileId) [NSString stringWithFormat:@"%@/remove", SPECIFIC_TILE_PATH(tileId)]
 #define TILE_PAGE_SIZE @(5)
 
 @interface CPTileCommunicationManager()
@@ -81,6 +83,16 @@ NSString * const kTilesPath = @"users/tiles";
     // TODO: extra args
     [self.sessionManager PUT:buttonPath parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         // TODO: error handling if required
+        if (completion) completion(nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        // TODO: error parsing
+        if (completion) completion(error);
+    }];
+}
+
+- (ASYNC)handleTileSwipe:(NSString *)tileId completion:(void (^)(NSError *))completion
+{
+    [self.sessionManager POST:REMOVE_TILE(tileId) parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (completion) completion(nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         // TODO: error parsing

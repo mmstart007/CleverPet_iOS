@@ -15,5 +15,6 @@
 - (ASYNC)refreshTiles:(NSString*)filter completion:(void (^)(NSDictionary *tileInfo, NSError *error))completion;
 - (ASYNC)getNextPage:(NSString*)filter withCursor:(NSString*)cursor completion:(void (^)(NSDictionary *tileInfo, NSError *error))completion;
 - (ASYNC)handleButtonPressWithPath:(NSString *)buttonPath completion:(void (^)(NSError *error))completion;
+- (ASYNC)handleTileSwipe:(NSString*)tileId completion:(void (^)(NSError *error))completion;
 
 @end
