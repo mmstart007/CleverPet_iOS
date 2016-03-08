@@ -70,8 +70,8 @@
     }
     // TODO: report template
     
-    self.primaryButton.hidden = !tile.primaryButtonText;
-    self.secondaryButton.hidden = !tile.secondaryButtonText;
+    self.primaryButton.hidden = tile.templateType == CPTileTemplateVideo || !tile.primaryButtonText;
+    self.secondaryButton.hidden = tile.templateType == CPTileTemplateVideo || !tile.secondaryButtonText;
     
     // Ignore button titles for video tiles
     if (tile.templateType != CPTileTemplateVideo) {
