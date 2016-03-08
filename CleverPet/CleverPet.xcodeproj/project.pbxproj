@@ -85,6 +85,7 @@
 		97CC44851C77E703003C4258 /* CPAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44841C77E703003C4258 /* CPAppearance.m */; };
 		97CC44881C7BB6D8003C4258 /* CPParticleConnectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44871C7BB6D8003C4258 /* CPParticleConnectionHelper.m */; };
 		97D258211C8F5F17002C4CC6 /* CPPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D258201C8F5F17002C4CC6 /* CPPlayerViewController.m */; };
+		97D258241C8F639C002C4CC6 /* CPBaseCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D258231C8F639C002C4CC6 /* CPBaseCommunicationManager.m */; };
 		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
 		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
 		97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */; };
@@ -228,6 +229,8 @@
 		97CC44871C7BB6D8003C4258 /* CPParticleConnectionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPParticleConnectionHelper.m; sourceTree = "<group>"; };
 		97D2581F1C8F5F17002C4CC6 /* CPPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPlayerViewController.h; sourceTree = "<group>"; };
 		97D258201C8F5F17002C4CC6 /* CPPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlayerViewController.m; sourceTree = "<group>"; };
+		97D258221C8F639C002C4CC6 /* CPBaseCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBaseCommunicationManager.h; sourceTree = "<group>"; };
+		97D258231C8F639C002C4CC6 /* CPBaseCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBaseCommunicationManager.m; sourceTree = "<group>"; };
 		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
 		97EB7AB41C729F33007F1383 /* CPNascarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNascarViewController.m; sourceTree = "<group>"; };
 		97EB7AB61C72A300007F1383 /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
@@ -503,6 +506,8 @@
 				979D84421C7FA50700ADB6B0 /* CPFileUtils.m */,
 				979D84501C810F5600ADB6B0 /* CPGenderUtils.h */,
 				979D84511C810F5600ADB6B0 /* CPGenderUtils.m */,
+				97D258221C8F639C002C4CC6 /* CPBaseCommunicationManager.h */,
+				97D258231C8F639C002C4CC6 /* CPBaseCommunicationManager.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -718,6 +723,7 @@
 				979D844F1C80FCB200ADB6B0 /* CPLoadingView.m in Sources */,
 				97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */,
 				97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */,
+				97D258241C8F639C002C4CC6 /* CPBaseCommunicationManager.m in Sources */,
 				0D36AA8E1C7243D600349D03 /* ViewController.m in Sources */,
 				97EB7AC21C73A97D007F1383 /* CPSignUpViewController.m in Sources */,
 				9704E2FE1C7D2799004874A7 /* CPSharedUtils.m in Sources */,

@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CPBaseCommunicationManager.h"
 
-@interface CPTileCommunicationManager : NSObject
+@interface CPTileCommunicationManager : CPBaseCommunicationManager
 
 + (instancetype)sharedInstance;
 

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CPBaseCommunicationManager.h"
 
 @class GITAccount;
 @class SparkDevice;
@@ -14,7 +15,7 @@
 
 typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile, CPLoginResult_UserWithoutDevice, CPLoginResult_UserWithSetupCompleted, CPLoginResult_Failure};
 
-@interface CPAppEngineCommunicationManager : NSObject
+@interface CPAppEngineCommunicationManager : CPBaseCommunicationManager
 
 + (instancetype)sharedInstance;
 

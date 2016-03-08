@@ -8,7 +8,6 @@
 
 #import "CPTileCommunicationManager.h"
 #import "CPAppEngineCommunicationManager.h"
-#import <AFNetworking/AFNetworking.h>
 
 // TODO: appropriate path for filter
 NSString * const kTilesPath = @"users/tiles";
@@ -73,8 +72,7 @@ NSString * const kTilesPath = @"users/tiles";
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (completion) completion(jsonResponse, nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        // TODO: Pull aferror to server error conversion out into category or something
-        if (completion) completion(nil, error);
+        if (completion) completion(nil, [self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -85,8 +83,7 @@ NSString * const kTilesPath = @"users/tiles";
         // TODO: error handling if required
         if (completion) completion(nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        // TODO: error parsing
-        if (completion) completion(error);
+        if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -95,8 +92,7 @@ NSString * const kTilesPath = @"users/tiles";
     [self.sessionManager POST:REMOVE_TILE(tileId) parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (completion) completion(nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        // TODO: error parsing
-        if (completion) completion(error);
+        if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
