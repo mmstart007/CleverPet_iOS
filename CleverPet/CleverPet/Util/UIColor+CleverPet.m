@@ -84,9 +84,16 @@ return UIColorFromRGB(RGB);\
     return [UIColor colorWithRed:197.0/255.0 green:197.0/255.0 blue:197.0/255.0 alpha:1.0];
 }
 
++ (UIColor*)appHubOnlineColor
+{
+    return [UIColor appTealColor];
+}
+
 DefineColor(Divider, 0xe5e5e5);
 DefineColor(LightRed, 0xfae5d6);
 DefineColor(LightGreen, 0xecf2dc);
 DefineColor(LightOrange, 0xf2c2a2);
 DefineColor(LightYellow, 0xf6dea0);
+DefineColor(HubWaiting, 0xf8be2e);
+DefineColor(HubOffline, 0xea6060);
 @end

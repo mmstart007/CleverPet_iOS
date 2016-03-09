@@ -12,6 +12,7 @@
 #import "CPAppearance.h"
 #import <Intercom/Intercom.h>
 #import "CPConfigManager.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface AppDelegate ()
 
@@ -28,6 +29,8 @@
     
     // Initialize Intercom
     [Intercom setApiKey:@"ios_sdk-7acac94f6c642142e21fd6e6be0bbc7b4d38f7cc" forAppId:@"swragh2u"];
+    // Have reachability manager start monitoring, for use in the settings
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     return YES;
 }

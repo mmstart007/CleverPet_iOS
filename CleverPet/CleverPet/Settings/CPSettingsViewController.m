@@ -8,12 +8,19 @@
 
 #import "CPSettingsViewController.h"
 #import <Intercom/Intercom.h>
+#import "CPAppEngineCommunicationManager.h"
+#import "CPUserManager.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
+#import "CPHubSettingsViewController.h"
 
 NSUInteger const kDeviceSection = 0;
 NSUInteger const kHelpSection = 1;
 NSUInteger const kAccountSection = 2;
 
 NSUInteger const kHelpSectionChatWithUsRow = 0;
+NSUInteger const kDeviceSectionHubSettingsRow = 0;
+
+NSInteger const kLastSeenThreshhold = 120;
 
 @interface CPSettingsBasicCell : UITableViewCell
 
@@ -28,7 +35,7 @@ NSUInteger const kHelpSectionChatWithUsRow = 0;
 @property (weak, nonatomic) IBOutlet UIView *indicatorDot;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
-- (void)updateWithHubStatus;
+- (void)updateWithHubConnection:(HubConnectionState)connectionState;
 
 @end
 
@@ -36,6 +43,8 @@ NSUInteger const kHelpSectionChatWithUsRow = 0;
 
 @property (weak, nonatomic) IBOutlet CPSettingsHubStatusCell *hubCell;
 @property (weak, nonatomic) UIBarButtonItem *pseudoBackButton;
+@property (nonatomic, assign) BOOL checkingHubStatus;
+@property (nonatomic, assign) HubConnectionState connectionState;
 
 @end
 
@@ -55,17 +64,47 @@ NSUInteger const kHelpSectionChatWithUsRow = 0;
     [button addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = barButton;
     self.pseudoBackButton = barButton;
+    self.connectionState = HubConnectionState_Unknown;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [self updateHubStatus];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setConnectionState:(HubConnectionState)connectionState
+{
+    _connectionState = connectionState;
+    [self.hubCell updateWithHubConnection:_connectionState];
+}
+
+- (void)updateHubStatus
+{
+    if(!self.checkingHubStatus) {
+        // Check if we're offline
+        if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
+            self.connectionState = HubConnectionState_Offline;
+        } else {
+            self.checkingHubStatus = YES;
+            BLOCK_SELF_REF_OUTSIDE();
+            [[CPAppEngineCommunicationManager sharedInstance] checkDeviceLastSeen:[[CPUserManager sharedInstance] getCurrentUser].device.deviceId completion:^(NSInteger delta, NSError *error) {
+                BLOCK_SELF_REF_INSIDE();
+                self.checkingHubStatus = NO;
+                if (error || delta == NSNotFound || delta > kLastSeenThreshhold) {
+                    self.connectionState = HubConnectionState_Disconnected;
+                } else {
+                    self.connectionState = HubConnectionState_Connected;
+                }
+            }];
+        }
+    }
 }
 
 #pragma mark - IBActions
@@ -151,18 +190,22 @@ NSUInteger const kHelpSectionChatWithUsRow = 0;
     
     if (indexPath.section == kHelpSection && indexPath.row == kHelpSectionChatWithUsRow) {
         [Intercom presentConversationList];
+    } else if (indexPath.section == kDeviceSection && indexPath.row == kDeviceSectionHubSettingsRow) {
+        if (self.connectionState != HubConnectionState_Unknown) {
+            [self performSegueWithIdentifier:@"hubSettings" sender:nil];
+        }
     }
 }
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[CPHubSettingsViewController class]]) {
+        CPHubSettingsViewController *vc = segue.destinationViewController;
+        vc.connectionState = self.connectionState;
+    }
 }
-*/
 
 @end
 
@@ -201,9 +244,35 @@ NSUInteger const kHelpSectionChatWithUsRow = 0;
     self.accessoryView = imageView;
 }
 
-- (void)updateWithHubStatus
+- (void)updateWithHubConnection:(HubConnectionState)connectionState;
 {
-    // TODO: Update with hub status once we're connecting. Dot color, status text, hide/show disclosure indicator
+    switch (connectionState) {
+        case HubConnectionState_Unknown:
+        {
+            self.indicatorDot.backgroundColor = [UIColor appHubWaitingColor];
+            self.statusLabel.text = NSLocalizedString(@"Waiting For Connection", @"Hub status while checking online state");
+            break;
+        }
+        case HubConnectionState_Connected:
+        {
+            self.indicatorDot.backgroundColor = [UIColor appHubOnlineColor];
+            self.statusLabel.text = NSLocalizedString(@"On", @"Hub status when the hub is reachable");
+            break;
+        }
+        case HubConnectionState_Disconnected:
+        {
+            self.indicatorDot.backgroundColor = [UIColor appHubOfflineColor];
+            self.statusLabel.text = NSLocalizedString(@"Disconnected", @"Hub status when the hub is not reachable");
+            break;
+        }
+        case HubConnectionState_Offline:
+        {
+            self.indicatorDot.backgroundColor = [UIColor appHubOfflineColor];
+            self.statusLabel.text = NSLocalizedString(@"No Data", @"Hub status when phone is offline");
+            break;
+        }
+    }
+    self.accessoryView.hidden = connectionState == HubConnectionState_Unknown;
 }
 
 @end
