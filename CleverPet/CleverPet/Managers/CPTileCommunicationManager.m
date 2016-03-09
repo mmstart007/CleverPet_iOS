@@ -56,17 +56,13 @@ NSString * const kTilesPath = @"users/tiles";
 
 - (ASYNC)requestTilesForFilter:(NSString *)filter withCursor:(NSString *)cursor completion:(void (^)(NSDictionary *, NSError *))completion
 {
-    // TODO: filter appropriate url
-    // TODO: Page size or rely on the servers internal batch size?
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[kPageSizeKey] = TILE_PAGE_SIZE;
     if ([cursor length] > 0) {
         params[kCursorKey] = cursor;
     }
     
-    // TODO: when filters are working
-//    NSString *path = filter ? TILE_FILTER_PATH(filter) : kTilesPath;
-    NSString *path = kTilesPath;
+    NSString *path = filter ? TILE_FILTER_PATH(filter) : kTilesPath;
     
     [self.sessionManager GET:path parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];

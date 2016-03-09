@@ -82,8 +82,6 @@ CGFloat const kPagingThreshhold = 100.f;
             // Run through our refresh call for the first manager so we populate the table. Call refresh on the others so their content is ready when we change between filters
             if ([filter isEqualToFilter:self.currentFilter]) {
                 [self refreshTilesWithAnimation:YES];
-            } else {
-                [self.tileDataManagers[filter] refreshTiles:nil];
             }
         }
     }
@@ -344,6 +342,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     if (self.currentFilter != filter) {
         self.currentFilter = filter;
         [self.tableView reloadData];
+        [self refreshTilesWithAnimation:YES];
     }
 }
 
@@ -367,7 +366,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     [self.footerSpinner startAnimating];
     CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
     BLOCK_SELF_REF_OUTSIDE();
-    [currentManager refreshTiles:^(NSIndexSet *indexes, NSError *error) {
+    [currentManager refreshTiles:NO completion:^(NSIndexSet *indexes, NSError *error) {
         BLOCK_SELF_REF_INSIDE();
         [self.footerSpinner stopAnimating];
         if (error) {
@@ -390,7 +389,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         if (error) {
             // TODO: display error
         } else if (currentManager == self.tileDataManagers[self.currentFilter]) {
-            [self addTiles:indexes withAnimation:YES];
+            [self addTiles:indexes withAnimation:withAnimation];
         }
     }];
 }

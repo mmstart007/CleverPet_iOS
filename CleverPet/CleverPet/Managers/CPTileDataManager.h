@@ -21,7 +21,8 @@
 
 - (NSIndexSet *)addTile:(CPTile *)tile;
 - (NSIndexSet *)deleteTile:(CPTile *)tile;
-- (ASYNC)refreshTiles:(void (^)(NSIndexSet *indexes, NSError *error))completion;
+- (ASYNC)refreshTiles:(BOOL)forceRefresh completion:(void (^)(NSIndexSet *indexes, NSError *error))completion;
 - (ASYNC)pageMoreTiles:(void (^)(NSIndexSet *indexes, NSError *error))completion;
+- (void)clearBackingData;
 - (BOOL)allowPaging;
 @end

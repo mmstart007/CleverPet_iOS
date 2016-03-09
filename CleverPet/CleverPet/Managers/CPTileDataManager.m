@@ -17,6 +17,7 @@
 @property (nonatomic, assign) BOOL moreTiles;
 @property (nonatomic, strong) NSString *cursor;
 @property (nonatomic, assign) BOOL requestInProgress;
+@property (nonatomic, assign) BOOL performedInitialFetch;
 @property (nonatomic, strong) NSString *filter;
 @end
 
@@ -156,37 +157,38 @@
     return [deletedIndexes copy];
 }
 
-- (ASYNC)refreshTiles:(void (^)(NSIndexSet *indexes, NSError *error))completion
+- (ASYNC)refreshTiles:(BOOL)forceRefresh completion:(void (^)(NSIndexSet *indexes, NSError *error))completion
 {
-    // TODO: self.filter
-    BLOCK_SELF_REF_OUTSIDE();
-    self.requestInProgress = YES;
-    [[CPTileCommunicationManager sharedInstance] refreshTiles:self.filter completion:^(NSDictionary *tileInfo, NSError *error) {
-        BLOCK_SELF_REF_INSIDE();
-        self.requestInProgress = NO;
-        NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
-        // TODO: pass error/message back up the chain
-        if (!error) {
-            // TODO: Clear our backing data on refresh?
-            [self.tileSectionList removeAllObjects];
-            [self.tileSections removeAllObjects];
-            // Parse our tile objects, and slam into the backing data.
-            NSError *modelError;
-            NSArray *tiles = [CPTile arrayOfModelsFromDictionaries:tileInfo[kTilesKey] error:&modelError];
-            for (CPTile *tile in tiles) {
-                [indexes addIndexes:[self addTile:tile]];
+    if ((forceRefresh || !self.performedInitialFetch) && !self.requestInProgress) {
+        BLOCK_SELF_REF_OUTSIDE();
+        self.requestInProgress = YES;
+        [[CPTileCommunicationManager sharedInstance] refreshTiles:self.filter completion:^(NSDictionary *tileInfo, NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            self.requestInProgress = NO;
+            NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
+            // TODO: pass error/message back up the chain
+            if (!error) {
+                self.performedInitialFetch = YES;
+                // Parse our tile objects, and slam into the backing data.
+                NSError *modelError;
+                NSArray *tiles = [CPTile arrayOfModelsFromDictionaries:tileInfo[kTilesKey] error:&modelError];
+                for (CPTile *tile in tiles) {
+                    [indexes addIndexes:[self addTile:tile]];
+                }
+                // Hold onto our paging cursor for future use
+                self.cursor = [tileInfo[kCursorKey] isKindOfClass:[NSNull class]] ? nil : tileInfo[kCursorKey];
+                self.moreTiles = [tileInfo[kMoreKey] boolValue];
             }
-            // Hold onto our paging cursor for future use
-            self.cursor = tileInfo[kCursorKey];
-            self.moreTiles = [tileInfo[kMoreKey] boolValue];
-        }
-        if (completion) completion(indexes, error);
-    }];
+            if (completion) completion(indexes, error);
+        }];
+    } else {
+        if (completion) completion([NSIndexSet indexSet], nil);
+    }
 }
 
 - (ASYNC)pageMoreTiles:(void (^)(NSIndexSet *, NSError *))completion
 {
-    if (self.moreTiles && self.cursor) {
+    if (self.moreTiles && self.cursor && !self.requestInProgress) {
         self.requestInProgress = YES;
         BLOCK_SELF_REF_OUTSIDE();
         // TODO: self.filter
@@ -213,6 +215,17 @@
 - (BOOL)allowPaging
 {
     return !self.requestInProgress && self.moreTiles;
+}
+
+- (void)clearBackingData
+{
+    // TODO: cancel in progress requests
+    // TODO: Handle merging a refresh into the existing data set when we have server support for it
+    self.performedInitialFetch = NO;
+    self.cursor = nil;
+    self.moreTiles = NO;
+    [self.tileSectionList removeAllObjects];
+    [self.tileSections removeAllObjects];
 }
 
 - (NSUInteger)insertTileSection:(CPTileSection *)tileSection {
