@@ -21,6 +21,7 @@ NSString * const kUserInfoPath = @"users/info";
 NSString * const kPetProfilePath = @"animals";
 #define SPECIFIC_PET_PROFILE(petId) [NSString stringWithFormat:@"%@/%@", kPetProfilePath, petId]
 
+#define CREATE_DEVICE_FOR_ANIMAL(animalId) [NSString stringWithFormat:@"animals/%@/devices", animalId]
 NSString * const kDevicePath = @"devices";
 NSString * const kSchedulesPathFragment = @"schedules";
 NSString * const kModePathFragment = @"mode";
@@ -202,11 +203,10 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 }
 
 #pragma mark - Device
-- (ASYNC)createDevice:(NSDictionary *)deviceInfo completion:(void (^)(NSError *))completion
+- (ASYNC)createDevice:(NSDictionary *)deviceInfo forAnimal:(NSString*)animalId completion:(void (^)(NSError *))completion
 {
     BLOCK_SELF_REF_OUTSIDE();
-    // TODO: remove this hack
-    [self.sessionManager POST:kDevicePath parameters:deviceInfo progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.sessionManager POST:CREATE_DEVICE_FOR_ANIMAL(animalId) parameters:deviceInfo progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {

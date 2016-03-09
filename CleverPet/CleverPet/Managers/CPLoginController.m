@@ -178,8 +178,9 @@ didFinishSignInWithToken:(NSString *)token
 #pragma mark - CPParticleConnectionDelegate methods
 - (void)deviceClaimed:(NSDictionary *)deviceInfo
 {
+    CPPet *pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
     BLOCK_SELF_REF_OUTSIDE();
-    [[CPAppEngineCommunicationManager sharedInstance] createDevice:deviceInfo completion:^(NSError *error) {
+    [[CPAppEngineCommunicationManager sharedInstance] createDevice:deviceInfo forAnimal:pet.petId completion:^(NSError *error) {
         BLOCK_SELF_REF_INSIDE();
         if (error) {
             // TODO: display error to user and relaunch device claim flow
