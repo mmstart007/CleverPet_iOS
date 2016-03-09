@@ -153,14 +153,14 @@
         [self addConstraint:colorHeight];
         NSLayoutConstraint *colorWidth = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:4.f];
         [self addConstraint:colorWidth];
-        NSLayoutConstraint *colorY = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:label attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-        [self addConstraint:colorY];
-        NSLayoutConstraint *colorSpacing = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:label attribute:NSLayoutAttributeLeading multiplier:1 constant:-4.f];
+        NSLayoutConstraint *colorX = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:label attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+        [self addConstraint:colorX];
+        NSLayoutConstraint *colorSpacing = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:label attribute:NSLayoutAttributeBottom multiplier:1 constant:0.f];
         [self addConstraint:colorSpacing];
     }
     
     if (self.lastLabel) {
-        NSLayoutConstraint *spacingConstraint = [NSLayoutConstraint constraintWithItem:(colorDotView ? colorDotView : label) attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.lastLabel attribute:NSLayoutAttributeTrailing multiplier:1 constant:32];
+        NSLayoutConstraint *spacingConstraint = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.lastLabel attribute:NSLayoutAttributeTrailing multiplier:1 constant:32];
         [self addConstraint:spacingConstraint];
     } else {
         [self setCurrentFilter:0 withAnimation:NO];
