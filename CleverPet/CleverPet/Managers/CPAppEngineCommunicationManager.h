@@ -11,7 +11,7 @@
 @class GITAccount;
 @class SparkDevice;
 
-typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile, CPLoginResult_UserWithoutDevice, CPLoginResult_UserWithSetupCompleted, CPLoginResult_Failure};
+typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile, CPLoginResult_UserWithoutDevice, CPLoginResult_UserWithoutParticle, CPLoginResult_UserWithSetupCompleted, CPLoginResult_Failure};
 
 @interface CPAppEngineCommunicationManager : NSObject
 
@@ -26,6 +26,7 @@ typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile,
 
 - (ASYNC)createDevice:(NSDictionary*)deviceInfo forAnimal:(NSString*)animalId completion:(void (^)(NSError *error))completion;
 - (ASYNC)updateDevice:(NSString*)deviceId mode:(NSString*)mode completion:(void (^)(NSError *error))completion;
+- (ASYNC)updateDevice:(NSString*)deviceId particle:(NSDictionary*)particleInfo completion:(void (^)(NSError *error))completion;
 - (ASYNC)updateDevice:(NSString*)deviceId schedule:(NSString*)scheduleId withInfo:(NSDictionary*)scheduleInfo completion:(void (^)(NSError *error))completion;
 
 @end

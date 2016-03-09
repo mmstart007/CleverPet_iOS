@@ -178,9 +178,8 @@ didFinishSignInWithToken:(NSString *)token
 #pragma mark - CPParticleConnectionDelegate methods
 - (void)deviceClaimed:(NSDictionary *)deviceInfo
 {
-    CPPet *pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
     BLOCK_SELF_REF_OUTSIDE();
-    [[CPAppEngineCommunicationManager sharedInstance] createDevice:deviceInfo forAnimal:pet.petId completion:^(NSError *error) {
+    void (^completion)(NSError *) = ^(NSError *error) {
         BLOCK_SELF_REF_INSIDE();
         if (error) {
             // TODO: display error to user and relaunch device claim flow
@@ -188,7 +187,14 @@ didFinishSignInWithToken:(NSString *)token
         } else {
             [self presentUIForLoginResult:CPLoginResult_UserWithSetupCompleted];
         }
-    }];
+    };
+    
+    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
+    if (currentUser.device && !currentUser.device.particleId) {
+        [[CPAppEngineCommunicationManager sharedInstance] updateDevice:currentUser.device.deviceId particle:deviceInfo completion:completion];
+    } else {
+        [[CPAppEngineCommunicationManager sharedInstance] createDevice:deviceInfo forAnimal:currentUser.pet.petId completion:completion];
+    }
 }
 
 - (void)deviceClaimCanceled
@@ -226,6 +232,16 @@ didFinishSignInWithToken:(NSString *)token
         {
             UIViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"PetProfileSetup"];
             [[self getRootNavController] pushViewController:vc animated:YES];
+            break;
+        }
+        case CPLoginResult_UserWithoutParticle:
+        {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Particle Missing" message:@"We no longer have a record of your particle device, a hub is required to continue" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+            }]];
+            [[self getRootNavController] presentViewController:alert animated:YES completion:nil];
             break;
         }
         case CPLoginResult_UserWithoutDevice:

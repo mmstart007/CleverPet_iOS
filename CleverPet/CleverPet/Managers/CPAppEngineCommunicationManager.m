@@ -25,9 +25,11 @@ NSString * const kPetProfilePath = @"animals";
 NSString * const kDevicePath = @"devices";
 NSString * const kSchedulesPathFragment = @"schedules";
 NSString * const kModePathFragment = @"mode";
+NSString * const kParticlePathFragment = @"particle";
 #define SPECIFIC_DEVICE(deviceId) [NSString stringWithFormat:@"%@/%@", kDevicePath, deviceId]
 #define SPECIFIC_DEVICE_SCHEDULES(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment]
 #define SPECIFIC_DEVICE_MODE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kModePathFragment]
+#define SPECIFIC_DEVICE_PARTICLE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kParticlePathFragment]
 #define SPECIFIC_SCHEDULE(deviceId, scheduleId) [NSString stringWithFormat:@"%@/%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment, scheduleId]
 
 // TODO: error codes or something so this isn't string matching
@@ -119,9 +121,11 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
                 result = CPLoginResult_UserWithoutPetProfile;
             } else if (!currentUser.device) {
                 result = CPLoginResult_UserWithoutDevice;
+            } else if (!currentUser.device.particleId) {
+                result = CPLoginResult_UserWithoutParticle;
             }
             
-            if (currentUser.device && (!currentUser.device.weekdaySchedule || !currentUser.device.weekendSchedule)) {
+            if ((currentUser.device && currentUser.device.particleId) && (!currentUser.device.weekdaySchedule || !currentUser.device.weekendSchedule)) {
                 [self lookupDeviceSchedules:currentUser.device.deviceId completion:^(NSError *error) {
                     if (error) {
                         if (completion) completion(CPLoginResult_Failure, error);
@@ -135,7 +139,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     };
     
-    if (!currentUser.device) {
+    if (!currentUser.device || !currentUser.device.particleId) {
         // If we have no device, we need to set the auth token for particle
         [[CPParticleConnectionHelper sharedInstance] setAccessToken:userInfo[kParticleAuthKey] completion:particleAuthSet];
     } else {
@@ -233,6 +237,25 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (completion) completion([self errorForMessage:errorMessage]);
         } else {
             if (completion) completion(nil);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+    }];
+}
+
+- (ASYNC)updateDevice:(NSString *)deviceId particle:(NSDictionary *)particleInfo completion:(void (^)(NSError *))completion
+{
+    NSParameterAssert(deviceId);
+    NSParameterAssert(particleInfo);
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.sessionManager PUT:SPECIFIC_DEVICE_PARTICLE(deviceId) parameters:particleInfo success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        if (jsonResponse[kErrorKey]) {
+            NSString *errorMessage = jsonResponse[kErrorKey];
+            if (completion) completion([self errorForMessage:errorMessage]);
+        } else {
+            [self lookupDeviceInfo:deviceId completion:completion];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
