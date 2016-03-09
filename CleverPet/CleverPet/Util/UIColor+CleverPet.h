@@ -29,11 +29,13 @@
 // #808080
 + (UIColor*)appSubCopyTextColor;
 + (UIColor*)appTextFieldPlaceholderColor;
-
++ (UIColor*)appHubOnlineColor;
 
 DeclareColor(Divider);
 DeclareColor(LightRed);
 DeclareColor(LightGreen);
 DeclareColor(LightOrange);
 DeclareColor(LightYellow);
+DeclareColor(HubWaiting);
+DeclareColor(HubOffline);
 @end
