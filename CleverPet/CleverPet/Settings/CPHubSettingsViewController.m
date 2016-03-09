@@ -95,7 +95,6 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     // TODO: Hub listener, etc so we can display disconnected or waiting for data as appropriate when the state changes
     // TODO: hub setting, scheduled settings from server
     self.currentHubSetting = [self.modeToHubSettingMap[self.currentDevice.mode] integerValue];
-    self.connectionState = HubConnectionState_Connected;
     switch (self.connectionState) {
         case HubConnectionState_Connected:
         {
