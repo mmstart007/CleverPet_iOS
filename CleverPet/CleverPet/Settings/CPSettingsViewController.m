@@ -97,7 +97,7 @@ NSInteger const kLastSeenThreshhold = 120;
             [[CPAppEngineCommunicationManager sharedInstance] checkDeviceLastSeen:[[CPUserManager sharedInstance] getCurrentUser].device.deviceId completion:^(NSInteger delta, NSError *error) {
                 BLOCK_SELF_REF_INSIDE();
                 self.checkingHubStatus = NO;
-                if (error || delta > kLastSeenThreshhold) {
+                if (error || delta == NSNotFound || delta > kLastSeenThreshhold) {
                     self.connectionState = HubConnectionState_Disconnected;
                 } else {
                     self.connectionState = HubConnectionState_Connected;
