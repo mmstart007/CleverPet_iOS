@@ -18,6 +18,7 @@ NSUInteger const kHelpSection = 1;
 NSUInteger const kAccountSection = 2;
 
 NSUInteger const kHelpSectionChatWithUsRow = 0;
+NSUInteger const kDeviceSectionHubSettingsRow = 0;
 
 NSInteger const kLastSeenThreshhold = 120;
 
@@ -78,13 +79,18 @@ NSInteger const kLastSeenThreshhold = 120;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)setConnectionState:(HubConnectionState)connectionState
+{
+    _connectionState = connectionState;
+    [self.hubCell updateWithHubConnection:_connectionState];
+}
+
 - (void)updateHubStatus
 {
     if(!self.checkingHubStatus) {
         // Check if we're offline
         if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
             self.connectionState = HubConnectionState_Offline;
-            [self.hubCell updateWithHubConnection:self.connectionState];
         } else {
             self.checkingHubStatus = YES;
             BLOCK_SELF_REF_OUTSIDE();
@@ -96,7 +102,6 @@ NSInteger const kLastSeenThreshhold = 120;
                 } else {
                     self.connectionState = HubConnectionState_Connected;
                 }
-                [self.hubCell updateWithHubConnection:self.connectionState];
             }];
         }
     }
@@ -185,6 +190,10 @@ NSInteger const kLastSeenThreshhold = 120;
     
     if (indexPath.section == kHelpSection && indexPath.row == kHelpSectionChatWithUsRow) {
         [Intercom presentConversationList];
+    } else if (indexPath.section == kDeviceSection && indexPath.row == kDeviceSectionHubSettingsRow) {
+        if (self.connectionState != HubConnectionState_Unknown) {
+            [self performSegueWithIdentifier:@"hubSettings" sender:nil];
+        }
     }
 }
 

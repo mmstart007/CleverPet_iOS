@@ -72,7 +72,6 @@
                                             <outlet property="indicatorDot" destination="cQB-ql-ikf" id="JJU-qm-mRu"/>
                                             <outlet property="statusLabel" destination="yLM-Be-vv4" id="uhv-DX-0ec"/>
                                             <outlet property="titleLabel" destination="uz1-Id-MkH" id="Qoh-te-dDa"/>
-                                            <segue destination="Lcj-q5-au9" kind="show" id="GzI-xG-RNr"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -186,6 +185,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="hubCell" destination="o0a-FZ-mNx" id="FUW-9f-aXn"/>
+                        <segue destination="Lcj-q5-au9" kind="show" identifier="hubSettings" id="yy9-pA-N2M"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X8U-nT-PYQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -508,7 +508,7 @@
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logout" translatesAutoresizingMaskIntoConstraints="NO" id="Q8a-W7-foH">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logout" translatesAutoresizingMaskIntoConstraints="NO" id="Q8a-W7-foH">
                                                         <rect key="frame" x="291" y="26" width="14" height="14"/>
                                                     </imageView>
                                                 </subviews>
