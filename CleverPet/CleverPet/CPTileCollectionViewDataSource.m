@@ -35,6 +35,7 @@ CGFloat const kPagingThreshhold = 100.f;
 @property (strong, nonatomic) CPMainTableSectionHeaderFilter *currentFilter;
 @property (strong, nonatomic) NSMutableDictionary<CPMainTableSectionHeaderFilter *, CPTileDataManager *> *tileDataManagers;
 @property (nonatomic, weak) UIActivityIndicatorView *footerSpinner;
+@property (nonatomic, weak) UIImageView *footerIcon;
 @end
 
 @implementation CPTileCollectionViewDataSource {
@@ -95,6 +96,7 @@ CGFloat const kPagingThreshhold = 100.f;
     UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     logo.translatesAutoresizingMaskIntoConstraints = NO;
     [view addSubview:logo];
+    self.footerIcon = logo;
     // center image in footer
     NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
     NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
@@ -107,8 +109,8 @@ CGFloat const kPagingThreshhold = 100.f;
     [view addSubview:spinner];
     self.footerSpinner = spinner;
     NSLayoutConstraint *spinnerCenterY = [NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
-    NSLayoutConstraint *spinnerSpacing = [NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:logo attribute:NSLayoutAttributeLeading multiplier:1 constant:-10];
-    [view addConstraints:@[spinnerCenterY, spinnerSpacing]];
+    NSLayoutConstraint *spinnerCenterX = [NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    [view addConstraints:@[spinnerCenterY, spinnerCenterX]];
     
     self.tableView.tableFooterView = view;
 }
@@ -363,12 +365,12 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 // TODO: kill page if we refresh
 - (void)refreshTilesWithAnimation:(BOOL)withAnimation
 {
-    [self.footerSpinner startAnimating];
+    [self animateFooterSpinner:YES];
     CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
     BLOCK_SELF_REF_OUTSIDE();
     [currentManager refreshTiles:NO completion:^(NSIndexSet *indexes, NSError *error) {
         BLOCK_SELF_REF_INSIDE();
-        [self.footerSpinner stopAnimating];
+        [self animateFooterSpinner:NO];
         if (error) {
             // TODO: display error
         } else if (currentManager == self.tileDataManagers[self.currentFilter]) {
@@ -380,18 +382,30 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 
 - (void)pageMoreTilesWithAnimation:(BOOL)withAnimation
 {
-    [self.footerSpinner startAnimating];
+    [self animateFooterSpinner:YES];
     CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
     BLOCK_SELF_REF_OUTSIDE();
     [currentManager pageMoreTiles:^(NSIndexSet *indexes, NSError *error) {
         BLOCK_SELF_REF_INSIDE();
-        [self.footerSpinner stopAnimating];
+        [self animateFooterSpinner:NO];
         if (error) {
             // TODO: display error
         } else if (currentManager == self.tileDataManagers[self.currentFilter]) {
             [self addTiles:indexes withAnimation:withAnimation];
         }
     }];
+}
+
+- (void)animateFooterSpinner:(BOOL)animate
+{
+    [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseInOut animations:^{
+        if (animate) {
+            [self.footerSpinner startAnimating];
+        } else {
+            [self.footerSpinner stopAnimating];
+        }
+        self.footerIcon.hidden = animate;
+    } completion:nil];
 }
 
 @end
