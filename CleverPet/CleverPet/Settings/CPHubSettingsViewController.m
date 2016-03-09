@@ -26,8 +26,6 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (weak, nonatomic) IBOutlet UIView *disconnectedView;
 @property (weak, nonatomic) IBOutlet UILabel *disconnectedHeaderLabel;
 @property (weak, nonatomic) IBOutlet UILabel *disconnectedBodyLabel;
-@property (weak, nonatomic) IBOutlet UILabel *disconnectedSubHeaderLabel;
-@property (weak, nonatomic) IBOutlet UILabel *disconnectedSubBodyLabel;
 
 // On
 @property (weak, nonatomic) IBOutlet UIStackView *onView;
@@ -59,7 +57,6 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (weak, nonatomic) IBOutlet UILabel *offBodyLabel;
 
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *headerLabels;
-@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *subHeaderLabels;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *bodyLabels;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *weekdayLabels;
 @property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *timeRangeLabels;
@@ -98,7 +95,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     // TODO: Hub listener, etc so we can display disconnected or waiting for data as appropriate when the state changes
     // TODO: hub setting, scheduled settings from server
     self.currentHubSetting = [self.modeToHubSettingMap[self.currentDevice.mode] integerValue];
-    
+    self.connectionState = HubConnectionState_Connected;
     switch (self.connectionState) {
         case HubConnectionState_Connected:
         {
@@ -137,8 +134,6 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 {
     [self.headerLabels makeObjectsPerformSelector:@selector(setFont:) withObject:[UIFont cpLightFontWithSize:kTableCellTitleSize italic:NO]];
     [self.headerLabels makeObjectsPerformSelector:@selector(setTextColor:) withObject:[UIColor appTitleTextColor]];
-    [self.subHeaderLabels makeObjectsPerformSelector:@selector(setFont:) withObject:[UIFont cpLightFontWithSize:kSubCopyFontSize italic:NO]];
-    [self.subHeaderLabels makeObjectsPerformSelector:@selector(setTextColor:) withObject:[UIColor appTitleTextColor]];
     [self.bodyLabels makeObjectsPerformSelector:@selector(setFont:) withObject:[UIFont cpLightFontWithSize:kHubStatusSubCopyFontSize italic:NO]];
     [self.bodyLabels makeObjectsPerformSelector:@selector(setTextColor:) withObject:[UIColor appSubCopyTextColor]];
     [self.weekdayLabels makeObjectsPerformSelector:@selector(setFont:) withObject:[UIFont cpLightFontWithSize:12.0 italic:NO]];
@@ -170,10 +165,8 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 {
     [self animateChanges:^{
         // TODO: actual strings
-        self.disconnectedHeaderLabel.text = NSLocalizedString(@"Disconnected", nil);
-        self.disconnectedBodyLabel.text = @"This is some placeholder disconnected body text. Please update me";
-        self.disconnectedSubHeaderLabel.text = @"This is a placeholder sub headline. Please update me";
-        self.disconnectedSubBodyLabel.text = @"This is some placeholder disconnected sub body text. Please update me.";
+        self.disconnectedHeaderLabel.text = NSLocalizedString(@"Status Pending", @"No data header for when the hub is not connected to data");
+        self.disconnectedBodyLabel.text = NSLocalizedString(@"The Hub is not connected to the Internet.", @"No data message for when the hub is not connected to data");
         [self hideDisconnectedView:NO];
     } withDuration:.3];
 }
@@ -182,10 +175,8 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 {
     [self animateChanges:^{
         // TODO: actual strings
-        self.disconnectedHeaderLabel.text = NSLocalizedString(@"No Data", nil);
-        self.disconnectedBodyLabel.text = @"This is some placeholder no data body text. Please update me";
-        self.disconnectedSubHeaderLabel.text = @"This is a placeholder sub headline. Please update me";
-        self.disconnectedSubBodyLabel.text = @"This is some placeholder no data sub body text. Please update me.";
+        self.disconnectedHeaderLabel.text = NSLocalizedString(@"Status Unknown", @"No data header for when the app is not connected to data");
+        self.disconnectedBodyLabel.text = NSLocalizedString(@"This app is not connected to the Internet", @"No data message for when the app is not connected to data");
         [self hideDisconnectedView:NO];
     } withDuration:.3];
 }
