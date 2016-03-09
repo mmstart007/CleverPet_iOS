@@ -183,6 +183,7 @@ didFinishSignInWithToken:(NSString *)token
         BLOCK_SELF_REF_INSIDE();
         if (error) {
             // TODO: display error to user and relaunch device claim flow
+            [self deviceClaimFailed];
         } else {
             [self presentUIForLoginResult:CPLoginResult_UserWithSetupCompleted];
         }
@@ -192,11 +193,23 @@ didFinishSignInWithToken:(NSString *)token
 - (void)deviceClaimCanceled
 {
     // TODO: Inform the user they cannot proceed without a particle device and relaunch device claim flow
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Hub Required" message:@"You must have a hub to continue with the app. Please rest your hub to listening mode before pressing continue to retry device setup" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self presentUIForLoginResult:CPLoginResult_UserWithoutDevice];
+    }]];
+    [[self getRootNavController] presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)deviceClaimFailed
 {
-    // TODO: Present instructional message to user before relaunching device claim flow
+    // TODO: View controller Present instructional message to user before relaunching device claim flow
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error claiming hub" message:@"There was an error claiming the hub. Please reset the hub to listening mode before pressing continue to retry device setup" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self presentUIForLoginResult:CPLoginResult_UserWithoutDevice];
+    }]];
+    [[self getRootNavController] presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - UI flow
@@ -217,8 +230,7 @@ didFinishSignInWithToken:(NSString *)token
         case CPLoginResult_UserWithoutDevice:
         {
             // TODO: remove this hack
-            [self deviceClaimed:nil];
-//            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
             break;
         }
         case CPLoginResult_UserWithSetupCompleted:

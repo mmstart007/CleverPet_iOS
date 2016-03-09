@@ -74,7 +74,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         } else {
             // Check for required auth tokens
             // TODO: bring back particle and firebase auth
-            if (jsonResponse[kAuthTokenKey]) {
+            if (jsonResponse[kAuthTokenKey] && jsonResponse[kParticleAuthKey]) {
                 [self setAuthToken:jsonResponse[kAuthTokenKey]];
                 [[CPUserManager sharedInstance] userLoggedIn:jsonResponse];
                 [self userLoggedIn:jsonResponse completion:completion];
@@ -134,14 +134,12 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     };
     
-    // TODO: bring back when particle auth is working
-    // TODO: Update with the proper keys/etc from feature/hub-settings-networking
-//    if (!userInfo[@"device"] || [userInfo[@"device"] isKindOfClass:[NSNull class]]) {
-//        // If we have no device, we need to set the auth token for particle
-//        [[CPParticleConnectionHelper sharedInstance] setAccessToken:userInfo[kParticleAuthTokenKey] completion:particleAuthSet];
-//    } else {
+    if (!currentUser.device) {
+        // If we have no device, we need to set the auth token for particle
+        [[CPParticleConnectionHelper sharedInstance] setAccessToken:userInfo[kParticleAuthKey] completion:particleAuthSet];
+    } else {
         particleAuthSet(nil);
-//    }
+    }
 }
 
 #pragma mark - Pet profile
