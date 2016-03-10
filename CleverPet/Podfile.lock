@@ -23,6 +23,7 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
   - CHCSVParser (2.1.0)
+  - CorePlot (2.0)
   - FBSDKCoreKit (4.10.0):
     - Bolts (~> 1.5)
   - FBSDKLoginKit (4.10.0):
@@ -80,6 +81,7 @@ DEPENDENCIES:
   - AttributedMarkdown (from `https://github.com/dreamwieber/AttributedMarkdown.git`)
   - BABCropperView
   - CHCSVParser
+  - CorePlot (~> 2.0)
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
@@ -109,6 +111,7 @@ SPEC CHECKSUMS:
   BABCropperView: 908858c9fd17e9bb6d2446f3ae56172c14363974
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   CHCSVParser: 3bcc7bdb72111a31222e95d57eacceefe4e537e8
+  CorePlot: b7f422ad363f2b0e48152471d6da45ce232eb8c6
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
