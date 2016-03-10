@@ -101,6 +101,7 @@
 		97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B071C75316F007F1383 /* CPPickerViewController.m */; };
 		97EC010A1C92354300929EFE /* CPSplashImageUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC01091C92354300929EFE /* CPSplashImageUtils.m */; };
 		97EC01041C921FFC00929EFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97EC01031C921FFC00929EFE /* GoogleService-Info.plist */; };
+		97EC01071C92258600929EFE /* CPGCMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC01061C92258600929EFE /* CPGCMManager.m */; };
 		97F7284E1C7E416A005E65C2 /* CPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F7284D1C7E416A005E65C2 /* CPConfigManager.m */; };
 		97F728511C7E588C005E65C2 /* CPAppEngineCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */; };
 		BCD1938D360A74B45F4482F4 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */; };
@@ -266,6 +267,8 @@
 		97EC01081C92354300929EFE /* CPSplashImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSplashImageUtils.h; sourceTree = "<group>"; };
 		97EC01091C92354300929EFE /* CPSplashImageUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSplashImageUtils.m; sourceTree = "<group>"; };
 		97EC01031C921FFC00929EFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		97EC01051C92258600929EFE /* CPGCMManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGCMManager.h; sourceTree = "<group>"; };
+		97EC01061C92258600929EFE /* CPGCMManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGCMManager.m; sourceTree = "<group>"; };
 		97F7284C1C7E416A005E65C2 /* CPConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPConfigManager.h; sourceTree = "<group>"; };
 		97F7284D1C7E416A005E65C2 /* CPConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPConfigManager.m; sourceTree = "<group>"; };
 		97F7284F1C7E588C005E65C2 /* CPAppEngineCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAppEngineCommunicationManager.h; sourceTree = "<group>"; };
@@ -472,6 +475,8 @@
 				51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */,
 				971D337A1C937208000A0DD6 /* CPTileUpdateListener.h */,
 				971D337B1C937208000A0DD6 /* CPTileUpdateListener.m */,
+				97EC01051C92258600929EFE /* CPGCMManager.h */,
+				97EC01061C92258600929EFE /* CPGCMManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -619,6 +624,11 @@
 					0D36AA821C7243D600349D03 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 8TD89Q5H39;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -801,6 +811,7 @@
 				971D337C1C937208000A0DD6 /* CPTileUpdateListener.m in Sources */,
 				979D84431C7FA50700ADB6B0 /* CPFileUtils.m in Sources */,
 				97B635441C91E6FA00DFE89C /* CPHubPlaceholderViewController.m in Sources */,
+				97EC01071C92258600929EFE /* CPGCMManager.m in Sources */,
 				97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */,
 				9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */,
 				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
@@ -915,6 +926,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
@@ -923,6 +935,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -933,6 +946,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
@@ -941,6 +955,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

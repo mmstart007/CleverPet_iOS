@@ -15,8 +15,15 @@
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <Google/CloudMessaging.h>
+#import "CPGCMManager.h"
 
-@interface AppDelegate ()
+typedef void (^gcmHandler)(NSString *token, NSError *error);
+
+@interface AppDelegate ()<GGLInstanceIDDelegate>
+
+@property (nonatomic, copy) gcmHandler gcmHandler;
+@property (nonatomic, strong) NSDictionary *registrationOptions;
 
 @end
 
@@ -34,6 +41,17 @@
     // Have reachability manager start monitoring, for use in the settings
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [Fabric with:@[[Crashlytics class]]];
+    
+    // Register for notifications
+    [self initializeGCM];
+    UIUserNotificationType allNotificationTypes =
+    (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+    UIUserNotificationSettings *settings =
+    [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    
     
     return YES;
 }
@@ -61,6 +79,19 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    
+    self.registrationOptions = @{kGGLInstanceIDRegisterAPNSOption:deviceToken,
+                             kGGLInstanceIDAPNSServerTypeSandboxOption:@YES};
+    [self obtainGCMToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSInteger breakpoint = 0;
+}
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -78,6 +109,37 @@
     gitkitClient.widgetURL = @"http://localhost?placeholder";
     gitkitClient.providers = @[kGITProviderGoogle, kGITProviderFacebook];
     [GIDSignIn sharedInstance].clientID = @"879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com";
+}
+
+#pragma mark - GGLInstanceIDDelegate
+- (void)onTokenRefresh
+{
+    [self obtainGCMToken];
+}
+
+- (void)initializeGCM
+{
+    // Create a config and set a delegate that implements the GGLInstaceIDDelegate protocol.
+    GGLInstanceIDConfig *instanceIDConfig = [GGLInstanceIDConfig defaultConfig];
+    instanceIDConfig.delegate = self;
+    // Start the GGLInstanceID shared instance with the that config and request a registration
+    // token to enable reception of notifications
+    [[GGLInstanceID sharedInstance] startWithConfig:instanceIDConfig];
+    
+    self.gcmHandler = ^(NSString *token, NSError *error) {
+        if (!error) {
+            [[CPGCMManager sharedInstance] obtainedGCMToken:token];
+        }
+        // TODO: handle error
+    };
+}
+
+- (void)obtainGCMToken
+{
+    [[GGLInstanceID sharedInstance] tokenWithAuthorizedEntity:@"879679195763"
+                                                        scope:kGGLInstanceIDScopeGCM
+                                                      options:self.registrationOptions
+                                                      handler:self.gcmHandler];
 }
 
 @end

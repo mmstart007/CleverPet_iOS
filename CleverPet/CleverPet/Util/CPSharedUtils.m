@@ -59,6 +59,8 @@ NSString * const kCursorKey = @"cursor";
 NSString * const kMoreKey = @"more";
 NSString * const kTilesKey = @"tiles";
 NSString * const kPageSizeKey = @"num_entries";
+// GCM keys
+NSString * const kGCMTokenKey = @"phone_ids";
 
 @implementation CPSharedUtils
 
