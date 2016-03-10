@@ -63,7 +63,11 @@
     self.orLabel.textColor = [UIColor appTitleTextColor];
     
     self.facebookButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
+    self.facebookButton.backgroundColor = [UIColor colorWithRed:0.235 green:0.353 blue:0.584 alpha:1.00];
+    [self.facebookButton setTitleColor:[UIColor appWhiteColor] forState:UIControlStateNormal];
     self.googleButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
+    self.googleButton.backgroundColor = [UIColor appWhiteColor];
+    [self.googleButton setTitleColor:[UIColor appTitleTextColor] forState:UIControlStateNormal];
     self.signInButton.backgroundColor = [UIColor appLightTealColor];
     [self.signInButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.signInButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];

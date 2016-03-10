@@ -364,7 +364,7 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="530"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="96S-Y2-KXS">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="342"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="382"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign in" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4h6-nR-KHD">
                                                 <rect key="frame" x="20" y="100" width="560" height="21"/>
@@ -388,9 +388,13 @@
                                                     <outlet property="delegate" destination="oPR-Or-REb" id="vfq-kZ-3qf"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UOY-lu-j4i">
-                                                <rect key="frame" x="0.0" y="312" width="600" height="30"/>
-                                                <state key="normal" title="Sign in with Google ID"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UOY-lu-j4i">
+                                                <rect key="frame" x="0.0" y="332" width="600" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="rsj-fs-yMx"/>
+                                                </constraints>
+                                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Sign in with Google" image="google"/>
                                                 <connections>
                                                     <action selector="googleTapped:" destination="oPR-Or-REb" eventType="touchUpInside" id="cHi-Dw-VuF"/>
                                                 </connections>
@@ -401,9 +405,13 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l76-Qu-1Hv">
-                                                <rect key="frame" x="0.0" y="272" width="600" height="30"/>
-                                                <state key="normal" title="Sign in with Facebook"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l76-Qu-1Hv">
+                                                <rect key="frame" x="0.0" y="272" width="600" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="Gt9-c5-OpI"/>
+                                                </constraints>
+                                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <state key="normal" title="Sign in with Facebook" image="facebook"/>
                                                 <connections>
                                                     <action selector="facebookTapped:" destination="oPR-Or-REb" eventType="touchUpInside" id="XWt-Yp-Jxx"/>
                                                 </connections>
@@ -822,4 +830,8 @@
             <point key="canvasLocation" x="1239" y="-243"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="facebook" width="28" height="28"/>
+        <image name="google" width="30" height="30"/>
+    </resources>
 </document>
