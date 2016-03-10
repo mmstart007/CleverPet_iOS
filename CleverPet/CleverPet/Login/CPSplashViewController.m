@@ -10,12 +10,11 @@
 #import "CPLoginController.h"
 #import "CPConfigManager.h"
 #import "CPLoadingView.h"
+#import "CPSplashImageUtils.h"
 
 @interface CPSplashViewController ()<CPLoginControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
-@property (weak, nonatomic) IBOutlet UIImageView *iconImage;
-@property (weak, nonatomic) IBOutlet UILabel *taglineLabel;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIView *fadeView;
 
@@ -28,6 +27,9 @@
     // Do any additional setup after loading the view.
     [self setupStyling];
     self.signInButton.hidden = YES;
+    
+    self.backgroundImage.image = [CPSplashImageUtils getSplashImage];
+    
     BLOCK_SELF_REF_OUTSIDE();
     [[CPConfigManager sharedInstance] loadConfigWithCompletion:^(NSError *error) {
         BLOCK_SELF_REF_INSIDE();
@@ -49,8 +51,6 @@
 
 - (void)setupStyling
 {
-    self.taglineLabel.font = [UIFont cpLightFontWithSize:16.0 italic:NO];
-    self.taglineLabel.textColor = [UIColor appGreyColor];
     self.signInButton.backgroundColor = [UIColor appLightTealColor];
     [self.signInButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.signInButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:0];
