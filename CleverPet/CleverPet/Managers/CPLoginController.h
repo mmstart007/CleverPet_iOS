@@ -29,6 +29,9 @@
 - (void)signInWithGoogle;
 
 - (void)loginViewPressedCancel:(UIViewController*)viewController;
+- (void)cancelPetProfileCreation;
+- (void)continueDeviceSetup;
+- (void)cancelDeviceSetup;
 
 - (void)setPendingUserInfo:(NSDictionary *)userInfo;
 - (void)completeSignUpWithPetImage:(UIImage*)image completion:(void (^)(NSError *error))completion;
