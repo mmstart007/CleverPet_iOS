@@ -145,13 +145,14 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 
 - (void)continueDeviceSetup
 {
-    
+    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
 }
 
 - (void)cancelDeviceSetup
 {
     [self.delegate loginAttemptCancelled];
     [[self getRootNavController] popToRootViewControllerAnimated:YES];
+    self.hubPlaceholderVc = nil;
 }
 
 #pragma mark - GITInterfaceManagerDelegate
@@ -239,24 +240,12 @@ didFinishSignInWithToken:(NSString *)token
 
 - (void)deviceClaimCanceled
 {
-    // TODO: Inform the user they cannot proceed without a particle device and relaunch device claim flow
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Hub Required" message:@"You must have a hub to continue with the app. Please rest your hub to listening mode before pressing continue to retry device setup" preferredStyle:UIAlertControllerStyleAlert];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [self presentUIForLoginResult:CPLoginResult_UserWithoutDevice];
-    }]];
-    [[self getRootNavController] presentViewController:alert animated:YES completion:nil];
+    [self.hubPlaceholderVc displayMessage:NSLocalizedString(@"If you do not complete Hub WiFi Setup, the Hub won't adapt to your dog or offer your dog new challenges.\n\nYou also won't be able to see how your dog is doing through the CleverPet mobile app.", @"Message displayed to user when they cancel out of the particle device claim flow")];
 }
 
 - (void)deviceClaimFailed
 {
-    // TODO: View controller Present instructional message to user before relaunching device claim flow
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error claiming hub" message:@"There was an error claiming the hub. Please reset the hub to listening mode before pressing continue to retry device setup" preferredStyle:UIAlertControllerStyleAlert];
-    
-    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [self presentUIForLoginResult:CPLoginResult_UserWithoutDevice];
-    }]];
-    [[self getRootNavController] presentViewController:alert animated:YES completion:nil];
+    [self.hubPlaceholderVc displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
 }
 
 #pragma mark - UI flow
@@ -276,22 +265,18 @@ didFinishSignInWithToken:(NSString *)token
         }
         case CPLoginResult_UserWithoutParticle:
         {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Particle Missing" message:@"We no longer have a record of your particle device, a hub is required to continue" preferredStyle:UIAlertControllerStyleAlert];
-            
-            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
-            }]];
-            [[self getRootNavController] presentViewController:alert animated:YES completion:nil];
+            [self presentHubPlaceholderWithMessage:NSLocalizedString(@"We no longer have a record of your Hub.\n\nPlease setup a Hub to continue.", @"Message displayed to user when hub has been claimed out from under them")];
             break;
         }
         case CPLoginResult_UserWithoutDevice:
         {
-            // TODO: remove this hack
+            [self presentHubPlaceholderWithMessage:nil];
             [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
             break;
         }
         case CPLoginResult_UserWithSetupCompleted:
         {
+            self.hubPlaceholderVc = nil;
             // We've made it completely through our signin/account setup flow. Store the users auth token in the keychain to support autologin.
             // Just storing by our auto login name, since the user id is irrelevant, we just want the last user
             [self setAutoLoginToken:self.pendingAuthToken];
@@ -312,6 +297,18 @@ didFinishSignInWithToken:(NSString *)token
             break;
         }
     }
+}
+
+- (void)presentHubPlaceholderWithMessage:(NSString *)message
+{
+    CPHubPlaceholderViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"HubPlaceholder"];
+    self.hubPlaceholderVc = vc;
+    if (message) {
+        [self.hubPlaceholderVc displayMessage:message];
+    }
+    
+    UINavigationController *root = [self getRootNavController];
+    [root pushViewController:vc animated:YES];
 }
 
 - (UINavigationController*)getRootNavController
