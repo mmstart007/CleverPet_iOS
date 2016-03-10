@@ -17,6 +17,7 @@
 #import "CPUserManager.h"
 #import <Intercom/Intercom.h>
 #import <SSKeychain/SSKeychain.h>
+#import "CPHubPlaceholderViewController.h"
 
 NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 
@@ -27,6 +28,7 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 @property (nonatomic, strong) NSDictionary *userInfo;
 @property (nonatomic, weak) id<CPLoginControllerDelegate> delegate;
 @property (nonatomic, strong) NSString *pendingAuthToken;
+@property (nonatomic, strong) CPHubPlaceholderViewController *hubPlaceholderVc;
 
 @end
 
@@ -139,6 +141,11 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
     self.userInfo = nil;
     [self.delegate loginAttemptCancelled];
     [[self getRootNavController] popToRootViewControllerAnimated:YES];
+}
+
+- (void)continueDeviceSetup
+{
+    
 }
 
 - (void)cancelDeviceSetup

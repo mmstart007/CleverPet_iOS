@@ -30,6 +30,7 @@
 
 - (void)loginViewPressedCancel:(UIViewController*)viewController;
 - (void)cancelPetProfileCreation;
+- (void)continueDeviceSetup;
 - (void)cancelDeviceSetup;
 
 - (void)setPendingUserInfo:(NSDictionary *)userInfo;

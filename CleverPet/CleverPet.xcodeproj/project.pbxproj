@@ -70,6 +70,7 @@
 		979D84751C84FAF200ADB6B0 /* Raleway-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 979D84631C84F60500ADB6B0 /* Raleway-Thin.ttf */; };
 		979D84761C84FAF200ADB6B0 /* Raleway-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 979D84641C84F60500ADB6B0 /* Raleway-ThinItalic.ttf */; };
 		979D84781C84FF3000ADB6B0 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 979D84771C84FF3000ADB6B0 /* CoreText.framework */; };
+		97B635441C91E6FA00DFE89C /* CPHubPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B635431C91E6FA00DFE89C /* CPHubPlaceholderViewController.m */; };
 		97C8AA951C7E6AE500BABD4D /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C8AA941C7E6AE500BABD4D /* Login.storyboard */; };
 		97CC44561C754B67003C4258 /* breeds.csv in Resources */ = {isa = PBXBuildFile; fileRef = 97CC44551C754B67003C4258 /* breeds.csv */; };
 		97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */; };
@@ -200,6 +201,8 @@
 		979D84631C84F60500ADB6B0 /* Raleway-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-Thin.ttf"; sourceTree = "<group>"; };
 		979D84641C84F60500ADB6B0 /* Raleway-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Raleway-ThinItalic.ttf"; sourceTree = "<group>"; };
 		979D84771C84FF3000ADB6B0 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		97B635421C91E6FA00DFE89C /* CPHubPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHubPlaceholderViewController.h; sourceTree = "<group>"; };
+		97B635431C91E6FA00DFE89C /* CPHubPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHubPlaceholderViewController.m; sourceTree = "<group>"; };
 		97C8AA941C7E6AE500BABD4D /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		97CC44551C754B67003C4258 /* breeds.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = breeds.csv; sourceTree = "<group>"; };
 		97CC44571C754E93003C4258 /* CPBreedPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBreedPickerViewController.h; sourceTree = "<group>"; };
@@ -382,6 +385,8 @@
 				97EB7AFA1C73F282007F1383 /* CPPetProfileViewController.h */,
 				97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */,
 				97C8AA941C7E6AE500BABD4D /* Login.storyboard */,
+				97B635421C91E6FA00DFE89C /* CPHubPlaceholderViewController.h */,
+				97B635431C91E6FA00DFE89C /* CPHubPlaceholderViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -746,6 +751,7 @@
 				97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */,
 				0DE13B451C7E9CB100648834 /* CPMainTableSectionHeader.m in Sources */,
 				979D84431C7FA50700ADB6B0 /* CPFileUtils.m in Sources */,
+				97B635441C91E6FA00DFE89C /* CPHubPlaceholderViewController.m in Sources */,
 				97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */,
 				9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */,
 				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,

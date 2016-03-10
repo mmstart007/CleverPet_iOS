@@ -256,6 +256,76 @@
             </objects>
             <point key="canvasLocation" x="362" y="1287"/>
         </scene>
+        <!--Hub Placeholder View Controller-->
+        <scene sceneID="rcd-Fh-w7A">
+            <objects>
+                <viewController storyboardIdentifier="HubPlaceholder" id="Gh1-G2-TO8" customClass="CPHubPlaceholderViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ncb-LC-nFf"/>
+                        <viewControllerLayoutGuide type="bottom" id="Pfb-Jl-KfE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fsG-kg-6nf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXW-OY-NAS">
+                                <rect key="frame" x="15" y="20" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelTapped:" destination="Gh1-G2-TO8" eventType="touchUpInside" id="aQo-Zy-87O"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYO-RY-ylF">
+                                <rect key="frame" x="279" y="290" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6JH-6l-9V5">
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4II-tr-OcU"/>
+                                </constraints>
+                                <state key="normal" title="Continue"/>
+                                <connections>
+                                    <action selector="continueTapped:" destination="Gh1-G2-TO8" eventType="touchUpInside" id="yU4-lz-qd8"/>
+                                </connections>
+                            </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gT2-Qk-cYE" customClass="CPLoadingView">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gT2-Qk-cYE" secondAttribute="trailing" id="0lS-wK-hi0"/>
+                            <constraint firstItem="6JH-6l-9V5" firstAttribute="leading" secondItem="fsG-kg-6nf" secondAttribute="leading" id="8Oq-JU-UQ7"/>
+                            <constraint firstItem="Pfb-Jl-KfE" firstAttribute="top" secondItem="6JH-6l-9V5" secondAttribute="bottom" id="9PX-Xo-pij"/>
+                            <constraint firstItem="6JH-6l-9V5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XYO-RY-ylF" secondAttribute="bottom" constant="50" id="EOY-wX-Bzm"/>
+                            <constraint firstItem="UXW-OY-NAS" firstAttribute="leading" secondItem="fsG-kg-6nf" secondAttribute="leading" constant="15" id="N2F-Mv-Esd"/>
+                            <constraint firstItem="XYO-RY-ylF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fsG-kg-6nf" secondAttribute="leading" constant="50" id="Q2D-UB-qd7"/>
+                            <constraint firstItem="XYO-RY-ylF" firstAttribute="centerY" secondItem="fsG-kg-6nf" secondAttribute="centerY" id="cu7-R6-CXh"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XYO-RY-ylF" secondAttribute="trailing" constant="50" id="g1f-Qn-lwg"/>
+                            <constraint firstAttribute="trailing" secondItem="6JH-6l-9V5" secondAttribute="trailing" id="ifb-ml-YXv"/>
+                            <constraint firstItem="gT2-Qk-cYE" firstAttribute="top" secondItem="ncb-LC-nFf" secondAttribute="bottom" id="jKY-5z-WET"/>
+                            <constraint firstItem="UXW-OY-NAS" firstAttribute="top" secondItem="ncb-LC-nFf" secondAttribute="bottom" id="mSl-I5-Yb5"/>
+                            <constraint firstItem="gT2-Qk-cYE" firstAttribute="leading" secondItem="fsG-kg-6nf" secondAttribute="leading" id="rVC-xI-TVL"/>
+                            <constraint firstItem="XYO-RY-ylF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ncb-LC-nFf" secondAttribute="bottom" constant="50" id="tJP-nm-UWu"/>
+                            <constraint firstItem="XYO-RY-ylF" firstAttribute="centerX" secondItem="fsG-kg-6nf" secondAttribute="centerX" id="tqz-RJ-QNw"/>
+                            <constraint firstItem="Pfb-Jl-KfE" firstAttribute="top" secondItem="gT2-Qk-cYE" secondAttribute="bottom" id="vCg-No-NU7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="UXW-OY-NAS" id="jLF-P5-1Z6"/>
+                        <outlet property="continueButton" destination="6JH-6l-9V5" id="EHy-MV-dN9"/>
+                        <outlet property="fadeView" destination="gT2-Qk-cYE" id="uWY-Pu-pqS"/>
+                        <outlet property="messageLabel" destination="XYO-RY-ylF" id="UwT-n0-Vbk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GU7-6R-Yj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2016" y="1287"/>
+        </scene>
         <!--Storyboard Link-->
         <scene sceneID="Fg8-Io-rPq">
             <objects>
