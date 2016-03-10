@@ -85,7 +85,23 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 - (void)startSigninWithDelegate:(id<CPLoginControllerDelegate>)delegate
 {
     self.delegate = delegate;
-    [self.interfaceManager startSignIn];
+    NSString *autoLoginToken = [SSKeychain passwordForService:kAutoLogin account:kAutoLogin];
+    if (autoLoginToken) {
+        BLOCK_SELF_REF_OUTSIDE();
+        [[CPAppEngineCommunicationManager sharedInstance] loginWithAuthToken:autoLoginToken completion:^(CPLoginResult result, NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            if (result == CPLoginResult_Failure) {
+                // TODO: don't clear keychain on failure because device is offline
+                // We don't need to display this error, as we'll just enter the regular sign in flow
+                [SSKeychain deletePasswordForService:kAutoLogin account:kAutoLogin];
+                [self startSigninWithDelegate:self.delegate];
+            } else {
+                [self presentUIForLoginResult:result];
+            }
+        }];
+    } else {
+        [self.interfaceManager startSignIn];
+    }
 }
 
 - (void)signInWithEmail:(NSString *)email
@@ -122,24 +138,7 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 #pragma mark - GITInterfaceManagerDelegate
 - (UIViewController*)signInControllerWithAccount:(GITAccount *)account
 {
-    CPNascarViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"SignInStart"];
-    
-    NSString *autoLoginToken = [SSKeychain passwordForService:kAutoLogin account:account.localID];
-    if (autoLoginToken) {
-        vc.isAutoLogin = YES;
-        
-        [[CPAppEngineCommunicationManager sharedInstance] loginWithAuthToken:autoLoginToken completion:^(CPLoginResult result, NSError *error) {
-            if (result == CPLoginResult_Failure) {
-                // TODO: don't clear keychain on failure because device is offline
-                [SSKeychain deletePasswordForService:kAutoLogin account:account.localID];
-                [vc autoLoginFailed];
-            } else {
-                [self presentUIForLoginResult:result];
-            }
-        }];
-    }
-    
-    return vc;
+    return [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"SignInStart"];
 }
 
 - (UIViewController *)legacySignInControllerWithEmail:(NSString *)email
@@ -246,8 +245,9 @@ didFinishSignInWithToken:(NSString *)token
         }
         case CPLoginResult_UserWithSetupCompleted:
         {
-            // We've made it completely through our signin/account setup flow. Store the users auth token in the keychain to support autologin
-            [SSKeychain setPassword:self.pendingAuthToken forService:kAutoLogin account:self.pendingGitAccount.localID];
+            // We've made it completely through our signin/account setup flow. Store the users auth token in the keychain to support autologin.
+            // Just storing by our auto login name, since the user id is irrelevant, we just want the last user
+            [SSKeychain setPassword:self.pendingAuthToken forService:kAutoLogin account:kAutoLogin];
             
             // Swap our root controller for the main screen
             UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScreenNav"];
@@ -278,11 +278,8 @@ didFinishSignInWithToken:(NSString *)token
     [Intercom reset];
     [[GITAuth sharedInstance] signOut];
     
-    // Clear any auth tokens from the keychain
-    NSArray *autoLoginAccounts = [SSKeychain accountsForService:kAutoLogin];
-    for (NSString *account in autoLoginAccounts) {
-        [SSKeychain deletePasswordForService:kAutoLogin account:account];
-    }
+    // Clear auto login token from keychain
+    [SSKeychain deletePasswordForService:kAutoLogin account:kAutoLogin];
     
     // Interface manager setup is tied into the root controller when it's instantiated, so reset it
     self.interfaceManager = [[GITInterfaceManager alloc] init];

@@ -10,8 +10,4 @@
 
 @interface CPNascarViewController : UIViewController
 
-@property (nonatomic, assign) BOOL isAutoLogin;
-
-- (void)autoLoginFailed;
-
 @end

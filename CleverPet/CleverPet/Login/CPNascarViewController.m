@@ -32,9 +32,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupStyling];
-    
-    // If we're processing an autologin, hide the rest of our UI
-    [self showAutoLogin:self.isAutoLogin animated:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,25 +81,6 @@
     }
     
     return YES;
-}
-
-- (void)showAutoLogin:(BOOL)show animated:(BOOL)animated
-{
-    BLOCK_SELF_REF_OUTSIDE();
-    [UIView animateWithDuration:(animated ? .3 : 0) delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        BLOCK_SELF_REF_INSIDE();
-        self.loadingView.hidden = !show;
-        self.scrollView.hidden = show;
-        self.cancelButton.hidden = show;
-        self.signInButton.hidden = show;
-        
-    } completion:nil];
-}
-
-- (void)autoLoginFailed
-{
-    // Our auto login attempt failed, so we resume the normal flow
-    [self showAutoLogin:NO animated:YES];
 }
 
 #pragma mark - IBActions
