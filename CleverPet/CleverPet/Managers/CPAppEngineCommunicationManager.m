@@ -26,10 +26,12 @@ NSString * const kDevicePath = @"devices";
 NSString * const kSchedulesPathFragment = @"schedules";
 NSString * const kModePathFragment = @"mode";
 NSString * const kParticlePathFragment = @"particle";
+NSString * const kLastSeenPathFragment = @"lastseen";
 #define SPECIFIC_DEVICE(deviceId) [NSString stringWithFormat:@"%@/%@", kDevicePath, deviceId]
 #define SPECIFIC_DEVICE_SCHEDULES(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment]
 #define SPECIFIC_DEVICE_MODE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kModePathFragment]
 #define SPECIFIC_DEVICE_PARTICLE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kParticlePathFragment]
+#define DEVICE_LAST_SEEN(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kLastSeenPathFragment]
 #define SPECIFIC_SCHEDULE(deviceId, scheduleId) [NSString stringWithFormat:@"%@/%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment, scheduleId]
 
 // TODO: error codes or something so this isn't string matching
@@ -280,6 +282,26 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
         if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+    }];
+}
+
+- (ASYNC)checkDeviceLastSeen:(NSString *)deviceId completion:(void (^)(NSInteger, NSError *))completion
+{
+    NSParameterAssert(deviceId);
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.sessionManager GET:DEVICE_LAST_SEEN(deviceId) parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        BLOCK_SELF_REF_INSIDE();
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        if (jsonResponse[kErrorKey]) {
+            NSString *errorMessage = jsonResponse[kErrorKey];
+            if (completion) completion(NSNotFound, [self errorForMessage:errorMessage]);
+        } else {
+            NSInteger delta = (jsonResponse[kLastSeenKey] && ![jsonResponse[kLastSeenKey] isKindOfClass:[NSNull class]]) ? [jsonResponse[kLastSeenKey] integerValue] : NSNotFound;
+            if (completion) completion(delta, nil);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion(NSNotFound, [self convertAFNetworkingErroToServerError:error]);
     }];
 }
 

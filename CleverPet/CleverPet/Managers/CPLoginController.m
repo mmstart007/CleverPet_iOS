@@ -16,6 +16,9 @@
 #import "CPFileUtils.h"
 #import "CPUserManager.h"
 #import <Intercom/Intercom.h>
+#import <SSKeychain/SSKeychain.h>
+
+NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 
 @interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate, CPParticleConnectionDelegate>
 
@@ -23,6 +26,7 @@
 @property (nonatomic, strong) NSDataDetector *emailDetector;
 @property (nonatomic, strong) NSDictionary *userInfo;
 @property (nonatomic, weak) id<CPLoginControllerDelegate> delegate;
+@property (nonatomic, strong) NSString *pendingAuthToken;
 
 @end
 
@@ -80,7 +84,23 @@
 - (void)startSigninWithDelegate:(id<CPLoginControllerDelegate>)delegate
 {
     self.delegate = delegate;
-    [self.interfaceManager startSignIn];
+    NSString *autoLoginToken = [SSKeychain passwordForService:kAutoLogin account:kAutoLogin];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kAutoLogin] && autoLoginToken) {
+        BLOCK_SELF_REF_OUTSIDE();
+        [[CPAppEngineCommunicationManager sharedInstance] loginWithAuthToken:autoLoginToken completion:^(CPLoginResult result, NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            if (result == CPLoginResult_Failure) {
+                // TODO: don't clear keychain on failure because device is offline
+                // We don't need to display this error, as we'll just enter the regular sign in flow
+                [self clearAutoLoginToken];
+                [self startSigninWithDelegate:self.delegate];
+            } else {
+                [self presentUIForLoginResult:result];
+            }
+        }];
+    } else {
+        [self.interfaceManager startSignIn];
+    }
 }
 
 - (void)signInWithEmail:(NSString *)email
@@ -100,7 +120,7 @@
 
 - (void)signInWithFacebook
 {
-//    [[GITAuth sharedInstance] signInWithProviderID:kGITProviderFacebook];
+    [[GITAuth sharedInstance] signInWithProviderID:kGITProviderFacebook];
 }
 
 - (void)signInWithGoogle
@@ -117,7 +137,6 @@
 #pragma mark - GITInterfaceManagerDelegate
 - (UIViewController*)signInControllerWithAccount:(GITAccount *)account
 {
-    // TODO: auto sign in with cached user
     return [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"SignInStart"];
 }
 
@@ -160,6 +179,7 @@ didFinishSignInWithToken:(NSString *)token
     if (error) {
         [self.delegate loginAttemptFailed:error.localizedDescription];
     } else {
+        self.pendingAuthToken = token;
         BLOCK_SELF_REF_OUTSIDE();
         [[CPAppEngineCommunicationManager sharedInstance] loginWithAuthToken:token completion:^(CPLoginResult result, NSError *error) {
             BLOCK_SELF_REF_INSIDE();
@@ -252,6 +272,11 @@ didFinishSignInWithToken:(NSString *)token
         }
         case CPLoginResult_UserWithSetupCompleted:
         {
+            // We've made it completely through our signin/account setup flow. Store the users auth token in the keychain to support autologin.
+            // Just storing by our auto login name, since the user id is irrelevant, we just want the last user
+            [self setAutoLoginToken:self.pendingAuthToken];
+            self.pendingAuthToken = nil;
+            
             // Swap our root controller for the main screen
             UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScreenNav"];
             UIWindow *window = [[UIApplication sharedApplication].delegate window];
@@ -281,6 +306,9 @@ didFinishSignInWithToken:(NSString *)token
     [Intercom reset];
     [[GITAuth sharedInstance] signOut];
     
+    // Clear auto login token from keychain
+    [self clearAutoLoginToken];
+    
     // Interface manager setup is tied into the root controller when it's instantiated, so reset it
     self.interfaceManager = [[GITInterfaceManager alloc] init];
     self.interfaceManager.delegate = self;
@@ -297,6 +325,21 @@ didFinishSignInWithToken:(NSString *)token
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     [animation setType:kCATransitionFade];
     [window.layer addAnimation:animation forKey:@"crossFade"];
+}
+
+- (void)setAutoLoginToken:(NSString*)authToken
+{
+    // We set true to user defaults so we can kill auto login across device installs, as the keychain is not cleared on app uninstall, but defaults are
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kAutoLogin];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [SSKeychain setPassword:self.pendingAuthToken forService:kAutoLogin account:kAutoLogin];
+}
+
+- (void)clearAutoLoginToken
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kAutoLogin];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [SSKeychain deletePasswordForService:kAutoLogin account:kAutoLogin];
 }
 
 @end
