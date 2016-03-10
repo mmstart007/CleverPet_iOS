@@ -73,7 +73,7 @@
     GITClient *gitkitClient = [GITClient sharedInstance];
     gitkitClient.apiKey = @"AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA";
     gitkitClient.widgetURL = @"http://localhost?placeholder";
-    gitkitClient.providers = @[kGITProviderGoogle];
+    gitkitClient.providers = @[kGITProviderGoogle, kGITProviderFacebook];
     [GIDSignIn sharedInstance].clientID = @"879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com";
 }
 

@@ -100,7 +100,7 @@
 
 - (void)signInWithFacebook
 {
-//    [[GITAuth sharedInstance] signInWithProviderID:kGITProviderFacebook];
+    [[GITAuth sharedInstance] signInWithProviderID:kGITProviderFacebook];
 }
 
 - (void)signInWithGoogle
