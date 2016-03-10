@@ -69,7 +69,7 @@ extern NSString * const kEmailKey;
 extern NSString * const kFirstNameKey;
 extern NSString * const kLastNameKey;
 extern NSString * const kAuthTokenKey;
-extern NSString * const kParticleAuthTokenKey;
+extern NSString * const kParticleAuthKey;
 extern NSString * const kFirebaseAuthTokenKey;
 // Pet keys
 extern NSString * const kPetIdKey;

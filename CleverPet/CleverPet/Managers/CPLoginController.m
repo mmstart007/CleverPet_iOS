@@ -199,24 +199,44 @@ didFinishSignInWithToken:(NSString *)token
 - (void)deviceClaimed:(NSDictionary *)deviceInfo
 {
     BLOCK_SELF_REF_OUTSIDE();
-    [[CPAppEngineCommunicationManager sharedInstance] createDevice:deviceInfo completion:^(NSError *error) {
+    void (^completion)(NSError *) = ^(NSError *error) {
         BLOCK_SELF_REF_INSIDE();
         if (error) {
             // TODO: display error to user and relaunch device claim flow
+            [self deviceClaimFailed];
         } else {
             [self presentUIForLoginResult:CPLoginResult_UserWithSetupCompleted];
         }
-    }];
+    };
+    
+    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
+    if (currentUser.device && !currentUser.device.particleId) {
+        [[CPAppEngineCommunicationManager sharedInstance] updateDevice:currentUser.device.deviceId particle:deviceInfo completion:completion];
+    } else {
+        [[CPAppEngineCommunicationManager sharedInstance] createDevice:deviceInfo forAnimal:currentUser.pet.petId completion:completion];
+    }
 }
 
 - (void)deviceClaimCanceled
 {
     // TODO: Inform the user they cannot proceed without a particle device and relaunch device claim flow
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Hub Required" message:@"You must have a hub to continue with the app. Please rest your hub to listening mode before pressing continue to retry device setup" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self presentUIForLoginResult:CPLoginResult_UserWithoutDevice];
+    }]];
+    [[self getRootNavController] presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)deviceClaimFailed
 {
-    // TODO: Present instructional message to user before relaunching device claim flow
+    // TODO: View controller Present instructional message to user before relaunching device claim flow
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error claiming hub" message:@"There was an error claiming the hub. Please reset the hub to listening mode before pressing continue to retry device setup" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self presentUIForLoginResult:CPLoginResult_UserWithoutDevice];
+    }]];
+    [[self getRootNavController] presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - UI flow
@@ -234,11 +254,20 @@ didFinishSignInWithToken:(NSString *)token
             [[self getRootNavController] pushViewController:vc animated:YES];
             break;
         }
+        case CPLoginResult_UserWithoutParticle:
+        {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Particle Missing" message:@"We no longer have a record of your particle device, a hub is required to continue" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Continue", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+            }]];
+            [[self getRootNavController] presentViewController:alert animated:YES completion:nil];
+            break;
+        }
         case CPLoginResult_UserWithoutDevice:
         {
             // TODO: remove this hack
-            [self deviceClaimed:nil];
-//            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
             break;
         }
         case CPLoginResult_UserWithSetupCompleted:

@@ -21,13 +21,16 @@ NSString * const kUserInfoPath = @"users/info";
 NSString * const kPetProfilePath = @"animals";
 #define SPECIFIC_PET_PROFILE(petId) [NSString stringWithFormat:@"%@/%@", kPetProfilePath, petId]
 
+#define CREATE_DEVICE_FOR_ANIMAL(animalId) [NSString stringWithFormat:@"animals/%@/devices", animalId]
 NSString * const kDevicePath = @"devices";
 NSString * const kSchedulesPathFragment = @"schedules";
 NSString * const kModePathFragment = @"mode";
+NSString * const kParticlePathFragment = @"particle";
 NSString * const kLastSeenPathFragment = @"lastseen";
 #define SPECIFIC_DEVICE(deviceId) [NSString stringWithFormat:@"%@/%@", kDevicePath, deviceId]
 #define SPECIFIC_DEVICE_SCHEDULES(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment]
 #define SPECIFIC_DEVICE_MODE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kModePathFragment]
+#define SPECIFIC_DEVICE_PARTICLE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kParticlePathFragment]
 #define DEVICE_LAST_SEEN(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kLastSeenPathFragment]
 #define SPECIFIC_SCHEDULE(deviceId, scheduleId) [NSString stringWithFormat:@"%@/%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment, scheduleId]
 
@@ -76,7 +79,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         } else {
             // Check for required auth tokens
             // TODO: bring back particle and firebase auth
-            if (jsonResponse[kAuthTokenKey]) {
+            if (jsonResponse[kAuthTokenKey] && jsonResponse[kParticleAuthKey]) {
                 [self setAuthToken:jsonResponse[kAuthTokenKey]];
                 [[CPUserManager sharedInstance] userLoggedIn:jsonResponse];
                 [self userLoggedIn:jsonResponse completion:completion];
@@ -120,9 +123,11 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
                 result = CPLoginResult_UserWithoutPetProfile;
             } else if (!currentUser.device) {
                 result = CPLoginResult_UserWithoutDevice;
+            } else if (!currentUser.device.particleId) {
+                result = CPLoginResult_UserWithoutParticle;
             }
             
-            if (currentUser.device && (!currentUser.device.weekdaySchedule || !currentUser.device.weekendSchedule)) {
+            if ((currentUser.device && currentUser.device.particleId) && (!currentUser.device.weekdaySchedule || !currentUser.device.weekendSchedule)) {
                 [self lookupDeviceSchedules:currentUser.device.deviceId completion:^(NSError *error) {
                     if (error) {
                         if (completion) completion(CPLoginResult_Failure, error);
@@ -136,14 +141,12 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     };
     
-    // TODO: bring back when particle auth is working
-    // TODO: Update with the proper keys/etc from feature/hub-settings-networking
-//    if (!userInfo[@"device"] || [userInfo[@"device"] isKindOfClass:[NSNull class]]) {
-//        // If we have no device, we need to set the auth token for particle
-//        [[CPParticleConnectionHelper sharedInstance] setAccessToken:userInfo[kParticleAuthTokenKey] completion:particleAuthSet];
-//    } else {
+    if (!currentUser.device || !currentUser.device.particleId) {
+        // If we have no device, we need to set the auth token for particle
+        [[CPParticleConnectionHelper sharedInstance] setAccessToken:userInfo[kParticleAuthKey] completion:particleAuthSet];
+    } else {
         particleAuthSet(nil);
-//    }
+    }
 }
 
 #pragma mark - Pet profile
@@ -206,11 +209,10 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 }
 
 #pragma mark - Device
-- (ASYNC)createDevice:(NSDictionary *)deviceInfo completion:(void (^)(NSError *))completion
+- (ASYNC)createDevice:(NSDictionary *)deviceInfo forAnimal:(NSString*)animalId completion:(void (^)(NSError *))completion
 {
     BLOCK_SELF_REF_OUTSIDE();
-    // TODO: remove this hack
-    [self.sessionManager POST:kDevicePath parameters:deviceInfo progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.sessionManager POST:CREATE_DEVICE_FOR_ANIMAL(animalId) parameters:deviceInfo progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
@@ -237,6 +239,25 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (completion) completion([self errorForMessage:errorMessage]);
         } else {
             if (completion) completion(nil);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+    }];
+}
+
+- (ASYNC)updateDevice:(NSString *)deviceId particle:(NSDictionary *)particleInfo completion:(void (^)(NSError *))completion
+{
+    NSParameterAssert(deviceId);
+    NSParameterAssert(particleInfo);
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.sessionManager PUT:SPECIFIC_DEVICE_PARTICLE(deviceId) parameters:particleInfo success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
+        if (jsonResponse[kErrorKey]) {
+            NSString *errorMessage = jsonResponse[kErrorKey];
+            if (completion) completion([self errorForMessage:errorMessage]);
+        } else {
+            [self lookupDeviceInfo:deviceId completion:completion];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
