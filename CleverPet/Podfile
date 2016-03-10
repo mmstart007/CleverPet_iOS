@@ -17,4 +17,5 @@ pod 'BABCropperView'
 pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
+pod 'SSKeychain'
 end
