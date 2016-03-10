@@ -134,6 +134,19 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
     [self.interfaceManager popViewController];
 }
 
+- (void)cancelPetProfileCreation
+{
+    self.userInfo = nil;
+    [self.delegate loginAttemptCancelled];
+    [[self getRootNavController] popToRootViewControllerAnimated:YES];
+}
+
+- (void)cancelDeviceSetup
+{
+    [self.delegate loginAttemptCancelled];
+    [[self getRootNavController] popToRootViewControllerAnimated:YES];
+}
+
 #pragma mark - GITInterfaceManagerDelegate
 - (UIViewController*)signInControllerWithAccount:(GITAccount *)account
 {

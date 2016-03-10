@@ -213,9 +213,17 @@
                                     <constraint firstAttribute="trailing" secondItem="8eG-5W-OXW" secondAttribute="trailing" id="ylF-R1-5Zs"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kOG-3O-wXr">
+                                <rect key="frame" x="15" y="20" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelTapped:" destination="Tpf-WM-h2I" eventType="touchUpInside" id="FzG-wu-IAH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="kOG-3O-wXr" firstAttribute="top" secondItem="R3k-L9-aVm" secondAttribute="bottom" id="3Df-bw-XuJ"/>
                             <constraint firstItem="8eG-5W-OXW" firstAttribute="width" secondItem="P7U-jZ-SgO" secondAttribute="width" id="5Qn-3a-OIe"/>
                             <constraint firstItem="JjL-R6-7AE" firstAttribute="leading" secondItem="P7U-jZ-SgO" secondAttribute="leading" id="FjK-dW-QEP"/>
                             <constraint firstAttribute="trailing" secondItem="JjL-R6-7AE" secondAttribute="trailing" id="IBV-q3-OM2"/>
@@ -223,6 +231,7 @@
                             <constraint firstItem="JjL-R6-7AE" firstAttribute="top" secondItem="Cz1-Cw-dDc" secondAttribute="bottom" id="RYo-1j-ai5"/>
                             <constraint firstItem="Cz1-Cw-dDc" firstAttribute="top" secondItem="R3k-L9-aVm" secondAttribute="bottom" id="TTX-Pe-a49"/>
                             <constraint firstAttribute="trailing" secondItem="Cz1-Cw-dDc" secondAttribute="trailing" id="X1v-Qn-s4P"/>
+                            <constraint firstItem="kOG-3O-wXr" firstAttribute="leading" secondItem="P7U-jZ-SgO" secondAttribute="leading" constant="15" id="YuK-Ky-n11"/>
                             <constraint firstItem="FrJ-CI-AME" firstAttribute="top" secondItem="JjL-R6-7AE" secondAttribute="bottom" id="mY0-3B-oNL"/>
                         </constraints>
                     </view>
@@ -230,6 +239,7 @@
                     <connections>
                         <outlet property="ageField" destination="ImT-HO-OFo" id="UG2-uj-wX6"/>
                         <outlet property="breedField" destination="YJ0-ue-Nwj" id="UHi-Hd-ER7"/>
+                        <outlet property="cancelButton" destination="kOG-3O-wXr" id="5Iw-vT-7ab"/>
                         <outlet property="continueButton" destination="JjL-R6-7AE" id="bOf-vy-bbL"/>
                         <outlet property="continueButtonBottomConstraint" destination="mY0-3B-oNL" id="vhE-dq-UGG"/>
                         <outlet property="familyField" destination="uG7-ay-KDL" id="FSn-Yt-Vrj"/>
