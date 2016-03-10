@@ -16,7 +16,19 @@ PODS:
     - AFNetworking/NSURLSession
   - AttributedMarkdown (0.9.2)
   - BABCropperView (0.4.6)
+  - Bolts (1.6.0):
+    - Bolts/AppLinks (= 1.6.0)
+    - Bolts/Tasks (= 1.6.0)
+  - Bolts/AppLinks (1.6.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.6.0)
   - CHCSVParser (2.1.0)
+  - FBSDKCoreKit (4.10.0):
+    - Bolts (~> 1.5)
+  - FBSDKLoginKit (4.10.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.10.0):
+    - FBSDKCoreKit
   - GoogleAppUtilities (1.0.0):
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleAuthUtilities (1.0.1):
@@ -68,6 +80,9 @@ DEPENDENCIES:
   - AttributedMarkdown (from `https://github.com/dreamwieber/AttributedMarkdown.git`)
   - BABCropperView
   - CHCSVParser
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
   - GoogleIdentityToolkit
   - Intercom
   - JSONModel
@@ -92,7 +107,11 @@ SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   AttributedMarkdown: ac5060667280be8cc8ee33a46c73e4ec6b17ca1a
   BABCropperView: 908858c9fd17e9bb6d2446f3ae56172c14363974
+  Bolts: f52a250053bb517ca874523c3913776359ab3def
   CHCSVParser: 3bcc7bdb72111a31222e95d57eacceefe4e537e8
+  FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
+  FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
+  FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
   GoogleAuthUtilities: 049ffd3a297cdffd271451b82fd4e75304f15ef3
   GoogleIdentityToolkit: c4cb90839fb7eb4df4c14a452a983c6fab23b115
