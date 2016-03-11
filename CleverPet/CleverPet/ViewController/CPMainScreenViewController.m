@@ -83,7 +83,7 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
     self.playingTile = nil;
-    [[CPFirebaseManager sharedInstance] stoplisteningForUpdates];
+    [[CPFirebaseManager sharedInstance] stoplisteningForStatsUpdates];
 }
 
 #pragma mark - CPTileCollectionViewDataSourceDelegate
