@@ -15,21 +15,42 @@ typedef NS_ENUM(NSUInteger) {
     CPTTMac,
 } CPTileType;
 
-@interface CPTile : NSObject
-// Persisted properties
-@property (strong, nonatomic) NSString *id;
-@property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) NSString *body;
-@property (strong, nonatomic) NSDate *date;
-@property (strong, nonatomic) UIImage *image;
-@property (assign, nonatomic) CPTileType tileType;
-@property (assign, nonatomic) BOOL isSwipeable;
+// TODO: other templates
+typedef NS_ENUM(NSUInteger){
+    CPTileTemplateMessage,
+    CPTileTemplateVideo,
+    CPTileTemplateReport
+}CPTileTemplate;
 
-@property (strong, nonatomic) NSString *affirmativeButtonText, *negativeButtonText;
+@interface CPTile : JSONModel
+// Persisted properties
+@property (nonatomic, strong) NSString *category;
+@property (strong, nonatomic) NSDate *date;
+@property (nonatomic, strong) NSURL<Optional> *imageUrl;
+@property (nonatomic, strong) NSString<Optional> *message;
+@property (nonatomic, strong) NSString<Optional> *primaryButtonText;
+@property (nonatomic, strong) NSString<Optional> *primaryButtonUrl;
+@property (nonatomic, assign) NSInteger priority;
+@property (nonatomic, strong) NSString<Optional> *secondaryButtonText;
+@property (nonatomic, strong) NSString<Optional> *secondaryButtonUrl;
+// TODO: Template v category nonsense
+@property (nonatomic, strong) NSString<Optional> *template;
+@property (nonatomic, strong) NSString *tileId;
+@property (nonatomic, strong) NSString<Optional> *title;
+@property (nonatomic, assign) BOOL userDeletable;
+// TODO: can probably remove
+@property (nonatomic, strong) NSString *userId;
+@property (nonatomic, strong) NSURL<Optional> *videoThumbnailUrl;
+@property (nonatomic, strong) NSURL<Optional> *videoUrl;
+
+@property (assign, nonatomic) CPTileType tileType;
+@property (assign, nonatomic) CPTileTemplate templateType;
 
 // Non-persisted properties
 @property (strong, nonatomic) NSAttributedString<Ignore>*parsedBody;
 @property (strong, nonatomic) CPSimpleDate<Ignore> *simpleDate;
 
 @property (assign, nonatomic) CGFloat cachedRowHeight;
+
++(void)setTimeZoneOffset:(NSInteger)offset;
 @end

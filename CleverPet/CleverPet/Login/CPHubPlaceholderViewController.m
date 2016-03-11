@@ -35,6 +35,10 @@
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.messageLabel.textColor = [UIColor appTitleTextColor];
     self.messageLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
+    
+    if (self.message) {
+        [self displayMessage:self.message];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

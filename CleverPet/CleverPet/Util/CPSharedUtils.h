@@ -10,6 +10,8 @@
 
 @interface CPSharedUtils : NSObject
 
++ (void)deviceTimeZoneUpdated:(NSInteger)offset;
+
 @end
 
 #pragma mark-- NSNotification Macros
@@ -54,6 +56,7 @@ removeObserver:self]
 #import "UIFont+CleverPet.h"
 #import "UIColor+CleverPet.h"
 #import "UIViewController+CleverPet.h"
+#import "UIImageView+AFNetworking.h"
 
 #pragma mark - Data field max and min values
 extern NSInteger const kNameFieldMinChars;
@@ -103,7 +106,11 @@ extern NSString * const kIsActiveKey;
 extern NSString * const kStartTimeKey;
 extern NSString * const kEndTimeKey;
 extern NSString * const kDaysOnKey;
+// Tile keys
+extern NSString * const kCursorKey;
+extern NSString * const kMoreKey;
+extern NSString * const kTilesKey;
+extern NSString * const kPageSizeKey;
 
 #define ASYNC void
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-

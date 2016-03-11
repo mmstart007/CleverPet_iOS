@@ -10,6 +10,7 @@
 
 @interface CPHubPlaceholderViewController : UIViewController
 
+@property (nonatomic, strong) NSString *message;
 - (void)displayMessage:(NSString *)message;
 
 @end

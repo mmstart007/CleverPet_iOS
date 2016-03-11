@@ -12,8 +12,10 @@
 #import "UIView+CPShadowEffect.h"
 #import "CPUserManager.h"
 #import "CPFirebaseManager.h"
+#import "CPPlayerViewController.h"
+@import AVFoundation;
 
-@interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceScrollDelegate>
+@interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceDelegate, AVPlayerViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CPTileCollectionViewDataSource *dataSource;
 @property (strong, nonatomic) CPPetStatsView *petStatsView;
@@ -23,6 +25,8 @@
 @property (strong, nonatomic) CPMainScreenStatsHeaderView *mainScreenStatsHeaderView;
 
 @property (nonatomic, strong) CPPet *currentPet;
+@property (nonatomic, strong) CPTile *playingTile;
+@property (nonatomic, strong) CPPlayerViewController *playerController;
 @end
 
 @implementation CPMainScreenViewController {
@@ -50,19 +54,15 @@
     self.mainScreenStatsHeaderView.alpha = 0;
     
     CPTileCollectionViewDataSource *dataSource = [[CPTileCollectionViewDataSource alloc] initWithCollectionView:self.tableView andPetImage:[self.currentPet petPhoto]];
-    dataSource.scrollDelegate = self;
+    dataSource.delegate = self;
 
     self.dataSource = dataSource;
     self.tableView.delegate = dataSource;
     self.tableView.dataSource = dataSource;
     
-    [dataSource postInit];
+    self.playerController = [[CPPlayerViewController alloc] init];
     
-    NSDate *startDate = [NSDate date];
-    for (NSUInteger i = 0; i < 100; i++) {
-        NSDate *date = [startDate dateByAddingTimeInterval:-60.0 * 60.0 * 4 * i];
-        [self addTileForDate:date index:i];
-    }
+    [dataSource postInit];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -76,14 +76,19 @@
         [self.tableView.dataSource performSelector:@selector(updatePetImage:) withObject:[self.currentPet petPhoto]];
     }
     [[CPFirebaseManager sharedInstance] beginlisteningForUpdates];
+    // Inform our data source we're going to become visible
+    [self.dataSource viewBecomingVisible];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[CPFirebaseManager sharedInstance] stoplisteningForUpdates];
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    self.playingTile = nil;
+    [[CPFirebaseManager sharedInstance] stoplisteningForStatsUpdates];
 }
 
+#pragma mark - CPTileCollectionViewDataSourceDelegate
 - (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible headerStatsFade:(CGFloat)headerStatsFade
 {
     if (!headerPhotoVisible) {
@@ -102,50 +107,36 @@
     }
 }
 
-- (void)addTileForDate:(NSDate *)date index:(NSUInteger)index
+- (void)playVideoForTile:(CPTile *)tile
 {
-    CPTile *tile = [[CPTile alloc] init];
-    tile.date = date;
-    tile.isSwipeable = YES;
-    
-    switch (index % 6) {
-        case 0:
-            tile.tileType = CPTTChallenge;
-            tile.negativeButtonText = @"Restart";
-            tile.title = @"Challenge 9: Learning double sequence";
-            tile.body = @"Your pup is learning a sequence of lights -- s/he'll need to trigger the touchpads in the order the lights come on.";
-            break;
-        case 1:
-            tile.tileType = CPTTMessage;
-            tile.title = @"Hands off, paws only!";
-            tile.affirmativeButtonText = @"Got it.";
-            tile.negativeButtonText = @"Explain.";
-            tile.body = @"Do not touch the touchpads for your dog as he is learning.";
-            break;
-        case 2:
-            tile.tileType = CPTTMessage;
-            tile.title = @"Challenge Met!";
-            tile.affirmativeButtonText = @"Ok";
-            tile.body = @"Your pup solved multiple puzzles made from sequences of three lighted touchpads! Give your dog extra scritches!";
-            tile.image = [UIImage imageNamed:@"award"];
-            break;
-        case 3:
-            tile.tileType = CPTTMessage;
-            tile.title = @"Silly human, touchpads are for dogs!";
-            tile.body = @"From now on, the Hub is set to respond to your dog's actions. If you touch the touchpads, it may impact the accuracy of your dog's progress, and slow your dog's learning.";
-            break;
-        case 4:
-            tile.tileType = CPTTReport;
-            tile.title = @"Cool, it's a report!";
-            tile.body = @"Yep here's a report. Eat it.";
-            break;
-        case 5:
-            tile.tileType = CPTTVideo;
-            tile.title = @"Watch a dog do a thing!";
-            tile.body = @"Watch closely, this dog is about to do a thing. Don't miss the thing.";
-            break;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    if (tile != self.playingTile) {
+        self.playingTile = tile;
+        AVPlayerItem *item = [AVPlayerItem playerItemWithURL:tile.videoUrl];
+        if (self.playerController.player) {
+            [self.playerController.player replaceCurrentItemWithPlayerItem:item];
+        } else {
+            self.playerController.player = [AVPlayer playerWithPlayerItem:item];
+        }
     }
     
-    [self.dataSource addTile:tile withAnimation:NO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    self.playerController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+    [self presentViewController:self.playerController animated:YES completion:nil];
+    [self.playerController.player play];
 }
+
+- (void)videoPlayedToEnd:(NSNotification*)notification
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    [self.dataSource videoPlaybackCompletedForTile:self.playingTile];
+    self.playingTile = nil;
+}
+
+- (BOOL)isViewVisible
+{
+    // we have no window, we're not currently visible
+    return self.view.window;
+}
+
 @end
