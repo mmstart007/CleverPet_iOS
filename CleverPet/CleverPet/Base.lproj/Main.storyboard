@@ -90,7 +90,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0Hb-LW-76K"/>
                                 </constraints>
-                                <state key="normal" title="Sign in"/>
+                                <state key="normal" title="Begin"/>
                                 <connections>
                                     <action selector="signInTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FFx-XB-7gw"/>
                                 </connections>

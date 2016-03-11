@@ -70,7 +70,7 @@ extern NSString * const kEmailKey;
 extern NSString * const kFirstNameKey;
 extern NSString * const kLastNameKey;
 extern NSString * const kAuthTokenKey;
-extern NSString * const kParticleAuthTokenKey;
+extern NSString * const kParticleAuthKey;
 extern NSString * const kFirebaseAuthTokenKey;
 // Pet keys
 extern NSString * const kPetIdKey;
@@ -94,6 +94,8 @@ extern NSString * const kSchedulesKey;
 extern NSString * const kActiveMode;
 extern NSString * const kStandbyMode;
 extern NSString * const kSchedulerMode;
+extern NSString * const kLastSeenKey;
+extern NSString * const kTimeZoneKey;
 // Schedule keys
 extern NSString * const kScheduleIdKey;
 extern NSString * const kWeekdayKey;

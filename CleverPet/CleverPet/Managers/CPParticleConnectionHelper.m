@@ -61,7 +61,7 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
     customization.productSlug = self.productSlug;
     customization.organizationName = self.organizationName;
     customization.organizationSlug = self.organizationSlug;
-//    customization.organization = YES;
+    customization.organization = YES;
     
     customization.pageBackgroundColor = [UIColor appBackgroundColor];
     customization.normalTextColor = [UIColor appTitleTextColor];
@@ -86,7 +86,21 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
 - (void)setAccessToken:(NSDictionary *)tokenInfo completion:(void (^)(NSError *))completion
 {
     // Set access token on [SparkCloud sharedInstance] to simulate user login.
-    [[SparkCloud sharedInstance] loginWithAccessToken:tokenInfo completion:completion];
+    // Massage the data we're getting back to avoid further modifying the pod
+    NSMutableDictionary *newTokenInfo = [NSMutableDictionary dictionary];
+    newTokenInfo[@"access_token"] = tokenInfo[@"access_token"];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSSSS";
+    NSDate *expiryDate = [dateFormatter dateFromString:tokenInfo[@"expires"]];
+    NSTimeInterval timeUntilExpiry = [expiryDate timeIntervalSinceNow];
+    newTokenInfo[@"expires_in"] = @(timeUntilExpiry);
+    
+    newTokenInfo[@"token_type"] = @"bearer";
+    // TODO: Spark ignores the refresh_token, but pass it along anyways
+    newTokenInfo[@"refresh_token"] = tokenInfo[@"refresh_token"];
+    
+    [[SparkCloud sharedInstance] loginWithAccessToken:newTokenInfo completion:completion];
 }
 
 - (void)presentSetupControllerOnController:(UINavigationController *)controller withDelegate:(id<CPParticleConnectionDelegate>)delegate
@@ -101,7 +115,8 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
 - (void)sparkSetupViewController:(SparkSetupMainController *)controller didFinishWithResult:(SparkSetupMainControllerResult)result device:(SparkDevice *)device
 {
     if (result == SparkSetupMainControllerResultSuccess) {
-        [self.delegate deviceClaimed:@{kParticleIdKey:device.id, kNameKey:device.name}];
+        NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+        [self.delegate deviceClaimed:@{kParticleIdKey:device.id, kNameKey:device.name, kTimeZoneKey:(timeZone ? @([timeZone secondsFromGMT]) : @(0))}];
     } else {
         if (result == SparkSetupMainControllerResultUserCancel) {
             [self.delegate deviceClaimCanceled];
