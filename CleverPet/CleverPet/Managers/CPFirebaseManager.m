@@ -51,15 +51,25 @@
     self.userStatsPath = nil;
 }
 
+- (CPPetStats*)petStats:(NSDictionary*)values
+{
+    CPPetStats *petStats = nil;
+    if (![values isEqual:[NSNull null]]) {
+        NSError *error;
+        petStats = [[CPPetStats alloc] initWithDictionary:values error:&error];
+    }
+    return petStats;
+}
 
  - (void)beginlisteningForUpdates
 {
     [[self.rootRef childByAppendingPath:self.userStatsPath] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        CPPetStats *petStats = [self petStats:snapshot.value];
         if (self.headerStatsUpdateBlock) {
-            self.headerStatsUpdateBlock(nil, snapshot.value);
+            self.headerStatsUpdateBlock(nil, petStats);
         }
         if (self.viewStatsUpdateBlock) {
-            self.viewStatsUpdateBlock(nil, snapshot.value);
+            self.viewStatsUpdateBlock(nil, petStats);
         }
     } withCancelBlock:^(NSError *error) {
         if (self.headerStatsUpdateBlock) {
@@ -77,7 +87,7 @@
     _viewStatsUpdateBlock = viewStatsUpdateBlock;
     if (viewStatsUpdateBlock) {
         [[self.rootRef childByAppendingPath:self.userStatsPath] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-             viewStatsUpdateBlock(nil, snapshot.value);
+             viewStatsUpdateBlock(nil, [self petStats:snapshot.value]);
         }];
     }
 }
@@ -87,7 +97,7 @@
     _headerStatsUpdateBlock = headerStatsUpdateBlock;
     if (headerStatsUpdateBlock) {
         [[self.rootRef childByAppendingPath:self.userStatsPath] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            headerStatsUpdateBlock(nil, snapshot.value);
+            headerStatsUpdateBlock(nil, [self petStats:snapshot.value]);
         }];
     }
 }
