@@ -116,7 +116,12 @@
     [self setTextColor:[UIColor whiteColor] onButton:self.primaryButton];
     [self setTextColor:tileColor onButton:self.secondaryButton];
 
-    self.tagTimeStampLabel.text = [NSString stringWithFormat:@"Device Message | %@", [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
+    // Uppercase the first character, since it's all lowercase coming from the server
+    NSString *categoryString = tile.category;
+    if ([categoryString length] > 0) {
+        categoryString = [categoryString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[categoryString substringToIndex:1] uppercaseString]];
+    }
+    self.tagTimeStampLabel.text = [NSString stringWithFormat:@"%@ | %@", categoryString, [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
     
     self.colouredDotView.backgroundColor = tileColor;
 }
