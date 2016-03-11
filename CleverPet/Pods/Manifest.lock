@@ -29,6 +29,7 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
+  - Firebase (2.5.1)
   - GoogleAppUtilities (1.0.0):
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleAuthUtilities (1.0.1):
@@ -74,7 +75,7 @@ PODS:
     - SparkSetup/Comm
     - SparkSetup/Resources
   - SparkSetup/Resources (0.3.3)
-  - SSKeychain (1.3.1)
+  - SSKeychain (1.4.0)
 
 DEPENDENCIES:
   - AFNetworking
@@ -84,6 +85,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - Firebase (>= 2.5.0)
   - GoogleIdentityToolkit
   - Intercom
   - JSONModel
@@ -114,6 +116,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
+  Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
   GoogleAuthUtilities: 049ffd3a297cdffd271451b82fd4e75304f15ef3
   GoogleIdentityToolkit: c4cb90839fb7eb4df4c14a452a983c6fab23b115
@@ -129,6 +132,6 @@ SPEC CHECKSUMS:
   RBStoryboardLink: 0faae84aea6a5e8716c4469984d847d958c3fcb3
   Spark-SDK: dbd947fd197f08655b5f458ec559de5c920e8e70
   SparkSetup: f9618dd24548ab8a024efdaa65a89f63ed44a7ee
-  SSKeychain: 04c4ec40f4c3deda524e269bc76e5f30e638a174
+  SSKeychain: c71293fa57216a40ab06c23f4085387583293de4
 
 COCOAPODS: 0.39.0

@@ -9,10 +9,11 @@
 #import "CPConfigManager.h"
 #import "CPParticleConnectionHelper.h"
 #import "CPAppEngineCommunicationManager.h"
+#import "CPFirebaseManager.h"
 #import <AFNetworking/AFNetworking.h>
 #import "CPConfigViewController.h"
 
-NSString * const kConfigUrl = @"https://storage.googleapis.com/cleverpet-app/configs/config.json";
+NSString * const kConfigUrl = @"https://s3-us-west-2.amazonaws.com/cleverpet/config.json";
 NSString * const kMinimumVersionKey = @"minimum_required_version";
 NSString * const kDeprecationMessageKey = @"deprecation_message";
 NSString * const kDefaultDeprecationMessage = @"Your app does not meet the minimum version. Do something about it.";
@@ -84,7 +85,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
 {
     [[CPParticleConnectionHelper sharedInstance] applyConfig:configData];
     [[CPAppEngineCommunicationManager sharedInstance] applyConfig:configData];
-    // TODO: apply config to firebase
+    [[CPFirebaseManager sharedInstance] applyConfig:configData];
 }
 
 - (void)appEnteredForeground

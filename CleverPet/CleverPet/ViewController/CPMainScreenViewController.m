@@ -11,6 +11,7 @@
 #import "CPMainScreenStatsHeaderView.h"
 #import "UIView+CPShadowEffect.h"
 #import "CPUserManager.h"
+#import "CPFirebaseManager.h"
 #import "CPPlayerViewController.h"
 @import AVFoundation;
 
@@ -74,6 +75,7 @@
     if ([self.tableView.dataSource respondsToSelector:@selector(updatePetImage:)]) {
         [self.tableView.dataSource performSelector:@selector(updatePetImage:) withObject:[self.currentPet petPhoto]];
     }
+    [[CPFirebaseManager sharedInstance] beginlisteningForUpdates];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -81,6 +83,7 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
     self.playingTile = nil;
+    [[CPFirebaseManager sharedInstance] stoplisteningForUpdates];
 }
 
 #pragma mark - CPTileCollectionViewDataSourceDelegate
