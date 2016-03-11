@@ -35,6 +35,7 @@
 		1827AD83CD7A2FD906AA0567 /* CPMainTableSectionHeaderFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A722B7D6084A2F1E3D1F /* CPMainTableSectionHeaderFilter.m */; };
 		1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */; };
 		1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A57728C978A652728E14 /* CPTileViewCell.m */; };
+		51A8A7BB1C90E127001A1572 /* CPFirebaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */; };
 		9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2F71C7D08A2004874A7 /* CPProfileSettingsViewController.m */; };
 		9704E2FB1C7D260E004874A7 /* CPTextValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2FA1C7D260E004874A7 /* CPTextValidator.m */; };
 		9704E2FE1C7D2799004874A7 /* CPSharedUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2FD1C7D2799004874A7 /* CPSharedUtils.m */; };
@@ -153,6 +154,8 @@
 		1827AD320F0C4F8FD18E36D8 /* CPTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTile.m; sourceTree = "<group>"; };
 		1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
 		3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
+		51A8A7B91C90E127001A1572 /* CPFirebaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFirebaseManager.h; sourceTree = "<group>"; };
+		51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFirebaseManager.m; sourceTree = "<group>"; };
 		9704E2F61C7D08A2004874A7 /* CPProfileSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPProfileSettingsViewController.h; sourceTree = "<group>"; };
 		9704E2F71C7D08A2004874A7 /* CPProfileSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPProfileSettingsViewController.m; sourceTree = "<group>"; };
 		9704E2F91C7D260E004874A7 /* CPTextValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTextValidator.h; sourceTree = "<group>"; };
@@ -446,6 +449,8 @@
 				0DE13B661C7FABB200648834 /* CPTileDataManager.m */,
 				979D84441C7FB73700ADB6B0 /* CPUserManager.h */,
 				979D84451C7FB73700ADB6B0 /* CPUserManager.m */,
+				51A8A7B91C90E127001A1572 /* CPFirebaseManager.h */,
+				51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -761,6 +766,7 @@
 				0D8AC9871C7CEACD0096F339 /* CPTileTextFormatter.m in Sources */,
 				97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */,
 				97CC44691C766A28003C4258 /* CPSettingsViewController.m in Sources */,
+				51A8A7BB1C90E127001A1572 /* CPFirebaseManager.m in Sources */,
 				97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */,
 				1827AD83CD7A2FD906AA0567 /* CPMainTableSectionHeaderFilter.m in Sources */,
 			);
