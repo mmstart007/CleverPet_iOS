@@ -11,7 +11,6 @@
 #import "CPMainScreenStatsHeaderView.h"
 #import "UIView+CPShadowEffect.h"
 #import "CPUserManager.h"
-#import "CPFirebaseManager.h"
 
 @interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceScrollDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -75,13 +74,6 @@
     if ([self.tableView.dataSource respondsToSelector:@selector(updatePetImage:)]) {
         [self.tableView.dataSource performSelector:@selector(updatePetImage:) withObject:[self.currentPet petPhoto]];
     }
-    [[CPFirebaseManager sharedInstance] beginlisteningForUpdates];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [[CPFirebaseManager sharedInstance] stoplisteningForUpdates];
-    [super viewWillDisappear:animated];
 }
 
 - (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible headerStatsFade:(CGFloat)headerStatsFade
