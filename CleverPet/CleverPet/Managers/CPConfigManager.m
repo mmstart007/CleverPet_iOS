@@ -12,6 +12,7 @@
 #import "CPFirebaseManager.h"
 #import <AFNetworking/AFNetworking.h>
 #import "CPConfigViewController.h"
+#import "CPUserManager.h"
 
 NSString * const kConfigUrl = @"https://s3-us-west-2.amazonaws.com/cleverpet/config.json";
 NSString * const kMinimumVersionKey = @"minimum_required_version";
@@ -25,6 +26,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 @property (nonatomic, strong) CPConfigViewController *configViewController;
+@property (nonatomic, strong) NSDictionary *config;
 
 @end
 
@@ -74,6 +76,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
             }
         }
         [self applyConfig:responseObject];
+        [[CPUserManager sharedInstance] processPendingLogouts];
         if (completion) completion(nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         // TODO: Perhaps ignore the timer the next time we see if we should check so the user isn't shut out of the app?
@@ -86,6 +89,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
     [[CPParticleConnectionHelper sharedInstance] applyConfig:configData];
     [[CPAppEngineCommunicationManager sharedInstance] applyConfig:configData];
     [[CPFirebaseManager sharedInstance] applyConfig:configData];
+    self.config = configData;
 }
 
 - (void)appEnteredForeground
@@ -115,6 +119,11 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
             }
         }];
     }
+}
+
+- (NSString*)getServerUrl
+{
+    return self.config[@"app_server_url"];
 }
 
 @end

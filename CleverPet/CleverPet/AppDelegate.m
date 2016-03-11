@@ -17,6 +17,7 @@
 #import <Crashlytics/Crashlytics.h>
 #import <Google/CloudMessaging.h>
 #import "CPGCMManager.h"
+#import "CPUserManager.h"
 
 typedef void (^gcmHandler)(NSString *token, NSError *error);
 
@@ -69,6 +70,7 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [[CPConfigManager sharedInstance] appEnteredForeground];
+    [[CPUserManager sharedInstance] processPendingLogouts];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
