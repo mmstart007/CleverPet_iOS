@@ -12,6 +12,7 @@
 #import "CPMainTableDateHeader.h"
 #import "CPMainTableSectionHeaderFilter.h"
 #import "CPTileCommunicationManager.h"
+#import "CPTileUpdateListener.h"
 
 #define TILE_VIEW_CELL @"TILE_VIEW_CELL"
 #define PET_STATS_HEADER @"PET_STATS_HEADER"
@@ -21,7 +22,7 @@
 
 CGFloat const kPagingThreshhold = 100.f;
 
-@interface CPTileCollectionViewDataSource () <CPTileViewCellDelegate, CPMainTableSectionHeaderDelegate>
+@interface CPTileCollectionViewDataSource () <CPTileViewCellDelegate, CPMainTableSectionHeaderDelegate, CPTileUpdateDelegate>
 @property (weak, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) CPTileViewCell *sizingCell;
 @property (strong, nonatomic) CPTableHeaderView *tableHeaderView;
@@ -36,6 +37,8 @@ CGFloat const kPagingThreshhold = 100.f;
 @property (strong, nonatomic) NSMutableDictionary<CPMainTableSectionHeaderFilter *, CPTileDataManager *> *tileDataManagers;
 @property (nonatomic, weak) UIActivityIndicatorView *footerSpinner;
 @property (nonatomic, weak) UIImageView *footerIcon;
+@property (nonatomic, strong) CPTileUpdateListener *tileUpdateListener;
+
 @end
 
 @implementation CPTileCollectionViewDataSource {
@@ -79,12 +82,7 @@ CGFloat const kPagingThreshhold = 100.f;
         self.tileDataManagers[self.filters[1]] = [[CPTileDataManager alloc] initWithFilter:@"report"];
         self.tileDataManagers[self.filters[2]] = [[CPTileDataManager alloc] initWithFilter:@"video"];
         self.tileDataManagers[self.filters[3]] = [[CPTileDataManager alloc] initWithFilter:@"challenge"];
-        for (CPMainTableSectionHeaderFilter *filter in self.filters) {
-            // Run through our refresh call for the first manager so we populate the table. Call refresh on the others so their content is ready when we change between filters
-            if ([filter isEqualToFilter:self.currentFilter]) {
-                [self refreshTilesWithAnimation:YES];
-            }
-        }
+        self.tileUpdateListener = [CPTileUpdateListener tileUpdateListenerWithDelegate:self];
     }
     
     return self;
@@ -368,7 +366,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     [self animateFooterSpinner:YES];
     CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
     BLOCK_SELF_REF_OUTSIDE();
-    [currentManager refreshTiles:NO completion:^(NSIndexSet *indexes, NSError *error) {
+    BOOL didClearData = [currentManager refreshTiles:NO completion:^(NSIndexSet *indexes, NSError *error) {
         BLOCK_SELF_REF_INSIDE();
         [self animateFooterSpinner:NO];
         if (error) {
@@ -378,6 +376,11 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
             [self.tableView reloadData];
         }
     }];
+    
+    if (didClearData) {
+        // If our data manager cleared it's backing data, reload the table so we just show the loading spinner
+        [self.tableView reloadData];
+    }
 }
 
 - (void)pageMoreTilesWithAnimation:(BOOL)withAnimation
@@ -406,6 +409,18 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         }
         self.footerIcon.hidden = animate;
     } completion:nil];
+}
+
+#pragma mark - CPTileUpdateDelegate methods
+- (void)queueTileUpdate
+{
+    // TODO: don't execute the refresh unless we're visible
+    for (CPMainTableSectionHeaderFilter *filter in self.filters) {
+        // Inform data managers that their next refresh needs to be forced and refresh the current
+        CPTileDataManager *dataManager = self.tileDataManagers[filter];
+        [dataManager forceNextRefresh];
+        [self refreshTilesWithAnimation:YES];
+    }
 }
 
 @end

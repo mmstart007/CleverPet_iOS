@@ -12,13 +12,17 @@
 #import "CPTileCommunicationManager.h"
 
 @interface CPTileDataManager ()
+
 @property (strong, nonatomic) NSMutableDictionary<CPSimpleDate *, CPTileSection *> *tileSections;
 @property (strong, nonatomic) NSMutableArray<CPTileSection *> *tileSectionList;
 @property (nonatomic, assign) BOOL moreTiles;
 @property (nonatomic, strong) NSString *cursor;
-@property (nonatomic, assign) BOOL requestInProgress;
+@property (nonatomic, assign) BOOL refreshInProgress;
+@property (nonatomic, assign) BOOL pageInProgress;
 @property (nonatomic, assign) BOOL performedInitialFetch;
 @property (nonatomic, strong) NSString *filter;
+@property (nonatomic, assign) BOOL shouldForceNextRefresh;
+
 @end
 
 @implementation CPTileDataManager
@@ -157,14 +161,17 @@
     return [deletedIndexes copy];
 }
 
-- (ASYNC)refreshTiles:(BOOL)forceRefresh completion:(void (^)(NSIndexSet *indexes, NSError *error))completion
+- (BOOL)refreshTiles:(BOOL)forceRefresh completion:(void (^)(NSIndexSet *indexes, NSError *error))completion
 {
-    if ((forceRefresh || !self.performedInitialFetch) && !self.requestInProgress) {
+    if ((self.shouldForceNextRefresh || forceRefresh || !self.performedInitialFetch) && !self.refreshInProgress) {
         BLOCK_SELF_REF_OUTSIDE();
-        self.requestInProgress = YES;
+        [self clearBackingData];
+        self.refreshInProgress = YES;
+        self.shouldForceNextRefresh = NO;
         [[CPTileCommunicationManager sharedInstance] refreshTiles:self.filter completion:^(NSDictionary *tileInfo, NSError *error) {
             BLOCK_SELF_REF_INSIDE();
-            self.requestInProgress = NO;
+            self.refreshInProgress = NO;
+            self.pageInProgress = NO;
             NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
             // TODO: pass error/message back up the chain
             if (!error) {
@@ -181,20 +188,22 @@
             }
             if (completion) completion(indexes, error);
         }];
+        return YES;
     } else {
         if (completion) completion([NSIndexSet indexSet], nil);
     }
+    return NO;
 }
 
 - (ASYNC)pageMoreTiles:(void (^)(NSIndexSet *, NSError *))completion
 {
-    if (self.moreTiles && self.cursor && !self.requestInProgress) {
-        self.requestInProgress = YES;
+    if (self.moreTiles && self.cursor && !self.refreshInProgress && !self.pageInProgress) {
+        self.pageInProgress = YES;
         BLOCK_SELF_REF_OUTSIDE();
         // TODO: self.filter
         [[CPTileCommunicationManager sharedInstance] getNextPage:self.filter withCursor:self.cursor completion:^(NSDictionary *tileInfo, NSError *error) {
             BLOCK_SELF_REF_INSIDE();
-            self.requestInProgress = NO;
+            self.pageInProgress = NO;
             NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
             if (!error) {
                 NSError *modelError;
@@ -214,7 +223,7 @@
 
 - (BOOL)allowPaging
 {
-    return !self.requestInProgress && self.moreTiles;
+    return !self.refreshInProgress && !self.pageInProgress && self.moreTiles;
 }
 
 - (void)clearBackingData
@@ -267,6 +276,11 @@
     }
     
     return [NSIndexPath indexPathForRow:row inSection:section];
+}
+
+- (void)forceNextRefresh
+{
+    self.shouldForceNextRefresh = YES;
 }
 
 @end
