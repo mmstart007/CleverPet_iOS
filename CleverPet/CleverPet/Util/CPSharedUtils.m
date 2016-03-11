@@ -21,7 +21,7 @@ NSString * const kEmailKey = @"email";
 NSString * const kFirstNameKey = @"first_name";
 NSString * const kLastNameKey = @"last_name";
 NSString * const kAuthTokenKey = @"auth_token";
-NSString * const kParticleAuthTokenKey = @"particle_oauth_token";
+NSString * const kParticleAuthKey = @"particle_auth";
 NSString * const kFirebaseAuthTokenKey = @"firebase_oauth_token";
 // Pet keys
 NSString * const kPetIdKey = @"animal_ID";
@@ -44,6 +44,7 @@ NSString * const kActiveMode = @"active";
 NSString * const kStandbyMode = @"standby";
 NSString * const kSchedulerMode = @"scheduler";
 NSString * const kLastSeenKey = @"since_last_seen";
+NSString * const kTimeZoneKey = @"time_zone";
 //Schedule keys
 NSString * const kScheduleIdKey = @"schedule_ID";
 NSString * const kWeekdayKey = @"weekday";

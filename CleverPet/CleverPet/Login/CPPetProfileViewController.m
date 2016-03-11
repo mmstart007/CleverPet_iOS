@@ -27,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *continueButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *continueButtonBottomConstraint;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *weightUnitSelector;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @property (nonatomic, strong) NSArray *textFields;
 
@@ -35,6 +36,7 @@
 @property (nonatomic, strong) CPTextValidator *textValidator;
 // TODO: pull this out somewhere
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
+@property (nonatomic, assign) BOOL isCancelling;
 
 @end
 
@@ -75,7 +77,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    if (!self.isCancelling) {
+        [self.navigationController setNavigationBarHidden:NO animated:animated];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -101,6 +105,8 @@
     self.continueButton.backgroundColor = [UIColor appLightTealColor];
     self.continueButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.continueButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    [self.cancelButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    self.cancelButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
 - (void)moveToNextTextFieldFrom:(UITextField*)textField
@@ -133,6 +139,12 @@
     NSString *newDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
     self.weightField.text = [self.weightField.text stringByReplacingOccurrencesOfString:self.weightDescriptor withString:newDescriptor];
     self.weightDescriptor = newDescriptor;
+}
+
+- (IBAction)cancelTapped:(id)sender
+{
+    self.isCancelling = YES;
+    [[CPLoginController sharedInstance] cancelPetProfileCreation];
 }
 
 #pragma mark - UITextFieldDelegate methods

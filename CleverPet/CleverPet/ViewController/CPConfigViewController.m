@@ -7,6 +7,7 @@
 //
 
 #import "CPConfigViewController.h"
+#import "CPSplashImageUtils.h"
 
 NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
 
@@ -30,6 +31,7 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
     self.loadedDate = [NSDate date];
     self.messageLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
     self.messageLabel.textColor = [UIColor appTitleTextColor];
+    self.backgroundImage.image = [CPSplashImageUtils getSplashImage];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,7 +75,7 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
 - (void)performDismiss
 {
     self.dismissTimer = nil;
-    [self dismissViewControllerAnimated:YES completion:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

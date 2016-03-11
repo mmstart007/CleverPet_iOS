@@ -116,7 +116,8 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
 
 -(BOOL)isLoggedIn
 {
-    return (self.loggedInUsername != nil);
+    return self.token != nil;
+//    return (self.loggedInUsername != nil);
 }
 
 #pragma mark Setter functions
