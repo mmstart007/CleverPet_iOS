@@ -87,11 +87,6 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
     [self obtainGCMToken];
 }
 
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
-    NSInteger breakpoint = 0;
-}
-
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
