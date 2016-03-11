@@ -18,7 +18,7 @@
 
 @property (weak, nonatomic) id<CPMainTableSectionHeaderDelegate> delegate;
 
-- (void)addFilter:(CPMainTableSectionHeaderFilter *)filter;
+- (void)addFilter:(CPMainTableSectionHeaderFilter *)filter withColor:(UIColor *)color;
 
 - (void)setCurrentFilterObject:(CPMainTableSectionHeaderFilter *)filterObject withAnimation:(BOOL)animate;
 

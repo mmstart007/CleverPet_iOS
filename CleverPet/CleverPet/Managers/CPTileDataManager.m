@@ -9,21 +9,39 @@
 #import "CPTileDataManager.h"
 #import "CPSimpleDate.h"
 #import "CPTile.h"
+#import "CPTileCommunicationManager.h"
 
 @interface CPTileDataManager ()
+
 @property (strong, nonatomic) NSMutableDictionary<CPSimpleDate *, CPTileSection *> *tileSections;
 @property (strong, nonatomic) NSMutableArray<CPTileSection *> *tileSectionList;
+@property (nonatomic, assign) BOOL moreTiles;
+@property (nonatomic, strong) NSString *cursor;
+@property (nonatomic, assign) BOOL refreshInProgress;
+@property (nonatomic, assign) BOOL pageInProgress;
+@property (nonatomic, assign) BOOL performedInitialFetch;
+@property (nonatomic, strong) NSString *filter;
+@property (nonatomic, assign) BOOL shouldForceNextRefresh;
+
 @end
 
 @implementation CPTileDataManager
-- (instancetype)init {
+
+- (instancetype)initWithFilter:(NSString *)filter
+{
     self = [super init];
     if (self) {
+        self.filter = [filter lowercaseString];
         self.tileSectionList = [[NSMutableArray alloc] init];
         self.tileSections = [[NSMutableDictionary alloc] init];
     }
-
     return self;
+}
+
+- (instancetype)init
+{
+    NSAssert(NO, @"[CPTileDataManager init] - initWithFilter: should be used instead");
+    return [self initWithFilter:nil];
 }
 
 - (NSUInteger)rowCount {
@@ -74,6 +92,7 @@
     return indexOfSectionStart;
 }
 
+#pragma mark - Backing data manipulation
 - (NSIndexSet *)addTile:(CPTile *)tile {
     CPSimpleDate *simpleDate = [[CPSimpleDate alloc] initWithDate:tile.date];
     CPTileSection *tileSection = self.tileSections[simpleDate];
@@ -104,6 +123,7 @@
 }
 
 - (NSIndexSet *)deleteTile:(CPTile *)tile {
+    // TODO: web call to delete
     CPSimpleDate *simpleDate = [[CPSimpleDate alloc] initWithDate:tile.date];
     CPTileSection *tileSection = self.tileSections[simpleDate];
     
@@ -139,6 +159,82 @@
     [deletedIndexes addIndex:sectionStart + 1 + tileIndex];
     
     return [deletedIndexes copy];
+}
+
+- (BOOL)refreshTiles:(BOOL)forceRefresh completion:(void (^)(NSIndexSet *indexes, NSError *error))completion
+{
+    if ((self.shouldForceNextRefresh || forceRefresh || !self.performedInitialFetch) && !self.refreshInProgress) {
+        BLOCK_SELF_REF_OUTSIDE();
+        [self clearBackingData];
+        self.refreshInProgress = YES;
+        self.shouldForceNextRefresh = NO;
+        [[CPTileCommunicationManager sharedInstance] refreshTiles:self.filter completion:^(NSDictionary *tileInfo, NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            self.refreshInProgress = NO;
+            self.pageInProgress = NO;
+            NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
+            // TODO: pass error/message back up the chain
+            if (!error) {
+                self.performedInitialFetch = YES;
+                // Parse our tile objects, and slam into the backing data.
+                NSError *modelError;
+                NSArray *tiles = [CPTile arrayOfModelsFromDictionaries:tileInfo[kTilesKey] error:&modelError];
+                for (CPTile *tile in tiles) {
+                    [indexes addIndexes:[self addTile:tile]];
+                }
+                // Hold onto our paging cursor for future use
+                self.cursor = [tileInfo[kCursorKey] isKindOfClass:[NSNull class]] ? nil : tileInfo[kCursorKey];
+                self.moreTiles = [tileInfo[kMoreKey] boolValue];
+            }
+            if (completion) completion(indexes, error);
+        }];
+        return YES;
+    } else {
+        if (completion) completion([NSIndexSet indexSet], nil);
+    }
+    return NO;
+}
+
+- (ASYNC)pageMoreTiles:(void (^)(NSIndexSet *, NSError *))completion
+{
+    if (self.moreTiles && self.cursor && !self.refreshInProgress && !self.pageInProgress) {
+        self.pageInProgress = YES;
+        BLOCK_SELF_REF_OUTSIDE();
+        // TODO: self.filter
+        [[CPTileCommunicationManager sharedInstance] getNextPage:self.filter withCursor:self.cursor completion:^(NSDictionary *tileInfo, NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            self.pageInProgress = NO;
+            NSMutableIndexSet *indexes = [[NSMutableIndexSet alloc] init];
+            if (!error) {
+                NSError *modelError;
+                NSArray *tiles = [CPTile arrayOfModelsFromDictionaries:tileInfo[kTilesKey] error:&modelError];
+                for (CPTile *tile in tiles) {
+                    [indexes addIndexes:[self addTile:tile]];
+                }
+                self.cursor = tileInfo[kCursorKey];
+                self.moreTiles = [tileInfo[kMoreKey] boolValue];
+            }
+            if (completion) completion(indexes, error);
+        }];
+    } else {
+        if (completion) completion([NSIndexSet indexSet], nil);
+    }
+}
+
+- (BOOL)allowPaging
+{
+    return !self.refreshInProgress && !self.pageInProgress && self.moreTiles;
+}
+
+- (void)clearBackingData
+{
+    // TODO: cancel in progress requests
+    // TODO: Handle merging a refresh into the existing data set when we have server support for it
+    self.performedInitialFetch = NO;
+    self.cursor = nil;
+    self.moreTiles = NO;
+    [self.tileSectionList removeAllObjects];
+    [self.tileSections removeAllObjects];
 }
 
 - (NSUInteger)insertTileSection:(CPTileSection *)tileSection {
@@ -181,4 +277,10 @@
     
     return [NSIndexPath indexPathForRow:row inSection:section];
 }
+
+- (void)forceNextRefresh
+{
+    self.shouldForceNextRefresh = YES;
+}
+
 @end

@@ -9,18 +9,21 @@
 
 @class CPTileCollectionViewDataSource;
 
-@protocol CPTileCollectionViewDataSourceScrollDelegate <NSObject>
+@protocol CPTileCollectionViewDataSourceDelegate <NSObject>
 - (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible headerStatsFade:(CGFloat)headerStatsFade;
+- (void)playVideoForTile:(CPTile*)tile;
+- (BOOL)isViewVisible;
 @end
 
 @interface CPTileCollectionViewDataSource : NSObject<UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) id<CPTileCollectionViewDataSourceScrollDelegate> scrollDelegate;
+@property (weak, nonatomic) id<CPTileCollectionViewDataSourceDelegate> delegate;
 
 - (instancetype)initWithCollectionView:(UITableView *)tableView andPetImage:(UIImage *)petImage;
 
-- (void)addTile:(CPTile *)tile withAnimation:(BOOL)withAnimation;
-- (void)deleteTile:(CPTile *)tile withAnimation:(BOOL)withAnimation;
 - (void)postInit;
 - (void)updatePetImage:(UIImage*)petImage;
+- (void)videoPlaybackCompletedForTile:(CPTile*)tile;
+- (void)viewBecomingVisible;
+
 @end

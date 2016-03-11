@@ -10,13 +10,20 @@
 #import "CPTileSection.h"
 
 @interface CPTileDataManager : NSObject
+- (instancetype)initWithFilter:(NSString *)filter;
 - (NSUInteger)sectionCount;
 - (CPSimpleDate *)sectionHeaderAtIndex:(NSUInteger)index;
 - (NSUInteger)tileCountForSection:(NSUInteger)section;
 - (CPTile *)tileForInternalIndexPath:(NSIndexPath *)indexPath;
-- (NSIndexSet *)addTile:(CPTile *)tile;
-- (NSIndexSet *)deleteTile:(CPTile *)tile;
 
 - (NSUInteger)rowCount;
 - (NSIndexPath *)indexPathFromCellIndex:(NSUInteger)cellIndex;
+
+- (NSIndexSet *)addTile:(CPTile *)tile;
+- (NSIndexSet *)deleteTile:(CPTile *)tile;
+- (BOOL)refreshTiles:(BOOL)forceRefresh completion:(void (^)(NSIndexSet *indexes, NSError *error))completion;
+- (ASYNC)pageMoreTiles:(void (^)(NSIndexSet *indexes, NSError *error))completion;
+- (void)clearBackingData;
+- (BOOL)allowPaging;
+- (void)forceNextRefresh;
 @end
