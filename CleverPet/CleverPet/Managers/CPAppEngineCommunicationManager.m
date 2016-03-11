@@ -12,6 +12,7 @@
 #import "CPUserManager.h"
 #import "CPParticleConnectionHelper.h"
 #import <Spark-SDK/SparkDevice.h>
+#import "CPFirebaseManager.h"
 
 NSString * const kAppEngineBaseUrl = @"app_server_url";
 NSString * const kNewUserPath = @"users/new";
@@ -77,6 +78,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (jsonResponse[kAuthTokenKey]) {
                 [self setAuthToken:jsonResponse[kAuthTokenKey]];
                 [[CPUserManager sharedInstance] userLoggedIn:jsonResponse];
+                [[CPFirebaseManager sharedInstance] userLoggedIn:jsonResponse];
                 [self userLoggedIn:jsonResponse completion:completion];
             } else {
                 // TODO: update message with specific token missing
