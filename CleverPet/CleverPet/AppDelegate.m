@@ -12,6 +12,7 @@
 #import "CPAppearance.h"
 #import <Intercom/Intercom.h>
 #import "CPConfigManager.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface AppDelegate ()
 
@@ -28,6 +29,8 @@
     
     // Initialize Intercom
     [Intercom setApiKey:@"ios_sdk-7acac94f6c642142e21fd6e6be0bbc7b4d38f7cc" forAppId:@"swragh2u"];
+    // Have reachability manager start monitoring, for use in the settings
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     return YES;
 }
@@ -70,7 +73,7 @@
     GITClient *gitkitClient = [GITClient sharedInstance];
     gitkitClient.apiKey = @"AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA";
     gitkitClient.widgetURL = @"http://localhost?placeholder";
-    gitkitClient.providers = @[kGITProviderGoogle];
+    gitkitClient.providers = @[kGITProviderGoogle, kGITProviderFacebook];
     [GIDSignIn sharedInstance].clientID = @"879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com";
 }
 

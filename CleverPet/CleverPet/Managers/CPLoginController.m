@@ -16,6 +16,10 @@
 #import "CPFileUtils.h"
 #import "CPUserManager.h"
 #import <Intercom/Intercom.h>
+#import <SSKeychain/SSKeychain.h>
+#import "CPHubPlaceholderViewController.h"
+
+NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 
 @interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate, CPParticleConnectionDelegate>
 
@@ -23,6 +27,8 @@
 @property (nonatomic, strong) NSDataDetector *emailDetector;
 @property (nonatomic, strong) NSDictionary *userInfo;
 @property (nonatomic, weak) id<CPLoginControllerDelegate> delegate;
+@property (nonatomic, strong) NSString *pendingAuthToken;
+@property (nonatomic, strong) CPHubPlaceholderViewController *hubPlaceholderVc;
 
 @end
 
@@ -80,7 +86,23 @@
 - (void)startSigninWithDelegate:(id<CPLoginControllerDelegate>)delegate
 {
     self.delegate = delegate;
-    [self.interfaceManager startSignIn];
+    NSString *autoLoginToken = [SSKeychain passwordForService:kAutoLogin account:kAutoLogin];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:kAutoLogin] && autoLoginToken) {
+        BLOCK_SELF_REF_OUTSIDE();
+        [[CPAppEngineCommunicationManager sharedInstance] loginWithAuthToken:autoLoginToken completion:^(CPLoginResult result, NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            if (result == CPLoginResult_Failure) {
+                // TODO: don't clear keychain on failure because device is offline
+                // We don't need to display this error, as we'll just enter the regular sign in flow
+                [self clearAutoLoginToken];
+                [self startSigninWithDelegate:self.delegate];
+            } else {
+                [self presentUIForLoginResult:result];
+            }
+        }];
+    } else {
+        [self.interfaceManager startSignIn];
+    }
 }
 
 - (void)signInWithEmail:(NSString *)email
@@ -100,7 +122,7 @@
 
 - (void)signInWithFacebook
 {
-//    [[GITAuth sharedInstance] signInWithProviderID:kGITProviderFacebook];
+    [[GITAuth sharedInstance] signInWithProviderID:kGITProviderFacebook];
 }
 
 - (void)signInWithGoogle
@@ -114,10 +136,28 @@
     [self.interfaceManager popViewController];
 }
 
+- (void)cancelPetProfileCreation
+{
+    self.userInfo = nil;
+    [self.delegate loginAttemptCancelled];
+    [[self getRootNavController] popToRootViewControllerAnimated:YES];
+}
+
+- (void)continueDeviceSetup
+{
+    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+}
+
+- (void)cancelDeviceSetup
+{
+    [self.delegate loginAttemptCancelled];
+    [[self getRootNavController] popToRootViewControllerAnimated:YES];
+    self.hubPlaceholderVc = nil;
+}
+
 #pragma mark - GITInterfaceManagerDelegate
 - (UIViewController*)signInControllerWithAccount:(GITAccount *)account
 {
-    // TODO: auto sign in with cached user
     return [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"SignInStart"];
 }
 
@@ -160,6 +200,7 @@ didFinishSignInWithToken:(NSString *)token
     if (error) {
         [self.delegate loginAttemptFailed:error.localizedDescription];
     } else {
+        self.pendingAuthToken = token;
         BLOCK_SELF_REF_OUTSIDE();
         [[CPAppEngineCommunicationManager sharedInstance] loginWithAuthToken:token completion:^(CPLoginResult result, NSError *error) {
             BLOCK_SELF_REF_INSIDE();
@@ -179,24 +220,32 @@ didFinishSignInWithToken:(NSString *)token
 - (void)deviceClaimed:(NSDictionary *)deviceInfo
 {
     BLOCK_SELF_REF_OUTSIDE();
-    [[CPAppEngineCommunicationManager sharedInstance] createDevice:deviceInfo completion:^(NSError *error) {
+    void (^completion)(NSError *) = ^(NSError *error) {
         BLOCK_SELF_REF_INSIDE();
         if (error) {
             // TODO: display error to user and relaunch device claim flow
+            [self deviceClaimFailed];
         } else {
             [self presentUIForLoginResult:CPLoginResult_UserWithSetupCompleted];
         }
-    }];
+    };
+    
+    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
+    if (currentUser.device && !currentUser.device.particleId) {
+        [[CPAppEngineCommunicationManager sharedInstance] updateDevice:currentUser.device.deviceId particle:deviceInfo completion:completion];
+    } else {
+        [[CPAppEngineCommunicationManager sharedInstance] createDevice:deviceInfo forAnimal:currentUser.pet.petId completion:completion];
+    }
 }
 
 - (void)deviceClaimCanceled
 {
-    // TODO: Inform the user they cannot proceed without a particle device and relaunch device claim flow
+    [self.hubPlaceholderVc displayMessage:NSLocalizedString(@"If you do not complete Hub WiFi Setup, the Hub won't adapt to your dog or offer your dog new challenges.\n\nYou also won't be able to see how your dog is doing through the CleverPet mobile app.", @"Message displayed to user when they cancel out of the particle device claim flow")];
 }
 
 - (void)deviceClaimFailed
 {
-    // TODO: Present instructional message to user before relaunching device claim flow
+    [self.hubPlaceholderVc displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
 }
 
 #pragma mark - UI flow
@@ -214,15 +263,25 @@ didFinishSignInWithToken:(NSString *)token
             [[self getRootNavController] pushViewController:vc animated:YES];
             break;
         }
+        case CPLoginResult_UserWithoutParticle:
+        {
+            [self presentHubPlaceholderWithMessage:NSLocalizedString(@"We no longer have a record of your Hub.\n\nPlease setup a Hub to continue.", @"Message displayed to user when hub has been claimed out from under them")];
+            break;
+        }
         case CPLoginResult_UserWithoutDevice:
         {
-            // TODO: remove this hack
-            [self deviceClaimed:nil];
-//            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+            [self presentHubPlaceholderWithMessage:nil];
+            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
             break;
         }
         case CPLoginResult_UserWithSetupCompleted:
         {
+            self.hubPlaceholderVc = nil;
+            // We've made it completely through our signin/account setup flow. Store the users auth token in the keychain to support autologin.
+            // Just storing by our auto login name, since the user id is irrelevant, we just want the last user
+            [self setAutoLoginToken:self.pendingAuthToken];
+            self.pendingAuthToken = nil;
+            
             // Swap our root controller for the main screen
             UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"MainScreenNav"];
             UIWindow *window = [[UIApplication sharedApplication].delegate window];
@@ -240,6 +299,18 @@ didFinishSignInWithToken:(NSString *)token
     }
 }
 
+- (void)presentHubPlaceholderWithMessage:(NSString *)message
+{
+    CPHubPlaceholderViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"HubPlaceholder"];
+    self.hubPlaceholderVc = vc;
+    if (message) {
+        [self.hubPlaceholderVc displayMessage:message];
+    }
+    
+    UINavigationController *root = [self getRootNavController];
+    [root pushViewController:vc animated:YES];
+}
+
 - (UINavigationController*)getRootNavController
 {
     // TODO: Need to get the actual top level controller navController = visibleViewController, viewController = probably presentedViewController
@@ -251,6 +322,9 @@ didFinishSignInWithToken:(NSString *)token
 {
     [Intercom reset];
     [[GITAuth sharedInstance] signOut];
+    
+    // Clear auto login token from keychain
+    [self clearAutoLoginToken];
     
     // Interface manager setup is tied into the root controller when it's instantiated, so reset it
     self.interfaceManager = [[GITInterfaceManager alloc] init];
@@ -268,6 +342,21 @@ didFinishSignInWithToken:(NSString *)token
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     [animation setType:kCATransitionFade];
     [window.layer addAnimation:animation forKey:@"crossFade"];
+}
+
+- (void)setAutoLoginToken:(NSString*)authToken
+{
+    // We set true to user defaults so we can kill auto login across device installs, as the keychain is not cleared on app uninstall, but defaults are
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kAutoLogin];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [SSKeychain setPassword:self.pendingAuthToken forService:kAutoLogin account:kAutoLogin];
+}
+
+- (void)clearAutoLoginToken
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kAutoLogin];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [SSKeychain deletePasswordForService:kAutoLogin account:kAutoLogin];
 }
 
 @end

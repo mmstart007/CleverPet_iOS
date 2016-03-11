@@ -87,8 +87,8 @@
             BLOCK_SELF_REF_OUTSIDE();
             [[CPLoginController sharedInstance] completeSignUpWithPetImage:croppedImage completion:^(NSError *error) {
                 BLOCK_SELF_REF_INSIDE();
-                [self showLoadingSpinner:NO];
                 if (error) {
+                    [self showLoadingSpinner:NO];
                     [self displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
                 }
             }];

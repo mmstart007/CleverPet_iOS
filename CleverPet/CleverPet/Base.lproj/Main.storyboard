@@ -36,7 +36,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aDM-mp-Fl9">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="otv-r7-ch9">
                                 <rect key="frame" x="282" y="281" width="37" height="37"/>
@@ -51,12 +51,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="aDM-mp-Fl9" secondAttribute="trailing" id="IYs-he-ore"/>
+                            <constraint firstItem="aDM-mp-Fl9" firstAttribute="top" secondItem="FAb-Fv-lcZ" secondAttribute="top" id="NRl-wT-jpm"/>
                             <constraint firstItem="Ke8-zx-6te" firstAttribute="centerX" secondItem="FAb-Fv-lcZ" secondAttribute="centerX" id="NYE-rh-ZSC"/>
                             <constraint firstItem="otv-r7-ch9" firstAttribute="centerX" secondItem="FAb-Fv-lcZ" secondAttribute="centerX" id="PWb-yq-uD0"/>
-                            <constraint firstItem="aDM-mp-Fl9" firstAttribute="top" secondItem="RUR-5z-JCt" secondAttribute="bottom" id="Q1S-lo-Gpa"/>
                             <constraint firstItem="aDM-mp-Fl9" firstAttribute="leading" secondItem="FAb-Fv-lcZ" secondAttribute="leading" id="RId-i8-eV9"/>
-                            <constraint firstItem="YMg-je-ick" firstAttribute="top" secondItem="aDM-mp-Fl9" secondAttribute="bottom" id="eMy-WR-qqv"/>
                             <constraint firstItem="otv-r7-ch9" firstAttribute="centerY" secondItem="FAb-Fv-lcZ" secondAttribute="centerY" id="pHj-uZ-EEa"/>
+                            <constraint firstAttribute="bottom" secondItem="aDM-mp-Fl9" secondAttribute="bottom" id="phF-IP-Aic"/>
                             <constraint firstItem="otv-r7-ch9" firstAttribute="top" secondItem="Ke8-zx-6te" secondAttribute="bottom" constant="15" id="rT8-LL-7wU"/>
                         </constraints>
                     </view>
@@ -90,24 +90,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0Hb-LW-76K"/>
                                 </constraints>
-                                <state key="normal" title="Sign in"/>
+                                <state key="normal" title="Begin"/>
                                 <connections>
                                     <action selector="signInTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FFx-XB-7gw"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="REs-0U-Wys">
-                                <rect key="frame" x="180" y="60" width="240" height="128"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="JuI-RK-xtG"/>
-                                    <constraint firstAttribute="width" constant="240" id="irh-Cw-kpc"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Engage idle paws." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="auy-Fs-Rb9">
-                                <rect key="frame" x="20" y="203" width="560" height="39"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="usW-ib-AbP" customClass="CPLoadingView">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
@@ -119,27 +106,20 @@
                             <constraint firstAttribute="trailing" secondItem="M4t-xv-zM4" secondAttribute="trailing" id="42N-BS-UyM"/>
                             <constraint firstAttribute="bottom" secondItem="qco-Qs-99e" secondAttribute="bottom" id="DUW-Cf-R7b"/>
                             <constraint firstItem="qco-Qs-99e" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Efj-pz-gjg"/>
-                            <constraint firstItem="REs-0U-Wys" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="IH8-57-IvL"/>
                             <constraint firstAttribute="trailing" secondItem="qco-Qs-99e" secondAttribute="trailing" id="LkO-MQ-OlN"/>
                             <constraint firstItem="qco-Qs-99e" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SMa-Fp-i5Z"/>
                             <constraint firstItem="usW-ib-AbP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Y09-IN-rNC"/>
                             <constraint firstItem="usW-ib-AbP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="enG-TJ-M4G"/>
-                            <constraint firstItem="REs-0U-Wys" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fcb-7Y-RKj"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="M4t-xv-zM4" secondAttribute="bottom" id="joX-i5-ig1"/>
-                            <constraint firstItem="auy-Fs-Rb9" firstAttribute="top" secondItem="REs-0U-Wys" secondAttribute="bottom" constant="15" id="lC0-MT-fz0"/>
-                            <constraint firstItem="auy-Fs-Rb9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="m1r-fK-FVg"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="usW-ib-AbP" secondAttribute="bottom" id="qCZ-WV-ceh"/>
                             <constraint firstAttribute="trailing" secondItem="usW-ib-AbP" secondAttribute="trailing" id="vt8-6Z-kjZ"/>
-                            <constraint firstAttribute="trailing" secondItem="auy-Fs-Rb9" secondAttribute="trailing" constant="20" id="zVB-mz-eUL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="6Y5-Wr-du6"/>
                     <connections>
                         <outlet property="backgroundImage" destination="qco-Qs-99e" id="bhg-lb-Pas"/>
                         <outlet property="fadeView" destination="usW-ib-AbP" id="dTT-87-1NB"/>
-                        <outlet property="iconImage" destination="REs-0U-Wys" id="u2U-Br-j0I"/>
                         <outlet property="signInButton" destination="M4t-xv-zM4" id="43Y-4t-BV0"/>
-                        <outlet property="taglineLabel" destination="auy-Fs-Rb9" id="pYF-YW-3OL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
