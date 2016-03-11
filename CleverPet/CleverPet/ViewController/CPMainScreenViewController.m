@@ -76,6 +76,8 @@
         [self.tableView.dataSource performSelector:@selector(updatePetImage:) withObject:[self.currentPet petPhoto]];
     }
     [[CPFirebaseManager sharedInstance] beginlisteningForUpdates];
+    // Inform our data source we're going to become visible
+    [self.dataSource viewBecomingVisible];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -129,6 +131,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
     [self.dataSource videoPlaybackCompletedForTile:self.playingTile];
     self.playingTile = nil;
+}
+
+- (BOOL)isViewVisible
+{
+    // we have no window, we're not currently visible
+    return self.view.window;
 }
 
 @end

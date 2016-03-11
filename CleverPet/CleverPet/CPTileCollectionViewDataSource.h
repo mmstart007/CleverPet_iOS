@@ -12,6 +12,7 @@
 @protocol CPTileCollectionViewDataSourceDelegate <NSObject>
 - (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible headerStatsFade:(CGFloat)headerStatsFade;
 - (void)playVideoForTile:(CPTile*)tile;
+- (BOOL)isViewVisible;
 @end
 
 @interface CPTileCollectionViewDataSource : NSObject<UITableViewDataSource, UITableViewDelegate>
@@ -23,5 +24,6 @@
 - (void)postInit;
 - (void)updatePetImage:(UIImage*)petImage;
 - (void)videoPlaybackCompletedForTile:(CPTile*)tile;
+- (void)viewBecomingVisible;
 
 @end

@@ -38,6 +38,7 @@ CGFloat const kPagingThreshhold = 100.f;
 @property (nonatomic, weak) UIActivityIndicatorView *footerSpinner;
 @property (nonatomic, weak) UIImageView *footerIcon;
 @property (nonatomic, strong) CPTileUpdateListener *tileUpdateListener;
+@property (nonatomic, assign) BOOL shouldRefresh;
 
 @end
 
@@ -228,6 +229,14 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     [[CPTileCommunicationManager sharedInstance] handleButtonPressWithPath:tile.secondaryButtonUrl completion:nil];
 }
 
+- (void)viewBecomingVisible
+{
+    // If we've received a tile update, refresh
+    if (self.shouldRefresh) {
+        [self refreshTilesWithAnimation:YES];
+    }
+}
+
 #pragma mark - UITableView delegate and data source methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -363,6 +372,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 // TODO: kill page if we refresh
 - (void)refreshTilesWithAnimation:(BOOL)withAnimation
 {
+    self.shouldRefresh = NO;
     [self animateFooterSpinner:YES];
     CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
     BLOCK_SELF_REF_OUTSIDE();
@@ -419,7 +429,12 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         // Inform data managers that their next refresh needs to be forced and refresh the current
         CPTileDataManager *dataManager = self.tileDataManagers[filter];
         [dataManager forceNextRefresh];
+    }
+    
+    if ([self.delegate isViewVisible]) {
         [self refreshTilesWithAnimation:YES];
+    } else {
+        self.shouldRefresh = YES;
     }
 }
 
