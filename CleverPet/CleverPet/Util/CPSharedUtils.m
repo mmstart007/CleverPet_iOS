@@ -44,6 +44,7 @@ NSString * const kActiveMode = @"active";
 NSString * const kStandbyMode = @"standby";
 NSString * const kSchedulerMode = @"scheduler";
 NSString * const kLastSeenKey = @"since_last_seen";
+NSString * const kTimeZoneKey = @"time_zone";
 //Schedule keys
 NSString * const kScheduleIdKey = @"schedule_ID";
 NSString * const kWeekdayKey = @"weekday";
