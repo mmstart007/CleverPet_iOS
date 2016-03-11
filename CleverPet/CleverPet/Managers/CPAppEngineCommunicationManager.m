@@ -97,7 +97,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         BLOCK_SELF_REF_INSIDE();
         // Clear the auth header as we will now be in a fresh login state
         [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
-        if (completion) completion(CPLoginResult_Failure, error);
+        if (completion) completion(CPLoginResult_Failure, [self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -266,7 +266,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -306,7 +306,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion(NSNotFound, [self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion(NSNotFound, [self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 

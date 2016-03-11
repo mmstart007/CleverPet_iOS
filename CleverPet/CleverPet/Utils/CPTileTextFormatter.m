@@ -29,6 +29,11 @@
   return _instance;
 }
 
++ (void)setTimeZoneOffset:(NSInteger)offset
+{
+    [[[self instance] relativeDateFormatter] setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:offset]];
+}
+
 - (instancetype)init
 {
     if (self = [super init])

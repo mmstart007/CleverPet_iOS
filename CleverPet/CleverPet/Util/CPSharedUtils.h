@@ -10,6 +10,8 @@
 
 @interface CPSharedUtils : NSObject
 
++ (void)deviceTimeZoneUpdated:(NSInteger)offset;
+
 @end
 
 #pragma mark-- NSNotification Macros
@@ -112,4 +114,3 @@ extern NSString * const kPageSizeKey;
 
 #define ASYNC void
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
-

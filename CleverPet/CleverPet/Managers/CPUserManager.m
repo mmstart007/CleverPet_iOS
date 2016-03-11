@@ -35,6 +35,8 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 {
     NSError *error;
     self.currentUser = [[CPUser alloc] initWithDictionary:userInfo error:&error];
+    // Update to use device time zone. Probably should pull this out
+    [CPSharedUtils deviceTimeZoneUpdated:self.currentUser.device.timeZone];
 }
 
 - (void)userCreatedPet:(NSDictionary *)petInfo
@@ -86,6 +88,8 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 {
     NSError *error;
     self.currentUser.device = [[CPDevice alloc] initWithDictionary:deviceInfo error:&error];
+    // Update to use device time zone. Probably should pull this out
+    [CPSharedUtils deviceTimeZoneUpdated:self.currentUser.device.timeZone];
 }
 
 - (void)updateDeviceInfo:(NSDictionary *)deviceInfo

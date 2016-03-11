@@ -21,6 +21,8 @@
     dispatch_once(&onceToken, ^{
         s_tileDateFormatter = [[NSDateFormatter alloc] init];
         s_tileDateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSSSS";
+        // Dates come from the server with 0 offset from gmt/utc
+        s_tileDateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     });
     return s_tileDateFormatter;
 }

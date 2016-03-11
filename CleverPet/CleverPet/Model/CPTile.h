@@ -51,4 +51,6 @@ typedef NS_ENUM(NSUInteger){
 @property (strong, nonatomic) CPSimpleDate<Ignore> *simpleDate;
 
 @property (assign, nonatomic) CGFloat cachedRowHeight;
+
++(void)setTimeZoneOffset:(NSInteger)offset;
 @end
