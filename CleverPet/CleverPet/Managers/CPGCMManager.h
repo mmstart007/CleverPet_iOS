@@ -15,5 +15,6 @@
 
 - (void)userLoggedIn;
 - (void)obtainedGCMToken:(NSString *)token;
+- (NSString*)getToken;
 
 @end

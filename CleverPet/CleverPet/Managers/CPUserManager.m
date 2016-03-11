@@ -10,6 +10,7 @@
 #import "CPAppEngineCommunicationManager.h"
 #import "CPFileUtils.h"
 #import "CPLoginController.h"
+#import "CPGCMManager.h"
 
 NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 
@@ -194,17 +195,18 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 
 - (void)addUserToPendingLogouts:(CPUser*)user
 {
-    // Write our user id and device token to defaults so we can attempt to remove the push on the server at a later point if the logout call fails
-    NSMutableDictionary *pendingLogouts = [[[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts] mutableCopy];
-    if (!pendingLogouts) {
-        pendingLogouts = [NSMutableDictionary dictionary];
+    NSString *gcmToken = [[CPGCMManager sharedInstance] getToken];
+    if (gcmToken) {
+        // Write our user id and device token to defaults so we can attempt to remove the push on the server at a later point if the logout call fails
+        NSMutableDictionary *pendingLogouts = [[[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts] mutableCopy];
+        if (!pendingLogouts) {
+            pendingLogouts = [NSMutableDictionary dictionary];
+        }
+        
+        pendingLogouts[user.userId] = @"pushToken";
+        [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    
-    // TODO: Add push token to user object
-    // TODO: we aren't getting user id back from the server, either figure out something to use as an identifier(email probably works), or ask for the id
-//    pendingLogouts[user.userId] = @"pushToken";
-    [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)removeUserFromPendingLogouts:(CPUser*)user
@@ -214,7 +216,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
         return;
     }
     
-//    pendingLogouts[user.userId] = nil;
+    pendingLogouts[user.userId] = nil;
     [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

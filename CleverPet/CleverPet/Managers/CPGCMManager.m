@@ -51,6 +51,11 @@
     [self sendTokenToServer];
 }
 
+- (NSString*)getToken
+{
+    return self.gcmToken;
+}
+
 - (ASYNC)sendTokenToServer
 {
     if (self.gcmToken && [[CPUserManager sharedInstance] getCurrentUser]) {
