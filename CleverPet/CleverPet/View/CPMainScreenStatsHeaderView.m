@@ -8,7 +8,6 @@
 
 #import "CPMainScreenStatsHeaderView.h"
 #import "CPLabelUtils.h"
-#import "CPFirebaseManager.h"
 
 @interface CPMainScreenStatsHeaderView ()
 @property (weak, nonatomic) IBOutlet UILabel *kibblesTitleLabel;
@@ -32,34 +31,6 @@
     self.imageView.clipsToBounds = YES;
     self.progressView.progressTintColor = [UIColor appTealColor];
     self.progressView.trackTintColor = [UIColor appDividerColor];
-    
-    BLOCK_SELF_REF_OUTSIDE();
-    [CPFirebaseManager sharedInstance].headerStatsUpdateBlock = ^(NSError *error, NSDictionary *update) {
-        BLOCK_SELF_REF_INSIDE()
-        if(error) {
-            [self setHidden:YES];
-        }else {
-            [self setHidden:NO];
-            if (![update isEqual:[NSNull null]]) {
-                [self.kibblesNumberLabel setText:[[update objectForKey:@"kibbles"] stringValue]];
-                [self.playsNumberLabel setText:[[update objectForKey:@"plays"] stringValue]];
-                
-                NSNumber *stage = [update objectForKey:@"stage_number"];
-                NSNumber *totalStages = [update objectForKey:@"total_stages"];
-                float progress = [stage floatValue]/[totalStages floatValue];
-                [self.progressView setProgress:progress animated:YES];
-            }   else {
-                [self.kibblesNumberLabel setText:@"0"];
-                [self.playsNumberLabel setText:@"0"];
-                [self.progressView setProgress:0.0f animated:YES];
-            }
-        }
-    };
-}
-
-- (void)dealloc
-{
-    [CPFirebaseManager sharedInstance].headerStatsUpdateBlock = nil;
 }
 
 @end
