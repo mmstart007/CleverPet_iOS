@@ -115,7 +115,8 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
 - (void)sparkSetupViewController:(SparkSetupMainController *)controller didFinishWithResult:(SparkSetupMainControllerResult)result device:(SparkDevice *)device
 {
     if (result == SparkSetupMainControllerResultSuccess) {
-        [self.delegate deviceClaimed:@{kParticleIdKey:device.id, kNameKey:device.name}];
+        NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+        [self.delegate deviceClaimed:@{kParticleIdKey:device.id, kNameKey:device.name, kTimeZoneKey:(timeZone ? @([timeZone secondsFromGMT]) : @(0))}];
     } else {
         if (result == SparkSetupMainControllerResultUserCancel) {
             [self.delegate deviceClaimCanceled];

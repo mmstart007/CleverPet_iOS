@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *deviceId;
 @property (nonatomic, strong) NSString *mode;
 @property (nonatomic, strong) NSString<Optional> *particleId;
+@property (nonatomic, assign) NSInteger timeZone;
 @property (nonatomic, strong) CPDeviceSchedule<Optional> *weekdaySchedule;
 @property (nonatomic, strong) CPDeviceSchedule<Optional> *weekendSchedule;
 
