@@ -60,6 +60,7 @@ PODS:
   - JSONModel (1.2.0)
   - NMRangeSlider (1.2.1)
   - OAStackView (1.0.1)
+  - OJFSegmentedProgressView (0.0.1)
   - RBStoryboardLink (0.1.4)
   - Spark-SDK (0.3.5):
     - Spark-SDK/Helpers (= 0.3.5)
@@ -96,6 +97,7 @@ DEPENDENCIES:
   - JSONModel
   - NMRangeSlider
   - OAStackView
+  - OJFSegmentedProgressView (~> 0.0.1)
   - RBStoryboardLink
   - Spark-SDK (from `Spark-SDK_Internal`)
   - SparkSetup
@@ -136,6 +138,7 @@ SPEC CHECKSUMS:
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   NMRangeSlider: 317ded652431eb90501c8421d9cddc3930d891e6
   OAStackView: 95e7cb79cbea25c2342f496a44bdbe8bd4c8d510
+  OJFSegmentedProgressView: 53b0d9fb54fc1587b887e6c3d814b09f724a4a66
   RBStoryboardLink: 0faae84aea6a5e8716c4469984d847d958c3fcb3
   Spark-SDK: dbd947fd197f08655b5f458ec559de5c920e8e70
   SparkSetup: f9618dd24548ab8a024efdaa65a89f63ed44a7ee
