@@ -18,4 +18,5 @@
 - (NSUInteger)hash;
 
 @property (strong, nonatomic) NSString *filterName;
+@property (strong, nonatomic) UIColor *color;
 @end

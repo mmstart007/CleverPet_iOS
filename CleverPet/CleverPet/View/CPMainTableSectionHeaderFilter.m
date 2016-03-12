@@ -17,6 +17,14 @@
 - (instancetype)initWithFilterName:(NSString *)filterName {
     if (self = [super init]) {
         self.filterName = filterName;
+        // TODO: clean this up
+        if ([filterName isEqualToString:@"Reports"]) {
+            self.color = [UIColor appRedColor];
+        } else if ([filterName isEqualToString:@"Videos"]) {
+            self.color = [UIColor appYellowColor];
+        } else if ([filterName isEqualToString:@"Challenges"]) {
+            self.color = [UIColor appTealColor];
+        }
     }
 
     return self;

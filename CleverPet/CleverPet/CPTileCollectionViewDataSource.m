@@ -11,6 +11,8 @@
 #import "CPMainTableSectionHeader.h"
 #import "CPMainTableDateHeader.h"
 #import "CPMainTableSectionHeaderFilter.h"
+#import "CPTileCommunicationManager.h"
+#import "CPTileUpdateListener.h"
 
 #define TILE_VIEW_CELL @"TILE_VIEW_CELL"
 #define PET_STATS_HEADER @"PET_STATS_HEADER"
@@ -18,7 +20,9 @@
 #define DATE_HEADER @"DATE_HEADER"
 #define HEADER_VIEW_SECTION 0
 
-@interface CPTileCollectionViewDataSource () <CPTileViewCellDelegate, CPMainTableSectionHeaderDelegate>
+CGFloat const kPagingThreshhold = 100.f;
+
+@interface CPTileCollectionViewDataSource () <CPTileViewCellDelegate, CPMainTableSectionHeaderDelegate, CPTileUpdateDelegate>
 @property (weak, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) CPTileViewCell *sizingCell;
 @property (strong, nonatomic) CPTableHeaderView *tableHeaderView;
@@ -31,6 +35,11 @@
 @property (strong, nonatomic) NSArray<CPMainTableSectionHeaderFilter *> *filters;
 @property (strong, nonatomic) CPMainTableSectionHeaderFilter *currentFilter;
 @property (strong, nonatomic) NSMutableDictionary<CPMainTableSectionHeaderFilter *, CPTileDataManager *> *tileDataManagers;
+@property (nonatomic, weak) UIActivityIndicatorView *footerSpinner;
+@property (nonatomic, weak) UIImageView *footerIcon;
+@property (nonatomic, strong) CPTileUpdateListener *tileUpdateListener;
+@property (nonatomic, assign) BOOL shouldRefresh;
+
 @end
 
 @implementation CPTileCollectionViewDataSource {
@@ -57,23 +66,52 @@
         [tableView registerNib:[UINib nibWithNibName:@"CPMainTableSectionHeader" bundle:[NSBundle mainBundle]] forHeaderFooterViewReuseIdentifier:SECTION_HEADER];
         
         [self precacheTableViewCells];
+        [self setupTableFooter];
         
         self.filters = @[
+                         [CPMainTableSectionHeaderFilter filterWithName:@"Latest"],
                          [CPMainTableSectionHeaderFilter filterWithName:@"Reports"],
                          [CPMainTableSectionHeaderFilter filterWithName:@"Videos"],
-                         [CPMainTableSectionHeaderFilter filterWithName:@"Device Messages"]
+                         [CPMainTableSectionHeaderFilter filterWithName:@"Challenges"]
                          ];
         
-        self.tileDataManagers = [[NSMutableDictionary alloc] init];
-        
-        for (CPMainTableSectionHeaderFilter *filter in self.filters) {
-            self.tileDataManagers[filter] = [[CPTileDataManager alloc] init];
-        }
-        
         self.currentFilter = self.filters[0];
+        
+        self.tileDataManagers = [[NSMutableDictionary alloc] init];
+        // TODO: clean this up
+        self.tileDataManagers[self.filters[0]] = [[CPTileDataManager alloc] initWithFilter:nil];
+        self.tileDataManagers[self.filters[1]] = [[CPTileDataManager alloc] initWithFilter:@"report"];
+        self.tileDataManagers[self.filters[2]] = [[CPTileDataManager alloc] initWithFilter:@"video"];
+        self.tileDataManagers[self.filters[3]] = [[CPTileDataManager alloc] initWithFilter:@"challenge"];
+        self.tileUpdateListener = [CPTileUpdateListener tileUpdateListenerWithDelegate:self];
     }
     
     return self;
+}
+
+- (void)setupTableFooter
+{
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 40.f)];
+    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
+    logo.translatesAutoresizingMaskIntoConstraints = NO;
+    [view addSubview:logo];
+    self.footerIcon = logo;
+    // center image in footer
+    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    [view addConstraints:@[centerX, centerY]];
+    
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    spinner.color = [UIColor appGreyColor];
+    spinner.hidesWhenStopped = YES;
+    spinner.translatesAutoresizingMaskIntoConstraints = NO;
+    [view addSubview:spinner];
+    self.footerSpinner = spinner;
+    NSLayoutConstraint *spinnerCenterY = [NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    NSLayoutConstraint *spinnerCenterX = [NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    [view addConstraints:@[spinnerCenterY, spinnerCenterX]];
+    
+    self.tableView.tableFooterView = view;
 }
 
 - (CPTileDataManager *)currentTileDataManager {
@@ -99,9 +137,19 @@
     
     CGFloat fade = MIN(1, MAX(0, scrollView.contentOffset.y - self.headerImageHeight) / self.headerStatsHeight);
     
-    [self.scrollDelegate dataSource:self
+    [self.delegate dataSource:self
                  headerPhotoVisible:scrollView.contentOffset.y < self.headerImageHeight - 4
                     headerStatsFade:fade];
+    
+    // TODO: loading section
+    // TODO: trigger page if our initial content size is less than our bounds, and we have more tiles
+    // Start paging if we've reached our threshhold
+    if ([self.tileDataManagers[self.currentFilter] allowPaging]) {
+        CGFloat offsetY = scrollView.contentOffset.y + scrollView.bounds.size.height;
+        if (scrollView.contentSize.height - offsetY < kPagingThreshhold) {
+            [self pageMoreTilesWithAnimation:YES];
+        }
+    }
 }
 
 NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
@@ -127,8 +175,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     return [s_dateFormatter stringFromDate:date];
 }
 
-- (void)addTile:(CPTile *)tile withAnimation:(BOOL)withAnimation {
-    NSIndexSet *indexSet = [self.currentTileDataManager addTile:tile];
+- (void)addTiles:(NSIndexSet *)tileIndexes withAnimation:(BOOL)withAnimation {
     UITableViewRowAnimation animation;
     
     if (withAnimation) {
@@ -139,7 +186,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     
     [self.tableView beginUpdates];
     NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-    [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+    [tileIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
         [indexPaths addObject:[NSIndexPath indexPathForItem:idx inSection:1]];
     }];
     [self.tableView insertRowsAtIndexPaths:indexPaths withRowAnimation:animation];
@@ -176,6 +223,21 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     [self.tableHeaderView updateImage:petImage];
 }
 
+- (void)videoPlaybackCompletedForTile:(CPTile *)tile
+{
+    // Inform the server video playback completed for the tile. We don't care if this was successful or not
+    [[CPTileCommunicationManager sharedInstance] handleButtonPressWithPath:tile.secondaryButtonUrl completion:nil];
+}
+
+- (void)viewBecomingVisible
+{
+    // If we've received a tile update, refresh
+    if (self.shouldRefresh) {
+        [self refreshTilesWithAnimation:YES];
+    }
+}
+
+#pragma mark - UITableView delegate and data source methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
@@ -223,7 +285,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         
         if (!sectionHeader.hasFiltersSetup) {
             for (CPMainTableSectionHeaderFilter *filter in self.filters) {
-                [sectionHeader addFilter:filter];
+                [sectionHeader addFilter:filter withColor:filter.color];
             }
             
             sectionHeader.hasFiltersSetup = YES;
@@ -256,6 +318,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         if (internalIndexPath.row == NSNotFound) {
             return 50;
         } else {
+            // TODO: separate cache for each filter
             CPTile *tile = [self.currentTileDataManager tileForInternalIndexPath:internalIndexPath];
             if (tile.cachedRowHeight != 0) {
                 return tile.cachedRowHeight;
@@ -288,13 +351,91 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     if (self.currentFilter != filter) {
         self.currentFilter = filter;
         [self.tableView reloadData];
+        [self refreshTilesWithAnimation:YES];
     }
 }
 
 #pragma mark - CPTileViewCellDelegate methods
 
 - (void)didSwipeTileViewCell:(CPTileViewCell *)tileViewCell {
-    // TODO: Get rid of the tile here
+    // We don't particularly care about success or failure here, so just update the ui
+    [[CPTileCommunicationManager sharedInstance] handleTileSwipe:tileViewCell.tile.tileId completion:nil];
     [self deleteTile:tileViewCell.tile withAnimation:YES];
 }
+
+- (void)playVideoForCell:(CPTileViewCell *)tileViewCell
+{
+    [self.delegate playVideoForTile:tileViewCell.tile];
+}
+
+#pragma mark - Data source management
+// TODO: kill page if we refresh
+- (void)refreshTilesWithAnimation:(BOOL)withAnimation
+{
+    self.shouldRefresh = NO;
+    [self animateFooterSpinner:YES];
+    CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
+    BLOCK_SELF_REF_OUTSIDE();
+    BOOL didClearData = [currentManager refreshTiles:NO completion:^(NSIndexSet *indexes, NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        [self animateFooterSpinner:NO];
+        if (error) {
+            // TODO: display error
+        } else if (currentManager == self.tileDataManagers[self.currentFilter]) {
+            // TODO: animate from old data to new data instead of refresh?
+            [self.tableView reloadData];
+        }
+    }];
+    
+    if (didClearData) {
+        // If our data manager cleared it's backing data, reload the table so we just show the loading spinner
+        [self.tableView reloadData];
+    }
+}
+
+- (void)pageMoreTilesWithAnimation:(BOOL)withAnimation
+{
+    [self animateFooterSpinner:YES];
+    CPTileDataManager *currentManager = self.tileDataManagers[self.currentFilter];
+    BLOCK_SELF_REF_OUTSIDE();
+    [currentManager pageMoreTiles:^(NSIndexSet *indexes, NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        [self animateFooterSpinner:NO];
+        if (error) {
+            // TODO: display error
+        } else if (currentManager == self.tileDataManagers[self.currentFilter]) {
+            [self addTiles:indexes withAnimation:withAnimation];
+        }
+    }];
+}
+
+- (void)animateFooterSpinner:(BOOL)animate
+{
+    [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionCurveEaseInOut animations:^{
+        if (animate) {
+            [self.footerSpinner startAnimating];
+        } else {
+            [self.footerSpinner stopAnimating];
+        }
+        self.footerIcon.hidden = animate;
+    } completion:nil];
+}
+
+#pragma mark - CPTileUpdateDelegate methods
+- (void)queueTileUpdate
+{
+    // TODO: don't execute the refresh unless we're visible
+    for (CPMainTableSectionHeaderFilter *filter in self.filters) {
+        // Inform data managers that their next refresh needs to be forced and refresh the current
+        CPTileDataManager *dataManager = self.tileDataManagers[filter];
+        [dataManager forceNextRefresh];
+    }
+    
+    if ([self.delegate isViewVisible]) {
+        [self refreshTilesWithAnimation:YES];
+    } else {
+        self.shouldRefresh = YES;
+    }
+}
+
 @end

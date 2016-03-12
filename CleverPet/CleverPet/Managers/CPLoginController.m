@@ -303,9 +303,7 @@ didFinishSignInWithToken:(NSString *)token
 {
     CPHubPlaceholderViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"HubPlaceholder"];
     self.hubPlaceholderVc = vc;
-    if (message) {
-        [self.hubPlaceholderVc displayMessage:message];
-    }
+    vc.message = message;
     
     UINavigationController *root = [self getRootNavController];
     [root pushViewController:vc animated:YES];

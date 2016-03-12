@@ -58,6 +58,7 @@
     self.textValidator = [[CPTextValidator alloc] init];
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateFormat = @"Y-M-d";
+    self.dateFormatter.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated

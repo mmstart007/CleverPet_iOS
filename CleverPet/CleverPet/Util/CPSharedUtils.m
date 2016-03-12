@@ -7,6 +7,7 @@
 //
 
 #import "CPSharedUtils.h"
+#import "CPTileTextFormatter.h"
 
 NSInteger const kNameFieldMinChars = 2;
 NSInteger const kNameFieldMaxChars = 10;
@@ -53,7 +54,17 @@ NSString * const kIsActiveKey = @"is_active";
 NSString * const kStartTimeKey = @"start_time";
 NSString * const kEndTimeKey = @"end_time";
 NSString * const kDaysOnKey = @"days_on";
+//Tile keys
+NSString * const kCursorKey = @"cursor";
+NSString * const kMoreKey = @"more";
+NSString * const kTilesKey = @"tiles";
+NSString * const kPageSizeKey = @"num_entries";
 
 @implementation CPSharedUtils
+
++ (void)deviceTimeZoneUpdated:(NSInteger)offset
+{
+    [CPTileTextFormatter setTimeZoneOffset:offset];
+}
 
 @end
