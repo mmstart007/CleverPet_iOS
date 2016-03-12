@@ -30,7 +30,6 @@
     [self.cancelButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.cancelButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     self.fadeView.hidden = NO;
-    [self.navigationController setNavigationBarHidden:YES];
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.messageLabel.textColor = [UIColor appTitleTextColor];
     self.messageLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
@@ -38,6 +37,12 @@
     if (self.message) {
         [self displayMessage:self.message];
     }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)didReceiveMemoryWarning {
