@@ -380,7 +380,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (completion) completion(nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             BLOCK_SELF_REF_INSIDE();
-            if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+            if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
         }];
     } else {
         if (completion) completion([self errorForMessage:@"Config not set up"]);

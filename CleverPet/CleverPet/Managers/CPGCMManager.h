@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CPBaseCommunicationManager.h"
 
 // TODO: convert to base communication manager after tiles branch is merged
-@interface CPGCMManager : NSObject
+@interface CPGCMManager : CPBaseCommunicationManager
 
 + (instancetype)sharedInstance;
 

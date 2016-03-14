@@ -52,5 +52,4 @@ typedef NS_ENUM(NSUInteger){
 
 @property (assign, nonatomic) CGFloat cachedRowHeight;
 
-+(void)setTimeZoneOffset:(NSInteger)offset;
 @end
