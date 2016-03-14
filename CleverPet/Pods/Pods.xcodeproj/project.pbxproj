@@ -29,10 +29,9 @@
 		0524E3768D3DFCF2E4E232DCF896DC2D /* FBSDKLoginKit+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E91AC5493A6090F1B4013D37C7C98CD /* FBSDKLoginKit+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0538A918060871C2C45287705CE50ACC /* FBSDKVideoUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CE116E802100A4AB35F2C071F8591CC /* FBSDKVideoUploader.m */; };
 		054406501262AC9BC4FE106D42B871CC /* BABCropperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B8DA4F01DAF09816EB35CD8B6DA8A /* BABCropperView.m */; };
-		05FBC19E4A36FA0C6F14D9EC6ACC2969 /* CHCSVParser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F858062FA69889F1520C5FE74DFB17 /* CHCSVParser-dummy.m */; };
-		064C184FF8ACD0772525E10BA47B6B27 /* SparkConnectingProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBFF44545D036E6D4E3B3F741B5456A6 /* SparkConnectingProgressViewController.m */; };
 		06D70E3ED56542E6E150732ACE707585 /* FBSDKLoginButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 0452300B0A657638B8A3850372BD62F8 /* FBSDKLoginButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		071CCBB91A9ECC04D521A4A670F2EAF7 /* FBSDKShareVideoContent.h in Headers */ = {isa = PBXBuildFile; fileRef = C1C6FDD411C41A1F8BEA4A455461377B /* FBSDKShareVideoContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		073CEC1D92E59AB4A2745E69A44799DD /* SparkManualNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC018436B2CAD8E03519805B170A1B95 /* SparkManualNetworkViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		075979D6A80AA907E8C15434C532C221 /* FAuthData.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FF4BD8A72AE2A294171994BB28BD9DB /* FAuthData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		08219E0F587B7EBB3EB1EF138B25CEA6 /* CorePlotProbes.d in Sources */ = {isa = PBXBuildFile; fileRef = E11F7CD9A82235FE851A20D55CC84EC8 /* CorePlotProbes.d */; };
 		08C00B7452924B8BC9C63B7CD1299CC9 /* SparkDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F8C75E7E30EABCD84B959EC7482453 /* SparkDevice.m */; };
@@ -57,14 +56,13 @@
 		1002547EB73320964BC1B10D757EAE2D /* FBSDKUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = B0FE4B24A08D41705E3A89D3C199C14C /* FBSDKUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		10ADBF90FFAA830125E40D9F6E610242 /* CPTPlotAreaFrame.h in Headers */ = {isa = PBXBuildFile; fileRef = CA4273545F7CD52FD4B5E40CC5AC2B43 /* CPTPlotAreaFrame.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		11A9DA16AE59F888A8D6B6119FC134B4 /* FBSDKShareOpenGraphAction.m in Sources */ = {isa = PBXBuildFile; fileRef = AC33418E01413E5AA943B64DB2CD4007 /* FBSDKShareOpenGraphAction.m */; };
-		11AE48F15E95419C31C78230EE82A566 /* SparkSetupCommManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D31417084590DBB77CB2DF92B3C56776 /* SparkSetupCommManager.m */; };
 		1211F5B8B797289EB5EA643EEFB76C75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D96B1BAF92C16FB3856C540E179DBB49 /* Foundation.framework */; };
 		1240130D4215AAFB9945B734C60222CE /* CPTShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4831CC86353BA66DEBD234E3C4C8C189 /* CPTShadow.m */; };
 		1345483A67FB02C778D2D3639930AED7 /* FBSDKBridgeAPIRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 42E43441E5A23C220AE158CCA3B3A955 /* FBSDKBridgeAPIRequest.m */; };
 		138917EC340B4D359138CD16C4383D1D /* FBSDKCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = 011EF2BA45456BFE4D81D62E739381B3 /* FBSDKCopying.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1449C916D95650C692EE9AAD5C69D3B6 /* SparkSetupWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1F7D18DD83962AF6B21E5C832F5AE /* SparkSetupWebViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		145C1B3EF387EA4913A69F010CED3BCB /* BFCancellationTokenSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 30B359CC9E93D0C07CE76FD2677CAC58 /* BFCancellationTokenSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14CD3DFB4A25BAEFB205730FA6750025 /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F9456BCAB5AE072778D6503DA0908654 /* AFAutoPurgingImageCache.m */; };
-		152DB4C1EC66241FD456FC72BF5E255C /* SparkSetupCustomization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECD60B3E48C2269DAD1F00F0BAC38FA /* SparkSetupCustomization.m */; };
 		15460ABD372C937E2A07A2FCDF98C473 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = AA80C0A575179AB50F377F2335889FEF /* UIActivityIndicatorView+AFNetworking.m */; };
 		156967851249D30F7710773EC47EB1F3 /* FBSDKCoreKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B515DCA3DFF8B351065D6883C297133 /* FBSDKCoreKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		165AD11E9D34B83AC9262E2A78BED040 /* OAStackView+Hiding.m in Sources */ = {isa = PBXBuildFile; fileRef = BF20BA51DEE1066877B6EF0BA3BBA62B /* OAStackView+Hiding.m */; };
@@ -74,6 +72,7 @@
 		17F1AF68F9268D5D91C761D9472B4F16 /* NSCoderExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E29008601ACC7F3419340F7E8E3983A /* NSCoderExtensions.m */; };
 		18997D757B93BB8ADCC88884AFD7C96D /* CPTResponder.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D9644763FB5028E226CD2C9F96B2E6 /* CPTResponder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18CF81105FB6E0685A26F83F128F4E47 /* FBSDKButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BEF4E8CE4B833463B28F462931F53CA /* FBSDKButton.m */; };
+		1917C9BD05D6D2401F769DD41D8AE087 /* RBStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 346A29E083F57CAA8073C417402E4C51 /* RBStoryboardPopoverSegue.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		19A2AEA6F18B93212006AFB2A7A25AF8 /* JSONModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D16E29D04188C4CB286C2011C689D79A /* JSONModel.m */; };
 		19BDBAC11D9374B885191F4446201AE9 /* _CPTMaskLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 16481191D213CDB0893F719830C7E722 /* _CPTMaskLayer.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		19E6319F6ECED7539AABBD9A211F7AEC /* AFAutoPurgingImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = F463EBEAA3B95C9FA96A7EBC03842421 /* AFAutoPurgingImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -109,7 +108,6 @@
 		221E69885904AF69B6CD0B5B8880B55A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D96B1BAF92C16FB3856C540E179DBB49 /* Foundation.framework */; };
 		2260D5399D08BCA0192920AC34B1C1C4 /* CPTTextStylePlatformSpecific.h in Headers */ = {isa = PBXBuildFile; fileRef = 810DCD8B1680EE897EBBA6CBEACC4754 /* CPTTextStylePlatformSpecific.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22806923DC925F8CD7E0BB29CDF95EB1 /* CPTNumericDataType.m in Sources */ = {isa = PBXBuildFile; fileRef = 696C90127201B465D1C7BBCD5FC93EFF /* CPTNumericDataType.m */; };
-		228EE029D75D89534D14D43BC51734E7 /* SparkSetupConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E14C0382C7BB4394F6131A0F00638B1 /* SparkSetupConnection.m */; };
 		22A54F8B2438F21312BB5D8BEBA0CAF1 /* CPTCalendarFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = B6DCD2698EAC7A65BC07B8099526EAC8 /* CPTCalendarFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		22A6FF1328EAE17C15550FDE06EC6360 /* AppIcon76x76-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3059987011E2964299D53E8AA3313E5B /* AppIcon76x76-1.png */; };
 		22D304D56345C1CF4C5EF66C509C93A8 /* SSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF68A40E0694E092FB240B613FCECE1 /* SSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
@@ -120,7 +118,6 @@
 		23EF4E5A6D5D8FF68280FACE10A53A27 /* FBSDKAppInviteContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E17081031F9027E9AEBF5CCD86C8CF /* FBSDKAppInviteContent.m */; };
 		23F22339DEDBD778AB5D1DA13BFECC4F /* FBSDKGraphRequestMetadata.h in Headers */ = {isa = PBXBuildFile; fileRef = 390D7F4A888B1CEBCA127677F57753E8 /* FBSDKGraphRequestMetadata.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		243380FF7451E09D58054B5D7C3357EF /* FBSDKShareOpenGraphContent.h in Headers */ = {isa = PBXBuildFile; fileRef = D0C7D74347B2CCFC833FDFC1FA0137A8 /* FBSDKShareOpenGraphContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		243D1FC34D292F23600DF4EF1F52CC09 /* SparkUserSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB37A3FDE355E347B6C01AAB9B3A8FB /* SparkUserSignupViewController.m */; };
 		243FE4B0A2F192465A33638C349239B0 /* BFCancellationTokenRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = EE1A714A69D955C907C3576E6CEE5C04 /* BFCancellationTokenRegistration.m */; };
 		2446C9B743C6A3292C3C5C5037C16BA1 /* CPTNumericData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6216A49B5E68BF99830858E3E2F28D /* CPTNumericData.m */; };
 		2453E44572F93FE8CFB1E9C2B07F8142 /* FBSDKInternalUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 685D7CCA291542B693067F8D34324B85 /* FBSDKInternalUtility.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -131,20 +128,18 @@
 		25C893D3F81918CA2748927B5F02A595 /* FBSDKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CCAB7BE8A6AC5BAF70703D934E8BB23 /* FBSDKBase64.m */; };
 		2617C1651BDE360A04512FF5DFEE55B1 /* FBSDKMonotonicTime.h in Headers */ = {isa = PBXBuildFile; fileRef = D0509ED084A9A53E4F19B6665446C4C4 /* FBSDKMonotonicTime.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		264457704BDD888C92CAAEBE20E709FC /* FBSDKTestUsersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E4FDF823A2C5BF24541E097754BA28B4 /* FBSDKTestUsersManager.m */; };
-		27E90CB158CEA695A288E26ADE723578 /* markdown_parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 094689DC9F79C391A734AE5D978AD613 /* markdown_parser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		2840E7386BB4222AD57993A51DA2D326 /* SparkSelectNetworkViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A5CA1D5FA057AD829179F44D2B1B2331 /* SparkSelectNetworkViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		28661F05D28CC1D60E54BE2BE927F2E1 /* FBSDKMessageDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BFC7FBC74EBE642EE5B7B0C200C113 /* FBSDKMessageDialog.m */; };
 		28764C6D98A509F1CC4943BD68964CB0 /* CPTLineCap.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F7232E637E2BC0987F26A4A95DD82A0 /* CPTLineCap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2887EBE9CE4F558373DD359BE37DDE2C /* CPTShadow.h in Headers */ = {isa = PBXBuildFile; fileRef = BE9CC0A9CF983F4D7DAAE0D68C9D09E4 /* CPTShadow.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		28F3FC66BF5676454318A1EF9544F391 /* SparkSetup-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EEA7CF4D31CAEE16801E27FD527721 /* SparkSetup-dummy.m */; };
 		291C086F876DD7BCB5E5FCFAFFB5C216 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D96B1BAF92C16FB3856C540E179DBB49 /* Foundation.framework */; };
 		2A2484F1773729BB256973910B7340DB /* FBSDKAppEventsUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = A6FF3CC5C61FD656629B91BE4DBB8A8E /* FBSDKAppEventsUtility.m */; };
 		2A8617C891620AD3384639CD5153C0F2 /* FBSDKShareButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 34613C353BF6AC8F06F99E849D467B63 /* FBSDKShareButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2A974F5D63C984DEA435B4749BD25DD5 /* FBSDKShareKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E8531B02B905D97B4AB9CE98B0D96626 /* FBSDKShareKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2A9CEEB87BBDA4D36B53DB71C9EFE5AD /* SparkUserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DF1665AA4F554F242687C9F3C6CE12 /* SparkUserLoginViewController.m */; };
 		2AE7D6488E6E4791762C474240489FF1 /* CPTBorderedLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D6297903044A28F613C1B2B475A2AAD6 /* CPTBorderedLayer.m */; };
 		2B68CADEB1C8D15411306D940086306D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D217AE1285E807C3FB564658CEEAEFAB /* UIKit.framework */; };
 		2B94013D1EC06E05D18A68706EF009A6 /* FBSDKShareDialogMode.h in Headers */ = {isa = PBXBuildFile; fileRef = 0F56955F30B4FF2853AC345176675C97 /* FBSDKShareDialogMode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2BEC4E1B3997AAC2FFC886568BE3FB18 /* SparkConnectingProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBFF44545D036E6D4E3B3F741B5456A6 /* SparkConnectingProgressViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		2C3793AF6A7097C0958E069E88198F00 /* BFTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 5471A3582F04DB0D417054793EB91464 /* BFTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2D6A4394441557EF7FA7BD741957EDE9 /* SSKeychain.h in Headers */ = {isa = PBXBuildFile; fileRef = E0BFE7AEB0C4335B8572D0CE6CDB7CB5 /* SSKeychain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E87F7494BC2023ED83CCB2C93E67B69 /* FBSDKBridgeAPIProtocolWebV2.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D77C2A34E2C7E4E3F7AA132998E5570 /* FBSDKBridgeAPIProtocolWebV2.m */; };
@@ -181,9 +176,9 @@
 		357028869021D2CF599B2A61B82072E0 /* OAStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D3A2FFE2117C7F28AC291F976D020CC /* OAStackView.m */; };
 		361A366D11CECA15C3B45FC3ACEDA050 /* FBSDKGraphRequestDataAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 7076B3964D03E221DE291E259FDF4D5D /* FBSDKGraphRequestDataAttachment.m */; };
 		36D9ECB6EF6E493B4FDC32704631CE48 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = DED147BF04FCB189CDF23FE383ADF692 /* 1.png */; };
+		36FAD980A6B69D60D73AFC3560AA9E46 /* RBStoryboardModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5FD8B3922589E394E118545EE73A4C /* RBStoryboardModalSegue.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		37072D4945635F99581601398156BC95 /* BFAppLinkReturnToRefererView.h in Headers */ = {isa = PBXBuildFile; fileRef = B1577689F6CE60A88CB5D4D98C990029 /* BFAppLinkReturnToRefererView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		37742678E019FB52A74BDCCB71479C67 /* CPTAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FAB43565949843288D6039CCC05619 /* CPTAnimation.m */; };
-		37D3EF2FC496A69FC80D7CE803F3FAB3 /* RBStoryboardPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 513426ECC23D5047BC57E7B7E7D64E20 /* RBStoryboardPushSegue.m */; };
 		3814C9D90F1BE63F2372520C38505474 /* markdown_peg.h in Headers */ = {isa = PBXBuildFile; fileRef = BDC2273FC16F814AC1E6F0239760B375 /* markdown_peg.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		385B06310B4C055EA74A606FDD5239E3 /* FBSDKAppGroupJoinDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 12D8C2BB163A5758403843F3BA1DD472 /* FBSDKAppGroupJoinDialog.m */; };
 		3884DA2E07542DB9723BFA90E8CD6AD9 /* FBSDKLikeBoxView.h in Headers */ = {isa = PBXBuildFile; fileRef = 6608658627746BF66513670D836F0CA4 /* FBSDKLikeBoxView.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -195,8 +190,10 @@
 		393E2E501D0B38AE7DD535362026926D /* JSONAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B7BFBF752164CCD9FEDB35D19A1E146 /* JSONAPI.m */; };
 		3A556B3C5A20B207344C388BA7F1FF22 /* CPTAxis.h in Headers */ = {isa = PBXBuildFile; fileRef = 296C33590406DF817727FD4489D4C2D4 /* CPTAxis.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3B34B9CF9A34E235FD457006303C757D /* FBSDKErrorRecoveryConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C82594B7DBD3315BC856F9D07B1B044 /* FBSDKErrorRecoveryConfiguration.m */; };
+		3B354E8A36F1D3B928ED22C8C28963FB /* UIViewController+RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 277577B106BC1B5B7BA18712ADB88191 /* UIViewController+RBStoryboardLink.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		3B88684885F6A92894F9B1C6DF2CB127 /* FBSDKAppEventsDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = DFECAEB7CD6AD9A5DB145B7154447907 /* FBSDKAppEventsDeviceInfo.m */; };
 		3C0DEBB740DFB646BB292668FF187A3C /* FBSDKCloseIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = 5618BBC6F8CDD7AB7358A6DA81958A52 /* FBSDKCloseIcon.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		3C176BCE38FE03BFC7759723DADB7FD0 /* SparkSetupUISpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = B17962503393C34304496100552C2D0A /* SparkSetupUISpinner.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		3C31ED01B7466FD05173FEB6F86953BA /* FBSDKTestUsersManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AF8FE0F1C955F41737CC01F653FA5E5 /* FBSDKTestUsersManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3C4AAB3773830E06801D58980C2ED88C /* _CPTFillGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = B6938D7C1CC88C16AAB30A673C6D02DE /* _CPTFillGradient.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		3D91615B81BDE2505C751BD7D4FB5EDB /* FBSDKLoginTooltipView.h in Headers */ = {isa = PBXBuildFile; fileRef = DCD87275E0FBBB6699C02237265ACF5A /* FBSDKLoginTooltipView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -205,7 +202,6 @@
 		3E16E0BEF69F5BA97F8E9F07A617E509 /* FBSDKAccessTokenCache.h in Headers */ = {isa = PBXBuildFile; fileRef = EE837B9AECC35DEDB84583553D22345F /* FBSDKAccessTokenCache.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		3E299BCC3C701BABED92DE2DB7DF020E /* CPTPlotGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 3180AF77F75AC39F316BBB7E322D8413 /* CPTPlotGroup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3E58173D5B230D1EF99F932DFC5A5BF7 /* FBSDKSharing.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F9C9787D86FCBCD6E3AC4792B10078 /* FBSDKSharing.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3E6EC68837C52D639D8C24C6832AFF46 /* UIViewController+RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 277577B106BC1B5B7BA18712ADB88191 /* UIViewController+RBStoryboardLink.m */; };
 		3F476D1C30035E4B85EC6606817145BE /* CPTImage.h in Headers */ = {isa = PBXBuildFile; fileRef = A7ED6716FFEDA4CC34F92138C6658E61 /* CPTImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3F7BB23CA0495AFB7A230E0CEE4E8A08 /* CPTPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 815C9E41A980245560686047A41359DF /* CPTPieChart.m */; };
 		3F8C5D7B6679728DA732A652BC749DC0 /* RBStoryboardPushSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 28D8ECE9923C516BAF1245B5513B6924 /* RBStoryboardPushSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -228,15 +224,14 @@
 		4505527808576A44D861B0A13154F425 /* FBSDKURLOpening.h in Headers */ = {isa = PBXBuildFile; fileRef = A0D2673D608D46327E31C4D7BD8757C0 /* FBSDKURLOpening.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		45B4B410B0DD43BC083C5243D1450505 /* CPTLimitBand.m in Sources */ = {isa = PBXBuildFile; fileRef = D525BCB11D308A0D62F680429F994C8B /* CPTLimitBand.m */; };
 		46434AF620227311479C776B81BA97F6 /* FBSDKLoginCompletion+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 977A18E4917273997EB3134DB544C3B1 /* FBSDKLoginCompletion+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		4684DEB0672B8709B7F742A6AACD3304 /* SparkSetupWifiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D556B95FA9BE79ADF887B7098C3C286E /* SparkSetupWifiTableViewCell.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		469084E98A9C948AF5A38EF23BAEA79C /* leftChevron.png in Resources */ = {isa = PBXBuildFile; fileRef = 1966C842C7C90B712DB37BD4742532A4 /* leftChevron.png */; };
 		46A761F0B52B393302374F202159EF83 /* _FBSDKLoginRecoveryAttempter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2307063E76EF784295756E6AD57CC0 /* _FBSDKLoginRecoveryAttempter.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		4727F1C349747A7F96CA2EE6098BA7E6 /* FBSDKBridgeAPICrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = C7D74B4D12C64BB43DE9A2654943F4F5 /* FBSDKBridgeAPICrypto.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		478ABD9572E8B016F58DEA4443381845 /* RBStoryboardModalSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5FD8B3922589E394E118545EE73A4C /* RBStoryboardModalSegue.m */; };
 		47B9D515BDF8D439010DCAF156567374 /* CorePlot-CocoaTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = A747DC087E472DACB92FE580B9559261 /* CorePlot-CocoaTouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47BF771AF8EB624BCB9E7C2B10C1BD5B /* CPTLayerAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E97E1ECE59395A4D7B1234A01A5AD12D /* CPTLayerAnnotation.m */; };
 		4812F81D903A7724C80FECA494805308 /* CPTXYGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = 54C89356FCB7ABE38EFB5F315A03D821 /* CPTXYGraph.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		48440DE07118E4AB627F00DAC0A837F1 /* CPTGridLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 22629E7D1279E2D427B52D44FAEA6E0B /* CPTGridLines.m */; };
-		48787A287F0D3D3BAC68656386FCBB7B /* RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C42E6C8BCD50EE8EF52738F91DCE85 /* RBStoryboardLink.m */; };
 		48912F1D2B351DB101E766973B46C999 /* FBSDKGameRequestFrictionlessRecipientCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E50533EC20964C47948A40C2F4A9E82D /* FBSDKGameRequestFrictionlessRecipientCache.m */; };
 		4988AD373FEAF0B3D3287075576289EB /* OAStackView+Constraint.h in Headers */ = {isa = PBXBuildFile; fileRef = F1FC0934838DE11F34057F7B2023C2FE /* OAStackView+Constraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		49B06B0D2D88F52ACAB70203F0E904D8 /* NSNumberExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A0748C31119CD91B08E9E97504E51F63 /* NSNumberExtensions.m */; };
@@ -264,9 +259,9 @@
 		4F7D027767C0B81A970A50BA82F2073A /* FBSDKAppGroupContent.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC62FF357AC20661972096BE003ECE8 /* FBSDKAppGroupContent.m */; };
 		50082BFC7661B8F77C7A9331C54ECA7B /* Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 9C0D1655B6C43DA7AA35BA9C8B22C382 /* Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		503CF9672FAD008BBF47B160056161AC /* Default-Portrait-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 152A0C8DD9E98FF3F774D159E304C81B /* Default-Portrait-736h@3x.png */; };
+		504DCE562B242128015A81F84A5FC247 /* SparkSetupSecurityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B54A1A61AE92133770EB5A228F6F15 /* SparkSetupSecurityManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		50570F0F317C5A916AD5BE1D82F49641 /* FBSDKGraphRequestDataAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = D5919794E679B4A61F1C89EE89042413 /* FBSDKGraphRequestDataAttachment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506A98603F453AD96AA61260F52B3199 /* SparkCloud.h in Headers */ = {isa = PBXBuildFile; fileRef = 56F393DCE8405CF76906B1F0BCCE1B36 /* SparkCloud.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5073245201B17BA54A2F10194E631D58 /* SparkSetupMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D26D6AB0E4A350EE66A0A017B4AE3D7 /* SparkSetupMainController.m */; };
 		50ED958AFAB156499B1D88CD2C0394B7 /* _FBSDKLoginRecoveryAttempter.m in Sources */ = {isa = PBXBuildFile; fileRef = E78F9A87E26D075886389497B361301F /* _FBSDKLoginRecoveryAttempter.m */; };
 		52474B3F869DBA64CC57CC8E1031F87B /* FBSDKSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 248FC625E2B30B027BE1F534E72B4F65 /* FBSDKSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		52B9F1F399DEADDDFBE3F17BAA8D6D14 /* JSONModelArray.h in Headers */ = {isa = PBXBuildFile; fileRef = 8081BAB3A3E64EFBDDF75D8115C23FF1 /* JSONModelArray.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -276,7 +271,7 @@
 		543F919A9263D75AD09FD35D4119FBEF /* OAStackViewAlignmentStrategyBaseline.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F3B3475F9DB728D93B8F70B376CDB20 /* OAStackViewAlignmentStrategyBaseline.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5489766EB89353B4FCCD1F88CFFFFFFE /* CPTPlatformSpecificCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BA53E29306BFB2CB898702585D89111 /* CPTPlatformSpecificCategories.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		555466B7EA6454B1E1968FB7A7BD1334 /* FBSDKBoltsMeasurementEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = D35F69FCE9997C55B8EDEB0ED1BDDBBD /* FBSDKBoltsMeasurementEventListener.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		56545471ADE68A7DEC8B82E8D26A6E0F /* SparkSelectNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B719328040478234421E8A06B964C95A /* SparkSelectNetworkViewController.m */; };
+		55966B3DE57C2EC92D37B86CEE9384C1 /* CHCSVParser-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F858062FA69889F1520C5FE74DFB17 /* CHCSVParser-dummy.m */; };
 		56CDA039051AAEF3FC25B7FA37811F99 /* CPTAxisLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B3B916BFEA38DA5AE38ECE22BAA8F4 /* CPTAxisLabel.m */; };
 		57119B960D8B298DAA5F85C522B90E56 /* CPTPlotRange.h in Headers */ = {isa = PBXBuildFile; fileRef = F7102AB561BBEE81C5BE0F55D2BF0470 /* CPTPlotRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		576E9A10A24BFE5C7F8BDC9A6D032442 /* BFWebViewAppLinkResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 232856D8872590C29FA59B9FF90FBB13 /* BFWebViewAppLinkResolver.m */; };
@@ -297,6 +292,7 @@
 		5BCB783AB72F308FEEEF8680C4F2B3BA /* SSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A49BAD82FC46B73B7ABED18D49E417F /* SSKeychain.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
 		5BD43BFF9279E45D883E3C7B77AE3B9C /* CPTLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA62AD9DEE61D07D79647D23B2D0854 /* CPTLayer.m */; };
 		5BFD27BA374E67EB186EECD2F3ADD032 /* CPTColorSpace.h in Headers */ = {isa = PBXBuildFile; fileRef = BB1B6EA13A1D04A7995C653D7F69D3D5 /* CPTColorSpace.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5BFE47BF89E582AFF8F0537EBB1F7A06 /* SparkUserForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA18E1B6C277C9DCBA61C6FD6157566 /* SparkUserForgotPasswordViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		5CAC5DEDF2CB82D6184B5BDCB1F93E6A /* FBSDKShareVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B995DBC1DE473C5A5FDB8B8977C609 /* FBSDKShareVideo.m */; };
 		5D52DB6DF2E6C24CECB0015A9177A2E1 /* UIProgressView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 931027F9080D645AA86D02DB141FCACD /* UIProgressView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5DA9D80A3BC3AA013585632EE9C13421 /* OAStackView+Traversal.m in Sources */ = {isa = PBXBuildFile; fileRef = C0E442DFF9AB0F5B5B9733E9DD50B036 /* OAStackView+Traversal.m */; };
@@ -314,10 +310,8 @@
 		64E52D854B97C30205BA31A143E3BC8C /* Pods-CleverPet-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EF30A0D3A0F469EC21FE81DBE4392F /* Pods-CleverPet-dummy.m */; };
 		6551E5ACD99E167E298A279F77FC5E03 /* _CPTXYTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = F43573B460CD0ED932411381662DFA46 /* _CPTXYTheme.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		6563C525E6D6BCCDBE34601FA332A10A /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = A19C0634C3FC7384415977A5CD3EED49 /* success.png */; };
-		656ECF2227F0D3AF16A4FD53660DFF2B /* SparkSetupPasswordEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C11B3642E597EFC3DCB3F13CDAFA8F3C /* SparkSetupPasswordEntryViewController.m */; };
 		6578D170D9C3AA619492E86AAA2D6B28 /* SparkSetupCommManager.h in Headers */ = {isa = PBXBuildFile; fileRef = EFAD718B277811D9E84C60B76E87AE7C /* SparkSetupCommManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65E8C83C523E3CC077887AE995C3F8EE /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = CC671C34D4E72CB8C2E3ED52DB531102 /* checkmark.png */; };
-		66D89F8C760E115788FC3E9B2D5E7ADA /* SparkSetupUISpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = B17962503393C34304496100552C2D0A /* SparkSetupUISpinner.m */; };
 		67BAE8D86073CD75A682C98697BC4874 /* wifi3.png in Resources */ = {isa = PBXBuildFile; fileRef = AF8461A98C23483E23AD646457477A2B /* wifi3.png */; };
 		67D0F6A90E174DEE71D31E4BA2980F24 /* NSDecimalNumberExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A1F9E66957E7EA591BE64EE5D3E6A6FC /* NSDecimalNumberExtensions.m */; };
 		67F789F4A32CA7A82DE43CD27AEA87BD /* FBSDKBridgeAPIRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A68449D44EBE965BC0282441CFBA460 /* FBSDKBridgeAPIRequest.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -332,6 +326,7 @@
 		6B2DD9967AB4D947BDECC65AC4CCB1EE /* FBSDKLoginError.m in Sources */ = {isa = PBXBuildFile; fileRef = 156017657B0BE4F3014DC8D2129AC05B /* FBSDKLoginError.m */; };
 		6B630F95819253D37F799D14473C9DAF /* SparkSetupUIButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 6884FC3B726C97D45E4DB0A517020CD5 /* SparkSetupUIButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6BE282C82DA0217B01576D14DF69F7A2 /* _CPTAnimationCGRectPeriod.h in Headers */ = {isa = PBXBuildFile; fileRef = 36A57964DAAA40101B1DCB9A7187292B /* _CPTAnimationCGRectPeriod.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		6C28338064727D6F7B807C914B94760D /* SparkSetupCommManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D31417084590DBB77CB2DF92B3C56776 /* SparkSetupCommManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		6C6B44FB16E5ABD292E2D77D89DDFF32 /* FBSDKCloseIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = D67111F93553D14C1087A46D17C1784D /* FBSDKCloseIcon.m */; };
 		6C9410611251D0D8BCB75D499221D081 /* BFTaskCompletionSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC357558047F8539623D02DE4E826F4 /* BFTaskCompletionSource.m */; };
 		6CE3C12EAF5A4D0E5ACF85208F73D39B /* _CPTXYTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 1081AD426B39178F61D28B05A0BAE565 /* _CPTXYTheme.m */; };
@@ -347,10 +342,10 @@
 		6FDF50493444907FED2AA9EBAAAF19D4 /* _CPTAnimationPlotRangePeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548255696C33D657EE4F1657C8A369 /* _CPTAnimationPlotRangePeriod.m */; };
 		7051CE40FD16869F0BF9CD028A658782 /* FBSDKCoreKit+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = A038DF12FBA16D06E3D368A60FF5ACC3 /* FBSDKCoreKit+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		707BD4661A1FDA59631AB238A1161A37 /* CPTExceptions.m in Sources */ = {isa = PBXBuildFile; fileRef = D56543103241564031FD8276BF6459EC /* CPTExceptions.m */; };
+		714732C16F2C30AE6BB2A574C43036AE /* SparkSetup-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 32EEA7CF4D31CAEE16801E27FD527721 /* SparkSetup-dummy.m */; };
 		716F0DAAA02850C6CB8A324634260EB1 /* CPTImagePlatformSpecific.m in Sources */ = {isa = PBXBuildFile; fileRef = B65A494D367074911983B62E148E5C3F /* CPTImagePlatformSpecific.m */; };
 		71DF67850774658371D1DFD4DF5186E7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA5CE7135BC8CFD4F718389FF2F0958 /* Security.framework */; };
 		7283D77C324BA605426E2932B1210550 /* _CPTAnimationCGPointPeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = 8526390DFF7D6649457557D5B3FC7A3F /* _CPTAnimationCGPointPeriod.m */; };
-		7299F10B0DFC2A3B971DE25618B90FB1 /* SparkSetupResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE172EABB049824FA9FE8C46E0DBB3 /* SparkSetupResultViewController.m */; };
 		72DDA136310E1878B3393479B38B83F9 /* FBSDKURLConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 6939FB3E78CABC1DF74F9267763A1D2F /* FBSDKURLConnection.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		72F2F1992E7609ABFC6FA0A49F9F325B /* CPTBorderedLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = A94016F8D6DBA2736985F2289C3104A1 /* CPTBorderedLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		732A34EFE1148661BBA1F3C761FF7EA9 /* FBSDKLikeButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D3263648819761862AE6E6B702B5A52 /* FBSDKLikeButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -369,7 +364,6 @@
 		76AA67866D21E13EFEBA4FD9798E3EE4 /* SparkUserSignupViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4292E7CFF7050304305E6420F665D595 /* SparkUserSignupViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		76CD2EC79D452B68CFEF821C42F99A5A /* BFURL_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 60418AB3E88E7A0CF6823FC7276BFDD7 /* BFURL_Internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		774E19492156820F5CC848D34D9AA4A6 /* FBSDKLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FE8DA16EFFDB33DEBBCBB9F1DC234DF /* FBSDKLogger.m */; };
-		77813FFF21BB8D2262F9EE8C117DB97A /* markdown_output.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F46B39D30190A55C9FDF65D523B2EF /* markdown_output.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		778E9C87378AB3312B7A01BB409B9E17 /* Spark-SDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D07EBDFF023D852D7D9B22C2A85ECD74 /* Spark-SDK-dummy.m */; };
 		77B5397CB9EB225E9C0BB7318B12E949 /* FBSDKBridgeAPICrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5659D27FD5D7F5334CF797012A72B0B1 /* FBSDKBridgeAPICrypto.m */; };
 		77CF177F2CDC9BEBEF5BE1DD296E1E2C /* FBSDKErrorRecoveryAttempter.h in Headers */ = {isa = PBXBuildFile; fileRef = F9EB7B8D7B6E7535D6AF3743104C95E5 /* FBSDKErrorRecoveryAttempter.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -377,7 +371,6 @@
 		77E8F2532709DED8D778A14FAE6AF63B /* CPTLineCap.m in Sources */ = {isa = PBXBuildFile; fileRef = D15833EA9910A03C8940F7518245FC42 /* CPTLineCap.m */; };
 		780F043F84148B88D553F46438358DCD /* CPTPlatformSpecificFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 8588D9C4FC2645FE0E3228D0D166F72D /* CPTPlatformSpecificFunctions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		78239C7C8C6684E9D18BF0868F15C5E3 /* FBSDKAppInviteContent.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A6B7A66245DFF3D452F5B742FC33D60 /* FBSDKAppInviteContent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7886CEFE26F12B6FA0999096CDD3F33A /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E2A5D2B85507D5FE3F6D6E1B88568E /* Reachability.m */; };
 		78940A6980F359C4304C695EF6E67C5D /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FFFBFD347F746C5CCFBCFA40C256110C /* UIButton+AFNetworking.m */; };
 		78952ACEF38C155ADF7CA3B63C38A5E6 /* FBSDKProfilePictureView.h in Headers */ = {isa = PBXBuildFile; fileRef = 957AD29C34A9DC90EEF2597C41ED4279 /* FBSDKProfilePictureView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		78D1712C14C5555BB9C6D778E7D0F6DA /* CPTTimeFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = 05EE80A76BF38ACBD1EDE846CCEC49B8 /* CPTTimeFormatter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -392,7 +385,6 @@
 		7E7D0544FC094B2E8AC5EA8C5B279A90 /* CPTXYAxis.h in Headers */ = {isa = PBXBuildFile; fileRef = A09D132A2DCBC1E5DDB6D1EFCE40D4CD /* CPTXYAxis.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7EC57A971BC81BEFCD4D52ACF58BB517 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A9D576B9DC95CC25461EC1465A92FEA /* JSONValueTransformer.m */; };
 		7F0578A0258E02384F6229C678E60D31 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = BBAE68F95DE0F3D1759BB2889048786D /* UIRefreshControl+AFNetworking.m */; };
-		7F14C734AE189B017025D3F304E6E628 /* SparkSetupWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF1F7D18DD83962AF6B21E5C832F5AE /* SparkSetupWebViewController.m */; };
 		7F35603B737B2A4B465CAE4B481C34BB /* FBSDKGraphErrorRecoveryProcessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 6F70894291CB6324EBBFAA98A8D88D6B /* FBSDKGraphErrorRecoveryProcessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F57B410341984A2D03BD3B96225A67D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D217AE1285E807C3FB564658CEEAEFAB /* UIKit.framework */; };
 		7FE2B9B6DD113F12434283D1E61938CC /* CPTGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = C2F7E2FBFBE0414FCC2D69911C2A6D68 /* CPTGradient.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -400,7 +392,6 @@
 		8021DB19D1B97CF76EC96F399AB9E018 /* CPTScatterPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 34EB994242FB6F0E1A5E7AD99A85DB74 /* CPTScatterPlot.m */; };
 		80385C747CA4971D13456DD3BEF168C0 /* spacer.png in Resources */ = {isa = PBXBuildFile; fileRef = F87D18DE9FD36FB1B3D25415BCC8EE66 /* spacer.png */; };
 		809C53B31BE1AC40886B82DFD238136D /* FBSDKBridgeAPIProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2AC5E4B38AE1DEFCEAC1A095F1C169 /* FBSDKBridgeAPIProtocol.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		81144A59314D6D54C350943980FC2AFA /* SparkUserForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DA18E1B6C277C9DCBA61C6FD6157566 /* SparkUserForgotPasswordViewController.m */; };
 		813F9921F9C0A44B4C110CDF92783834 /* Bolts-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D1EBE05694991D4D9A86ED6D5E09778 /* Bolts-dummy.m */; };
 		81A2A1E607483054B4C595CA92987E08 /* FBSDKAudioResourceLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FEAC959DDFF54B6021743E93E4DDCA2 /* FBSDKAudioResourceLoader.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		82360B32AC1B887E85DC592D62CB046F /* FBSDKSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = B3278E883411F028564669065BC4DB62 /* FBSDKSettings.m */; };
@@ -442,31 +433,30 @@
 		8D92A8DEB51FCDC8D0077B768696CE6A /* CPTMutableNumericData+TypeConversion.h in Headers */ = {isa = PBXBuildFile; fileRef = DEABF01190AC1E87F18F3D066C019B79 /* CPTMutableNumericData+TypeConversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8D9E418F4BF4FF9ABF3F4E5932589C3D /* FBSDKBoltsMeasurementEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = B5BDA80284AAA26F1E714CDCDF2A8DB8 /* FBSDKBoltsMeasurementEventListener.m */; };
 		8DBE0D3126CD13AD09FC575903D6CF60 /* RBStoryboardSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 33A60328D8C098D0FE9403778D2ADB9C /* RBStoryboardSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E290B8F0C35C282BC55A89B3694709C /* SparkDiscoverDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43848605836BE557611AD8F26DCA8CC /* SparkDiscoverDeviceViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8E3F310FB34E020A985BF37D34582619 /* FBSDKKeychainStoreViaBundleID.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E920F0D5C39BA6C2881227B2C7CD71C /* FBSDKKeychainStoreViaBundleID.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		8E4CFA9F50CF7012C6AE4294B185FB25 /* CPTMutableNumericData.h in Headers */ = {isa = PBXBuildFile; fileRef = BEEBF43C5AA1CA3893507D3E14FD3307 /* CPTMutableNumericData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8E582D2B4F881B3814E601AA46D54304 /* SparkSetupResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AAE172EABB049824FA9FE8C46E0DBB3 /* SparkSetupResultViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		8E82178CC9BD8BE3DBF2C10E33807AEB /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F98F4B8CDC9D880A6CA5B69A95250D6E /* AFURLRequestSerialization.m */; };
 		8EAAFD265BEF53B14600E4F496B0653C /* CPTDerivedXYGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 9232718DA3A7991D30B1A3AFA1B59D2C /* CPTDerivedXYGraph.m */; };
 		8EBBBC4E9F35291B691E87F933592C6A /* BFAppLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 60F75940B342E6C1DB054F04B4D67EE9 /* BFAppLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8EE441E5EBD7EAFFDDCCB5F247B160F6 /* FBSDKLoginUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = F32455F84CEBB4F1868671CE7CFDBE19 /* FBSDKLoginUtility.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		8F11ABA0C553B18981097015226E5748 /* NSArray+JSONModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FDF51A76CCF4E708C7F76FCB85D4E1E /* NSArray+JSONModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8F3AFE94DA83C68DACED731E3D4D1982 /* SparkDiscoverDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E43848605836BE557611AD8F26DCA8CC /* SparkDiscoverDeviceViewController.m */; };
 		8F4F6C91327C6D43B7C6A83EBDC6184B /* FirebaseServerValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 93F7F9CC05157EEBA8346EDC6A436797 /* FirebaseServerValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8F77582A13C74A1A3B7322B5C640AD4E /* CPTExceptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6D29CCD50C67431E79A93DE44601171D /* CPTExceptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8F7B9F00E3D67CF1432A75B0B23D20D9 /* RBStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ABCD8E8C91BABA2764A6276C9BFE62F /* RBStoryboardSegue.m */; };
 		8FA5498B976319A4DB8A58B9E68F09EF /* OATransformLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 301527263A2C039E0EFD5B94FEA94694 /* OATransformLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8FC64B2706114F7E8FE37219A7695D3D /* CPTFunctionDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D1B9DB5E0AA4D73F2170216C974AE9A /* CPTFunctionDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		905D0A5FE23B08D47AA9AB3F584B626D /* FBSDKContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4F52334BA89E0BE0EE7A8DA6922813 /* FBSDKContainerViewController.m */; };
 		909726053F2352EFADD71E3DAF166341 /* background-1-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 90039663B282C607412DDCB45245D90F /* background-1-1.png */; };
 		90F2175480DE7324ADEEF602757134D7 /* FBSDKBridgeAPIRequest+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = ADD7C5A7CD735A0EA4C11212C35B6E29 /* FBSDKBridgeAPIRequest+Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		91697C24186529AA65CE9BD223ADE56F /* CPTColorSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = DFC7A2387E5D2D38E6AE3A550A23ECB2 /* CPTColorSpace.m */; };
-		91BC069071B772372730061E7046C401 /* SparkSetupUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A233C49CA72A7E2466C50633CA1D683 /* SparkSetupUIButton.m */; };
 		924D2586BFCD36A807E0E047454317A8 /* FBSDKServerConfiguration+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BCCCA224D30FF6ACD1DDFD210FA3B94A /* FBSDKServerConfiguration+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		926F1FF1ADA93F8BE4339C7AE28BD968 /* FBSDKButton.h in Headers */ = {isa = PBXBuildFile; fileRef = BE364EB364C699F56E9D8392490E2A28 /* FBSDKButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9291A374C13771D9D11BEA26DB0B69A1 /* SparkUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 863192EB5EA31D7C6E6C8C77E43A4C4E /* SparkUser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		92B4749E7E5E2D58263DC45A22483741 /* SparkManualNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DC018436B2CAD8E03519805B170A1B95 /* SparkManualNetworkViewController.m */; };
 		92C0D76C4F3414C92C5F66D331AF6C30 /* SparkUserForgotPasswordViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D96A5D370332B1E316127756E5EE0BA /* SparkUserForgotPasswordViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9453F95C876D9EE51770AEEB9FD892E7 /* _CPTFillColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D46C609E2879F9E61181EB401D27E9E /* _CPTFillColor.m */; };
 		949F1878AC4A43632EFADACFC8140683 /* FBSDKGraphRequestBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 548EF8031ED8499C99FA0406A9334FC7 /* FBSDKGraphRequestBody.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		953CAFC0EC16F29B21CEBA1E017D85B4 /* SparkSetupPasswordEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C11B3642E597EFC3DCB3F13CDAFA8F3C /* SparkSetupPasswordEntryViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		967E3C8E9F74A79040D9B5FA82F09428 /* _CPTAnimationNSDecimalPeriod.h in Headers */ = {isa = PBXBuildFile; fileRef = 4357F6B7AEDB007308C5920FE6583B7B /* _CPTAnimationNSDecimalPeriod.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		9772F11F1CDC5BD4276AA320BB216543 /* spark-logo-head.png in Resources */ = {isa = PBXBuildFile; fileRef = D5D77D1DF0796A75404CD4CCD040E198 /* spark-logo-head.png */; };
 		97996933B25E24DAF9D18F8E188B03CA /* FBSDKMath.m in Sources */ = {isa = PBXBuildFile; fileRef = 412C51DEEDAC2F19A80EFDADA3D09ED3 /* FBSDKMath.m */; };
@@ -488,6 +478,7 @@
 		9D788B74325B43C79131205A93ECCF9C /* RBStoryboardLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 5A7222F5A9642AE3699E463C591767C3 /* RBStoryboardLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9E1DFD298D2638A443CF2EA5B47BFC51 /* FBSDKCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5866155844CA90A2956B23549DEDDBB9 /* FBSDKCrypto.m */; };
 		9E827B3B0C193FC791DE85A8C5BB61E7 /* platform.h in Headers */ = {isa = PBXBuildFile; fileRef = D88A3094C9F356C63D87FFEC66528EB6 /* platform.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9E8A31706D889EC5E1924E4B2263A5B3 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 677384FDCDE3A573E8047DA412CF946B /* CHCSVParser.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		9EFC61F27D88241A96D3FB13EF831E02 /* FBSDKProfile+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = A0F55DD6A3480B020790C3E9B4DC7282 /* FBSDKProfile+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		9F3D3656F5864DED6AF668D1AB68975E /* FBSDKGraphRequestConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 959055A63C94571B99ECC7C8D25CA947 /* FBSDKGraphRequestConnection.m */; };
 		9FE40BBAE823BF82BD835273866EDDFD /* iosCheckmark.png in Resources */ = {isa = PBXBuildFile; fileRef = FED500A4E77A1F5A7D928FE14D24D2DD /* iosCheckmark.png */; };
@@ -498,6 +489,7 @@
 		A18206D679C80B4AFF6654B5677DBFDB /* FBSDKInternalUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = B62D8448BC6D6EA517D078ABFC2EA9D3 /* FBSDKInternalUtility.m */; };
 		A1FD52763562195234A3E31DB9D87EA8 /* BFAppLinkReturnToRefererController.m in Sources */ = {isa = PBXBuildFile; fileRef = E55AC117039A68B795163D854306B400 /* BFAppLinkReturnToRefererController.m */; };
 		A248810839C65E5881B7B7B3F264078F /* FBSDKBridgeAPIProtocolWebV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B8DB386CDB50E55BD7389346FED0546 /* FBSDKBridgeAPIProtocolWebV1.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A300CF65520FA4558BE0A384233C6424 /* SparkGetReadyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D746185B892A63FD76D7192B126AF1 /* SparkGetReadyViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		A340BC9BF2A384FF044540C73D851510 /* _CPTAnimationPlotRangePeriod.h in Headers */ = {isa = PBXBuildFile; fileRef = E423C79CE779C6E54A9A73CAC54FBA57 /* _CPTAnimationPlotRangePeriod.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		A35CF4BCF332DEDBB9F3B8CF132757DF /* connect-to-wifi.png in Resources */ = {isa = PBXBuildFile; fileRef = EE2E1197BEFE24119FC46BE6CEF28A82 /* connect-to-wifi.png */; };
 		A4AA61EF4E7E175383F829835B3690B6 /* FBSDKCoreKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EC57F6610B3282B261418858616C05BB /* FBSDKCoreKit-dummy.m */; };
@@ -507,19 +499,23 @@
 		A55D4E06A15BD0D7189518E2B96DB8A3 /* FBSDKWebDialogView.h in Headers */ = {isa = PBXBuildFile; fileRef = 469D554C1BAE7AE786BCCDF3FF8EB3B9 /* FBSDKWebDialogView.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A5E23287231B8CED31D97C44BA2702F9 /* FBSDKGraphRequestConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = DBD811E8DBB100FB300EA8D3732CBE5A /* FBSDKGraphRequestConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A661008071892B0148336A0636FC59A1 /* FBSDKIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = E61D0F99967B13A3638BB82C81C8B097 /* FBSDKIcon.m */; };
+		A666A9F00C7EE31F1ADF4B9C8C64538D /* SparkSetupUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A233C49CA72A7E2466C50633CA1D683 /* SparkSetupUIButton.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		A67C61152A4CB20E4EAD5D7D7E662D22 /* CPTXYPlotSpace.m in Sources */ = {isa = PBXBuildFile; fileRef = B195E832284FA4E75BA8291890866733 /* CPTXYPlotSpace.m */; };
 		A6D8B881BC31F26E99F56A4B5144F72D /* FBSDKAppEventsDeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = F7E6CFFD0C994811F9877E34623B89EB /* FBSDKAppEventsDeviceInfo.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		A7AA12E5FCAD6A1BC349D317A7574829 /* FBSDKShareVideoContent.m in Sources */ = {isa = PBXBuildFile; fileRef = D3F9DBBB1D080537C423A2D13A352440 /* FBSDKShareVideoContent.m */; };
+		A7F37094BD96BB0626E8E4865925A0B5 /* markdown_output.m in Sources */ = {isa = PBXBuildFile; fileRef = C9F46B39D30190A55C9FDF65D523B2EF /* markdown_output.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		A8FB9C2DF4996A5647C43D1D20B34154 /* FBSDKTooltipView.h in Headers */ = {isa = PBXBuildFile; fileRef = 0331D1F5207E8A3F05C343CA974E12BD /* FBSDKTooltipView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A8FC6A53F6C1CB4DEFD972664E1AF3B1 /* AFNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AE092EC915D0B6342A1BF05DDA45D /* AFNetworking-dummy.m */; };
 		A97E6C17C88546E4D5102CB6C65ADEEC /* CPTLegend.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E5607AD1792B17CD3593180906B0361 /* CPTLegend.m */; };
 		A9821C932984F979E72D5984C1E3A87E /* FBSDKIcon.h in Headers */ = {isa = PBXBuildFile; fileRef = FD4C5230F431ED1A496C3A4466B28A72 /* FBSDKIcon.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A9887A9CBC359623141805B5B150809D /* SparkSelectNetworkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B719328040478234421E8A06B964C95A /* SparkSelectNetworkViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		A9D01434F1CFFFF1277E3429A43FA1C0 /* FBSDKAppEventsStateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F36F536641DB8F6FC51D14266DD4D162 /* FBSDKAppEventsStateManager.m */; };
 		A9E55FFD78AEB8A9B226F93072BC61B9 /* CPTAnimation.h in Headers */ = {isa = PBXBuildFile; fileRef = 2387A9C3CC35452236FF542A7D0AD33F /* CPTAnimation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA35C670B6AD21AEF3D6A2A51A32431D /* NSCoderExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F77F0B9C61D04EDDEA21E712131AF9 /* NSCoderExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AA7EEE3CFF0CA25DF1AC398EC99E8DBA /* CPTPieChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FBE50771ED2EE84200BD9D5C03E9EDA /* CPTPieChart.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAC9E1446E1658DE58B365EDE55B12BC /* SparkUserLoginViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 159A448FE577E7D06035E530832D4E9F /* SparkUserLoginViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AAEA1275B8DBCEDED978E0E5967D1440 /* FBSDKTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B9755A63BD97754ED938F2EA802524C /* FBSDKTooltipView.m */; };
+		AB16DCD2CE42228265B78B0FAD940F70 /* SparkSetupMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D26D6AB0E4A350EE66A0A017B4AE3D7 /* SparkSetupMainController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		AB7CAA7D0CB1D37DB84BF83644CF6E41 /* FBSDKAppEventsUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D8004C40491BFE7B0D73C188599AD93 /* FBSDKAppEventsUtility.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		AB8D18ED889E13CC5F738DD1A59CC510 /* FBSDKGraphRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = A340754B79F27C38C23D274ED7EAC8E0 /* FBSDKGraphRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AB980524D94063D2794CB15001D05EFB /* CPTGraphHostingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C04ED473DCB0C8A6C8153A1E2E59E58F /* CPTGraphHostingView.m */; };
@@ -530,6 +526,7 @@
 		ADDFE8356A08473DB953B7843A650CFD /* CPTBarPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = A28133DEF2B4EBA21C3523C365C89A0B /* CPTBarPlot.m */; };
 		AE07C7019A3CCAB14F78B59289050154 /* FBSDKShareUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 601D797F274F949C8100A5CED6721829 /* FBSDKShareUtility.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		AE279B6C3893C1BB12A7D761A8F70EA1 /* FBSDKError.h in Headers */ = {isa = PBXBuildFile; fileRef = 233BC016F4155C848BE58B9C3DAAE62D /* FBSDKError.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AE464BBE57AD875A79513C61F067B25E /* RBStoryboardLink.m in Sources */ = {isa = PBXBuildFile; fileRef = C0C42E6C8BCD50EE8EF52738F91DCE85 /* RBStoryboardLink.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		AEA0A97B01CF7151526D414E20428DC4 /* CPTFill.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EE3F5B05A780EFCE3265FF9C06F722 /* CPTFill.m */; };
 		AEA3AA528737696B11EE6875F3E4FF89 /* CPTRangePlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A677F7A002D53D0730184CA8E273D4E /* CPTRangePlot.m */; };
 		AEA7569F32F2586A0D83BDFC01935590 /* SparkAccessToken.h in Headers */ = {isa = PBXBuildFile; fileRef = 6C5F48C94B4387AFCBD10CBAE598A27D /* SparkAccessToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -537,7 +534,7 @@
 		AF8FB7CCBBDA8A7348EF0AEFD61A1215 /* CPTColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 766BC859E3B4F5CDD4C10D16CD8EB738 /* CPTColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B05B85B93FE4C40364989A851D0E4C95 /* FBSDKLoginConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 75F003384E120A5997057D8870FDBAC5 /* FBSDKLoginConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B0BE398350F83A7B0102C3BBAFC51428 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA660F9D49B481A9AFC8E0A6F315BFE /* UIImageView+AFNetworking.m */; };
-		B0E779F4F9C8CCA3D0A1E640C96C2984 /* CHCSVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 677384FDCDE3A573E8047DA412CF946B /* CHCSVParser.m */; };
+		B16930CC13E3202A1D751B6ED4206727 /* SparkUserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DF1665AA4F554F242687C9F3C6CE12 /* SparkUserLoginViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		B1E2BB1A1186B0C02B35C1C6F5509D36 /* FBSDKLoginKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E764F31BB75FE3487F95C9B9B7A9894 /* FBSDKLoginKit-dummy.m */; };
 		B27819B3DAAFD58C001250F148CD1BD4 /* UIViewController+RBStoryboardLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 5324349DFFB315F328156B31D363206A /* UIViewController+RBStoryboardLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2C7E9065BD6BF8E3F3017B802865B56 /* FBSDKAccessTokenCacheV3.h in Headers */ = {isa = PBXBuildFile; fileRef = DB633AC260DB73D17E5130B83CC93520 /* FBSDKAccessTokenCacheV3.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -557,7 +554,6 @@
 		B667F6DB6E2F2FECC8D3B3FD936E0607 /* BFCancellationToken.h in Headers */ = {isa = PBXBuildFile; fileRef = E43CC955C003F2545A3F2E3C73D72390 /* BFCancellationToken.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B6F0E183551EDCF59CE46660F5B08471 /* _CPTPlainWhiteTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 2BC2BBBD90ECFA01E87454556D470ACE /* _CPTPlainWhiteTheme.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B73A68CEA179447208DD84C5ADD38124 /* NSNumberExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 88842A846CFAB5B0028D2EFFF83A025D /* NSNumberExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B74F688CD990F72BC278DD3575319B25 /* RBStoryboardPopoverSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 346A29E083F57CAA8073C417402E4C51 /* RBStoryboardPopoverSegue.m */; };
 		B756A3A23D2F67078E56CC00CBBC0B08 /* FBSDKLikeButtonPopWAV.h in Headers */ = {isa = PBXBuildFile; fileRef = 477D723AFDF26B8FD8305E2BF5FCCBA1 /* FBSDKLikeButtonPopWAV.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		B7AE70A61E377DBD22845B2D4ED3357C /* _CPTFillColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A257854C7F586541333F18D96836E5A /* _CPTFillColor.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B7B41E32FB4ADB6C44FB3797B9BB77AE /* Firebase-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DB3C447103B4A1433B99A192010AF59 /* Firebase-dummy.m */; };
@@ -567,7 +563,6 @@
 		B93DAEE44996830CEC634B410CD1A411 /* wifi2.png in Resources */ = {isa = PBXBuildFile; fileRef = C95D0C413B870375917CE7B19AC2BE1A /* wifi2.png */; };
 		B9F822DA4FF6232D73F9448B3F5B2793 /* FBSDKGameRequestContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 85A60401A77431CFA1FEF47E6734E2CE /* FBSDKGameRequestContent.m */; };
 		BA43B68104EFD6866A838D01F31AA80D /* SparkSetupResultViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = E6A4BBF0C0BAE8F27419D1A071099B50 /* SparkSetupResultViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BACA41C3A5A16A3668B70A7278AF60CA /* SparkSetupSecurityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B54A1A61AE92133770EB5A228F6F15 /* SparkSetupSecurityManager.m */; };
 		BAE9E1A3551E75CCC395A6668508D85E /* CPTPlotArea.h in Headers */ = {isa = PBXBuildFile; fileRef = 6455720FE583EA5E3E98A32B01C36650 /* CPTPlotArea.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BB1151A40AE6E5AA064A5AAC684EEF46 /* _FBSDKTemporaryErrorRecoveryAttempter.m in Sources */ = {isa = PBXBuildFile; fileRef = A901E7CE3E21F4ABE1C79D4D7C3ED4BA /* _FBSDKTemporaryErrorRecoveryAttempter.m */; };
 		BB2BF4B46FCFF638BC655C76F3FB957B /* BFAppLinkReturnToRefererView_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = A490CEC250B488CA82EB9C2D0D961FA8 /* BFAppLinkReturnToRefererView_Internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -595,6 +590,7 @@
 		C133B074DBFB513F4FE12EA7CD293F73 /* CPTAxisSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 97F88962AABDB15B9FF7BDB80B2409E7 /* CPTAxisSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C19EAF21029CA50C9FEEC6375E01439D /* SparkEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = EDFC2B6AE2DE443406A9EE02FA7D6CA9 /* SparkEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C1B65C3D849FEE4FB5298A8135A765DA /* UIImage+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 8A6882A19FE96CCEA113C9DA2091129D /* UIImage+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C1B6C540B0EB029A4ECFC2FE8D0A6861 /* markdown_parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 094689DC9F79C391A734AE5D978AD613 /* markdown_parser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		C2201E34603B014192F0967473518496 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = D4556F62F507BAC9D49ADE5B17B22FDE /* AFURLResponseSerialization.m */; };
 		C2BD38EB470C18C73A4B3157A1B8675D /* BFAppLink_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = BF9957D2981A68B38C11C5B8EFDF205E /* BFAppLink_Internal.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3E578A7EA701A2C3D5291A7C716EBAD /* CPTUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = F0EE974C4DA03FCF3711F22D4A4F83C8 /* CPTUtilities.m */; };
@@ -615,7 +611,9 @@
 		C9D1309C96D5A244AF5DD2B97FB58A5E /* CPTPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D0152CA1E01F7DD96CA3B817F837EB55 /* CPTPathExtensions.m */; };
 		CA0A64C7187BFF5B6143C3D3A7FF8D94 /* FBSDKAppEvents+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 56F655D6625E5A64A1B5583D3F6D55BB /* FBSDKAppEvents+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		CB7A2EB58EBA82B7CE519F8C2EEAFBC4 /* FBSDKAccessTokenCacheV4.h in Headers */ = {isa = PBXBuildFile; fileRef = D2C1308444046D4B98E95B0E010D96C4 /* FBSDKAccessTokenCacheV4.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CB826B28738714E0AD0A10D3C9C7134F /* SparkSetupUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E81DBC43F9D3E1AFC0804632921C63E7 /* SparkSetupUILabel.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		CBB1612BD3819230D648B53F8DDE88AE /* OAStackViewAlignmentStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 37014E52D6E38AEF5A25A448F3DBDC6C /* OAStackViewAlignmentStrategy.m */; };
+		CBDEAECC0E88634DD4375E548AF0306E /* RBStoryboardPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 513426ECC23D5047BC57E7B7E7D64E20 /* RBStoryboardPushSegue.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		CC736771BB576D4513CEE6330C2326A4 /* FBSDKShareError.h in Headers */ = {isa = PBXBuildFile; fileRef = 4B4313F3DDACC1142F32C675AEF6A8F1 /* FBSDKShareError.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		CD166C7C763CE2174F1753B8CBDD4F65 /* CPTUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 181543C0AC11D49C148C8C5F8B1E9C56 /* CPTUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CE197B37F5EFD090717AF9A9AD0DC71A /* CPTNumericData+TypeConversion.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F443C66F9660201D7C53EF34F43981A /* CPTNumericData+TypeConversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -655,8 +653,8 @@
 		D6F4FF6B68EFF4810CC034B1B33B7A51 /* CPTAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 57141C0F2F920728635FAA79541907E0 /* CPTAnnotation.m */; };
 		D6FF2FC523E9FAD30FAECA78873380EA /* Bolts.h in Headers */ = {isa = PBXBuildFile; fileRef = 500E00330E6F4AA929E273DBC557035C /* Bolts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D73C453E44CB080A8ACE0EB4490FFB39 /* BABCropperView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE63BD36ED03E93F87BABF4ADFF80863 /* BABCropperView-dummy.m */; };
+		D79446874AF52558A6370457AA23BDAF /* SparkSetupUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE90D23078CB0B21D4ADAACE834925A /* SparkSetupUIViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		D7DDA982A02CB1D9ACDE4A9874926616 /* _CPTStocksTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 32BDB5D622ABF0BCAAE52CEF7C2C7A2B /* _CPTStocksTheme.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		D8B7965AAA05D40BBE484924618309FF /* SparkSetupWifiTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D556B95FA9BE79ADF887B7098C3C286E /* SparkSetupWifiTableViewCell.m */; };
 		D92D271B248FA2CCD7A07A926467E37C /* SparkSetupCustomization.h in Headers */ = {isa = PBXBuildFile; fileRef = 425CA2355E9A7D8D0679AA869681BCB5 /* SparkSetupCustomization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D933B54E2A3C9783696532BAB27B00FF /* BFTaskCompletionSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 3FC6B8EFA3F430F05FD2DCC48395EB6F /* BFTaskCompletionSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D94863993F1977C099A508C10A5FB475 /* FBSDKLikeBoxBorderView.h in Headers */ = {isa = PBXBuildFile; fileRef = 26BA51994145EBA06D0126113462B0B3 /* FBSDKLikeBoxBorderView.h */; settings = {ATTRIBUTES = (Project, ); }; };
@@ -683,17 +681,15 @@
 		E03421EE59E06D90EC9F0E07B93E1C2D /* FBSDKColor.h in Headers */ = {isa = PBXBuildFile; fileRef = F7AB5AC7E8D8A1E2DF267484DB3BA9B4 /* FBSDKColor.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E05459DA8E3D3D087697F4D84430798B /* RBStoryboardModalSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FF565562CE77E841F16D7079CBEBBE4 /* RBStoryboardModalSegue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E07910C027CE0222C09BC1B3A67A8BD3 /* FBSDKLikeControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 252E95F06DAEE4DBE01A3B817138F83B /* FBSDKLikeControl.m */; };
-		E0D02663D49CDFB05F224548ED9F7CB6 /* SparkGetReadyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D746185B892A63FD76D7192B126AF1 /* SparkGetReadyViewController.m */; };
 		E0EAD57AC8EA4C3510C04CDDC9A28DE6 /* FBSDKBridgeAPIProtocolWebV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B25AE65B40BF64271A54AF82776A182 /* FBSDKBridgeAPIProtocolWebV2.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E10A2574E0EE99F47BC9CAC0AF33FC47 /* FBSDKAppLinkUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = E90941613E3AB688809E024C09AAF1BA /* FBSDKAppLinkUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E159EF1028A9794B189D47DD79C6A0CC /* FBSDKAccessTokenCacheV4.m in Sources */ = {isa = PBXBuildFile; fileRef = E59155400C26A6697D5E921B0CE32E09 /* FBSDKAccessTokenCacheV4.m */; };
 		E1614F317CEB2BA8D61D68870FA17B63 /* CPTMutableTextStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 238BAE7A311AE3B8D51E4B81D3295008 /* CPTMutableTextStyle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E19528B349AA57299BED8F28FFCDB92D /* FBSDKErrorConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 656AC21491CB837A644DA2786E4C865E /* FBSDKErrorConfiguration.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E1B545382153C8218B2585C95DD885BB /* SparkSetupVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7541D44B4AF0D8EB3EB4FEE79ADD9CD /* SparkSetupVideoViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		E1B5FD2855EE2B8E7393E7DB0C494946 /* FBSDKLoginButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A11B2E7055E8F3C5D309887D8ADA32B9 /* FBSDKLoginButton.m */; };
 		E205087E50E3A0A251F91785784AB623 /* CPTPlotArea.m in Sources */ = {isa = PBXBuildFile; fileRef = 9771FDD27ECA9D198D95F3F361668524 /* CPTPlotArea.m */; };
 		E212C2AA95E8F6EFB69A5F1455F291F8 /* UIButton+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 672403B8D1F36699B5B4DC9D3E4B2826 /* UIButton+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E25557F11729C44BD6F53204E6083475 /* RBStoryboardLink-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C81344CACBC3F55D97A8C225E4662316 /* RBStoryboardLink-dummy.m */; };
-		E2B9463C162CD5FA6168B18AD2E60351 /* SparkSetupUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECE90D23078CB0B21D4ADAACE834925A /* SparkSetupUIViewController.m */; };
 		E30BD9620B97DF000E8F31104048D432 /* FBSDKServerConfigurationManager+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = B55BB6948EFC7C017F7D3BA50B6D15FF /* FBSDKServerConfigurationManager+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E35FADAE8EF72A1419545CEE70610D27 /* FBSDKPaymentObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = F1F625D87A2432BECE965E8DA1F80072 /* FBSDKPaymentObserver.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E379EA63195E8FDEF96F18AF37D25802 /* AppIcon40x40.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A761AE800BBA650A9A5C3CD87BA200E /* AppIcon40x40.png */; };
@@ -701,13 +697,13 @@
 		E461DC7FBE41300801EE6D160AE29860 /* FBSDKServerConfigurationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51646DF0F44C1FAA94D7FF66B9F5DC25 /* FBSDKServerConfigurationManager.m */; };
 		E47D4E86203EFA7643A44E5109117967 /* FBSDKGraphRequestConnection+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 975462A025F5968AF27DCD9E9B17FD2E /* FBSDKGraphRequestConnection+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E497F7EAC903A7C28D8CC1FD0D90CCDF /* FBSDKConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 57DEF4BA8E8ABAA5CCD28E8D066250C0 /* FBSDKConstants.m */; };
-		E51D7A1D68A02DD46112B56637D4BA0F /* SparkSetupVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F7541D44B4AF0D8EB3EB4FEE79ADD9CD /* SparkSetupVideoViewController.m */; };
 		E538CE431B0B1742D219C8D91483FDEA /* FBSDKLoginTooltipView.m in Sources */ = {isa = PBXBuildFile; fileRef = F14C5CDD5CB88A84DA9C1ED4FB5C7378 /* FBSDKLoginTooltipView.m */; };
 		E5C8B9D40CFF35AD283336A3D6E49113 /* BFTask.m in Sources */ = {isa = PBXBuildFile; fileRef = C770541FE9E8AB3512B07A2660D2F42C /* BFTask.m */; };
 		E65B5BAA6FD361DED892118A76ECF21E /* FBSDKLoginManager+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 09B2F0D718F3AD06200548A45F93F97B /* FBSDKLoginManager+Internal.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E698A1253B909543AC04E6A5330AB78F /* FBSDKSharePhotoContent.m in Sources */ = {isa = PBXBuildFile; fileRef = A8D875378D52B96F93F1C96A86BAD184 /* FBSDKSharePhotoContent.m */; };
 		E6D6A687F8FD1088F5EBB283308B0DC2 /* FBSDKGraphRequestPiggybackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DB7D47A6FA0EAC330F551FEF08F4C97 /* FBSDKGraphRequestPiggybackManager.m */; };
 		E7580306FB8E311F4E67B76B05D1B4CB /* CPTMutableTextStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D7DB88B370BAE5325E6B0BFA99733D6 /* CPTMutableTextStyle.m */; };
+		E7AA1C301910CD0D695B3BAF0DC3E3D3 /* SparkUserSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FEB37A3FDE355E347B6C01AAB9B3A8FB /* SparkUserSignupViewController.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		E7AC21B4D847D0F421132DCD478589F6 /* FBSDKBridgeAPIProtocolType.h in Headers */ = {isa = PBXBuildFile; fileRef = C1B8146A32EF6115AB58BFEF6982476F /* FBSDKBridgeAPIProtocolType.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		E7B550F789BBA220229E0D5C691EE014 /* FBSDKMessengerIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA48BB53F57A4877EBE29699322C139 /* FBSDKMessengerIcon.m */; };
 		E7D3F939E51FE170AC297C026347FA27 /* FBSDKShareAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 37A9EBA07AAB9427BCD1608B4DC2AFEA /* FBSDKShareAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -719,6 +715,7 @@
 		E9463774C9D59C21F04A7451C1DA4E64 /* SparkSetupMainController.h in Headers */ = {isa = PBXBuildFile; fileRef = 520011CD57CA6F9FB015F87157752C09 /* SparkSetupMainController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E97B61F439BAE5B0BC4AE0382AF6E4B3 /* FBSDKPaymentObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 14FBF49178F3D34440081821E73B0BEE /* FBSDKPaymentObserver.m */; };
 		E98B259CE519A4FBE933F01189D4402D /* OATransformLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C7B75AF6AA648573B6E8F49D128B77DE /* OATransformLayer.m */; };
+		E9AF295FD0050D24506B82B82248E5A7 /* SparkSetupConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E14C0382C7BB4394F6131A0F00638B1 /* SparkSetupConnection.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		EA12B77830599EFD0ADBD91F501B9C23 /* FBSDKAppInviteDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B6398E686786A67384C1469B08CA9D9 /* FBSDKAppInviteDialog.m */; };
 		EA3208DE2E2A3C5B240A0C832A77DDCF /* FBSDKTriStateBOOL.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E4E61D115324378373FA6D760AEDF /* FBSDKTriStateBOOL.m */; };
 		EAA6AEE424855F71D3C28C244972A99D /* CPTPlotRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 330D68E6E3F408CDA50798AE04C4027A /* CPTPlotRange.m */; };
@@ -738,6 +735,7 @@
 		EF38756A5556C26335245407A2D3C876 /* FBSDKLoginCompletion.m in Sources */ = {isa = PBXBuildFile; fileRef = 50AD1F24DD1761B10F54F4886AF85405 /* FBSDKLoginCompletion.m */; };
 		F0586172EFAC57F3D94AEC5D49838889 /* SparkSetupUIViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = CE4716E6DB9CB413938F4C8FE934563C /* SparkSetupUIViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F06664877754422D6FB53A1D8E4FE448 /* FAuthType.h in Headers */ = {isa = PBXBuildFile; fileRef = 545FD79C6C37ADF896A6B5AD5F4091C0 /* FAuthType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F09EAF7BE93C7DAF465AF3D479ECD738 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 23E2A5D2B85507D5FE3F6D6E1B88568E /* Reachability.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		F117666AD76270FDBD4B6C0DD32DE186 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA5CE7135BC8CFD4F718389FF2F0958 /* Security.framework */; };
 		F29A471367CC667E285AB977CABE7E4A /* _CPTConstraintsRelative.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2BA2FB4F96C5612DE8AA109477752B /* _CPTConstraintsRelative.m */; };
 		F3774B1449FCE5B3CA3E1B336E11D284 /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 469B3965308FF9E0BD47D78F8BCA2903 /* AFHTTPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -745,26 +743,28 @@
 		F3A425BF02764BAE2500811B7E75C5CB /* CPTTimeFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C03046F0AD00802DA11DABD7F2D67E /* CPTTimeFormatter.m */; };
 		F4D2A0918C2C064F1A16B4CA2D42089A /* JSONModelError.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C2BC2C04D24E25FEBD2448A1FFE6386 /* JSONModelError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F4F96AF7AC5C83FA96E172128610B1F2 /* FBSDKBase64.h in Headers */ = {isa = PBXBuildFile; fileRef = DA66ECA4B4FDC0242B4213EBBA34D6AF /* FBSDKBase64.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F50BC711475F45F2144F5C2D7DF61CA5 /* SparkSetupUILabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E81DBC43F9D3E1AFC0804632921C63E7 /* SparkSetupUILabel.m */; };
 		F50C506F7E9F6485EEBD6F74F0CC5448 /* FBSDKDynamicFrameworkLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = BFC6D76F6A660FFE6998EA1AD14CA54D /* FBSDKDynamicFrameworkLoader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F55B26027B8814D0008B2C9D31257DD9 /* CPTPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A475CDA68891C921338155E6C2E120 /* CPTPlot.m */; };
+		F5E4A18B4248AC14E5DD19D5489B0A77 /* RBStoryboardSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9ABCD8E8C91BABA2764A6276C9BFE62F /* RBStoryboardSegue.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		F6436C7EBBB2EB509CBCE133A2C2A8CA /* OJFSegmentedProgressView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A9A8615C275B480598651F5AC4491A90 /* OJFSegmentedProgressView-dummy.m */; };
 		F6B4D403FAF6FD5DDE3AC036A520EB0C /* OAStackViewDistributionStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = B10D6529CF2EA494D15AF35634DADEEE /* OAStackViewDistributionStrategy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F7957E0E919FE8E10308C8F4741507C1 /* CPTFunctionDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 80CDCC0DABC514F38A1C5935F5408AD1 /* CPTFunctionDataSource.m */; };
 		F7B5D2658B77049DDEC0AAA88E6FCEA7 /* JSONModel+networking.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BED4BF230C7E4F6931E7EA68AE5E8CC /* JSONModel+networking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F85228C0E287FE6D46BF05BB8A072AC4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E81835A7DB7FEEC75D4832A517554D0F /* CoreText.framework */; };
-		F89174140BF364E1BD053A2553C9538F /* markdown_lib.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BBDA4AEF98A499BD260AC2EA52F6F8 /* markdown_lib.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F8D2CBE43CA0DA5F392BB0BA2007FDA4 /* AttributedMarkdown-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BBA1771E59674021979EE514EB82A9F /* AttributedMarkdown-dummy.m */; };
 		F8D5B8F1B9914F8346C114125A5619BB /* CPTAnnotation.h in Headers */ = {isa = PBXBuildFile; fileRef = C2D66CBBF8FF9B10F9B1B247FD241948 /* CPTAnnotation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F8EE8198B2DE6828C3AD8F5160027069 /* CPTTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = FF4A7D1FC5B527AC61FFD847CB67A518 /* CPTTheme.m */; };
 		F9445F82B0A4F0FE9791FE40A7457444 /* BFAppLinkReturnToRefererController.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B539C3172EB8A7125CDFBAEB6703EFA /* BFAppLinkReturnToRefererController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F952E6103FE7EFCCE1E19423A4FC3C20 /* CPTTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 9EEF645ECB6302475467A0967A59D48E /* CPTTheme.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F9814C410ADDB3A0797E70914157D3A0 /* FBSDKLoginUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D9EB549BBB36FDF70233BB9E8AE83C /* FBSDKLoginUtility.m */; };
+		F98B6F7DF58D68133557C5A150F17ECB /* RBStoryboardLink-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C81344CACBC3F55D97A8C225E4662316 /* RBStoryboardLink-dummy.m */; };
 		F9A13983C99FFAA6C13ECA57A147CFC9 /* CPTPlotGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 03EFBB2DBAF99AAF6DA9F1F7A606C1BA /* CPTPlotGroup.m */; };
 		F9A49E306CE246D7F327C43091688131 /* FBSDKLoginCompletion.h in Headers */ = {isa = PBXBuildFile; fileRef = 415E39BD2CD0FA80A4B17E1A53AF2B7F /* FBSDKLoginCompletion.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		F9BA720B5065B1E8C8981CCC8DE925AA /* _CPTPlainBlackTheme.h in Headers */ = {isa = PBXBuildFile; fileRef = 575728F43A0C7710770C5C8C3ED682BB /* _CPTPlainBlackTheme.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		F9D68BC26F34DFFC2EA1BB8B52400064 /* markdown_lib.m in Sources */ = {isa = PBXBuildFile; fileRef = 32BBDA4AEF98A499BD260AC2EA52F6F8 /* markdown_lib.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		FA27E23894DFC2F77A0EA14C2D1A3DD4 /* FBSDKMonotonicTime.m in Sources */ = {isa = PBXBuildFile; fileRef = E933AF5724578CAB6A1F632CCD2F9E7F /* FBSDKMonotonicTime.m */; };
 		FA6F92749DF5DF53D5E8D80C6217F13C /* NSDecimalNumberExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 160215F8327FDF0F604752FD24819E6E /* NSDecimalNumberExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FAB0AA64574CECD70DDCB80C421AC763 /* SparkSetupCustomization.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ECD60B3E48C2269DAD1F00F0BAC38FA /* SparkSetupCustomization.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		FB1226E5F7E733CE12C088ECEE80DF6F /* BFAppLink.m in Sources */ = {isa = PBXBuildFile; fileRef = 0304149B4209736FD666C1978A10887C /* BFAppLink.m */; };
 		FB8D57FBF378C9756389C9FEA53FB2A9 /* markdown_lib.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F2625C8464233CA5D2200CF8E6FE7D7 /* markdown_lib.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FBA06D2990EEE1E43FB73CB59C0C4DCA /* CPTXYAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C347D4E3D7AA60A944E97D347E1E13 /* CPTXYAxis.m */; };
@@ -4220,7 +4220,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D3C8B0098ECEC2EFA18101CDBC42052 /* Build configuration list for PBXNativeTarget "CHCSVParser" */;
 			buildPhases = (
-				5D9350A1143623B0D91C65E11D141B98 /* Sources */,
+				3CDD9C127AEF4CC498D4B14D039B1D6D /* Sources */,
 				B690A9AF1DE0835CCD80166A10F6287E /* Frameworks */,
 				769BD8BA648BB85D93A144D407337819 /* Headers */,
 			);
@@ -4375,7 +4375,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F3752967D65F824B3796B3A8717D6361 /* Build configuration list for PBXNativeTarget "SparkSetup" */;
 			buildPhases = (
-				4ACEDC1733484CCBBE3253B1459EAC4A /* Sources */,
+				A592D5C968F6645E7251AF57A2BEEC13 /* Sources */,
 				A367978B4A8C71EBCB7198E2E5F81907 /* Frameworks */,
 				6D56C5D4BCF977B738E5B1A1E374EE99 /* Headers */,
 			);
@@ -4412,7 +4412,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8F90072C3C864448F34CF8AE3860844 /* Build configuration list for PBXNativeTarget "RBStoryboardLink" */;
 			buildPhases = (
-				9231E83E5F0A4A7B540A8B23670F023F /* Sources */,
+				EE11EB1BA2EEA6B1EDB1145A43D36BC7 /* Sources */,
 				896AAC89436DF8CD7399A5FCDD2446BD /* Frameworks */,
 				4709A9075A9CBA101BC03E484A673D17 /* Headers */,
 			);
@@ -4756,34 +4756,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4ACEDC1733484CCBBE3253B1459EAC4A /* Sources */ = {
+		3CDD9C127AEF4CC498D4B14D039B1D6D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7886CEFE26F12B6FA0999096CDD3F33A /* Reachability.m in Sources */,
-				064C184FF8ACD0772525E10BA47B6B27 /* SparkConnectingProgressViewController.m in Sources */,
-				8F3AFE94DA83C68DACED731E3D4D1982 /* SparkDiscoverDeviceViewController.m in Sources */,
-				E0D02663D49CDFB05F224548ED9F7CB6 /* SparkGetReadyViewController.m in Sources */,
-				92B4749E7E5E2D58263DC45A22483741 /* SparkManualNetworkViewController.m in Sources */,
-				56545471ADE68A7DEC8B82E8D26A6E0F /* SparkSelectNetworkViewController.m in Sources */,
-				28F3FC66BF5676454318A1EF9544F391 /* SparkSetup-dummy.m in Sources */,
-				11AE48F15E95419C31C78230EE82A566 /* SparkSetupCommManager.m in Sources */,
-				228EE029D75D89534D14D43BC51734E7 /* SparkSetupConnection.m in Sources */,
-				152DB4C1EC66241FD456FC72BF5E255C /* SparkSetupCustomization.m in Sources */,
-				5073245201B17BA54A2F10194E631D58 /* SparkSetupMainController.m in Sources */,
-				656ECF2227F0D3AF16A4FD53660DFF2B /* SparkSetupPasswordEntryViewController.m in Sources */,
-				7299F10B0DFC2A3B971DE25618B90FB1 /* SparkSetupResultViewController.m in Sources */,
-				BACA41C3A5A16A3668B70A7278AF60CA /* SparkSetupSecurityManager.m in Sources */,
-				91BC069071B772372730061E7046C401 /* SparkSetupUIButton.m in Sources */,
-				F50BC711475F45F2144F5C2D7DF61CA5 /* SparkSetupUILabel.m in Sources */,
-				66D89F8C760E115788FC3E9B2D5E7ADA /* SparkSetupUISpinner.m in Sources */,
-				E2B9463C162CD5FA6168B18AD2E60351 /* SparkSetupUIViewController.m in Sources */,
-				E51D7A1D68A02DD46112B56637D4BA0F /* SparkSetupVideoViewController.m in Sources */,
-				7F14C734AE189B017025D3F304E6E628 /* SparkSetupWebViewController.m in Sources */,
-				D8B7965AAA05D40BBE484924618309FF /* SparkSetupWifiTableViewCell.m in Sources */,
-				81144A59314D6D54C350943980FC2AFA /* SparkUserForgotPasswordViewController.m in Sources */,
-				2A9CEEB87BBDA4D36B53DB71C9EFE5AD /* SparkUserLoginViewController.m in Sources */,
-				243D1FC34D292F23600DF4EF1F52CC09 /* SparkUserSignupViewController.m in Sources */,
+				55966B3DE57C2EC92D37B86CEE9384C1 /* CHCSVParser-dummy.m in Sources */,
+				9E8A31706D889EC5E1924E4B2263A5B3 /* CHCSVParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4816,15 +4794,6 @@
 				576E9A10A24BFE5C7F8BDC9A6D032442 /* BFWebViewAppLinkResolver.m in Sources */,
 				813F9921F9C0A44B4C110CDF92783834 /* Bolts-dummy.m in Sources */,
 				C4642A42E1FB1387FE1CC0B112405AD5 /* Bolts.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5D9350A1143623B0D91C65E11D141B98 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				05FBC19E4A36FA0C6F14D9EC6ACC2969 /* CHCSVParser-dummy.m in Sources */,
-				B0E779F4F9C8CCA3D0A1E640C96C2984 /* CHCSVParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4916,9 +4885,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8D2CBE43CA0DA5F392BB0BA2007FDA4 /* AttributedMarkdown-dummy.m in Sources */,
-				F89174140BF364E1BD053A2553C9538F /* markdown_lib.m in Sources */,
-				77813FFF21BB8D2262F9EE8C117DB97A /* markdown_output.m in Sources */,
-				27E90CB158CEA695A288E26ADE723578 /* markdown_parser.m in Sources */,
+				F9D68BC26F34DFFC2EA1BB8B52400064 /* markdown_lib.m in Sources */,
+				A7F37094BD96BB0626E8E4865925A0B5 /* markdown_output.m in Sources */,
+				C1B6C540B0EB029A4ECFC2FE8D0A6861 /* markdown_parser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4968,20 +4937,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9231E83E5F0A4A7B540A8B23670F023F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E25557F11729C44BD6F53204E6083475 /* RBStoryboardLink-dummy.m in Sources */,
-				48787A287F0D3D3BAC68656386FCBB7B /* RBStoryboardLink.m in Sources */,
-				478ABD9572E8B016F58DEA4443381845 /* RBStoryboardModalSegue.m in Sources */,
-				B74F688CD990F72BC278DD3575319B25 /* RBStoryboardPopoverSegue.m in Sources */,
-				37D3EF2FC496A69FC80D7CE803F3FAB3 /* RBStoryboardPushSegue.m in Sources */,
-				8F7B9F00E3D67CF1432A75B0B23D20D9 /* RBStoryboardSegue.m in Sources */,
-				3E6EC68837C52D639D8C24C6832AFF46 /* UIViewController+RBStoryboardLink.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		97660B10740707DEA489AE1D969959F7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4994,6 +4949,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A592D5C968F6645E7251AF57A2BEEC13 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F09EAF7BE93C7DAF465AF3D479ECD738 /* Reachability.m in Sources */,
+				2BEC4E1B3997AAC2FFC886568BE3FB18 /* SparkConnectingProgressViewController.m in Sources */,
+				8E290B8F0C35C282BC55A89B3694709C /* SparkDiscoverDeviceViewController.m in Sources */,
+				A300CF65520FA4558BE0A384233C6424 /* SparkGetReadyViewController.m in Sources */,
+				073CEC1D92E59AB4A2745E69A44799DD /* SparkManualNetworkViewController.m in Sources */,
+				A9887A9CBC359623141805B5B150809D /* SparkSelectNetworkViewController.m in Sources */,
+				714732C16F2C30AE6BB2A574C43036AE /* SparkSetup-dummy.m in Sources */,
+				6C28338064727D6F7B807C914B94760D /* SparkSetupCommManager.m in Sources */,
+				E9AF295FD0050D24506B82B82248E5A7 /* SparkSetupConnection.m in Sources */,
+				FAB0AA64574CECD70DDCB80C421AC763 /* SparkSetupCustomization.m in Sources */,
+				AB16DCD2CE42228265B78B0FAD940F70 /* SparkSetupMainController.m in Sources */,
+				953CAFC0EC16F29B21CEBA1E017D85B4 /* SparkSetupPasswordEntryViewController.m in Sources */,
+				8E582D2B4F881B3814E601AA46D54304 /* SparkSetupResultViewController.m in Sources */,
+				504DCE562B242128015A81F84A5FC247 /* SparkSetupSecurityManager.m in Sources */,
+				A666A9F00C7EE31F1ADF4B9C8C64538D /* SparkSetupUIButton.m in Sources */,
+				CB826B28738714E0AD0A10D3C9C7134F /* SparkSetupUILabel.m in Sources */,
+				3C176BCE38FE03BFC7759723DADB7FD0 /* SparkSetupUISpinner.m in Sources */,
+				D79446874AF52558A6370457AA23BDAF /* SparkSetupUIViewController.m in Sources */,
+				E1B545382153C8218B2585C95DD885BB /* SparkSetupVideoViewController.m in Sources */,
+				1449C916D95650C692EE9AAD5C69D3B6 /* SparkSetupWebViewController.m in Sources */,
+				4684DEB0672B8709B7F742A6AACD3304 /* SparkSetupWifiTableViewCell.m in Sources */,
+				5BFE47BF89E582AFF8F0537EBB1F7A06 /* SparkUserForgotPasswordViewController.m in Sources */,
+				B16930CC13E3202A1D751B6ED4206727 /* SparkUserLoginViewController.m in Sources */,
+				E7AA1C301910CD0D695B3BAF0DC3E3D3 /* SparkUserSignupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5187,6 +5173,20 @@
 				38EEA9ED6B922946C54AD6BAC93B73AD /* UIProgressView+AFNetworking.m in Sources */,
 				7F0578A0258E02384F6229C678E60D31 /* UIRefreshControl+AFNetworking.m in Sources */,
 				AD359A96DD4AA2C962E50A5CD5524F54 /* UIWebView+AFNetworking.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE11EB1BA2EEA6B1EDB1145A43D36BC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F98B6F7DF58D68133557C5A150F17ECB /* RBStoryboardLink-dummy.m in Sources */,
+				AE464BBE57AD875A79513C61F067B25E /* RBStoryboardLink.m in Sources */,
+				36FAD980A6B69D60D73AFC3560AA9E46 /* RBStoryboardModalSegue.m in Sources */,
+				1917C9BD05D6D2401F769DD41D8AE087 /* RBStoryboardPopoverSegue.m in Sources */,
+				CBDEAECC0E88634DD4375E548AF0306E /* RBStoryboardPushSegue.m in Sources */,
+				F5E4A18B4248AC14E5DD19D5489B0A77 /* RBStoryboardSegue.m in Sources */,
+				3B354E8A36F1D3B928ED22C8C28963FB /* UIViewController+RBStoryboardLink.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

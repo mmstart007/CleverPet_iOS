@@ -4,15 +4,15 @@
 target 'CleverPet' do
 pod 'JSONModel'
 pod 'AFNetworking'
-pod 'AttributedMarkdown', :git => 'https://github.com/dreamwieber/AttributedMarkdown.git'
+pod 'AttributedMarkdown', :git => 'https://github.com/dreamwieber/AttributedMarkdown.git', :inhibit_warnings => true
 pod 'OAStackView'
 pod 'Intercom'
 pod 'GoogleIdentityToolkit'
-pod 'CHCSVParser'
-pod 'RBStoryboardLink'
+pod 'CHCSVParser', :inhibit_warnings => true
+pod 'RBStoryboardLink', :inhibit_warnings => true
 pod 'NMRangeSlider'
 pod 'Spark-SDK', :path => 'Spark-SDK_Internal'
-pod 'SparkSetup'
+pod 'SparkSetup', :inhibit_warnings => true
 pod 'BABCropperView'
 pod 'Firebase', '>= 2.5.0'
 pod 'FBSDKCoreKit'
