@@ -7,17 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CPBaseCommunicationManager.h"
 
 @class GITAccount;
 @class SparkDevice;
+@class AFHTTPSessionManager;
 
 typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile, CPLoginResult_UserWithoutDevice, CPLoginResult_UserWithoutParticle, CPLoginResult_UserWithSetupCompleted, CPLoginResult_Failure};
 
-@interface CPAppEngineCommunicationManager : NSObject
+@interface CPAppEngineCommunicationManager : CPBaseCommunicationManager
 
 + (instancetype)sharedInstance;
 
 - (void)applyConfig:(NSDictionary*)configData;
+- (AFHTTPSessionManager*)getSessionManager;
 
 - (ASYNC)loginWithAuthToken:(NSString*)gitKitToken completion:(void (^)(CPLoginResult result, NSError *error))completion;
 - (ASYNC)logoutWithCompletion:(void (^)(NSError *error))completion;

@@ -10,10 +10,16 @@
 #import "CPUserManager.h"
 #import "CPFirebaseManager.h"
 
+NSString * const kFirebaseTilePath = @"tile";
+
 @interface CPFirebaseManager()
 
 @property (strong, nonatomic) Firebase* rootRef;
 @property (strong, nonatomic) NSString* userStatsPath;
+@property (nonatomic, assign) FirebaseHandle statsHandle;
+@property (nonatomic, assign) BOOL hasStatsHandle;
+@property (nonatomic, assign) FirebaseHandle tilesHandle;
+@property (nonatomic, assign) BOOL hasTilesHandle;
 
 @end
 
@@ -47,8 +53,9 @@
 
 - (void)userLoggedOut
 {
-    [self stoplisteningForUpdates];
+    [self stoplisteningForStatsUpdates];
     self.userStatsPath = nil;
+    [self stopListeningForTileUpdates];
 }
 
 - (CPPetStats*)petStats:(NSDictionary*)values
@@ -63,8 +70,8 @@
 
  - (void)beginlisteningForUpdates
 {
-    [[self.rootRef childByAppendingPath:self.userStatsPath] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        CPPetStats *petStats = [self petStats:snapshot.value];
+    FirebaseHandle statsHandle = [[self.rootRef childByAppendingPath:self.userStatsPath] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+		CPPetStats *petStats = [self petStats:snapshot.value];
         if (self.headerStatsUpdateBlock) {
             self.headerStatsUpdateBlock(nil, petStats);
         }
@@ -79,6 +86,8 @@
             self.viewStatsUpdateBlock(error, nil);
         }
     }];
+    self.statsHandle = statsHandle;
+    self.hasStatsHandle = YES;
 }
 
 
@@ -102,9 +111,33 @@
     }
 }
 
-- (void)stoplisteningForUpdates
+- (void)stoplisteningForStatsUpdates
 {
-    [self.rootRef removeAllObservers];
+    // Controlling this with a boolean, since it's not clear from the documentation what the range of integers can be, so I don't feel confidant using say -1 to represent no handle
+    if (self.hasStatsHandle) {
+        [self.rootRef removeObserverWithHandle:self.statsHandle];
+        self.hasStatsHandle = NO;
+        self.statsHandle = 0;
+    }
+    
+}
+
+#pragma mark - Tile updates
+- (void)listenForTileUpdatesWithBlock:(FirebaseUpdateBlock)block
+{
+    self.tilesHandle = [[self.rootRef childByAppendingPath:[NSString stringWithFormat:@"%@/%@", self.userStatsPath, kFirebaseTilePath]] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        block(nil, snapshot.value);
+    }];
+    self.hasTilesHandle = YES;
+}
+
+- (void)stopListeningForTileUpdates
+{
+    if (self.hasTilesHandle) {
+        [self.rootRef removeObserverWithHandle:self.tilesHandle];
+        self.hasTilesHandle = NO;
+        self.statsHandle = 0;
+    }
 }
 
 @end

@@ -7,6 +7,8 @@
 #import "CPTile.h"
 #import "CPTileTextFormatter.h"
 #import "UIView+CPShadowEffect.h"
+#import "CPTileCommunicationManager.h"
+#import "CPUserManager.h"
 
 @interface CPTileViewCell ()
 @property (weak, nonatomic) IBOutlet UIStackView *messageTileContentView;
@@ -16,13 +18,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *cellImageView;
 @property (weak, nonatomic) IBOutlet UIView *colorBarView;
 @property (weak, nonatomic) IBOutlet UIView *cellImageViewHolder;
-@property (weak, nonatomic) IBOutlet UIButton *negativeButton;
-@property (weak, nonatomic) IBOutlet UIButton *affirmativeButton;
+@property (weak, nonatomic) IBOutlet UIButton *secondaryButton;
+@property (weak, nonatomic) IBOutlet UIButton *primaryButton;
 @property (weak, nonatomic) IBOutlet UIStackView *buttonHolder;
 @property (weak, nonatomic) IBOutlet UIView *backingView;
 @property (strong, nonatomic) IBOutlet UIView *colouredDotView;
-
-
 @property (weak, nonatomic) IBOutlet UIView *swipedColorView;
 
 // The relative priority of these 2 constraints controls whether the swiped color view covers
@@ -32,10 +32,12 @@
 
 // Video layout specific stuff
 @property (weak, nonatomic) IBOutlet UIView *videoContentView;
+@property (weak, nonatomic) IBOutlet UIView *videoImageContainer;
 @property (weak, nonatomic) IBOutlet UITextView *videoLayoutTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *videoLayoutImageView;
 
 @property (strong, nonatomic) NSMutableArray<UISwipeGestureRecognizer *> *swipeGestureRecognizers;
+
 @end
 
 @implementation CPTileViewCell {
@@ -45,27 +47,42 @@
     _tile = tile;
     
     self.titleLabel.hidden = !tile.title;
-    self.titleLabel.text = tile.title;
+    // TODO: pass in pet
+    CPPet *pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
+    self.titleLabel.text = [[CPTileTextFormatter instance] filterString:tile.title forPet:pet name:YES gender:YES];
     
-    self.messageTileContentView.hidden = tile.tileType == CPTTVideo;
-    self.videoLayoutImageView.hidden = tile.tileType != CPTTVideo;
+    self.messageTileContentView.hidden = tile.templateType == CPTileTemplateVideo;
+    self.videoLayoutImageView.hidden = tile.templateType != CPTileTemplateVideo;
     
-    if (tile.tileType == CPTTVideo) {
+    if (tile.templateType == CPTileTemplateVideo) {
         self.videoLayoutTextView.attributedText = tile.parsedBody;
-        self.videoLayoutImageView.image = tile.image;
+        self.bodyTextView.attributedText = nil;
+        [self.videoLayoutImageView setImageWithURL:tile.videoThumbnailUrl];
+        [self.cellImageView cancelImageDownloadTask];
+        self.cellImageView.image = nil;
+        self.cellImageViewHolder.hidden = YES;
+        self.videoImageContainer.hidden = NO;
     } else {
         self.bodyTextView.attributedText = tile.parsedBody;
-        self.cellImageViewHolder.hidden = !tile.image;
-        self.cellImageView.image = tile.image;
+        self.videoLayoutTextView.attributedText = nil;
+        self.cellImageViewHolder.hidden = !tile.imageUrl;
+        [self.cellImageView setImageWithURL:tile.imageUrl];
+        [self.videoLayoutImageView cancelImageDownloadTask];
+        self.videoLayoutImageView.image = nil;
+        self.videoImageContainer.hidden = YES;
+    }
+    // TODO: report template
+    
+    self.primaryButton.hidden = tile.templateType == CPTileTemplateVideo || !tile.primaryButtonText;
+    self.secondaryButton.hidden = tile.templateType == CPTileTemplateVideo || !tile.secondaryButtonText;
+    
+    // Ignore button titles for video tiles
+    if (tile.templateType != CPTileTemplateVideo) {
+        [self setButtonTitle:[[CPTileTextFormatter instance] filterString:tile.primaryButtonText forPet:pet name:YES gender:YES] onButton:self.primaryButton];
+        [self setButtonTitle:[[CPTileTextFormatter instance] filterString:tile.secondaryButtonText forPet:pet name:YES gender:YES] onButton:self.secondaryButton];
     }
     
-    self.affirmativeButton.hidden = !tile.affirmativeButtonText;
-    self.negativeButton.hidden = !tile.negativeButtonText;
-    
-    [self setButtonTitle:tile.affirmativeButtonText onButton:self.affirmativeButton];
-    [self setButtonTitle:tile.negativeButtonText onButton:self.negativeButton];
-    
-    self.buttonHolder.hidden = self.affirmativeButton.hidden && self.negativeButton.hidden;
+    self.buttonHolder.hidden = self.primaryButton.hidden && self.secondaryButton.hidden;
     
     UIColor *tileColor = [UIColor blackColor];
     UIColor *tileLightColor = [UIColor blackColor];
@@ -90,21 +107,27 @@
             break;
     }
     
+    // TODO: convert button background colors to images, or set alpha on them or something, so they look disabled
     self.colorBarView.backgroundColor = tileColor;
     self.swipedColorView.backgroundColor = tileColor;
-    self.affirmativeButton.backgroundColor = tileColor;
-    self.negativeButton.backgroundColor = tileLightColor;
+    self.primaryButton.backgroundColor = tileColor;
+    self.secondaryButton.backgroundColor = tileLightColor;
     
-    [self setTextColor:[UIColor whiteColor] onButton:self.affirmativeButton];
-    [self setTextColor:tileColor onButton:self.negativeButton];
+    [self setTextColor:[UIColor whiteColor] onButton:self.primaryButton];
+    [self setTextColor:tileColor onButton:self.secondaryButton];
 
-    self.tagTimeStampLabel.text = [NSString stringWithFormat:@"Device Message | %@", [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
+    // Uppercase the first character, since it's all lowercase coming from the server
+    NSString *categoryString = tile.category;
+    if ([categoryString length] > 0) {
+        categoryString = [categoryString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[categoryString substringToIndex:1] uppercaseString]];
+    }
+    self.tagTimeStampLabel.text = [NSString stringWithFormat:@"%@ | %@", categoryString, [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
     
     self.colouredDotView.backgroundColor = tileColor;
 }
 
 - (void)swipeGestureRecognized:(UISwipeGestureRecognizer *)recognizer {
-    if (self.tile.isSwipeable && [self.swipeGestureRecognizers containsObject:recognizer]) {
+    if (self.tile.userDeletable && [self.swipeGestureRecognizers containsObject:recognizer]) {
         [self setSwipedMode:YES withAnimation:YES callDelegateMethod:YES];
     }
 }
@@ -170,7 +193,7 @@
     self.videoLayoutTextView.textContainer.lineFragmentPadding = self.bodyTextView.textContainer.lineFragmentPadding;
     self.videoLayoutTextView.textContainerInset = self.bodyTextView.textContainerInset;
     
-    for (UIButton *button in @[self.affirmativeButton, self.negativeButton]) {
+    for (UIButton *button in @[self.primaryButton, self.secondaryButton]) {
         button.titleLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
     }
     
@@ -196,10 +219,52 @@
     self.titleLabel.text = nil;
     self.cellImageView.image = nil;
     
-    self.bodyTextView.text = nil;
+    self.bodyTextView.attributedText = nil;
     self.videoLayoutImageView.image = nil;
-    self.videoLayoutTextView.text = nil;
+    self.videoLayoutTextView.attributedText = nil;
+    
     
     [self setSwipedMode:NO withAnimation:NO callDelegateMethod:NO];
+    // TODO: cancel request response block somehow. Maybe mark request in progress on the tile so we have the correct state when scrolling back to a tile if the request takes a long time?
+    [self requestInProgress:NO];
 }
+
+- (void)requestInProgress:(BOOL)inProgress
+{
+    self.primaryButton.enabled = !inProgress;
+    self.secondaryButton.enabled = !inProgress;
+    // Set alpha on the buttons so they look disabled-ish
+    self.primaryButton.alpha = inProgress ? .5f : 1.f;
+    self.secondaryButton.alpha = inProgress ? .5f : 1.f;
+}
+
+#pragma mark - IBActions
+- (IBAction)secondaryButtonTapped:(id)sender
+{
+    [self buttonTappedWithPath:self.tile.secondaryButtonUrl];
+}
+
+- (IBAction)primaryButtonTapped:(id)sender
+{
+    [self buttonTappedWithPath:self.tile.primaryButtonUrl];
+}
+
+- (IBAction)playVideoTapped:(id)sender
+{
+    [self.delegate playVideoForCell:self];
+    [self primaryButtonTapped:nil];
+}
+
+- (void)buttonTappedWithPath:(NSString *)path
+{
+    // TODO: chain this back up through the data source -> data manager -> communications manager instead of calling directly?
+    [self requestInProgress:YES];
+    BLOCK_SELF_REF_OUTSIDE();
+    [[CPTileCommunicationManager sharedInstance] handleButtonPressWithPath:path completion:^(NSError *error){
+        BLOCK_SELF_REF_INSIDE();
+        // TODO: display error;
+        // TODO: Reactivate buttons? probably not
+    }];
+}
+
 @end

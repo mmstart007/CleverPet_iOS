@@ -7,7 +7,6 @@
 //
 
 #import "CPAppEngineCommunicationManager.h"
-#import <AFNetworking/AFNetworking.h>
 #import "GITAccount.h"
 #import "CPUserManager.h"
 #import "CPParticleConnectionHelper.h"
@@ -64,6 +63,12 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     self.sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
 }
 
+- (AFHTTPSessionManager*)getSessionManager
+{
+    return self.sessionManager;
+}
+
+#pragma mark - Login and user calls
 - (ASYNC)loginWithAuthToken:(NSString *)gitKitToken completion:(void (^)(CPLoginResult, NSError *))completion
 {
     NSParameterAssert(gitKitToken);
@@ -94,7 +99,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         BLOCK_SELF_REF_INSIDE();
         // Clear the auth header as we will now be in a fresh login state
         [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
-        if (completion) completion(CPLoginResult_Failure, error);
+        if (completion) completion(CPLoginResult_Failure, [self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -105,7 +110,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         if (completion) completion(nil);
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
     }];
     // Clear our auth header regardless of if the call is successful or not, as we've already dumped the user back to login
     [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
@@ -167,7 +172,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion(nil, [self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion(nil, [self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -186,7 +191,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -206,7 +211,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion(nil, [self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion(nil, [self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -225,7 +230,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -244,7 +249,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -263,7 +268,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -283,7 +288,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -303,7 +308,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion(NSNotFound, [self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion(NSNotFound, [self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -323,7 +328,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -343,7 +348,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         BLOCK_SELF_REF_INSIDE();
-        if (completion) completion([self convertAFNetworkingErroToServerError:error]);
+        if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
     }];
 }
 
@@ -351,21 +356,6 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 - (void)setAuthToken:(NSString *)authToken
 {
     [self.sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", authToken] forHTTPHeaderField:@"Authorization"];
-}
-
-- (NSError *)convertAFNetworkingErroToServerError:(NSError*)error
-{
-    NSInteger errorCode = [error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
-    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] options:kNilOptions error:nil];
-    NSString *errorMessage = responseDict[kErrorKey] ? responseDict[kErrorKey] : [[NSString alloc] initWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
-    NSError *newError = [NSError errorWithDomain:NSStringFromClass([self class]) code:errorCode userInfo:@{NSLocalizedDescriptionKey:errorMessage}];
-    return newError;
-}
-
-- (NSError*)errorForMessage:(NSString *)message
-{
-    // TODO: error codes
-    return [NSError errorWithDomain:NSStringFromClass([self class]) code:0 userInfo:@{NSLocalizedDescriptionKey:message}];
 }
 
 @end

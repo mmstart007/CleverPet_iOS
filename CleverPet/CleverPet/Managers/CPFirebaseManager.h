@@ -20,6 +20,12 @@ typedef void(^FirebaseUpdateBlock)(NSError*, CPPetStats*);
 
 - (void)applyConfig:(NSDictionary *)configData;
 - (void)userLoggedIn:(NSDictionary *)response;
+// TODO: rename to stats
 - (void)beginlisteningForUpdates;
-- (void)stoplisteningForUpdates;
+- (void)stoplisteningForStatsUpdates;
+
+//Tile updates
+- (void)listenForTileUpdatesWithBlock:(FirebaseUpdateBlock)block;
+- (void)stopListeningForTileUpdates;
+
 @end

@@ -8,7 +8,6 @@
 
 #import "CPHubPlaceholderViewController.h"
 #import "CPLoadingView.h"
-#import "CPLoginController.h"
 
 @interface CPHubPlaceholderViewController ()
 
@@ -31,10 +30,19 @@
     [self.cancelButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.cancelButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     self.fadeView.hidden = NO;
-    [self.navigationController setNavigationBarHidden:YES];
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.messageLabel.textColor = [UIColor appTitleTextColor];
     self.messageLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
+    
+    if (self.message) {
+        [self displayMessage:self.message];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,25 +59,28 @@
 #pragma mark - IBActions
 - (IBAction)continueTapped:(id)sender
 {
-    [[CPLoginController sharedInstance] continueDeviceSetup];
+    [self.delegate hubSetupContinued];
     self.messageLabel.text = nil;
     self.fadeView.hidden = NO;
 }
 
 - (IBAction)cancelTapped:(id)sender
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Cancelling Hub Setup", @"Alert title when user attempts to back out of hub setup") message:NSLocalizedString(@"If you do not complete Hub WiFi Setup, the Hub won't adapt to your dog or offer your dog new challenges.\n\nYou also won't be able to see how your dog is doing through the CleverPet mobile app.\n\nAre you sure you want to cancel?", @"Alert body when user attempts to back out of hub setup") preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes, I want to cancel", @"Alert action message to confirm backing out of hub setup") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [[CPLoginController sharedInstance] cancelDeviceSetup];
-    }];
-    
-    UIAlertAction *continueAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No, Let me try again", @"Alert action message to continue with hub setup") style:UIAlertActionStyleDefault handler:nil];
-    
-    [alert addAction:cancelAction];
-    [alert addAction:continueAction];
-    [self presentViewController:alert animated:YES completion:nil];
-
+    if (self.shouldConfirmCancellation) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Cancelling Hub Setup", @"Alert title when user attempts to back out of hub setup") message:NSLocalizedString(@"If you do not complete Hub WiFi Setup, the Hub won't adapt to your dog or offer your dog new challenges.\n\nYou also won't be able to see how your dog is doing through the CleverPet mobile app.\n\nAre you sure you want to cancel?", @"Alert body when user attempts to back out of hub setup") preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes, I want to cancel", @"Alert action message to confirm backing out of hub setup") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [self.delegate hubSetupCancelled];
+        }];
+        
+        UIAlertAction *continueAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No, Let me try again", @"Alert action message to continue with hub setup") style:UIAlertActionStyleDefault handler:nil];
+        
+        [alert addAction:cancelAction];
+        [alert addAction:continueAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    } else {
+        [self.delegate hubSetupCancelled];
+    }
 }
 
 /*

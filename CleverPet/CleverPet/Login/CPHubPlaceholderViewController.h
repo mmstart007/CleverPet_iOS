@@ -8,7 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CPHubPlaceholderDelegate <NSObject>
+
+- (void)hubSetupCancelled;
+- (void)hubSetupContinued;
+
+@end
+
 @interface CPHubPlaceholderViewController : UIViewController
+
+@property (nonatomic, strong) NSString *message;
+@property (nonatomic, assign) BOOL shouldConfirmCancellation;
+@property (nonatomic, weak) id<CPHubPlaceholderDelegate> delegate;
 
 - (void)displayMessage:(NSString *)message;
 

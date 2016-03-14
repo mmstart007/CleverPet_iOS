@@ -120,7 +120,7 @@
     }
 }
 
-- (void)addFilter:(CPMainTableSectionHeaderFilter *)filter
+- (void)addFilter:(CPMainTableSectionHeaderFilter *)filter withColor:(UIColor *)color
 {
     UILabel *label = [[UILabel alloc] init];
     label.text = filter.filterName;
@@ -141,6 +141,23 @@
     centerYConstraint.priority = 1000;
     
     [self.verticalConstraints addObject:centerYConstraint];
+    
+    UIView *colorDotView;
+    if (color) {
+        colorDotView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 4.f, 4.f)];
+        colorDotView.translatesAutoresizingMaskIntoConstraints = NO;
+        colorDotView.layer.cornerRadius = colorDotView.bounds.size.width*.5f;
+        colorDotView.backgroundColor = color;
+        [self addSubview:colorDotView];
+        NSLayoutConstraint *colorHeight = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:4.f];
+        [self addConstraint:colorHeight];
+        NSLayoutConstraint *colorWidth = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:4.f];
+        [self addConstraint:colorWidth];
+        NSLayoutConstraint *colorX = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:label attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+        [self addConstraint:colorX];
+        NSLayoutConstraint *colorSpacing = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:label attribute:NSLayoutAttributeBottom multiplier:1 constant:0.f];
+        [self addConstraint:colorSpacing];
+    }
     
     if (self.lastLabel) {
         NSLayoutConstraint *spacingConstraint = [NSLayoutConstraint constraintWithItem:label attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.lastLabel attribute:NSLayoutAttributeTrailing multiplier:1 constant:32];
