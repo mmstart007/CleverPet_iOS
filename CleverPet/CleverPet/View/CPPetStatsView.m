@@ -10,6 +10,7 @@
 #import "UIView+CPShadowEffect.h"
 #import "CPLabelUtils.h"
 #import "CPFirebaseManager.h"
+#import "OJFSegmentedProgressView.h"
 
 @interface CPPetStatsView ()
 @property (weak, nonatomic) IBOutlet UILabel *playsTitleLabel;
@@ -20,11 +21,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *challengeTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lifetimePointsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lifetimePointsTitleLabel;
-@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+@property (weak, nonatomic) IBOutlet UIView *progressViewHolder;
 @property (weak, nonatomic) IBOutlet UIView *dividerView;
 @property (weak, nonatomic) IBOutlet UIView *shadowView;
 @property (weak, nonatomic) IBOutlet UIView *errorView;
 @property (weak, nonatomic) IBOutlet UILabel *errorMessageLabel;
+@property (strong, nonatomic) OJFSegmentedProgressView *progressView;
 @end
 
 @implementation CPPetStatsView
@@ -50,8 +52,15 @@
     
     [self.shadowView applyCleverPetShadow];
     
-    self.progressView.progressTintColor = [UIColor appTealColor];
-    self.progressView.trackTintColor = [UIColor appDividerColor];
+    self.progressView = [[OJFSegmentedProgressView alloc] initWithNumberOfSegments:1];
+    [self.progressView setFrame:CGRectMake(0, 0, self.progressViewHolder.frame.size.width, self.progressViewHolder.frame.size.height)];
+    [self.progressView setProgressTintColor:[UIColor appTealColor]];
+    [self.progressView setTrackTintColor:[UIColor appDividerColor]];
+    [self.progressView setSegmentSeparatorSize:0.1f];
+    [self.progressView setStyle:OJFSegmentedProgressViewStyleDiscrete];
+    [self.progressViewHolder addSubview:self.progressView];
+    
+    [self.progressView setAutoresizingMask:UIViewContentModeLeft|UIViewContentModeRight];
     
     BLOCK_SELF_REF_OUTSIDE()
     [CPFirebaseManager sharedInstance].viewStatsUpdateBlock = ^(NSError *error, CPPetStats *update) {
@@ -71,15 +80,16 @@
                 [self.challengeNumberLabel setText:[update.challengeNumber stringValue]];
                 [self.lifetimePointsLabel setText:[update.lifetimePoints stringValue]];
 
-                float progress = [update.stageNumber floatValue]/[update.totalStages floatValue];
-                [self.progressView setProgress:progress animated:YES];
+				float progress = [update.stageNumber floatValue]/[update.totalStages floatValue];
+                [self.progressView setNumberOfSegments:[update.totalStages integerValue]];
+                [self.progressView setProgress:progress];
             } else {
                 [self.challengeTitleLabel setHidden:YES];
                 [self.challengeNumberLabel setHidden:YES];
                 [self.kibblesLabel setText:@"0"];
                 [self.playsLabel setText:@"0"];
                 [self.lifetimePointsLabel setText:@"0"];
-                [self.progressView setProgress:0.0f animated:YES];
+                [self.progressView setProgress:0.0f];
             }
         }
     };
