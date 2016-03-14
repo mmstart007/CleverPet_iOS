@@ -45,23 +45,27 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TA2-4D-hfp">
+                                        <view contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fKE-mx-wbk">
                                             <rect key="frame" x="16" y="72" width="568" height="2"/>
-                                        </progressView>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="2" id="ax8-kE-VaX"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="sVB-UA-LXB" firstAttribute="leading" secondItem="NRW-1B-rJI" secondAttribute="leading" constant="16" id="0Uo-ek-D4H"/>
                                         <constraint firstItem="16U-1D-6YL" firstAttribute="top" secondItem="LgD-2L-S91" secondAttribute="bottom" constant="5" id="1lK-yc-mB8"/>
-                                        <constraint firstAttribute="trailing" secondItem="TA2-4D-hfp" secondAttribute="trailing" constant="16" id="3hk-eF-WAo"/>
-                                        <constraint firstItem="TA2-4D-hfp" firstAttribute="top" secondItem="sVB-UA-LXB" secondAttribute="bottom" constant="10" id="Bkl-TM-Lsp"/>
+                                        <constraint firstItem="fKE-mx-wbk" firstAttribute="top" secondItem="sVB-UA-LXB" secondAttribute="bottom" constant="10" id="6bZ-VG-UVE"/>
+                                        <constraint firstAttribute="bottom" secondItem="fKE-mx-wbk" secondAttribute="bottom" constant="16" id="DTS-dM-OB4"/>
                                         <constraint firstAttribute="trailing" secondItem="LgD-2L-S91" secondAttribute="trailing" constant="16" id="Qpw-j5-RfU"/>
-                                        <constraint firstItem="TA2-4D-hfp" firstAttribute="leading" secondItem="NRW-1B-rJI" secondAttribute="leading" constant="16" id="aIO-fJ-iXb"/>
+                                        <constraint firstAttribute="trailing" secondItem="fKE-mx-wbk" secondAttribute="trailing" constant="16" id="V0K-Cp-VQl"/>
                                         <constraint firstAttribute="trailing" secondItem="16U-1D-6YL" secondAttribute="trailing" constant="16" id="fLz-Ar-pCw"/>
+                                        <constraint firstItem="fKE-mx-wbk" firstAttribute="leading" secondItem="NRW-1B-rJI" secondAttribute="leading" constant="16" id="nOq-MK-U4t"/>
                                         <constraint firstItem="NqU-OS-mCJ" firstAttribute="leading" secondItem="NRW-1B-rJI" secondAttribute="leading" constant="16" id="qwX-hx-SGZ"/>
                                         <constraint firstItem="sVB-UA-LXB" firstAttribute="top" secondItem="NqU-OS-mCJ" secondAttribute="bottom" constant="5" id="uQA-0O-jdH"/>
                                         <constraint firstItem="LgD-2L-S91" firstAttribute="top" secondItem="NRW-1B-rJI" secondAttribute="top" constant="16" id="v9w-oZ-uxp"/>
-                                        <constraint firstAttribute="bottom" secondItem="TA2-4D-hfp" secondAttribute="bottom" constant="16" id="xr4-jG-SOg"/>
                                         <constraint firstItem="NqU-OS-mCJ" firstAttribute="top" secondItem="NRW-1B-rJI" secondAttribute="top" constant="16" id="zW6-ao-uo6"/>
                                     </constraints>
                                 </view>
@@ -152,9 +156,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="195"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sCV-QG-Voi">
-                                            <rect key="frame" x="244.5" y="87.5" width="111" height="20.5"/>
+                                            <rect key="frame" x="244" y="87" width="111" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -226,7 +230,7 @@
                 <outlet property="lifetimePointsTitleLabel" destination="LgD-2L-S91" id="Ywm-gU-xX0"/>
                 <outlet property="playsLabel" destination="byb-IT-vJC" id="b5b-TD-fnx"/>
                 <outlet property="playsTitleLabel" destination="SCT-os-1fM" id="8YI-OO-f6e"/>
-                <outlet property="progressView" destination="TA2-4D-hfp" id="CDb-No-rOx"/>
+                <outlet property="progressViewHolder" destination="fKE-mx-wbk" id="e60-dR-4wi"/>
                 <outlet property="shadowView" destination="mhW-yj-jzT" id="Jm6-wg-K0N"/>
             </connections>
             <point key="canvasLocation" x="185" y="-135"/>

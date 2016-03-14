@@ -9,13 +9,15 @@
 #import "CPMainScreenStatsHeaderView.h"
 #import "CPLabelUtils.h"
 #import "CPFirebaseManager.h"
+#import "OJFSegmentedProgressView.h"
 
 @interface CPMainScreenStatsHeaderView ()
 @property (weak, nonatomic) IBOutlet UILabel *kibblesTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *kibblesNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *playsTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *playsNumberLabel;
-@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
+@property (weak, nonatomic) IBOutlet UIView *progressViewHolder;
+@property (strong, nonatomic) OJFSegmentedProgressView *progressView;
 @end
 
 @implementation CPMainScreenStatsHeaderView
@@ -30,8 +32,16 @@
     
     self.imageView.layer.cornerRadius = self.imageView.bounds.size.height / 2;
     self.imageView.clipsToBounds = YES;
-    self.progressView.progressTintColor = [UIColor appTealColor];
-    self.progressView.trackTintColor = [UIColor appDividerColor];
+    
+    self.progressView = [[OJFSegmentedProgressView alloc] initWithNumberOfSegments:1];
+    [self.progressView setFrame:CGRectMake(0, 0, self.progressViewHolder.frame.size.width, self.progressViewHolder.frame.size.height)];
+    [self.progressView setProgressTintColor:[UIColor appTealColor]];
+    [self.progressView setTrackTintColor:[UIColor appDividerColor]];
+    [self.progressView setSegmentSeparatorSize:0.1f];
+    [self.progressView setStyle:OJFSegmentedProgressViewStyleDiscrete];
+    [self.progressViewHolder addSubview:self.progressView];
+    
+    [self.progressView setAutoresizingMask:UIViewContentModeLeft|UIViewContentModeRight];
     
     BLOCK_SELF_REF_OUTSIDE();
     [CPFirebaseManager sharedInstance].headerStatsUpdateBlock = ^(NSError *error, CPPetStats *update) {
@@ -45,11 +55,12 @@
                 [self.playsNumberLabel setText:[update.plays stringValue]];
                 
                 float progress = [update.stageNumber floatValue]/[update.totalStages floatValue];
-                [self.progressView setProgress:progress animated:YES];
+                [self.progressView setNumberOfSegments:[update.totalStages integerValue]];
+                [self.progressView setProgress:progress];
             }   else {
                 [self.kibblesNumberLabel setText:@"0"];
                 [self.playsNumberLabel setText:@"0"];
-                [self.progressView setProgress:0.0f animated:YES];
+                [self.progressView setProgress:0.0f];
             }
         }
     };
