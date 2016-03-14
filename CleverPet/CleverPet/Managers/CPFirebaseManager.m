@@ -58,15 +58,25 @@ NSString * const kFirebaseTilePath = @"tile";
     [self stopListeningForTileUpdates];
 }
 
+- (CPPetStats*)petStats:(NSDictionary*)values
+{
+    CPPetStats *petStats = nil;
+    if (![values isEqual:[NSNull null]]) {
+        NSError *error;
+        petStats = [[CPPetStats alloc] initWithDictionary:values error:&error];
+    }
+    return petStats;
+}
 
  - (void)beginlisteningForUpdates
 {
     FirebaseHandle statsHandle = [[self.rootRef childByAppendingPath:self.userStatsPath] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+		CPPetStats *petStats = [self petStats:snapshot.value];
         if (self.headerStatsUpdateBlock) {
-            self.headerStatsUpdateBlock(nil, snapshot.value);
+            self.headerStatsUpdateBlock(nil, petStats);
         }
         if (self.viewStatsUpdateBlock) {
-            self.viewStatsUpdateBlock(nil, snapshot.value);
+            self.viewStatsUpdateBlock(nil, petStats);
         }
     } withCancelBlock:^(NSError *error) {
         if (self.headerStatsUpdateBlock) {
@@ -86,7 +96,7 @@ NSString * const kFirebaseTilePath = @"tile";
     _viewStatsUpdateBlock = viewStatsUpdateBlock;
     if (viewStatsUpdateBlock) {
         [[self.rootRef childByAppendingPath:self.userStatsPath] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-             viewStatsUpdateBlock(nil, snapshot.value);
+             viewStatsUpdateBlock(nil, [self petStats:snapshot.value]);
         }];
     }
 }
@@ -96,7 +106,7 @@ NSString * const kFirebaseTilePath = @"tile";
     _headerStatsUpdateBlock = headerStatsUpdateBlock;
     if (headerStatsUpdateBlock) {
         [[self.rootRef childByAppendingPath:self.userStatsPath] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            headerStatsUpdateBlock(nil, snapshot.value);
+            headerStatsUpdateBlock(nil, [self petStats:snapshot.value]);
         }];
     }
 }
@@ -116,7 +126,7 @@ NSString * const kFirebaseTilePath = @"tile";
 - (void)listenForTileUpdatesWithBlock:(FirebaseUpdateBlock)block
 {
     self.tilesHandle = [[self.rootRef childByAppendingPath:[NSString stringWithFormat:@"%@/%@", self.userStatsPath, kFirebaseTilePath]] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        block(nil, snapshot.value);
+        block(nil, [self petStats:snapshot.value]);
     }];
     self.hasTilesHandle = YES;
 }

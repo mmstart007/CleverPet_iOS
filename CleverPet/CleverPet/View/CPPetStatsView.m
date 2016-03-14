@@ -63,27 +63,25 @@
     [self.progressView setAutoresizingMask:UIViewContentModeLeft|UIViewContentModeRight];
     
     BLOCK_SELF_REF_OUTSIDE()
-    [CPFirebaseManager sharedInstance].viewStatsUpdateBlock = ^(NSError *error, NSDictionary *update) {
-        BLOCK_SELF_REF_INSIDE();
+    [CPFirebaseManager sharedInstance].viewStatsUpdateBlock = ^(NSError *error, CPPetStats *update) {
+        BLOCK_SELF_REF_INSIDE()
         if (error) {
             [self.errorMessageLabel setText:NSLocalizedString(@"Sorry, there was an issue getting your pet's stats", @"Error message when when stats ")];
             [self.errorView setHidden:NO];
         }else {
             [self.errorView setHidden:YES];
-            if (![update isEqual:[NSNull null]]) {
+            if (update != nil) {
                 [self.challengeNumberLabel setHidden:NO];
                 [self.challengeTitleLabel setHidden:NO];
                 
-                [self.kibblesLabel setText:[[update objectForKey:@"kibbles"] stringValue]];
-                [self.playsLabel setText:[[update objectForKey:@"plays"] stringValue]];
-                [self.challengeTitleLabel setText:[update objectForKey:@"challenge_name"]];
-                [self.challengeNumberLabel setText:[[update objectForKey:@"challenge_number"] stringValue]];
-                [self.lifetimePointsLabel setText:[[update objectForKey:@"lifetime_points"] stringValue]];
-                
-                NSNumber *stage = [update objectForKey:@"stage_number"];
-                NSNumber *totalStages = [update objectForKey:@"total_stages"];
-                float progress = [stage floatValue]/[totalStages floatValue];
-                [self.progressView setNumberOfSegments:[totalStages integerValue]];
+                [self.kibblesLabel setText:[update.kibbles stringValue]];
+                [self.playsLabel setText:[update.plays stringValue]];
+                [self.challengeTitleLabel setText:update.challengeName];
+                [self.challengeNumberLabel setText:[update.challengeNumber stringValue]];
+                [self.lifetimePointsLabel setText:[update.lifetimePoints stringValue]];
+
+				float progress = [update.stageNumber floatValue]/[update.totalStages floatValue];
+                [self.progressView setNumberOfSegments:[update.totalStages integerValue]];
                 [self.progressView setProgress:progress];
             } else {
                 [self.challengeTitleLabel setHidden:YES];

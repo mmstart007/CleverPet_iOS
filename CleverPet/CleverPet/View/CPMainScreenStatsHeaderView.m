@@ -44,20 +44,18 @@
     [self.progressView setAutoresizingMask:UIViewContentModeLeft|UIViewContentModeRight];
     
     BLOCK_SELF_REF_OUTSIDE();
-    [CPFirebaseManager sharedInstance].headerStatsUpdateBlock = ^(NSError *error, NSDictionary *update) {
+    [CPFirebaseManager sharedInstance].headerStatsUpdateBlock = ^(NSError *error, CPPetStats *update) {
         BLOCK_SELF_REF_INSIDE()
         if(error) {
             [self setHidden:YES];
         }else {
             [self setHidden:NO];
-            if (![update isEqual:[NSNull null]]) {
-                [self.kibblesNumberLabel setText:[[update objectForKey:@"kibbles"] stringValue]];
-                [self.playsNumberLabel setText:[[update objectForKey:@"plays"] stringValue]];
+            if (update != nil) {
+                [self.kibblesNumberLabel setText:[update.kibbles stringValue]];
+                [self.playsNumberLabel setText:[update.plays stringValue]];
                 
-                NSNumber *stage = [update objectForKey:@"stage_number"];
-                NSNumber *totalStages = [update objectForKey:@"total_stages"];
-                float progress = [stage floatValue]/[totalStages floatValue];
-                [self.progressView setNumberOfSegments:[totalStages integerValue]];
+                float progress = [update.stageNumber floatValue]/[update.totalStages floatValue];
+                [self.progressView setNumberOfSegments:[update.totalStages integerValue]];
                 [self.progressView setProgress:progress];
             }   else {
                 [self.kibblesNumberLabel setText:@"0"];
