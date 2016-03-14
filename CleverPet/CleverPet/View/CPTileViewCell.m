@@ -9,6 +9,7 @@
 #import "UIView+CPShadowEffect.h"
 #import "CPTileCommunicationManager.h"
 #import "CPUserManager.h"
+#import "CPReportGraphHolder.h"
 
 @interface CPTileViewCell ()
 @property (weak, nonatomic) IBOutlet UIStackView *messageTileContentView;
@@ -36,6 +37,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *videoLayoutTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *videoLayoutImageView;
 
+@property (weak, nonatomic) IBOutlet CPReportGraphHolder *reportContentView;
+
 @property (strong, nonatomic) NSMutableArray<UISwipeGestureRecognizer *> *swipeGestureRecognizers;
 
 @end
@@ -46,30 +49,37 @@
 - (void)setTile:(CPTile *)tile {
     _tile = tile;
     
+    self.reportContentView.graph = nil;
+    
     self.titleLabel.hidden = !tile.title;
     // TODO: pass in pet
     CPPet *pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
     self.titleLabel.text = [[CPTileTextFormatter instance] filterString:tile.title forPet:pet name:YES gender:YES];
     
-    self.messageTileContentView.hidden = tile.templateType == CPTileTemplateVideo;
+    self.messageTileContentView.hidden = tile.templateType != CPTileTemplateMessage;
     self.videoLayoutImageView.hidden = tile.templateType != CPTileTemplateVideo;
+    self.reportContentView.hidden = tile.templateType != CPTileTemplateReport;
+    
+    self.videoLayoutTextView.attributedText = nil;
+    self.bodyTextView.attributedText = nil;
+    self.videoLayoutImageView.image = nil;
+    self.cellImageView.image = nil;
+    self.cellImageViewHolder.hidden = YES;
+    self.videoImageContainer.hidden = YES;
+    [self.cellImageView cancelImageDownloadTask];
+    [self.videoLayoutImageView cancelImageDownloadTask];
     
     if (tile.templateType == CPTileTemplateVideo) {
         self.videoLayoutTextView.attributedText = tile.parsedBody;
-        self.bodyTextView.attributedText = nil;
         [self.videoLayoutImageView setImageWithURL:tile.videoThumbnailUrl];
-        [self.cellImageView cancelImageDownloadTask];
-        self.cellImageView.image = nil;
-        self.cellImageViewHolder.hidden = YES;
         self.videoImageContainer.hidden = NO;
-    } else {
+    } else if (tile.templateType == CPTileTemplateMessage) {
         self.bodyTextView.attributedText = tile.parsedBody;
-        self.videoLayoutTextView.attributedText = nil;
         self.cellImageViewHolder.hidden = !tile.imageUrl;
         [self.cellImageView setImageWithURL:tile.imageUrl];
         [self.videoLayoutImageView cancelImageDownloadTask];
-        self.videoLayoutImageView.image = nil;
-        self.videoImageContainer.hidden = YES;
+    } else if (tile.templateType == CPTileTemplateReport) {
+        self.reportContentView.graph = tile.graph;
     }
     // TODO: report template
     
@@ -92,8 +102,8 @@
             tileLightColor = [UIColor appLightTealColor];
             break;
         case CPTTReport:
-            tileColor = [UIColor appRedColor];
-            tileLightColor = [UIColor appLightRedColor];
+            tileColor = [UIColor appOrangeColor];
+            tileLightColor = [UIColor appLightOrangeColor];
             break;
         case CPTTChallenge:
             tileColor = [UIColor appTealColor];
@@ -222,7 +232,6 @@
     self.bodyTextView.attributedText = nil;
     self.videoLayoutImageView.image = nil;
     self.videoLayoutTextView.attributedText = nil;
-    
     
     [self setSwipedMode:NO withAnimation:NO callDelegateMethod:NO];
     // TODO: cancel request response block somehow. Maybe mark request in progress on the tile so we have the correct state when scrolling back to a tile if the request takes a long time?

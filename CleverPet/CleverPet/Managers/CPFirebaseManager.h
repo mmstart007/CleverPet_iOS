@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void(^FirebaseUpdateBlock)(NSError*, NSDictionary*);
+typedef void(^FirebaseLoginBlock)(NSError *);
 
 @interface CPFirebaseManager : NSObject
 
@@ -18,7 +19,7 @@ typedef void(^FirebaseUpdateBlock)(NSError*, NSDictionary*);
 + (instancetype)sharedInstance;
 
 - (void)applyConfig:(NSDictionary *)configData;
-- (void)userLoggedIn:(NSDictionary *)response;
+- (void)userLoggedIn:(NSDictionary *)response withCompletion:(FirebaseLoginBlock)completion;
 // TODO: rename to stats
 - (void)beginlisteningForUpdates;
 - (void)stoplisteningForStatsUpdates;

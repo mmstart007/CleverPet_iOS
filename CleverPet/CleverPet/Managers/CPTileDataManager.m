@@ -10,6 +10,7 @@
 #import "CPSimpleDate.h"
 #import "CPTile.h"
 #import "CPTileCommunicationManager.h"
+#import "CPGraph.h"
 
 @interface CPTileDataManager ()
 
@@ -182,6 +183,61 @@
                 for (CPTile *tile in tiles) {
                     [indexes addIndexes:[self addTile:tile]];
                 }
+                
+                for (NSUInteger i = 0; i < 10; i++) {
+                    CPTile *reportTile = [[CPTile alloc] init];
+                    reportTile.category = @"report";
+                    reportTile.template = @"report";
+                    reportTile.date = [NSDate date];
+                    CPGraph *graph = [[CPGraph alloc] init];
+                    
+                    NSArray *colors = @[
+                                        @"red",
+                                        @"teal",
+                                        @"yellow",
+                                        @"green",
+                                        @"orange"
+                                        ];
+                    
+                    NSArray *seriesNames = @[
+                                             @"Wins",
+                                             @"Plays",
+                                             @"Losses",
+                                             @"Levels",
+                                             @"Cats"
+                                             ];
+                    
+                    NSMutableArray *series = [[NSMutableArray alloc] init];
+                    for (NSUInteger j = 0; j < colors.count; j++) {
+                        CPGraphSeries *graphSeries = [[CPGraphSeries alloc] init];
+                        graphSeries.color = colors[j];
+                        
+                        NSMutableArray *dataPoints = [[NSMutableArray alloc] init];
+                        for (double point = 0; point < 7; point++) {
+                            [dataPoints addObject:@(sin(M_PI / 6 * point) + 1)];
+                        }
+                        
+                        graphSeries.data = dataPoints;
+                        graphSeries.name = seriesNames[j];
+                        [series addObject:graphSeries];
+                    }
+                    graph.series = [series copy];
+                    graph.yMax = @(2*series.count);
+                    graph.xAxisLabels = @[@"MON", @"TUE", @"WED", @"THUR", @"FRI"];
+                    graph.xAxisTicks = @[@1, @2, @3, @4, @5];
+                    graph.yAxisLabels = @[@"1", @"2", @"3"];
+                    graph.yAxisTicks = @[@1, @2, @3];
+                    graph.graphTitle = @"My Graph";
+                    graph.aspectRatio = @1;
+                    
+                    reportTile.graph = graph;
+                    
+                    [indexes addIndexes:[self addTile:reportTile]];
+                    
+                    NSString *jsonObject = [graph toJSONString];
+                    NSLog(@"%@", jsonObject);
+                }
+                
                 // Hold onto our paging cursor for future use
                 self.cursor = [tileInfo[kCursorKey] isKindOfClass:[NSNull class]] ? nil : tileInfo[kCursorKey];
                 self.moreTiles = [tileInfo[kMoreKey] boolValue];

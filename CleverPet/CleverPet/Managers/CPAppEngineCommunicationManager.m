@@ -86,10 +86,15 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             // Check for required auth tokens
             // TODO: bring back particle and firebase auth
             if (jsonResponse[kAuthTokenKey] && jsonResponse[kParticleAuthKey]) {
-                [self setAuthToken:jsonResponse[kAuthTokenKey]];
-                [[CPUserManager sharedInstance] userLoggedIn:jsonResponse];
-                [[CPFirebaseManager sharedInstance] userLoggedIn:jsonResponse];
-                [self userLoggedIn:jsonResponse completion:completion];
+                [[CPFirebaseManager sharedInstance] userLoggedIn:jsonResponse withCompletion:^(NSError *error) {
+                    if (!error) {
+                        [self setAuthToken:jsonResponse[kAuthTokenKey]];
+                        [[CPUserManager sharedInstance] userLoggedIn:jsonResponse];
+                        [self userLoggedIn:jsonResponse completion:completion];
+                    } else if (completion) {
+                        completion(CPLoginResult_Failure, error);
+                    }
+                }];
             } else {
                 // TODO: update message with specific token missing
                 if (completion) completion(CPLoginResult_Failure, [self errorForMessage:NSLocalizedString(@"Missing auth token", nil)]);
@@ -129,22 +134,22 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (!currentUser.pet) {
                 result = CPLoginResult_UserWithoutPetProfile;
             } else if (!currentUser.device) {
-                result = CPLoginResult_UserWithoutDevice;
+//                result = CPLoginResult_UserWithoutDevice;
             } else if (!currentUser.device.particleId) {
-                result = CPLoginResult_UserWithoutParticle;
+//                result = CPLoginResult_UserWithoutParticle;
             }
             
-            if ((currentUser.device && currentUser.device.particleId) && (!currentUser.device.weekdaySchedule || !currentUser.device.weekendSchedule)) {
-                [self lookupDeviceSchedules:currentUser.device.deviceId completion:^(NSError *error) {
-                    if (error) {
-                        if (completion) completion(CPLoginResult_Failure, error);
-                    } else {
-                        if (completion) completion(result, nil);
-                    }
-                }];
-            } else {
+//            if ((currentUser.device && currentUser.device.particleId) && (!currentUser.device.weekdaySchedule || !currentUser.device.weekendSchedule)) {
+//                [self lookupDeviceSchedules:currentUser.device.deviceId completion:^(NSError *error) {
+//                    if (error) {
+//                        if (completion) completion(CPLoginResult_Failure, error);
+//                    } else {
+//                        if (completion) completion(result, nil);
+//                    }
+//                }];
+//            } else {
                 if (completion) completion(result, nil);
-            }
+//            }
         }
     };
     

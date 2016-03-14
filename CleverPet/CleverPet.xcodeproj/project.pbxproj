@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D159F371C937F68001BB12D /* CPReportGraphHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D159F361C937F68001BB12D /* CPReportGraphHolder.m */; };
+		0D159F391C938014001BB12D /* CPReportGraphHolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D159F381C938014001BB12D /* CPReportGraphHolder.xib */; };
 		0D1F1C561C7E228900EAF336 /* CPPetStatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F1C551C7E228900EAF336 /* CPPetStatsView.m */; };
 		0D1F1C581C7E229500EAF336 /* CPPetStatsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D1F1C571C7E229500EAF336 /* CPPetStatsView.xib */; };
 		0D36AA881C7243D600349D03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D36AA871C7243D600349D03 /* main.m */; };
@@ -14,6 +16,7 @@
 		0D36AA8E1C7243D600349D03 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D36AA8D1C7243D600349D03 /* ViewController.m */; };
 		0D36AA911C7243D600349D03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA8F1C7243D600349D03 /* Main.storyboard */; };
 		0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA921C7243D600349D03 /* Assets.xcassets */; };
+		0D535F271C93A91F003B4CF8 /* CPChartRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D535F261C93A91F003B4CF8 /* CPChartRenderer.m */; };
 		0D6512AA1C8678BA0086D593 /* CPMainTableDateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6512A81C8678BA0086D593 /* CPMainTableDateHeader.m */; };
 		0D6512AB1C8678BA0086D593 /* CPMainTableDateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D6512A91C8678BA0086D593 /* CPMainTableDateHeader.xib */; };
 		0D8AC9871C7CEACD0096F339 /* CPTileTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AC9861C7CEACD0096F339 /* CPTileTextFormatter.m */; };
@@ -108,6 +111,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D159F351C937F68001BB12D /* CPReportGraphHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPReportGraphHolder.h; sourceTree = "<group>"; };
+		0D159F361C937F68001BB12D /* CPReportGraphHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPReportGraphHolder.m; sourceTree = "<group>"; };
+		0D159F381C938014001BB12D /* CPReportGraphHolder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPReportGraphHolder.xib; sourceTree = "<group>"; };
 		0D1F1C541C7E228900EAF336 /* CPPetStatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetStatsView.h; sourceTree = "<group>"; };
 		0D1F1C551C7E228900EAF336 /* CPPetStatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetStatsView.m; sourceTree = "<group>"; };
 		0D1F1C571C7E229500EAF336 /* CPPetStatsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPPetStatsView.xib; sourceTree = "<group>"; };
@@ -120,6 +126,8 @@
 		0D36AA901C7243D600349D03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0D36AA921C7243D600349D03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D36AA971C7243D600349D03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D535F251C93A91F003B4CF8 /* CPChartRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPChartRenderer.h; sourceTree = "<group>"; };
+		0D535F261C93A91F003B4CF8 /* CPChartRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPChartRenderer.m; sourceTree = "<group>"; };
 		0D6512A71C8678BA0086D593 /* CPMainTableDateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainTableDateHeader.h; sourceTree = "<group>"; };
 		0D6512A81C8678BA0086D593 /* CPMainTableDateHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainTableDateHeader.m; sourceTree = "<group>"; };
 		0D6512A91C8678BA0086D593 /* CPMainTableDateHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPMainTableDateHeader.xib; sourceTree = "<group>"; };
@@ -487,6 +495,8 @@
 				51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */,
 				971D337A1C937208000A0DD6 /* CPTileUpdateListener.h */,
 				971D337B1C937208000A0DD6 /* CPTileUpdateListener.m */,
+				0D535F251C93A91F003B4CF8 /* CPChartRenderer.h */,
+				0D535F261C93A91F003B4CF8 /* CPChartRenderer.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -584,6 +594,9 @@
 				0D6512A91C8678BA0086D593 /* CPMainTableDateHeader.xib */,
 				1827A722B7D6084A2F1E3D1F /* CPMainTableSectionHeaderFilter.m */,
 				1827ABBC45661B9B8347A62B /* CPMainTableSectionHeaderFilter.h */,
+				0D159F351C937F68001BB12D /* CPReportGraphHolder.h */,
+				0D159F361C937F68001BB12D /* CPReportGraphHolder.m */,
+				0D159F381C938014001BB12D /* CPReportGraphHolder.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -632,7 +645,7 @@
 				TargetAttributes = {
 					0D36AA821C7243D600349D03 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 8TD89Q5H39;
+						DevelopmentTeam = KW37C7GFUP;
 					};
 				};
 			};
@@ -671,6 +684,7 @@
 				979D84691C84FAF200ADB6B0 /* Raleway-ExtraBold.ttf in Resources */,
 				979D84651C84FAF200ADB6B0 /* Raleway-Black.ttf in Resources */,
 				97CC445E1C7552C3003C4258 /* CPSimpleTableViewCell.xib in Resources */,
+				0D159F391C938014001BB12D /* CPReportGraphHolder.xib in Resources */,
 				979D84731C84FAF200ADB6B0 /* Raleway-SemiBold.ttf in Resources */,
 				979D84661C84FAF200ADB6B0 /* Raleway-BlackItalic.ttf in Resources */,
 				979D84751C84FAF200ADB6B0 /* Raleway-Thin.ttf in Resources */,
@@ -763,6 +777,7 @@
 				9704E2FE1C7D2799004874A7 /* CPSharedUtils.m in Sources */,
 				97CC44821C77CA30003C4258 /* CPHubSettingsButton.m in Sources */,
 				979D84491C7FB79400ADB6B0 /* CPUser.m in Sources */,
+				0D535F271C93A91F003B4CF8 /* CPChartRenderer.m in Sources */,
 				0DE13B401C7E9A6A00648834 /* UIView+CPShadowEffect.m in Sources */,
 				97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */,
 				0D36AA8B1C7243D600349D03 /* AppDelegate.m in Sources */,
@@ -798,6 +813,7 @@
 				971D63011C863D0A006C9F80 /* CPConfigViewController.m in Sources */,
 				1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */,
 				97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */,
+				0D159F371C937F68001BB12D /* CPReportGraphHolder.m in Sources */,
 				0DE13B451C7E9CB100648834 /* CPMainTableSectionHeader.m in Sources */,
 				971D337C1C937208000A0DD6 /* CPTileUpdateListener.m in Sources */,
 				979D84431C7FA50700ADB6B0 /* CPFileUtils.m in Sources */,
