@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/Comm/SparkSetupSecurityManager.h
+../../../../SparkSetup_Internal/Classes/Comm/SparkSetupSecurityManager.h

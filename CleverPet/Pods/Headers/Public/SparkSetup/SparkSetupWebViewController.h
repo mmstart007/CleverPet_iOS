@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/UI/SparkSetupWebViewController.h
+../../../../SparkSetup_Internal/Classes/UI/SparkSetupWebViewController.h

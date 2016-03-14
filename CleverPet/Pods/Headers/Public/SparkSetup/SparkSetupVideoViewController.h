@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/UI/SparkSetupVideoViewController.h
+../../../../SparkSetup_Internal/Classes/UI/SparkSetupVideoViewController.h

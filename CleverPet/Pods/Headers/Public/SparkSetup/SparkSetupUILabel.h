@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/UI/UI Elements/SparkSetupUILabel.h
+../../../../SparkSetup_Internal/Classes/UI/UI Elements/SparkSetupUILabel.h
