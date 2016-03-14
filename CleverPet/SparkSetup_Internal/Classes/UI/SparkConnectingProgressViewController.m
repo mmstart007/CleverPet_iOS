@@ -69,6 +69,7 @@ typedef NS_ENUM(NSInteger, SparkSetupConnectionProgressState) {
 @property (strong, nonatomic) IBOutletCollection(SparkConnectingProgressView) NSArray *progressViews;
 
 @property (weak, nonatomic) IBOutlet UIImageView *wifiSymbolImageView;
+@property (nonatomic, assign) BOOL isLeaving;
 @end
 
 @implementation SparkConnectingProgressViewController
@@ -224,11 +225,14 @@ typedef NS_ENUM(NSInteger, SparkSetupConnectionProgressState) {
 
 -(void)finishSetupWithResult:(SparkSetupResult)result
 {
-    self.setupResult = result;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self performSegueWithIdentifier:@"done" sender:self];
-    });
+    if (!self.isLeaving) {
+        self.isLeaving = YES;
+        self.setupResult = result;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1.5 * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self performSegueWithIdentifier:@"done" sender:self];
+        });
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
