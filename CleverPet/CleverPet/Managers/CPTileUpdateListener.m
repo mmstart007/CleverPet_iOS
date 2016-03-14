@@ -23,7 +23,7 @@
     self = [super init];
     if (self) {
         BLOCK_SELF_REF_OUTSIDE();
-        [[CPFirebaseManager sharedInstance] listenForTileUpdatesWithBlock:^(NSError *error, NSDictionary *tileValue) {
+        [[CPFirebaseManager sharedInstance] listenForTileUpdatesWithBlock:^(NSError *error, CPPetStats *tileValue) {
             BLOCK_SELF_REF_INSIDE();
             [self.delegate queueTileUpdate];
         }];
