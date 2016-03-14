@@ -28,10 +28,10 @@
     
     if (graph) {
         self.graphViewAspectRatioConstraint = [NSLayoutConstraint constraintWithItem:self.graphView
-                                                                           attribute:NSLayoutAttributeWidth
+                                                                           attribute:NSLayoutAttributeHeight
                                                                            relatedBy:NSLayoutRelationEqual
                                                                               toItem:self.graphView
-                                                                           attribute:NSLayoutAttributeHeight
+                                                                           attribute:NSLayoutAttributeWidth
                                                                           multiplier:graph.aspectRatio.doubleValue
                                                                             constant:0];
         [self.graphView addConstraint:self.graphViewAspectRatioConstraint];
