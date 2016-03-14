@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger){
     CPTileTemplateReport
 }CPTileTemplate;
 
+@class CPGraph;
 @interface CPTile : JSONModel
 // Persisted properties
 @property (nonatomic, strong) NSString *category;
@@ -51,6 +52,8 @@ typedef NS_ENUM(NSUInteger){
 @property (strong, nonatomic) CPSimpleDate<Ignore> *simpleDate;
 
 @property (assign, nonatomic) CGFloat cachedRowHeight;
+
+@property (strong, nonatomic) CPGraph<Optional> *graph;
 
 +(void)setTimeZoneOffset:(NSInteger)offset;
 @end

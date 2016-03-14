@@ -10,6 +10,7 @@
 #import "CPSimpleDate.h"
 #import "CPTile.h"
 #import "CPTileCommunicationManager.h"
+#import "CPGraph.h"
 
 @interface CPTileDataManager ()
 
@@ -182,6 +183,7 @@
                 for (CPTile *tile in tiles) {
                     [indexes addIndexes:[self addTile:tile]];
                 }
+                
                 // Hold onto our paging cursor for future use
                 self.cursor = [tileInfo[kCursorKey] isKindOfClass:[NSNull class]] ? nil : tileInfo[kCursorKey];
                 self.moreTiles = [tileInfo[kMoreKey] boolValue];

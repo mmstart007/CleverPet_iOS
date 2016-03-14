@@ -40,13 +40,17 @@ NSString * const kFirebaseTilePath = @"tile";
     self.rootRef = [[Firebase alloc] initWithUrl:[configData objectForKey:@"firebase_url"]];
 }
 
-- (void)userLoggedIn:(NSDictionary *)response
+- (void)userLoggedIn:(NSDictionary *)response withCompletion:(FirebaseLoginBlock)completion
 {
     [self.rootRef authWithCustomToken:[response objectForKey:@"firebase_token"] withCompletionBlock:^(NSError *error, FAuthData *authData) {
         if (error) {
             NSLog(@"Login Failed! %@", error);
         } else {
             self.userStatsPath = [NSString stringWithFormat:@"stats/%@", authData.uid];
+        }
+        
+        if (completion) {
+            completion(error);
         }
     }];
 }
