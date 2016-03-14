@@ -126,7 +126,7 @@ NSString * const kFirebaseTilePath = @"tile";
 - (void)listenForTileUpdatesWithBlock:(FirebaseUpdateBlock)block
 {
     self.tilesHandle = [[self.rootRef childByAppendingPath:[NSString stringWithFormat:@"%@/%@", self.userStatsPath, kFirebaseTilePath]] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        block(nil, snapshot.value);
+        block(nil, [self petStats:snapshot.value]);
     }];
     self.hasTilesHandle = YES;
 }

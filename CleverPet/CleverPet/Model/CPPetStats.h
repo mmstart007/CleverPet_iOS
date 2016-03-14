@@ -10,6 +10,7 @@
 
 @interface CPPetStats : JSONModel
 
+@property (nonatomic, strong) NSString *tile;
 @property (nonatomic, strong) NSString *challengeName;
 @property (nonatomic, strong) NSNumber *challengeNumber;
 @property (nonatomic, strong) NSNumber *lifetimePoints;
