@@ -31,6 +31,8 @@
 @property (strong, nonatomic) NSArray<NSString *> <Optional> *yAxisLabels;
 @property (strong, nonatomic) NSArray<NSNumber *> <Optional> *yAxisTicks;
 
+@property (strong, nonatomic) NSNumber<Optional> *hasLegend;
+
 @property (strong, nonatomic) NSString *graphTitle;
 @property (strong, nonatomic) NSNumber *yMax;
 
