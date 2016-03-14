@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D159F371C937F68001BB12D /* CPReportGraphHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D159F361C937F68001BB12D /* CPReportGraphHolder.m */; };
+		0D159F391C938014001BB12D /* CPReportGraphHolder.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D159F381C938014001BB12D /* CPReportGraphHolder.xib */; };
 		0D1F1C561C7E228900EAF336 /* CPPetStatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D1F1C551C7E228900EAF336 /* CPPetStatsView.m */; };
 		0D1F1C581C7E229500EAF336 /* CPPetStatsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D1F1C571C7E229500EAF336 /* CPPetStatsView.xib */; };
 		0D36AA881C7243D600349D03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D36AA871C7243D600349D03 /* main.m */; };
@@ -14,10 +16,13 @@
 		0D36AA8E1C7243D600349D03 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D36AA8D1C7243D600349D03 /* ViewController.m */; };
 		0D36AA911C7243D600349D03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA8F1C7243D600349D03 /* Main.storyboard */; };
 		0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D36AA921C7243D600349D03 /* Assets.xcassets */; };
+		0D535F271C93A91F003B4CF8 /* CPChartRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D535F261C93A91F003B4CF8 /* CPChartRenderer.m */; };
 		0D6512AA1C8678BA0086D593 /* CPMainTableDateHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D6512A81C8678BA0086D593 /* CPMainTableDateHeader.m */; };
 		0D6512AB1C8678BA0086D593 /* CPMainTableDateHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0D6512A91C8678BA0086D593 /* CPMainTableDateHeader.xib */; };
 		0D8AC9871C7CEACD0096F339 /* CPTileTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D8AC9861C7CEACD0096F339 /* CPTileTextFormatter.m */; };
 		0DD4BD311C739426006B3725 /* CPTileViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DD4BD301C739426006B3725 /* CPTileViewCell.xib */; };
+		0DDF53F91C910CC80048FF6F /* CPGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DDF53F81C910CC80048FF6F /* CPGraph.m */; };
+		0DDF53FD1C910F970048FF6F /* CPGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DDF53FC1C910F970048FF6F /* CPGraphView.m */; };
 		0DE13B401C7E9A6A00648834 /* UIView+CPShadowEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B3F1C7E9A6A00648834 /* UIView+CPShadowEffect.m */; };
 		0DE13B421C7E9CA300648834 /* CPMainTableSectionHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DE13B411C7E9CA300648834 /* CPMainTableSectionHeader.xib */; };
 		0DE13B451C7E9CB100648834 /* CPMainTableSectionHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE13B441C7E9CB100648834 /* CPMainTableSectionHeader.m */; };
@@ -107,6 +112,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D159F351C937F68001BB12D /* CPReportGraphHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPReportGraphHolder.h; sourceTree = "<group>"; };
+		0D159F361C937F68001BB12D /* CPReportGraphHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPReportGraphHolder.m; sourceTree = "<group>"; };
+		0D159F381C938014001BB12D /* CPReportGraphHolder.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPReportGraphHolder.xib; sourceTree = "<group>"; };
 		0D1F1C541C7E228900EAF336 /* CPPetStatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetStatsView.h; sourceTree = "<group>"; };
 		0D1F1C551C7E228900EAF336 /* CPPetStatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetStatsView.m; sourceTree = "<group>"; };
 		0D1F1C571C7E229500EAF336 /* CPPetStatsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPPetStatsView.xib; sourceTree = "<group>"; };
@@ -119,12 +127,18 @@
 		0D36AA901C7243D600349D03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0D36AA921C7243D600349D03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D36AA971C7243D600349D03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0D535F251C93A91F003B4CF8 /* CPChartRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPChartRenderer.h; sourceTree = "<group>"; };
+		0D535F261C93A91F003B4CF8 /* CPChartRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPChartRenderer.m; sourceTree = "<group>"; };
 		0D6512A71C8678BA0086D593 /* CPMainTableDateHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainTableDateHeader.h; sourceTree = "<group>"; };
 		0D6512A81C8678BA0086D593 /* CPMainTableDateHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPMainTableDateHeader.m; sourceTree = "<group>"; };
 		0D6512A91C8678BA0086D593 /* CPMainTableDateHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPMainTableDateHeader.xib; sourceTree = "<group>"; };
 		0D8AC9851C7CEACD0096F339 /* CPTileTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileTextFormatter.h; sourceTree = "<group>"; };
 		0D8AC9861C7CEACD0096F339 /* CPTileTextFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileTextFormatter.m; sourceTree = "<group>"; };
 		0DD4BD301C739426006B3725 /* CPTileViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPTileViewCell.xib; sourceTree = "<group>"; };
+		0DDF53F71C910CC80048FF6F /* CPGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGraph.h; sourceTree = "<group>"; };
+		0DDF53F81C910CC80048FF6F /* CPGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGraph.m; sourceTree = "<group>"; };
+		0DDF53FB1C910F970048FF6F /* CPGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGraphView.h; sourceTree = "<group>"; };
+		0DDF53FC1C910F970048FF6F /* CPGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGraphView.m; sourceTree = "<group>"; };
 		0DE13B3E1C7E9A6A00648834 /* UIView+CPShadowEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CPShadowEffect.h"; sourceTree = "<group>"; };
 		0DE13B3F1C7E9A6A00648834 /* UIView+CPShadowEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CPShadowEffect.m"; sourceTree = "<group>"; };
 		0DE13B411C7E9CA300648834 /* CPMainTableSectionHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPMainTableSectionHeader.xib; sourceTree = "<group>"; };
@@ -307,6 +321,7 @@
 		0D36AA851C7243D600349D03 /* CleverPet */ = {
 			isa = PBXGroup;
 			children = (
+				0DDF53FA1C910F730048FF6F /* Graph */,
 				97CC44661C7669B3003C4258 /* Settings */,
 				97CC44541C754B67003C4258 /* Resources */,
 				97EB7AE81C73B833007F1383 /* Util */,
@@ -339,6 +354,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0DDF53FA1C910F730048FF6F /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				0DDF53FB1C910F970048FF6F /* CPGraphView.h */,
+				0DDF53FC1C910F970048FF6F /* CPGraphView.m */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
 		1827A33D9223DD88F1F07633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +382,8 @@
 				971D63091C88B0A7006C9F80 /* CPDevice.m */,
 				971D630A1C88B0A7006C9F80 /* CPDeviceSchedule.h */,
 				971D630B1C88B0A7006C9F80 /* CPDeviceSchedule.m */,
+				0DDF53F71C910CC80048FF6F /* CPGraph.h */,
+				0DDF53F81C910CC80048FF6F /* CPGraph.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -474,6 +500,8 @@
 				51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */,
 				971D337A1C937208000A0DD6 /* CPTileUpdateListener.h */,
 				971D337B1C937208000A0DD6 /* CPTileUpdateListener.m */,
+				0D535F251C93A91F003B4CF8 /* CPChartRenderer.h */,
+				0D535F261C93A91F003B4CF8 /* CPChartRenderer.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -571,6 +599,9 @@
 				0D6512A91C8678BA0086D593 /* CPMainTableDateHeader.xib */,
 				1827A722B7D6084A2F1E3D1F /* CPMainTableSectionHeaderFilter.m */,
 				1827ABBC45661B9B8347A62B /* CPMainTableSectionHeaderFilter.h */,
+				0D159F351C937F68001BB12D /* CPReportGraphHolder.h */,
+				0D159F361C937F68001BB12D /* CPReportGraphHolder.m */,
+				0D159F381C938014001BB12D /* CPReportGraphHolder.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -620,7 +651,7 @@
 				TargetAttributes = {
 					0D36AA821C7243D600349D03 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 8TD89Q5H39;
+						DevelopmentTeam = KW37C7GFUP;
 					};
 				};
 			};
@@ -659,6 +690,7 @@
 				979D84691C84FAF200ADB6B0 /* Raleway-ExtraBold.ttf in Resources */,
 				979D84651C84FAF200ADB6B0 /* Raleway-Black.ttf in Resources */,
 				97CC445E1C7552C3003C4258 /* CPSimpleTableViewCell.xib in Resources */,
+				0D159F391C938014001BB12D /* CPReportGraphHolder.xib in Resources */,
 				979D84731C84FAF200ADB6B0 /* Raleway-SemiBold.ttf in Resources */,
 				979D84661C84FAF200ADB6B0 /* Raleway-BlackItalic.ttf in Resources */,
 				979D84751C84FAF200ADB6B0 /* Raleway-Thin.ttf in Resources */,
@@ -764,6 +796,7 @@
 				9704E2FE1C7D2799004874A7 /* CPSharedUtils.m in Sources */,
 				97CC44821C77CA30003C4258 /* CPHubSettingsButton.m in Sources */,
 				979D84491C7FB79400ADB6B0 /* CPUser.m in Sources */,
+				0D535F271C93A91F003B4CF8 /* CPChartRenderer.m in Sources */,
 				0DE13B401C7E9A6A00648834 /* UIView+CPShadowEffect.m in Sources */,
 				97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */,
 				0D36AA8B1C7243D600349D03 /* AppDelegate.m in Sources */,
@@ -777,6 +810,7 @@
 				97CC445D1C7552C3003C4258 /* CPSimpleTableViewCell.m in Sources */,
 				9704E3071C7D34BD004874A7 /* CPPetPhotoViewController.m in Sources */,
 				971D630C1C88B0A7006C9F80 /* CPDevice.m in Sources */,
+				0DDF53F91C910CC80048FF6F /* CPGraph.m in Sources */,
 				97CC44721C7699C7003C4258 /* CPFAQView.m in Sources */,
 				97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */,
 				5141E9891C936BB800D72DC8 /* CPPetStats.m in Sources */,
@@ -799,6 +833,7 @@
 				971D63011C863D0A006C9F80 /* CPConfigViewController.m in Sources */,
 				1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */,
 				97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */,
+				0D159F371C937F68001BB12D /* CPReportGraphHolder.m in Sources */,
 				0DE13B451C7E9CB100648834 /* CPMainTableSectionHeader.m in Sources */,
 				971D337C1C937208000A0DD6 /* CPTileUpdateListener.m in Sources */,
 				979D84431C7FA50700ADB6B0 /* CPFileUtils.m in Sources */,
@@ -806,6 +841,7 @@
 				97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */,
 				9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */,
 				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
+				0DDF53FD1C910F970048FF6F /* CPGraphView.m in Sources */,
 				0D6512AA1C8678BA0086D593 /* CPMainTableDateHeader.m in Sources */,
 				0D8AC9871C7CEACD0096F339 /* CPTileTextFormatter.m in Sources */,
 				97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */,
