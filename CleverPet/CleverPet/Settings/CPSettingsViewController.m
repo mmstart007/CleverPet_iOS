@@ -12,6 +12,8 @@
 #import "CPUserManager.h"
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import "CPHubSettingsViewController.h"
+#import "CPHubPlaceholderViewController.h"
+#import "CPParticleConnectionHelper.h"
 
 NSUInteger const kDeviceSection = 0;
 NSUInteger const kHelpSection = 1;
@@ -19,6 +21,7 @@ NSUInteger const kAccountSection = 2;
 
 NSUInteger const kHelpSectionChatWithUsRow = 0;
 NSUInteger const kDeviceSectionHubSettingsRow = 0;
+NSUInteger const kDeviceSectionHubSetupRow = 1;
 
 NSInteger const kLastSeenThreshhold = 120;
 
@@ -39,12 +42,13 @@ NSInteger const kLastSeenThreshhold = 120;
 
 @end
 
-@interface CPSettingsViewController ()
+@interface CPSettingsViewController ()<CPHubPlaceholderDelegate, CPParticleConnectionDelegate>
 
 @property (weak, nonatomic) IBOutlet CPSettingsHubStatusCell *hubCell;
 @property (weak, nonatomic) UIBarButtonItem *pseudoBackButton;
 @property (nonatomic, assign) BOOL checkingHubStatus;
 @property (nonatomic, assign) HubConnectionState connectionState;
+@property (nonatomic, strong) CPHubPlaceholderViewController *hubPlaceholder;
 
 @end
 
@@ -117,7 +121,7 @@ NSInteger const kLastSeenThreshhold = 120;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // TODO: check hub state
-    if (section == kHelpSection && YES) {
+    if ((section == kHelpSection && YES) || section == kDeviceSection) {
         return 2;
     }
     
@@ -172,7 +176,6 @@ NSInteger const kLastSeenThreshhold = 120;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     // TODO: Check hub status
     if (indexPath.section == kHelpSection && NO) {
         // Offset our index path to account for the hidden chat with us cell
@@ -190,11 +193,55 @@ NSInteger const kLastSeenThreshhold = 120;
     
     if (indexPath.section == kHelpSection && indexPath.row == kHelpSectionChatWithUsRow) {
         [Intercom presentConversationList];
-    } else if (indexPath.section == kDeviceSection && indexPath.row == kDeviceSectionHubSettingsRow) {
-        if (self.connectionState != HubConnectionState_Unknown) {
+    } else if (indexPath.section == kDeviceSection) {
+        if (indexPath.row == kDeviceSectionHubSettingsRow && self.connectionState != HubConnectionState_Unknown) {
             [self performSegueWithIdentifier:@"hubSettings" sender:nil];
+        } else if (indexPath.row == kDeviceSectionHubSetupRow) {
+            CPHubPlaceholderViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"HubPlaceholder"];
+            vc.message = NSLocalizedString(@"Press Continue to continue with Hub setup.\n\nIf you connect to a new Hub, this will result in your current hub being unlinked from your account.", @"Message displayed to user when performing hub setup from the settings");
+            vc.delegate = self;
+            vc.shouldConfirmCancellation = NO;
+            self.hubPlaceholder = vc;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
+}
+
+#pragma mark - CPHubPlaceholderDelegate methods
+- (void)hubSetupCancelled
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)hubSetupContinued
+{
+    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:self.navigationController withDelegate:self];
+}
+
+#pragma mark - CPParticleConnectionDelegate methods
+- (void)deviceClaimed:(NSDictionary *)deviceInfo
+{
+    BLOCK_SELF_REF_OUTSIDE();
+    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
+    [[CPAppEngineCommunicationManager sharedInstance] updateDevice:currentUser.device.deviceId particle:deviceInfo completion:^(NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (error) {
+            // TODO: display error to user and relaunch device claim flow
+            [self deviceClaimFailed];
+        } else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }];
+}
+
+- (void)deviceClaimCanceled
+{
+    [self.hubPlaceholder displayMessage:NSLocalizedString(@"If you do not complete Hub WiFi Setup, the Hub won't adapt to your dog or offer your dog new challenges.\n\nYou also won't be able to see how your dog is doing through the CleverPet mobile app.", @"Message displayed to user when they cancel out of the particle device claim flow")];
+}
+
+- (void)deviceClaimFailed
+{
+    [self.hubPlaceholder displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
 }
 
 #pragma mark - Navigation

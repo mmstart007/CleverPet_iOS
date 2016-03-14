@@ -20,4 +20,7 @@ pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 pod 'CorePlot', '~> 2.0'
 pod 'SSKeychain'
+pod 'Fabric'
+pod 'Crashlytics'
+pod 'OJFSegmentedProgressView', '~> 0.0.1'
 end

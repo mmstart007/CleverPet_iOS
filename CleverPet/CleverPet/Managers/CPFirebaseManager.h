@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CPPetStats.h"
 
-typedef void(^FirebaseUpdateBlock)(NSError*, NSDictionary*);
+typedef void(^FirebaseUpdateBlock)(NSError*, CPPetStats*);
 typedef void(^FirebaseLoginBlock)(NSError *);
 
 @interface CPFirebaseManager : NSObject

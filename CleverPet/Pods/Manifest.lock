@@ -24,6 +24,9 @@ PODS:
   - Bolts/Tasks (1.6.0)
   - CHCSVParser (2.1.0)
   - CorePlot (2.0)
+  - Crashlytics (3.7.0):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
   - FBSDKCoreKit (4.10.0):
     - Bolts (~> 1.5)
   - FBSDKLoginKit (4.10.0):
@@ -58,6 +61,7 @@ PODS:
   - JSONModel (1.2.0)
   - NMRangeSlider (1.2.1)
   - OAStackView (1.0.1)
+  - OJFSegmentedProgressView (0.0.1)
   - RBStoryboardLink (0.1.4)
   - Spark-SDK (0.3.5):
     - Spark-SDK/Helpers (= 0.3.5)
@@ -84,6 +88,8 @@ DEPENDENCIES:
   - BABCropperView
   - CHCSVParser
   - CorePlot (~> 2.0)
+  - Crashlytics
+  - Fabric
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
@@ -93,6 +99,7 @@ DEPENDENCIES:
   - JSONModel
   - NMRangeSlider
   - OAStackView
+  - OJFSegmentedProgressView (~> 0.0.1)
   - RBStoryboardLink
   - Spark-SDK (from `Spark-SDK_Internal`)
   - SparkSetup
@@ -116,6 +123,8 @@ SPEC CHECKSUMS:
   Bolts: f52a250053bb517ca874523c3913776359ab3def
   CHCSVParser: 3bcc7bdb72111a31222e95d57eacceefe4e537e8
   CorePlot: b7f422ad363f2b0e48152471d6da45ce232eb8c6
+  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
+  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FBSDKCoreKit: 13bec8373fb3af94d44daf2aa1e0958687897fbd
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
@@ -132,6 +141,7 @@ SPEC CHECKSUMS:
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   NMRangeSlider: 317ded652431eb90501c8421d9cddc3930d891e6
   OAStackView: 95e7cb79cbea25c2342f496a44bdbe8bd4c8d510
+  OJFSegmentedProgressView: 53b0d9fb54fc1587b887e6c3d814b09f724a4a66
   RBStoryboardLink: 0faae84aea6a5e8716c4469984d847d958c3fcb3
   Spark-SDK: dbd947fd197f08655b5f458ec559de5c920e8e70
   SparkSetup: f9618dd24548ab8a024efdaa65a89f63ed44a7ee
