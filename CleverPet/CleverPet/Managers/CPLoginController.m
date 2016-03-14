@@ -21,7 +21,7 @@
 
 NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 
-@interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate, CPParticleConnectionDelegate>
+@interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate, CPParticleConnectionDelegate, CPHubPlaceholderDelegate>
 
 @property (nonatomic, strong) GITInterfaceManager *interfaceManager;
 @property (nonatomic, strong) NSDataDetector *emailDetector;
@@ -143,18 +143,6 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
     [[self getRootNavController] popToRootViewControllerAnimated:YES];
 }
 
-- (void)continueDeviceSetup
-{
-    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
-}
-
-- (void)cancelDeviceSetup
-{
-    [self.delegate loginAttemptCancelled];
-    [[self getRootNavController] popToRootViewControllerAnimated:YES];
-    self.hubPlaceholderVc = nil;
-}
-
 #pragma mark - GITInterfaceManagerDelegate
 - (UIViewController*)signInControllerWithAccount:(GITAccount *)account
 {
@@ -248,6 +236,19 @@ didFinishSignInWithToken:(NSString *)token
     [self.hubPlaceholderVc displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
 }
 
+#pragma mark - CPHubPlaceholderDelegate methods
+- (void)hubSetupCancelled
+{
+    [self.delegate loginAttemptCancelled];
+    [[self getRootNavController] popToRootViewControllerAnimated:YES];
+    self.hubPlaceholderVc = nil;
+}
+
+- (void)hubSetupContinued
+{
+    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+}
+
 #pragma mark - UI flow
 - (void)presentUIForLoginResult:(CPLoginResult)result
 {
@@ -304,6 +305,8 @@ didFinishSignInWithToken:(NSString *)token
     CPHubPlaceholderViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"HubPlaceholder"];
     self.hubPlaceholderVc = vc;
     vc.message = message;
+    vc.delegate = self;
+    vc.shouldConfirmCancellation = YES;
     
     UINavigationController *root = [self getRootNavController];
     [root pushViewController:vc animated:YES];
