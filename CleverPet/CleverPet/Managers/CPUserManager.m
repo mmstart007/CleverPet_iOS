@@ -45,7 +45,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     self.currentUser.pet = [[CPPet alloc] initWithDictionary:petInfo error:&error];
 }
 
-- (void)updatePetInfo:(NSDictionary *)petInfo
+- (void)updatePetInfo:(NSDictionary *)petInfo withCompletion:(void (^)(NSError *))completion
 {
     NSDictionary *currentPetInfo = [self.currentUser.pet toDictionary];
     BOOL shouldUpdate = NO;
@@ -72,8 +72,13 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
             if (error) {
                 // reset back to original info
                 [self.currentUser.pet mergeFromDictionary:currentPetInfo useKeyMapping:YES error:nil];
+                completion(error);
+            } else {
+               completion(nil);
             }
         }];
+    }else {
+        completion(nil);
     }
 }
 

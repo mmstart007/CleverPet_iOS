@@ -15,7 +15,7 @@
 
 - (void)userLoggedIn:(NSDictionary*)userInfo;
 - (void)userCreatedPet:(NSDictionary*)petInfo;
-- (void)updatePetInfo:(NSDictionary*)petInfo;
+- (void)updatePetInfo:(NSDictionary*)petInfo withCompletion:(void (^)(NSError *))completion;
 - (void)updatePetPhoto:(UIImage*)image;
 
 - (void)userCreatedDevice:(NSDictionary*)deviceInfo;
