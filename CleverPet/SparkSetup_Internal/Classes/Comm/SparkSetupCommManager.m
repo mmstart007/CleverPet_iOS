@@ -231,8 +231,10 @@ int const kSparkSetupConnectionEndpointPort = 5609;
     {
         [self.sendCommandTimeoutTimer invalidate];
         if (self.commandCompletionBlock)
+        {
             self.commandCompletionBlock(nil, [NSError errorWithDomain:@"SparkSetupCommManagerError" code:2002 userInfo:@{NSLocalizedDescriptionKey:error.localizedDescription}]);
-//        self.commandCompletionBlock = nil;
+            self.commandCompletionBlock = nil;
+        }
         return;
     }
     
