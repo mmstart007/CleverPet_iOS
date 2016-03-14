@@ -60,7 +60,7 @@
                                                         length:self.graphData.yMax];
         
         CPTMutableLineStyle *axisLineStyle = [[CPTMutableLineStyle alloc] init];
-        axisLineStyle.lineWidth = 2;
+        axisLineStyle.lineWidth = 1;
         axisLineStyle.lineColor = [CPTColor colorWithCGColor:[UIColor appTextFieldPlaceholderColor].CGColor];
         
         CPTXYAxisSet *axisSet = (CPTXYAxisSet *)self.graph.axisSet;
@@ -93,12 +93,6 @@
                                                                                                   NSFontAttributeName:[UIFont cpRegularFontWithSize:12 italic:NO],
                                                                                                   NSForegroundColorAttributeName:[UIColor appSubCopyTextColor]
                                                                                                   }]];
-            //        [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-            //        [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%.f", self.graphData.bottomData[i].doubleValue]
-            //                                                                                 attributes:@{
-            //                                                                                              NSFontAttributeName:[UIFont cpSemiboldFontWithSize:12 italic:NO],
-            //                                                                                              NSForegroundColorAttributeName:[UIColor appSubCopyTextColor]
-            //                                                                                              }]];
             
             [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, attributedString.length)];
             
