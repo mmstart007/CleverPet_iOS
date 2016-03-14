@@ -12,6 +12,10 @@
 
 - (NSError *)convertAFNetworkingErrorToServerError:(NSError*)error
 {
+    if ( ![error.domain isEqualToString:AFURLResponseSerializationErrorDomain] || error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] == nil) {
+        return error;
+    }
+    
     NSInteger errorCode = [error.userInfo[AFNetworkingOperationFailingURLResponseErrorKey] statusCode];
     NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] options:kNilOptions error:nil];
     NSString *errorMessage = responseDict[kErrorKey] ? responseDict[kErrorKey] : [[NSString alloc] initWithData:error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
