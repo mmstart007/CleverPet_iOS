@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/UI/UI Elements/SparkSetupUIViewController.h
+../../../../SparkSetup_Internal/Classes/UI/UI Elements/SparkSetupUIViewController.h

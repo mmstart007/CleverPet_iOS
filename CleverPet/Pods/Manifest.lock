@@ -102,7 +102,7 @@ DEPENDENCIES:
   - OJFSegmentedProgressView (~> 0.0.1)
   - RBStoryboardLink
   - Spark-SDK (from `Spark-SDK_Internal`)
-  - SparkSetup
+  - SparkSetup (from `SparkSetup_Internal`)
   - SSKeychain
 
 EXTERNAL SOURCES:
@@ -110,6 +110,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/dreamwieber/AttributedMarkdown.git
   Spark-SDK:
     :path: Spark-SDK_Internal
+  SparkSetup:
+    :path: SparkSetup_Internal
 
 CHECKOUT OPTIONS:
   AttributedMarkdown:

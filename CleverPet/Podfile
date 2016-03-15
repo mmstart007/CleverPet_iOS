@@ -11,8 +11,8 @@ pod 'GoogleIdentityToolkit'
 pod 'CHCSVParser', :inhibit_warnings => true
 pod 'RBStoryboardLink', :inhibit_warnings => true
 pod 'NMRangeSlider'
+pod 'SparkSetup', :path => 'SparkSetup_Internal', :inhibit_warnings => true
 pod 'Spark-SDK', :path => 'Spark-SDK_Internal'
-pod 'SparkSetup', :inhibit_warnings => true
 pod 'BABCropperView'
 pod 'Firebase', '>= 2.5.0'
 pod 'FBSDKCoreKit'

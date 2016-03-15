@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/SparkSetup-Bridging-Header.h
+../../../../SparkSetup_Internal/Classes/SparkSetup-Bridging-Header.h

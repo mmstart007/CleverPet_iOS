@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/UI/SparkDiscoverDeviceViewController.h
+../../../../SparkSetup_Internal/Classes/UI/SparkDiscoverDeviceViewController.h
