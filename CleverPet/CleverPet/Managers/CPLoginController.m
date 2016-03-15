@@ -18,7 +18,9 @@
 #import <Intercom/Intercom.h>
 #import <SSKeychain/SSKeychain.h>
 #import "CPHubPlaceholderViewController.h"
+#import <GoogleSignIn/GoogleSignIn.h>
 
+#define DEFAULT_ERROR_MESSAGE NSLocalizedString(@"An unexpected error occurred. Please try again.", @"Error message displayed for unhandled login error codes")
 NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 
 @interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate, CPParticleConnectionDelegate, CPHubPlaceholderDelegate>
@@ -194,7 +196,18 @@ didFinishSignInWithToken:(NSString *)token
             if (error.code == kGITErrorCodeUserCancellation) {
                 // No error message, we don't need to tell the user what they did
             } else {
-                errorMessage = NSLocalizedString(@"An unexpected error occurred. Please try again.", @"Error message displayed for unhandled google identity error codes");
+                errorMessage = DEFAULT_ERROR_MESSAGE;
+            }
+        } else if ([error.domain isEqualToString:kGIDSignInErrorDomain]) {
+            if (error.code == kGIDSignInErrorCodeCanceled) {
+                // User cancelation and denying access have the same error code, so we have to parse the description; ;
+                // This potentially doesn't work if the user changes their locale
+                NSString *message = error.localizedDescription;
+                if ([message isEqualToString:@"access_denied"]) {
+                    errorMessage = NSLocalizedString(@"This app require access to your email address and profile info. You cannot continue without allowing access.", @"Message displayed when access to google account info is denied");
+                }
+            } else {
+                errorMessage = DEFAULT_ERROR_MESSAGE;
             }
         }
         
