@@ -95,7 +95,7 @@ NSInteger const kMinPasswordLength = 6;
         return NO;
     }
     
-    if (![self.passwordField.text length] < kMinPasswordLength) {
+    if ([self.passwordField.text length] < kMinPasswordLength) {
         [self displayErrorAlertWithTitle:NSLocalizedString(@"Password does not meet minimum requirements", @"Title of alert displayed when attempting to sign up with a short password") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Your password must be a minimum of %d characters", @"Body of alert displayed when attempting to sign up with a short password"), kMinPasswordLength]];
         return NO;
     }
