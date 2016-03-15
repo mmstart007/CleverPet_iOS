@@ -26,6 +26,8 @@
 
 @end
 
+NSInteger const kMinPasswordLength = 6;
+
 @implementation CPSignUpViewController
 
 - (void)viewDidLoad {
@@ -90,6 +92,11 @@
     
     if (![self.passwordField.text isEqualToString:self.verifyField.text]) {
         [self displayErrorAlertWithTitle:NSLocalizedString(@"The passwords entered do not match", @"Error title when trying to sign up with mismatched passwords") andMessage:NSLocalizedString(@"Please re-enter your password", @"Error message when trying to sign up with mismatched passwords")];
+        return NO;
+    }
+    
+    if (![self.passwordField.text length] < kMinPasswordLength) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Password does not meet minimum requirements", @"Title of alert displayed when attempting to sign up with a short password") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Your password must be a minimum of %d characters", @"Body of alert displayed when attempting to sign up with a short password"), kMinPasswordLength]];
         return NO;
     }
     
