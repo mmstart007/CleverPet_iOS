@@ -186,7 +186,19 @@ didFinishSignInWithToken:(NSString *)token
          error:(NSError *)error
 {
     if (error) {
-        [self.delegate loginAttemptFailed:error.localizedDescription];
+        // Check if the device is currently online
+        NSString *errorMessage;
+        if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
+            errorMessage = NSLocalizedString(@"The internet connection appears to be offline.", @"Error message displayed when attempting to log in to Google Identity while the device is offline");
+        } else if ([error.domain isEqualToString:@"com.google.gitkit"]) { // Not great, but I haven't been able to find a define for the domain
+            if (error.code == kGITErrorCodeUserCancellation) {
+                // No error message, we don't need to tell the user what they did
+            } else {
+                errorMessage = NSLocalizedString(@"An unexpected error occurred. Please try again.", @"Error message displayed for unhandled google identity error codes");
+            }
+        }
+        
+        [self.delegate loginAttemptFailed:errorMessage];
     } else {
         self.pendingAuthToken = token;
         BLOCK_SELF_REF_OUTSIDE();
