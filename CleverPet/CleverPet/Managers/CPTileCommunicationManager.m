@@ -18,8 +18,6 @@ NSString * const kTilesPath = @"users/tiles";
 
 @interface CPTileCommunicationManager()
 
-@property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
-
 @end
 
 @implementation CPTileCommunicationManager
@@ -38,10 +36,15 @@ NSString * const kTilesPath = @"users/tiles";
 {
     self = [super init];
     if (self) {
-        // Borrow the session manager from app engine communication manager so we don't need to manage auth in multiple places
-        self.sessionManager = [[CPAppEngineCommunicationManager sharedInstance] getSessionManager];
+        
     }
     return self;
+}
+
+- (AFHTTPSessionManager*)sessionManager
+{
+    // Borrow the session manager from app engine communication manager so we don't need to manage auth in multiple places
+    return [[CPAppEngineCommunicationManager sharedInstance] getSessionManager];
 }
 
 - (ASYNC)refreshTiles:(NSString *)filter completion:(void (^)(NSDictionary *, NSError *))completion

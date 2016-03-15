@@ -58,9 +58,16 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 - (void)applyConfig:(NSDictionary *)configData
 {
     // TODO: handle missing config
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    if (self.sessionManager) {
+        // If we already have a session manager, we want to transfer our request serializer across so we don't lose our auth header
+        requestSerializer = self.sessionManager.requestSerializer;
+        responseSerializer = self.sessionManager.responseSerializer;
+    }
     self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:configData[kAppEngineBaseUrl]]];
-    self.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    self.sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    self.sessionManager.requestSerializer = requestSerializer;
+    self.sessionManager.responseSerializer = responseSerializer;
 }
 
 - (AFHTTPSessionManager*)getSessionManager

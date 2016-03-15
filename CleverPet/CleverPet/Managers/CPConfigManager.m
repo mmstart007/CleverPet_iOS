@@ -25,6 +25,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 @property (nonatomic, strong) CPConfigViewController *configViewController;
+@property (nonatomic, strong) NSDictionary *configData;
 
 @end
 
@@ -83,9 +84,13 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
 
 - (void)applyConfig:(NSDictionary *)configData
 {
-    [[CPParticleConnectionHelper sharedInstance] applyConfig:configData];
-    [[CPAppEngineCommunicationManager sharedInstance] applyConfig:configData];
-    [[CPFirebaseManager sharedInstance] applyConfig:configData];
+    if (![configData isEqualToDictionary:self.configData])
+    {
+        self.configData = configData;
+        [[CPParticleConnectionHelper sharedInstance] applyConfig:configData];
+        [[CPAppEngineCommunicationManager sharedInstance] applyConfig:configData];
+        [[CPFirebaseManager sharedInstance] applyConfig:configData];
+    }
 }
 
 - (void)appEnteredForeground
