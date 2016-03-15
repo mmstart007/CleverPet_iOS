@@ -75,7 +75,9 @@
 - (void)loginAttemptFailed:(NSString *)message
 {
     [self showLoadingSpinner:NO];
-    [self displayErrorAlertWithTitle:NSLocalizedString(@"Error", @"Login error alert title") andMessage:message];
+    if (message) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Error", @"Login error alert title") andMessage:message];
+    }
 }
 
 - (void)loginAttemptCancelled

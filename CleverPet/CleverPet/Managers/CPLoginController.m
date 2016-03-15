@@ -18,7 +18,9 @@
 #import <Intercom/Intercom.h>
 #import <SSKeychain/SSKeychain.h>
 #import "CPHubPlaceholderViewController.h"
+#import <GoogleSignIn/GoogleSignIn.h>
 
+#define DEFAULT_ERROR_MESSAGE NSLocalizedString(@"An unexpected error occurred. Please try again.", @"Error message displayed for unhandled login error codes")
 NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 
 @interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate, CPParticleConnectionDelegate, CPHubPlaceholderDelegate>
@@ -186,7 +188,30 @@ didFinishSignInWithToken:(NSString *)token
          error:(NSError *)error
 {
     if (error) {
-        [self.delegate loginAttemptFailed:error.localizedDescription];
+        // Check if the device is currently online
+        NSString *errorMessage;
+        if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
+            errorMessage = NSLocalizedString(@"The internet connection appears to be offline.", @"Error message displayed when attempting to log in to Google Identity while the device is offline");
+        } else if ([error.domain isEqualToString:@"com.google.gitkit"]) { // Not great, but I haven't been able to find a define for the domain
+            if (error.code == kGITErrorCodeUserCancellation) {
+                // No error message, we don't need to tell the user what they did
+            } else {
+                errorMessage = DEFAULT_ERROR_MESSAGE;
+            }
+        } else if ([error.domain isEqualToString:kGIDSignInErrorDomain]) {
+            if (error.code == kGIDSignInErrorCodeCanceled) {
+                // User cancelation and denying access have the same error code, so we have to parse the description; ;
+                // This potentially doesn't work if the user changes their locale
+                NSString *message = error.localizedDescription;
+                if ([message isEqualToString:@"access_denied"]) {
+                    errorMessage = NSLocalizedString(@"This app require access to your email address and profile info. You cannot continue without allowing access.", @"Message displayed when access to google account info is denied");
+                }
+            } else {
+                errorMessage = DEFAULT_ERROR_MESSAGE;
+            }
+        }
+        
+        [self.delegate loginAttemptFailed:errorMessage];
     } else {
         self.pendingAuthToken = token;
         BLOCK_SELF_REF_OUTSIDE();
