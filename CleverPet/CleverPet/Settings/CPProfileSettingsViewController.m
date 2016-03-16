@@ -119,7 +119,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.title = CANCEL_TEXT;
+    [self.view endEditing:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -336,6 +336,7 @@
 {
     if ([segue.destinationViewController isKindOfClass:[CPPetPhotoViewController class]])
     {
+        self.title = CANCEL_TEXT;
         CPPetPhotoViewController *photoPicker = segue.destinationViewController;
         photoPicker.delegate = self;
         photoPicker.selectedImage = [self.pet petPhotoForPicker];
