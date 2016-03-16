@@ -141,6 +141,8 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 - (void)cancelPetProfileCreation
 {
     self.userInfo = nil;
+    // Logout of google identity so the user needs to enter their password if signing in with google
+    [self logoutOfGit];
     [self.delegate loginAttemptCancelled];
     [[self getRootNavController] popToRootViewControllerAnimated:YES];
 }
@@ -198,7 +200,7 @@ didFinishSignInWithToken:(NSString *)token
             } else if(error.code == kGITErrorCodeEmailMismatch) {
                 // The login web form is presented by identity toolkit, and we can't force the user to enter the same email in the gmail web form as they did in the app, so it's possible to hit this error. Tell the user they need to use the same email they started the sign up flow with, and we also need to logout of GITAuth, as the user is actually logged in to Google Identity, despite receiving an error and no user account here
                 errorMessage = NSLocalizedString(@"The email address signed in to does not match the address provided on the sign in page. Please try again with the correct email.", @"Error message displayed when user uses 2 different emails as part of google sign in");
-                [[GITAuth sharedInstance] signOut];
+                [self logoutOfGit];
             } else {
                 errorMessage = DEFAULT_ERROR_MESSAGE;
             }
@@ -268,6 +270,7 @@ didFinishSignInWithToken:(NSString *)token
 #pragma mark - CPHubPlaceholderDelegate methods
 - (void)hubSetupCancelled
 {
+    [self logoutOfGit];
     [self.delegate loginAttemptCancelled];
     [[self getRootNavController] popToRootViewControllerAnimated:YES];
     self.hubPlaceholderVc = nil;
@@ -351,7 +354,7 @@ didFinishSignInWithToken:(NSString *)token
 - (void)logout
 {
     [Intercom reset];
-    [[GITAuth sharedInstance] signOut];
+    [self logoutOfGit];
     
     // Clear auto login token from keychain
     [self clearAutoLoginToken];
@@ -372,6 +375,11 @@ didFinishSignInWithToken:(NSString *)token
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     [animation setType:kCATransitionFade];
     [window.layer addAnimation:animation forKey:@"crossFade"];
+}
+
+- (void)logoutOfGit
+{
+    [[GITAuth sharedInstance] signOut];
 }
 
 - (void)setAutoLoginToken:(NSString*)authToken
