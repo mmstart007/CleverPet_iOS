@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 @property (weak, nonatomic) IBOutlet UIButton *signInButton;
 @property (weak, nonatomic) IBOutlet UIView *fadeView;
+@property (nonatomic, assign) BOOL listeningForConfigUpdates;
 
 @end
 
@@ -31,24 +32,20 @@
     self.backgroundImage.image = [CPSplashImageUtils getSplashImage];
     
     BLOCK_SELF_REF_OUTSIDE();
-    [[CPConfigManager sharedInstance] loadConfigWithCompletion:^(NSError *error) {
+    [[CPConfigManager sharedInstance] loadConfig:NO completion:^(NSError *error) {
         BLOCK_SELF_REF_INSIDE();
-        if (error) {
-            // TODO: ship off to the app store or something
-            
-            NSString *errorTitle = [error.domain isEqualToString:@"AppVersion"] ? NSLocalizedString(@"App Version Out of Date", @"Title for alert shown when using out of date version of the app") : NSLocalizedString(@"Unable to load app config", @"Title for error shown when unable to load app config");
-            [self displayErrorAlertWithTitle:errorTitle andMessage:error.localizedDescription];
-        } else {
-            [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                self.signInButton.hidden = NO;
-            } completion:nil];
-        }
+        [self finishConfigLoad:error];
     }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    UNREG_SELF_FOR_ALL_NOTIFICATIONS();
 }
 
 - (void)setupStyling
@@ -85,6 +82,47 @@
 - (void)loginAttemptCancelled
 {
     [self showLoadingSpinner:NO];
+}
+
+- (void)configUpdated:(NSNotification *)notification
+{
+    NSError *error = notification.userInfo[kConfigErrorKey];
+    [self finishConfigLoad:error];
+}
+
+- (void)listenForConfigUpdates
+{
+    if (!self.listeningForConfigUpdates) {
+        self.listeningForConfigUpdates = YES;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUpdated:) name:kConfigUpdatedNotification object:nil];
+    }
+}
+
+- (void)stopListeningForConfigUpdates
+{
+    if (self.listeningForConfigUpdates) {
+        self.listeningForConfigUpdates = NO;
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:kConfigUpdatedNotification object:nil];
+    }
+}
+
+- (void)finishConfigLoad:(NSError *)error
+{
+    if (error) {
+        // TODO: ship off to the app store or something
+        
+        // Don't display error if we're not visible. May have to look at this again
+        if (self.view.window != nil) {
+            NSString *errorTitle = [error.domain isEqualToString:@"AppVersion"] ? NSLocalizedString(@"App Version Out of Date", @"Title for alert shown when using out of date version of the app") : NSLocalizedString(@"Unable to load app config", @"Title for error shown when unable to load app config");
+            [self displayErrorAlertWithTitle:errorTitle andMessage:error.localizedDescription];
+        }
+        [self listenForConfigUpdates];
+    } else {
+        [self stopListeningForConfigUpdates];
+        [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            self.signInButton.hidden = NO;
+        } completion:nil];
+    }
 }
 
 /*
