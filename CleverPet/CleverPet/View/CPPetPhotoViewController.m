@@ -37,6 +37,7 @@
         // Force update of image and button if we had an image set before segueing in
         self.selectedImage = self.selectedImage;
     }
+    self.navigationController.navigationItem.backBarButtonItem.title = CANCEL_TEXT;
     [self setupStyling];
 }
 
@@ -75,7 +76,6 @@
 
 - (IBAction)continueTapped:(id)sender
 {
-    
     BLOCK_SELF_REF_OUTSIDE();
     void (^imageSelectedBlock)(UIImage *, CGRect) = ^(UIImage *croppedImage, CGRect cropRect){
         BLOCK_SELF_REF_INSIDE();

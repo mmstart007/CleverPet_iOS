@@ -230,7 +230,7 @@
             </objects>
             <point key="canvasLocation" x="204" y="582"/>
         </scene>
-        <!--Profile-->
+        <!--Cancel-->
         <scene sceneID="Ato-6U-P8X">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="3WD-7U-wgO" customClass="CPProfileSettingsViewController" sceneMemberID="viewController">
@@ -263,7 +263,7 @@
                                                         <state key="normal" title="Edit"/>
                                                         <connections>
                                                             <action selector="editImageTapped:" destination="3WD-7U-wgO" eventType="touchUpInside" id="OeO-1C-mwn"/>
-                                                            <segue destination="kkD-fH-BRQ" kind="custom" identifier="setPetPhoto" customClass="RBStoryboardModalSegue" id="MDZ-n7-65O"/>
+                                                            <segue destination="kkD-fH-BRQ" kind="custom" identifier="setPetPhoto" customClass="RBStoryboardPushSegue" id="MDZ-n7-65O"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -618,7 +618,7 @@
                             <constraint firstItem="2XS-p3-Txp" firstAttribute="top" secondItem="7ll-na-eLD" secondAttribute="bottom" id="eIq-Ra-Ywh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="Jzl-v7-PCM"/>
+                    <navigationItem key="navigationItem" title="Cancel" id="Jzl-v7-PCM"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="754"/>
                     <connections>

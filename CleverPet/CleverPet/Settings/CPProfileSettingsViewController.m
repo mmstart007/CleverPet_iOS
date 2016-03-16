@@ -101,12 +101,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // Mess with our title so we get the appropriate back button
+    self.title = @"Profile";
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
     REG_SELF_FOR_NOTIFICATION(UIKeyboardWillShowNotification, keyboardWillShow:);
     REG_SELF_FOR_NOTIFICATION(UIKeyboardWillHideNotification, keyboardWillHide:);
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.title = CANCEL_TEXT;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -315,7 +328,7 @@
 {
     [[CPUserManager sharedInstance] updatePetPhoto:image];
     self.petImage.image = [self.pet petPhoto];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Navigation
