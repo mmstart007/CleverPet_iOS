@@ -82,11 +82,13 @@
     [self setupStyling];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    // TODO: button image
+    [button setImage:[[UIImage imageNamed:@"back_arrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [button setTitle:@"Back" forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
-    [button sizeToFit];
     [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor appTealColor]];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 7, 0, 0)];
+    button.frame = CGRectMake(0, 0, 50, 40);
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     [button addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = barButton;
