@@ -36,7 +36,7 @@
 @property (nonatomic, strong) CPTextValidator *textValidator;
 // TODO: pull this out somewhere
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
-@property (nonatomic, assign) BOOL isCancelling;
+@property (nonatomic, assign) BOOL shouldUpdateNavBar;
 
 @end
 
@@ -78,7 +78,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    if (!self.isCancelling) {
+    [self.view endEditing:YES];
+    if (self.shouldUpdateNavBar) {
+        self.shouldUpdateNavBar = NO;
         [self.navigationController setNavigationBarHidden:NO animated:animated];
     }
 }
@@ -128,6 +130,7 @@
     [CPPet validateInput:petInfo isInitialSetup:YES completion:^(BOOL isValidInput, NSString *errorMessage) {
         if (isValidInput) {
             [[CPLoginController sharedInstance] setPendingUserInfo:petInfo];
+            self.shouldUpdateNavBar = YES;
             [self performSegueWithIdentifier:@"setPetPhoto" sender:nil];
         } else {
             [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:errorMessage];
@@ -144,7 +147,7 @@
 
 - (IBAction)cancelTapped:(id)sender
 {
-    self.isCancelling = YES;
+    self.shouldUpdateNavBar = YES;
     [[CPLoginController sharedInstance] cancelPetProfileCreation];
 }
 

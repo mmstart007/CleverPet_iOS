@@ -66,21 +66,27 @@
                                                                 </constraints>
                                                             </view>
                                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="1000" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNm-et-SFa">
-                                                                <rect key="frame" x="8" y="0.0" width="582" height="21"/>
+                                                                <rect key="frame" x="8" y="0.0" width="42" height="21"/>
                                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
+                                                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="swipe" translatesAutoresizingMaskIntoConstraints="NO" id="Gqj-RX-Uym">
+                                                                <rect key="frame" x="570" y="0.0" width="20" height="21"/>
+                                                            </imageView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstItem="yNm-et-SFa" firstAttribute="leading" secondItem="qzG-M2-IlP" secondAttribute="trailing" constant="4" id="0KR-6J-3JS"/>
-                                                            <constraint firstAttribute="trailing" secondItem="yNm-et-SFa" secondAttribute="trailing" id="Cpc-MX-kfi"/>
                                                             <constraint firstAttribute="bottom" secondItem="yNm-et-SFa" secondAttribute="bottom" id="FwQ-5r-8vm"/>
                                                             <constraint firstItem="yNm-et-SFa" firstAttribute="top" secondItem="RBa-9Q-4V4" secondAttribute="top" id="RSv-tO-SaI"/>
+                                                            <constraint firstItem="Gqj-RX-Uym" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yNm-et-SFa" secondAttribute="trailing" constant="20" id="RlZ-YO-faw"/>
+                                                            <constraint firstAttribute="trailing" secondItem="Gqj-RX-Uym" secondAttribute="trailing" id="UkD-cg-qHA"/>
                                                             <constraint firstItem="qzG-M2-IlP" firstAttribute="centerY" secondItem="RBa-9Q-4V4" secondAttribute="centerY" id="Utq-ri-lKB"/>
                                                             <constraint firstItem="qzG-M2-IlP" firstAttribute="leading" secondItem="RBa-9Q-4V4" secondAttribute="leading" id="XTU-Gc-AK7"/>
+                                                            <constraint firstAttribute="bottom" secondItem="Gqj-RX-Uym" secondAttribute="bottom" id="azE-DZ-tc1"/>
+                                                            <constraint firstItem="Gqj-RX-Uym" firstAttribute="top" secondItem="RBa-9Q-4V4" secondAttribute="top" id="mio-us-NQ0"/>
                                                         </constraints>
                                                     </view>
                                                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n9r-4T-ZV3">
@@ -294,6 +300,7 @@
                 <outlet property="primaryButton" destination="p07-iq-B3X" id="Mbz-NJ-uGp"/>
                 <outlet property="reportContentView" destination="2jn-nV-Ic3" id="ieE-vz-GZf"/>
                 <outlet property="secondaryButton" destination="ZlO-nl-F4D" id="qHE-gK-l9B"/>
+                <outlet property="swipableImage" destination="Gqj-RX-Uym" id="g8i-SQ-Qsp"/>
                 <outlet property="swipedColorView" destination="zPr-Vl-QaO" id="2B5-P3-RpQ"/>
                 <outlet property="tagTimeStampLabel" destination="yNm-et-SFa" id="I2c-gY-QbK"/>
                 <outlet property="titleLabel" destination="n9r-4T-ZV3" id="gXc-oF-pl4"/>
@@ -307,5 +314,6 @@
     </objects>
     <resources>
         <image name="play" width="30" height="30"/>
+        <image name="swipe" width="20" height="11"/>
     </resources>
 </document>

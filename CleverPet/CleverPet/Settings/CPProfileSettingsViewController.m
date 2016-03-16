@@ -101,12 +101,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // Mess with our title so we get the appropriate back button
+    self.title = @"Profile";
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
     REG_SELF_FOR_NOTIFICATION(UIKeyboardWillShowNotification, keyboardWillShow:);
     REG_SELF_FOR_NOTIFICATION(UIKeyboardWillHideNotification, keyboardWillHide:);
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -180,7 +193,7 @@
             [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:^(NSError *error) {
                 if (error) {
                      UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Save", nil) message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    [alert addAction:[UIAlertAction actionWithTitle:OK_TEXT style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                         [self.navigationController popViewControllerAnimated:YES];
                     }]];
                     [self presentViewController:alert animated:YES completion:nil];
@@ -197,7 +210,16 @@
 
 - (void)logoutTapped:(UITapGestureRecognizer*)recognizer
 {
-    [[CPUserManager sharedInstance] logout];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Are you sure you want to log out?", @"Confirmation message displayed to user when logging out") preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:CANCEL_TEXT style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Logout", @"Logout confirmation button text") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [[CPUserManager sharedInstance] logout];
+    }];
+    
+    [alert addAction:cancelAction];
+    [alert addAction:logoutAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - UITextFieldDelegate methods
@@ -306,7 +328,7 @@
 {
     [[CPUserManager sharedInstance] updatePetPhoto:image];
     self.petImage.image = [self.pet petPhoto];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Navigation
@@ -314,6 +336,7 @@
 {
     if ([segue.destinationViewController isKindOfClass:[CPPetPhotoViewController class]])
     {
+        self.title = CANCEL_TEXT;
         CPPetPhotoViewController *photoPicker = segue.destinationViewController;
         photoPicker.delegate = self;
         photoPicker.selectedImage = [self.pet petPhotoForPicker];
