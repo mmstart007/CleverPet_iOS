@@ -54,32 +54,40 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
 
 - (ASYNC)loadConfigWithCompletion:(void (^)(NSError *))completion
 {
-    BLOCK_SELF_REF_OUTSIDE();
-    [self.sessionManager GET:kConfigUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        BLOCK_SELF_REF_INSIDE();
-        // Update our last checked config date
-        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kLastCheckedConfigKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-        NSString *minimumVersion = responseObject[kMinimumVersionKey];
-        // Ignore the minimum version set on our test config
-        if (minimumVersion && ![minimumVersion isEqualToString:@"test"]) {
-            if ([version compare:minimumVersion options:NSNumericSearch] == NSOrderedAscending) {
-                NSString *deprecationMessage = responseObject[kDeprecationMessageKey];
-                if ([deprecationMessage length] == 0) {
-                    deprecationMessage = kDefaultDeprecationMessage;
+    NSDate *lastChecked = [[NSUserDefaults standardUserDefaults] objectForKey:kLastCheckedConfigKey];
+    NSTimeInterval timeSinceCheck = [[NSDate date] timeIntervalSinceDate:lastChecked];
+    
+    if (timeSinceCheck > kMinimumTimeBetweenChecks) {
+        BLOCK_SELF_REF_OUTSIDE();
+        [self.sessionManager GET:kConfigUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            BLOCK_SELF_REF_INSIDE();
+            // Update our last checked config date
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kLastCheckedConfigKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            NSString *minimumVersion = responseObject[kMinimumVersionKey];
+            // Ignore the minimum version set on our test config
+            if (minimumVersion && ![minimumVersion isEqualToString:@"test"]) {
+                if ([version compare:minimumVersion options:NSNumericSearch] == NSOrderedAscending) {
+                    NSString *deprecationMessage = responseObject[kDeprecationMessageKey];
+                    if ([deprecationMessage length] == 0) {
+                        deprecationMessage = kDefaultDeprecationMessage;
+                    }
+                    if (completion) completion([NSError errorWithDomain:@"AppVersion" code:1 userInfo:@{NSLocalizedDescriptionKey:deprecationMessage}]);
+                    return;
                 }
-                if (completion) completion([NSError errorWithDomain:@"AppVersion" code:1 userInfo:@{NSLocalizedDescriptionKey:deprecationMessage}]);
-                return;
             }
-        }
-        [self applyConfig:responseObject];
+            [self applyConfig:responseObject];
+            if (completion) completion(nil);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // TODO: Perhaps ignore the timer the next time we see if we should check so the user isn't shut out of the app?
+            // If we're offline, register for reachability notifications and update when appropriate
+            if (completion) completion(error);
+        }];
+    } else {
         if (completion) completion(nil);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        // TODO: Perhaps ignore the timer the next time we see if we should check so the user isn't shut out of the app?
-        if (completion) completion(error);
-    }];
+    }
 }
 
 - (void)applyConfig:(NSDictionary *)configData
@@ -113,7 +121,8 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
         [self loadConfigWithCompletion:^(NSError *error) {
             BLOCK_SELF_REF_INSIDE();
             if (error) {
-                [self.configViewController displayErrorAlertWithTitle:NSLocalizedString(@"App Version Out of Date", @"Title for alert shown when using out of date version of the app") andMessage:error.localizedDescription];
+                NSString *errorTitle = [error.domain isEqualToString:@"AppVersion"] ? NSLocalizedString(@"App Version Out of Date", @"Title for alert shown when using out of date version of the app") : NSLocalizedString(@"Unable to load app config", @"Title for error shown when unable to load app config");
+                [self.configViewController displayErrorAlertWithTitle:errorTitle andMessage:error.localizedDescription];
             } else {
                 [self.configViewController dismiss];
                 self.configViewController = nil;

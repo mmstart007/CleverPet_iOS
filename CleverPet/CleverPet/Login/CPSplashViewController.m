@@ -35,7 +35,9 @@
         BLOCK_SELF_REF_INSIDE();
         if (error) {
             // TODO: ship off to the app store or something
-            [self displayErrorAlertWithTitle:NSLocalizedString(@"App Version Out of Date", @"Title for alert shown when using out of date version of the app") andMessage:error.localizedDescription];
+            
+            NSString *errorTitle = [error.domain isEqualToString:@"AppVersion"] ? NSLocalizedString(@"App Version Out of Date", @"Title for alert shown when using out of date version of the app") : NSLocalizedString(@"Unable to load app config", @"Title for error shown when unable to load app config");
+            [self displayErrorAlertWithTitle:errorTitle andMessage:error.localizedDescription];
         } else {
             [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                 self.signInButton.hidden = NO;
