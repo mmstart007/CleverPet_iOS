@@ -217,8 +217,8 @@
         [[CPUserManager sharedInstance] logout];
     }];
     
-    [alert addAction:logoutAction];
     [alert addAction:cancelAction];
+    [alert addAction:logoutAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
