@@ -48,19 +48,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 - (void)updatePetInfo:(NSDictionary *)petInfo withCompletion:(void (^)(NSError *))completion
 {
     NSDictionary *currentPetInfo = [self.currentUser.pet toDictionary];
-    BOOL shouldUpdate = NO;
-    // Don't need to do anything if no fields have been updated
-    for (NSString *key in petInfo) {
-        if (!currentPetInfo[key] || ![currentPetInfo[key] isEqual:petInfo[key]]) {
-            shouldUpdate = YES;
-            // Additional checking for weight, as passed in pet info will be a string, but toDict weight will be a number. Will have to do the same thing for any other primitives we may add
-            if ([key isEqualToString:kWeightKey]) {
-                shouldUpdate = [petInfo[key] integerValue] != [currentPetInfo[key] integerValue];
-            }
-            if (shouldUpdate) break;
-        }
-    }
-    
+    BOOL shouldUpdate = [self hasPetInfoChanged:petInfo];
     if (shouldUpdate) {
         NSError *error;
         [self.currentUser.pet mergeFromDictionary:petInfo useKeyMapping:YES error:&error];
@@ -80,6 +68,24 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     }else {
         if (completion) completion(nil);
     }
+}
+
+- (BOOL)hasPetInfoChanged:(NSDictionary *)petInfo
+{
+    BOOL hasChanged = NO;
+    NSDictionary *currentPetInfo = [self.currentUser.pet toDictionary];
+    for (NSString *key in petInfo) {
+        if (!currentPetInfo[key] || ![currentPetInfo[key] isEqual:petInfo[key]]) {
+            hasChanged = YES;
+            // Additional checking for weight, as passed in pet info will be a string, but toDict weight will be a number. Will have to do the same thing for any other primitives we may add
+            if ([key isEqualToString:kWeightKey]) {
+                hasChanged = [petInfo[key] integerValue] != [currentPetInfo[key] integerValue];
+            }
+            if (hasChanged) break;
+        }
+    }
+    
+    return hasChanged;
 }
 
 - (void)updatePetPhoto:(UIImage *)image

@@ -14,6 +14,7 @@
 #import "CPPetPhotoViewController.h"
 #import "CPUserManager.h"
 #import "CPGenderUtils.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate, CPPetPhotoDelegate, UIScrollViewDelegate>
 
@@ -183,6 +184,7 @@
 
 - (void)backButtonTapped:(id)sender
 {
+    [self.view endEditing:YES];
     NSString *alteredString = [CPGenderUtils genderNeutralStringForAlteredState:self.neuteredField.text];
     if ([alteredString length] == 0) {
         alteredString = kGenderNeutralUnspecified;
@@ -190,8 +192,29 @@
     NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kAlteredKey:alteredString};
     [CPPet validateInput:petInfo isInitialSetup:NO completion:^(BOOL isValidInput, NSString *errorMessage) {
         if (isValidInput) {
-            [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:nil];
-            [self.navigationController popViewControllerAnimated:YES];
+            if ([[CPUserManager sharedInstance] hasPetInfoChanged:petInfo]) {
+                // Verify we even have a network connection before this nonsense
+                if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+                    [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:nil];
+                    [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Connection Offline" message:NSLocalizedString(@"The internet connection appears to be offline. Changes will not be save.", @"Error message displayed when trying to save changes while device is offline") preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel (Stay Here)", @"Cancel text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleCancel handler:nil];
+                    
+                    BLOCK_SELF_REF_OUTSIDE();
+                    UIAlertAction *discardAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Continue (Discard my Changes)", @"Continue text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                        BLOCK_SELF_REF_INSIDE();
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }];
+                    
+                    [alert addAction:cancelAction];
+                    [alert addAction:discardAction];
+                    [self presentViewController:alert animated:YES completion:nil];
+                }
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         } else {
             [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", nil) andMessage:errorMessage];
         }
@@ -202,7 +225,7 @@
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Are you sure you want to log out?", @"Confirmation message displayed to user when logging out") preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:CANCEL_TEXT style:UIAlertActionStyleDefault handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:CANCEL_TEXT style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Logout", @"Logout confirmation button text") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [[CPUserManager sharedInstance] logout];
     }];
