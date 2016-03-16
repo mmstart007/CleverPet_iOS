@@ -78,6 +78,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
     if (self.shouldUpdateNavBar) {
         self.shouldUpdateNavBar = NO;
         [self.navigationController setNavigationBarHidden:NO animated:animated];
