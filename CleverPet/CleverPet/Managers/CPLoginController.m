@@ -144,7 +144,7 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
     // Logout of google identity so the user needs to enter their password if signing in with google
     [self logoutOfGit];
     [self.delegate loginAttemptCancelled];
-    [[self getRootNavController] popToRootViewControllerAnimated:YES];
+    [[CPSharedUtils getRootNavController] popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - GITInterfaceManagerDelegate
@@ -272,13 +272,13 @@ didFinishSignInWithToken:(NSString *)token
 {
     [self logoutOfGit];
     [self.delegate loginAttemptCancelled];
-    [[self getRootNavController] popToRootViewControllerAnimated:YES];
+    [[CPSharedUtils getRootNavController] popToRootViewControllerAnimated:YES];
     self.hubPlaceholderVc = nil;
 }
 
 - (void)hubSetupContinued
 {
-    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[CPSharedUtils getRootNavController] withDelegate:self];
 }
 
 #pragma mark - UI flow
@@ -293,7 +293,7 @@ didFinishSignInWithToken:(NSString *)token
         case CPLoginResult_UserWithoutPetProfile:
         {
             UIViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"PetProfileSetup"];
-            [[self getRootNavController] pushViewController:vc animated:YES];
+            [[CPSharedUtils getRootNavController] pushViewController:vc animated:YES];
             break;
         }
         case CPLoginResult_UserWithoutParticle:
@@ -304,7 +304,7 @@ didFinishSignInWithToken:(NSString *)token
         case CPLoginResult_UserWithoutDevice:
         {
             [self presentHubPlaceholderWithMessage:nil];
-            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[CPSharedUtils getRootNavController] withDelegate:self];
             break;
         }
         case CPLoginResult_UserWithSetupCompleted:
@@ -340,15 +340,8 @@ didFinishSignInWithToken:(NSString *)token
     vc.delegate = self;
     vc.shouldConfirmCancellation = YES;
     
-    UINavigationController *root = [self getRootNavController];
+    UINavigationController *root = [CPSharedUtils getRootNavController];
     [root pushViewController:vc animated:YES];
-}
-
-- (UINavigationController*)getRootNavController
-{
-    // TODO: Need to get the actual top level controller navController = visibleViewController, viewController = probably presentedViewController
-    // TODO: handle when our root is not a nav controller
-    return (UINavigationController*)[[[UIApplication sharedApplication].delegate window] rootViewController];
 }
 
 - (void)logout

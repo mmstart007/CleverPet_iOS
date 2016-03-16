@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface CPSharedUtils : NSObject
 
 + (void)deviceTimeZoneUpdated:(NSInteger)offset;
++ (UINavigationController *)getRootNavController;
 
 @end
 

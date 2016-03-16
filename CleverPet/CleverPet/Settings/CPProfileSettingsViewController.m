@@ -190,18 +190,8 @@
     NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kAlteredKey:alteredString};
     [CPPet validateInput:petInfo isInitialSetup:NO completion:^(BOOL isValidInput, NSString *errorMessage) {
         if (isValidInput) {
-            [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:^(NSError *error) {
-                if (error) {
-                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Save", nil) message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:OK_TEXT style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                        [self.navigationController popViewControllerAnimated:YES];
-                    }]];
-                    [self presentViewController:alert animated:YES completion:nil];
-                } else {
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
-            }];
-
+            [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:nil];
+            [self.navigationController popViewControllerAnimated:YES];
         } else {
             [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", nil) andMessage:errorMessage];
         }
