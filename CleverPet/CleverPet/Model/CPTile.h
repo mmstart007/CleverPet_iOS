@@ -55,5 +55,4 @@ typedef NS_ENUM(NSUInteger){
 
 @property (strong, nonatomic) CPGraph<Optional> *graph;
 
-+(void)setTimeZoneOffset:(NSInteger)offset;
 @end
