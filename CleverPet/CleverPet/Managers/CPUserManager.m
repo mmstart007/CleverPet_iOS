@@ -156,6 +156,26 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     }
 }
 
+- (BOOL)hasDeviceInfoChanged:(NSDictionary *)deviceInfo
+{
+    return [self hasModeChanged:deviceInfo] || [self hasSchedule:self.currentUser.device.weekdaySchedule changed:deviceInfo[kWeekdayKey]] || [self hasSchedule:self.currentUser.device.weekendSchedule changed:deviceInfo[kWeekendKey]];
+}
+
+- (BOOL)hasModeChanged:(NSDictionary *)deviceInfo
+{
+    NSString *oldMode = self.currentUser.device.mode;
+    NSString *newMode = deviceInfo[kModeKey];
+    return ![oldMode isEqualToString:newMode];
+}
+
+- (BOOL)hasSchedule:(CPDeviceSchedule *)schedule changed:(NSDictionary*)scheduleInfo
+{
+    NSInteger startTime = [scheduleInfo[kStartTimeKey] integerValue];
+    NSInteger endTime = [scheduleInfo[kEndTimeKey] integerValue];
+    
+    return schedule.startTime != startTime || schedule.endTime != endTime;
+}
+
 - (void)fetchedDeviceSchedules:(NSDictionary *)scheduleInfo
 {
     NSError *error;
