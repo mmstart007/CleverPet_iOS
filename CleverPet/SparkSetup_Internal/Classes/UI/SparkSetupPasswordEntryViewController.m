@@ -60,7 +60,7 @@
     self.wifiSymbolImageView.tintColor = [SparkSetupCustomization sharedInstance].normalTextColor;// elementBackgroundColor;;
 
     self.backButton.imageView.image = [self.backButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    self.backButton.tintColor = [SparkSetupCustomization sharedInstance].normalTextColor;
+    self.backButton.tintColor = [SparkSetupCustomization sharedInstance].elementTextColor;
 
     // Do any additional setup after loading the view.
     UIView *inputView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50.f)];

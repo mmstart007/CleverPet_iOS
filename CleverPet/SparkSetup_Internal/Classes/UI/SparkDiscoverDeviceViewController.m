@@ -116,8 +116,8 @@
     self.wifiView.layer.borderWidth = 1.0f;
     
 //    self.cancelSetupButton. // customize color too
-    self.cancelSetupButton.titleLabel.font = [UIFont fontWithName:[SparkSetupCustomization sharedInstance].headerTextFontName size:self.self.cancelSetupButton.titleLabel.font.pointSize];
-    [self.cancelSetupButton setTitleColor:[SparkSetupCustomization sharedInstance].normalTextColor forState:UIControlStateNormal];
+    self.cancelSetupButton.titleLabel.font = [UIFont fontWithName:[SparkSetupCustomization sharedInstance].headerTextFontName size:self.cancelSetupButton.titleLabel.font.pointSize];
+    [self.cancelSetupButton setTitleColor:[SparkSetupCustomization sharedInstance].elementTextColor forState:UIControlStateNormal];
 
     
 #ifdef ANALYTICS

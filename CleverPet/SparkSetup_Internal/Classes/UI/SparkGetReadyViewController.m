@@ -57,11 +57,11 @@
         self.loggedInLabel.text = @"";
     self.loggedInLabel.alpha = 0.85;
     self.logoutButton.titleLabel.font = [UIFont fontWithName:[SparkSetupCustomization sharedInstance].headerTextFontName size:self.logoutButton.titleLabel.font.pointSize];
-    [self.logoutButton setTitleColor:[SparkSetupCustomization sharedInstance].normalTextColor forState:UIControlStateNormal];
+    [self.logoutButton setTitleColor:[SparkSetupCustomization sharedInstance].elementTextColor forState:UIControlStateNormal];
 
     //    self.cancelSetupButton. // customize color too
     self.cancelSetupButton.titleLabel.font = [UIFont fontWithName:[SparkSetupCustomization sharedInstance].headerTextFontName size:self.self.cancelSetupButton.titleLabel.font.pointSize];
-    [self.cancelSetupButton setTitleColor:[SparkSetupCustomization sharedInstance].normalTextColor forState:UIControlStateNormal];
+    [self.cancelSetupButton setTitleColor:[SparkSetupCustomization sharedInstance].elementTextColor forState:UIControlStateNormal];
 
     if ([SparkCloud sharedInstance].isLoggedIn)
     {
