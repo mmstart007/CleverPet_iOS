@@ -182,7 +182,7 @@ typedef NS_ENUM(NSInteger, SparkSetupConnectionProgressState) {
     }
     else
     {
-        self.currentStateView.spinner.tintColor = [SparkSetupCustomization sharedInstance].elementBackgroundColor;
+        self.currentStateView.spinner.tintColor = [SparkSetupCustomization sharedInstance].elementTextColor;
     }
 
 }

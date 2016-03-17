@@ -4433,7 +4433,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="type" value="header"/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yjo-nA-HOv" customClass="SparkSetupUILabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yjo-nA-HOv" customClass="SparkSetupUILabel">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -4461,7 +4461,7 @@
                                             </mask>
                                         </variation>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security type" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1M-iA-Igy" customClass="SparkSetupUILabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Security type" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="r1M-iA-Igy" customClass="SparkSetupUILabel">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -4520,6 +4520,7 @@
                                     <constraint firstItem="3hV-M8-czG" firstAttribute="top" secondItem="7YD-Eu-eRs" secondAttribute="bottom" constant="8" id="Ptw-oB-jSr">
                                         <variation key="heightClass=regular-widthClass=compact" constant="16"/>
                                     </constraint>
+                                    <constraint firstItem="r1M-iA-Igy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yjo-nA-HOv" secondAttribute="trailing" constant="8" id="Q9Z-2t-dFp"/>
                                     <constraint firstItem="J4Z-in-rrz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="aGH-RZ-uLL" secondAttribute="top" constant="8" id="Vy0-mP-kyN"/>
                                     <constraint firstItem="GRe-Uh-isD" firstAttribute="leading" secondItem="3hV-M8-czG" secondAttribute="trailing" constant="8" id="W5E-tW-AaM"/>
                                     <constraint firstItem="shD-NL-Bfg" firstAttribute="leading" secondItem="aGH-RZ-uLL" secondAttribute="leading" constant="8" id="WEu-Sn-NqD"/>
@@ -4550,23 +4551,24 @@
                                     <mask key="constraints">
                                         <exclude reference="0Yr-tn-JJA"/>
                                         <exclude reference="5du-sY-B28"/>
-                                        <exclude reference="5OD-gA-kRf"/>
-                                        <exclude reference="AW2-uN-6gY"/>
-                                        <exclude reference="Iho-PN-jvp"/>
-                                        <exclude reference="W5E-tW-AaM"/>
-                                        <exclude reference="o1o-F5-Fpp"/>
-                                        <exclude reference="NoG-3s-Pgf"/>
-                                        <exclude reference="bYa-we-lwk"/>
-                                        <exclude reference="dIj-qj-R69"/>
-                                        <exclude reference="Ptw-oB-jSr"/>
-                                        <exclude reference="eA7-li-7Ht"/>
-                                        <exclude reference="q6l-gN-aT8"/>
-                                        <exclude reference="WEu-Sn-NqD"/>
-                                        <exclude reference="ySg-Tq-jPZ"/>
                                         <exclude reference="73T-xB-aWu"/>
                                         <exclude reference="96h-Pe-jHU"/>
                                         <exclude reference="Vy0-mP-kyN"/>
                                         <exclude reference="vRe-ea-jLB"/>
+                                        <exclude reference="WEu-Sn-NqD"/>
+                                        <exclude reference="ySg-Tq-jPZ"/>
+                                        <exclude reference="NoG-3s-Pgf"/>
+                                        <exclude reference="bYa-we-lwk"/>
+                                        <exclude reference="dIj-qj-R69"/>
+                                        <exclude reference="5OD-gA-kRf"/>
+                                        <exclude reference="AW2-uN-6gY"/>
+                                        <exclude reference="Iho-PN-jvp"/>
+                                        <exclude reference="Ptw-oB-jSr"/>
+                                        <exclude reference="eA7-li-7Ht"/>
+                                        <exclude reference="q6l-gN-aT8"/>
+                                        <exclude reference="W5E-tW-AaM"/>
+                                        <exclude reference="Q9Z-2t-dFp"/>
+                                        <exclude reference="o1o-F5-Fpp"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -4582,23 +4584,24 @@
                                     <mask key="constraints">
                                         <exclude reference="0Yr-tn-JJA"/>
                                         <include reference="5du-sY-B28"/>
-                                        <include reference="5OD-gA-kRf"/>
-                                        <include reference="AW2-uN-6gY"/>
-                                        <include reference="Iho-PN-jvp"/>
-                                        <include reference="W5E-tW-AaM"/>
-                                        <include reference="o1o-F5-Fpp"/>
-                                        <include reference="NoG-3s-Pgf"/>
-                                        <include reference="bYa-we-lwk"/>
-                                        <include reference="dIj-qj-R69"/>
-                                        <include reference="Ptw-oB-jSr"/>
-                                        <include reference="eA7-li-7Ht"/>
-                                        <include reference="q6l-gN-aT8"/>
-                                        <include reference="WEu-Sn-NqD"/>
-                                        <include reference="ySg-Tq-jPZ"/>
                                         <include reference="73T-xB-aWu"/>
                                         <include reference="96h-Pe-jHU"/>
                                         <exclude reference="Vy0-mP-kyN"/>
                                         <include reference="vRe-ea-jLB"/>
+                                        <include reference="WEu-Sn-NqD"/>
+                                        <include reference="ySg-Tq-jPZ"/>
+                                        <include reference="NoG-3s-Pgf"/>
+                                        <include reference="bYa-we-lwk"/>
+                                        <include reference="dIj-qj-R69"/>
+                                        <include reference="5OD-gA-kRf"/>
+                                        <include reference="AW2-uN-6gY"/>
+                                        <include reference="Iho-PN-jvp"/>
+                                        <include reference="Ptw-oB-jSr"/>
+                                        <include reference="eA7-li-7Ht"/>
+                                        <include reference="q6l-gN-aT8"/>
+                                        <include reference="W5E-tW-AaM"/>
+                                        <include reference="Q9Z-2t-dFp"/>
+                                        <include reference="o1o-F5-Fpp"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -5325,8 +5328,8 @@
         <image name="wifi3" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Hst-E4-Dux"/>
         <segue reference="LMP-8O-ZPP"/>
-        <segue reference="c4T-fL-kLE"/>
-        <segue reference="HmP-Rg-LHN"/>
+        <segue reference="Lg4-P5-Mxv"/>
     </inferredMetricsTieBreakers>
 </document>
