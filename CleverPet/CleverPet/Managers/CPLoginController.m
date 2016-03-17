@@ -298,7 +298,7 @@ didFinishSignInWithToken:(NSString *)token
         }
         case CPLoginResult_UserWithoutParticle:
         {
-            [self presentHubPlaceholderWithMessage:NSLocalizedString(@"We no longer have a record of your Hub.\n\nPlease setup a Hub to continue.", @"Message displayed to user when hub has been claimed out from under them")];
+            [self presentHubPlaceholderWithMessage:NSLocalizedString(@"We don't have a record of this Hub. Did anyone recently create a new account for this Hub? Log in to the last account which was set up to avoid losing data.\n\nIf this Hub has not been set up yet, let's set up your Hub!", @"Message displayed to user when hub has been claimed out from under them")];
             break;
         }
         case CPLoginResult_UserWithoutDevice:
