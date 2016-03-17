@@ -25,7 +25,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *brandImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *wifiSymbolImageView;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
-@property (nonatomic, weak) UIButton *keyboardCloseButton;
 
 @end
 
@@ -61,22 +60,6 @@
 
     self.backButton.imageView.image = [self.backButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     self.backButton.tintColor = [SparkSetupCustomization sharedInstance].elementTextColor;
-
-    // Do any additional setup after loading the view.
-    UIView *inputView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50.f)];
-    inputView.backgroundColor = [UIColor whiteColor];
-    UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [doneButton setTitle:@"Done" forState:UIControlStateNormal];
-    doneButton.titleLabel.font = [UIFont fontWithName:[SparkSetupCustomization sharedInstance].normalTextFontName size:15];
-    [doneButton setTitleColor:[SparkSetupCustomization sharedInstance].elementTextColor forState:UIControlStateNormal];
-    [doneButton addTarget:self action:@selector(closeKeyboardTapped:) forControlEvents:UIControlEventTouchUpInside];
-    doneButton.frame = CGRectMake(self.view.bounds.size.width - 70, 0, 50, 50);
-    [inputView addSubview:doneButton];
-    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 1)];
-    separator.backgroundColor = [UIColor lightGrayColor];
-    [inputView addSubview:separator];
-    self.keyboardCloseButton = doneButton;
-    self.passwordTextField.inputAccessoryView = inputView;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,6 +81,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
 #ifdef ANALYTICS
     [[Mixpanel sharedInstance] track:@"Device Setup: Password Entry Screen"];
 #endif
@@ -189,11 +173,6 @@
 - (IBAction)changeNetworkButtonTapped:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)closeKeyboardTapped:(id)sender
-{
-    [self.passwordTextField resignFirstResponder];
 }
 
 @end
