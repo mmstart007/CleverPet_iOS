@@ -141,8 +141,10 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 - (void)cancelPetProfileCreation
 {
     self.userInfo = nil;
+    // Logout of google identity so the user needs to enter their password if signing in with google
+    [self logoutOfGit];
     [self.delegate loginAttemptCancelled];
-    [[self getRootNavController] popToRootViewControllerAnimated:YES];
+    [[CPSharedUtils getRootNavController] popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - GITInterfaceManagerDelegate
@@ -198,7 +200,7 @@ didFinishSignInWithToken:(NSString *)token
             } else if(error.code == kGITErrorCodeEmailMismatch) {
                 // The login web form is presented by identity toolkit, and we can't force the user to enter the same email in the gmail web form as they did in the app, so it's possible to hit this error. Tell the user they need to use the same email they started the sign up flow with, and we also need to logout of GITAuth, as the user is actually logged in to Google Identity, despite receiving an error and no user account here
                 errorMessage = NSLocalizedString(@"The email address signed in to does not match the address provided on the sign in page. Please try again with the correct email.", @"Error message displayed when user uses 2 different emails as part of google sign in");
-                [[GITAuth sharedInstance] signOut];
+                [self logoutOfGit];
             } else {
                 errorMessage = DEFAULT_ERROR_MESSAGE;
             }
@@ -268,14 +270,15 @@ didFinishSignInWithToken:(NSString *)token
 #pragma mark - CPHubPlaceholderDelegate methods
 - (void)hubSetupCancelled
 {
+    [self logoutOfGit];
     [self.delegate loginAttemptCancelled];
-    [[self getRootNavController] popToRootViewControllerAnimated:YES];
+    [[CPSharedUtils getRootNavController] popToRootViewControllerAnimated:YES];
     self.hubPlaceholderVc = nil;
 }
 
 - (void)hubSetupContinued
 {
-    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[CPSharedUtils getRootNavController] withDelegate:self];
 }
 
 #pragma mark - UI flow
@@ -290,18 +293,18 @@ didFinishSignInWithToken:(NSString *)token
         case CPLoginResult_UserWithoutPetProfile:
         {
             UIViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"PetProfileSetup"];
-            [[self getRootNavController] pushViewController:vc animated:YES];
+            [[CPSharedUtils getRootNavController] pushViewController:vc animated:YES];
             break;
         }
         case CPLoginResult_UserWithoutParticle:
         {
-            [self presentHubPlaceholderWithMessage:NSLocalizedString(@"We no longer have a record of your Hub.\n\nPlease setup a Hub to continue.", @"Message displayed to user when hub has been claimed out from under them")];
+            [self presentHubPlaceholderWithMessage:NSLocalizedString(@"We don't have a record of this Hub. Did anyone recently create a new account for this Hub? Log in to the last account which was set up to avoid losing data.\n\nIf this Hub has not been set up yet, let's set up your Hub!", @"Message displayed to user when hub has been claimed out from under them")];
             break;
         }
         case CPLoginResult_UserWithoutDevice:
         {
             [self presentHubPlaceholderWithMessage:nil];
-            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[CPSharedUtils getRootNavController] withDelegate:self];
             break;
         }
         case CPLoginResult_UserWithSetupCompleted:
@@ -337,21 +340,14 @@ didFinishSignInWithToken:(NSString *)token
     vc.delegate = self;
     vc.shouldConfirmCancellation = YES;
     
-    UINavigationController *root = [self getRootNavController];
+    UINavigationController *root = [CPSharedUtils getRootNavController];
     [root pushViewController:vc animated:YES];
-}
-
-- (UINavigationController*)getRootNavController
-{
-    // TODO: Need to get the actual top level controller navController = visibleViewController, viewController = probably presentedViewController
-    // TODO: handle when our root is not a nav controller
-    return (UINavigationController*)[[[UIApplication sharedApplication].delegate window] rootViewController];
 }
 
 - (void)logout
 {
     [Intercom reset];
-    [[GITAuth sharedInstance] signOut];
+    [self logoutOfGit];
     
     // Clear auto login token from keychain
     [self clearAutoLoginToken];
@@ -372,6 +368,11 @@ didFinishSignInWithToken:(NSString *)token
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     [animation setType:kCATransitionFade];
     [window.layer addAnimation:animation forKey:@"crossFade"];
+}
+
+- (void)logoutOfGit
+{
+    [[GITAuth sharedInstance] signOut];
 }
 
 - (void)setAutoLoginToken:(NSString*)authToken

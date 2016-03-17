@@ -18,6 +18,7 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) NSDate *loadedDate;
 @property (nonatomic, strong) NSTimer *dismissTimer;
+@property (weak, nonatomic) IBOutlet UIView *fade;
 
 @end
 
@@ -32,6 +33,7 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
     self.messageLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
     self.messageLabel.textColor = [UIColor appTitleTextColor];
     self.backgroundImage.image = [CPSplashImageUtils getSplashImage];
+    self.fade.layer.cornerRadius = 10.f;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +55,7 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
         [self.spinner stopAnimating];
     }
     self.messageLabel.hidden = !isAnimating;
+    self.fade.hidden = !isAnimating;
 }
 
 - (void)displayErrorAlertWithTitle:(NSString *)title andMessage:(NSString *)message

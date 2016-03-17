@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface CPSharedUtils : NSObject
 
 + (void)deviceTimeZoneUpdated:(NSInteger)offset;
++ (UINavigationController *)getRootNavController;
 
 @end
 
@@ -114,3 +116,7 @@ extern NSString * const kPageSizeKey;
 
 #define ASYNC void
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+#pragma mark - Text
+#define CANCEL_TEXT NSLocalizedString(@"Cancel", @"Cancel")
+#define OK_TEXT NSLocalizedString(@"OK", @"OK")

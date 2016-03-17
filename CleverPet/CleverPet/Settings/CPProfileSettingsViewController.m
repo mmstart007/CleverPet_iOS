@@ -14,6 +14,7 @@
 #import "CPPetPhotoViewController.h"
 #import "CPUserManager.h"
 #import "CPGenderUtils.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate, CPPetPhotoDelegate, UIScrollViewDelegate>
 
@@ -81,11 +82,13 @@
     [self setupStyling];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    // TODO: button image
+    [button setImage:[[UIImage imageNamed:@"back_arrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
     [button setTitle:@"Back" forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
-    [button sizeToFit];
     [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor appTealColor]];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 7, 0, 0)];
+    button.frame = CGRectMake(0, 0, 50, 40);
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     [button addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = barButton;
@@ -101,12 +104,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // Mess with our title so we get the appropriate back button
+    self.title = @"Profile";
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
     REG_SELF_FOR_NOTIFICATION(UIKeyboardWillShowNotification, keyboardWillShow:);
     REG_SELF_FOR_NOTIFICATION(UIKeyboardWillHideNotification, keyboardWillHide:);
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -170,6 +186,7 @@
 
 - (void)backButtonTapped:(id)sender
 {
+    [self.view endEditing:YES];
     NSString *alteredString = [CPGenderUtils genderNeutralStringForAlteredState:self.neuteredField.text];
     if ([alteredString length] == 0) {
         alteredString = kGenderNeutralUnspecified;
@@ -177,18 +194,29 @@
     NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kAlteredKey:alteredString};
     [CPPet validateInput:petInfo isInitialSetup:NO completion:^(BOOL isValidInput, NSString *errorMessage) {
         if (isValidInput) {
-            [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:^(NSError *error) {
-                if (error) {
-                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Save", nil) message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                        [self.navigationController popViewControllerAnimated:YES];
-                    }]];
-                    [self presentViewController:alert animated:YES completion:nil];
-                } else {
+            if ([[CPUserManager sharedInstance] hasPetInfoChanged:petInfo]) {
+                // Verify we even have a network connection before this nonsense
+                if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+                    [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:nil];
                     [self.navigationController popViewControllerAnimated:YES];
+                } else {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Connection Offline" message:NSLocalizedString(@"The internet connection appears to be offline. Changes will not be save.", @"Error message displayed when trying to save changes while device is offline") preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel (Stay Here)", @"Cancel text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleCancel handler:nil];
+                    
+                    BLOCK_SELF_REF_OUTSIDE();
+                    UIAlertAction *discardAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Continue (Discard my Changes)", @"Continue text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                        BLOCK_SELF_REF_INSIDE();
+                        [self.navigationController popViewControllerAnimated:YES];
+                    }];
+                    
+                    [alert addAction:cancelAction];
+                    [alert addAction:discardAction];
+                    [self presentViewController:alert animated:YES completion:nil];
                 }
-            }];
-
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         } else {
             [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", nil) andMessage:errorMessage];
         }
@@ -197,7 +225,16 @@
 
 - (void)logoutTapped:(UITapGestureRecognizer*)recognizer
 {
-    [[CPUserManager sharedInstance] logout];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Are you sure you want to log out?", @"Confirmation message displayed to user when logging out") preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:CANCEL_TEXT style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Logout", @"Logout confirmation button text") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [[CPUserManager sharedInstance] logout];
+    }];
+    
+    [alert addAction:cancelAction];
+    [alert addAction:logoutAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - UITextFieldDelegate methods
@@ -205,6 +242,34 @@
 {
     if (textField == self.weightField) {
         self.weightField.text = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
+    } else if (textField == self.genderField) {
+        if (!self.genderPicker) {
+            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+            CPPickerViewController *genderPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
+            [genderPicker setupForPickingGender];
+            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
+            [genderPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
+            genderPicker.delegate = self;
+            textField.inputView = genderPicker.view;
+            self.genderPicker = genderPicker;
+        }
+    } else if (textField == self.neuteredField) {
+        if (!self.neuteredPicker) {
+            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+            CPPickerViewController *neuteredPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
+            [neuteredPicker setupForPickingNeuteredWithGender:[self.genderField.text lowercaseString]];
+            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
+            [neuteredPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
+            neuteredPicker.delegate = self;
+            textField.inputView = neuteredPicker.view;
+            self.neuteredPicker = neuteredPicker;
+        }
+    } else if (textField == self.breedField) {
+        UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+        CPBreedPickerViewController *vc = [pickerStoryboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
+        vc.delegate = self;
+        vc.selectedBreed = self.breedField.text;
+        [self presentViewController:vc animated:YES completion:nil];
     }
 }
 
@@ -240,42 +305,6 @@
     return NO;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    if (textField == self.genderField) {
-        if (!self.genderPicker) {
-            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
-            CPPickerViewController *genderPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
-            [genderPicker setupForPickingGender];
-            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
-            [genderPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
-            genderPicker.delegate = self;
-            textField.inputView = genderPicker.view;
-            self.genderPicker = genderPicker;
-        }
-    } else if (textField == self.neuteredField) {
-        if (!self.neuteredPicker) {
-            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
-            CPPickerViewController *neuteredPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
-            [neuteredPicker setupForPickingNeuteredWithGender:[self.genderField.text lowercaseString]];
-            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
-            [neuteredPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
-            neuteredPicker.delegate = self;
-            textField.inputView = neuteredPicker.view;
-            self.neuteredPicker = neuteredPicker;
-        }
-    } else if (textField == self.breedField) {
-        UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
-        CPBreedPickerViewController *vc = [pickerStoryboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
-        vc.delegate = self;
-        vc.selectedBreed = self.breedField.text;
-        [self presentViewController:vc animated:YES completion:nil];
-        return NO;
-    }
-    
-    return YES;
-}
-
 #pragma mark - CPPickerDelegate methods
 - (void)pickerViewController:(CPPickerViewController *)controller selectedString:(NSString *)string
 {
@@ -306,7 +335,7 @@
 {
     [[CPUserManager sharedInstance] updatePetPhoto:image];
     self.petImage.image = [self.pet petPhoto];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Navigation
@@ -314,6 +343,7 @@
 {
     if ([segue.destinationViewController isKindOfClass:[CPPetPhotoViewController class]])
     {
+        self.title = CANCEL_TEXT;
         CPPetPhotoViewController *photoPicker = segue.destinationViewController;
         photoPicker.delegate = self;
         photoPicker.selectedImage = [self.pet petPhotoForPicker];

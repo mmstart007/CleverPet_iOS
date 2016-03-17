@@ -67,4 +67,11 @@ NSString * const kPageSizeKey = @"num_entries";
     [CPTileTextFormatter setTimeZoneOffset:offset];
 }
 
++ (UINavigationController*)getRootNavController
+{
+    // TODO: Need to get the actual top level controller navController = visibleViewController, viewController = probably presentedViewController
+    // TODO: handle when our root is not a nav controller
+    return (UINavigationController*)[[[UIApplication sharedApplication].delegate window] rootViewController];
+}
+
 @end

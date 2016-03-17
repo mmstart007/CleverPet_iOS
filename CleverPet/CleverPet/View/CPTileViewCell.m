@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIView *backingView;
 @property (strong, nonatomic) IBOutlet UIView *colouredDotView;
 @property (weak, nonatomic) IBOutlet UIView *swipedColorView;
+@property (weak, nonatomic) IBOutlet UIImageView *swipableImage;
 
 // The relative priority of these 2 constraints controls whether the swiped color view covers
 // or doesn't cover the cell. One should always be greater than the other to prevent constraint conflicts.
@@ -134,6 +135,7 @@
     self.tagTimeStampLabel.text = [NSString stringWithFormat:@"%@ | %@", categoryString, [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
     
     self.colouredDotView.backgroundColor = tileColor;
+    self.swipableImage.hidden = !tile.userDeletable;
 }
 
 - (void)swipeGestureRecognized:(UISwipeGestureRecognizer *)recognizer {

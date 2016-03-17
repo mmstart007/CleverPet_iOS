@@ -136,7 +136,7 @@
 - (BOOL)isViewVisible
 {
     // we have no window, we're not currently visible
-    return self.view.window;
+    return self.view.window != nil;
 }
 
 @end
