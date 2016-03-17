@@ -127,11 +127,21 @@ NSString * const kFirebaseTilePath = @"tile";
 }
 
 #pragma mark - Tile updates
-- (void)listenForTileUpdatesWithBlock:(FirebaseUpdateBlock)block
+- (void)listenForTileUpdatesWithBlock:(FirebaseTileUpdateBlock)block
 {
-    self.tilesHandle = [[self.rootRef childByAppendingPath:[NSString stringWithFormat:@"%@/%@", self.userStatsPath, kFirebaseTilePath]] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        block(nil, [self petStats:snapshot.value]);
+    Firebase *tileRoot = [self.rootRef childByAppendingPath:[NSString stringWithFormat:@"%@/%@", self.userStatsPath, kFirebaseTilePath]];
+    NSString *childKey = [tileRoot childByAutoId].key;
+    
+    self.tilesHandle = [[[tileRoot queryOrderedByKey] queryStartingAtValue:childKey] observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        NSError *error = nil;
+        CPTile *tile = [[CPTile alloc] initWithDictionary:snapshot.value error:&error];
+        if (error) {
+            block(error, nil);
+        } else {
+            block(nil, tile);
+        }
     }];
+    
     self.hasTilesHandle = YES;
 }
 

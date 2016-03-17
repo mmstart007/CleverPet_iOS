@@ -34,6 +34,12 @@ NSString * const kLastSeenPathFragment = @"lastseen";
 #define DEVICE_LAST_SEEN(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kLastSeenPathFragment]
 #define SPECIFIC_SCHEDULE(deviceId, scheduleId) [NSString stringWithFormat:@"%@/%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment, scheduleId]
 
+#define PARTICLE_ENABLED 1
+
+#if !PARTICLE_ENABLED
+#warning #### Particle is not enabled! Please enable before checking in!
+#endif
+
 // TODO: error codes or something so this isn't string matching
 NSString * const kNoUserAccountError = @"No account exists for the given email address";
 
@@ -134,11 +140,16 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (!currentUser.pet) {
                 result = CPLoginResult_UserWithoutPetProfile;
             } else if (!currentUser.device) {
+#if PARTICLE_ENABLED
                 result = CPLoginResult_UserWithoutDevice;
+#endif
             } else if (!currentUser.device.particleId) {
+#if PARTICLE_ENABLED
                 result = CPLoginResult_UserWithoutParticle;
+#endif
             }
             
+#if PARTICLE_ENABLED
             if ((currentUser.device && currentUser.device.particleId) && (!currentUser.device.weekdaySchedule || !currentUser.device.weekendSchedule)) {
                 [self lookupDeviceSchedules:currentUser.device.deviceId completion:^(NSError *error) {
                     if (error) {
@@ -148,8 +159,11 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
                     }
                 }];
             } else {
+#endif
                 if (completion) completion(result, nil);
+#if PARTICLE_ENABLED
             }
+#endif
         }
     };
     

@@ -93,6 +93,24 @@
     return indexOfSectionStart;
 }
 
+- (NSUInteger)indexOfTile:(CPTile *)tile {
+    CPSimpleDate *simpleDate = [[CPSimpleDate alloc] initWithDate:tile.date];
+    CPTileSection *tileSection = self.tileSections[simpleDate];
+    if (!tileSection) {
+        return NSNotFound;
+    }
+    
+    NSUInteger sectionStart = [self indexOfSectionStart:tileSection];
+    
+    NSUInteger rowIndex = [tileSection indexOfTile:tile forInsertion:NO];
+    
+    if (rowIndex == NSNotFound) {
+        return rowIndex;
+    }
+    
+    return sectionStart + 1 + rowIndex;
+}
+
 #pragma mark - Backing data manipulation
 - (NSIndexSet *)addTile:(CPTile *)tile {
     CPSimpleDate *simpleDate = [[CPSimpleDate alloc] initWithDate:tile.date];
@@ -162,7 +180,7 @@
     return [deletedIndexes copy];
 }
 
-- (BOOL)refreshTiles:(BOOL)forceRefresh completion:(void (^)(NSIndexSet *indexes, NSError *error))completion
+- (BOOL)refreshTiles:(BOOL)forceRefresh
 {
     if ((self.shouldForceNextRefresh || forceRefresh || !self.performedInitialFetch) && !self.refreshInProgress) {
         BLOCK_SELF_REF_OUTSIDE();
@@ -187,17 +205,20 @@
                 // Hold onto our paging cursor for future use
                 self.cursor = [tileInfo[kCursorKey] isKindOfClass:[NSNull class]] ? nil : tileInfo[kCursorKey];
                 self.moreTiles = [tileInfo[kMoreKey] boolValue];
+                
+                [self.delegate tileDataManager:self didDeleteRows:nil updateRows:nil insertRows:indexes fromRefresh:YES];
+            } else {
+                [self.delegate tileDataManager:self encounteredRefreshError:error];
             }
-            if (completion) completion(indexes, error);
         }];
         return YES;
     } else {
-        if (completion) completion([NSIndexSet indexSet], nil);
+        [self.delegate tileDataManager:self didDeleteRows:nil updateRows:nil insertRows:nil fromRefresh:YES];
     }
     return NO;
 }
 
-- (ASYNC)pageMoreTiles:(void (^)(NSIndexSet *, NSError *))completion
+- (void)pageMoreTiles
 {
     if (self.moreTiles && self.cursor && !self.refreshInProgress && !self.pageInProgress) {
         self.pageInProgress = YES;
@@ -215,11 +236,14 @@
                 }
                 self.cursor = tileInfo[kCursorKey];
                 self.moreTiles = [tileInfo[kMoreKey] boolValue];
+                
+                [self.delegate tileDataManager:self didDeleteRows:nil updateRows:nil insertRows:indexes fromRefresh:YES];
+            } else {
+                [self.delegate tileDataManager:self encounteredRefreshError:error];
             }
-            if (completion) completion(indexes, error);
         }];
     } else {
-        if (completion) completion([NSIndexSet indexSet], nil);
+        [self.delegate tileDataManager:self didDeleteRows:nil updateRows:nil insertRows:nil fromRefresh:YES];
     }
 }
 
@@ -285,4 +309,23 @@
     self.shouldForceNextRefresh = YES;
 }
 
+- (void)updateTile:(CPTile *)tile
+{
+    if (self.filter == nil && tile.removed.boolValue) {
+        NSIndexSet *deletedIndexes = [self deleteTile:tile];
+        [self.delegate tileDataManager:self didDeleteRows:deletedIndexes updateRows:nil insertRows:nil fromRefresh:NO];
+    } else if (!tile.removed.boolValue) {
+        // We only care about adding this tile if it's part of our filter
+        if (self.filter == nil || [tile.category isEqualToString:self.filter]) {
+            NSUInteger tileIndex = [self indexOfTile:tile];
+            if (tileIndex == NSNotFound) {
+                NSIndexSet *addedTile = [self addTile:tile];
+                [self.delegate tileDataManager:self didDeleteRows:nil updateRows:nil insertRows:addedTile fromRefresh:NO];
+            } else {
+                NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:tileIndex];
+                [self.delegate tileDataManager:self didDeleteRows:nil updateRows:indexSet insertRows:nil fromRefresh:NO];
+            }
+        }
+    }
+}
 @end

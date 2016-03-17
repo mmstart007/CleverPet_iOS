@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "CPPetStats.h"
+#import "CPTile.h"
 
 typedef void(^FirebaseUpdateBlock)(NSError*, CPPetStats*);
+typedef void(^FirebaseTileUpdateBlock)(NSError*, CPTile*);
 typedef void(^FirebaseLoginBlock)(NSError *);
 
 @interface CPFirebaseManager : NSObject
@@ -26,7 +28,7 @@ typedef void(^FirebaseLoginBlock)(NSError *);
 - (void)stoplisteningForStatsUpdates;
 
 //Tile updates
-- (void)listenForTileUpdatesWithBlock:(FirebaseUpdateBlock)block;
+- (void)listenForTileUpdatesWithBlock:(FirebaseTileUpdateBlock)block;
 - (void)stopListeningForTileUpdates;
 
 @end

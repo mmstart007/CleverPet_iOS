@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class CPTile;
 @protocol CPTileUpdateDelegate <NSObject>
 
-- (void)queueTileUpdate;
+- (void)queueTileUpdate:(CPTile *)tile;
 
 @end
 
