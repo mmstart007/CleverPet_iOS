@@ -77,10 +77,8 @@
     }
     // Ensure we always have Mixed Breed as an option
     NSString *mixed = NSLocalizedString(@"Mixed Breed", @"Default option for breed selector");
-    // Naive, but lets assume we want it at the top instead of somewhere in the array
-    if (![[self.filteredBreeds firstObject] isEqualToString:mixed]) {
-        [self.filteredBreeds insertObject:mixed atIndex:0];
-    }
+    [self.filteredBreeds removeObject:mixed];
+    [self.filteredBreeds insertObject:mixed atIndex:0];
     [self.tableView reloadData];
 }
 
