@@ -264,7 +264,7 @@
                                     <action selector="cancelTapped:" destination="Gh1-G2-TO8" eventType="touchUpInside" id="aQo-Zy-87O"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hub Setup" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYO-RY-ylF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hub Setup" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XYO-RY-ylF">
                                 <rect key="frame" x="259" y="290" width="82" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -290,7 +290,7 @@
                             <constraint firstAttribute="trailing" secondItem="gT2-Qk-cYE" secondAttribute="trailing" id="0lS-wK-hi0"/>
                             <constraint firstItem="6JH-6l-9V5" firstAttribute="leading" secondItem="fsG-kg-6nf" secondAttribute="leading" id="8Oq-JU-UQ7"/>
                             <constraint firstItem="Pfb-Jl-KfE" firstAttribute="top" secondItem="6JH-6l-9V5" secondAttribute="bottom" id="9PX-Xo-pij"/>
-                            <constraint firstItem="6JH-6l-9V5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XYO-RY-ylF" secondAttribute="bottom" constant="50" id="EOY-wX-Bzm"/>
+                            <constraint firstItem="6JH-6l-9V5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XYO-RY-ylF" secondAttribute="bottom" constant="20" id="EOY-wX-Bzm"/>
                             <constraint firstItem="UXW-OY-NAS" firstAttribute="leading" secondItem="fsG-kg-6nf" secondAttribute="leading" constant="15" id="N2F-Mv-Esd"/>
                             <constraint firstItem="XYO-RY-ylF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fsG-kg-6nf" secondAttribute="leading" constant="50" id="Q2D-UB-qd7"/>
                             <constraint firstItem="XYO-RY-ylF" firstAttribute="centerY" secondItem="fsG-kg-6nf" secondAttribute="centerY" id="cu7-R6-CXh"/>
@@ -299,7 +299,7 @@
                             <constraint firstItem="gT2-Qk-cYE" firstAttribute="top" secondItem="ncb-LC-nFf" secondAttribute="bottom" id="jKY-5z-WET"/>
                             <constraint firstItem="UXW-OY-NAS" firstAttribute="top" secondItem="ncb-LC-nFf" secondAttribute="bottom" id="mSl-I5-Yb5"/>
                             <constraint firstItem="gT2-Qk-cYE" firstAttribute="leading" secondItem="fsG-kg-6nf" secondAttribute="leading" id="rVC-xI-TVL"/>
-                            <constraint firstItem="XYO-RY-ylF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ncb-LC-nFf" secondAttribute="bottom" constant="50" id="tJP-nm-UWu"/>
+                            <constraint firstItem="XYO-RY-ylF" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ncb-LC-nFf" secondAttribute="bottom" constant="20" id="tJP-nm-UWu"/>
                             <constraint firstItem="XYO-RY-ylF" firstAttribute="centerX" secondItem="fsG-kg-6nf" secondAttribute="centerX" id="tqz-RJ-QNw"/>
                             <constraint firstItem="Pfb-Jl-KfE" firstAttribute="top" secondItem="gT2-Qk-cYE" secondAttribute="bottom" id="vCg-No-NU7"/>
                         </constraints>

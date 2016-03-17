@@ -241,7 +241,7 @@ NSInteger const kLastSeenThreshhold = 120;
 
 - (void)deviceClaimFailed
 {
-    [self.hubPlaceholder displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
+    [self.hubPlaceholder displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again. Make sure your phone is no longer connected to the Hub's network.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
 }
 
 #pragma mark - Navigation
