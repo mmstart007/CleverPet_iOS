@@ -27,6 +27,9 @@
 #import <Mixpanel.h>
 #endif
 
+// TODO: Pull this out somewhere for access by the rest of spark setup
+#define BLOCK_SELF_REF_OUTSIDE() __weak __typeof(&*self) weakSelf = self;
+#define BLOCK_SELF_REF_INSIDE() __typeof(&*self) self = weakSelf;
 
 @interface SparkDiscoverDeviceViewController () <NSStreamDelegate, UIAlertViewDelegate, SparkSelectNetworkViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *wifiSignalImageView;
@@ -231,7 +234,9 @@
                                                                repeats:YES];
     
     
+    BLOCK_SELF_REF_OUTSIDE();
     self.backgroundTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        BLOCK_SELF_REF_INSIDE();
 //        NSLog(@"Background handler called. Not running background tasks anymore.");
         [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
         self.backgroundTask = UIBackgroundTaskInvalid;
@@ -337,8 +342,10 @@
         [self startStepTimeoutTimer];
         SparkSetupCommManager *manager = [[SparkSetupCommManager alloc] init];
         [self.checkConnectionTimer invalidate];
+        BLOCK_SELF_REF_OUTSIDE();
         [manager deviceID:^(id deviceResponseDict, NSError *error)
          {
+             BLOCK_SELF_REF_INSIDE();
              if (error)
              {
                  NSLog(@"Could not send device-id command: %@", error.localizedDescription);
@@ -379,7 +386,9 @@
         SparkSetupCommManager *manager = [[SparkSetupCommManager alloc] init];
         [self startStepTimeoutTimer];
         NSLog(@"ScanAP sent");
+        BLOCK_SELF_REF_OUTSIDE();
         [manager scanAP:^(id scanResponse, NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
             if (error)
             {
                 NSLog(@"Could not send scan-ap command: %@",error.localizedDescription);
@@ -523,7 +532,9 @@
         SparkSetupCommManager *manager = [[SparkSetupCommManager alloc] init];
         [self.checkConnectionTimer invalidate];
         [self startStepTimeoutTimer];
+        BLOCK_SELF_REF_OUTSIDE();
         [manager publicKey:^(id responseCode, NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
             if (error)
             {
                 NSLog(@"Error sending public-key command to target: %@",error.localizedDescription);
@@ -574,7 +585,9 @@
     [self.checkConnectionTimer invalidate];
     [self startStepTimeoutTimer];
     NSLog(@"Claim code - trying to set");
+    BLOCK_SELF_REF_OUTSIDE();
     [manager setClaimCode:self.claimCode completion:^(id responseCode, NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
         if (error)
         {
             NSLog(@"Could not send set command: %@", error.localizedDescription);
@@ -603,7 +616,9 @@
 {
     SparkSetupCommManager *manager = [[SparkSetupCommManager alloc] init];
     [self.checkConnectionTimer invalidate];
+    BLOCK_SELF_REF_OUTSIDE();
     [manager version:^(id version, NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
         if (error)
         {
             NSLog(@"Could not send version command: %@",error.localizedDescription);
@@ -621,8 +636,7 @@
 - (IBAction)cancelButtonTouched:(id)sender
 {
     // finish gracefully
-    [self.checkConnectionTimer invalidate];
-    self.checkConnectionTimer = nil;
+    [self killAllTimers];
     [[NSNotificationCenter defaultCenter] postNotificationName:kSparkSetupDidFinishNotification object:nil userInfo:@{kSparkSetupDidFinishStateKey:@(SparkSetupMainControllerResultUserCancel)}];
     
     
@@ -650,12 +664,7 @@
 
 - (void)cancelSetup
 {
-    [self stopStepTimeoutTimer];
-    [self.checkConnectionTimer invalidate];
-    self.checkConnectionTimer = nil;
-    [self.backgroundTaskTimer invalidate];
-    self.backgroundTaskTimer = nil;
-    
+    [self killAllTimers];
     [self performSegueWithIdentifier:@"done" sender:nil];
 }
 
@@ -666,6 +675,10 @@
     self.checkConnectionTimer = nil;
     [self.backgroundTaskTimer invalidate];
     self.backgroundTaskTimer = nil;
+    if (self.backgroundTask && self.backgroundTask != UIBackgroundTaskInvalid) {
+        [[UIApplication sharedApplication] endBackgroundTask:self.backgroundTask];
+        self.backgroundTask = UIBackgroundTaskInvalid;
+    }
 }
 
 @end
