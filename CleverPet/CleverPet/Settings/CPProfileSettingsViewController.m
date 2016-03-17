@@ -242,6 +242,34 @@
 {
     if (textField == self.weightField) {
         self.weightField.text = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
+    } else if (textField == self.genderField) {
+        if (!self.genderPicker) {
+            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+            CPPickerViewController *genderPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
+            [genderPicker setupForPickingGender];
+            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
+            [genderPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
+            genderPicker.delegate = self;
+            textField.inputView = genderPicker.view;
+            self.genderPicker = genderPicker;
+        }
+    } else if (textField == self.neuteredField) {
+        if (!self.neuteredPicker) {
+            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+            CPPickerViewController *neuteredPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
+            [neuteredPicker setupForPickingNeuteredWithGender:[self.genderField.text lowercaseString]];
+            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
+            [neuteredPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
+            neuteredPicker.delegate = self;
+            textField.inputView = neuteredPicker.view;
+            self.neuteredPicker = neuteredPicker;
+        }
+    } else if (textField == self.breedField) {
+        UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+        CPBreedPickerViewController *vc = [pickerStoryboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
+        vc.delegate = self;
+        vc.selectedBreed = self.breedField.text;
+        [self presentViewController:vc animated:YES completion:nil];
     }
 }
 
@@ -275,42 +303,6 @@
     
     // Disable typing for gender/breed fields
     return NO;
-}
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    if (textField == self.genderField) {
-        if (!self.genderPicker) {
-            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
-            CPPickerViewController *genderPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
-            [genderPicker setupForPickingGender];
-            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
-            [genderPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
-            genderPicker.delegate = self;
-            textField.inputView = genderPicker.view;
-            self.genderPicker = genderPicker;
-        }
-    } else if (textField == self.neuteredField) {
-        if (!self.neuteredPicker) {
-            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
-            CPPickerViewController *neuteredPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
-            [neuteredPicker setupForPickingNeuteredWithGender:[self.genderField.text lowercaseString]];
-            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
-            [neuteredPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
-            neuteredPicker.delegate = self;
-            textField.inputView = neuteredPicker.view;
-            self.neuteredPicker = neuteredPicker;
-        }
-    } else if (textField == self.breedField) {
-        UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
-        CPBreedPickerViewController *vc = [pickerStoryboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
-        vc.delegate = self;
-        vc.selectedBreed = self.breedField.text;
-        [self presentViewController:vc animated:YES completion:nil];
-        return NO;
-    }
-    
-    return YES;
 }
 
 #pragma mark - CPPickerDelegate methods
