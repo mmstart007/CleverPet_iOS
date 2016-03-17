@@ -25,5 +25,4 @@
 - (void)updatePetImage:(UIImage*)petImage;
 - (void)videoPlaybackCompletedForTile:(CPTile*)tile;
 - (void)viewBecomingVisible;
-- (void)reloadData;
 @end
