@@ -17,7 +17,6 @@
 @interface CPPetProfileViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subCopyLabel;
 @property (weak, nonatomic) IBOutlet CPTextField *nameField;
 @property (weak, nonatomic) IBOutlet CPTextField *familyField;
 @property (weak, nonatomic) IBOutlet CPTextField *breedField;
@@ -102,9 +101,6 @@
     self.headerLabel.text = NSLocalizedString(@"Pet's Profile", @"Title text for pets profile");
     self.headerLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
     self.headerLabel.textColor = [UIColor appTitleTextColor];
-    self.subCopyLabel.text = NSLocalizedString(@"Placeholder sub copy", @"Sub copy text for pets profile");
-    self.subCopyLabel.font = [UIFont cpLightFontWithSize:kSubCopyFontSize italic:NO];
-    self.subCopyLabel.textColor = [UIColor appSubCopyTextColor];
     self.continueButton.backgroundColor = [UIColor appLightTealColor];
     self.continueButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.continueButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
