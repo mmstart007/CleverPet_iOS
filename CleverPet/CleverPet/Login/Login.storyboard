@@ -32,7 +32,7 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="530"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8eG-5W-OXW">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="532"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="491"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jhh-5R-0Vg">
                                                 <rect key="frame" x="279" y="40" width="42" height="21"/>
@@ -40,14 +40,8 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p2a-pI-4Fh">
-                                                <rect key="frame" x="279" y="81" width="42" height="21"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uc0-rq-sB5" customClass="CPTextField">
-                                                <rect key="frame" x="0.0" y="132" width="600" height="50"/>
+                                                <rect key="frame" x="0.0" y="91" width="600" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="hbg-mL-N8y"/>
@@ -66,7 +60,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Family Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uG7-ay-KDL" customClass="CPTextField">
-                                                <rect key="frame" x="0.0" y="197" width="600" height="50"/>
+                                                <rect key="frame" x="0.0" y="156" width="600" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="228-zM-qdq"/>
@@ -85,7 +79,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Breed" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YJ0-ue-Nwj" customClass="CPTextField">
-                                                <rect key="frame" x="0.0" y="262" width="600" height="50"/>
+                                                <rect key="frame" x="0.0" y="221" width="600" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="qgm-Zy-rPp"/>
@@ -104,7 +98,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Gender" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SeR-qg-ZLA" customClass="CPTextField">
-                                                <rect key="frame" x="0.0" y="327" width="600" height="50"/>
+                                                <rect key="frame" x="0.0" y="286" width="600" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Yox-xj-cxA"/>
@@ -123,7 +117,7 @@
                                                 </connections>
                                             </textField>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Weight Unit" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bpR-1D-xrx" customClass="CPTextField">
-                                                <rect key="frame" x="0.0" y="462" width="600" height="50"/>
+                                                <rect key="frame" x="0.0" y="421" width="600" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="5Hs-c8-8KS"/>
@@ -142,7 +136,7 @@
                                                 </connections>
                                             </textField>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gd7-K5-WJf">
-                                                <rect key="frame" x="495" y="473" width="75" height="29"/>
+                                                <rect key="frame" x="495" y="432" width="75" height="29"/>
                                                 <segments>
                                                     <segment title="Lbs"/>
                                                     <segment title="Kgs"/>
@@ -153,7 +147,7 @@
                                                 </connections>
                                             </segmentedControl>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Age" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ImT-HO-OFo" customClass="CPTextField">
-                                                <rect key="frame" x="0.0" y="397" width="600" height="50"/>
+                                                <rect key="frame" x="0.0" y="356" width="600" height="50"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="yoz-VG-xeT"/>
@@ -181,27 +175,23 @@
                                             <constraint firstAttribute="trailing" secondItem="uG7-ay-KDL" secondAttribute="trailing" id="76K-af-1X8"/>
                                             <constraint firstItem="uc0-rq-sB5" firstAttribute="leading" secondItem="8eG-5W-OXW" secondAttribute="leading" id="8Le-d5-EBh"/>
                                             <constraint firstItem="YJ0-ue-Nwj" firstAttribute="top" secondItem="uG7-ay-KDL" secondAttribute="bottom" constant="15" id="9e4-C9-ItA"/>
-                                            <constraint firstItem="p2a-pI-4Fh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8eG-5W-OXW" secondAttribute="leading" constant="20" id="Bjx-Pt-uHU"/>
                                             <constraint firstItem="Jhh-5R-0Vg" firstAttribute="top" secondItem="8eG-5W-OXW" secondAttribute="top" constant="40" id="CJ8-Xu-0TQ"/>
-                                            <constraint firstItem="p2a-pI-4Fh" firstAttribute="top" secondItem="Jhh-5R-0Vg" secondAttribute="bottom" constant="20" id="DC4-qn-6cX"/>
                                             <constraint firstItem="SeR-qg-ZLA" firstAttribute="leading" secondItem="8eG-5W-OXW" secondAttribute="leading" id="FaN-kq-neQ"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Jhh-5R-0Vg" secondAttribute="trailing" constant="20" id="HiL-sP-vho"/>
                                             <constraint firstAttribute="trailing" secondItem="gd7-K5-WJf" secondAttribute="trailing" constant="30" id="JR9-09-7Xh"/>
                                             <constraint firstItem="bpR-1D-xrx" firstAttribute="leading" secondItem="8eG-5W-OXW" secondAttribute="leading" id="JXq-1P-R0G"/>
                                             <constraint firstItem="ImT-HO-OFo" firstAttribute="top" secondItem="SeR-qg-ZLA" secondAttribute="bottom" constant="20" id="Jh7-Uf-O0f"/>
-                                            <constraint firstItem="uc0-rq-sB5" firstAttribute="top" secondItem="p2a-pI-4Fh" secondAttribute="bottom" constant="30" id="Jlr-wM-0Z3"/>
                                             <constraint firstItem="Jhh-5R-0Vg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8eG-5W-OXW" secondAttribute="leading" constant="20" id="Keq-aq-2RC"/>
                                             <constraint firstAttribute="trailing" secondItem="YJ0-ue-Nwj" secondAttribute="trailing" id="NLe-n1-ZWn"/>
                                             <constraint firstAttribute="bottom" secondItem="bpR-1D-xrx" secondAttribute="bottom" constant="20" id="ThW-kL-e9B"/>
                                             <constraint firstItem="uG7-ay-KDL" firstAttribute="top" secondItem="uc0-rq-sB5" secondAttribute="bottom" constant="15" id="Tjy-Y6-6rw"/>
                                             <constraint firstAttribute="trailing" secondItem="bpR-1D-xrx" secondAttribute="trailing" id="ZBa-a6-bX2"/>
                                             <constraint firstItem="uG7-ay-KDL" firstAttribute="leading" secondItem="8eG-5W-OXW" secondAttribute="leading" id="ZaJ-M0-RFt"/>
-                                            <constraint firstItem="p2a-pI-4Fh" firstAttribute="centerX" secondItem="8eG-5W-OXW" secondAttribute="centerX" id="e57-Ho-HJD"/>
+                                            <constraint firstItem="uc0-rq-sB5" firstAttribute="top" secondItem="Jhh-5R-0Vg" secondAttribute="bottom" constant="30" id="dKy-5R-qft"/>
                                             <constraint firstItem="YJ0-ue-Nwj" firstAttribute="leading" secondItem="8eG-5W-OXW" secondAttribute="leading" id="kgQ-05-rA5"/>
                                             <constraint firstAttribute="trailing" secondItem="SeR-qg-ZLA" secondAttribute="trailing" id="lfk-T0-aYs"/>
                                             <constraint firstAttribute="trailing" secondItem="ImT-HO-OFo" secondAttribute="trailing" id="ngh-Dn-oMw"/>
                                             <constraint firstItem="ImT-HO-OFo" firstAttribute="leading" secondItem="8eG-5W-OXW" secondAttribute="leading" id="pqb-cf-Wq5"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="p2a-pI-4Fh" secondAttribute="trailing" constant="20" id="ryY-y7-hGQ"/>
                                             <constraint firstItem="gd7-K5-WJf" firstAttribute="centerY" secondItem="bpR-1D-xrx" secondAttribute="centerY" id="tGm-d7-JGa"/>
                                         </constraints>
                                     </view>
@@ -246,7 +236,6 @@
                         <outlet property="genderField" destination="SeR-qg-ZLA" id="L8g-Pl-M2h"/>
                         <outlet property="headerLabel" destination="Jhh-5R-0Vg" id="ABZ-LO-RDR"/>
                         <outlet property="nameField" destination="uc0-rq-sB5" id="Nil-cQ-Thk"/>
-                        <outlet property="subCopyLabel" destination="p2a-pI-4Fh" id="urt-Cv-o1j"/>
                         <outlet property="weightField" destination="bpR-1D-xrx" id="XGT-Iw-Xx7"/>
                         <outlet property="weightUnitSelector" destination="gd7-K5-WJf" id="GPN-TF-5ty"/>
                         <segue destination="PsM-cF-91Y" kind="custom" identifier="setPetPhoto" customClass="RBStoryboardPushSegue" id="dOm-JW-ocI"/>

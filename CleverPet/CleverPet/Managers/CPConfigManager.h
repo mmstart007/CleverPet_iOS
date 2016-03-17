@@ -8,10 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const kConfigUpdatedNotification;
+extern NSString * const kConfigErrorKey;
+
 @interface CPConfigManager : NSObject
 
 + (instancetype)sharedInstance;
-- (ASYNC)loadConfigWithCompletion:(void (^)(NSError *error))completion;
+- (ASYNC)loadConfig:(BOOL)forceLoad completion:(void (^)(NSError *))completion;
 - (void)appEnteredForeground;
 
 @end

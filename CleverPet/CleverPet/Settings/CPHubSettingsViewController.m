@@ -12,6 +12,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 #import "CPHubSettingsButton.h"
 #import "NMRangeSlider.h"
 #import "CPUserManager.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface CPHubSettingsViewController ()
 
@@ -69,6 +70,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (nonatomic, strong) NSDictionary *hubSettingToModeMap;
 @property (nonatomic, strong) NSDictionary *modeToHubSettingMap;
 @property (nonatomic, strong) CPDevice *currentDevice;
+@property (nonatomic, weak) UIBarButtonItem *pseudoBackButton;
 
 @end
 
@@ -113,15 +115,24 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
             break;
         }
     }
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[[UIImage imageNamed:@"back_arrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
+    [button setTitle:@"Back" forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
+    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor appTealColor]];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 7, 0, 0)];
+    button.frame = CGRectMake(0, 0, 50, 40);
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [button addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = barButton;
+    self.pseudoBackButton = barButton;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    // TODO: schedule nonsense
-    // TODO: We shouldn't do this if we've disappeared because of the version check
-    // TODO: should we save on moving to background?
-    [[CPUserManager sharedInstance] updateDeviceInfo:@{kModeKey:self.hubSettingToModeMap[@(self.currentHubSetting)], kWeekdayKey:@{kStartTimeKey:@(self.weekDaySlider.lowerValue), kEndTimeKey:@(self.weekDaySlider.upperValue)}, kWeekendKey:@{kStartTimeKey:@(self.weekendSlider.lowerValue), kEndTimeKey:@(self.weekendSlider.upperValue)}}];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -287,6 +298,35 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     [self updateWeekendRange];
     
     // TODO: Update hub
+}
+
+- (void)backButtonTapped:(id)sender
+{
+    NSDictionary *deviceInfo = @{kModeKey:self.hubSettingToModeMap[@(self.currentHubSetting)], kWeekdayKey:@{kStartTimeKey:@(self.weekDaySlider.lowerValue), kEndTimeKey:@(self.weekDaySlider.upperValue)}, kWeekendKey:@{kStartTimeKey:@(self.weekendSlider.lowerValue), kEndTimeKey:@(self.weekendSlider.upperValue)}};
+    
+    if ([[CPUserManager sharedInstance] hasDeviceInfoChanged:deviceInfo]) {
+        // Verify we're online
+        if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+            [[CPUserManager sharedInstance] updateDeviceInfo:deviceInfo];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Connection Offline" message:NSLocalizedString(@"The internet connection appears to be offline. Changes will not be save.", @"Error message displayed when trying to save changes while device is offline") preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel (Stay Here)", @"Cancel text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleCancel handler:nil];
+            
+            BLOCK_SELF_REF_OUTSIDE();
+            UIAlertAction *discardAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Continue (Discard my Changes)", @"Continue text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+                BLOCK_SELF_REF_INSIDE();
+                [self.navigationController popViewControllerAnimated:YES];
+            }];
+            
+            [alert addAction:cancelAction];
+            [alert addAction:discardAction];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 /*
