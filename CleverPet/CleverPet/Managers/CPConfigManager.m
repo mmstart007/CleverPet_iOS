@@ -13,6 +13,11 @@
 #import <AFNetworking/AFNetworking.h>
 #import "CPConfigViewController.h"
 
+#define USE_LOCAL_CONFIG 0
+#if USE_LOCAL_CONFIG
+#warning #### Local config is enabled! Please disable before checking in!
+#endif
+
 NSString * const kConfigUrl = @"https://storage.googleapis.com/cleverpet-app/configs/config.json";
 NSString * const kMinimumVersionKey = @"minimum_required_version";
 NSString * const kDeprecationMessageKey = @"deprecation_message";
@@ -64,9 +69,20 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
 - (ASYNC)loadConfig:(BOOL)forceLoad completion:(void (^)(NSError *))completion
 {
     if (!self.configData || forceLoad) {
+#if !USE_LOCAL_CONFIG
         BLOCK_SELF_REF_OUTSIDE();
         [self.sessionManager GET:kConfigUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             BLOCK_SELF_REF_INSIDE();
+#else
+            NSString *localConfigPath = [[NSBundle mainBundle] pathForResource:@"localConfig" ofType:@"json"];
+            NSData *localConfigData = [NSData dataWithContentsOfFile:localConfigPath];
+            NSError *error = nil;
+            NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:localConfigData options:0 error:&error];
+            if (error) {
+                if (completion) completion(error);
+                return;
+            }
+#endif
             // Update our last checked config date
             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kLastCheckedConfigKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
@@ -89,6 +105,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
             [self applyConfig:responseObject];
             [[NSNotificationCenter defaultCenter] postNotificationName:kConfigUpdatedNotification object:nil userInfo:@{}];
             if (completion) completion(nil);
+#if !USE_LOCAL_CONFIG
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // TODO: Perhaps ignore the timer the next time we see if we should check so the user isn't shut out of the app?
             // If we're offline, register for reachability notifications and update when appropriate
@@ -98,6 +115,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
             }
             if (completion) completion(error);
         }];
+#endif
     } else {
         if (completion) completion(nil);
     }

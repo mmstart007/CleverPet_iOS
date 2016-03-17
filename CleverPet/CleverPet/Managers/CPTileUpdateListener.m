@@ -23,9 +23,9 @@
     self = [super init];
     if (self) {
         BLOCK_SELF_REF_OUTSIDE();
-        [[CPFirebaseManager sharedInstance] listenForTileUpdatesWithBlock:^(NSError *error, CPPetStats *tileValue) {
+        [[CPFirebaseManager sharedInstance] listenForTileUpdatesWithBlock:^(NSError *error, CPTile *tile) {
             BLOCK_SELF_REF_INSIDE();
-            [self.delegate queueTileUpdate];
+            [self.delegate queueTileUpdate:tile];
         }];
     }
     return self;
