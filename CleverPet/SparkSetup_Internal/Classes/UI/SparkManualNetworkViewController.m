@@ -51,7 +51,7 @@
     self.wifiSymbolImageView.tintColor = [SparkSetupCustomization sharedInstance].normalTextColor;// elementBackgroundColor;;
 
     self.backButton.imageView.image = [self.backButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    self.backButton.imageView.tintColor = [SparkSetupCustomization sharedInstance].elementTextColor;// elementBackgroundColor;;
+    self.backButton.tintColor = [SparkSetupCustomization sharedInstance].elementTextColor;
 }
 
 - (void)didReceiveMemoryWarning {
