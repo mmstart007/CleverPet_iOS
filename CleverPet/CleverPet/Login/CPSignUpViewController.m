@@ -83,25 +83,34 @@ NSInteger const kMinPasswordLength = 6;
         return NO;
     }
     
-    if ([[self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] < 1) {
+    NSString *nameString = [self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([nameString length] < 1) {
         [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter a display name", @"Error message when trying to sign up with an invalid display name")];
         return NO;
     }
     
-    // TODO: Password verification before sending to identity toolkit
+    if ([nameString length] > kEmailMaxChars) {
+        [self displayErrorAlertWithTitle:nil andMessage:[NSString stringWithFormat:NSLocalizedString(@"Your name must be less than %d characters", @"Error message displayed when user name exceeds max length"), kEmailMaxChars]];
+        return NO;
+    }
     
     if ([self.passwordField.text length] < 1 || self.verifyField.text.length < 1) {
         [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter and verify your password", @"Error message when trying to sign up with missing password")];
         return NO;
     }
     
-    if (![self.passwordField.text isEqualToString:self.verifyField.text]) {
-        [self displayErrorAlertWithTitle:NSLocalizedString(@"The passwords entered do not match", @"Error title when trying to sign up with mismatched passwords") andMessage:NSLocalizedString(@"Please re-enter your password", @"Error message when trying to sign up with mismatched passwords")];
+    if ([self.passwordField.text length] < kMinPasswordLength) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Password does not meet requirements", @"Title of alert displayed when attempting to sign up with a short password") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Your password must be a minimum of %d characters", @"Body of alert displayed when attempting to sign up with a short password"), kMinPasswordLength]];
         return NO;
     }
     
-    if ([self.passwordField.text length] < kMinPasswordLength) {
-        [self displayErrorAlertWithTitle:NSLocalizedString(@"Password does not meet minimum requirements", @"Title of alert displayed when attempting to sign up with a short password") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Your password must be a minimum of %d characters", @"Body of alert displayed when attempting to sign up with a short password"), kMinPasswordLength]];
+    if ([self.passwordField.text length] > kPasswordMaxChars) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Password does not meet requirements", @"Title of alert displayed when attempting to sign up with a long") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Your password must be a maximum of %d characters", @"Body of alert displayed when attempting to sign up with a long password"), kPasswordMaxChars]];
+        return NO;
+    }
+    
+    if (![self.passwordField.text isEqualToString:self.verifyField.text]) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"The passwords entered do not match", @"Error title when trying to sign up with mismatched passwords") andMessage:NSLocalizedString(@"Please re-enter your password", @"Error message when trying to sign up with mismatched passwords")];
         return NO;
     }
     
