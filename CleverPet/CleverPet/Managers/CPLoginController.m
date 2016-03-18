@@ -362,6 +362,9 @@ didFinishSignInWithToken:(NSString *)token
     self.interfaceManager.delegate = self;
     [GITClient sharedInstance].delegate = self;
     
+    // Reset intercom user
+    [Intercom registerUnidentifiedUser];
+    
     // Swap root controller for splash
     UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
     UIWindow *window = [[UIApplication sharedApplication].delegate window];

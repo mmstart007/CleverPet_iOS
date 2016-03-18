@@ -31,6 +31,9 @@
     
     // Initialize Intercom
     [Intercom setApiKey:@"ios_sdk-7acac94f6c642142e21fd6e6be0bbc7b4d38f7cc" forAppId:@"swragh2u"];
+    // Register an unidentified user for use on the sign in page. On login, we'll update this with the appropriate user
+    [Intercom registerUnidentifiedUser];
+    
     // Have reachability manager start monitoring, for use in the settings
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [Fabric with:@[[Crashlytics class]]];

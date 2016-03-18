@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -257,11 +258,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXW-OY-NAS">
-                                <rect key="frame" x="15" y="20" width="48" height="30"/>
-                                <state key="normal" title="Cancel"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UXW-OY-NAS">
+                                <rect key="frame" x="15" y="20" width="56" height="34"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="cancelTapped:" destination="Gh1-G2-TO8" eventType="touchUpInside" id="aQo-Zy-87O"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ybx-Q0-eC8">
+                                <rect key="frame" x="470" y="20" width="95" height="34"/>
+                                <state key="normal" title="Need Help?">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="intercomTapped:" destination="Gh1-G2-TO8" eventType="touchUpInside" id="rOz-qp-Fuq"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hub Setup" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XYO-RY-ylF">
@@ -270,12 +282,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6JH-6l-9V5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6JH-6l-9V5">
                                 <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="4II-tr-OcU"/>
                                 </constraints>
-                                <state key="normal" title="Continue"/>
+                                <state key="normal" title="Continue">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="continueTapped:" destination="Gh1-G2-TO8" eventType="touchUpInside" id="yU4-lz-qd8"/>
                                 </connections>
@@ -291,8 +305,10 @@
                             <constraint firstItem="6JH-6l-9V5" firstAttribute="leading" secondItem="fsG-kg-6nf" secondAttribute="leading" id="8Oq-JU-UQ7"/>
                             <constraint firstItem="Pfb-Jl-KfE" firstAttribute="top" secondItem="6JH-6l-9V5" secondAttribute="bottom" id="9PX-Xo-pij"/>
                             <constraint firstItem="6JH-6l-9V5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XYO-RY-ylF" secondAttribute="bottom" constant="20" id="EOY-wX-Bzm"/>
+                            <constraint firstItem="Ybx-Q0-eC8" firstAttribute="top" secondItem="ncb-LC-nFf" secondAttribute="bottom" id="Mxa-QZ-wj2"/>
                             <constraint firstItem="UXW-OY-NAS" firstAttribute="leading" secondItem="fsG-kg-6nf" secondAttribute="leading" constant="15" id="N2F-Mv-Esd"/>
                             <constraint firstItem="XYO-RY-ylF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fsG-kg-6nf" secondAttribute="leading" constant="50" id="Q2D-UB-qd7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ybx-Q0-eC8" secondAttribute="trailing" constant="15" id="Tst-Cn-muH"/>
                             <constraint firstItem="XYO-RY-ylF" firstAttribute="centerY" secondItem="fsG-kg-6nf" secondAttribute="centerY" id="cu7-R6-CXh"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XYO-RY-ylF" secondAttribute="trailing" constant="50" id="g1f-Qn-lwg"/>
                             <constraint firstAttribute="trailing" secondItem="6JH-6l-9V5" secondAttribute="trailing" id="ifb-ml-YXv"/>
@@ -308,6 +324,7 @@
                         <outlet property="cancelButton" destination="UXW-OY-NAS" id="jLF-P5-1Z6"/>
                         <outlet property="continueButton" destination="6JH-6l-9V5" id="EHy-MV-dN9"/>
                         <outlet property="fadeView" destination="gT2-Qk-cYE" id="uWY-Pu-pqS"/>
+                        <outlet property="intercomButton" destination="Ybx-Q0-eC8" id="fZi-3w-ruF"/>
                         <outlet property="messageLabel" destination="XYO-RY-ylF" id="UwT-n0-Vbk"/>
                     </connections>
                 </viewController>
@@ -453,6 +470,15 @@
                                     <action selector="cancelTapped:" destination="oPR-Or-REb" eventType="touchUpInside" id="igR-5L-Isz"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5o-bb-Q3k">
+                                <rect key="frame" x="490" y="20" width="95" height="34"/>
+                                <state key="normal" title="Need Help?">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="intercomTapped:" destination="oPR-Or-REb" eventType="touchUpInside" id="bTk-xC-dX9"/>
+                                </connections>
+                            </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3B-0X-HFZ" customClass="CPLoadingView">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -461,9 +487,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="H0B-49-wPG" firstAttribute="leading" secondItem="qX5-7H-AQ2" secondAttribute="leading" id="3xm-Hu-HXK"/>
+                            <constraint firstItem="G5o-bb-Q3k" firstAttribute="top" secondItem="dIi-aL-o3J" secondAttribute="bottom" id="4ff-EC-84h"/>
                             <constraint firstItem="v6X-lm-cXg" firstAttribute="leading" secondItem="qX5-7H-AQ2" secondAttribute="leading" id="90Z-S3-0Wm"/>
                             <constraint firstAttribute="trailing" secondItem="v6X-lm-cXg" secondAttribute="trailing" id="AcE-uF-dzd"/>
                             <constraint firstItem="FAZ-ga-bpe" firstAttribute="top" secondItem="v3B-0X-HFZ" secondAttribute="bottom" id="EIa-4H-QGj"/>
+                            <constraint firstAttribute="trailing" secondItem="G5o-bb-Q3k" secondAttribute="trailing" constant="15" id="LHW-6p-Lm6"/>
                             <constraint firstItem="96S-Y2-KXS" firstAttribute="width" secondItem="qX5-7H-AQ2" secondAttribute="width" id="NEL-JA-lnB"/>
                             <constraint firstItem="H0B-49-wPG" firstAttribute="top" secondItem="v6X-lm-cXg" secondAttribute="bottom" id="Qoy-Ma-Pn7"/>
                             <constraint firstItem="FAZ-ga-bpe" firstAttribute="top" secondItem="H0B-49-wPG" secondAttribute="bottom" id="RNn-xw-xrg"/>
@@ -482,6 +510,7 @@
                         <outlet property="facebookButton" destination="l76-Qu-1Hv" id="Itm-sA-Caj"/>
                         <outlet property="googleButton" destination="UOY-lu-j4i" id="VcH-tB-hNo"/>
                         <outlet property="headerLabel" destination="4h6-nR-KHD" id="hKb-GF-3am"/>
+                        <outlet property="intercomButton" destination="G5o-bb-Q3k" id="K6o-jW-jQM"/>
                         <outlet property="loadingView" destination="v3B-0X-HFZ" id="ERV-nd-eqI"/>
                         <outlet property="orLabel" destination="me7-Re-p6f" id="jYv-VI-cZy"/>
                         <outlet property="scrollView" destination="v6X-lm-cXg" id="Cxh-4f-M4P"/>
