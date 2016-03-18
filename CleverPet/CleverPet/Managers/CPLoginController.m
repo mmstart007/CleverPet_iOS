@@ -197,18 +197,17 @@ didFinishSignInWithToken:(NSString *)token
 {
     if (error) {
         // Check if the device is currently online
-        NSString *errorMessage;
+        NSString *errorMessage = DEFAULT_ERROR_MESSAGE;
         if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
             errorMessage = NSLocalizedString(@"The internet connection appears to be offline.", @"Error message displayed when attempting to log in to Google Identity while the device is offline");
         } else if ([error.domain isEqualToString:@"com.google.gitkit"]) { // Not great, but I haven't been able to find a define for the domain
             if (error.code == kGITErrorCodeUserCancellation) {
                 // No error message, we don't need to tell the user what they did
+                errorMessage = nil;
             } else if(error.code == kGITErrorCodeEmailMismatch) {
                 // The login web form is presented by identity toolkit, and we can't force the user to enter the same email in the gmail web form as they did in the app, so it's possible to hit this error. Tell the user they need to use the same email they started the sign up flow with, and we also need to logout of GITAuth, as the user is actually logged in to Google Identity, despite receiving an error and no user account here
                 errorMessage = NSLocalizedString(@"The email address signed in to does not match the address provided on the sign in page. Please try again with the correct email.", @"Error message displayed when user uses 2 different emails as part of google sign in");
                 [self logoutOfGit];
-            } else {
-                errorMessage = DEFAULT_ERROR_MESSAGE;
             }
         } else if ([error.domain isEqualToString:kGIDSignInErrorDomain]) {
             if (error.code == kGIDSignInErrorCodeCanceled) {
@@ -217,9 +216,9 @@ didFinishSignInWithToken:(NSString *)token
                 NSString *message = error.localizedDescription;
                 if ([message isEqualToString:@"access_denied"]) {
                     errorMessage = NSLocalizedString(@"This app require access to your email address and profile info. You cannot continue without allowing access.", @"Error message displayed when access to google account info is denied");
+                } else {
+                    errorMessage = nil;
                 }
-            } else {
-                errorMessage = DEFAULT_ERROR_MESSAGE;
             }
         }
         
