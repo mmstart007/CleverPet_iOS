@@ -7,7 +7,6 @@
 //
 
 #import "CPBreedPickerViewController.h"
-#import "CHCSVParser.h"
 #import "CPTextField.h"
 #import "CPSimpleTableViewCell.h"
 
@@ -28,9 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSArray *breedsArray = [NSArray arrayWithContentsOfCSVURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"breeds" ofType:@".csv"]]];
-    // Flatten out the array(parser returns an array of arrays of strings)
-    self.breedsArray = [breedsArray valueForKeyPath:@"@unionOfArrays.self"];
+    self.breedsArray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"breeds" withExtension:@"json"]] options:kNilOptions error:nil];
     self.textField.text = self.selectedBreed;
     [self filterBreedsByString:self.selectedBreed];
     self.view.backgroundColor = [UIColor appWhiteColor];

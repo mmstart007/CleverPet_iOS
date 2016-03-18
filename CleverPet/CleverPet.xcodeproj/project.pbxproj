@@ -79,7 +79,7 @@
 		979D84781C84FF3000ADB6B0 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 979D84771C84FF3000ADB6B0 /* CoreText.framework */; };
 		97B635441C91E6FA00DFE89C /* CPHubPlaceholderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B635431C91E6FA00DFE89C /* CPHubPlaceholderViewController.m */; };
 		97C8AA951C7E6AE500BABD4D /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C8AA941C7E6AE500BABD4D /* Login.storyboard */; };
-		97CC44561C754B67003C4258 /* breeds.csv in Resources */ = {isa = PBXBuildFile; fileRef = 97CC44551C754B67003C4258 /* breeds.csv */; };
+		97CC44561C754B67003C4258 /* breeds.json in Resources */ = {isa = PBXBuildFile; fileRef = 97CC44551C754B67003C4258 /* breeds.json */; };
 		97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */; };
 		97CC445D1C7552C3003C4258 /* CPSimpleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC445B1C7552C3003C4258 /* CPSimpleTableViewCell.m */; };
 		97CC445E1C7552C3003C4258 /* CPSimpleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97CC445C1C7552C3003C4258 /* CPSimpleTableViewCell.xib */; };
@@ -227,7 +227,7 @@
 		97B635421C91E6FA00DFE89C /* CPHubPlaceholderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHubPlaceholderViewController.h; sourceTree = "<group>"; };
 		97B635431C91E6FA00DFE89C /* CPHubPlaceholderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHubPlaceholderViewController.m; sourceTree = "<group>"; };
 		97C8AA941C7E6AE500BABD4D /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
-		97CC44551C754B67003C4258 /* breeds.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = breeds.csv; sourceTree = "<group>"; };
+		97CC44551C754B67003C4258 /* breeds.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = breeds.json; sourceTree = "<group>"; };
 		97CC44571C754E93003C4258 /* CPBreedPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBreedPickerViewController.h; sourceTree = "<group>"; };
 		97CC44581C754E93003C4258 /* CPBreedPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBreedPickerViewController.m; sourceTree = "<group>"; };
 		97CC445A1C7552C3003C4258 /* CPSimpleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSimpleTableViewCell.h; sourceTree = "<group>"; };
@@ -437,7 +437,7 @@
 			isa = PBXGroup;
 			children = (
 				73C6EFFA1C9A123F004CA862 /* localConfig.json */,
-				97CC44551C754B67003C4258 /* breeds.csv */,
+				97CC44551C754B67003C4258 /* breeds.json */,
 				971D63111C8A3B1C006C9F80 /* faqs.json */,
 			);
 			path = Resources;
@@ -678,7 +678,7 @@
 				979D846D1C84FAF200ADB6B0 /* Raleway-Italic.ttf in Resources */,
 				0DE13B421C7E9CA300648834 /* CPMainTableSectionHeader.xib in Resources */,
 				0D36AA931C7243D600349D03 /* Assets.xcassets in Resources */,
-				97CC44561C754B67003C4258 /* breeds.csv in Resources */,
+				97CC44561C754B67003C4258 /* breeds.json in Resources */,
 				0D1F1C581C7E229500EAF336 /* CPPetStatsView.xib in Resources */,
 				979D84691C84FAF200ADB6B0 /* Raleway-ExtraBold.ttf in Resources */,
 				979D84651C84FAF200ADB6B0 /* Raleway-Black.ttf in Resources */,
