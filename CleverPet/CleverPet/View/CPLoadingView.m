@@ -25,6 +25,15 @@
     return self;
 }
 
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder]) {
+        self.isCentered = YES;
+    }
+    
+    return self;
+}
+
 - (void)awakeFromNib
 {
     [self setup];
@@ -41,9 +50,28 @@
     [self addSubview:spinner];
     self.spinner = spinner;
     
-    NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f];
-    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0.f];
-    [self addConstraints:@[centerX, centerY]];
+    if (self.isCentered) {
+        NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f];
+        NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0.f];
+        [self addConstraints:@[centerX, centerY]];
+    } else {
+        NSLayoutConstraint *bottom = [NSLayoutConstraint constraintWithItem:self
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:spinner
+                                                                  attribute:NSLayoutAttributeBottom
+                                                                 multiplier:1
+                                                                   constant:16];
+        NSLayoutConstraint *right = [NSLayoutConstraint constraintWithItem:self
+                                                                 attribute:NSLayoutAttributeRight
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:spinner
+                                                                 attribute:NSLayoutAttributeRight
+                                                                multiplier:1
+                                                                  constant:16];
+        [self addConstraints:@[bottom, right]];
+    }
+    
     [self layoutIfNeeded];
 }
 

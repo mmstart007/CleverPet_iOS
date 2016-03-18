@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *playsNumberLabel;
 @property (weak, nonatomic) IBOutlet UIView *progressViewHolder;
 @property (strong, nonatomic) OJFSegmentedProgressView *progressView;
+@property (strong, nonatomic) NSArray<FirebaseManagerHandle> *handles;
 @end
 
 @implementation CPMainScreenStatsHeaderView
@@ -43,32 +44,65 @@
     
     [self.progressView setAutoresizingMask:UIViewContentModeLeft|UIViewContentModeRight];
     
+    CPFirebaseManager *firebaseManager = [CPFirebaseManager sharedInstance];
     BLOCK_SELF_REF_OUTSIDE();
-    [CPFirebaseManager sharedInstance].headerStatsUpdateBlock = ^(NSError *error, CPPetStats *update) {
-        BLOCK_SELF_REF_INSIDE()
-        if(error) {
-            [self setHidden:YES];
-        }else {
-            [self setHidden:NO];
-            if (update != nil) {
-                [self.kibblesNumberLabel setText:[update.kibbles stringValue]];
-                [self.playsNumberLabel setText:[update.plays stringValue]];
-                
-                float progress = [update.stageNumber floatValue]/[update.totalStages floatValue];
-                [self.progressView setNumberOfSegments:[update.totalStages integerValue]];
-                [self.progressView setProgress:progress];
-            }   else {
-                [self.kibblesNumberLabel setText:@"0"];
-                [self.playsNumberLabel setText:@"0"];
-                [self.progressView setProgress:0.0f];
-            }
-        }
+    
+    NSMutableArray *handles = [[NSMutableArray alloc] init];
+    [handles addObjectsFromArray:@[
+                                   [firebaseManager subscribeToKibblesWithBlock:[self numberUpdateBlockForLabel:self.kibblesNumberLabel]],
+                                   [firebaseManager subscribeToPlaysWithBlock:[self numberUpdateBlockForLabel:self.playsNumberLabel]]
+                                   ]];
+    
+    __block NSNumber *stageNumber = nil;
+    __block NSNumber *totalStages = nil;
+    
+    [handles addObject:[firebaseManager subscribeToStageNumberWithBlock:^(NSNumber *value) {
+        stageNumber = value;
+        BLOCK_SELF_REF_INSIDE();
+        
+        [self updateProgressViewForStageNumber:stageNumber totalStages:totalStages];
+    }]];
+    
+    [handles addObject:[firebaseManager subscribeToTotalStagesWithBlock:^(NSNumber *value) {
+        BLOCK_SELF_REF_INSIDE();
+        
+        totalStages = value;
+        
+        [self updateProgressViewForStageNumber:stageNumber totalStages:totalStages];
+    }]];
+    
+    self.handles = handles;
+}
+
+- (void)updateProgressViewForStageNumber:(NSNumber *)stageNumber totalStages:(NSNumber *)totalStages
+{
+    self.progressView.hidden = !(stageNumber && totalStages);
+    self.progressView.numberOfSegments = totalStages.integerValue;
+    if (totalStages.floatValue > 0) {
+        self.progressView.progress = stageNumber.floatValue / totalStages.floatValue;
+    }
+}
+
+- (FirebaseNumberUpdateBlock)numberUpdateBlockForLabel:(UILabel *)label
+{
+    return ^(NSNumber *number) {
+        label.text = [NSString stringWithFormat:@"%@", @(number.unsignedIntegerValue)];
+    };
+}
+
+- (FirebaseStringUpdateBlock)stringUpdateBlockForLabel:(UILabel *)label
+{
+    return ^(NSString *value) {
+        label.text = value;
     };
 }
 
 - (void)dealloc
 {
-    [CPFirebaseManager sharedInstance].headerStatsUpdateBlock = nil;
+    for (FirebaseManagerHandle handle in self.handles) {
+        [[CPFirebaseManager sharedInstance] unsubscribeFromHandle:handle];
+    }
+    self.handles = nil;
 }
 
 @end

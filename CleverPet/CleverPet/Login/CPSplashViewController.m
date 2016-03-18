@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIView *fadeView;
 @property (nonatomic, assign) BOOL listeningForConfigUpdates;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *hideSignInButtonConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *showSignInButtonConstraint;
 @end
 
 @implementation CPSplashViewController
@@ -27,7 +29,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setupStyling];
-    self.signInButton.hidden = YES;
+    
+    self.fadeView.alpha = 0;
+    self.fadeView.hidden = NO;
+
+    [self makeSignInButtonVisible:NO animated:NO];
     
     self.backgroundImage.image = [CPSplashImageUtils getSplashImage];
     
@@ -57,10 +63,12 @@
 
 - (void)showLoadingSpinner:(BOOL)show
 {
+    self.fadeView.alpha = !show ? 1 : 0;
     [UIView animateWithDuration:.3 animations:^{
-        self.fadeView.hidden = !show;
-        self.signInButton.hidden = show;
+        self.fadeView.alpha = show ? 1 : 0;
     }];
+    
+    [self makeSignInButtonVisible:!show animated:YES];
 }
 
 #pragma mark - IBActions
@@ -119,12 +127,29 @@
         [self listenForConfigUpdates];
     } else {
         [self stopListeningForConfigUpdates];
-        [UIView animateWithDuration:.3 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.signInButton.hidden = NO;
-        } completion:nil];
+        
+        [self.signInButton layoutIfNeeded];
+        
+        [self makeSignInButtonVisible:YES animated:YES];
     }
 }
 
+- (void)makeSignInButtonVisible:(BOOL)visible animated:(BOOL)animated
+{
+    if (animated) {
+        [self.signInButton layoutIfNeeded];
+    }
+    self.hideSignInButtonConstraint.priority = visible ? 998 : 999;
+    self.showSignInButtonConstraint.priority = visible ? 999 : 998;
+
+    if (animated) {
+        [UIView animateWithDuration:.2 animations:^{
+            [self.signInButton layoutIfNeeded];
+        }];
+    } else {
+        [self.signInButton layoutIfNeeded];
+    }
+}
 /*
 #pragma mark - Navigation
 

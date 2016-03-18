@@ -12,7 +12,7 @@
 #import "CPMainTableDateHeader.h"
 #import "CPMainTableSectionHeaderFilter.h"
 #import "CPTileCommunicationManager.h"
-#import "CPTileUpdateListener.h"
+#import "CPFirebaseManager.h"
 
 #define TILE_VIEW_CELL @"TILE_VIEW_CELL"
 #define PET_STATS_HEADER @"PET_STATS_HEADER"
@@ -20,9 +20,9 @@
 #define DATE_HEADER @"DATE_HEADER"
 #define HEADER_VIEW_SECTION 0
 
-CGFloat const kPagingThreshhold = 100.f;
+CGFloat const kPagingThreshhold = 300.f;
 
-@interface CPTileCollectionViewDataSource () <CPTileViewCellDelegate, CPMainTableSectionHeaderDelegate, CPTileUpdateDelegate, CPTileDataManagerDelegate>
+@interface CPTileCollectionViewDataSource () <CPTileViewCellDelegate, CPMainTableSectionHeaderDelegate, CPTileDataManagerDelegate>
 @property (weak, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) CPTileViewCell *sizingCell;
 @property (strong, nonatomic) CPTableHeaderView *tableHeaderView;
@@ -37,7 +37,8 @@ CGFloat const kPagingThreshhold = 100.f;
 @property (strong, nonatomic) NSMutableDictionary<CPMainTableSectionHeaderFilter *, CPTileDataManager *> *tileDataManagers;
 @property (nonatomic, weak) UIActivityIndicatorView *footerSpinner;
 @property (nonatomic, weak) UIImageView *footerIcon;
-@property (nonatomic, strong) CPTileUpdateListener *tileUpdateListener;
+//@property (nonatomic, strong) CPTileUpdateListener *tileUpdateListener;
+@property (strong, nonatomic) FirebaseManagerHandle tileUpdateHandle;
 @property (nonatomic, assign) BOOL shouldRefresh;
 
 @end
@@ -88,7 +89,16 @@ CGFloat const kPagingThreshhold = 100.f;
             tileDataManager.delegate = self;
         }
         
-        self.tileUpdateListener = [CPTileUpdateListener tileUpdateListenerWithDelegate:self];
+        BLOCK_SELF_REF_OUTSIDE()
+        self.tileUpdateHandle = [[CPFirebaseManager sharedInstance] subscribeToTilesWithBlock:^(NSError *error, CPTile *tile) {
+            BLOCK_SELF_REF_INSIDE();
+            for (CPMainTableSectionHeaderFilter *filter in self.filters) {
+                // Inform data managers that their next refresh needs to be forced and refresh the current
+                CPTileDataManager *dataManager = self.tileDataManagers[filter];
+                
+                [dataManager updateTile:tile];
+            }
+        }];
     }
     
     return self;
@@ -96,13 +106,13 @@ CGFloat const kPagingThreshhold = 100.f;
 
 - (void)setupTableFooter
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 40.f)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, 60.f)];
     UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"logo"]];
     logo.translatesAutoresizingMaskIntoConstraints = NO;
     [view addSubview:logo];
     self.footerIcon = logo;
     // center image in footer
-    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:0];
+    NSLayoutConstraint *centerY = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1 constant:-8];
     NSLayoutConstraint *centerX = [NSLayoutConstraint constraintWithItem:logo attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
     [view addConstraints:@[centerX, centerY]];
     
@@ -272,7 +282,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         }
         
         CPTile *tile = [self.currentTileDataManager tileForInternalIndexPath:innerIndexPath];
-        cell.tile = tile;
+        [cell setTile:tile allowSwiping:self.currentFilter == self.filters[0]];
         cell.delegate = self;
         return cell;
     }
@@ -338,7 +348,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
                 [self.sizingCell.contentView addConstraint:layoutConstraint];
             }
             
-            self.sizingCell.tile = tile;
+            [self.sizingCell setTile:tile allowSwiping:YES];
             
             CGSize size = [self.sizingCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
             tile.cachedRowHeight = size.height;
@@ -362,9 +372,6 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 - (void)didSwipeTileViewCell:(CPTileViewCell *)tileViewCell {
     // We don't particularly care about success or failure here, so just update the ui
     [[CPTileCommunicationManager sharedInstance] handleTileSwipe:tileViewCell.tile.tileId completion:nil];
-    
-    CPMainTableSectionHeaderFilter *filter = self.filters[0];
-    [self.tileDataManagers[filter] deleteTile:tileViewCell.tile];
 }
 
 - (void)playVideoForCell:(CPTileViewCell *)tileViewCell
@@ -407,14 +414,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 }
 
 #pragma mark - CPTileUpdateDelegate methods
-- (void)queueTileUpdate:(CPTile *)tile
-{
-    // TODO: don't execute the refresh unless we're visible
-    for (CPMainTableSectionHeaderFilter *filter in self.filters) {
-        // Inform data managers that their next refresh needs to be forced and refresh the current
-        CPTileDataManager *dataManager = self.tileDataManagers[filter];
-        
-        [dataManager updateTile:tile];
-    }
+- (void)dealloc {
+    [[CPFirebaseManager sharedInstance] unsubscribeFromHandle:self.tileUpdateHandle];
 }
 @end

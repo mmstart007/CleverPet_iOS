@@ -41,16 +41,23 @@
 @property (weak, nonatomic) IBOutlet CPReportGraphHolder *reportContentView;
 
 @property (strong, nonatomic) NSMutableArray<UISwipeGestureRecognizer *> *swipeGestureRecognizers;
+@property (assign, nonatomic) BOOL allowSwiping;
 
 @end
 
 @implementation CPTileViewCell {
+    CPTile *_tile;
 }
 
-- (void)setTile:(CPTile *)tile {
+- (CPTile *)tile {
+    return _tile;
+}
+
+- (void)setTile:(CPTile *)tile allowSwiping:(BOOL)allowSwiping {
     _tile = tile;
     
     self.reportContentView.graph = nil;
+    self.allowSwiping = allowSwiping;
     
     self.titleLabel.hidden = !tile.title;
     // TODO: pass in pet
@@ -135,11 +142,11 @@
     self.tagTimeStampLabel.text = [NSString stringWithFormat:@"%@ | %@", categoryString, [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
     
     self.colouredDotView.backgroundColor = tileColor;
-    self.swipableImage.hidden = !tile.userDeletable;
+    self.swipableImage.hidden = !(tile.userDeletable && self.allowSwiping);
 }
 
 - (void)swipeGestureRecognized:(UISwipeGestureRecognizer *)recognizer {
-    if (self.tile.userDeletable && [self.swipeGestureRecognizers containsObject:recognizer]) {
+    if (self.tile.userDeletable && self.allowSwiping && [self.swipeGestureRecognizers containsObject:recognizer]) {
         [self setSwipedMode:YES withAnimation:YES callDelegateMethod:YES];
     }
 }
@@ -270,9 +277,10 @@
 {
     // TODO: chain this back up through the data source -> data manager -> communications manager instead of calling directly?
     [self requestInProgress:YES];
-    BLOCK_SELF_REF_OUTSIDE();
+    if (_tile.tileType != CPTTChallenge) {
+        [self setSwipedMode:YES withAnimation:YES callDelegateMethod:NO];
+    }
     [[CPTileCommunicationManager sharedInstance] handleButtonPressWithPath:path completion:^(NSError *error){
-        BLOCK_SELF_REF_INSIDE();
         // TODO: display error;
         // TODO: Reactivate buttons? probably not
     }];

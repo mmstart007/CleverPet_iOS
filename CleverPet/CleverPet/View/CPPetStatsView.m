@@ -27,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UIView *errorView;
 @property (weak, nonatomic) IBOutlet UILabel *errorMessageLabel;
 @property (strong, nonatomic) OJFSegmentedProgressView *progressView;
+
+@property (strong, nonatomic) NSArray<FirebaseManagerHandle> *handles;
 @end
 
 @implementation CPPetStatsView
@@ -61,43 +63,77 @@
     [self.progressViewHolder addSubview:self.progressView];
     
     [self.progressView setAutoresizingMask:UIViewContentModeLeft|UIViewContentModeRight];
+    self.progressView.layer.cornerRadius = 1;
     
-    BLOCK_SELF_REF_OUTSIDE()
-    [CPFirebaseManager sharedInstance].viewStatsUpdateBlock = ^(NSError *error, CPPetStats *update) {
-        BLOCK_SELF_REF_INSIDE()
-        if (error) {
-            [self.errorMessageLabel setText:NSLocalizedString(@"Sorry, there was an issue getting your pet's stats", @"Error message when when stats ")];
-            [self.errorView setHidden:NO];
-        }else {
-            [self.errorView setHidden:YES];
-            if (update != nil) {
-                [self.challengeNumberLabel setHidden:NO];
-                [self.challengeTitleLabel setHidden:NO];
-                
-                [self.kibblesLabel setText:[update.kibbles stringValue]];
-                [self.playsLabel setText:[update.plays stringValue]];
-                [self.challengeTitleLabel setText:update.challengeName];
-                [self.challengeNumberLabel setText:[update.challengeNumber stringValue]];
-                [self.lifetimePointsLabel setText:[update.lifetimePoints stringValue]];
-
-				float progress = [update.stageNumber floatValue]/[update.totalStages floatValue];
-                [self.progressView setNumberOfSegments:[update.totalStages integerValue]];
-                [self.progressView setProgress:progress];
-            } else {
-                [self.challengeTitleLabel setHidden:YES];
-                [self.challengeNumberLabel setHidden:YES];
-                [self.kibblesLabel setText:@"0"];
-                [self.playsLabel setText:@"0"];
-                [self.lifetimePointsLabel setText:@"0"];
-                [self.progressView setProgress:0.0f];
-            }
+#define SUBSCRIBE(Type, Name, LabelName) [[CPFirebaseManager sharedInstance] subscribeTo##Name##WithBlock:[self updateBlockFor##Type##Label:LabelName]]
+   
+    NSMutableArray *handles = [[NSMutableArray alloc] init];
+    
+    [handles addObjectsFromArray:@[
+                                   SUBSCRIBE(Number, Kibbles, self.kibblesLabel),
+                                   SUBSCRIBE(Number, Plays, self.playsLabel),
+                                   SUBSCRIBE(String, ChallengeName, self.challengeTitleLabel),
+                                   SUBSCRIBE(Number, LifetimePoints, self.lifetimePointsLabel)
+                                   ]];
+    
+    CPFirebaseManager *firebaseManager = [CPFirebaseManager sharedInstance];
+    
+    __block NSNumber *stageNumber = nil;
+    __block NSNumber *totalStages = nil;
+    
+    BLOCK_SELF_REF_OUTSIDE();
+    [handles addObject:[firebaseManager subscribeToStageNumberWithBlock:^(NSNumber *value) {
+        BLOCK_SELF_REF_INSIDE();
+        stageNumber = value;
+        
+        [self updateProgressViewForStageNumber:stageNumber totalStages:totalStages];
+    }]];
+    
+    [handles addObject:[firebaseManager subscribeToTotalStagesWithBlock:^(NSNumber *value) {
+        BLOCK_SELF_REF_INSIDE();
+        totalStages = value;
+        
+        [self updateProgressViewForStageNumber:stageNumber totalStages:totalStages];
+    }]];
+    
+    [handles addObject:[firebaseManager subscribeToChallengeNumberWithBlock:^(NSNumber *value) {
+        BLOCK_SELF_REF_INSIDE();
+        if (value) {
+            self.challengeNumberLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Challenge %@", @"Challenge number label text"), value];
+        } else {
+            self.challengeNumberLabel.text = nil;
         }
+    }]];
+    
+    self.handles = handles;
+}
+
+- (FirebaseStringUpdateBlock)updateBlockForStringLabel:(UILabel *)label
+{
+    return ^(NSString *value) {
+        label.text = value;
     };
+}
+
+- (FirebaseNumberUpdateBlock)updateBlockForNumberLabel:(UILabel *)label
+{
+    return ^(NSNumber *value) {
+        label.text = [NSString stringWithFormat:@"%@", @(value.unsignedIntegerValue)];
+    };
+}
+
+- (void)updateProgressViewForStageNumber:(NSNumber *)stageNumber totalStages:(NSNumber *)totalStages
+{
+    self.progressView.hidden = !(stageNumber && totalStages);
+    self.progressView.numberOfSegments = totalStages.integerValue;
+    self.progressView.progress = stageNumber.floatValue / totalStages.floatValue;
 }
 
 - (void)dealloc
 {
-    [CPFirebaseManager sharedInstance].viewStatsUpdateBlock = nil;
+    for (FirebaseManagerHandle handle in self.handles) {
+        [[CPFirebaseManager sharedInstance] unsubscribeFromHandle:handle];
+    }
 }
 
 @end

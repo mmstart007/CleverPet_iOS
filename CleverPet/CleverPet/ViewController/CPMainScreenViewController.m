@@ -59,6 +59,7 @@
     self.dataSource = dataSource;
     self.tableView.delegate = dataSource;
     self.tableView.dataSource = dataSource;
+    self.tableView.allowsSelection = NO;
     
     self.playerController = [[CPPlayerViewController alloc] init];
     
@@ -75,7 +76,6 @@
     if ([self.tableView.dataSource respondsToSelector:@selector(updatePetImage:)]) {
         [self.tableView.dataSource performSelector:@selector(updatePetImage:) withObject:[self.currentPet petPhoto]];
     }
-    [[CPFirebaseManager sharedInstance] beginlisteningForUpdates];
     // Inform our data source we're going to become visible
     [self.dataSource viewBecomingVisible];
 }
@@ -85,7 +85,6 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
     self.playingTile = nil;
-    [[CPFirebaseManager sharedInstance] stoplisteningForStatsUpdates];
 }
 
 #pragma mark - CPTileCollectionViewDataSourceDelegate
