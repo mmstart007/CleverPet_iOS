@@ -116,8 +116,8 @@
     self.wifiView.layer.borderWidth = 1.0f;
     
 //    self.cancelSetupButton. // customize color too
-    self.cancelSetupButton.titleLabel.font = [UIFont fontWithName:[SparkSetupCustomization sharedInstance].headerTextFontName size:self.self.cancelSetupButton.titleLabel.font.pointSize];
-    [self.cancelSetupButton setTitleColor:[SparkSetupCustomization sharedInstance].normalTextColor forState:UIControlStateNormal];
+    self.cancelSetupButton.titleLabel.font = [UIFont fontWithName:[SparkSetupCustomization sharedInstance].headerTextFontName size:self.cancelSetupButton.titleLabel.font.pointSize];
+    [self.cancelSetupButton setTitleColor:[SparkSetupCustomization sharedInstance].elementTextColor forState:UIControlStateNormal];
 
     
 #ifdef ANALYTICS
@@ -461,7 +461,7 @@
                     if ([SparkCloud sharedInstance].isLoggedIn)
                     {
                         // that means device is claimed by somebody else - we want to check that with user (and set claimcode if user wants to change ownership)
-                        NSString *messageStr = [NSString stringWithFormat:@"This %@ is has been setup before, do you want to override ownership to %@?",[SparkSetupCustomization sharedInstance].deviceName,[SparkCloud sharedInstance].loggedInUsername];
+                        NSString *messageStr = [NSString stringWithFormat:@"This %@ is has been setup before, do you want to override ownership?",[SparkSetupCustomization sharedInstance].deviceName,[SparkCloud sharedInstance].loggedInUsername];
                         self.changeOwnershipAlertView = [[UIAlertView alloc] initWithTitle:@"Product ownership" message:messageStr delegate:self cancelButtonTitle:nil otherButtonTitles:@"Yes",@"No",nil];
                         [self.checkConnectionTimer invalidate];
                         [self.changeOwnershipAlertView show];

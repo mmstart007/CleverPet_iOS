@@ -59,9 +59,7 @@
     self.wifiSymbolImageView.tintColor = [SparkSetupCustomization sharedInstance].normalTextColor;// elementBackgroundColor;;
 
     self.backButton.imageView.image = [self.backButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    self.backButton.tintColor = [SparkSetupCustomization sharedInstance].normalTextColor;
-
-    // Do any additional setup after loading the view.
+    self.backButton.tintColor = [SparkSetupCustomization sharedInstance].elementTextColor;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,6 +81,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
 #ifdef ANALYTICS
     [[Mixpanel sharedInstance] track:@"Device Setup: Password Entry Screen"];
 #endif

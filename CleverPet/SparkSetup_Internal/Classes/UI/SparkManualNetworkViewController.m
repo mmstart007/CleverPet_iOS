@@ -51,8 +51,7 @@
     self.wifiSymbolImageView.tintColor = [SparkSetupCustomization sharedInstance].normalTextColor;// elementBackgroundColor;;
 
     self.backButton.imageView.image = [self.backButton.imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    self.backButton.imageView.tintColor = [SparkSetupCustomization sharedInstance].normalTextColor;// elementBackgroundColor;;
-    
+    self.backButton.tintColor = [SparkSetupCustomization sharedInstance].elementTextColor;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,6 +63,7 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
 #ifdef ANALYTICS
     [[Mixpanel sharedInstance] track:@"Device Setup: Manual network entry screen"];
 #endif
@@ -107,12 +107,9 @@
     }
 }
 
-
-
-
 - (IBAction)connectButtonTapped:(id)sender
 {
-    if (![self.networkNameTextField.text isEqualToString:@""])
+    if (![[self.networkNameTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""])
     {
         [self.view endEditing:YES];
         if (self.networkRequiresPasswordSwitch.isOn)
@@ -130,10 +127,10 @@
             [self performSegueWithIdentifier:@"connect" sender:self];
             
         }
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Please enter a network name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
     }
-    
-    
-    
 }
 
 
