@@ -60,6 +60,12 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 
 - (BOOL)isValidEmail:(NSString *)email
 {
+    // If we have any spaces, this is a bogus email
+    NSRange spaceRange = [email rangeOfString:@" "];
+    if (spaceRange.location != NSNotFound) {
+        return NO;
+    }
+    
     NSArray *emailMatches = [self.emailDetector matchesInString:email options:kNilOptions range:NSMakeRange(0, [email length])];
     return [emailMatches count] == 1 && [[[emailMatches firstObject] URL].scheme isEqualToString:@"mailto"];
 }

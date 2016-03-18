@@ -10,6 +10,7 @@
 #import "CPLoginController.h"
 #import "CPTextField.h"
 #import "CPLoadingView.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface CPSignInViewController ()<UITextFieldDelegate>
 
@@ -92,7 +93,16 @@
         self.loadingView.hidden = NO;
         [[CPLoginController sharedInstance] verifyPassword:self.passwordField.text forEmail:self.emailField.text failure:^{
             self.loadingView.hidden = YES;
-            [self displayErrorAlertWithTitle:NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails") andMessage:NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails")];
+            NSString *title;
+            NSString *message;
+            if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+                title = NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails");
+                message = NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails");
+            } else {
+                title = NSLocalizedString(@"Error", nil);
+                message = NSLocalizedString(@"The internet connection appears to be offline.", @"Error message displayed when attempting to log in to Google Identity while the device is offline");
+            }
+            [self displayErrorAlertWithTitle:title andMessage:message];
         }];
     }
 }
