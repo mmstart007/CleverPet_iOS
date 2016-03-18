@@ -120,7 +120,6 @@ NSInteger const kLastSeenThreshhold = 120;
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // TODO: check hub state
     if ((section == kHelpSection && YES) || section == kDeviceSection) {
         return 2;
     }

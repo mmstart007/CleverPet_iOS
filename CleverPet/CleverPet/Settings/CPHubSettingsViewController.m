@@ -98,15 +98,11 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     // TODO: hub setting, scheduled settings from server
     self.currentHubSetting = [self.modeToHubSettingMap[self.currentDevice.mode] integerValue];
     switch (self.connectionState) {
+        case HubConnectionState_Unknown:
+        case HubConnectionState_Disconnected:
         case HubConnectionState_Connected:
         {
             [self setupForHubSetting:self.currentHubSetting animated:NO];
-            break;
-        }
-        case HubConnectionState_Unknown:
-        case HubConnectionState_Disconnected:
-        {
-            [self hubDisconnected];
             break;
         }
         case HubConnectionState_Offline:
