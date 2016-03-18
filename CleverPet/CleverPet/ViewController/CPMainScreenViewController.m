@@ -45,7 +45,7 @@
     self.mainScreenHeaderView = [CPMainScreenHeaderView loadFromNib];
     [self.mainScreenHeaderView setupForPet:self.currentPet];
     self.mainScreenStatsHeaderView = [CPMainScreenStatsHeaderView loadFromNib];
-    self.mainScreenStatsHeaderView.imageView.image = [self.currentPet petPhoto];;
+    self.mainScreenStatsHeaderView.imageView.image = [self.currentPet petPhoto];
     
     [self.headerView addSubview:self.mainScreenHeaderView];
     [self.headerView addSubview:self.mainScreenStatsHeaderView];
@@ -73,6 +73,7 @@
     // Update pet name/image
     // TODO: maybe a notification when pet info is updated so we don't always have to do this?
     [self.mainScreenHeaderView setupForPet:self.currentPet];
+    self.mainScreenStatsHeaderView.imageView.image = [self.currentPet petPhoto];
     if ([self.tableView.dataSource respondsToSelector:@selector(updatePetImage:)]) {
         [self.tableView.dataSource performSelector:@selector(updatePetImage:) withObject:[self.currentPet petPhoto]];
     }
