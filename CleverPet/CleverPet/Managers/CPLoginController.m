@@ -215,7 +215,7 @@ didFinishSignInWithToken:(NSString *)token
                 // This potentially doesn't work if the user changes their locale
                 NSString *message = error.localizedDescription;
                 if ([message isEqualToString:@"access_denied"]) {
-                    errorMessage = NSLocalizedString(@"This app require access to your email address and profile info. You cannot continue without allowing access.", @"Error message displayed when access to google account info is denied");
+                    errorMessage = NSLocalizedString(@"This app require access to your email address and profile info. You can not continue without allowing access.", @"Error message displayed when access to google account info is denied");
                 } else {
                     errorMessage = nil;
                 }

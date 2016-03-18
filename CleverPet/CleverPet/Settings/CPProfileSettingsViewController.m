@@ -200,7 +200,7 @@
                     [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:nil];
                     [self.navigationController popViewControllerAnimated:YES];
                 } else {
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Connection Offline" message:NSLocalizedString(@"The internet connection appears to be offline. Changes will not be save.", @"Error message displayed when trying to save changes while device is offline") preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Connection Offline" message:NSLocalizedString(@"The internet connection appears to be offline. Changes will not be saved.", @"Error message displayed when trying to save changes while device is offline") preferredStyle:UIAlertControllerStyleAlert];
                     
                     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel (Stay Here)", @"Cancel text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleCancel handler:nil];
                     
@@ -225,10 +225,10 @@
 
 - (void)logoutTapped:(UITapGestureRecognizer*)recognizer
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Are you sure you want to log out?", @"Confirmation message displayed to user when logging out") preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Are you sure you want to sign out?", @"Confirmation message displayed to user when logging out") preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:CANCEL_TEXT style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Logout", @"Logout confirmation button text") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Sign Out", @"Logout confirmation button text") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [[CPUserManager sharedInstance] logout];
     }];
     
