@@ -379,6 +379,8 @@ didFinishSignInWithToken:(NSString *)token
 - (void)logoutOfGit
 {
     [[GITAuth sharedInstance] signOut];
+    // Also clear our autologin token
+    [self clearAutoLoginToken];
 }
 
 - (void)setAutoLoginToken:(NSString*)authToken
