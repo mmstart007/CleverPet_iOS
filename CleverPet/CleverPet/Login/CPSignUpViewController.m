@@ -73,6 +73,11 @@ NSInteger const kMinPasswordLength = 6;
 {
     NSString *emailString = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
+    if ([emailString length] > kEmailMaxChars) {
+        [self displayErrorAlertWithTitle:nil andMessage:[NSString stringWithFormat:NSLocalizedString(@"Your email address must be less than %d characters", @"Error message displayed when email address exceeds max length"), kEmailMaxChars]];
+        return NO;
+    }
+    
     if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
         [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address")];
         return NO;

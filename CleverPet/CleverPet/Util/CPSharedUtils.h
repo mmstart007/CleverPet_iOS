@@ -65,6 +65,8 @@ extern NSInteger const kNameFieldMinChars;
 extern NSInteger const kNameFieldMaxChars;
 extern NSInteger const kFamilyNameFieldMinChars;
 extern NSInteger const kFamilyNameFieldMaxChars;
+extern NSInteger const kEmailMaxChars;
+extern NSInteger const kPasswordMaxChars;
 
 #pragma mark - JSON keys
 extern NSString * const kErrorKey;
