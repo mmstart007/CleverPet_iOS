@@ -4017,7 +4017,7 @@
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eze-v7-t6f">
                                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                                <string key="text">Note: If you plug in Hub and some time passes before you try to set up WiFi, indicator light will begin blinking white. Disconnect Hub from wall outlet and plug back in. Indicator light will blink blue, and Hub is ready to connect to WiFi.</string>
+                                                                <string key="text">Note: If you plug in the Hub and some time passes before you try to set up WiFi, the indicator light will begin blinking white. Disconnect the Hub from the wall outlet and plug it back in. The indicator light will blink blue, and the Hub is ready to connect to WiFi.</string>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
