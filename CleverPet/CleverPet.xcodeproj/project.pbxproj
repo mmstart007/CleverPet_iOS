@@ -40,7 +40,6 @@
 		1827AD83CD7A2FD906AA0567 /* CPMainTableSectionHeaderFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A722B7D6084A2F1E3D1F /* CPMainTableSectionHeaderFilter.m */; };
 		1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */; };
 		1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A57728C978A652728E14 /* CPTileViewCell.m */; };
-		5141E9891C936BB800D72DC8 /* CPPetStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 5141E9881C936BB800D72DC8 /* CPPetStats.m */; };
 		51A8A7BB1C90E127001A1572 /* CPFirebaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */; };
 		73C6EFFB1C9A123F004CA862 /* localConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 73C6EFFA1C9A123F004CA862 /* localConfig.json */; };
 		9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2F71C7D08A2004874A7 /* CPProfileSettingsViewController.m */; };
@@ -48,7 +47,6 @@
 		9704E2FE1C7D2799004874A7 /* CPSharedUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2FD1C7D2799004874A7 /* CPSharedUtils.m */; };
 		9704E3041C7D2D4D004874A7 /* Pickers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9704E3031C7D2D4D004874A7 /* Pickers.storyboard */; };
 		9704E3071C7D34BD004874A7 /* CPPetPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E3061C7D34BD004874A7 /* CPPetPhotoViewController.m */; };
-		971D337C1C937208000A0DD6 /* CPTileUpdateListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D337B1C937208000A0DD6 /* CPTileUpdateListener.m */; };
 		971D63011C863D0A006C9F80 /* CPConfigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D63001C863D0A006C9F80 /* CPConfigViewController.m */; };
 		971D630C1C88B0A7006C9F80 /* CPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D63091C88B0A7006C9F80 /* CPDevice.m */; };
 		971D630D1C88B0A7006C9F80 /* CPDeviceSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D630B1C88B0A7006C9F80 /* CPDeviceSchedule.m */; };
@@ -174,8 +172,6 @@
 		1827AD320F0C4F8FD18E36D8 /* CPTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTile.m; sourceTree = "<group>"; };
 		1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
 		3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
-		5141E9871C936BB800D72DC8 /* CPPetStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetStats.h; sourceTree = "<group>"; };
-		5141E9881C936BB800D72DC8 /* CPPetStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetStats.m; sourceTree = "<group>"; };
 		51A8A7B91C90E127001A1572 /* CPFirebaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFirebaseManager.h; sourceTree = "<group>"; };
 		51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFirebaseManager.m; sourceTree = "<group>"; };
 		73C6EFFA1C9A123F004CA862 /* localConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = localConfig.json; sourceTree = "<group>"; };
@@ -188,8 +184,6 @@
 		9704E3031C7D2D4D004874A7 /* Pickers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Pickers.storyboard; sourceTree = "<group>"; };
 		9704E3051C7D32D2004874A7 /* CPPetPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPetPhotoViewController.h; sourceTree = "<group>"; };
 		9704E3061C7D34BD004874A7 /* CPPetPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPetPhotoViewController.m; sourceTree = "<group>"; };
-		971D337A1C937208000A0DD6 /* CPTileUpdateListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileUpdateListener.h; sourceTree = "<group>"; };
-		971D337B1C937208000A0DD6 /* CPTileUpdateListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileUpdateListener.m; sourceTree = "<group>"; };
 		971D62FF1C863D0A006C9F80 /* CPConfigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPConfigViewController.h; sourceTree = "<group>"; };
 		971D63001C863D0A006C9F80 /* CPConfigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPConfigViewController.m; sourceTree = "<group>"; };
 		971D63081C88B0A7006C9F80 /* CPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPDevice.h; sourceTree = "<group>"; };
@@ -368,8 +362,6 @@
 		1827A33D9223DD88F1F07633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5141E9871C936BB800D72DC8 /* CPPetStats.h */,
-				5141E9881C936BB800D72DC8 /* CPPetStats.m */,
 				1827AD320F0C4F8FD18E36D8 /* CPTile.m */,
 				1827AA55CD84B5F8ACE22F8A /* CPTile.h */,
 				1827A50A4A6169E21622727F /* CPTileSection.m */,
@@ -501,8 +493,6 @@
 				971D630F1C88FFC2006C9F80 /* CPTileCommunicationManager.m */,
 				51A8A7B91C90E127001A1572 /* CPFirebaseManager.h */,
 				51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */,
-				971D337A1C937208000A0DD6 /* CPTileUpdateListener.h */,
-				971D337B1C937208000A0DD6 /* CPTileUpdateListener.m */,
 				0D535F251C93A91F003B4CF8 /* CPChartRenderer.h */,
 				0D535F261C93A91F003B4CF8 /* CPChartRenderer.m */,
 			);
@@ -817,7 +807,6 @@
 				0DDF53F91C910CC80048FF6F /* CPGraph.m in Sources */,
 				97CC44721C7699C7003C4258 /* CPFAQView.m in Sources */,
 				97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */,
-				5141E9891C936BB800D72DC8 /* CPPetStats.m in Sources */,
 				0D1F1C561C7E228900EAF336 /* CPPetStatsView.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
 				971D630D1C88B0A7006C9F80 /* CPDeviceSchedule.m in Sources */,
@@ -839,7 +828,6 @@
 				97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */,
 				0D159F371C937F68001BB12D /* CPReportGraphHolder.m in Sources */,
 				0DE13B451C7E9CB100648834 /* CPMainTableSectionHeader.m in Sources */,
-				971D337C1C937208000A0DD6 /* CPTileUpdateListener.m in Sources */,
 				979D84431C7FA50700ADB6B0 /* CPFileUtils.m in Sources */,
 				97B635441C91E6FA00DFE89C /* CPHubPlaceholderViewController.m in Sources */,
 				97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */,

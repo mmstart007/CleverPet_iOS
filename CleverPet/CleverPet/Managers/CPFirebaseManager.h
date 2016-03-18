@@ -7,28 +7,31 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CPPetStats.h"
 #import "CPTile.h"
 
-typedef void(^FirebaseUpdateBlock)(NSError*, CPPetStats*);
 typedef void(^FirebaseTileUpdateBlock)(NSError*, CPTile*);
 typedef void(^FirebaseLoginBlock)(NSError *);
 
 @interface CPFirebaseManager : NSObject
 
-@property (nonatomic, copy) FirebaseUpdateBlock headerStatsUpdateBlock;
-@property (nonatomic, copy) FirebaseUpdateBlock viewStatsUpdateBlock;
+typedef void(^FirebaseNumberUpdateBlock)(NSNumber *value);
+typedef void(^FirebaseStringUpdateBlock)(NSString *value);
+
+typedef NSNumber *FirebaseManagerHandle;
 
 + (instancetype)sharedInstance;
 
 - (void)applyConfig:(NSDictionary *)configData;
 - (void)userLoggedIn:(NSDictionary *)response withCompletion:(FirebaseLoginBlock)completion;
-// TODO: rename to stats
-- (void)beginlisteningForUpdates;
-- (void)stoplisteningForStatsUpdates;
 
-//Tile updates
-- (void)listenForTileUpdatesWithBlock:(FirebaseTileUpdateBlock)block;
-- (void)stopListeningForTileUpdates;
+- (FirebaseManagerHandle)subscribeToChallengeNameWithBlock:(FirebaseStringUpdateBlock)block;
+- (FirebaseManagerHandle)subscribeToChallengeNumberWithBlock:(FirebaseNumberUpdateBlock)block;
+- (FirebaseManagerHandle)subscribeToLifetimePointsWithBlock:(FirebaseNumberUpdateBlock)block;
+- (FirebaseManagerHandle)subscribeToStageNumberWithBlock:(FirebaseNumberUpdateBlock)block;
+- (FirebaseManagerHandle)subscribeToTotalStagesWithBlock:(FirebaseNumberUpdateBlock)block;
+- (FirebaseManagerHandle)subscribeToKibblesWithBlock:(FirebaseNumberUpdateBlock)block;
+- (FirebaseManagerHandle)subscribeToPlaysWithBlock:(FirebaseNumberUpdateBlock)block;
+- (FirebaseManagerHandle)subscribeToTilesWithBlock:(FirebaseTileUpdateBlock)block;
 
+- (void)unsubscribeFromHandle:(FirebaseManagerHandle)handle;
 @end
