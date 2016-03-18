@@ -306,7 +306,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
             [[CPUserManager sharedInstance] updateDeviceInfo:deviceInfo];
             [self.navigationController popViewControllerAnimated:YES];
         } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Connection Offline" message:NSLocalizedString(@"The internet connection appears to be offline. Changes will not be save.", @"Error message displayed when trying to save changes while device is offline") preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Connection Offline" message:NSLocalizedString(@"The internet connection appears to be offline. Changes will not be saved.", @"Error message displayed when trying to save changes while device is offline") preferredStyle:UIAlertControllerStyleAlert];
             
             UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel (Stay Here)", @"Cancel text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleCancel handler:nil];
             
