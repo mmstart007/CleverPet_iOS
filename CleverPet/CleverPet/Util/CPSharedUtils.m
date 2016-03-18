@@ -15,6 +15,10 @@ NSInteger const kFamilyNameFieldMinChars = 1;
 NSInteger const kFamilyNameFieldMaxChars = 35;
 NSInteger const kEmailMaxChars = 64;
 NSInteger const kPasswordMaxChars = 64;
+NSInteger const kMinWeight = 0;
+NSInteger const kMaxWeight = 999;
+NSInteger const kMinAge = 0;
+NSInteger const kMaxAge = 99;
 
 #pragma mark - JSON keys
 NSString * const kErrorKey = @"error";

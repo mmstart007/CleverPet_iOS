@@ -122,6 +122,13 @@
 #pragma mark - IBActions
 - (IBAction)continueTapped:(id)sender
 {
+    // Validate pet age
+    NSInteger ageValue = [self.ageField.text integerValue];
+    if (ageValue < kMinAge || ageValue > kMaxAge) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Age must be between %d and %d", @"Error message when pet age is invalid. First %d is minimum age, second %d is maximum age"), kMinAge, kMaxAge]];
+        return;
+    }
+    
     NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kDOBKey:[self getDOB]};
     [CPPet validateInput:petInfo isInitialSetup:YES completion:^(BOOL isValidInput, NSString *errorMessage) {
         if (isValidInput) {

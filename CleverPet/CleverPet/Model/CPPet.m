@@ -66,6 +66,12 @@
         return;
     }
     
+    NSInteger weightValue = [weight integerValue];
+    if (weightValue < kMinWeight || weightValue > kMaxWeight) {
+        if (completion) completion(NO, [NSString stringWithFormat:NSLocalizedString(@"Weight must be between %d and %d", @"Error message when pet weight is invalid. First %d is minimum weight, second %d is maximum weight"), kMinWeight, kMaxWeight]);
+        return;
+    }
+    
     // TODO: verify altered is one of the accepted options
     if(completion) completion(YES, nil);
 }
