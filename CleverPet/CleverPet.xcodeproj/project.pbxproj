@@ -93,6 +93,8 @@
 		97CC44881C7BB6D8003C4258 /* CPParticleConnectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44871C7BB6D8003C4258 /* CPParticleConnectionHelper.m */; };
 		97D258211C8F5F17002C4CC6 /* CPPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D258201C8F5F17002C4CC6 /* CPPlayerViewController.m */; };
 		97D258241C8F639C002C4CC6 /* CPBaseCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D258231C8F639C002C4CC6 /* CPBaseCommunicationManager.m */; };
+		97E678251C9CD25C00971A0F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97E678241C9CD25C00971A0F /* Settings.bundle */; };
+		97E6782B1CA0799E00971A0F /* post_build.sh in Resources */ = {isa = PBXBuildFile; fileRef = 97E6782A1CA0799E00971A0F /* post_build.sh */; };
 		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
 		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
 		97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */; };
@@ -252,6 +254,8 @@
 		97D258201C8F5F17002C4CC6 /* CPPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlayerViewController.m; sourceTree = "<group>"; };
 		97D258221C8F639C002C4CC6 /* CPBaseCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBaseCommunicationManager.h; sourceTree = "<group>"; };
 		97D258231C8F639C002C4CC6 /* CPBaseCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBaseCommunicationManager.m; sourceTree = "<group>"; };
+		97E678241C9CD25C00971A0F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		97E6782A1CA0799E00971A0F /* post_build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = post_build.sh; sourceTree = "<group>"; };
 		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
 		97EB7AB41C729F33007F1383 /* CPNascarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNascarViewController.m; sourceTree = "<group>"; };
 		97EB7AB61C72A300007F1383 /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
@@ -317,27 +321,28 @@
 		0D36AA851C7243D600349D03 /* CleverPet */ = {
 			isa = PBXGroup;
 			children = (
-				0DDF53FA1C910F730048FF6F /* Graph */,
-				97CC44661C7669B3003C4258 /* Settings */,
-				97CC44541C754B67003C4258 /* Resources */,
-				97EB7AE81C73B833007F1383 /* Util */,
-				97EB7AC31C73B826007F1383 /* Font */,
-				97EB7ABC1C72AAE3007F1383 /* Managers */,
-				974868B11C725A990031BEEF /* Login */,
 				0D36AA891C7243D600349D03 /* AppDelegate.h */,
 				0D36AA8A1C7243D600349D03 /* AppDelegate.m */,
+				0D36AA921C7243D600349D03 /* Assets.xcassets */,
+				97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */,
+				97EB7AC31C73B826007F1383 /* Font */,
+				0DDF53FA1C910F730048FF6F /* Graph */,
+				0D36AA971C7243D600349D03 /* Info.plist */,
+				974868B11C725A990031BEEF /* Login */,
+				0D36AA8F1C7243D600349D03 /* Main.storyboard */,
+				97EB7ABC1C72AAE3007F1383 /* Managers */,
+				1827A33D9223DD88F1F07633 /* Model */,
+				97CC44541C754B67003C4258 /* Resources */,
+				97E678291CA0799E00971A0F /* Scripts */,
+				97CC44661C7669B3003C4258 /* Settings */,
+				97CC44641C76571F003C4258 /* Settings.storyboard */,
+				0D36AA861C7243D600349D03 /* Supporting Files */,
+				97EB7AE81C73B833007F1383 /* Util */,
+				1827A9E78952C5B4B2C50430 /* Utils */,
+				97EB7AF41C73C9FD007F1383 /* View */,
+				1827A78F146E373DB1371921 /* ViewController */,
 				0D36AA8C1C7243D600349D03 /* ViewController.h */,
 				0D36AA8D1C7243D600349D03 /* ViewController.m */,
-				0D36AA8F1C7243D600349D03 /* Main.storyboard */,
-				0D36AA921C7243D600349D03 /* Assets.xcassets */,
-				0D36AA971C7243D600349D03 /* Info.plist */,
-				0D36AA861C7243D600349D03 /* Supporting Files */,
-				1827A33D9223DD88F1F07633 /* Model */,
-				1827A78F146E373DB1371921 /* ViewController */,
-				1827A9E78952C5B4B2C50430 /* Utils */,
-				97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */,
-				97EB7AF41C73C9FD007F1383 /* View */,
-				97CC44641C76571F003C4258 /* Settings.storyboard */,
 			);
 			path = CleverPet;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				73C6EFFA1C9A123F004CA862 /* localConfig.json */,
 				97CC44551C754B67003C4258 /* breeds.json */,
 				971D63111C8A3B1C006C9F80 /* faqs.json */,
+				97E678241C9CD25C00971A0F /* Settings.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -470,6 +476,14 @@
 				9704E2F71C7D08A2004874A7 /* CPProfileSettingsViewController.m */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		97E678291CA0799E00971A0F /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				97E6782A1CA0799E00971A0F /* post_build.sh */,
+			);
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 		97EB7ABC1C72AAE3007F1383 /* Managers */ = {
@@ -621,6 +635,7 @@
 				0D36AA811C7243D600349D03 /* Resources */,
 				11913D9F032B5AD5C1F14CBE /* Embed Pods Frameworks */,
 				121785C1CF39DB22AA5A7959 /* Copy Pods Resources */,
+				97E678281CA077E600971A0F /* Version Update */,
 				971D337E1C938D43000A0DD6 /* ShellScript */,
 			);
 			buildRules = (
@@ -686,6 +701,7 @@
 				0D159F391C938014001BB12D /* CPReportGraphHolder.xib in Resources */,
 				979D84731C84FAF200ADB6B0 /* Raleway-SemiBold.ttf in Resources */,
 				979D84661C84FAF200ADB6B0 /* Raleway-BlackItalic.ttf in Resources */,
+				97E6782B1CA0799E00971A0F /* post_build.sh in Resources */,
 				73C6EFFB1C9A123F004CA862 /* localConfig.json in Resources */,
 				979D84751C84FAF200ADB6B0 /* Raleway-Thin.ttf in Resources */,
 				979D84741C84FAF200ADB6B0 /* Raleway-SemiBoldItalic.ttf in Resources */,
@@ -698,6 +714,7 @@
 				979D846E1C84FAF200ADB6B0 /* Raleway-Light.ttf in Resources */,
 				979D84761C84FAF200ADB6B0 /* Raleway-ThinItalic.ttf in Resources */,
 				9704E3041C7D2D4D004874A7 /* Pickers.storyboard in Resources */,
+				97E678251C9CD25C00971A0F /* Settings.bundle in Resources */,
 				971D63121C8A3B1C006C9F80 /* faqs.json in Resources */,
 				0D36AA911C7243D600349D03 /* Main.storyboard in Resources */,
 				979D846A1C84FAF200ADB6B0 /* Raleway-ExtraBoldItalic.ttf in Resources */,
@@ -768,6 +785,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 6586a4d29c7ed19812e3881d41c1b24f9b9e5a89 955e1aa55844720923ed15ef1f6a1590e20aac38f568ad5899f4f60645f0702b";
+		};
+		97E678281CA077E600971A0F /* Version Update */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Version Update";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"${SRCROOT}/CleverPet/Scripts/post_build.sh\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
