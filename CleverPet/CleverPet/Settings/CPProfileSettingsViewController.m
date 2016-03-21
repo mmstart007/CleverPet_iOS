@@ -14,7 +14,6 @@
 #import "CPPetPhotoViewController.h"
 #import "CPUserManager.h"
 #import "CPGenderUtils.h"
-#import <AFNetworking/AFNetworkReachabilityManager.h>
 #import "CPLoadingView.h"
 
 @interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate, CPPetPhotoDelegate, UIScrollViewDelegate>
@@ -213,11 +212,11 @@
         if (isValidInput) {
             if ([[CPUserManager sharedInstance] hasPetInfoChanged:petInfo]) {
                 
-                self.loadingView.hidden = NO;
+                [self showLoading:YES];
                 BLOCK_SELF_REF_OUTSIDE();
                 [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:^(NSError *error) {
                     BLOCK_SELF_REF_INSIDE();
-                    self.loadingView.hidden = YES;
+                    [self showLoading:NO];
                     if (error) {
                         // Verify we even have a network connection before this nonsense
                         if ([error isOfflineError]) {
@@ -250,6 +249,13 @@
     [alert addAction:cancelAction];
     [alert addAction:logoutAction];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)showLoading:(BOOL)loading
+{
+    self.loadingView.hidden = !loading;
+    self.pseudoBackButton.enabled = !loading;
+    self.saveButton.enabled = !loading;
 }
 
 #pragma mark - UITextFieldDelegate methods
