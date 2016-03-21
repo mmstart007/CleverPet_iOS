@@ -56,9 +56,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
         BLOCK_SELF_REF_OUTSIDE();
         [[CPAppEngineCommunicationManager sharedInstance] updatePet:self.currentUser.pet.petId withInfo:petInfo completion:^(NSError *error) {
             BLOCK_SELF_REF_INSIDE();
-            // TODO: Handle failure somehow
             if (error) {
-                [[CPSharedUtils getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:NSLocalizedString(@"There was an error saving your changes. You will have to remake them.", @"Error message displayed when saving user/hub data from settings fails")];
                 [self.currentUser.pet mergeFromDictionary:currentPetInfo useKeyMapping:YES error:nil];
                 if (completion) completion(error);
             } else {
@@ -116,7 +114,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
                 BLOCK_SELF_REF_INSIDE();
                 // TODO: Handle failure
                 if (error) {
-                    [[CPSharedUtils getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:NSLocalizedString(@"There was an error saving your changes. You will have to remake them.", @"Error message displayed when saving user/hub data from settings fails")];
+                    [[CPSharedUtils getRootNavController] displayErrorAlertWithTitle:ERROR_TEXT andMessage:NSLocalizedString(@"There was an error saving your changes. You will have to remake them.", @"Error message displayed when saving user/hub data from settings fails")];
                     self.currentUser.device.mode = oldMode;
                 }
             }];
@@ -138,7 +136,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
             
             [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId schedule:schedule.scheduleId withInfo:newSchedule completion:^(NSError *error) {
                 if (error) {
-                    [[CPSharedUtils getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:NSLocalizedString(@"There was an error saving your changes. You will have to remake them.", @"Error message displayed when saving user/hub data from settings fails")];
+                    [[CPSharedUtils getRootNavController] displayErrorAlertWithTitle:ERROR_TEXT andMessage:NSLocalizedString(@"There was an error saving your changes. You will have to remake them.", @"Error message displayed when saving user/hub data from settings fails")];
                     [schedule mergeFromDictionary:previousSchedule useKeyMapping:YES error:nil];
                 }
             }];

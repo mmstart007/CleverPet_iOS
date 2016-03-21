@@ -90,7 +90,7 @@
                 BLOCK_SELF_REF_INSIDE();
                 if (error) {
                     [self showLoadingSpinner:NO];
-                    [self displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:error.localizedDescription];
+                    [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:error.localizedDescription];
                 }
             }];
         }

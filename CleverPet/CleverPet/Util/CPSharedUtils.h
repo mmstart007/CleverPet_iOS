@@ -59,6 +59,7 @@ removeObserver:self]
 #import "UIColor+CleverPet.h"
 #import "UIViewController+CleverPet.h"
 #import "UIImageView+AFNetworking.h"
+#import "NSError+CleverPet.h"
 
 #pragma mark - Data field max and min values
 extern NSInteger const kNameFieldMinChars;
@@ -126,3 +127,5 @@ extern NSString * const kPageSizeKey;
 #pragma mark - Text
 #define CANCEL_TEXT NSLocalizedString(@"Cancel", @"Cancel")
 #define OK_TEXT NSLocalizedString(@"OK", @"OK")
+#define ERROR_TEXT NSLocalizedString(@"Error", @"Error")
+#define OFFLINE_TEXT NSLocalizedString(@"The internet connection appears to be offline.", @"The internet connection appears to be offline.")
