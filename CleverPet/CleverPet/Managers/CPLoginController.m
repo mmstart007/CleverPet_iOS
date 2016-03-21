@@ -198,7 +198,7 @@ didFinishSignInWithToken:(NSString *)token
     if (error) {
         // Check if the device is currently online
         NSString *errorMessage = DEFAULT_ERROR_MESSAGE;
-        if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
+        if ([error isOfflineError]) {
             errorMessage = OFFLINE_TEXT;
         } else if ([error.domain isEqualToString:@"com.google.gitkit"]) { // Not great, but I haven't been able to find a define for the domain
             if (error.code == kGITErrorCodeUserCancellation) {
