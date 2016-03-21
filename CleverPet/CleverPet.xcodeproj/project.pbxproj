@@ -93,6 +93,7 @@
 		97CC44881C7BB6D8003C4258 /* CPParticleConnectionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 97CC44871C7BB6D8003C4258 /* CPParticleConnectionHelper.m */; };
 		97D258211C8F5F17002C4CC6 /* CPPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D258201C8F5F17002C4CC6 /* CPPlayerViewController.m */; };
 		97D258241C8F639C002C4CC6 /* CPBaseCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D258231C8F639C002C4CC6 /* CPBaseCommunicationManager.m */; };
+		97E678251C9CD25C00971A0F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97E678241C9CD25C00971A0F /* Settings.bundle */; };
 		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
 		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
 		97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */; };
@@ -252,6 +253,7 @@
 		97D258201C8F5F17002C4CC6 /* CPPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPlayerViewController.m; sourceTree = "<group>"; };
 		97D258221C8F639C002C4CC6 /* CPBaseCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBaseCommunicationManager.h; sourceTree = "<group>"; };
 		97D258231C8F639C002C4CC6 /* CPBaseCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBaseCommunicationManager.m; sourceTree = "<group>"; };
+		97E678241C9CD25C00971A0F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
 		97EB7AB41C729F33007F1383 /* CPNascarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNascarViewController.m; sourceTree = "<group>"; };
 		97EB7AB61C72A300007F1383 /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				73C6EFFA1C9A123F004CA862 /* localConfig.json */,
 				97CC44551C754B67003C4258 /* breeds.json */,
 				971D63111C8A3B1C006C9F80 /* faqs.json */,
+				97E678241C9CD25C00971A0F /* Settings.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -698,6 +701,7 @@
 				979D846E1C84FAF200ADB6B0 /* Raleway-Light.ttf in Resources */,
 				979D84761C84FAF200ADB6B0 /* Raleway-ThinItalic.ttf in Resources */,
 				9704E3041C7D2D4D004874A7 /* Pickers.storyboard in Resources */,
+				97E678251C9CD25C00971A0F /* Settings.bundle in Resources */,
 				971D63121C8A3B1C006C9F80 /* faqs.json in Resources */,
 				0D36AA911C7243D600349D03 /* Main.storyboard in Resources */,
 				979D846A1C84FAF200ADB6B0 /* Raleway-ExtraBoldItalic.ttf in Resources */,
