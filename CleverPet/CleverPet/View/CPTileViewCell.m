@@ -32,6 +32,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *colorViewNotCoveringConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *colorViewCoveringConstraint;
 
+// The relative priority of these 2 constraints controls whether the title label is pinned to the cell bounds(image/message tiles), or the video image thumbnail (video tiles). One should always be greater than the other to prevent constraint conflicts.
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleNonVideoTrailingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleVideoTrailingConstraint;
+
 // Video layout specific stuff
 @property (weak, nonatomic) IBOutlet UIView *videoContentView;
 @property (weak, nonatomic) IBOutlet UIView *videoImageContainer;
@@ -86,7 +90,10 @@
     } else if (tile.templateType == CPTileTemplateReport) {
         [self.reportContentView setGraph:tile.graph forSizing:forSizing];
     }
-    // TODO: report template
+    
+    // Pin the trailing edge of the title label to the appropriate view
+    self.titleNonVideoTrailingConstraint.priority = tile.templateType == CPTileTemplateVideo ? 998 : 999;
+    self.titleVideoTrailingConstraint.priority = tile.templateType == CPTileTemplateVideo ? 999 : 998;
     
     self.primaryButton.hidden = tile.templateType == CPTileTemplateVideo || !tile.primaryButtonText;
     self.secondaryButton.hidden = tile.templateType == CPTileTemplateVideo || !tile.secondaryButtonText;
