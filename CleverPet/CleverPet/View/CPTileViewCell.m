@@ -56,7 +56,7 @@
 - (void)setTile:(CPTile *)tile forSizing:(BOOL)forSizing allowSwiping:(BOOL)allowSwiping {
     _tile = tile;
     
-    self.reportContentView.graph = nil;
+    [self.reportContentView setGraph:nil forSizing:forSizing];
     self.allowSwiping = allowSwiping;
     
     self.titleLabel.hidden = !tile.title;
@@ -84,7 +84,7 @@
         self.bodyTextView.attributedText = tile.parsedBody;
         self.cellImageViewHolder.hidden = !tile.imageUrl;
     } else if (tile.templateType == CPTileTemplateReport) {
-        self.reportContentView.graph = tile.graph;
+        [self.reportContentView setGraph:tile.graph forSizing:forSizing];
     }
     // TODO: report template
     
@@ -120,8 +120,6 @@
         [self.videoLayoutImageView setImageWithURL:self.tile.videoThumbnailUrl];
     } else if (self.tile.templateType == CPTileTemplateMessage) {
         [self.cellImageView setImageWithURL:self.tile.imageUrl];
-    } else if (self.tile.templateType == CPTileTemplateReport) {
-        self.reportContentView.graph = self.tile.graph;
     }
     
     UIColor *tileColor = [UIColor blackColor];
