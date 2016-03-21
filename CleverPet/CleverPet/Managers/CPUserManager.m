@@ -56,9 +56,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
         BLOCK_SELF_REF_OUTSIDE();
         [[CPAppEngineCommunicationManager sharedInstance] updatePet:self.currentUser.pet.petId withInfo:petInfo completion:^(NSError *error) {
             BLOCK_SELF_REF_INSIDE();
-            // TODO: Handle failure somehow
             if (error) {
-                [[CPSharedUtils getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:NSLocalizedString(@"There was an error saving your changes. You will have to remake them.", @"Error message displayed when saving user/hub data from settings fails")];
                 [self.currentUser.pet mergeFromDictionary:currentPetInfo useKeyMapping:YES error:nil];
                 if (completion) completion(error);
             } else {
@@ -103,22 +101,34 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     [CPSharedUtils deviceTimeZoneUpdated:self.currentUser.device.timeZone];
 }
 
-- (void)updateDeviceInfo:(NSDictionary *)deviceInfo
+- (void)updateDeviceInfo:(NSDictionary *)deviceInfo withCompletion:(void (^)(NSError *))completion
 {
+    __block NSInteger pendingRequests = 0;
+    __block NSError *blockError;
+    void (^requestFinished)(NSError *error) = ^(NSError *error){
+        if (error) {
+            blockError = error;
+        }
+        pendingRequests--;
+        if (pendingRequests == 0) {
+            if (completion) completion(blockError);
+        }
+    };
+    
     if (deviceInfo[kModeKey]) {
         NSString *oldMode = self.currentUser.device.mode;
         NSString *newMode = deviceInfo[kModeKey];
         if (![oldMode isEqualToString:newMode]) {
             self.currentUser.device.mode = newMode;
-            
+            pendingRequests++;
             BLOCK_SELF_REF_OUTSIDE();
             [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId mode:newMode completion:^(NSError *error) {
                 BLOCK_SELF_REF_INSIDE();
                 // TODO: Handle failure
                 if (error) {
-                    [[CPSharedUtils getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:NSLocalizedString(@"There was an error saving your changes. You will have to remake them.", @"Error message displayed when saving user/hub data from settings fails")];
                     self.currentUser.device.mode = oldMode;
                 }
+                requestFinished(error);
             }];
         }
     }
@@ -136,11 +146,12 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
             [schedule updateEndTime:endTime];
             NSDictionary *newSchedule = [schedule toDictionary];
             
+            pendingRequests++;
             [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId schedule:schedule.scheduleId withInfo:newSchedule completion:^(NSError *error) {
                 if (error) {
-                    [[CPSharedUtils getRootNavController] displayErrorAlertWithTitle:NSLocalizedString(@"Error", nil) andMessage:NSLocalizedString(@"There was an error saving your changes. You will have to remake them.", @"Error message displayed when saving user/hub data from settings fails")];
                     [schedule mergeFromDictionary:previousSchedule useKeyMapping:YES error:nil];
                 }
+                requestFinished(error);
             }];
         }
     };

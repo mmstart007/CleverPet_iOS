@@ -14,7 +14,7 @@
 #import "CPPetPhotoViewController.h"
 #import "CPUserManager.h"
 #import "CPGenderUtils.h"
-#import <AFNetworking/AFNetworkReachabilityManager.h>
+#import "CPLoadingView.h"
 
 @interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate, CPPetPhotoDelegate, UIScrollViewDelegate>
 
@@ -51,7 +51,9 @@
 
 @property (nonatomic, strong) CPPet *pet;
 @property (nonatomic, weak) UIBarButtonItem *pseudoBackButton;
+@property (nonatomic, weak) UIBarButtonItem *saveButton;
 @property (nonatomic, weak) UITapGestureRecognizer *logoutRecognizer;
+@property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
 
 @end
 
@@ -82,17 +84,26 @@
     [self setupStyling];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[[UIImage imageNamed:@"back_arrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [button setTitle:@"Back" forState:UIControlStateNormal];
+    [button setTitle:@"Cancel" forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
     [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     [button setTintColor:[UIColor appTealColor]];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 7, 0, 0)];
     button.frame = CGRectMake(0, 0, 50, 40);
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     [button addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = barButton;
     self.pseudoBackButton = barButton;
+    
+    button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"Save" forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
+    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor appTealColor]];
+    [button sizeToFit];
+    barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [button addTarget:self action:@selector(saveButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = barButton;
+    self.saveButton = barButton;
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoutTapped:)];
     [self.logoutContainer addGestureRecognizer:recognizer];
@@ -186,6 +197,11 @@
 
 - (void)backButtonTapped:(id)sender
 {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)saveButtonTapped:(id)sender
+{
     [self.view endEditing:YES];
     NSString *alteredString = [CPGenderUtils genderNeutralStringForAlteredState:self.neuteredField.text];
     if ([alteredString length] == 0) {
@@ -195,25 +211,23 @@
     [CPPet validateInput:petInfo isInitialSetup:NO completion:^(BOOL isValidInput, NSString *errorMessage) {
         if (isValidInput) {
             if ([[CPUserManager sharedInstance] hasPetInfoChanged:petInfo]) {
-                // Verify we even have a network connection before this nonsense
-                if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
-                    [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:nil];
-                    [self.navigationController popViewControllerAnimated:YES];
-                } else {
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Connection Offline" message:NSLocalizedString(@"The internet connection appears to be offline. Changes will not be saved.", @"Error message displayed when trying to save changes while device is offline") preferredStyle:UIAlertControllerStyleAlert];
-                    
-                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel (Stay Here)", @"Cancel text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleCancel handler:nil];
-                    
-                    BLOCK_SELF_REF_OUTSIDE();
-                    UIAlertAction *discardAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Continue (Discard my Changes)", @"Continue text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                        BLOCK_SELF_REF_INSIDE();
+                
+                [self showLoading:YES];
+                BLOCK_SELF_REF_OUTSIDE();
+                [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:^(NSError *error) {
+                    BLOCK_SELF_REF_INSIDE();
+                    [self showLoading:NO];
+                    if (error) {
+                        // Verify we even have a network connection before this nonsense
+                        if ([error isOfflineError]) {
+                            [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:OFFLINE_TEXT];
+                        } else {
+                            [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:error.localizedDescription];
+                        }
+                    } else {
                         [self.navigationController popViewControllerAnimated:YES];
-                    }];
-                    
-                    [alert addAction:cancelAction];
-                    [alert addAction:discardAction];
-                    [self presentViewController:alert animated:YES completion:nil];
-                }
+                    }
+                }];
             } else {
                 [self.navigationController popViewControllerAnimated:YES];
             }
@@ -235,6 +249,13 @@
     [alert addAction:cancelAction];
     [alert addAction:logoutAction];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)showLoading:(BOOL)loading
+{
+    self.loadingView.hidden = !loading;
+    self.pseudoBackButton.enabled = !loading;
+    self.saveButton.enabled = !loading;
 }
 
 #pragma mark - UITextFieldDelegate methods

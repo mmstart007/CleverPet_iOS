@@ -106,8 +106,8 @@
                 title = NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails");
                 message = NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails");
             } else {
-                title = NSLocalizedString(@"Error", nil);
-                message = NSLocalizedString(@"The internet connection appears to be offline.", @"Error message displayed when attempting to log in to Google Identity while the device is offline");
+                title = ERROR_TEXT;
+                message = OFFLINE_TEXT;
             }
             [self displayErrorAlertWithTitle:title andMessage:message];
         }];
