@@ -32,6 +32,10 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *colorViewNotCoveringConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *colorViewCoveringConstraint;
 
+// The relative priority of these 2 constraints controls whether the title label is pinned to the cell bounds(image/message tiles), or the video image thumbnail (video tiles). One should always be greater than the other to prevent constraint conflicts.
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleNonVideoTrailingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleVideoTrailingConstraint;
+
 // Video layout specific stuff
 @property (weak, nonatomic) IBOutlet UIView *videoContentView;
 @property (weak, nonatomic) IBOutlet UIView *videoImageContainer;
@@ -53,10 +57,10 @@
     return _tile;
 }
 
-- (void)setTile:(CPTile *)tile allowSwiping:(BOOL)allowSwiping {
+- (void)setTile:(CPTile *)tile forSizing:(BOOL)forSizing allowSwiping:(BOOL)allowSwiping {
     _tile = tile;
     
-    self.reportContentView.graph = nil;
+    [self.reportContentView setGraph:nil forSizing:forSizing];
     self.allowSwiping = allowSwiping;
     
     self.titleLabel.hidden = !tile.title;
@@ -79,17 +83,17 @@
     
     if (tile.templateType == CPTileTemplateVideo) {
         self.videoLayoutTextView.attributedText = tile.parsedBody;
-        [self.videoLayoutImageView setImageWithURL:tile.videoThumbnailUrl];
         self.videoImageContainer.hidden = NO;
     } else if (tile.templateType == CPTileTemplateMessage) {
         self.bodyTextView.attributedText = tile.parsedBody;
         self.cellImageViewHolder.hidden = !tile.imageUrl;
-        [self.cellImageView setImageWithURL:tile.imageUrl];
-        [self.videoLayoutImageView cancelImageDownloadTask];
     } else if (tile.templateType == CPTileTemplateReport) {
-        self.reportContentView.graph = tile.graph;
+        [self.reportContentView setGraph:tile.graph forSizing:forSizing];
     }
-    // TODO: report template
+    
+    // Pin the trailing edge of the title label to the appropriate view
+    self.titleNonVideoTrailingConstraint.priority = tile.templateType == CPTileTemplateVideo ? 998 : 999;
+    self.titleVideoTrailingConstraint.priority = tile.templateType == CPTileTemplateVideo ? 999 : 998;
     
     self.primaryButton.hidden = tile.templateType == CPTileTemplateVideo || !tile.primaryButtonText;
     self.secondaryButton.hidden = tile.templateType == CPTileTemplateVideo || !tile.secondaryButtonText;
@@ -102,9 +106,32 @@
     
     self.buttonHolder.hidden = self.primaryButton.hidden && self.secondaryButton.hidden;
     
+    // Uppercase the first character, since it's all lowercase coming from the server
+    NSString *categoryString = tile.category;
+    if ([categoryString length] > 0) {
+        categoryString = [categoryString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[categoryString substringToIndex:1] uppercaseString]];
+    }
+    self.tagTimeStampLabel.text = [NSString stringWithFormat:@"%@ | %@", categoryString, [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
+    
+    self.swipableImage.hidden = !(tile.userDeletable && self.allowSwiping);
+    
+    if (!forSizing) {
+        [self loadContent];
+    }
+}
+
+// We don't need to load images/update colors unless we're actually going to display the tile
+- (void)loadContent
+{
+    if (self.tile.templateType == CPTileTemplateVideo) {
+        [self.videoLayoutImageView setImageWithURL:self.tile.videoThumbnailUrl];
+    } else if (self.tile.templateType == CPTileTemplateMessage) {
+        [self.cellImageView setImageWithURL:self.tile.imageUrl];
+    }
+    
     UIColor *tileColor = [UIColor blackColor];
     UIColor *tileLightColor = [UIColor blackColor];
-    switch (tile.tileType) {
+    switch (self.tile.tileType) {
         case CPTTMessage:
             tileColor = [UIColor appTealColor];
             tileLightColor = [UIColor appLightTealColor];
@@ -133,16 +160,8 @@
     
     [self setTextColor:[UIColor whiteColor] onButton:self.primaryButton];
     [self setTextColor:tileColor onButton:self.secondaryButton];
-
-    // Uppercase the first character, since it's all lowercase coming from the server
-    NSString *categoryString = tile.category;
-    if ([categoryString length] > 0) {
-        categoryString = [categoryString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[categoryString substringToIndex:1] uppercaseString]];
-    }
-    self.tagTimeStampLabel.text = [NSString stringWithFormat:@"%@ | %@", categoryString, [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
     
     self.colouredDotView.backgroundColor = tileColor;
-    self.swipableImage.hidden = !(tile.userDeletable && self.allowSwiping);
 }
 
 - (void)swipeGestureRecognized:(UISwipeGestureRecognizer *)recognizer {
