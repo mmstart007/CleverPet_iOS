@@ -282,7 +282,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
         }
         
         CPTile *tile = [self.currentTileDataManager tileForInternalIndexPath:innerIndexPath];
-        [cell setTile:tile allowSwiping:self.currentFilter == self.filters[0]];
+        [cell setTile:tile forSizing:NO allowSwiping:self.currentFilter == self.filters[0]];
         cell.delegate = self;
         return cell;
     }
@@ -348,7 +348,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
                 [self.sizingCell.contentView addConstraint:layoutConstraint];
             }
             
-            [self.sizingCell setTile:tile allowSwiping:YES];
+            [self.sizingCell setTile:tile forSizing:YES allowSwiping:YES];
             
             CGSize size = [self.sizingCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
             tile.cachedRowHeight = size.height;

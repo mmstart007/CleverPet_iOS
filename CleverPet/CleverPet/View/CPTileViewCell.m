@@ -53,7 +53,7 @@
     return _tile;
 }
 
-- (void)setTile:(CPTile *)tile allowSwiping:(BOOL)allowSwiping {
+- (void)setTile:(CPTile *)tile forSizing:(BOOL)forSizing allowSwiping:(BOOL)allowSwiping {
     _tile = tile;
     
     self.reportContentView.graph = nil;
@@ -79,13 +79,10 @@
     
     if (tile.templateType == CPTileTemplateVideo) {
         self.videoLayoutTextView.attributedText = tile.parsedBody;
-        [self.videoLayoutImageView setImageWithURL:tile.videoThumbnailUrl];
         self.videoImageContainer.hidden = NO;
     } else if (tile.templateType == CPTileTemplateMessage) {
         self.bodyTextView.attributedText = tile.parsedBody;
         self.cellImageViewHolder.hidden = !tile.imageUrl;
-        [self.cellImageView setImageWithURL:tile.imageUrl];
-        [self.videoLayoutImageView cancelImageDownloadTask];
     } else if (tile.templateType == CPTileTemplateReport) {
         self.reportContentView.graph = tile.graph;
     }
@@ -102,9 +99,34 @@
     
     self.buttonHolder.hidden = self.primaryButton.hidden && self.secondaryButton.hidden;
     
+    // Uppercase the first character, since it's all lowercase coming from the server
+    NSString *categoryString = tile.category;
+    if ([categoryString length] > 0) {
+        categoryString = [categoryString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[categoryString substringToIndex:1] uppercaseString]];
+    }
+    self.tagTimeStampLabel.text = [NSString stringWithFormat:@"%@ | %@", categoryString, [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
+    
+    self.swipableImage.hidden = !(tile.userDeletable && self.allowSwiping);
+    
+    if (!forSizing) {
+        [self loadContent];
+    }
+}
+
+// We don't need to load images/update colors unless we're actually going to display the tile
+- (void)loadContent
+{
+    if (self.tile.templateType == CPTileTemplateVideo) {
+        [self.videoLayoutImageView setImageWithURL:self.tile.videoThumbnailUrl];
+    } else if (self.tile.templateType == CPTileTemplateMessage) {
+        [self.cellImageView setImageWithURL:self.tile.imageUrl];
+    } else if (self.tile.templateType == CPTileTemplateReport) {
+        self.reportContentView.graph = self.tile.graph;
+    }
+    
     UIColor *tileColor = [UIColor blackColor];
     UIColor *tileLightColor = [UIColor blackColor];
-    switch (tile.tileType) {
+    switch (self.tile.tileType) {
         case CPTTMessage:
             tileColor = [UIColor appTealColor];
             tileLightColor = [UIColor appLightTealColor];
@@ -133,16 +155,8 @@
     
     [self setTextColor:[UIColor whiteColor] onButton:self.primaryButton];
     [self setTextColor:tileColor onButton:self.secondaryButton];
-
-    // Uppercase the first character, since it's all lowercase coming from the server
-    NSString *categoryString = tile.category;
-    if ([categoryString length] > 0) {
-        categoryString = [categoryString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[categoryString substringToIndex:1] uppercaseString]];
-    }
-    self.tagTimeStampLabel.text = [NSString stringWithFormat:@"%@ | %@", categoryString, [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
     
     self.colouredDotView.backgroundColor = tileColor;
-    self.swipableImage.hidden = !(tile.userDeletable && self.allowSwiping);
 }
 
 - (void)swipeGestureRecognized:(UISwipeGestureRecognizer *)recognizer {
