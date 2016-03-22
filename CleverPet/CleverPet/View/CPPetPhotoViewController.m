@@ -90,7 +90,11 @@
                 BLOCK_SELF_REF_INSIDE();
                 if (error) {
                     [self showLoadingSpinner:NO];
-                    [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:error.localizedDescription];
+                    if ([error isOfflineError]) {
+                        [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:OFFLINE_TEXT];
+                    } else {
+                        [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:error.localizedDescription];
+                    }
                 }
             }];
         }
