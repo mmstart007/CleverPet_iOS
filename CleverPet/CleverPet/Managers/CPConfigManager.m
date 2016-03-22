@@ -13,7 +13,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "CPConfigViewController.h"
 
-#define USE_LOCAL_CONFIG 0
+#define USE_LOCAL_CONFIG 1
 #if USE_LOCAL_CONFIG
 #warning #### Local config is enabled! Please disable before checking in!
 #endif

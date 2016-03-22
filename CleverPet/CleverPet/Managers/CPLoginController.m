@@ -400,4 +400,7 @@ didFinishSignInWithToken:(NSString *)token
     [SSKeychain deletePasswordForService:kAutoLogin account:kAutoLogin];
 }
 
+- (void)forgotPasswordForEmail:(NSString *)emailString withCompletion:(void (^)(NSError *))completion {
+    [[CPAppEngineCommunicationManager sharedInstance] forgotPasswordForEmail:emailString completion:completion];
+}
 @end

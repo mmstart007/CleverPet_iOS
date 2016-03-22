@@ -69,7 +69,7 @@
     self.cancelButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
-- (BOOL)validateInput
+- (NSString *)validateInput
 {
     NSString *emailString = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *errorMessage;
@@ -82,16 +82,19 @@
     
     if (errorMessage) {
         [self displayErrorAlertWithTitle:nil andMessage:errorMessage];
-        return NO;
+        return nil;
     }
     
-    return YES;
+    return emailString;
 }
 
 #pragma mark - IBActions
 - (IBAction)forgotPasswordTapped:(id)sender
 {
-    
+    NSString *emailString = [self validateInput];
+    [[CPLoginController sharedInstance] forgotPasswordForEmail:emailString withCompletion:^(NSError *error) {
+        
+    }];
 }
 
 - (IBAction)signInTapped:(id)sender
