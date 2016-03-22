@@ -22,7 +22,6 @@
 @property (nonatomic, assign) BOOL pageInProgress;
 @property (nonatomic, assign) BOOL performedInitialFetch;
 @property (nonatomic, strong) NSString *filter;
-@property (nonatomic, assign) BOOL shouldForceNextRefresh;
 
 @end
 
@@ -182,11 +181,10 @@
 
 - (BOOL)refreshTiles:(BOOL)forceRefresh
 {
-    if ((self.shouldForceNextRefresh || forceRefresh || !self.performedInitialFetch) && !self.refreshInProgress) {
+    if ((forceRefresh || !self.performedInitialFetch) && !self.refreshInProgress) {
         BLOCK_SELF_REF_OUTSIDE();
         [self clearBackingData];
         self.refreshInProgress = YES;
-        self.shouldForceNextRefresh = NO;
         [[CPTileCommunicationManager sharedInstance] refreshTiles:self.filter completion:^(NSDictionary *tileInfo, NSError *error) {
             BLOCK_SELF_REF_INSIDE();
             self.refreshInProgress = NO;
@@ -304,11 +302,6 @@
     return [NSIndexPath indexPathForRow:row inSection:section];
 }
 
-- (void)forceNextRefresh
-{
-    self.shouldForceNextRefresh = YES;
-}
-
 - (void)updateTile:(CPTile *)tile
 {
     if (self.filter == nil && tile.removed.boolValue) {
@@ -328,4 +321,15 @@
         }
     }
 }
+
+- (void)petInfoUpdated
+{
+    // Iterate over our tiles and clear the parsed body, so next time the tile is displayed, gender/name will be updated
+    for (CPTileSection *section in self.tileSectionList) {
+        for (CPTile *tile in section.tiles) {
+            [tile clearParsedBody];
+        }
+    }
+}
+
 @end

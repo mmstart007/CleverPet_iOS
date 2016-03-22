@@ -48,6 +48,7 @@ object:obj]
 [[NSNotificationCenter defaultCenter]  \
 removeObserver:self]
 
+extern NSString * const kPetInfoUpdated;
 
 #pragma mark - Blocks
 

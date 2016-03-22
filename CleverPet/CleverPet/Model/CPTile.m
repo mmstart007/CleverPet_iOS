@@ -106,4 +106,9 @@
     _message = message;
 }
 
+- (void)clearParsedBody
+{
+    _parsedBody = nil;
+}
+
 @end

@@ -9,6 +9,8 @@
 #import "CPSharedUtils.h"
 #import "CPTileTextFormatter.h"
 
+NSString * const kPetInfoUpdated = @"NOTE_PetInfoUpdated";
+
 NSInteger const kNameFieldMinChars = 2;
 NSInteger const kNameFieldMaxChars = 10;
 NSInteger const kFamilyNameFieldMinChars = 1;

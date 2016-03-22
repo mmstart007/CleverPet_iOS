@@ -60,6 +60,11 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
                 [self.currentUser.pet mergeFromDictionary:currentPetInfo useKeyMapping:YES error:nil];
                 if (completion) completion(error);
             } else {
+                // Send notification if pets name or gender has changed
+                if (![currentPetInfo[kNameKey] isEqualToString:petInfo[kNameKey]] || ![currentPetInfo[kGenderKey] isEqualToString:petInfo[kGenderKey]]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kPetInfoUpdated object:nil];
+                }
+                
                if (completion) completion(nil);
             }
         }];
