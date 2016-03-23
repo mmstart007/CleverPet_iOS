@@ -12,6 +12,11 @@
 #import "CPTile.h"
 #import "CPPet.h"
 
+NSString * const kExternalHorizontalRuleToken = @"---";
+NSString * const kInternalHorizontalRuleToken = @"Insert_Horizontal_Rule";
+CGFloat const kHorizontalRuleHeight = 1.f;
+CGFloat const kHorizontalRuleWidth = 300.f;
+
 @interface CPAbstractMutableString : NSObject
 - (instancetype)initWithString:(NSMutableString *)string;
 - (instancetype)initWithAttributedString:(NSMutableAttributedString *)attributedString;
@@ -63,6 +68,22 @@
 @end
 
 @implementation CPTileTextFormatter
+
++ (UIImage *)horizontalRuleImage
+{
+    static dispatch_once_t onceToken;
+    static UIImage *s_horizontalRule;
+    dispatch_once(&onceToken, ^{
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(kHorizontalRuleWidth, kHorizontalRuleHeight), NO, [[UIScreen mainScreen] scale]);
+        CGContextRef currentContext = UIGraphicsGetCurrentContext();
+        [[UIColor colorWithWhite:.9f alpha:1.f] setFill];
+        CGContextFillRect(currentContext, CGRectMake(0, 0, kHorizontalRuleWidth, kHorizontalRuleHeight));
+        s_horizontalRule = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+    });
+    return s_horizontalRule;
+}
+
 + (instancetype)instance {
   static CPTileTextFormatter *_instance = nil;
 
@@ -153,15 +174,21 @@
 
 - (NSString *)formatNonMarkdownText:(NSString *)text forPet:(CPPet *)pet
 {
+    if (!text) return nil;
+    
     NSString *genderedString = [self filterStringForGender:text forPet:pet];
     return [self filterStringForPetName:genderedString forPet:pet];
 }
 
 - (NSAttributedString *)formatMarkdownText:(NSString *)text forPet:(CPPet *)pet
 {
-    NSString *genderedString = [self filterStringForGender:text forPet:pet];
+    if (!text) return nil;
+    
+    NSString *newText = [text stringByReplacingOccurrencesOfString:kExternalHorizontalRuleToken withString:kInternalHorizontalRuleToken];
+    NSString *genderedString = [self filterStringForGender:newText forPet:pet];
     NSAttributedString *formattedString = [self attributedStringFromMarkdownString:genderedString];
-    return [self filterAttributedStringForPetName:formattedString forPet:pet];
+    formattedString = [self filterAttributedStringForPetName:formattedString forPet:pet];
+    return [self processHorizontalRulesForAttributedString:formattedString];
 }
 
 - (NSAttributedString *)filterAttributedStringForPetName:(NSAttributedString *)string forPet:(CPPet *)pet
@@ -221,10 +248,49 @@
     }
     
     NSTextCheckingResult *result = nil;
-    while ((result = [tokenFinder firstMatchInString:string.string options:0 range:NSMakeRange(0, string.string.length)])) {
-        NSLog(@"%@", result);
+    while ((result = [tokenFinder firstMatchInString:string.string options:0 range:NSMakeRange(0, string.string.length)]) != nil) {
+        NSString *tokenString = [string.string substringWithRange:result.range];
+        tokenString = [tokenString stringByReplacingOccurrencesOfString:@"{" withString:@""];
+        tokenString = [tokenString stringByReplacingOccurrencesOfString:@"}" withString:@""];
+        NSArray *tokens = [tokenString componentsSeparatedByString:@"|"];
+        if ([tokens count] > 1) {
+            [string replaceCharactersInRange:result.range withString:([pet.gender isEqualToString:kMaleKey] ? tokens[0] : tokens[1])];
+        }
     }
     
     return nil;
 }
+
+- (NSAttributedString *)processHorizontalRulesForAttributedString:(NSAttributedString*)string
+{
+    NSMutableAttributedString *mutableAttributedString = [string mutableCopy];
+    NSMutableString *mutableString = [[string string] mutableCopy];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:[NSString stringWithFormat:@"(%@)", kInternalHorizontalRuleToken] options:kNilOptions error:nil];
+    
+    NSRange matchRange = NSMakeRange(0, 0);
+    while (matchRange.location != NSNotFound) {
+        matchRange = [regex rangeOfFirstMatchInString:mutableString options:kNilOptions range:NSMakeRange(0, [mutableString length])];
+        if (matchRange.location != NSNotFound) {
+            NSTextAttachment *imageAttachement = [[NSTextAttachment alloc] init];
+            imageAttachement.image = [CPTileTextFormatter horizontalRuleImage];
+            NSAttributedString *imageString = [NSAttributedString attributedStringWithAttachment:imageAttachement];
+            [mutableAttributedString replaceCharactersInRange:matchRange withAttributedString:imageString];
+            // Center the image attachement
+            NSRange imageRange = NSMakeRange(matchRange.location, [imageString length]);
+            NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+            style.alignment = NSTextAlignmentCenter;
+            [mutableAttributedString addAttribute:NSParagraphStyleAttributeName value:style range:imageRange];
+            
+            // Build out a string with same length as our image string to maintain the right spacing in the string we're searching
+            NSMutableString *imageReplacementString = [NSMutableString string];
+            for (NSUInteger i = 0; i < imageRange.length; i++) {
+                [imageReplacementString appendString:@" "];
+            }
+            [mutableString replaceCharactersInRange:matchRange withString:imageReplacementString];
+        }
+    }
+    
+    return [mutableAttributedString copy];
+}
+
 @end
