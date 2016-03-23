@@ -119,54 +119,10 @@
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
+    BLOCK_SELF_REF_OUTSIDE();
     UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Take Photo", @"Alert action message to confirm taking photo") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // Ensure we actually have permissions to use the camera
-        AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
-        
-        void (^authorizationBlock)(AVAuthorizationStatus) = ^(AVAuthorizationStatus status){
-            switch (status) {
-                case AVAuthorizationStatusAuthorized:
-                {
-                    [self presentPhotoPickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
-                    break;
-                }
-                case AVAuthorizationStatusNotDetermined:
-                {
-                    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
-                        authorizationBlock([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo]);
-                    }];
-                    break;
-                }
-                case AVAuthorizationStatusDenied:
-                case AVAuthorizationStatusRestricted:
-                {
-                    NSString *title = NSLocalizedString(@"Camera Access Denied", @"Error alert title when camera permissions have been denied");
-                    NSString *message;
-                    UIAlertAction *settingsAction;
-                    UIAlertAction *cancelAction;
-                    
-                    if ((&UIApplicationOpenSettingsURLString) != nil) {
-                        message = NSLocalizedString(@"Taking a photo requires granting camera access in Settings", @"Error message informing the user camera permissions need to be granted when we can launch the settings app");
-                        settingsAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Go to Settings", @"Button title to send user to settings to address camera permissions") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-                        }];
-                        cancelAction = [UIAlertAction actionWithTitle:CANCEL_TEXT style:UIAlertActionStyleCancel handler:nil];
-                    } else {
-                        message = NSLocalizedString(@"Taking a photo require camera access to be granted. Please open the Settings app and grant access by going to Settings > Privacy > Camera", @"Error message informing the user camera permissions need to be granted when we cannot launch the settings app");
-                        settingsAction = [UIAlertAction actionWithTitle:OK_TEXT style:UIAlertActionStyleDefault handler:nil];
-                    }
-                    
-                    UIAlertController *settingsAlert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-                    [settingsAlert addAction:settingsAction];
-                    if (cancelAction) [settingsAlert addAction:cancelAction];
-                    [self presentViewController:settingsAlert animated:YES completion:nil];
-                    
-                    break;
-                }
-            }
-        };
-        
-        authorizationBlock(status);
+        BLOCK_SELF_REF_INSIDE();
+        [self checkCameraPermissions];
     }];
     
     UIAlertAction *libraryAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Choose from library", @"Alert action message to confirm picking photo from library") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -182,6 +138,64 @@
     [alert addAction:libraryAction];
     [alert addAction:cancelAction];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)checkCameraPermissions
+{
+    BLOCK_SELF_REF_OUTSIDE();
+    void (^authorizationBlock)(AVAuthorizationStatus) = ^(AVAuthorizationStatus status){
+        switch (status) {
+            case AVAuthorizationStatusAuthorized:
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self presentPhotoPickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
+                });
+                break;
+            }
+            case AVAuthorizationStatusNotDetermined:
+            {
+                // Do nothing on not determined, as the system will be presenting the allow/deny dialog
+                break;
+            }
+            case AVAuthorizationStatusDenied:
+            case AVAuthorizationStatusRestricted:
+            {
+                NSString *title = NSLocalizedString(@"Camera Access Denied", @"Error alert title when camera permissions have been denied");
+                NSString *message;
+                UIAlertAction *settingsAction;
+                UIAlertAction *cancelAction;
+                
+                if ((&UIApplicationOpenSettingsURLString) != nil) {
+                    message = NSLocalizedString(@"Taking a photo requires granting camera access in Settings", @"Error message informing the user camera permissions need to be granted when we can launch the settings app");
+                    settingsAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Go to Settings", @"Button title to send user to settings to address camera permissions") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+                    }];
+                    cancelAction = [UIAlertAction actionWithTitle:CANCEL_TEXT style:UIAlertActionStyleCancel handler:nil];
+                } else {
+                    message = NSLocalizedString(@"Taking a photo require camera access to be granted. Please open the Settings app and grant access by going to Settings > Privacy > Camera", @"Error message informing the user camera permissions need to be granted when we cannot launch the settings app");
+                    settingsAction = [UIAlertAction actionWithTitle:OK_TEXT style:UIAlertActionStyleDefault handler:nil];
+                }
+                
+                UIAlertController *settingsAlert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+                [settingsAlert addAction:settingsAction];
+                if (cancelAction) [settingsAlert addAction:cancelAction];
+                [self presentViewController:settingsAlert animated:YES completion:nil];
+                
+                break;
+            }
+        }
+    };
+    
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+        BLOCK_SELF_REF_INSIDE();
+        if (granted) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self presentPhotoPickerWithSourceType:UIImagePickerControllerSourceTypeCamera];
+            });
+        } else {
+            authorizationBlock([AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo]);
+        }
+    }];
 }
 
 - (void)presentPhotoPickerWithSourceType:(UIImagePickerControllerSourceType)sourceType
@@ -213,13 +227,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
