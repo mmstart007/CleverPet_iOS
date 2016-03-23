@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/UI/SparkUserForgotPasswordViewController.h
+../../../../SparkSetup_Internal/Classes/UI/SparkUserForgotPasswordViewController.h

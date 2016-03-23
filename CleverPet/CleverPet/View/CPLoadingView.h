@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface CPLoadingView : UIView
-
+@property (assign, nonatomic) IBInspectable BOOL isCentered;
 @end

@@ -19,6 +19,7 @@
 @property (nonatomic, weak) UILabel *headerLabel;
 @property (nonatomic, weak) UIButton *expandButton;
 @property (nonatomic, weak) UITextView *bodyLabel;
+@property (nonatomic, weak) UITapGestureRecognizer *tapRecognizer;
 
 @end
 
@@ -95,6 +96,11 @@
     
     [self.stackView addArrangedSubview:view];
     self.headerView = view;
+    
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(expandButtonTapped:)];
+    [self.headerView addGestureRecognizer:recognizer];
+    self.tapRecognizer = recognizer;
+    
     [self setupBodyLabel];
 }
 

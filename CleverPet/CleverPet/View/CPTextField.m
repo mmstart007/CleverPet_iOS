@@ -61,6 +61,16 @@ CGFloat const kCPTextFieldDefaultHorizontalInset = 0.f;
     [self setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:placeholder attributes:@{NSForegroundColorAttributeName:[UIColor appTextFieldPlaceholderColor], NSFontAttributeName:self.font}]];
 }
 
+- (CGRect)textRectForBounds:(CGRect)bounds
+{
+    return CGRectInset(bounds, 10, 0);
+}
+
+- (CGRect)editingRectForBounds:(CGRect)bounds
+{
+    return CGRectInset(bounds, 10, 0);
+}
+
 - (BOOL)resignFirstResponder
 {
     BOOL resigned = [super resignFirstResponder];

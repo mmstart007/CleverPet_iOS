@@ -17,6 +17,7 @@
 
 @property (weak, nonatomic) id<CPTileViewCellDelegate> delegate;
 
-@property (weak, nonatomic) CPTile *tile;
+- (void)setTile:(CPTile *)tile forSizing:(BOOL)forSizing allowSwiping:(BOOL)allowSwiping;
+- (CPTile *)tile;
 
 @end

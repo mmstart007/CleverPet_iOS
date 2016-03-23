@@ -8,12 +8,12 @@
 
 #import "CPSettingsViewController.h"
 #import <Intercom/Intercom.h>
-#import "CPAppEngineCommunicationManager.h"
 #import "CPUserManager.h"
-#import <AFNetworking/AFNetworkReachabilityManager.h>
 #import "CPHubSettingsViewController.h"
 #import "CPHubPlaceholderViewController.h"
 #import "CPParticleConnectionHelper.h"
+#import "CPHubStatusManager.h"
+#import "CPAppEngineCommunicationManager.h"
 
 NSUInteger const kDeviceSection = 0;
 NSUInteger const kHelpSection = 1;
@@ -22,8 +22,6 @@ NSUInteger const kAccountSection = 2;
 NSUInteger const kHelpSectionChatWithUsRow = 0;
 NSUInteger const kDeviceSectionHubSettingsRow = 0;
 NSUInteger const kDeviceSectionHubSetupRow = 1;
-
-NSInteger const kLastSeenThreshhold = 120;
 
 @interface CPSettingsBasicCell : UITableViewCell
 
@@ -49,6 +47,7 @@ NSInteger const kLastSeenThreshhold = 120;
 @property (nonatomic, assign) BOOL checkingHubStatus;
 @property (nonatomic, assign) HubConnectionState connectionState;
 @property (nonatomic, strong) CPHubPlaceholderViewController *hubPlaceholder;
+@property (nonatomic, strong) CPHubStatusHandle updateHandle;
 
 @end
 
@@ -69,13 +68,19 @@ NSInteger const kLastSeenThreshhold = 120;
     self.navigationItem.leftBarButtonItem = barButton;
     self.pseudoBackButton = barButton;
     self.connectionState = HubConnectionState_Unknown;
+    
+    // Listen for hub status updates
+    BLOCK_SELF_REF_OUTSIDE();
+    self.updateHandle = [[CPHubStatusManager sharedInstance] registerForHubStatusUpdates:^(HubConnectionState status) {
+        BLOCK_SELF_REF_INSIDE();
+        self.connectionState = status;
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [self updateHubStatus];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,31 +88,16 @@ NSInteger const kLastSeenThreshhold = 120;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setConnectionState:(HubConnectionState)connectionState
+- (void)dealloc
 {
-    _connectionState = connectionState;
-    [self.hubCell updateWithHubConnection:_connectionState];
+    [[CPHubStatusManager sharedInstance] unregisterForHubStatusUpdates:self.updateHandle];
 }
 
-- (void)updateHubStatus
+- (void)setConnectionState:(HubConnectionState)connectionState
 {
-    if(!self.checkingHubStatus) {
-        // Check if we're offline
-        if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
-            self.connectionState = HubConnectionState_Offline;
-        } else {
-            self.checkingHubStatus = YES;
-            BLOCK_SELF_REF_OUTSIDE();
-            [[CPAppEngineCommunicationManager sharedInstance] checkDeviceLastSeen:[[CPUserManager sharedInstance] getCurrentUser].device.deviceId completion:^(NSInteger delta, NSError *error) {
-                BLOCK_SELF_REF_INSIDE();
-                self.checkingHubStatus = NO;
-                if (error || delta == NSNotFound || delta > kLastSeenThreshhold) {
-                    self.connectionState = HubConnectionState_Disconnected;
-                } else {
-                    self.connectionState = HubConnectionState_Connected;
-                }
-            }];
-        }
+    if (_connectionState != connectionState) {
+        _connectionState = connectionState;
+        [self.hubCell updateWithHubConnection:_connectionState];
     }
 }
 
@@ -120,7 +110,6 @@ NSInteger const kLastSeenThreshhold = 120;
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // TODO: check hub state
     if ((section == kHelpSection && YES) || section == kDeviceSection) {
         return 2;
     }
@@ -241,17 +230,14 @@ NSInteger const kLastSeenThreshhold = 120;
 
 - (void)deviceClaimFailed
 {
-    [self.hubPlaceholder displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
+    [self.hubPlaceholder displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again. Make sure your phone is no longer connected to the Hub's network.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.destinationViewController isKindOfClass:[CPHubSettingsViewController class]]) {
-        CPHubSettingsViewController *vc = segue.destinationViewController;
-        vc.connectionState = self.connectionState;
-    }
+    
 }
 
 @end

@@ -12,5 +12,7 @@
 @class CPGraphView;
 @interface CPReportGraphHolder : UIView
 
-@property (strong, nonatomic) CPGraph *graph;
+- (void)setGraph:(CPGraph*)graph forSizing:(BOOL)forSizing;
+- (CPGraph*)graph;
+
 @end

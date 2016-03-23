@@ -18,8 +18,16 @@
 @property (weak, nonatomic) IBOutlet UITextView *chartTitleView;
 @end
 
-@implementation CPReportGraphHolder
-- (void)setGraph:(CPGraph *)graph {
+@implementation CPReportGraphHolder {
+    CPGraph *_graph;
+}
+
+- (CPGraph*)graph
+{
+    return _graph;
+}
+
+- (void)setGraph:(CPGraph *)graph forSizing:(BOOL)forSizing{
     _graph = graph;
     
     if (self.graphViewAspectRatioConstraint) {
@@ -41,9 +49,12 @@
         imageSize.width = [UIScreen mainScreen].bounds.size.width - 32;
         imageSize.height = imageSize.width * graph.aspectRatio.floatValue;
         
-        [[CPChartRenderer sharedInstance] renderChart:graph ofSize:imageSize withCallback:^(UIImage *renderedChart) {
-            self.graphView.image = renderedChart;
-        }];
+        // Skip rendering the chart we're calculating row size
+        if (!forSizing) {
+            [[CPChartRenderer sharedInstance] renderChart:graph ofSize:imageSize withCallback:^(UIImage *renderedChart) {
+                self.graphView.image = renderedChart;
+            }];
+        }
         
         NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] init];
         

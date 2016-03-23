@@ -230,7 +230,7 @@
             </objects>
             <point key="canvasLocation" x="204" y="582"/>
         </scene>
-        <!--Profile-->
+        <!--Cancel-->
         <scene sceneID="Ato-6U-P8X">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="3WD-7U-wgO" customClass="CPProfileSettingsViewController" sceneMemberID="viewController">
@@ -263,7 +263,7 @@
                                                         <state key="normal" title="Edit"/>
                                                         <connections>
                                                             <action selector="editImageTapped:" destination="3WD-7U-wgO" eventType="touchUpInside" id="OeO-1C-mwn"/>
-                                                            <segue destination="kkD-fH-BRQ" kind="custom" identifier="setPetPhoto" customClass="RBStoryboardModalSegue" id="MDZ-n7-65O"/>
+                                                            <segue destination="kkD-fH-BRQ" kind="custom" identifier="setPetPhoto" customClass="RBStoryboardPushSegue" id="MDZ-n7-65O"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -540,8 +540,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlS-We-bZS">
                                                 <rect key="frame" x="0.0" y="625" width="320" height="65"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Log Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5v-Co-YYS">
-                                                        <rect key="frame" x="15" y="22" width="61" height="21"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Sign Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5v-Co-YYS">
+                                                        <rect key="frame" x="15" y="22" width="67" height="21"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -608,17 +608,25 @@
                                     <outlet property="delegate" destination="3WD-7U-wgO" id="doz-pX-RTG"/>
                                 </connections>
                             </scrollView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lbJ-vY-6af" customClass="CPLoadingView">
+                                <rect key="frame" x="0.0" y="20" width="320" height="734"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="7ll-na-eLD" firstAttribute="leading" secondItem="CLY-pq-iuR" secondAttribute="leading" id="5IM-DA-xbg"/>
+                            <constraint firstAttribute="trailing" secondItem="lbJ-vY-6af" secondAttribute="trailing" id="A3q-MB-Ub5"/>
                             <constraint firstItem="7ll-na-eLD" firstAttribute="top" secondItem="fjg-mF-acl" secondAttribute="bottom" id="Cgs-BX-2Ca"/>
                             <constraint firstAttribute="trailing" secondItem="7ll-na-eLD" secondAttribute="trailing" id="Ee1-ZW-ihB"/>
+                            <constraint firstItem="2XS-p3-Txp" firstAttribute="top" secondItem="lbJ-vY-6af" secondAttribute="bottom" id="Mpa-du-PDY"/>
+                            <constraint firstItem="lbJ-vY-6af" firstAttribute="leading" secondItem="CLY-pq-iuR" secondAttribute="leading" id="ZVm-5e-S29"/>
                             <constraint firstItem="RGD-tz-vdr" firstAttribute="width" secondItem="CLY-pq-iuR" secondAttribute="width" id="c6Z-j1-Rci"/>
                             <constraint firstItem="2XS-p3-Txp" firstAttribute="top" secondItem="7ll-na-eLD" secondAttribute="bottom" id="eIq-Ra-Ywh"/>
+                            <constraint firstItem="lbJ-vY-6af" firstAttribute="top" secondItem="fjg-mF-acl" secondAttribute="bottom" id="iHV-Gx-xch"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="Jzl-v7-PCM"/>
+                    <navigationItem key="navigationItem" title="Cancel" id="Jzl-v7-PCM"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="754"/>
                     <connections>
@@ -629,6 +637,7 @@
                         <outlet property="genderField" destination="CkZ-T2-hpv" id="YKZ-gQ-eM7"/>
                         <outlet property="imageContainer" destination="z1C-hx-cnF" id="j3T-An-25X"/>
                         <outlet property="imageHeightConstraint" destination="UpQ-ZJ-GVn" id="Lq4-HB-Y3f"/>
+                        <outlet property="loadingView" destination="lbJ-vY-6af" id="ZGq-Od-TQg"/>
                         <outlet property="logoutContainer" destination="BlS-We-bZS" id="de7-xo-3c3"/>
                         <outlet property="logoutLabel" destination="G5v-Co-YYS" id="OFP-aN-sCv"/>
                         <outlet property="nameField" destination="q4u-aE-pAF" id="eex-qj-4Ju"/>
@@ -1038,14 +1047,22 @@
                                     <constraint firstItem="TjS-Tp-CD8" firstAttribute="top" secondItem="Aba-Mq-AzZ" secondAttribute="top" id="uk1-Fb-5nc"/>
                                 </constraints>
                             </scrollView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TF8-YE-AJp" customClass="CPLoadingView">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="45r-Qj-w6K" firstAttribute="top" secondItem="Aba-Mq-AzZ" secondAttribute="bottom" id="8Ts-R1-aef"/>
+                            <constraint firstItem="TF8-YE-AJp" firstAttribute="leading" secondItem="aRv-rD-UQ9" secondAttribute="leading" id="IVw-vy-BwR"/>
                             <constraint firstItem="Aba-Mq-AzZ" firstAttribute="top" secondItem="SUt-14-OOO" secondAttribute="bottom" id="IaO-xs-ew3"/>
                             <constraint firstItem="Aba-Mq-AzZ" firstAttribute="leading" secondItem="aRv-rD-UQ9" secondAttribute="leading" id="Nza-2T-wkZ"/>
                             <constraint firstItem="TjS-Tp-CD8" firstAttribute="width" secondItem="aRv-rD-UQ9" secondAttribute="width" id="SKN-Sn-Z19"/>
                             <constraint firstAttribute="trailing" secondItem="Aba-Mq-AzZ" secondAttribute="trailing" id="UFF-Df-nin"/>
+                            <constraint firstItem="45r-Qj-w6K" firstAttribute="top" secondItem="TF8-YE-AJp" secondAttribute="bottom" id="XKB-Bh-se3"/>
+                            <constraint firstAttribute="trailing" secondItem="TF8-YE-AJp" secondAttribute="trailing" id="bOp-IW-Eg0"/>
+                            <constraint firstItem="TF8-YE-AJp" firstAttribute="top" secondItem="SUt-14-OOO" secondAttribute="bottom" id="gqC-o0-RXY"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Hub" id="Ac6-1R-8ad"/>
@@ -1055,6 +1072,7 @@
                         <outlet property="disconnectedView" destination="LTD-Ge-8nT" id="2qY-Jg-DSK"/>
                         <outlet property="headerLabel" destination="dQq-PQ-VUe" id="6Rt-xI-6cm"/>
                         <outlet property="headerView" destination="dYF-vZ-DXZ" id="n0K-7U-tyl"/>
+                        <outlet property="loadingView" destination="TF8-YE-AJp" id="8Fd-V8-B88"/>
                         <outlet property="offBodyLabel" destination="xmk-7V-flH" id="h7R-Fo-4R7"/>
                         <outlet property="offButton" destination="yPU-P3-6vk" id="f8J-4U-VjA"/>
                         <outlet property="offHeader" destination="b9o-qh-ga6" id="ZDX-oC-XYh"/>

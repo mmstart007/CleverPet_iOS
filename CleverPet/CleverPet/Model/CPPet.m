@@ -55,14 +55,20 @@
     if (isInitialSetup) {
         NSString *age = proposedInput[kDOBKey];
         if ([age length] == 0) {
-            if (completion) completion(NO, NSLocalizedString(@"Please enter your pets age", @"Error message when pet age is empty"));
+            if (completion) completion(NO, NSLocalizedString(@"Please enter your pet's age", @"Error message when pet age is empty"));
             return;
         }
     }
         
     NSString *weight = proposedInput[kWeightKey];
     if ([weight length] == 0) {
-        if (completion) completion(NO, NSLocalizedString(@"Please enter your pets weight", @"Error message when pet weight is empty"));
+        if (completion) completion(NO, NSLocalizedString(@"Please enter your pet's weight", @"Error message when pet weight is empty"));
+        return;
+    }
+    
+    NSInteger weightValue = [weight integerValue];
+    if (weightValue < kMinWeight || weightValue > kMaxWeight) {
+        if (completion) completion(NO, [NSString stringWithFormat:NSLocalizedString(@"Weight must be between %d and %d", @"Error message when pet weight is invalid. First %d is minimum weight, second %d is maximum weight"), kMinWeight, kMaxWeight]);
         return;
     }
     

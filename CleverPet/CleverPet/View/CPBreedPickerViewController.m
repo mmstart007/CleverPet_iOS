@@ -7,7 +7,6 @@
 //
 
 #import "CPBreedPickerViewController.h"
-#import "CHCSVParser.h"
 #import "CPTextField.h"
 #import "CPSimpleTableViewCell.h"
 
@@ -28,9 +27,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSArray *breedsArray = [NSArray arrayWithContentsOfCSVURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"breeds" ofType:@".csv"]]];
-    // Flatten out the array(parser returns an array of arrays of strings)
-    self.breedsArray = [breedsArray valueForKeyPath:@"@unionOfArrays.self"];
+    self.breedsArray = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"breeds" withExtension:@"json"]] options:kNilOptions error:nil];
     self.textField.text = self.selectedBreed;
     [self filterBreedsByString:self.selectedBreed];
     self.view.backgroundColor = [UIColor appWhiteColor];
@@ -77,10 +74,8 @@
     }
     // Ensure we always have Mixed Breed as an option
     NSString *mixed = NSLocalizedString(@"Mixed Breed", @"Default option for breed selector");
-    // Naive, but lets assume we want it at the top instead of somewhere in the array
-    if (![[self.filteredBreeds firstObject] isEqualToString:mixed]) {
-        [self.filteredBreeds insertObject:mixed atIndex:0];
-    }
+    [self.filteredBreeds removeObject:mixed];
+    [self.filteredBreeds insertObject:mixed atIndex:0];
     [self.tableView reloadData];
 }
 

@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/UI/SparkManualNetworkViewController.h
+../../../../SparkSetup_Internal/Classes/UI/SparkManualNetworkViewController.h

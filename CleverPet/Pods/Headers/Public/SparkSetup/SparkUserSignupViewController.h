@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/UI/SparkUserSignupViewController.h
+../../../../SparkSetup_Internal/Classes/UI/SparkUserSignupViewController.h

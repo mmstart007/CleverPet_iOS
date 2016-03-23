@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lOe-QP-hca">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="lOe-QP-hca">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -38,6 +38,10 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aDM-mp-Fl9">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
+                            <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHL-O6-lNu">
+                                <rect key="frame" x="185" y="230" width="230" height="103"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="otv-r7-ch9">
                                 <rect key="frame" x="282" y="281" width="37" height="37"/>
                             </activityIndicatorView>
@@ -50,11 +54,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wHL-O6-lNu" firstAttribute="top" secondItem="Ke8-zx-6te" secondAttribute="top" constant="-15" id="CBc-ml-cU0"/>
                             <constraint firstAttribute="trailing" secondItem="aDM-mp-Fl9" secondAttribute="trailing" id="IYs-he-ore"/>
                             <constraint firstItem="aDM-mp-Fl9" firstAttribute="top" secondItem="FAb-Fv-lcZ" secondAttribute="top" id="NRl-wT-jpm"/>
                             <constraint firstItem="Ke8-zx-6te" firstAttribute="centerX" secondItem="FAb-Fv-lcZ" secondAttribute="centerX" id="NYE-rh-ZSC"/>
+                            <constraint firstItem="wHL-O6-lNu" firstAttribute="bottom" secondItem="otv-r7-ch9" secondAttribute="bottom" constant="15" id="O1y-o4-jVD"/>
                             <constraint firstItem="otv-r7-ch9" firstAttribute="centerX" secondItem="FAb-Fv-lcZ" secondAttribute="centerX" id="PWb-yq-uD0"/>
                             <constraint firstItem="aDM-mp-Fl9" firstAttribute="leading" secondItem="FAb-Fv-lcZ" secondAttribute="leading" id="RId-i8-eV9"/>
+                            <constraint firstItem="wHL-O6-lNu" firstAttribute="leading" secondItem="Ke8-zx-6te" secondAttribute="leading" constant="-15" id="ZfV-Eh-N9m"/>
+                            <constraint firstItem="wHL-O6-lNu" firstAttribute="trailing" secondItem="Ke8-zx-6te" secondAttribute="trailing" constant="15" id="mqO-fg-B94"/>
                             <constraint firstItem="otv-r7-ch9" firstAttribute="centerY" secondItem="FAb-Fv-lcZ" secondAttribute="centerY" id="pHj-uZ-EEa"/>
                             <constraint firstAttribute="bottom" secondItem="aDM-mp-Fl9" secondAttribute="bottom" id="phF-IP-Aic"/>
                             <constraint firstItem="otv-r7-ch9" firstAttribute="top" secondItem="Ke8-zx-6te" secondAttribute="bottom" constant="15" id="rT8-LL-7wU"/>
@@ -62,6 +70,7 @@
                     </view>
                     <connections>
                         <outlet property="backgroundImage" destination="aDM-mp-Fl9" id="9bF-fk-KtT"/>
+                        <outlet property="fade" destination="wHL-O6-lNu" id="hRs-fO-oyW"/>
                         <outlet property="messageLabel" destination="Ke8-zx-6te" id="yj7-pQ-kWy"/>
                         <outlet property="spinner" destination="otv-r7-ch9" id="f19-V1-qxh"/>
                     </connections>
@@ -86,7 +95,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M4t-xv-zM4">
-                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <rect key="frame" x="0.0" y="600" width="600" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="0Hb-LW-76K"/>
                                 </constraints>
@@ -98,6 +107,9 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="usW-ib-AbP" customClass="CPLoadingView">
                                 <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 <color key="backgroundColor" white="1" alpha="0.5" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isCentered" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -109,8 +121,9 @@
                             <constraint firstAttribute="trailing" secondItem="qco-Qs-99e" secondAttribute="trailing" id="LkO-MQ-OlN"/>
                             <constraint firstItem="qco-Qs-99e" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="SMa-Fp-i5Z"/>
                             <constraint firstItem="usW-ib-AbP" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Y09-IN-rNC"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="M4t-xv-zM4" secondAttribute="bottom" priority="998" id="eGI-cD-Akz"/>
                             <constraint firstItem="usW-ib-AbP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="enG-TJ-M4G"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="M4t-xv-zM4" secondAttribute="bottom" id="joX-i5-ig1"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="M4t-xv-zM4" secondAttribute="top" priority="999" id="joX-i5-ig1"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="usW-ib-AbP" secondAttribute="bottom" id="qCZ-WV-ceh"/>
                             <constraint firstAttribute="trailing" secondItem="usW-ib-AbP" secondAttribute="trailing" id="vt8-6Z-kjZ"/>
                         </constraints>
@@ -119,6 +132,8 @@
                     <connections>
                         <outlet property="backgroundImage" destination="qco-Qs-99e" id="bhg-lb-Pas"/>
                         <outlet property="fadeView" destination="usW-ib-AbP" id="dTT-87-1NB"/>
+                        <outlet property="hideSignInButtonConstraint" destination="joX-i5-ig1" id="ZAj-Xb-rJ6"/>
+                        <outlet property="showSignInButtonConstraint" destination="eGI-cD-Akz" id="XNe-Fz-KRY"/>
                         <outlet property="signInButton" destination="M4t-xv-zM4" id="43Y-4t-BV0"/>
                     </connections>
                 </viewController>

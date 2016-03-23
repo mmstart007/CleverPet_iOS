@@ -10,6 +10,7 @@
 #import "CPLoginController.h"
 #import "CPTextField.h"
 #import "CPLoadingView.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface CPSignInViewController ()<UITextFieldDelegate>
 
@@ -71,9 +72,16 @@
 - (BOOL)validateInput
 {
     NSString *emailString = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *errorMessage;
     
-    if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
-        [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address")];
+    if ([emailString length] > kEmailMaxChars) {
+        errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Your email address must be less than %d characters", @"Error message displayed when email address exceeds max length"), kEmailMaxChars];
+    } else if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
+        NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address");
+    }
+    
+    if (errorMessage) {
+        [self displayErrorAlertWithTitle:nil andMessage:errorMessage];
         return NO;
     }
     
@@ -90,9 +98,18 @@
 {
     if ([self validateInput]) {
         self.loadingView.hidden = NO;
-        [[CPLoginController sharedInstance] verifyPassword:self.passwordField.text forEmail:self.emailField.text failure:^{
+        [[CPLoginController sharedInstance] verifyPassword:self.passwordField.text forEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] failure:^{
             self.loadingView.hidden = YES;
-            [self displayErrorAlertWithTitle:NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails") andMessage:NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails")];
+            NSString *title;
+            NSString *message;
+            if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+                title = NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails");
+                message = NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails");
+            } else {
+                title = ERROR_TEXT;
+                message = OFFLINE_TEXT;
+            }
+            [self displayErrorAlertWithTitle:title andMessage:message];
         }];
     }
 }

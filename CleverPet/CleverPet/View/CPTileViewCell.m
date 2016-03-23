@@ -25,11 +25,16 @@
 @property (weak, nonatomic) IBOutlet UIView *backingView;
 @property (strong, nonatomic) IBOutlet UIView *colouredDotView;
 @property (weak, nonatomic) IBOutlet UIView *swipedColorView;
+@property (weak, nonatomic) IBOutlet UIImageView *swipableImage;
 
 // The relative priority of these 2 constraints controls whether the swiped color view covers
 // or doesn't cover the cell. One should always be greater than the other to prevent constraint conflicts.
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *colorViewNotCoveringConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *colorViewCoveringConstraint;
+
+// The relative priority of these 2 constraints controls whether the title label is pinned to the cell bounds(image/message tiles), or the video image thumbnail (video tiles). One should always be greater than the other to prevent constraint conflicts.
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleNonVideoTrailingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleVideoTrailingConstraint;
 
 // Video layout specific stuff
 @property (weak, nonatomic) IBOutlet UIView *videoContentView;
@@ -40,16 +45,23 @@
 @property (weak, nonatomic) IBOutlet CPReportGraphHolder *reportContentView;
 
 @property (strong, nonatomic) NSMutableArray<UISwipeGestureRecognizer *> *swipeGestureRecognizers;
+@property (assign, nonatomic) BOOL allowSwiping;
 
 @end
 
 @implementation CPTileViewCell {
+    CPTile *_tile;
 }
 
-- (void)setTile:(CPTile *)tile {
+- (CPTile *)tile {
+    return _tile;
+}
+
+- (void)setTile:(CPTile *)tile forSizing:(BOOL)forSizing allowSwiping:(BOOL)allowSwiping {
     _tile = tile;
     
-    self.reportContentView.graph = nil;
+    [self.reportContentView setGraph:nil forSizing:forSizing];
+    self.allowSwiping = allowSwiping;
     
     self.titleLabel.hidden = !tile.title;
     // TODO: pass in pet
@@ -71,17 +83,17 @@
     
     if (tile.templateType == CPTileTemplateVideo) {
         self.videoLayoutTextView.attributedText = tile.parsedBody;
-        [self.videoLayoutImageView setImageWithURL:tile.videoThumbnailUrl];
         self.videoImageContainer.hidden = NO;
     } else if (tile.templateType == CPTileTemplateMessage) {
         self.bodyTextView.attributedText = tile.parsedBody;
         self.cellImageViewHolder.hidden = !tile.imageUrl;
-        [self.cellImageView setImageWithURL:tile.imageUrl];
-        [self.videoLayoutImageView cancelImageDownloadTask];
     } else if (tile.templateType == CPTileTemplateReport) {
-        self.reportContentView.graph = tile.graph;
+        [self.reportContentView setGraph:tile.graph forSizing:forSizing];
     }
-    // TODO: report template
+    
+    // Pin the trailing edge of the title label to the appropriate view
+    self.titleNonVideoTrailingConstraint.priority = tile.templateType == CPTileTemplateVideo ? 998 : 999;
+    self.titleVideoTrailingConstraint.priority = tile.templateType == CPTileTemplateVideo ? 999 : 998;
     
     self.primaryButton.hidden = tile.templateType == CPTileTemplateVideo || !tile.primaryButtonText;
     self.secondaryButton.hidden = tile.templateType == CPTileTemplateVideo || !tile.secondaryButtonText;
@@ -94,9 +106,32 @@
     
     self.buttonHolder.hidden = self.primaryButton.hidden && self.secondaryButton.hidden;
     
+    // Uppercase the first character, since it's all lowercase coming from the server
+    NSString *categoryString = tile.category;
+    if ([categoryString length] > 0) {
+        categoryString = [categoryString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[categoryString substringToIndex:1] uppercaseString]];
+    }
+    self.tagTimeStampLabel.text = [NSString stringWithFormat:@"%@ | %@", categoryString, [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
+    
+    self.swipableImage.hidden = !(tile.userDeletable && self.allowSwiping);
+    
+    if (!forSizing) {
+        [self loadContent];
+    }
+}
+
+// We don't need to load images/update colors unless we're actually going to display the tile
+- (void)loadContent
+{
+    if (self.tile.templateType == CPTileTemplateVideo) {
+        [self.videoLayoutImageView setImageWithURL:self.tile.videoThumbnailUrl];
+    } else if (self.tile.templateType == CPTileTemplateMessage) {
+        [self.cellImageView setImageWithURL:self.tile.imageUrl];
+    }
+    
     UIColor *tileColor = [UIColor blackColor];
     UIColor *tileLightColor = [UIColor blackColor];
-    switch (tile.tileType) {
+    switch (self.tile.tileType) {
         case CPTTMessage:
             tileColor = [UIColor appTealColor];
             tileLightColor = [UIColor appLightTealColor];
@@ -125,19 +160,12 @@
     
     [self setTextColor:[UIColor whiteColor] onButton:self.primaryButton];
     [self setTextColor:tileColor onButton:self.secondaryButton];
-
-    // Uppercase the first character, since it's all lowercase coming from the server
-    NSString *categoryString = tile.category;
-    if ([categoryString length] > 0) {
-        categoryString = [categoryString stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[categoryString substringToIndex:1] uppercaseString]];
-    }
-    self.tagTimeStampLabel.text = [NSString stringWithFormat:@"%@ | %@", categoryString, [[CPTileTextFormatter instance].relativeDateFormatter stringFromDate:tile.date]];
     
     self.colouredDotView.backgroundColor = tileColor;
 }
 
 - (void)swipeGestureRecognized:(UISwipeGestureRecognizer *)recognizer {
-    if (self.tile.userDeletable && [self.swipeGestureRecognizers containsObject:recognizer]) {
+    if (self.tile.userDeletable && self.allowSwiping && [self.swipeGestureRecognizers containsObject:recognizer]) {
         [self setSwipedMode:YES withAnimation:YES callDelegateMethod:YES];
     }
 }
@@ -268,9 +296,10 @@
 {
     // TODO: chain this back up through the data source -> data manager -> communications manager instead of calling directly?
     [self requestInProgress:YES];
-    BLOCK_SELF_REF_OUTSIDE();
+    if (_tile.tileType != CPTTChallenge) {
+        [self setSwipedMode:YES withAnimation:YES callDelegateMethod:NO];
+    }
     [[CPTileCommunicationManager sharedInstance] handleButtonPressWithPath:path completion:^(NSError *error){
-        BLOCK_SELF_REF_INSIDE();
         // TODO: display error;
         // TODO: Reactivate buttons? probably not
     }];

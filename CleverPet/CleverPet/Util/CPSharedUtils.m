@@ -9,10 +9,18 @@
 #import "CPSharedUtils.h"
 #import "CPTileTextFormatter.h"
 
+NSString * const kPetInfoUpdated = @"NOTE_PetInfoUpdated";
+
 NSInteger const kNameFieldMinChars = 2;
 NSInteger const kNameFieldMaxChars = 10;
 NSInteger const kFamilyNameFieldMinChars = 1;
 NSInteger const kFamilyNameFieldMaxChars = 35;
+NSInteger const kEmailMaxChars = 64;
+NSInteger const kPasswordMaxChars = 64;
+NSInteger const kMinWeight = 0;
+NSInteger const kMaxWeight = 999;
+NSInteger const kMinAge = 0;
+NSInteger const kMaxAge = 99;
 
 #pragma mark - JSON keys
 NSString * const kErrorKey = @"error";
@@ -65,6 +73,13 @@ NSString * const kPageSizeKey = @"num_entries";
 + (void)deviceTimeZoneUpdated:(NSInteger)offset
 {
     [CPTileTextFormatter setTimeZoneOffset:offset];
+}
+
++ (UINavigationController*)getRootNavController
+{
+    // TODO: Need to get the actual top level controller navController = visibleViewController, viewController = probably presentedViewController
+    // TODO: handle when our root is not a nav controller
+    return (UINavigationController*)[[[UIApplication sharedApplication].delegate window] rootViewController];
 }
 
 @end

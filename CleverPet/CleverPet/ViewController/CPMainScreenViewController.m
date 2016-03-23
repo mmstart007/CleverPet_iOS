@@ -45,7 +45,7 @@
     self.mainScreenHeaderView = [CPMainScreenHeaderView loadFromNib];
     [self.mainScreenHeaderView setupForPet:self.currentPet];
     self.mainScreenStatsHeaderView = [CPMainScreenStatsHeaderView loadFromNib];
-    self.mainScreenStatsHeaderView.imageView.image = [self.currentPet petPhoto];;
+    self.mainScreenStatsHeaderView.imageView.image = [self.currentPet petPhoto];
     
     [self.headerView addSubview:self.mainScreenHeaderView];
     [self.headerView addSubview:self.mainScreenStatsHeaderView];
@@ -59,6 +59,7 @@
     self.dataSource = dataSource;
     self.tableView.delegate = dataSource;
     self.tableView.dataSource = dataSource;
+    self.tableView.allowsSelection = NO;
     
     self.playerController = [[CPPlayerViewController alloc] init];
     
@@ -72,10 +73,10 @@
     // Update pet name/image
     // TODO: maybe a notification when pet info is updated so we don't always have to do this?
     [self.mainScreenHeaderView setupForPet:self.currentPet];
+    self.mainScreenStatsHeaderView.imageView.image = [self.currentPet petPhoto];
     if ([self.tableView.dataSource respondsToSelector:@selector(updatePetImage:)]) {
         [self.tableView.dataSource performSelector:@selector(updatePetImage:) withObject:[self.currentPet petPhoto]];
     }
-    [[CPFirebaseManager sharedInstance] beginlisteningForUpdates];
     // Inform our data source we're going to become visible
     [self.dataSource viewBecomingVisible];
 }
@@ -85,7 +86,6 @@
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
     self.playingTile = nil;
-    [[CPFirebaseManager sharedInstance] stoplisteningForStatsUpdates];
 }
 
 #pragma mark - CPTileCollectionViewDataSourceDelegate
@@ -136,7 +136,7 @@
 - (BOOL)isViewVisible
 {
     // we have no window, we're not currently visible
-    return self.view.window;
+    return self.view.window != nil;
 }
 
 @end

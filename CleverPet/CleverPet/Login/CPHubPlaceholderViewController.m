@@ -8,6 +8,7 @@
 
 #import "CPHubPlaceholderViewController.h"
 #import "CPLoadingView.h"
+#import <Intercom/Intercom.h>
 
 @interface CPHubPlaceholderViewController ()
 
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet CPLoadingView *fadeView;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (weak, nonatomic) IBOutlet UIButton *intercomButton;
 
 @end
 
@@ -33,6 +35,8 @@
     self.view.backgroundColor = [UIColor appBackgroundColor];
     self.messageLabel.textColor = [UIColor appTitleTextColor];
     self.messageLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
+    [self.intercomButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    self.intercomButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     
     if (self.message) {
         [self displayMessage:self.message];
@@ -81,6 +85,11 @@
     } else {
         [self.delegate hubSetupCancelled];
     }
+}
+
+- (IBAction)intercomTapped:(id)sender
+{
+    [Intercom presentConversationList];
 }
 
 /*

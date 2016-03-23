@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface CPSharedUtils : NSObject
 
 + (void)deviceTimeZoneUpdated:(NSInteger)offset;
++ (UINavigationController *)getRootNavController;
 
 @end
 
@@ -46,6 +48,7 @@ object:obj]
 [[NSNotificationCenter defaultCenter]  \
 removeObserver:self]
 
+extern NSString * const kPetInfoUpdated;
 
 #pragma mark - Blocks
 
@@ -57,12 +60,19 @@ removeObserver:self]
 #import "UIColor+CleverPet.h"
 #import "UIViewController+CleverPet.h"
 #import "UIImageView+AFNetworking.h"
+#import "NSError+CleverPet.h"
 
 #pragma mark - Data field max and min values
 extern NSInteger const kNameFieldMinChars;
 extern NSInteger const kNameFieldMaxChars;
 extern NSInteger const kFamilyNameFieldMinChars;
 extern NSInteger const kFamilyNameFieldMaxChars;
+extern NSInteger const kEmailMaxChars;
+extern NSInteger const kPasswordMaxChars;
+extern NSInteger const kMinWeight;
+extern NSInteger const kMaxWeight;
+extern NSInteger const kMinAge;
+extern NSInteger const kMaxAge;
 
 #pragma mark - JSON keys
 extern NSString * const kErrorKey;
@@ -114,3 +124,9 @@ extern NSString * const kPageSizeKey;
 
 #define ASYNC void
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+#pragma mark - Text
+#define CANCEL_TEXT NSLocalizedString(@"Cancel", @"Cancel")
+#define OK_TEXT NSLocalizedString(@"OK", @"OK")
+#define ERROR_TEXT NSLocalizedString(@"Error", @"Error")
+#define OFFLINE_TEXT NSLocalizedString(@"The internet connection appears to be offline.", @"The internet connection appears to be offline.")

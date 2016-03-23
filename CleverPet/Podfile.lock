@@ -22,7 +22,6 @@ PODS:
   - Bolts/AppLinks (1.6.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
-  - CHCSVParser (2.1.0)
   - CorePlot (2.0)
   - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
@@ -86,7 +85,6 @@ DEPENDENCIES:
   - AFNetworking
   - AttributedMarkdown (from `https://github.com/dreamwieber/AttributedMarkdown.git`)
   - BABCropperView
-  - CHCSVParser
   - CorePlot (~> 2.0)
   - Crashlytics
   - Fabric
@@ -102,7 +100,7 @@ DEPENDENCIES:
   - OJFSegmentedProgressView (~> 0.0.1)
   - RBStoryboardLink
   - Spark-SDK (from `Spark-SDK_Internal`)
-  - SparkSetup
+  - SparkSetup (from `SparkSetup_Internal`)
   - SSKeychain
 
 EXTERNAL SOURCES:
@@ -110,6 +108,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/dreamwieber/AttributedMarkdown.git
   Spark-SDK:
     :path: Spark-SDK_Internal
+  SparkSetup:
+    :path: SparkSetup_Internal
 
 CHECKOUT OPTIONS:
   AttributedMarkdown:
@@ -121,7 +121,6 @@ SPEC CHECKSUMS:
   AttributedMarkdown: ac5060667280be8cc8ee33a46c73e4ec6b17ca1a
   BABCropperView: 908858c9fd17e9bb6d2446f3ae56172c14363974
   Bolts: f52a250053bb517ca874523c3913776359ab3def
-  CHCSVParser: 3bcc7bdb72111a31222e95d57eacceefe4e537e8
   CorePlot: b7f422ad363f2b0e48152471d6da45ce232eb8c6
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7

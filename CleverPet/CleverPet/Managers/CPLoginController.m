@@ -18,7 +18,9 @@
 #import <Intercom/Intercom.h>
 #import <SSKeychain/SSKeychain.h>
 #import "CPHubPlaceholderViewController.h"
+#import <GoogleSignIn/GoogleSignIn.h>
 
+#define DEFAULT_ERROR_MESSAGE NSLocalizedString(@"An unexpected error occurred. Please try again.", @"Error message displayed for unhandled login error codes")
 NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 
 @interface CPLoginController()<GITInterfaceManagerDelegate, GITClientDelegate, CPParticleConnectionDelegate, CPHubPlaceholderDelegate>
@@ -58,6 +60,12 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 
 - (BOOL)isValidEmail:(NSString *)email
 {
+    // If we have any spaces, this is a bogus email
+    NSRange spaceRange = [email rangeOfString:@" "];
+    if (spaceRange.location != NSNotFound) {
+        return NO;
+    }
+    
     NSArray *emailMatches = [self.emailDetector matchesInString:email options:kNilOptions range:NSMakeRange(0, [email length])];
     return [emailMatches count] == 1 && [[[emailMatches firstObject] URL].scheme isEqualToString:@"mailto"];
 }
@@ -139,8 +147,10 @@ NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
 - (void)cancelPetProfileCreation
 {
     self.userInfo = nil;
+    // Logout of google identity so the user needs to enter their password if signing in with google
+    [self logoutOfGit];
     [self.delegate loginAttemptCancelled];
-    [[self getRootNavController] popToRootViewControllerAnimated:YES];
+    [[CPSharedUtils getRootNavController] popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - GITInterfaceManagerDelegate
@@ -186,7 +196,33 @@ didFinishSignInWithToken:(NSString *)token
          error:(NSError *)error
 {
     if (error) {
-        [self.delegate loginAttemptFailed:error.localizedDescription];
+        // Check if the device is currently online
+        NSString *errorMessage = DEFAULT_ERROR_MESSAGE;
+        if ([error isOfflineError]) {
+            errorMessage = OFFLINE_TEXT;
+        } else if ([error.domain isEqualToString:@"com.google.gitkit"]) { // Not great, but I haven't been able to find a define for the domain
+            if (error.code == kGITErrorCodeUserCancellation) {
+                // No error message, we don't need to tell the user what they did
+                errorMessage = nil;
+            } else if(error.code == kGITErrorCodeEmailMismatch) {
+                // The login web form is presented by identity toolkit, and we can't force the user to enter the same email in the gmail web form as they did in the app, so it's possible to hit this error. Tell the user they need to use the same email they started the sign up flow with, and we also need to logout of GITAuth, as the user is actually logged in to Google Identity, despite receiving an error and no user account here
+                errorMessage = NSLocalizedString(@"The email address signed in to does not match the address provided on the sign in page. Please try again with the correct email.", @"Error message displayed when user uses 2 different emails as part of google sign in");
+                [self logoutOfGit];
+            }
+        } else if ([error.domain isEqualToString:kGIDSignInErrorDomain]) {
+            if (error.code == kGIDSignInErrorCodeCanceled) {
+                // User cancelation and denying access have the same error code, so we have to parse the description; ;
+                // This potentially doesn't work if the user changes their locale
+                NSString *message = error.localizedDescription;
+                if ([message isEqualToString:@"access_denied"]) {
+                    errorMessage = NSLocalizedString(@"This app requires access to your email address and profile info. You can not continue without allowing access.", @"Error message displayed when access to google account info is denied");
+                } else {
+                    errorMessage = nil;
+                }
+            }
+        }
+        
+        [self.delegate loginAttemptFailed:errorMessage];
     } else {
         self.pendingAuthToken = token;
         BLOCK_SELF_REF_OUTSIDE();
@@ -233,20 +269,21 @@ didFinishSignInWithToken:(NSString *)token
 
 - (void)deviceClaimFailed
 {
-    [self.hubPlaceholderVc displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
+    [self.hubPlaceholderVc displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again. Make sure your phone is no longer connected to the Hub's network.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
 }
 
 #pragma mark - CPHubPlaceholderDelegate methods
 - (void)hubSetupCancelled
 {
+    [self logoutOfGit];
     [self.delegate loginAttemptCancelled];
-    [[self getRootNavController] popToRootViewControllerAnimated:YES];
+    [[CPSharedUtils getRootNavController] popToRootViewControllerAnimated:YES];
     self.hubPlaceholderVc = nil;
 }
 
 - (void)hubSetupContinued
 {
-    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+    [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[CPSharedUtils getRootNavController] withDelegate:self];
 }
 
 #pragma mark - UI flow
@@ -261,18 +298,18 @@ didFinishSignInWithToken:(NSString *)token
         case CPLoginResult_UserWithoutPetProfile:
         {
             UIViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"PetProfileSetup"];
-            [[self getRootNavController] pushViewController:vc animated:YES];
+            [[CPSharedUtils getRootNavController] pushViewController:vc animated:YES];
             break;
         }
         case CPLoginResult_UserWithoutParticle:
         {
-            [self presentHubPlaceholderWithMessage:NSLocalizedString(@"We no longer have a record of your Hub.\n\nPlease setup a Hub to continue.", @"Message displayed to user when hub has been claimed out from under them")];
+            [self presentHubPlaceholderWithMessage:NSLocalizedString(@"We don't have a record of this Hub. Did anyone recently create a new account for this Hub? Log in to the last account which was set up to avoid losing data.\n\nIf this Hub has not been set up yet, let's set up your Hub!", @"Message displayed to user when hub has been claimed out from under them")];
             break;
         }
         case CPLoginResult_UserWithoutDevice:
         {
             [self presentHubPlaceholderWithMessage:nil];
-            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[self getRootNavController] withDelegate:self];
+            [[CPParticleConnectionHelper sharedInstance] presentSetupControllerOnController:[CPSharedUtils getRootNavController] withDelegate:self];
             break;
         }
         case CPLoginResult_UserWithSetupCompleted:
@@ -308,21 +345,14 @@ didFinishSignInWithToken:(NSString *)token
     vc.delegate = self;
     vc.shouldConfirmCancellation = YES;
     
-    UINavigationController *root = [self getRootNavController];
+    UINavigationController *root = [CPSharedUtils getRootNavController];
     [root pushViewController:vc animated:YES];
-}
-
-- (UINavigationController*)getRootNavController
-{
-    // TODO: Need to get the actual top level controller navController = visibleViewController, viewController = probably presentedViewController
-    // TODO: handle when our root is not a nav controller
-    return (UINavigationController*)[[[UIApplication sharedApplication].delegate window] rootViewController];
 }
 
 - (void)logout
 {
     [Intercom reset];
-    [[GITAuth sharedInstance] signOut];
+    [self logoutOfGit];
     
     // Clear auto login token from keychain
     [self clearAutoLoginToken];
@@ -331,6 +361,9 @@ didFinishSignInWithToken:(NSString *)token
     self.interfaceManager = [[GITInterfaceManager alloc] init];
     self.interfaceManager.delegate = self;
     [GITClient sharedInstance].delegate = self;
+    
+    // Reset intercom user
+    [Intercom registerUnidentifiedUser];
     
     // Swap root controller for splash
     UIViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateInitialViewController];
@@ -343,6 +376,13 @@ didFinishSignInWithToken:(NSString *)token
     [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
     [animation setType:kCATransitionFade];
     [window.layer addAnimation:animation forKey:@"crossFade"];
+}
+
+- (void)logoutOfGit
+{
+    [[GITAuth sharedInstance] signOut];
+    // Also clear our autologin token
+    [self clearAutoLoginToken];
 }
 
 - (void)setAutoLoginToken:(NSString*)authToken
