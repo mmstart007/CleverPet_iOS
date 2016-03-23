@@ -237,10 +237,7 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.destinationViewController isKindOfClass:[CPHubSettingsViewController class]]) {
-        CPHubSettingsViewController *vc = segue.destinationViewController;
-        vc.connectionState = self.connectionState;
-    }
+    
 }
 
 @end

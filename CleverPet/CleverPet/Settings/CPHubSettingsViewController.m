@@ -13,6 +13,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 #import "NMRangeSlider.h"
 #import "CPUserManager.h"
 #import "CPLoadingView.h"
+#import "CPHubStatusManager.h"
 
 @interface CPHubSettingsViewController ()
 
@@ -73,6 +74,8 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (nonatomic, weak) UIBarButtonItem *pseudoBackButton;
 @property (nonatomic, weak) UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
+@property (nonatomic, strong) CPHubStatusHandle updateHandle;
+@property (nonatomic, assign) HubConnectionState connectionState;
 
 @end
 
@@ -96,23 +99,9 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     
     self.currentDevice = [[CPUserManager sharedInstance] getCurrentUser].device;
     [self setupSliders];
-    // TODO: Hub listener, etc so we can display disconnected or waiting for data as appropriate when the state changes
-    // TODO: hub setting, scheduled settings from server
+    
+    
     self.currentHubSetting = [self.modeToHubSettingMap[self.currentDevice.mode] integerValue];
-    switch (self.connectionState) {
-        case HubConnectionState_Unknown:
-        case HubConnectionState_Disconnected:
-        case HubConnectionState_Connected:
-        {
-            [self setupForHubSetting:self.currentHubSetting animated:NO];
-            break;
-        }
-        case HubConnectionState_Offline:
-        {
-            [self hubNoData];
-            break;
-        }
-    }
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:@"Cancel" forState:UIControlStateNormal];
@@ -135,6 +124,13 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     [button addTarget:self action:@selector(saveButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = barButton;
     self.saveButton = barButton;
+    
+    // Listen for hub status updates
+    BLOCK_SELF_REF_OUTSIDE();
+    self.updateHandle = [[CPHubStatusManager sharedInstance] registerForHubStatusUpdates:^(HubConnectionState status) {
+        BLOCK_SELF_REF_INSIDE();
+        self.connectionState = status;
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -145,6 +141,32 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[CPHubStatusManager sharedInstance] unregisterForHubStatusUpdates:self.updateHandle];
+}
+
+- (void)setConnectionState:(HubConnectionState)connectionState
+{
+    if (_connectionState != connectionState) {
+        _connectionState = connectionState;
+        switch (connectionState) {
+            case HubConnectionState_Unknown:
+            case HubConnectionState_Disconnected:
+            case HubConnectionState_Connected:
+            {
+                [self setupForHubSetting:self.currentHubSetting animated:NO];
+                break;
+            }
+            case HubConnectionState_Offline:
+            {
+                [self hubNoData];
+                break;
+            }
+        }
+    }
 }
 
 - (void)setupFonts

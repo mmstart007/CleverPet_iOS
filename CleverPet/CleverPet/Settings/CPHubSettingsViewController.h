@@ -11,6 +11,4 @@
 
 @interface CPHubSettingsViewController : UIViewController
 
-@property (nonatomic, assign) HubConnectionState connectionState;
-
 @end
