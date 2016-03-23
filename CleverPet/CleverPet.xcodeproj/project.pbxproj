@@ -97,6 +97,7 @@
 		97E6782B1CA0799E00971A0F /* post_build.sh in Resources */ = {isa = PBXBuildFile; fileRef = 97E6782A1CA0799E00971A0F /* post_build.sh */; };
 		97E6782F1CA09F8000971A0F /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97E6782E1CA09F8000971A0F /* Photos.framework */; };
 		97E678321CA0B51D00971A0F /* NSError+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E678311CA0B51D00971A0F /* NSError+CleverPet.m */; };
+		97E678351CA313FF00971A0F /* CPHubStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E678341CA313FF00971A0F /* CPHubStatusManager.m */; };
 		97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB41C729F33007F1383 /* CPNascarViewController.m */; };
 		97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AB71C72A300007F1383 /* CPSignInViewController.m */; };
 		97EB7ABB1C72A570007F1383 /* CPSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7ABA1C72A570007F1383 /* CPSplashViewController.m */; };
@@ -261,6 +262,8 @@
 		97E6782E1CA09F8000971A0F /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
 		97E678301CA0B51D00971A0F /* NSError+CleverPet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+CleverPet.h"; sourceTree = "<group>"; };
 		97E678311CA0B51D00971A0F /* NSError+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+CleverPet.m"; sourceTree = "<group>"; };
+		97E678331CA313FF00971A0F /* CPHubStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPHubStatusManager.h; sourceTree = "<group>"; };
+		97E678341CA313FF00971A0F /* CPHubStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPHubStatusManager.m; sourceTree = "<group>"; };
 		97EB7AB31C729F33007F1383 /* CPNascarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPNascarViewController.h; sourceTree = "<group>"; };
 		97EB7AB41C729F33007F1383 /* CPNascarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPNascarViewController.m; sourceTree = "<group>"; };
 		97EB7AB61C72A300007F1383 /* CPSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSignInViewController.h; sourceTree = "<group>"; };
@@ -515,6 +518,8 @@
 				51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */,
 				0D535F251C93A91F003B4CF8 /* CPChartRenderer.h */,
 				0D535F261C93A91F003B4CF8 /* CPChartRenderer.m */,
+				97E678331CA313FF00971A0F /* CPHubStatusManager.h */,
+				97E678341CA313FF00971A0F /* CPHubStatusManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -880,6 +885,7 @@
 				97CC44691C766A28003C4258 /* CPSettingsViewController.m in Sources */,
 				51A8A7BB1C90E127001A1572 /* CPFirebaseManager.m in Sources */,
 				97EB7AEB1C73B858007F1383 /* UIFont+CleverPet.m in Sources */,
+				97E678351CA313FF00971A0F /* CPHubStatusManager.m in Sources */,
 				97E678321CA0B51D00971A0F /* NSError+CleverPet.m in Sources */,
 				1827AD83CD7A2FD906AA0567 /* CPMainTableSectionHeaderFilter.m in Sources */,
 			);

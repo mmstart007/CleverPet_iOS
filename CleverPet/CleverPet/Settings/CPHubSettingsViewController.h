@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef NS_ENUM(NSUInteger, HubConnectionState) {HubConnectionState_Connected, HubConnectionState_Disconnected, HubConnectionState_Offline, HubConnectionState_Unknown};
+#import "CPHubStatusManager.h"
 
 @interface CPHubSettingsViewController : UIViewController
 
