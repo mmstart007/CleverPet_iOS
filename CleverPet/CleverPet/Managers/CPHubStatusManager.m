@@ -43,6 +43,7 @@ NSTimeInterval const kHubStatusUpdateInterval = 60;
     if (self) {
         self.registeredBlocks = [NSMutableDictionary dictionary];
         self.lastKnownState = HubConnectionState_Unknown;
+        self.lastConnectionStatus = [[AFNetworkReachabilityManager sharedManager] networkReachabilityStatus];
         REG_SELF_FOR_NOTIFICATION(AFNetworkingReachabilityDidChangeNotification, reachabilityChanged:);
     }
     return self;
