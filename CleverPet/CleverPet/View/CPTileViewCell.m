@@ -66,7 +66,7 @@
     self.titleLabel.hidden = !tile.title;
     // TODO: pass in pet
     CPPet *pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
-    self.titleLabel.text = [[CPTileTextFormatter instance] filterString:tile.title forPet:pet name:YES gender:YES];
+    self.titleLabel.text = [[CPTileTextFormatter instance] formatNonMarkdownText:tile.title forPet:pet];
     
     self.messageTileContentView.hidden = tile.templateType != CPTileTemplateMessage;
     self.videoLayoutImageView.hidden = tile.templateType != CPTileTemplateVideo;
@@ -100,8 +100,8 @@
     
     // Ignore button titles for video tiles
     if (tile.templateType != CPTileTemplateVideo) {
-        [self setButtonTitle:[[CPTileTextFormatter instance] filterString:tile.primaryButtonText forPet:pet name:YES gender:YES] onButton:self.primaryButton];
-        [self setButtonTitle:[[CPTileTextFormatter instance] filterString:tile.secondaryButtonText forPet:pet name:YES gender:YES] onButton:self.secondaryButton];
+        [self setButtonTitle:[[CPTileTextFormatter instance] formatNonMarkdownText:tile.primaryButtonText forPet:pet] onButton:self.primaryButton];
+        [self setButtonTitle:[[CPTileTextFormatter instance] formatNonMarkdownText:tile.secondaryButtonText forPet:pet] onButton:self.secondaryButton];
     }
     
     self.buttonHolder.hidden = self.primaryButton.hidden && self.secondaryButton.hidden;
@@ -160,7 +160,7 @@
     
     [self setTextColor:[UIColor whiteColor] onButton:self.primaryButton];
     [self setTextColor:tileColor onButton:self.secondaryButton];
-    
+
     self.colouredDotView.backgroundColor = tileColor;
 }
 

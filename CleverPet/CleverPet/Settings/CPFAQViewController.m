@@ -33,10 +33,10 @@
     for (NSDictionary *dict in faqs) {
         NSString *title, *body;
         if ([dict[@"Question"] isKindOfClass:[NSString class]]) {
-            title = [formatter filterString:dict[@"Question"] forPet:pet name:YES gender:YES];
+            title = [formatter formatNonMarkdownText:dict[@"Question"] forPet:pet];
         }
         if ([dict[@"Answer"] isKindOfClass:[NSString class]]) {
-            body = [formatter filterString:dict[@"Answer"] forPet:pet name:YES gender:YES];
+            body = [formatter formatNonMarkdownText:dict[@"Answer"] forPet:pet];
         }
         
         if (!title && !body) {

@@ -58,7 +58,7 @@
     [self.progressView setFrame:CGRectMake(0, 0, self.progressViewHolder.frame.size.width, self.progressViewHolder.frame.size.height)];
     [self.progressView setProgressTintColor:[UIColor appTealColor]];
     [self.progressView setTrackTintColor:[UIColor appDividerColor]];
-    [self.progressView setSegmentSeparatorSize:0.1f];
+    [self.progressView setSegmentSeparatorSize:2];
     [self.progressView setStyle:OJFSegmentedProgressViewStyleDiscrete];
     [self.progressViewHolder addSubview:self.progressView];
     

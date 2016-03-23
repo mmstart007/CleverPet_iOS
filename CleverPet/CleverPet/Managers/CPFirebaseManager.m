@@ -41,7 +41,7 @@ NSString * const kFirebaseTilePath = @"tile";
 
 - (void)applyConfig:(NSDictionary *)configData
 {
-    self.rootRef = [[Firebase alloc] initWithUrl:[configData objectForKey:@"firebase_url"]];
+    self.rootRef = [[Firebase alloc] initWithUrl:@"https://blistering-torch-9343.firebaseio.com/"];
 }
 
 - (void)userLoggedIn:(NSDictionary *)response withCompletion:(FirebaseLoginBlock)completion

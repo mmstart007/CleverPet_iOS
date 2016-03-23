@@ -12,6 +12,51 @@
 #import "CPTile.h"
 #import "CPPet.h"
 
+@interface CPAbstractMutableString : NSObject
+- (instancetype)initWithString:(NSMutableString *)string;
+- (instancetype)initWithAttributedString:(NSMutableAttributedString *)attributedString;
+
+- (void)replaceCharactersInRange:(NSRange)range withString:(nonnull NSString *)aString;
+- (NSString *)string;
+
+@property (strong, nonatomic) NSMutableString *mutableString;
+@property (strong, nonatomic) NSMutableAttributedString *attributedString;
+@end
+
+@implementation CPAbstractMutableString
+- (instancetype)initWithString:(NSMutableString *)string {
+    if (self = [super init]) {
+        self.mutableString = string;
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithAttributedString:(NSMutableAttributedString *)attributedString {
+    if (self = [super init]) {
+        self.attributedString = attributedString;
+    }
+    
+    return self;
+}
+
+- (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)aString {
+    if (self.mutableString) {
+        [self.mutableString replaceCharactersInRange:range withString:aString];
+    } else {
+        [self.attributedString replaceCharactersInRange:range withString:aString];
+    }
+}
+
+- (NSString *)string {
+    if (self.mutableString) {
+        return self.mutableString;
+    } else {
+        return self.attributedString.string;
+    }
+}
+@end
+
 @interface CPTileTextFormatter ()
 @property (strong, nonatomic) NSDictionary *markdownAttributes;
 @property (strong, nonatomic) NSDateFormatter *relativeDateFormatter;
@@ -106,71 +151,80 @@
     return [temp copy];
 }
 
-- (NSAttributedString *)formatTileText:(NSString *)tileText forPet:(id)pet
+- (NSString *)formatNonMarkdownText:(NSString *)text forPet:(CPPet *)pet
 {
-    return [self attributedStringFromMarkdownString:[self filterString:tileText forPet:pet name:YES gender:YES]];
+    NSString *genderedString = [self filterStringForGender:text forPet:pet];
+    return [self filterStringForPetName:genderedString forPet:pet];
 }
 
-- (NSString*)filterString:(NSString*)string forPet:(CPPet *)pet name:(BOOL)filterName gender:(BOOL)filterGender
+- (NSAttributedString *)formatMarkdownText:(NSString *)text forPet:(CPPet *)pet
 {
-    if (string && (filterName || filterGender)) {
-        
-        NSMutableString *sanitizedString = [NSMutableString string];
-        NSScanner *scanner = [NSScanner scannerWithString:string];
-        scanner.charactersToBeSkipped = nil;
-        
-        while ([scanner scanLocation] < [string length] - 1) {
-            NSString *preReplacementString;
-            NSString *replacementToken;
-            
-            [scanner scanUpToString:@"{{" intoString:&preReplacementString];
-            if (preReplacementString) {
-                [sanitizedString appendString:preReplacementString];
-            }
-            
-            [scanner scanString:@"{{" intoString:nil];
-            [scanner scanUpToString:@"}}" intoString:&replacementToken];
-            [scanner scanString:@"}}" intoString:nil];
-            
-            // This will just remove {{}} with no content in the middle, which I think is ok
-            if (replacementToken) {
-                if ((filterName && [replacementToken isEqualToString:@"dog_name"]) || (filterGender && [replacementToken rangeOfString:@"|"].location != NSNotFound)) {
-                    NSString *replacedToken = [self replaceToken:replacementToken forPet:pet];
-                    if (replacedToken) {
-                        [sanitizedString appendString:replacedToken];
-                    }
-                } else {
-                    // We're ignoring this token type, reinsert it with {{}}
-                    [sanitizedString appendFormat:@"{{%@}}", replacementToken];
-                }
-            }
-        }
-        
-        return sanitizedString;
+    NSString *genderedString = [self filterStringForGender:text forPet:pet];
+    NSAttributedString *formattedString = [self attributedStringFromMarkdownString:genderedString];
+    return [self filterAttributedStringForPetName:formattedString forPet:pet];
+}
+
+- (NSAttributedString *)filterAttributedStringForPetName:(NSAttributedString *)string forPet:(CPPet *)pet
+{
+    NSMutableAttributedString *attributedString = [string mutableCopy];
+    [self filterAbstractStringForPetName:[[CPAbstractMutableString alloc] initWithAttributedString:attributedString] forPet:pet];
+    return attributedString;
+}
+
+- (NSAttributedString *)filterAttributedStringForGender:(NSAttributedString *)string forPet:(CPPet *)pet
+{
+    NSMutableAttributedString *attributedString = [string mutableCopy];
+    [self filterAbstractStringForGender:[[CPAbstractMutableString alloc] initWithAttributedString:attributedString] forPet:pet];
+    return attributedString;
+}
+
+- (NSString *)filterStringForPetName:(NSString *)string forPet:(CPPet *)pet
+{
+    NSMutableString *mutableString = [string mutableCopy];
+    [self filterAbstractStringForPetName:[[CPAbstractMutableString alloc] initWithString:mutableString] forPet:pet];
+    return mutableString;
+}
+
+- (NSString *)filterStringForGender:(NSString *)string forPet:(CPPet *)pet
+{
+    NSMutableString *mutableString = [string mutableCopy];
+    [self filterAbstractStringForGender:[[CPAbstractMutableString alloc] initWithString:mutableString] forPet:pet];
+    return mutableString;
+}
+
+- (NSError *)filterAbstractStringForPetName:(CPAbstractMutableString *)string forPet:(CPPet *)pet
+{
+    NSError *error = nil;
+    NSRegularExpression *tokenFinder = [NSRegularExpression regularExpressionWithPattern:@"{{dog_name}}"
+                                                                                 options:NSRegularExpressionIgnoreMetacharacters
+                                                                                   error:&error];
+    
+    if (error) {
+        return error;
     }
     
-    return string;
-}
-
-- (NSString*)replaceToken:(NSString*)string forPet:(CPPet*)pet
-{
-    if (string) {
-        NSScanner *scanner = [NSScanner scannerWithString:string];
-        scanner.charactersToBeSkipped = nil;
-        NSString *prePipeToken, *postPipeToken;
-        [scanner scanUpToString:@"|" intoString:&prePipeToken];
-        if ([scanner scanLocation] < [string length] - 1) {
-            [scanner scanString:@"|" intoString:nil];
-            postPipeToken = [[scanner string] substringFromIndex:[scanner scanLocation]];
-            return [pet.gender isEqualToString:kMaleKey] ? prePipeToken : postPipeToken;
-        } else {
-            if ([prePipeToken isEqualToString:@"dog_name"]) {
-                return pet.name;
-            }
-            return prePipeToken;
-        }
+    NSTextCheckingResult *result = nil;
+    while ((result = [tokenFinder firstMatchInString:string.string options:0 range:NSMakeRange(0, string.string.length)]) != nil) {
+        [string replaceCharactersInRange:result.range withString:pet.name];
     }
-    return string;
+    
+    return nil;
 }
 
+- (NSError *)filterAbstractStringForGender:(CPAbstractMutableString *)string forPet:(CPPet *)pet
+{
+    NSError *error = nil;
+    NSRegularExpression *tokenFinder = [NSRegularExpression regularExpressionWithPattern:@"\\{\\{(.*?)\\|(.*?)\\}\\}" options:0 error:&error];
+    
+    if (error) {
+        return error;
+    }
+    
+    NSTextCheckingResult *result = nil;
+    while ((result = [tokenFinder firstMatchInString:string.string options:0 range:NSMakeRange(0, string.string.length)])) {
+        NSLog(@"%@", result);
+    }
+    
+    return nil;
+}
 @end
