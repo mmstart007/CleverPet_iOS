@@ -370,13 +370,27 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 #pragma mark - CPTileViewCellDelegate methods
 
 - (void)didSwipeTileViewCell:(CPTileViewCell *)tileViewCell {
-    // We don't particularly care about success or failure here, so just update the ui
-    [[CPTileCommunicationManager sharedInstance] handleTileSwipe:tileViewCell.tile.tileId completion:nil];
+    CPTile *requestTile = tileViewCell.tile;
+    BLOCK_SELF_REF_OUTSIDE();
+    [[CPTileCommunicationManager sharedInstance] handleTileSwipe:tileViewCell.tile.tileId completion:^(NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (error) {
+            [self.delegate displayError:error];
+            if ([requestTile.tileId isEqualToString:tileViewCell.tile.tileId]) {
+                [tileViewCell resetSwipeState];
+            }
+        }
+    }];
 }
 
 - (void)playVideoForCell:(CPTileViewCell *)tileViewCell
 {
     [self.delegate playVideoForTile:tileViewCell.tile];
+}
+
+- (void)displayError:(NSError *)error
+{
+    [self.delegate displayError:error];
 }
 
 #pragma mark - Data source management

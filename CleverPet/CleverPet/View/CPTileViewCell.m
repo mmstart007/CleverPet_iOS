@@ -295,15 +295,31 @@
 
 - (void)buttonTappedWithPath:(NSString *)path
 {
-    // TODO: chain this back up through the data source -> data manager -> communications manager instead of calling directly?
     [self requestInProgress:YES];
     if (_tile.tileType != CPTTChallenge) {
         [self setSwipedMode:YES withAnimation:YES callDelegateMethod:NO];
     }
+    
+    CPTile *tileForRequest = _tile;
+    BLOCK_SELF_REF_OUTSIDE();
     [[CPTileCommunicationManager sharedInstance] handleButtonPressWithPath:path completion:^(NSError *error){
-        // TODO: display error;
-        // TODO: Reactivate buttons? probably not
+        BLOCK_SELF_REF_INSIDE();
+        if (error) {
+            [self.delegate displayError:error];
+            if ([_tile.tileId isEqualToString:tileForRequest.tileId]) {
+                // Only update our button state if we haven't been reused
+                [self requestInProgress:NO];
+                if (_tile.tileType != CPTTChallenge) {
+                    [self resetSwipeState];
+                }
+            }
+        }
     }];
+}
+
+- (void)resetSwipeState
+{
+    [self setSwipedMode:NO withAnimation:YES callDelegateMethod:NO];
 }
 
 @end

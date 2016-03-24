@@ -13,6 +13,7 @@
 - (void)dataSource:(CPTileCollectionViewDataSource *)dataSource headerPhotoVisible:(BOOL)headerPhotoVisible headerStatsFade:(CGFloat)headerStatsFade;
 - (void)playVideoForTile:(CPTile*)tile;
 - (BOOL)isViewVisible;
+- (void)displayError:(NSError *)error;
 @end
 
 @interface CPTileCollectionViewDataSource : NSObject<UITableViewDataSource, UITableViewDelegate>
