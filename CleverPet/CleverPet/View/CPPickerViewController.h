@@ -16,7 +16,7 @@
 
 @end
 
-@interface CPPickerViewController : UIViewController
+@interface CPPickerViewController : CPBaseViewController
 
 @property (nonatomic, weak) id<CPPickerViewDelegate> delegate;
 

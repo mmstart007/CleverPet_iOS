@@ -26,7 +26,7 @@
 
 @property (nonatomic, strong) CPPet *currentPet;
 @property (nonatomic, strong) CPTile *playingTile;
-@property (nonatomic, strong) CPPlayerViewController *playerController;
+@property (nonatomic, weak) CPPlayerViewController *playerController;
 @end
 
 @implementation CPMainScreenViewController {
@@ -61,8 +61,6 @@
     self.tableView.dataSource = dataSource;
     self.tableView.allowsSelection = NO;
     
-    self.playerController = [[CPPlayerViewController alloc] init];
-    
     [dataSource postInit];
 }
 
@@ -84,8 +82,13 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController playerItem]];
     self.playingTile = nil;
+}
+
+- (void)dealloc
+{
+    UNREG_SELF_FOR_ALL_NOTIFICATIONS();
 }
 
 #pragma mark - CPTileCollectionViewDataSourceDelegate
@@ -112,23 +115,18 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
     if (tile != self.playingTile) {
         self.playingTile = tile;
-        AVPlayerItem *item = [AVPlayerItem playerItemWithURL:tile.videoUrl];
-        if (self.playerController.player) {
-            [self.playerController.player replaceCurrentItemWithPlayerItem:item];
-        } else {
-            self.playerController.player = [AVPlayer playerWithPlayerItem:item];
-        }
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
-    self.playerController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    [self presentViewController:self.playerController animated:YES completion:nil];
-    [self.playerController.player play];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController playerItem]];
+    
+    CPPlayerViewController *player = [[CPPlayerViewController alloc] initWithContentUrl:tile.videoUrl];
+    [player presentInWindow];
+    self.playerController = player;
 }
 
 - (void)videoPlayedToEnd:(NSNotification*)notification
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController playerItem]];
     [self.dataSource videoPlaybackCompletedForTile:self.playingTile];
     self.playingTile = nil;
 }

@@ -78,6 +78,7 @@
     self.cellImageView.image = nil;
     self.cellImageViewHolder.hidden = YES;
     self.videoImageContainer.hidden = YES;
+    self.swipableImage.hidden = YES;
     [self.cellImageView cancelImageDownloadTask];
     [self.videoLayoutImageView cancelImageDownloadTask];
     

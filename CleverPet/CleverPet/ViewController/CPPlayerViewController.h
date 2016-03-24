@@ -7,7 +7,12 @@
 //
 
 #import <AVKit/AVKit.h>
+@import AVFoundation;
 
 @interface CPPlayerViewController : AVPlayerViewController
+
+- (instancetype)initWithContentUrl:(NSURL*)url;
+- (void)presentInWindow;
+- (AVPlayerItem*)playerItem;
 
 @end

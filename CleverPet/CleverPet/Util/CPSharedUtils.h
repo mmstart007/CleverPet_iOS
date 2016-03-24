@@ -61,6 +61,7 @@ extern NSString * const kPetInfoUpdated;
 #import "UIViewController+CleverPet.h"
 #import "UIImageView+AFNetworking.h"
 #import "NSError+CleverPet.h"
+#import "CPBaseViewController.h"
 
 #pragma mark - Data field max and min values
 extern NSInteger const kNameFieldMinChars;

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CPProfileSettingsViewController : UIViewController
+@interface CPProfileSettingsViewController : CPBaseViewController
 
 @end

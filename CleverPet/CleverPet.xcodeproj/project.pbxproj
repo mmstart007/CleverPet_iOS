@@ -52,6 +52,8 @@
 		971D630D1C88B0A7006C9F80 /* CPDeviceSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D630B1C88B0A7006C9F80 /* CPDeviceSchedule.m */; };
 		971D63101C88FFC2006C9F80 /* CPTileCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 971D630F1C88FFC2006C9F80 /* CPTileCommunicationManager.m */; };
 		971D63121C8A3B1C006C9F80 /* faqs.json in Resources */ = {isa = PBXBuildFile; fileRef = 971D63111C8A3B1C006C9F80 /* faqs.json */; };
+		97633C3E1CA47237009BC1F0 /* CPBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97633C3D1CA47237009BC1F0 /* CPBaseViewController.m */; };
+		97633C411CA47559009BC1F0 /* CPBaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97633C401CA47559009BC1F0 /* CPBaseNavigationController.m */; };
 		979D84431C7FA50700ADB6B0 /* CPFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D84421C7FA50700ADB6B0 /* CPFileUtils.m */; };
 		979D84461C7FB73700ADB6B0 /* CPUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D84451C7FB73700ADB6B0 /* CPUserManager.m */; };
 		979D84491C7FB79400ADB6B0 /* CPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D84481C7FB79400ADB6B0 /* CPUser.m */; };
@@ -198,6 +200,10 @@
 		971D630E1C88FFC2006C9F80 /* CPTileCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileCommunicationManager.h; sourceTree = "<group>"; };
 		971D630F1C88FFC2006C9F80 /* CPTileCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileCommunicationManager.m; sourceTree = "<group>"; };
 		971D63111C8A3B1C006C9F80 /* faqs.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = faqs.json; sourceTree = "<group>"; };
+		97633C3C1CA47237009BC1F0 /* CPBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBaseViewController.h; sourceTree = "<group>"; };
+		97633C3D1CA47237009BC1F0 /* CPBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBaseViewController.m; sourceTree = "<group>"; };
+		97633C3F1CA47559009BC1F0 /* CPBaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPBaseNavigationController.h; sourceTree = "<group>"; };
+		97633C401CA47559009BC1F0 /* CPBaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPBaseNavigationController.m; sourceTree = "<group>"; };
 		979D84411C7FA50700ADB6B0 /* CPFileUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFileUtils.h; sourceTree = "<group>"; };
 		979D84421C7FA50700ADB6B0 /* CPFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFileUtils.m; sourceTree = "<group>"; };
 		979D84441C7FB73700ADB6B0 /* CPUserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPUserManager.h; sourceTree = "<group>"; };
@@ -405,6 +411,10 @@
 				1827A708180DD5D390DB0EA8 /* CPMainScreenViewController.h */,
 				97D2581F1C8F5F17002C4CC6 /* CPPlayerViewController.h */,
 				97D258201C8F5F17002C4CC6 /* CPPlayerViewController.m */,
+				97633C3C1CA47237009BC1F0 /* CPBaseViewController.h */,
+				97633C3D1CA47237009BC1F0 /* CPBaseViewController.m */,
+				97633C3F1CA47559009BC1F0 /* CPBaseNavigationController.h */,
+				97633C401CA47559009BC1F0 /* CPBaseNavigationController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -847,6 +857,7 @@
 				979D844C1C7FB7A100ADB6B0 /* CPPet.m in Sources */,
 				979D84461C7FB73700ADB6B0 /* CPUserManager.m in Sources */,
 				97CC445D1C7552C3003C4258 /* CPSimpleTableViewCell.m in Sources */,
+				97633C411CA47559009BC1F0 /* CPBaseNavigationController.m in Sources */,
 				9704E3071C7D34BD004874A7 /* CPPetPhotoViewController.m in Sources */,
 				971D630C1C88B0A7006C9F80 /* CPDevice.m in Sources */,
 				0DDF53F91C910CC80048FF6F /* CPGraph.m in Sources */,
@@ -879,6 +890,7 @@
 				9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */,
 				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
 				0DDF53FD1C910F970048FF6F /* CPGraphView.m in Sources */,
+				97633C3E1CA47237009BC1F0 /* CPBaseViewController.m in Sources */,
 				0D6512AA1C8678BA0086D593 /* CPMainTableDateHeader.m in Sources */,
 				0D8AC9871C7CEACD0096F339 /* CPTileTextFormatter.m in Sources */,
 				97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */,

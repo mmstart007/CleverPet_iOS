@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CPConfigViewController : UIViewController
+@interface CPConfigViewController : CPBaseViewController
 
 - (void)setAnimating:(BOOL)isAnimating;
 - (void)dismiss;

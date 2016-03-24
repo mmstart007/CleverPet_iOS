@@ -14,7 +14,7 @@
 
 @end
 
-@interface CPPetPhotoViewController : UIViewController
+@interface CPPetPhotoViewController : CPBaseViewController
 
 @property (nonatomic, strong) UIImage *selectedImage;
 @property (nonatomic, weak) id<CPPetPhotoDelegate> delegate;

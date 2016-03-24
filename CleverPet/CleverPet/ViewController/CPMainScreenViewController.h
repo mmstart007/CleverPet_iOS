@@ -5,5 +5,5 @@
 
 @import UIKit;
 
-@interface CPMainScreenViewController : UIViewController
+@interface CPMainScreenViewController : CPBaseViewController
 @end
