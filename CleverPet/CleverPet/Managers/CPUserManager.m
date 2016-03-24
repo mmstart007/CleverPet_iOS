@@ -126,7 +126,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
         if (![oldMode isEqualToString:newMode]) {
             NSMutableDictionary *deviceUpdateDict = [[self.currentUser.device toDictionary] mutableCopy];
             deviceUpdateDict[kDesiredModeKey] = newMode;
-            self.currentUser.device.mode = newMode;
+            self.currentUser.device.desiredMode = newMode;
             pendingRequests++;
             BLOCK_SELF_REF_OUTSIDE();
             [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId mode:deviceUpdateDict completion:^(NSError *error) {
