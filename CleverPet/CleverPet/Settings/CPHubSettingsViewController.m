@@ -101,7 +101,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     [self setupSliders];
     
     
-    self.currentHubSetting = [self.modeToHubSettingMap[self.currentDevice.mode] integerValue];
+    self.currentHubSetting = [self.modeToHubSettingMap[self.currentDevice.desiredMode] integerValue];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:@"Cancel" forState:UIControlStateNormal];

@@ -121,7 +121,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     };
     
     if (deviceInfo[kModeKey]) {
-        NSString *oldMode = self.currentUser.device.mode;
+        NSString *oldMode = self.currentUser.device.desiredMode;
         NSString *newMode = deviceInfo[kModeKey];
         if (![oldMode isEqualToString:newMode]) {
             NSMutableDictionary *deviceUpdateDict = [[self.currentUser.device toDictionary] mutableCopy];
@@ -132,7 +132,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
             [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId mode:deviceUpdateDict completion:^(NSError *error) {
                 BLOCK_SELF_REF_INSIDE();
                 if (error) {
-                    self.currentUser.device.mode = oldMode;
+                    self.currentUser.device.desiredMode = oldMode;
                 }
                 requestFinished(error);
             }];
@@ -180,7 +180,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 
 - (BOOL)hasModeChanged:(NSDictionary *)deviceInfo
 {
-    NSString *oldMode = self.currentUser.device.mode;
+    NSString *oldMode = self.currentUser.device.desiredMode;
     NSString *newMode = deviceInfo[kModeKey];
     return ![oldMode isEqualToString:newMode];
 }
