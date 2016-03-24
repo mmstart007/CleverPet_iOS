@@ -94,8 +94,20 @@
 - (IBAction)forgotPasswordTapped:(id)sender
 {
     NSString *emailString = [self validateInput];
+    self.loadingView.hidden = NO;
+    BLOCK_SELF_REF_OUTSIDE();
     [[CPLoginController sharedInstance] forgotPasswordForEmail:emailString withCompletion:^(NSError *error) {
-        
+        BLOCK_SELF_REF_INSIDE();
+        self.loadingView.hidden = YES;
+        if (error) {
+            if ([error isOfflineError]) {
+                [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:OFFLINE_TEXT];
+            } else {
+                [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:NSLocalizedString(@"Unable to send forgot password email.", @"There was an error when trying to send the forgot password email.")];
+            }
+        } else {
+            [self displayErrorAlertWithTitle:NSLocalizedString(@"Email Sent", @"Title for forgot password email confirmation.") andMessage:[NSString stringWithFormat:NSLocalizedString(@"An email was sent to %@ with instructions on how to reset your password.", @"Email sent to the user's address to let them reset their password."), emailString]];
+        }
     }];
 }
 
