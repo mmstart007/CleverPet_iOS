@@ -187,7 +187,7 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
             [self performSegueWithIdentifier:@"hubSettings" sender:nil];
         } else if (indexPath.row == kDeviceSectionHubSetupRow) {
             CPHubPlaceholderViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"HubPlaceholder"];
-            vc.message = NSLocalizedString(@"Press Continue to continue with Hub setup.\n\nIf you connect to a new Hub, this will result in your current hub being unlinked from your account.", @"Message displayed to user when performing hub setup from the settings");
+            vc.message = NSLocalizedString(@"Press Continue to begin Hub setup.\n\nIf you connect to a new Hub, this will result in your current Hub being unlinked from your account.", @"Message displayed to user when performing hub setup from the settings");
             vc.delegate = self;
             vc.shouldConfirmCancellation = NO;
             self.hubPlaceholder = vc;
