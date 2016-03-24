@@ -138,6 +138,11 @@
     return YES;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    return ![string isEqualToString:@" "];
+}
+
 #pragma mark - Keyboard
 - (void)keyboardWillShow:(NSNotification *)note
 {
