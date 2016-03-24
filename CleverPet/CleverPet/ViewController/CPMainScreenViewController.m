@@ -137,4 +137,13 @@
     return self.view.window != nil;
 }
 
+- (void)displayError:(NSError *)error
+{
+    if ([error isOfflineError]) {
+        [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:OFFLINE_TEXT];
+    } else {
+        [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:error.localizedDescription];
+    }
+}
+
 @end

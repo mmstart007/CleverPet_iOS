@@ -11,6 +11,7 @@
 @protocol CPTileViewCellDelegate <NSObject>
 - (void)didSwipeTileViewCell:(CPTileViewCell *)tileViewCell;
 - (void)playVideoForCell:(CPTileViewCell *)tileViewCell;
+- (void)displayError:(NSError*)error;
 @end
 
 @interface CPTileViewCell : UITableViewCell
@@ -19,5 +20,6 @@
 
 - (void)setTile:(CPTile *)tile forSizing:(BOOL)forSizing allowSwiping:(BOOL)allowSwiping;
 - (CPTile *)tile;
+- (void)resetSwipeState;
 
 @end
