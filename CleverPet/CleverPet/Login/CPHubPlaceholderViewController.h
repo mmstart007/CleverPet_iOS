@@ -15,7 +15,7 @@
 
 @end
 
-@interface CPHubPlaceholderViewController : UIViewController
+@interface CPHubPlaceholderViewController : CPBaseViewController
 
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, assign) BOOL shouldConfirmCancellation;

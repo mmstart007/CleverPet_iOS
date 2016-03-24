@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CPHubStatusManager.h"
 
-@interface CPHubSettingsViewController : UIViewController
+@interface CPHubSettingsViewController : CPBaseViewController
 
 @end

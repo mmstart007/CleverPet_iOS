@@ -26,7 +26,7 @@
 
 @property (nonatomic, strong) CPPet *currentPet;
 @property (nonatomic, strong) CPTile *playingTile;
-@property (nonatomic, strong) CPPlayerViewController *playerController;
+@property (nonatomic, weak) CPPlayerViewController *playerController;
 @end
 
 @implementation CPMainScreenViewController {
@@ -60,8 +60,6 @@
     self.tableView.delegate = dataSource;
     self.tableView.dataSource = dataSource;
     self.tableView.allowsSelection = NO;
-    
-    self.playerController = [[CPPlayerViewController alloc] init];
     
     [dataSource postInit];
 }
@@ -114,9 +112,11 @@
         self.playingTile = tile;
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
     
-    [self.playerController playVideoWithUrl:tile.videoUrl];
+    [[[CPPlayerViewController alloc] init] playVideoWithUrl:tile.videoUrl];
+    
+//    [self.playerController playVideoWithUrl:tile.videoUrl];
 }
 
 - (void)videoPlayedToEnd:(NSNotification*)notification

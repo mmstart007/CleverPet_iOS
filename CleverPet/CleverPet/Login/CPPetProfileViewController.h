@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CPPetProfileViewController : UIViewController
+@interface CPPetProfileViewController : CPBaseViewController
 
 @end

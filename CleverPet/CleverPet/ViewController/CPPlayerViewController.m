@@ -67,7 +67,6 @@
 {
     self = [super init];
     if (self) {
-        self.playerController = [[CPVideoPlayerController alloc] init];
     }
     return self;
 }
@@ -94,6 +93,7 @@
 
 - (void)playVideoWithUrl:(NSURL *)videoUrl
 {
+    self.playerController = [[CPVideoPlayerController alloc] init];
     AVPlayerItem *item = [AVPlayerItem playerItemWithURL:videoUrl];
     if (self.playerController.player) {
         [self.playerController.player replaceCurrentItemWithPlayerItem:item];
@@ -147,6 +147,11 @@
 @end
 
 @implementation CPPresentVideoViewController
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationLandscapeRight;
+}
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskLandscapeRight|UIInterfaceOrientationMaskLandscapeLeft;
