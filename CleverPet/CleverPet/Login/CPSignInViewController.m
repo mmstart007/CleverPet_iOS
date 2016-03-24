@@ -76,8 +76,10 @@
     
     if ([emailString length] > kEmailMaxChars) {
         errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Your email address must be less than %d characters", @"Error message displayed when email address exceeds max length"), kEmailMaxChars];
-    } else if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
-        NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address");
+    }
+    
+    if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
+        errorMessage = NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address");
     }
     
     if (errorMessage) {
