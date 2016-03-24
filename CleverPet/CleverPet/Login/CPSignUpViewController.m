@@ -10,6 +10,7 @@
 #import "CPLoginController.h"
 #import "CPTextField.h"
 #import "CPLoadingView.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface CPSignUpViewController ()<UITextFieldDelegate>
 
@@ -121,8 +122,12 @@ NSInteger const kMinPasswordLength = 6;
 - (IBAction)signUpTapped:(id)sender
 {
     if ([self validateInput]) {
-        self.loginView.hidden = NO;
-        [[CPLoginController sharedInstance] signUpWithEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] displayName:[self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] andPassword:self.passwordField.text];
+        if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+            self.loginView.hidden = NO;
+            [[CPLoginController sharedInstance] signUpWithEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] displayName:[self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] andPassword:self.passwordField.text];
+        } else {
+            [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:OFFLINE_TEXT];
+        }
     }
 }
 

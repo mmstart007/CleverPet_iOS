@@ -76,8 +76,10 @@
     
     if ([emailString length] > kEmailMaxChars) {
         errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Your email address must be less than %d characters", @"Error message displayed when email address exceeds max length"), kEmailMaxChars];
-    } else if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
-        NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address");
+    }
+    
+    if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
+        errorMessage = NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address");
     }
     
     if (errorMessage) {
@@ -109,8 +111,8 @@
                 title = NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails");
                 message = NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails");
             } else {
-                title = NSLocalizedString(@"Error", nil);
-                message = NSLocalizedString(@"The internet connection appears to be offline.", @"Error message displayed when attempting to log in to Google Identity while the device is offline");
+                title = ERROR_TEXT;
+                message = OFFLINE_TEXT;
             }
             [self displayErrorAlertWithTitle:title andMessage:message];
         }];

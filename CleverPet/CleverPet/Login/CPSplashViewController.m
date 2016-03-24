@@ -83,7 +83,7 @@
 {
     [self showLoadingSpinner:NO];
     if (message) {
-        [self displayErrorAlertWithTitle:NSLocalizedString(@"Error", @"Login error alert title") andMessage:message];
+        [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:message];
     }
 }
 

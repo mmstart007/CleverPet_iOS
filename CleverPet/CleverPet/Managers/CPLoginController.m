@@ -198,8 +198,8 @@ didFinishSignInWithToken:(NSString *)token
     if (error) {
         // Check if the device is currently online
         NSString *errorMessage = DEFAULT_ERROR_MESSAGE;
-        if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
-            errorMessage = NSLocalizedString(@"The internet connection appears to be offline.", @"Error message displayed when attempting to log in to Google Identity while the device is offline");
+        if ([error isOfflineError] || ![[AFNetworkReachabilityManager sharedManager] isReachable]) {
+            errorMessage = OFFLINE_TEXT;
         } else if ([error.domain isEqualToString:@"com.google.gitkit"]) { // Not great, but I haven't been able to find a define for the domain
             if (error.code == kGITErrorCodeUserCancellation) {
                 // No error message, we don't need to tell the user what they did

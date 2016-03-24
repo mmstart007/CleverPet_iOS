@@ -149,7 +149,7 @@
 },
 {
 "Question": "How do I turn the CleverPet off?",
-"Answer": "Go to the Scheduler in the dropdown menu, located at the top left corner of the app screen, and select \"Stay off\". You can also schedule the Hub to turn on and turn off at specific times from this screen."
+"Answer": "Go to the app menu, select Hub, and set status to \"Always Off.\" You can also schedule the Hub to start and stop and specific times from this screen."
 },
 {
 "Question": "How is the CleverPet Hub powered?",

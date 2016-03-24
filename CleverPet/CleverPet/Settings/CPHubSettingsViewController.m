@@ -12,7 +12,8 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 #import "CPHubSettingsButton.h"
 #import "NMRangeSlider.h"
 #import "CPUserManager.h"
-#import <AFNetworking/AFNetworkReachabilityManager.h>
+#import "CPLoadingView.h"
+#import "CPHubStatusManager.h"
 
 @interface CPHubSettingsViewController ()
 
@@ -71,6 +72,10 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (nonatomic, strong) NSDictionary *modeToHubSettingMap;
 @property (nonatomic, strong) CPDevice *currentDevice;
 @property (nonatomic, weak) UIBarButtonItem *pseudoBackButton;
+@property (nonatomic, strong) UIBarButtonItem *saveButton;
+@property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
+@property (nonatomic, strong) CPHubStatusHandle updateHandle;
+@property (nonatomic, assign) HubConnectionState connectionState;
 
 @end
 
@@ -94,36 +99,38 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     
     self.currentDevice = [[CPUserManager sharedInstance] getCurrentUser].device;
     [self setupSliders];
-    // TODO: Hub listener, etc so we can display disconnected or waiting for data as appropriate when the state changes
-    // TODO: hub setting, scheduled settings from server
-    self.currentHubSetting = [self.modeToHubSettingMap[self.currentDevice.mode] integerValue];
-    switch (self.connectionState) {
-        case HubConnectionState_Unknown:
-        case HubConnectionState_Disconnected:
-        case HubConnectionState_Connected:
-        {
-            [self setupForHubSetting:self.currentHubSetting animated:NO];
-            break;
-        }
-        case HubConnectionState_Offline:
-        {
-            [self hubNoData];
-            break;
-        }
-    }
+    
+    
+    self.currentHubSetting = [self.modeToHubSettingMap[self.currentDevice.desiredMode] integerValue];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:[[UIImage imageNamed:@"back_arrow"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
-    [button setTitle:@"Back" forState:UIControlStateNormal];
+    [button setTitle:@"Cancel" forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
     [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     [button setTintColor:[UIColor appTealColor]];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 7, 0, 0)];
     button.frame = CGRectMake(0, 0, 50, 40);
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     [button addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = barButton;
     self.pseudoBackButton = barButton;
+    
+    button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"Save" forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
+    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor appTealColor]];
+    [button sizeToFit];
+    barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [button addTarget:self action:@selector(saveButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = barButton;
+    self.saveButton = barButton;
+    
+    // Listen for hub status updates
+    BLOCK_SELF_REF_OUTSIDE();
+    self.updateHandle = [[CPHubStatusManager sharedInstance] registerForHubStatusUpdates:^(HubConnectionState status) {
+        BLOCK_SELF_REF_INSIDE();
+        self.connectionState = status;
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -134,6 +141,34 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[CPHubStatusManager sharedInstance] unregisterForHubStatusUpdates:self.updateHandle];
+}
+
+- (void)setConnectionState:(HubConnectionState)connectionState
+{
+    if (_connectionState != connectionState) {
+        _connectionState = connectionState;
+        switch (connectionState) {
+            case HubConnectionState_Unknown:
+            case HubConnectionState_Disconnected:
+            case HubConnectionState_Connected:
+            {
+                self.navigationItem.rightBarButtonItem = self.saveButton;
+                [self setupForHubSetting:self.currentHubSetting animated:NO];
+                break;
+            }
+            case HubConnectionState_Offline:
+            {
+                self.navigationItem.rightBarButtonItem = nil;
+                [self hubNoData];
+                break;
+            }
+        }
+    }
 }
 
 - (void)setupFonts
@@ -257,8 +292,6 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     if (self.currentHubSetting != HubSetting_On) {
         self.currentHubSetting = HubSetting_On;
         [self setupForHubSetting:self.currentHubSetting animated:YES];
-        
-        // TODO: Update hub
     }
 }
 
@@ -267,8 +300,6 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     if (self.currentHubSetting != HubSetting_Scheduled) {
         self.currentHubSetting = HubSetting_Scheduled;
         [self setupForHubSetting:self.currentHubSetting animated:YES];
-        
-        // TODO: Update hub
     }
 }
 
@@ -277,52 +308,54 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     if (self.currentHubSetting != HubSetting_Off) {
         self.currentHubSetting = HubSetting_Off;
         [self setupForHubSetting:self.currentHubSetting animated:YES];
-        
-        // TODO: Update hub
     }
 }
 
 - (IBAction)weekdaySliderValueChanged:(id)sender
 {
     [self updateWeekdayRange];
-    
-    // TODO: Update hub
 }
 
 - (IBAction)weekendSliderValueChanged:(id)sender
 {
     [self updateWeekendRange];
-    
-    // TODO: Update hub
 }
 
 - (void)backButtonTapped:(id)sender
 {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)saveButtonTapped:(id)sender
+{
     NSDictionary *deviceInfo = @{kModeKey:self.hubSettingToModeMap[@(self.currentHubSetting)], kWeekdayKey:@{kStartTimeKey:@(self.weekDaySlider.lowerValue), kEndTimeKey:@(self.weekDaySlider.upperValue)}, kWeekendKey:@{kStartTimeKey:@(self.weekendSlider.lowerValue), kEndTimeKey:@(self.weekendSlider.upperValue)}};
     
     if ([[CPUserManager sharedInstance] hasDeviceInfoChanged:deviceInfo]) {
-        // Verify we're online
-        if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
-            [[CPUserManager sharedInstance] updateDeviceInfo:deviceInfo];
-            [self.navigationController popViewControllerAnimated:YES];
-        } else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Connection Offline" message:NSLocalizedString(@"The internet connection appears to be offline. Changes will not be saved.", @"Error message displayed when trying to save changes while device is offline") preferredStyle:UIAlertControllerStyleAlert];
-            
-            UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel (Stay Here)", @"Cancel text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleCancel handler:nil];
-            
-            BLOCK_SELF_REF_OUTSIDE();
-            UIAlertAction *discardAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Continue (Discard my Changes)", @"Continue text for confirmation when discarding settings changes due to no data connection") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                BLOCK_SELF_REF_INSIDE();
+        [self showLoading:YES];
+        BLOCK_SELF_REF_OUTSIDE();
+        [[CPUserManager sharedInstance] updateDeviceInfo:deviceInfo withCompletion:^(NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            [self showLoading:NO];
+            if (error) {
+                if ([error isOfflineError]) {
+                    [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:OFFLINE_TEXT];
+                } else {
+                    [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:error.localizedDescription];
+                }
+            } else {
                 [self.navigationController popViewControllerAnimated:YES];
-            }];
-            
-            [alert addAction:cancelAction];
-            [alert addAction:discardAction];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
+            }
+        }];
     } else {
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+- (void)showLoading:(BOOL)loading
+{
+    self.loadingView.hidden = !loading;
+    self.pseudoBackButton.enabled = !loading;
+    self.saveButton.enabled = !loading;
 }
 
 /*

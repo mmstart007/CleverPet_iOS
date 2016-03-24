@@ -9,6 +9,8 @@
 #import "CPSharedUtils.h"
 #import "CPTileTextFormatter.h"
 
+NSString * const kPetInfoUpdated = @"NOTE_PetInfoUpdated";
+
 NSInteger const kNameFieldMinChars = 2;
 NSInteger const kNameFieldMaxChars = 10;
 NSInteger const kFamilyNameFieldMinChars = 1;
@@ -52,6 +54,7 @@ NSString * const kStandbyMode = @"standby";
 NSString * const kSchedulerMode = @"scheduler";
 NSString * const kLastSeenKey = @"since_last_seen";
 NSString * const kTimeZoneKey = @"time_zone";
+NSString * const kDesiredModeKey = @"desired_mode";
 //Schedule keys
 NSString * const kScheduleIdKey = @"schedule_ID";
 NSString * const kWeekdayKey = @"weekday";

@@ -99,6 +99,9 @@ CGFloat const kPagingThreshhold = 300.f;
                 [dataManager updateTile:tile];
             }
         }];
+        
+        // Listen for pet gender/name updates
+        REG_SELF_FOR_NOTIFICATION(kPetInfoUpdated, petInfoUpdated:);
     }
     
     return self;
@@ -243,10 +246,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 
 - (void)viewBecomingVisible
 {
-    // If we've received a tile update, refresh
-    if (self.shouldRefresh) {
-        [self refreshTilesWithAnimation:YES];
-    }
+    [self.tableView reloadData];
 }
 
 #pragma mark - UITableView delegate and data source methods
@@ -416,5 +416,14 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 #pragma mark - CPTileUpdateDelegate methods
 - (void)dealloc {
     [[CPFirebaseManager sharedInstance] unsubscribeFromHandle:self.tileUpdateHandle];
+    UNREG_SELF_FOR_ALL_NOTIFICATIONS();
 }
+
+- (void)petInfoUpdated:(NSNotification*)notification
+{
+    for (CPMainTableSectionHeaderFilter *filter in [self.tileDataManagers allKeys]) {
+        [self.tileDataManagers[filter] petInfoUpdated];
+    }
+}
+
 @end

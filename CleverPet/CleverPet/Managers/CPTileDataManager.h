@@ -29,9 +29,9 @@
 - (void)pageMoreTiles;
 - (void)clearBackingData;
 - (BOOL)allowPaging;
-- (void)forceNextRefresh;
 - (void)updateTile:(CPTile *)tile;
 - (id)deleteTile:(CPTile *)tile;
+- (void)petInfoUpdated;
 
 @property (weak, nonatomic) id<CPTileDataManagerDelegate> delegate;
 @end

@@ -25,12 +25,10 @@ NSString * const kPetProfilePath = @"animals";
 #define CREATE_DEVICE_FOR_ANIMAL(animalId) [NSString stringWithFormat:@"animals/%@/devices", animalId]
 NSString * const kDevicePath = @"devices";
 NSString * const kSchedulesPathFragment = @"schedules";
-NSString * const kModePathFragment = @"mode";
 NSString * const kParticlePathFragment = @"particle";
 NSString * const kLastSeenPathFragment = @"lastseen";
 #define SPECIFIC_DEVICE(deviceId) [NSString stringWithFormat:@"%@/%@", kDevicePath, deviceId]
 #define SPECIFIC_DEVICE_SCHEDULES(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment]
-#define SPECIFIC_DEVICE_MODE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kModePathFragment]
 #define SPECIFIC_DEVICE_PARTICLE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kParticlePathFragment]
 #define DEVICE_LAST_SEEN(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kLastSeenPathFragment]
 #define SPECIFIC_SCHEDULE(deviceId, scheduleId) [NSString stringWithFormat:@"%@/%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment, scheduleId]
@@ -275,11 +273,11 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     }];
 }
 
-- (ASYNC)updateDevice:(NSString *)deviceId mode:(NSString *)mode completion:(void (^)(NSError *))completion
+- (ASYNC)updateDevice:(NSString *)deviceId mode:(NSDictionary*)deviceInfo completion:(void (^)(NSError *))completion
 {
     NSParameterAssert(deviceId);
     BLOCK_SELF_REF_OUTSIDE();
-    [self.sessionManager PUT:SPECIFIC_DEVICE_MODE(deviceId) parameters:@{kModeKey:mode} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.sessionManager PUT:SPECIFIC_DEVICE(deviceId) parameters:deviceInfo success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
