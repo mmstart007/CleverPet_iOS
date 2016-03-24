@@ -8,6 +8,10 @@
 
 #import <AVKit/AVKit.h>
 
-@interface CPPlayerViewController : AVPlayerViewController
+@interface CPPlayerViewController : UIViewController
+
+- (void)playVideoWithUrl:(NSURL*)videoUrl;
+- (void)dismissVideo;
+- (AVPlayer*)player;
 
 @end

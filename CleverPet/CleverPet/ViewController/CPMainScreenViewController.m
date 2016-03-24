@@ -112,18 +112,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
     if (tile != self.playingTile) {
         self.playingTile = tile;
-        AVPlayerItem *item = [AVPlayerItem playerItemWithURL:tile.videoUrl];
-        if (self.playerController.player) {
-            [self.playerController.player replaceCurrentItemWithPlayerItem:item];
-        } else {
-            self.playerController.player = [AVPlayer playerWithPlayerItem:item];
-        }
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
-    self.playerController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    [self presentViewController:self.playerController animated:YES completion:nil];
-    [self.playerController.player play];
+    
+    [self.playerController playVideoWithUrl:tile.videoUrl];
 }
 
 - (void)videoPlayedToEnd:(NSNotification*)notification
