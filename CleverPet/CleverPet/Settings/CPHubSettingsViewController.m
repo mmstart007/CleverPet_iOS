@@ -72,7 +72,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
 @property (nonatomic, strong) NSDictionary *modeToHubSettingMap;
 @property (nonatomic, strong) CPDevice *currentDevice;
 @property (nonatomic, weak) UIBarButtonItem *pseudoBackButton;
-@property (nonatomic, weak) UIBarButtonItem *saveButton;
+@property (nonatomic, strong) UIBarButtonItem *saveButton;
 @property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
 @property (nonatomic, strong) CPHubStatusHandle updateHandle;
 @property (nonatomic, assign) HubConnectionState connectionState;
@@ -157,11 +157,13 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
             case HubConnectionState_Disconnected:
             case HubConnectionState_Connected:
             {
+                self.navigationItem.rightBarButtonItem = self.saveButton;
                 [self setupForHubSetting:self.currentHubSetting animated:NO];
                 break;
             }
             case HubConnectionState_Offline:
             {
+                self.navigationItem.rightBarButtonItem = nil;
                 [self hubNoData];
                 break;
             }
