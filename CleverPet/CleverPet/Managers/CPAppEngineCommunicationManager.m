@@ -17,6 +17,7 @@ NSString * const kAppEngineBaseUrl = @"app_server_url";
 NSString * const kNewUserPath = @"users/new";
 NSString * const kUserLoginPath = @"users/login";
 NSString * const kUserLogoutPath = @"users/logout";
+NSString * const kUserEmailPath = @"users/email";
 NSString * const kUserInfoPath = @"users/info";
 NSString * const kPetProfilePath = @"animals";
 #define SPECIFIC_PET_PROFILE(petId) [NSString stringWithFormat:@"%@/%@", kPetProfilePath, petId]
@@ -131,6 +132,20 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     // Clear our auth header regardless of if the call is successful or not, as we've already dumped the user back to login
     [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
 }
+
+- (ASYNC)forgotPasswordForEmail:(NSString *)email completion:(void (^)(NSError *error))completion {
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.sessionManager POST:kUserEmailPath parameters:@{@"email":email, @"action":@"resetPassword"}
+                     progress:nil
+                      success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+                          if (completion) completion(nil);
+                      }
+                      failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                          BLOCK_SELF_REF_INSIDE();
+                          if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
+                      }];
+}
+
 
 - (ASYNC)userLoggedIn:(NSDictionary *)userInfo completion:(void (^)(CPLoginResult, NSError *))completion
 {
