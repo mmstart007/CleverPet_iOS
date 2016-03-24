@@ -290,7 +290,7 @@
 - (IBAction)playVideoTapped:(id)sender
 {
     [self.delegate playVideoForCell:self];
-//    [self primaryButtonTapped:nil];
+    [self primaryButtonTapped:nil];
 }
 
 - (void)buttonTappedWithPath:(NSString *)path

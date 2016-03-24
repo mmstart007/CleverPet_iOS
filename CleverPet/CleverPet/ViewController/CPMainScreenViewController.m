@@ -82,8 +82,13 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController playerItem]];
     self.playingTile = nil;
+}
+
+- (void)dealloc
+{
+    UNREG_SELF_FOR_ALL_NOTIFICATIONS();
 }
 
 #pragma mark - CPTileCollectionViewDataSourceDelegate
@@ -112,16 +117,16 @@
         self.playingTile = tile;
     }
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController playerItem]];
     
-    [[[CPPlayerViewController alloc] init] playVideoWithUrl:tile.videoUrl];
-    
-//    [self.playerController playVideoWithUrl:tile.videoUrl];
+    CPPlayerViewController *player = [[CPPlayerViewController alloc] initWithContentUrl:tile.videoUrl];
+    [player presentInWindow];
+    self.playerController = player;
 }
 
 - (void)videoPlayedToEnd:(NSNotification*)notification
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController playerItem]];
     [self.dataSource videoPlaybackCompletedForTile:self.playingTile];
     self.playingTile = nil;
 }

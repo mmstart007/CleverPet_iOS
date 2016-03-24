@@ -1,30 +1,6 @@
-//
-//  CPPlayerViewController.m
-//  CleverPet
-//
-//  Created by Dan Wright on 2016-03-08.
-//  Copyright © 2016 CleverPet, Inc. All rights reserved.
-//
-
 #import "CPPlayerViewController.h"
-@import AVFoundation;
 
-@interface CPVideoPlayerController : AVPlayerViewController
-
-@property (strong, nonatomic) UIWindow *presentingWindow;
-
-- (void)presentInWindow;
-- (void)dismissWindow;
-
-@end
-
-@interface CPPlayerViewController ()
-
-@property (nonatomic, strong) CPVideoPlayerController *playerController;
-
-@end
-
-@interface CPPresentVideoViewController : UIViewController
+@interface PresentVideoPlayerViewController : UIViewController
 
 @end
 
@@ -43,7 +19,7 @@
 
 - (void)presentInWindowInternal {
     self.presentingWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    [self.presentingWindow setRootViewController:[[CPPresentVideoViewController alloc] init]];
+    [self.presentingWindow setRootViewController:[[PresentVideoPlayerViewController alloc] init]];
     [self.presentingWindow setTintColor:[UIApplication sharedApplication].delegate.window.tintColor];
     [self.presentingWindow setWindowLevel:([UIApplication sharedApplication].windows.lastObject.windowLevel + 1)];
     [self.presentingWindow makeKeyAndVisible];
@@ -61,81 +37,28 @@
 
 @end
 
+#pragma mark - VideoPlayerViewController
+
+@interface CPPlayerViewController ()
+
+@property (strong, nonatomic) UIWindow *presentingWindow;
+
+@end
+
 @implementation CPPlayerViewController
 
-- (instancetype)init
+- (instancetype)initWithContentUrl:(NSURL *)url
 {
     self = [super init];
     if (self) {
+        self.player = [[AVPlayer alloc] initWithURL:url];
     }
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return UIInterfaceOrientationLandscapeRight;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskLandscapeLeft|UIInterfaceOrientationMaskLandscapeRight;
-}
-
-- (void)playVideoWithUrl:(NSURL *)videoUrl
-{
-    self.playerController = [[CPVideoPlayerController alloc] init];
-    AVPlayerItem *item = [AVPlayerItem playerItemWithURL:videoUrl];
-    if (self.playerController.player) {
-        [self.playerController.player replaceCurrentItemWithPlayerItem:item];
-    } else {
-        self.playerController.player = [AVPlayer playerWithPlayerItem:item];
-    }
-    
-    [self.playerController presentInWindow];
-    [self.playerController.player play];
-}
-
-- (void)dismissVideo
-{
-    [self.playerController dismissWindow];
-}
-
-- (AVPlayer*)player
-{
-    return self.playerController.player;
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-@end
-
-@implementation CPVideoPlayerController
-
 - (void)presentInWindow {
     [self presentInWindowInternal];
-}
-
-- (void)dismissWindow
-{
-    
+    [self.player play];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -144,17 +67,33 @@
     [self dismissInWindowInternal];
 }
 
-@end
-
-@implementation CPPresentVideoViewController
-
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationLandscapeRight;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscapeRight|UIInterfaceOrientationMaskLandscapeLeft;
+    return UIInterfaceOrientationMaskLandscapeLeft|UIInterfaceOrientationMaskLandscapeRight;
+}
+
+- (AVPlayerItem*)playerItem
+{
+    return [self.player currentItem];
+}
+
+@end
+
+#pragma mark - PresentVideoPlayerViewController
+
+@implementation PresentVideoPlayerViewController
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)dismissMoviePlayerViewControllerAnimated {

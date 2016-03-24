@@ -7,11 +7,12 @@
 //
 
 #import <AVKit/AVKit.h>
+@import AVFoundation;
 
-@interface CPPlayerViewController : UIViewController
+@interface CPPlayerViewController : AVPlayerViewController
 
-- (void)playVideoWithUrl:(NSURL*)videoUrl;
-- (void)dismissVideo;
-- (AVPlayer*)player;
+- (instancetype)initWithContentUrl:(NSURL*)url;
+- (void)presentInWindow;
+- (AVPlayerItem*)playerItem;
 
 @end
