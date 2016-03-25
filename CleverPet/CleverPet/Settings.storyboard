@@ -383,6 +383,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                                 <real key="value" value="14"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="showCaret" value="NO"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <outlet property="delegate" destination="3WD-7U-wgO" id="il6-MX-aQ0"/>
@@ -466,6 +467,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                                 <real key="value" value="14"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="showCaret" value="NO"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <outlet property="delegate" destination="3WD-7U-wgO" id="YYw-95-cDs"/>
@@ -501,6 +503,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                                 <real key="value" value="14"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="showCaret" value="NO"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <outlet property="delegate" destination="3WD-7U-wgO" id="YEa-ma-oHH"/>

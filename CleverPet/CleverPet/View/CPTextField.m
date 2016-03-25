@@ -25,6 +25,7 @@ CGFloat const kCPTextFieldDefaultHorizontalInset = 0.f;
         // Setup defaults for our inspectable properties
         self.showStripe = NO;
         self.showDropShadow = NO;
+        self.showCaret = YES;
         self.horizontalTextInset = kCPTextFieldDefaultHorizontalInset;
         self.fontSize = 15;
     }
@@ -69,6 +70,15 @@ CGFloat const kCPTextFieldDefaultHorizontalInset = 0.f;
 - (CGRect)editingRectForBounds:(CGRect)bounds
 {
     return CGRectInset(bounds, 10, 0);
+}
+
+- (CGRect)caretRectForPosition:(UITextPosition *)position
+{
+    if (self.showCaret) {
+        return [super caretRectForPosition:position];
+    } else {
+        return CGRectZero;
+    }
 }
 
 - (BOOL)resignFirstResponder
