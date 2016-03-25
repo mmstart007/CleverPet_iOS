@@ -15,7 +15,7 @@
     [CPFileUtils createMediaFolder];
     NSString *imagePath = [self pathForPetImage:petId];
     if (image) {
-        [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];;
+        [UIImageJPEGRepresentation(image, .75f) writeToFile:imagePath atomically:YES];
     } else {
         [[NSFileManager defaultManager] removeItemAtPath:imagePath error:nil];
     }
@@ -51,7 +51,7 @@
 
 + (NSString*)pathForPetImage:(NSString*)petId
 {
-    return [[CPFileUtils mediaFolderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png", petId]];
+    return [[CPFileUtils mediaFolderPath] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.jpg", petId]];
 }
 
 + (void)setDoNotBackupFlagForURL:(NSURL *)url
