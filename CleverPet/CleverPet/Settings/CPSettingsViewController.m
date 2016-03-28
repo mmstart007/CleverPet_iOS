@@ -60,9 +60,11 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
     self.tableView.separatorColor = [UIColor appBackgroundColor];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    // TODO: button image
-    [button setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(0, 0, 40, 40)];
+    [button setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
+    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor appTealColor]];
+    [button sizeToFit];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     [button addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = barButton;

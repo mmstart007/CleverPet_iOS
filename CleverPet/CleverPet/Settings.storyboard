@@ -383,6 +383,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                                 <real key="value" value="14"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="showCaret" value="NO"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <outlet property="delegate" destination="3WD-7U-wgO" id="il6-MX-aQ0"/>
@@ -466,6 +467,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                                 <real key="value" value="14"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="showCaret" value="NO"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <outlet property="delegate" destination="3WD-7U-wgO" id="YYw-95-cDs"/>
@@ -501,6 +503,7 @@
                                                             <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
                                                                 <real key="value" value="14"/>
                                                             </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="showCaret" value="NO"/>
                                                         </userDefinedRuntimeAttributes>
                                                         <connections>
                                                             <outlet property="delegate" destination="3WD-7U-wgO" id="YEa-ma-oHH"/>
@@ -761,27 +764,27 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="68"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pm1-dg-Lpf" customClass="CPHubSettingsButton">
-                                                                <rect key="frame" x="552" y="18" width="33" height="33"/>
+                                                                <rect key="frame" x="485" y="-3" width="100" height="75"/>
                                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" constant="33" id="dgA-SD-kHO"/>
-                                                                    <constraint firstAttribute="height" constant="33" id="kx7-ko-LPX"/>
+                                                                    <constraint firstAttribute="width" constant="100" id="dgA-SD-kHO"/>
+                                                                    <constraint firstAttribute="height" constant="75" id="kx7-ko-LPX"/>
                                                                 </constraints>
                                                                 <connections>
                                                                     <action selector="onButtonTapped:" destination="Lcj-q5-au9" eventType="touchUpInside" id="n1c-Mj-Fb9"/>
                                                                 </connections>
                                                             </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fdf-1t-aYa">
-                                                                <rect key="frame" x="15" y="15" width="522" height="38"/>
+                                                                <rect key="frame" x="15" y="15" width="455" height="38"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stay on" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9l-0J-VCO">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="522" height="18"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="455" height="18"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Hub offers a puzzle every few minutes." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ibn-7k-0Db">
-                                                                        <rect key="frame" x="0.0" y="23" width="522" height="15"/>
+                                                                        <rect key="frame" x="0.0" y="23" width="455" height="15"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -910,27 +913,27 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="68"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wO-w7-ubu" customClass="CPHubSettingsButton">
-                                                                <rect key="frame" x="552" y="18" width="33" height="33"/>
+                                                                <rect key="frame" x="485" y="-3" width="100" height="75"/>
                                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="33" id="qUD-Ax-y3I"/>
-                                                                    <constraint firstAttribute="width" constant="33" id="uw3-oq-dUF"/>
+                                                                    <constraint firstAttribute="height" constant="75" id="qUD-Ax-y3I"/>
+                                                                    <constraint firstAttribute="width" constant="100" id="uw3-oq-dUF"/>
                                                                 </constraints>
                                                                 <connections>
                                                                     <action selector="scheduledButtonTapped:" destination="Lcj-q5-au9" eventType="touchUpInside" id="VTu-qj-Pdl"/>
                                                                 </connections>
                                                             </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2AH-zT-qpU">
-                                                                <rect key="frame" x="15" y="15" width="522" height="38"/>
+                                                                <rect key="frame" x="15" y="15" width="455" height="38"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scheduled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HKn-5f-fQj">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="522" height="18"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="455" height="18"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Hub offers puzzles to your dog during your scheduled times." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZQ-zk-Os4">
-                                                                        <rect key="frame" x="0.0" y="23" width="522" height="15"/>
+                                                                        <rect key="frame" x="0.0" y="23" width="455" height="15"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
@@ -987,27 +990,27 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="68"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPU-P3-6vk" customClass="CPHubSettingsButton">
-                                                                <rect key="frame" x="552" y="18" width="33" height="33"/>
+                                                                <rect key="frame" x="485" y="-3" width="100" height="75"/>
                                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="33" id="dmj-Io-YCA"/>
-                                                                    <constraint firstAttribute="width" constant="33" id="pcM-6e-1R5"/>
+                                                                    <constraint firstAttribute="height" constant="75" id="dmj-Io-YCA"/>
+                                                                    <constraint firstAttribute="width" constant="100" id="pcM-6e-1R5"/>
                                                                 </constraints>
                                                                 <connections>
                                                                     <action selector="offButtonTapped:" destination="Lcj-q5-au9" eventType="touchUpInside" id="LBA-bi-PUl"/>
                                                                 </connections>
                                                             </button>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ti-ig-9q0">
-                                                                <rect key="frame" x="15" y="15" width="522" height="38"/>
+                                                                <rect key="frame" x="15" y="15" width="455" height="38"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stay off" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9o-qh-ga6">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="522" height="18"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="455" height="18"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The hub will not offer any puzzles to your dog." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xmk-7V-flH">
-                                                                        <rect key="frame" x="0.0" y="23" width="522" height="15"/>
+                                                                        <rect key="frame" x="0.0" y="23" width="455" height="15"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
