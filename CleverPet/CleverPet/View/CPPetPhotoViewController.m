@@ -32,7 +32,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     // Crop at double our view size so the resulting image isn't so garbage
-    self.cropView.cropSize = CGSizeMake(self.view.bounds.size.width*2, self.view.bounds.size.width*.75*2);
+    // width and height can not have a decimal value otherwise it will create a nonvalid CGBitmap parameter
+    NSInteger width = self.view.bounds.size.width*2;
+    NSInteger height = self.view.bounds.size.width*.75*2;
+    self.cropView.cropSize = CGSizeMake(width, height);
     self.cropView.backgroundColor = [UIColor appBackgroundColor];
     if (self.selectedImage) {
         // Force update of image and button if we had an image set before segueing in
