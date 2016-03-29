@@ -73,7 +73,7 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
     self.connectionState = HubConnectionState_Unknown;
     
     self.formatter = [[NSDateFormatter alloc] init];
-    [self.formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    self.formatter.timeStyle = NSDateFormatterShortStyle;
     
     // Listen for hub status updates
     BLOCK_SELF_REF_OUTSIDE();
@@ -295,19 +295,19 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
         case HubConnectionState_Connected:
         {
             self.indicatorDot.backgroundColor = [UIColor appHubOnlineColor];
-            self.statusLabel.text =[NSString stringWithFormat: NSLocalizedString(@"On : Last updated %@", @"Hub status when the hub is reachable"), updateTime];
+            self.statusLabel.text =[NSString stringWithFormat: NSLocalizedString(@"On. Last updated %@", @"Hub status when the hub is reachable"), updateTime];
             break;
         }
         case HubConnectionState_Disconnected:
         {
             self.indicatorDot.backgroundColor = [UIColor appHubOfflineColor];
-            self.statusLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Disconnected : Last updated %@", @"Hub status when the hub is not reachable, %@ = last updated time"), updateTime];
+            self.statusLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Disconnected. Last updated %@", @"Hub status when the hub is not reachable, %@ = last updated time"), updateTime];
             break;
         }
         case HubConnectionState_Offline:
         {
             self.indicatorDot.backgroundColor = [UIColor appHubOfflineColor];
-            self.statusLabel.text = [NSString stringWithFormat:NSLocalizedString(@"No Data : Last updated %@", @"Hub status when phone is offline"), updateTime];;
+            self.statusLabel.text = [NSString stringWithFormat:NSLocalizedString(@"No Data. Last updated %@", @"Hub status when phone is offline"), updateTime];;
             break;
         }
     }
