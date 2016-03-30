@@ -36,7 +36,7 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
 @property (weak, nonatomic) IBOutlet UIView *indicatorDot;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
-- (void)updateWithHubConnection:(HubConnectionState)connectionState;
+- (void)updateWithHubConnection:(HubConnectionState)connectionState withTimestamp:(NSString*)updateTime;
 
 @end
 
@@ -48,6 +48,7 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
 @property (nonatomic, assign) HubConnectionState connectionState;
 @property (nonatomic, strong) CPHubPlaceholderViewController *hubPlaceholder;
 @property (nonatomic, strong) CPHubStatusHandle updateHandle;
+@property (nonatomic, strong) NSDateFormatter *formatter;
 
 @end
 
@@ -70,6 +71,9 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
     self.navigationItem.leftBarButtonItem = barButton;
     self.pseudoBackButton = barButton;
     self.connectionState = HubConnectionState_Unknown;
+    
+    self.formatter = [[NSDateFormatter alloc] init];
+    self.formatter.timeStyle = NSDateFormatterShortStyle;
     
     // Listen for hub status updates
     BLOCK_SELF_REF_OUTSIDE();
@@ -99,8 +103,8 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
 {
     if (_connectionState != connectionState) {
         _connectionState = connectionState;
-        [self.hubCell updateWithHubConnection:_connectionState];
     }
+    [self.hubCell updateWithHubConnection:_connectionState withTimestamp:[self.formatter stringFromDate:[NSDate date]]];
 }
 
 #pragma mark - IBActions
@@ -279,7 +283,7 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
     self.accessoryView = imageView;
 }
 
-- (void)updateWithHubConnection:(HubConnectionState)connectionState;
+- (void)updateWithHubConnection:(HubConnectionState)connectionState withTimestamp:(NSString*)updateTime
 {
     switch (connectionState) {
         case HubConnectionState_Unknown:
@@ -291,19 +295,19 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
         case HubConnectionState_Connected:
         {
             self.indicatorDot.backgroundColor = [UIColor appHubOnlineColor];
-            self.statusLabel.text = NSLocalizedString(@"On", @"Hub status when the hub is reachable");
+            self.statusLabel.text =[NSString stringWithFormat: NSLocalizedString(@"On. Last updated %@", @"Hub status when the hub is reachable"), updateTime];
             break;
         }
         case HubConnectionState_Disconnected:
         {
             self.indicatorDot.backgroundColor = [UIColor appHubOfflineColor];
-            self.statusLabel.text = NSLocalizedString(@"Disconnected", @"Hub status when the hub is not reachable");
+            self.statusLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Disconnected. Last updated %@", @"Hub status when the hub is not reachable, %@ = last updated time"), updateTime];
             break;
         }
         case HubConnectionState_Offline:
         {
             self.indicatorDot.backgroundColor = [UIColor appHubOfflineColor];
-            self.statusLabel.text = NSLocalizedString(@"No Data", @"Hub status when phone is offline");
+            self.statusLabel.text = [NSString stringWithFormat:NSLocalizedString(@"No Data. Last updated %@", @"Hub status when phone is offline"), updateTime];;
             break;
         }
     }
