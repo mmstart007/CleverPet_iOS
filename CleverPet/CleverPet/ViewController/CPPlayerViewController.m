@@ -67,6 +67,12 @@
     [self dismissInWindowInternal];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.cpDelegate videoPlayerWillDisappear];
+}
+
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
     return UIInterfaceOrientationLandscapeRight;

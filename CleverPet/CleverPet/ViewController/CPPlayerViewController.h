@@ -9,7 +9,13 @@
 #import <AVKit/AVKit.h>
 @import AVFoundation;
 
+@protocol CPPlayerViewControllerDelegate <NSObject>
+- (void)videoPlayerWillDisappear;
+@end
+
 @interface CPPlayerViewController : AVPlayerViewController
+
+@property (weak, nonatomic) id<CPPlayerViewControllerDelegate> cpDelegate;
 
 - (instancetype)initWithContentUrl:(NSURL*)url;
 - (void)presentInWindow;
