@@ -15,7 +15,7 @@
 #import "CPPlayerViewController.h"
 @import AVFoundation;
 
-@interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceDelegate, AVPlayerViewControllerDelegate, CPPlayerViewControllerDelegate>
+@interface CPMainScreenViewController () <UICollectionViewDelegate, CPTileCollectionViewDataSourceDelegate, AVPlayerViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) CPTileCollectionViewDataSource *dataSource;
 @property (strong, nonatomic) CPPetStatsView *petStatsView;
@@ -120,7 +120,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController playerItem]];
     
     CPPlayerViewController *player = [[CPPlayerViewController alloc] initWithContentUrl:tile.videoUrl];
-    player.delegate = self;
     [player presentInWindow];
     self.playerController = player;
 }
@@ -130,11 +129,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController playerItem]];
     [self.dataSource videoPlaybackCompletedForTile:self.playingTile];
     self.playingTile = nil;
-}
-
-- (void)videoPlayerWillDisappear
-{
-    [self.dataSource viewBecomingVisible];
 }
 
 - (BOOL)isViewVisible

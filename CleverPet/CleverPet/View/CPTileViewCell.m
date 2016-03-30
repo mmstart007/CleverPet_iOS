@@ -296,7 +296,7 @@
 - (void)buttonTappedWithPath:(NSString *)path
 {
     [self requestInProgress:YES];
-    if (_tile.tileType != CPTTChallenge) {
+    if (_tile.tileType != CPTTChallenge && _tile.tileType != CPTTVideo) {
         [self setSwipedMode:YES withAnimation:YES callDelegateMethod:NO];
     }
     
