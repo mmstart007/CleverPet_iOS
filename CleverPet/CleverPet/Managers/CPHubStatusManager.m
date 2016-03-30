@@ -144,19 +144,24 @@ NSTimeInterval const kHubStatusUpdateInterval = 60;
 - (void)reachabilityChanged:(NSNotification*)notification
 {
     AFNetworkReachabilityStatus status = [notification.userInfo[AFNetworkingReachabilityNotificationStatusItem] integerValue];
-    if ((status == AFNetworkReachabilityStatusReachableViaWiFi || status == AFNetworkReachabilityStatusReachableViaWWAN) && status != self.lastConnectionStatus) {
-        // Don't need to trigger a reload unless we were previously unreachable
-        if (self.lastConnectionStatus == AFNetworkReachabilityStatusNotReachable) {
-            [self requestHubStatus];
-        } else {
-            [self startRequestTimer];
+    
+    // If we have no observers, skip status update
+    if ([[self.registeredBlocks allKeys] count] > 0) {
+        if ((status == AFNetworkReachabilityStatusReachableViaWiFi || status == AFNetworkReachabilityStatusReachableViaWWAN) && status != self.lastConnectionStatus) {
+            // Don't need to trigger a reload unless we were previously unreachable
+            if (self.lastConnectionStatus == AFNetworkReachabilityStatusNotReachable) {
+                [self requestHubStatus];
+            } else {
+                [self startRequestTimer];
+            }
+        } else if (status == AFNetworkReachabilityStatusNotReachable) {
+            // If we went unreachable, cancel our timer and immediately inform our observers
+            [self stopRequestTimer];
+            self.lastKnownState = HubConnectionState_Offline;
+            [self notifyOfStatusChange];
         }
-    } else if (status == AFNetworkReachabilityStatusNotReachable) {
-        // If we went unreachable, cancel our timer and immediately inform our observers
-        [self stopRequestTimer];
-        self.lastKnownState = HubConnectionState_Offline;
-        [self notifyOfStatusChange];
     }
+    
     self.lastConnectionStatus = status;
 }
 
