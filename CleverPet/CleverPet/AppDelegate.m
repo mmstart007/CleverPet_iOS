@@ -15,6 +15,7 @@
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "CPPlayerViewController.h"
 
 @interface AppDelegate ()
 
@@ -66,7 +67,10 @@
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
-    return UIInterfaceOrientationMaskPortrait|UIInterfaceOrientationMaskLandscapeLeft|UIInterfaceOrientationMaskLandscapeRight;
+    if([window.rootViewController isKindOfClass:[PresentVideoPlayerViewController class]]) {
+        return UIInterfaceOrientationMaskPortrait|UIInterfaceOrientationMaskLandscapeLeft|UIInterfaceOrientationMaskLandscapeRight;
+    }
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (BOOL)application:(UIApplication *)application
