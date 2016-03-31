@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CPSignInViewController : UIViewController
+@interface CPSignInViewController : CPBaseViewController
 
 @property (nonatomic, strong) NSString *email;
 

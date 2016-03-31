@@ -10,6 +10,10 @@
 #import "CPUserManager.h"
 #import "CPFirebaseManager.h"
 
+#define FIREBASE_LISTENER(Type, Field, Name) - (FirebaseManagerHandle)subscribeTo##Name##WithBlock:(Firebase##Type##UpdateBlock)block {\
+return [self subscribeTo ## Type ## UpdatesForKey:Field withCallback:block];\
+}
+
 NSString * const kFirebaseTilePath = @"tile";
 
 @interface CPFirebaseManager()
@@ -40,7 +44,7 @@ NSString * const kFirebaseTilePath = @"tile";
     self.rootRef = [[Firebase alloc] initWithUrl:[configData objectForKey:@"firebase_url"]];
 }
 
-- (void)userLoggedIn:(NSDictionary *)response
+- (void)userLoggedIn:(NSDictionary *)response withCompletion:(FirebaseLoginBlock)completion
 {
     [self.rootRef authWithCustomToken:[response objectForKey:@"firebase_token"] withCompletionBlock:^(NSError *error, FAuthData *authData) {
         if (error) {
@@ -48,67 +52,43 @@ NSString * const kFirebaseTilePath = @"tile";
         } else {
             self.userStatsPath = [NSString stringWithFormat:@"stats/%@", authData.uid];
         }
+        
+        if (completion) {
+            completion(error);
+        }
     }];
+}
+
+- (void)unsubscribeFromHandle:(FirebaseManagerHandle)handle
+{
+    [self.rootRef removeObserverWithHandle:handle.unsignedIntegerValue];
+}
+
+- (FirebaseManagerHandle)subscribeToNumberUpdatesForKey:(NSString *)updateKey withCallback:(FirebaseNumberUpdateBlock)callback
+{
+    return @([[[self.rootRef childByAppendingPath:self.userStatsPath] childByAppendingPath:updateKey] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (snapshot.value == [NSNull null]) {
+            callback(nil);
+        } else {
+            callback(snapshot.value);
+        }
+    }]);
+}
+
+- (FirebaseManagerHandle)subscribeToStringUpdatesForKey:(NSString *)updateKey withCallback:(FirebaseStringUpdateBlock)callback
+{
+    return @([[[self.rootRef childByAppendingPath:self.userStatsPath] childByAppendingPath:updateKey] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        if (snapshot.value == [NSNull null]) {
+            callback(nil);
+        } else {
+            callback(snapshot.value);
+        }
+    }]);
 }
 
 - (void)userLoggedOut
 {
-    [self stoplisteningForStatsUpdates];
     self.userStatsPath = nil;
-    [self stopListeningForTileUpdates];
-}
-
-- (CPPetStats*)petStats:(NSDictionary*)values
-{
-    CPPetStats *petStats = nil;
-    if (![values isEqual:[NSNull null]]) {
-        NSError *error;
-        petStats = [[CPPetStats alloc] initWithDictionary:values error:&error];
-    }
-    return petStats;
-}
-
- - (void)beginlisteningForUpdates
-{
-    FirebaseHandle statsHandle = [[self.rootRef childByAppendingPath:self.userStatsPath] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-		CPPetStats *petStats = [self petStats:snapshot.value];
-        if (self.headerStatsUpdateBlock) {
-            self.headerStatsUpdateBlock(nil, petStats);
-        }
-        if (self.viewStatsUpdateBlock) {
-            self.viewStatsUpdateBlock(nil, petStats);
-        }
-    } withCancelBlock:^(NSError *error) {
-        if (self.headerStatsUpdateBlock) {
-            self.headerStatsUpdateBlock(error, nil);
-        }
-        if (self.viewStatsUpdateBlock) {
-            self.viewStatsUpdateBlock(error, nil);
-        }
-    }];
-    self.statsHandle = statsHandle;
-    self.hasStatsHandle = YES;
-}
-
-
-- (void)setViewStatsUpdateBlock:(FirebaseUpdateBlock)viewStatsUpdateBlock
-{
-    _viewStatsUpdateBlock = viewStatsUpdateBlock;
-    if (viewStatsUpdateBlock) {
-        [[self.rootRef childByAppendingPath:self.userStatsPath] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-             viewStatsUpdateBlock(nil, [self petStats:snapshot.value]);
-        }];
-    }
-}
-
-- (void)setHeaderStatsUpdateBlock:(FirebaseUpdateBlock)headerStatsUpdateBlock
-{
-    _headerStatsUpdateBlock = headerStatsUpdateBlock;
-    if (headerStatsUpdateBlock) {
-        [[self.rootRef childByAppendingPath:self.userStatsPath] observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-            headerStatsUpdateBlock(nil, [self petStats:snapshot.value]);
-        }];
-    }
 }
 
 - (void)stoplisteningForStatsUpdates
@@ -123,21 +103,28 @@ NSString * const kFirebaseTilePath = @"tile";
 }
 
 #pragma mark - Tile updates
-- (void)listenForTileUpdatesWithBlock:(FirebaseUpdateBlock)block
+- (FirebaseManagerHandle)subscribeToTilesWithBlock:(FirebaseTileUpdateBlock)block
 {
-    self.tilesHandle = [[self.rootRef childByAppendingPath:[NSString stringWithFormat:@"%@/%@", self.userStatsPath, kFirebaseTilePath]] observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        block(nil, [self petStats:snapshot.value]);
-    }];
-    self.hasTilesHandle = YES;
+    Firebase *tileRoot = [self.rootRef childByAppendingPath:[NSString stringWithFormat:@"%@/%@", self.userStatsPath, kFirebaseTilePath]];
+    NSString *childKey = [tileRoot childByAutoId].key;
+    
+    return @([[[tileRoot queryOrderedByKey] queryStartingAtValue:childKey] observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot *snapshot) {
+        NSError *error = nil;
+        CPTile *tile = [[CPTile alloc] initWithDictionary:snapshot.value error:&error];
+        if (error) {
+            block(error, nil);
+        } else {
+            block(nil, tile);
+        }
+    }]);
 }
 
-- (void)stopListeningForTileUpdates
-{
-    if (self.hasTilesHandle) {
-        [self.rootRef removeObserverWithHandle:self.tilesHandle];
-        self.hasTilesHandle = NO;
-        self.statsHandle = 0;
-    }
-}
+FIREBASE_LISTENER(String, @"challenge_name", ChallengeName);
+FIREBASE_LISTENER(Number, @"challenge_number", ChallengeNumber);
+FIREBASE_LISTENER(Number, @"lifetime_points", LifetimePoints);
+FIREBASE_LISTENER(Number, @"stage_number", StageNumber);
+FIREBASE_LISTENER(Number, @"total_stages", TotalStages);
+FIREBASE_LISTENER(Number, @"kibbles", Kibbles);
+FIREBASE_LISTENER(Number, @"plays", Plays);
 
 @end

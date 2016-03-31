@@ -155,7 +155,7 @@
         [self addConstraint:colorWidth];
         NSLayoutConstraint *colorX = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:label attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
         [self addConstraint:colorX];
-        NSLayoutConstraint *colorSpacing = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:label attribute:NSLayoutAttributeBottom multiplier:1 constant:0.f];
+        NSLayoutConstraint *colorSpacing = [NSLayoutConstraint constraintWithItem:colorDotView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:label attribute:NSLayoutAttributeBottom multiplier:1 constant:3.f];
         [self addConstraint:colorSpacing];
     }
     

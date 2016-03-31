@@ -65,8 +65,10 @@
             
         [self.sessionManager POST:@"users/notificationgroup" parameters:@{kGCMTokenKey:self.gcmToken} progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             // TODO: probably nothing
+            NSInteger breakpoint = 0;
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             // TODO: attempt to resend?
+            NSInteger breakpoint = 0;
         }];
     }
 }

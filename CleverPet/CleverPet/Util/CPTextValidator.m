@@ -55,7 +55,9 @@
 
 - (BOOL)isValidPetWeightText:(NSString *)text
 {
-    return [text rangeOfCharacterFromSet:self.invalidNumericalCharacters options:NSCaseInsensitiveSearch].location == NSNotFound;
+    // TODO: bring back to allow decimals
+//    return [text rangeOfCharacterFromSet:self.invalidNumericalCharacters options:NSCaseInsensitiveSearch].location == NSNotFound;
+    return [text rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet] options:NSCaseInsensitiveSearch].location == NSNotFound;
 }
 
 @end

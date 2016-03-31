@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/Comm/SparkSetupConnection.h
+../../../../SparkSetup_Internal/Classes/Comm/SparkSetupConnection.h

@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CPNascarViewController : UIViewController
+@interface CPNascarViewController : CPBaseViewController
 
 @end

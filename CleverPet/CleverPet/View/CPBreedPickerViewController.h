@@ -14,7 +14,7 @@
 
 @end
 
-@interface CPBreedPickerViewController : UIViewController
+@interface CPBreedPickerViewController : CPBaseViewController
 
 @property (nonatomic, weak) id<CPBreedPickerDelegate> delegate;
 @property (nonatomic, strong) NSString *selectedBreed;

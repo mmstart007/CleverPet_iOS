@@ -22,6 +22,7 @@ typedef NS_ENUM(NSUInteger){
     CPTileTemplateReport
 }CPTileTemplate;
 
+@class CPGraph;
 @interface CPTile : JSONModel
 // Persisted properties
 @property (nonatomic, strong) NSString *category;
@@ -38,6 +39,9 @@ typedef NS_ENUM(NSUInteger){
 @property (nonatomic, strong) NSString *tileId;
 @property (nonatomic, strong) NSString<Optional> *title;
 @property (nonatomic, assign) BOOL userDeletable;
+
+@property (nonatomic, strong) NSNumber<Optional> *removed;
+
 // TODO: can probably remove
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSURL<Optional> *videoThumbnailUrl;
@@ -51,5 +55,9 @@ typedef NS_ENUM(NSUInteger){
 @property (strong, nonatomic) CPSimpleDate<Ignore> *simpleDate;
 
 @property (assign, nonatomic) CGFloat cachedRowHeight;
+
+@property (strong, nonatomic) CPGraph<Optional> *graph;
+
+- (void)clearParsedBody;
 
 @end

@@ -9,10 +9,18 @@
 #import "CPSharedUtils.h"
 #import "CPTileTextFormatter.h"
 
+NSString * const kPetInfoUpdated = @"NOTE_PetInfoUpdated";
+
 NSInteger const kNameFieldMinChars = 2;
 NSInteger const kNameFieldMaxChars = 10;
 NSInteger const kFamilyNameFieldMinChars = 1;
 NSInteger const kFamilyNameFieldMaxChars = 35;
+NSInteger const kEmailMaxChars = 64;
+NSInteger const kPasswordMaxChars = 64;
+NSInteger const kMinWeight = 0;
+NSInteger const kMaxWeight = 999;
+NSInteger const kMinAge = 0;
+NSInteger const kMaxAge = 99;
 
 #pragma mark - JSON keys
 NSString * const kErrorKey = @"error";
@@ -46,6 +54,7 @@ NSString * const kStandbyMode = @"standby";
 NSString * const kSchedulerMode = @"scheduler";
 NSString * const kLastSeenKey = @"since_last_seen";
 NSString * const kTimeZoneKey = @"time_zone";
+NSString * const kDesiredModeKey = @"desired_mode";
 //Schedule keys
 NSString * const kScheduleIdKey = @"schedule_ID";
 NSString * const kWeekdayKey = @"weekday";
@@ -67,6 +76,13 @@ NSString * const kGCMTokenKey = @"phone_ids";
 + (void)deviceTimeZoneUpdated:(NSInteger)offset
 {
     [CPTileTextFormatter setTimeZoneOffset:offset];
+}
+
++ (UINavigationController*)getRootNavController
+{
+    // TODO: Need to get the actual top level controller navController = visibleViewController, viewController = probably presentedViewController
+    // TODO: handle when our root is not a nav controller
+    return (UINavigationController*)[[[UIApplication sharedApplication].delegate window] rootViewController];
 }
 
 @end

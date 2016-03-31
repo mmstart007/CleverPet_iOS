@@ -1,1 +1,1 @@
-../../../SparkSetup/Classes/UI/UI Elements/SparkSetupWifiTableViewCell.h
+../../../../SparkSetup_Internal/Classes/UI/UI Elements/SparkSetupWifiTableViewCell.h

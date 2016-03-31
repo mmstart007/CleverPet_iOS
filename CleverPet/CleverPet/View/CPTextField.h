@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) IBInspectable BOOL showStripe;
 @property (nonatomic, assign) IBInspectable BOOL showDropShadow;
+@property (nonatomic, assign) IBInspectable BOOL showCaret;
 @property (nonatomic, assign) IBInspectable CGFloat horizontalTextInset;
 @property (nonatomic, assign) IBInspectable CGFloat fontSize;
 

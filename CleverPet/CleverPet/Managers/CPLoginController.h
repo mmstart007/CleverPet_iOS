@@ -38,4 +38,5 @@
 
 - (void)logout;
 
+- (void)forgotPasswordForEmail:(NSString *)emailString withCompletion:(void (^)(NSError *))completion;
 @end

@@ -4,8 +4,8 @@
 "Answer": 0
 },
 {
-"Question": "How do I teach my dog to use this?",
-"Answer": "Every dog is different. Set your dog up for success by keeping three things in mind:\n\n1. Be patient. Some dogs take a few hours, some a few days, others a few weeks. Calm patient support leads to faster learning.\n\n2. Let your dog play independently. If your dog depends on you to interact with the Hub, s/he is less likely to explore independently. Encourage your dog to figure it out on their own as much as possible.\n\n3. You know your dog best. If your dog is timid around new things, {{he'll|she'll}} need that much more time and encouragement from you. Keep your eyes peeled for small improvements along the way and celebrate them! Your dog is learning at {{his|her}} own pace, and getting good mental exercise in the process."
+"Question": "How do I teach my dog to use the Hub?",
+ "Answer": "Every dog is different. Set your dog up for success by keeping three things in mind:\n\n1. Be patient. Some dogs take a few hours, some a few days, others a few weeks. Calm patient support leads to faster learning.\n\n2. Let your dog play independently. If your dog depends on you to interact with the Hub, {{he|she}} is less likely to explore independently. Encourage your dog to figure it out on their own as much as possible.\n\n3. You know your dog best. If your dog is timid around new things, {{he'll|she'll}} need that much more time and encouragement from you. Keep your eyes peeled for small improvements along the way and celebrate them! Your dog is learning at {{his|her}} own pace, and getting good mental exercise in the process. "
 },
 {
 "Question": "Is my dog too old (or too young) to use the Hub?",
@@ -13,15 +13,15 @@
 },
 {
 "Question": "I’m still not sure my dog can do it.",
-"Answer": "The program on the CleverPet starts out easy, giving some food for free to help your dog learn that food comes from it. Your dog will be encouraged to explore the Hub (using feedback from the Hub, and perhaps from you) when {{he|she}}  accidentally triggers a touchpad, and a learning connection starts to form in your dog's mind. \n\nYour dog can explore and interact with the Hub at a pace that is unique to your dog. Some dogs take more time than others, and that's perfectly normal. You may find that, like some people, they are cautious until they know what they're doing, and then their confidence grows and they are quick to learn new games."
+ "Answer": "The program on the CleverPet starts out easy, giving some food for free to help your dog learn that food comes from it. Your dog will be encouraged to explore the Hub (using feedback from the Hub, and perhaps from you) when {{he|she}} accidentally triggers a touchpad, and a learning connection starts to form in your dog's mind.\n\nYour dog can explore and interact with the Hub at a pace that is unique to your dog. Some dogs take more time than others, and that's perfectly normal. You may find that, like some people, they are cautious until they know what they're doing, and then their confidence grows and they are quick to learn new games. "
 },
 {
 "Question": "My dog doesn't seem to notice the lights. What do I do?",
-"Answer": "If your dog has typical vision, {{he|she}} can and does see the lights. Learning to use the Hub includes learning that the lights have meaning, and that can take time. \n\nDogs see colors similarly to how red-green colorblind humans do. The human eye typically has three functional cones enabling us to see a range of colors (Hello, ROY G BIV.). Humans with red-green colorblindness have two functional cones instead of three (Y BIV!). Dogs, similarly, have only two cones, allowing them to see combinations of blue and yellow. The lights on a CleverPet Hub are optimized for this color spectrum."
+ "Answer": "If your dog has typical vision, {{he|she}} can and does see the lights. Learning to use the Hub includes learning that the lights have meaning, and that can take time.\n\nDogs see colors similarly to how red-green colorblind humans do. The human eye typically has three functional cones enabling us to see a range of colors (Hello, ROY G BIV). Humans with red-green colorblindness have two functional cones instead of three (Y BIV!). Dogs, similarly, have only two cones, allowing them to see combinations of blue and yellow. The lights on a CleverPet Hub are optimized for this color spectrum."
 },
 {
 "Question": "My dog seems frustrated. What do I do?",
-"Answer": "Some frustration, especially when your dog wants the food reward from the Hub, can be motivating--your dog is problem solving. Some signs of frustration include: barking at the Hub; walking away from it for awhile, laying near it, scratching at the Hub repeatedly or more emphatically, directing new noises like a growly yowl toward the Hub. Does your dog seem really frustrated? Check out our Tips from the Trainer video about frustration to learn more."
+"Answer": "Some frustration, especially when your dog wants the food reward from the Hub, can be motivating--your dog is problem solving. Think of how good you feel when you learn something challenging. You probably felt really good when you learned to tie a shoe for the first time, for example. People show frustration while learning, and dogs do, too. Some signs of frustration include: barking at the Hub, walking away from it for awhile, laying near it, staring at it, scratching at the Hub repeatedly or more emphatically, directing new noises like a growly yowl toward the Hub. Give your dog time to work through this frustration. Consider taking {{him|her}} for a walk or giving your dog a break and coming back fresh to work on the Hub again later. Always be calm, patient, and encouraging. Remember, learning new things can be hard!"
 },
 {
 "Question": "My dog is just laying by the Hub. What does this mean?",
@@ -29,7 +29,7 @@
 },
 {
 "Question": "My dog is too excited to focus on the Hub. What do I do?",
-"Answer": "If your dog is overenergized, go for a walk together, play fetch, let your pup run around to take the edge off. When the energy level is more relaxed, come back inside and calmly encourage your dog to explore the Hub."
+"Answer": "If your dog is too excited, it will be hard for {{him|her}} to focus on using the Hub. Go for a walk together, play fetch, let your pup run around to take the edge off. When the energy level is more relaxed, come back inside and calmly encourage your dog to explore the Hub. "
 },
 {
 "Question": 0,
@@ -56,20 +56,16 @@
 "Answer": 0
 },
 {
-"Question": "How does the CleverPet Hub work?",
-"Answer": "CleverPet engages dogs using puzzles made with touchpads, sounds, and lights. When a dog solves a puzzle, {{he|she}} is rewarded immediately with a piece or two of kibble (part of a regular day's meal). CleverPet adapts in real time to the interest and challenge level of each dog, and new games can be updated automatically to the WiFi-connected hub, so there are dozens and dozens of game options to play."
+"Question": "How many games does the Hub offer to my dog?",
+"Answer": "There are different types of games made with the lights, sounds, and touchpads, and each type of game includes a wide variety of challenges. Your Hub has access to a series of challenges designed to introduce your dog (and you!) to the Hub, help your dog learn how to interact with it, and reinforce that learning through increasingly difficult challenges. You'll receive a notification through the app when new game types or challenges are available for download to the Hub."
 },
 {
-"Question": "How many games can my dog play on the Hub?",
-"Answer": "The games combine lights, sounds, and touchpads to offer a wide variety of games and levels. Your Hub has access to a series of challenges designed to introduce your dog (and you!) to the Hub, help your dog learn how to interact with it, and reinforce that learning through increasingly difficult challenges. You'll receive a notification through the app when new games or challenges are available for download to the Hub."
-},
-{
-"Question": "Can more than one dog to use the Hub?",
+ "Question": "Can more than one dog use the Hub?",
 "Answer": "The Hub is optimized to support one dog, but we've had homes with more than one dog use CleverPet without a problem. It depends on the dogs’ personalities, and you know them better than we ever could--you can best judge whether to share CleverPet between pups. \n\nWith that said, for now, multiple dogs playing with one CleverPet is like multiple people trying to play a one-player video game. Tracking food intake and level progression will be off, so the adaptation of the CleverPet won't be exact to one particular dog. The Hub will provide feedback in response to the behavior of more than one dog, which may confuse the dogs and inhibit learning."
 },
 {
 "Question": "How do I teach my dog to use the CleverPet Hub?",
-"Answer": "As an introduction to the Hub, you and your dog will move through a series of challenges to help you both learn how to engage with the Hub, to help you support your dog in learning that the lighted touchpads have meaning and that the way the dog interacts with the lighted touchpads impacts whether {{he|she}} is rewarded with some food."
+"Answer": "As an introduction to the Hub, you and your dog will move through a series of challenges to help you both learn how to engage with the Hub, to help you support your dog in learning that the lighted touchpads have meaning and that the way {{he|she}} interacts with the lighted touchpads impacts whether {{he|she}} is rewarded with some food."
 },
 {
 "Question": "How do the touchpads work?",
@@ -109,7 +105,7 @@
 },
 {
 "Question": "Should I use treats or dog food?",
-"Answer": "Treats often increase a dog's motivation, which can be really helpful when getting started. Ultimately, it's your call: you might use all treats the first few times your dog uses it, and then supplement regular meals with some treats. Using only treats for extended play means either giving out too many treats, or restricting the number of times your dog gets rewarded with food. The Hub is designed to offer your dog mental engagement throughout the day, and rewarding your dog for each interaction with a bit of {{his|her}} regular meal."
+"Answer": "Treats often increase a dog's motivation, which can be really helpful at the beginning. Ultimately, it's your call: you might use all treats the first few times your dog uses it, and then supplement regular meals with some treats. Consider your dog's overall diet when deciding how many treats your pup should get from the Hub. Using only treats for extended play, in addition to receiving regular meals may result in overfeeding. The Hub is designed to offer your dog mental engagement throughout the day, and reward your dog for each interaction with a bit of {{his|her}} regular meal. Talk to your veterinarian about what's best for your pup. "
 },
 {
 "Question": "Can I use the Hub to give my pet water?",
@@ -117,11 +113,11 @@
 },
 {
 "Question": "How do I make sure my dog eats the right amount of food?",
-"Answer": "One of the most effective ways to use the CleverPet Hub is to feed your dog regular meals almost entirely through the Hub. By doing so, you maximize the number of opportunities for interaction and training. When you fill the CleverPet Hub with the regular amount of dry food your dog would eat over the course of the day, the food is used as a reward for learning how to solve CleverPet puzzles. This way, your dog receives the normal amount of food {{he|she}} would eat anyway. At the end of the day, any kibble left in the food pod is what remains of your dog's meal, and you can feed that to {{him|her}}  directly.\n\nOf course, you can supplement some of your pup's regular kibble with treats to add to the fun. It’s up to you!"
+ "Answer": "One of the most effective ways to use the CleverPet Hub is to feed your dog regular meals almost entirely through the Hub. By doing so, you maximize the number of opportunities for interaction and training. When you fill the CleverPet Hub with the regular amount of dry food your dog would eat over the course of the day, the food is used as a reward for learning how to solve CleverPet puzzles. This way, your dog receives the normal amount of food {{he|she}} would eat anyway. At the end of the day, any kibble left in the food pod is what remains of your dog's meal, and you can feed that to {{him|her}} directly.\n\nOf course, you can supplement some of your pup's regular kibble with treats to add to the fun. It’s up to you!"
 },
 {
 "Question": "Will my dog's paw get caught when the dish moves?",
-"Answer": "Safety is a top priority for us. CleverPet has a sensor that works like a super-sensitive elevator door. If the Hub senses that it takes more force than usual to close the dish, it will back off and try again. If this happens five times in a row, it will stop and stay open. To fix, reset the Hub by lifting the rear latches on the dome, and raising back of the Hub dome a few inches up, and then lowering back and snapping it into place."
+"Answer": "Safety is a top priority for us. CleverPet has a sensor that works like a super-sensitive elevator door. If the Hub senses that it takes more force than usual to close the dish, it will back off and try again. If this happens five times in a row, it will stop and stay open for your dog's safety. To fix, reset the Hub by lifting the rear latches on the dome, and raising the back of the Hub dome a few inches up, and then lowering back and snapping it into place."
 },
 {
 "Question": 0,
@@ -141,11 +137,11 @@
 },
 {
 "Question": "Can I schedule the Hub to turn on and off?",
-"Answer": "You can schedule the Hub to turn on or off or schedule it to start and stop at the times you specify. Go to the menu and choose Hub. \n\nAlways On = The Hub offers a puzzle every few minutes. \nScheduled =  The Hub offers puzzles to your dog during your scheduled times.\nAlways Off = The Hub will not offer any puzzles to your dog."
+ "Answer": "You can schedule the Hub to turn on or off or schedule it to start and stop at the times you specify. Go to the menu and choose Hub.\n\nAlways On = The Hub offers a puzzle every few minutes.\n\nScheduled = The Hub offers puzzles to your dog during your scheduled times.\n\nAlways Off = The Hub will not offer any puzzles to your dog."
 },
 {
 "Question": "What happens when the Hub runs out of food?",
-"Answer": "Once the food is gone, the indicator light will flash yellow, and the Hub won't offer puzzles to your dog. When this happens, refill the Hub with food and go to the app menu. Select Hub, and set status to \"Always On\" or \"Scheduled\" and set it to start and stop at specific times."
+"Answer": "Once the food is gone, the indicator light will flash yellow, and the Hub won't offer puzzles to your dog. Your dog has worked hard and earned all of {{his|her}} food! When this happens, refill the Hub with your dog's next meal. Remember, you can schedule a food-filled Hub to start (and stop, if your dog doesn't finish all of {{his|her}} food by a certain time) by going to the app menu, selecting Hub, and settting status to \"Always On\" or \"Scheduled.\""
 },
 {
 "Question": "Why doesn't the app show my dog's activity?",
@@ -153,7 +149,7 @@
 },
 {
 "Question": "How do I turn the CleverPet off?",
-"Answer": "Go to the Scheduler in the dropdown menu, located at the top left corner of the app screen, and select \"Stay off\". You can also schedule the Hub to turn on and turn off at specific times from this screen."
+"Answer": "Go to the app menu, select Hub, and set status to \"Always Off.\" You can also schedule the Hub to start and stop and specific times from this screen."
 },
 {
 "Question": "How is the CleverPet Hub powered?",
@@ -161,7 +157,7 @@
 },
 {
 "Question": "Why isn't my Hub working?",
-"Answer": "Do you want to start interactive troublehooting?  <Start Button>"
+ "Answer": "Q: Does the indicator light at the top front of the Hub dome turn on, at all, when plugged in?\n\nA: The Hub may not have power. Try unplugging it from the wall and plugging it back in. If the indicator light does not turn on at all, double check that the power cable is seated in the underside of the dome. Try using an outlet socket that you know works for another appliance.\n\nQ: Is your app having trouble connecting to the Hub?\n\nA: Your Hub is not online. Make sure you have a good WiFi signal for your Hub. Make sure the password you entered for your WiFi network is correct. Try connecting to WiFi again: Unplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, select “Set up Hub” from the menu.\n\nAre you seeing something different? We'll help you figure out what's happening. Get in touch with us using our mobile app live chat feature or email us anytime at support@clever.pet."
 },
 {
 "Question": 0,
@@ -169,6 +165,6 @@
 },
 {
 "Question": "What is your privacy policy?",
-"Answer": "We take your privacy (and your pet's) seriously. Check out our privacy policy {{https://clever.pet/privacy-policy/}} for details."
+"Answer": "We take your privacy (and your pet's) seriously. Check out our privacy policy https://clever.pet/privacy-policy/ for details."
 }
 ]

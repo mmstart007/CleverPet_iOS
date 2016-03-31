@@ -26,7 +26,7 @@
 
 @property (nonatomic, strong) CPPet *currentPet;
 @property (nonatomic, strong) CPTile *playingTile;
-@property (nonatomic, strong) CPPlayerViewController *playerController;
+@property (nonatomic, weak) CPPlayerViewController *playerController;
 @end
 
 @implementation CPMainScreenViewController {
@@ -45,7 +45,7 @@
     self.mainScreenHeaderView = [CPMainScreenHeaderView loadFromNib];
     [self.mainScreenHeaderView setupForPet:self.currentPet];
     self.mainScreenStatsHeaderView = [CPMainScreenStatsHeaderView loadFromNib];
-    self.mainScreenStatsHeaderView.imageView.image = [self.currentPet petPhoto];;
+    self.mainScreenStatsHeaderView.imageView.image = [self.currentPet petPhoto];
     
     [self.headerView addSubview:self.mainScreenHeaderView];
     [self.headerView addSubview:self.mainScreenStatsHeaderView];
@@ -59,8 +59,7 @@
     self.dataSource = dataSource;
     self.tableView.delegate = dataSource;
     self.tableView.dataSource = dataSource;
-    
-    self.playerController = [[CPPlayerViewController alloc] init];
+    self.tableView.allowsSelection = NO;
     
     [dataSource postInit];
 }
@@ -72,10 +71,10 @@
     // Update pet name/image
     // TODO: maybe a notification when pet info is updated so we don't always have to do this?
     [self.mainScreenHeaderView setupForPet:self.currentPet];
+    self.mainScreenStatsHeaderView.imageView.image = [self.currentPet petPhoto];
     if ([self.tableView.dataSource respondsToSelector:@selector(updatePetImage:)]) {
         [self.tableView.dataSource performSelector:@selector(updatePetImage:) withObject:[self.currentPet petPhoto]];
     }
-    [[CPFirebaseManager sharedInstance] beginlisteningForUpdates];
     // Inform our data source we're going to become visible
     [self.dataSource viewBecomingVisible];
 }
@@ -83,9 +82,13 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController playerItem]];
     self.playingTile = nil;
-    [[CPFirebaseManager sharedInstance] stoplisteningForStatsUpdates];
+}
+
+- (void)dealloc
+{
+    UNREG_SELF_FOR_ALL_NOTIFICATIONS();
 }
 
 #pragma mark - CPTileCollectionViewDataSourceDelegate
@@ -112,23 +115,18 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
     if (tile != self.playingTile) {
         self.playingTile = tile;
-        AVPlayerItem *item = [AVPlayerItem playerItemWithURL:tile.videoUrl];
-        if (self.playerController.player) {
-            [self.playerController.player replaceCurrentItemWithPlayerItem:item];
-        } else {
-            self.playerController.player = [AVPlayer playerWithPlayerItem:item];
-        }
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
-    self.playerController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-    [self presentViewController:self.playerController animated:YES completion:nil];
-    [self.playerController.player play];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayedToEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController playerItem]];
+    
+    CPPlayerViewController *player = [[CPPlayerViewController alloc] initWithContentUrl:tile.videoUrl];
+    [player presentInWindow];
+    self.playerController = player;
 }
 
 - (void)videoPlayedToEnd:(NSNotification*)notification
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController.player currentItem]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:[self.playerController playerItem]];
     [self.dataSource videoPlaybackCompletedForTile:self.playingTile];
     self.playingTile = nil;
 }
@@ -137,6 +135,15 @@
 {
     // we have no window, we're not currently visible
     return self.view.window != nil;
+}
+
+- (void)displayError:(NSError *)error
+{
+    if ([error isOfflineError]) {
+        [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:OFFLINE_TEXT];
+    } else {
+        [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:error.localizedDescription];
+    }
 }
 
 @end

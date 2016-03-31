@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CPFAQViewController : UIViewController
+@interface CPFAQViewController : CPBaseViewController
 
 @end

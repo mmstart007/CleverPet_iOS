@@ -14,11 +14,18 @@
 #import "CPConfigViewController.h"
 #import "CPUserManager.h"
 
-NSString * const kConfigUrl = @"https://s3-us-west-2.amazonaws.com/cleverpet/config.json";
+#define USE_LOCAL_CONFIG 1
+#if USE_LOCAL_CONFIG
+#warning #### Local config is enabled! Please disable before checking in!
+#endif
+
+NSString * const kConfigUrl = @"https://storage.googleapis.com/cleverpet-app/configs/config.json";
 NSString * const kMinimumVersionKey = @"minimum_required_version";
 NSString * const kDeprecationMessageKey = @"deprecation_message";
 NSString * const kDefaultDeprecationMessage = @"Your app does not meet the minimum version. Do something about it.";
 NSString * const kLastCheckedConfigKey = @"UserDefaults_LastCheckedConfig";
+NSString * const kConfigUpdatedNotification = @"NOTE_ConfigUpdated";
+NSString * const kConfigErrorKey = @"error";
 
 NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
 
@@ -26,7 +33,9 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
 
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 @property (nonatomic, strong) CPConfigViewController *configViewController;
-@property (nonatomic, strong) NSDictionary *config;
+@property (nonatomic, strong) NSDictionary *configData;
+@property (nonatomic, assign) BOOL listeningForReachability;
+@property (nonatomic, assign) AFNetworkReachabilityStatus lastStatus;
 
 @end
 
@@ -53,43 +62,76 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
     return self;
 }
 
-- (ASYNC)loadConfigWithCompletion:(void (^)(NSError *))completion
+- (void)dealloc
 {
-    BLOCK_SELF_REF_OUTSIDE();
-    [self.sessionManager GET:kConfigUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        BLOCK_SELF_REF_INSIDE();
-        // Update our last checked config date
-        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kLastCheckedConfigKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-        NSString *minimumVersion = responseObject[kMinimumVersionKey];
-        // Ignore the minimum version set on our test config
-        if (minimumVersion && ![minimumVersion isEqualToString:@"test"]) {
-            if ([version compare:minimumVersion options:NSNumericSearch] == NSOrderedAscending) {
-                NSString *deprecationMessage = responseObject[kDeprecationMessageKey];
-                if ([deprecationMessage length] == 0) {
-                    deprecationMessage = kDefaultDeprecationMessage;
-                }
-                if (completion) completion([NSError errorWithDomain:@"AppVersion" code:1 userInfo:@{NSLocalizedDescriptionKey:deprecationMessage}]);
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (ASYNC)loadConfig:(BOOL)forceLoad completion:(void (^)(NSError *))completion
+{
+    if (!self.configData || forceLoad) {
+#if !USE_LOCAL_CONFIG
+        BLOCK_SELF_REF_OUTSIDE();
+        [self.sessionManager GET:kConfigUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            BLOCK_SELF_REF_INSIDE();
+#else
+            NSString *localConfigPath = [[NSBundle mainBundle] pathForResource:@"localConfig" ofType:@"json"];
+            NSData *localConfigData = [NSData dataWithContentsOfFile:localConfigPath];
+            NSError *error = nil;
+            NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:localConfigData options:0 error:&error];
+            if (error) {
+                if (completion) completion(error);
                 return;
             }
-        }
-        [self applyConfig:responseObject];
-        [[CPUserManager sharedInstance] processPendingLogouts];
+#endif
+            // Update our last checked config date
+            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kLastCheckedConfigKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+            NSString *minimumVersion = responseObject[kMinimumVersionKey];
+            // Ignore the minimum version set on our test config
+            if (minimumVersion && ![minimumVersion isEqualToString:@"test"]) {
+                if ([version compare:minimumVersion options:NSNumericSearch] == NSOrderedAscending) {
+                    NSString *deprecationMessage = responseObject[kDeprecationMessageKey];
+                    if ([deprecationMessage length] == 0) {
+                        deprecationMessage = kDefaultDeprecationMessage;
+                    }
+                    NSError *configError = [NSError errorWithDomain:@"AppVersion" code:1 userInfo:@{NSLocalizedDescriptionKey:deprecationMessage}];
+                    if (completion) completion(configError);
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kConfigUpdatedNotification object:nil userInfo:@{kConfigErrorKey:configError}];
+                    return;
+                }
+            }
+            [self applyConfig:responseObject];
+        	[[CPUserManager sharedInstance] processPendingLogouts];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kConfigUpdatedNotification object:nil userInfo:@{}];
+            if (completion) completion(nil);
+#if !USE_LOCAL_CONFIG
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            // TODO: Perhaps ignore the timer the next time we see if we should check so the user isn't shut out of the app?
+            // If we're offline, register for reachability notifications and update when appropriate
+            BLOCK_SELF_REF_INSIDE();
+            if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
+                [self listenForReachability];
+            }
+            if (completion) completion(error);
+        }];
+#endif
+    } else {
         if (completion) completion(nil);
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        // TODO: Perhaps ignore the timer the next time we see if we should check so the user isn't shut out of the app?
-        if (completion) completion(error);
-    }];
+    }
 }
 
 - (void)applyConfig:(NSDictionary *)configData
 {
-    [[CPParticleConnectionHelper sharedInstance] applyConfig:configData];
-    [[CPAppEngineCommunicationManager sharedInstance] applyConfig:configData];
-    [[CPFirebaseManager sharedInstance] applyConfig:configData];
-    self.config = configData;
+    if (![configData isEqualToDictionary:self.configData])
+    {
+        self.configData = configData;
+        [[CPParticleConnectionHelper sharedInstance] applyConfig:configData];
+        [[CPAppEngineCommunicationManager sharedInstance] applyConfig:configData];
+        [[CPFirebaseManager sharedInstance] applyConfig:configData];
+    }
 }
 
 - (void)appEnteredForeground
@@ -109,13 +151,16 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
         
         // TODO: Prevent multiple requests when hitting this frequently
         BLOCK_SELF_REF_OUTSIDE();
-        [self loadConfigWithCompletion:^(NSError *error) {
+        [self loadConfig:YES completion:^(NSError *error) {
             BLOCK_SELF_REF_INSIDE();
             if (error) {
-                [self.configViewController displayErrorAlertWithTitle:NSLocalizedString(@"App Version Out of Date", @"Title for alert shown when using out of date version of the app") andMessage:error.localizedDescription];
+                NSString *errorTitle = [error.domain isEqualToString:@"AppVersion"] ? NSLocalizedString(@"App Version Out of Date", @"Title for alert shown when using out of date version of the app") : NSLocalizedString(@"Unable to load app config", @"Title for error shown when unable to load app config");
+                [self.configViewController displayErrorAlertWithTitle:errorTitle andMessage:error.localizedDescription];
             } else {
-                [self.configViewController dismiss];
-                self.configViewController = nil;
+                if (self.configViewController) {
+                    [self.configViewController dismiss];
+                    self.configViewController = nil;
+                }
             }
         }];
     }
@@ -123,7 +168,44 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
 
 - (NSString*)getServerUrl
 {
-    return self.config[@"app_server_url"];
+    return self.configData[@"app_server_url"];
+}
+
+// Using notifications so we don't have to worry about overriding reachability update blocks if somewhere else needs them as well
+- (void)listenForReachability
+{
+    if (!self.listeningForReachability) {
+        self.listeningForReachability = YES;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:AFNetworkingReachabilityDidChangeNotification object:nil];
+    }
+}
+
+- (void)stopListeningForReachability
+{
+    if (self.listeningForReachability) {
+        self.listeningForReachability = NO;
+        self.lastStatus = AFNetworkReachabilityStatusUnknown;
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AFNetworkingReachabilityDidChangeNotification object:nil];
+    }
+}
+
+- (void)reachabilityChanged:(NSNotification *)notification
+{
+    AFNetworkReachabilityStatus status = [notification.userInfo[AFNetworkingReachabilityNotificationStatusItem] integerValue];
+    if ((status == AFNetworkReachabilityStatusReachableViaWiFi || status == AFNetworkReachabilityStatusReachableViaWWAN) && status != self.lastStatus) {
+        BLOCK_SELF_REF_OUTSIDE();
+        [self loadConfig:YES completion:^(NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            if (!error) {
+                [self stopListeningForReachability];
+                if (self.configViewController) {
+                    [self.configViewController dismiss];
+                    self.configViewController = nil;
+                }
+            }
+        }];
+    }
+    self.lastStatus = status;
 }
 
 @end
