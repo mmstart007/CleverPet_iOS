@@ -296,25 +296,27 @@
 - (void)buttonTappedWithPath:(NSString *)path
 {
     [self requestInProgress:YES];
-    if (_tile.tileType != CPTTChallenge) {
-        [self setSwipedMode:YES withAnimation:YES callDelegateMethod:NO];
-    }
-    
-    CPTile *tileForRequest = _tile;
-    BLOCK_SELF_REF_OUTSIDE();
-    [[CPTileCommunicationManager sharedInstance] handleButtonPressWithPath:path completion:^(NSError *error){
-        BLOCK_SELF_REF_INSIDE();
-        if (error) {
-            [self.delegate displayError:error];
-            if ([_tile.tileId isEqualToString:tileForRequest.tileId]) {
-                // Only update our button state if we haven't been reused
-                [self requestInProgress:NO];
-                if (_tile.tileType != CPTTChallenge) {
-                    [self resetSwipeState];
+    if (self.allowSwiping) {
+        if (_tile.tileType != CPTTChallenge) {
+            [self setSwipedMode:YES withAnimation:YES callDelegateMethod:NO];
+        }
+        
+        CPTile *tileForRequest = _tile;
+        BLOCK_SELF_REF_OUTSIDE();
+        [[CPTileCommunicationManager sharedInstance] handleButtonPressWithPath:path completion:^(NSError *error){
+            BLOCK_SELF_REF_INSIDE();
+            if (error) {
+                [self.delegate displayError:error];
+                if ([_tile.tileId isEqualToString:tileForRequest.tileId]) {
+                    // Only update our button state if we haven't been reused
+                    [self requestInProgress:NO];
+                    if (_tile.tileType != CPTTChallenge) {
+                        [self resetSwipeState];
+                    }
                 }
             }
-        }
-    }];
+        }];
+    }
 }
 
 - (void)resetSwipeState
