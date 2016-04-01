@@ -35,6 +35,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
 @property (nonatomic, strong) NSDictionary *configData;
 @property (nonatomic, assign) BOOL listeningForReachability;
 @property (nonatomic, assign) AFNetworkReachabilityStatus lastStatus;
+@property (nonatomic, assign) BOOL hubClaimingInProgress;
 
 @end
 
@@ -68,7 +69,8 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
 
 - (ASYNC)loadConfig:(BOOL)forceLoad completion:(void (^)(NSError *))completion
 {
-    if (!self.configData || forceLoad) {
+    
+    if (!self.hubClaimingInProgress && (!self.configData || forceLoad)) {
 #if !USE_LOCAL_CONFIG
         BLOCK_SELF_REF_OUTSIDE();
         [self.sessionManager GET:kConfigUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -137,7 +139,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
     NSDate *lastChecked = [[NSUserDefaults standardUserDefaults] objectForKey:kLastCheckedConfigKey];
     NSTimeInterval timeSinceCheck = [[NSDate date] timeIntervalSinceDate:lastChecked];
     
-    if (timeSinceCheck > kMinimumTimeBetweenChecks) {
+    if (timeSinceCheck > kMinimumTimeBetweenChecks && !self.hubClaimingInProgress) {
         if (!self.configViewController) {
             // Find our currently displayed view controller
             // Again, this should really be updated to account for plain view controllers as the root, but currently(and for the conceivable future) we'll always have a nav controller as our root
@@ -199,6 +201,16 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
         }];
     }
     self.lastStatus = status;
+}
+
+- (void)hubClaimingBegan
+{
+    self.hubClaimingInProgress = YES;
+}
+
+- (void)hubClaimingEnded
+{
+    self.hubClaimingInProgress = NO;
 }
 
 @end
