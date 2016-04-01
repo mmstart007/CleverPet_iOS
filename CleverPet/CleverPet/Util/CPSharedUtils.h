@@ -94,6 +94,7 @@ extern NSString * const kBreedKey;
 extern NSString * const kWeightKey;
 extern NSString * const kDOBKey;
 extern NSString * const kAlteredKey;
+extern NSString * const kWeightUnits;
 
 // Gender keys. Correspond to the gender values returned by the server.
 extern NSString * const kMaleKey;
