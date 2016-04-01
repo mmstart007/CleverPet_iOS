@@ -124,6 +124,7 @@ typedef NS_ENUM(NSUInteger, HubSetting) {HubSetting_On, HubSetting_Scheduled, Hu
     [button addTarget:self action:@selector(saveButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = barButton;
     self.saveButton = barButton;
+    self.connectionState = HubConnectionState_Unknown;
     
     // Listen for hub status updates
     BLOCK_SELF_REF_OUTSIDE();
