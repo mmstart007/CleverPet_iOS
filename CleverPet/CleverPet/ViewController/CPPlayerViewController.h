@@ -9,6 +9,10 @@
 #import <AVKit/AVKit.h>
 @import AVFoundation;
 
+@interface PresentVideoPlayerViewController : UIViewController
+
+@end
+
 @interface CPPlayerViewController : AVPlayerViewController
 
 - (instancetype)initWithContentUrl:(NSURL*)url;
