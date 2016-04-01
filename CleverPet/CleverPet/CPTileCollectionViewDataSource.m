@@ -71,9 +71,9 @@ CGFloat const kPagingThreshhold = 300.f;
         
         self.filters = @[
                          [CPMainTableSectionHeaderFilter filterWithName:@"Latest"],
-                         [CPMainTableSectionHeaderFilter filterWithName:@"Reports"],
                          [CPMainTableSectionHeaderFilter filterWithName:@"Videos"],
-                         [CPMainTableSectionHeaderFilter filterWithName:@"Challenges"]
+                         [CPMainTableSectionHeaderFilter filterWithName:@"Challenges"],
+                         [CPMainTableSectionHeaderFilter filterWithName:@"Reports"]
                          ];
         
         self.currentFilter = self.filters[0];
@@ -81,9 +81,9 @@ CGFloat const kPagingThreshhold = 300.f;
         self.tileDataManagers = [[NSMutableDictionary alloc] init];
         // TODO: clean this up
         self.tileDataManagers[self.filters[0]] = [[CPTileDataManager alloc] initWithFilter:nil];
-        self.tileDataManagers[self.filters[1]] = [[CPTileDataManager alloc] initWithFilter:@"report"];
-        self.tileDataManagers[self.filters[2]] = [[CPTileDataManager alloc] initWithFilter:@"video"];
-        self.tileDataManagers[self.filters[3]] = [[CPTileDataManager alloc] initWithFilter:@"challenge"];
+        self.tileDataManagers[self.filters[1]] = [[CPTileDataManager alloc] initWithFilter:@"video"];
+        self.tileDataManagers[self.filters[2]] = [[CPTileDataManager alloc] initWithFilter:@"challenge"];
+        self.tileDataManagers[self.filters[3]] = [[CPTileDataManager alloc] initWithFilter:@"report"];
         
         for (CPTileDataManager *tileDataManager in self.tileDataManagers.allValues) {
             tileDataManager.delegate = self;
