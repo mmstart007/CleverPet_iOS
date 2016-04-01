@@ -38,6 +38,16 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aDM-mp-Fl9">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zlH-yO-JNO">
+                                <rect key="frame" x="0.0" y="550" width="600" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Krp-dx-moo"/>
+                                </constraints>
+                                <state key="normal" title="Retry"/>
+                                <connections>
+                                    <action selector="retryTapped:" destination="EGt-0m-FDw" eventType="touchUpInside" id="McO-ul-m6M"/>
+                                </connections>
+                            </button>
                             <view alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wHL-O6-lNu">
                                 <rect key="frame" x="185" y="230" width="230" height="103"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -55,13 +65,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="wHL-O6-lNu" firstAttribute="top" secondItem="Ke8-zx-6te" secondAttribute="top" constant="-15" id="CBc-ml-cU0"/>
+                            <constraint firstItem="YMg-je-ick" firstAttribute="top" secondItem="zlH-yO-JNO" secondAttribute="bottom" id="Ff5-Gc-dhD"/>
                             <constraint firstAttribute="trailing" secondItem="aDM-mp-Fl9" secondAttribute="trailing" id="IYs-he-ore"/>
+                            <constraint firstAttribute="trailing" secondItem="zlH-yO-JNO" secondAttribute="trailing" id="JQL-1W-aZP"/>
                             <constraint firstItem="aDM-mp-Fl9" firstAttribute="top" secondItem="FAb-Fv-lcZ" secondAttribute="top" id="NRl-wT-jpm"/>
                             <constraint firstItem="Ke8-zx-6te" firstAttribute="centerX" secondItem="FAb-Fv-lcZ" secondAttribute="centerX" id="NYE-rh-ZSC"/>
                             <constraint firstItem="wHL-O6-lNu" firstAttribute="bottom" secondItem="otv-r7-ch9" secondAttribute="bottom" constant="15" id="O1y-o4-jVD"/>
                             <constraint firstItem="otv-r7-ch9" firstAttribute="centerX" secondItem="FAb-Fv-lcZ" secondAttribute="centerX" id="PWb-yq-uD0"/>
                             <constraint firstItem="aDM-mp-Fl9" firstAttribute="leading" secondItem="FAb-Fv-lcZ" secondAttribute="leading" id="RId-i8-eV9"/>
                             <constraint firstItem="wHL-O6-lNu" firstAttribute="leading" secondItem="Ke8-zx-6te" secondAttribute="leading" constant="-15" id="ZfV-Eh-N9m"/>
+                            <constraint firstItem="zlH-yO-JNO" firstAttribute="leading" secondItem="FAb-Fv-lcZ" secondAttribute="leading" id="bSH-8g-dO9"/>
                             <constraint firstItem="wHL-O6-lNu" firstAttribute="trailing" secondItem="Ke8-zx-6te" secondAttribute="trailing" constant="15" id="mqO-fg-B94"/>
                             <constraint firstItem="otv-r7-ch9" firstAttribute="centerY" secondItem="FAb-Fv-lcZ" secondAttribute="centerY" id="pHj-uZ-EEa"/>
                             <constraint firstAttribute="bottom" secondItem="aDM-mp-Fl9" secondAttribute="bottom" id="phF-IP-Aic"/>
@@ -72,6 +85,7 @@
                         <outlet property="backgroundImage" destination="aDM-mp-Fl9" id="9bF-fk-KtT"/>
                         <outlet property="fade" destination="wHL-O6-lNu" id="hRs-fO-oyW"/>
                         <outlet property="messageLabel" destination="Ke8-zx-6te" id="yj7-pQ-kWy"/>
+                        <outlet property="retryButton" destination="zlH-yO-JNO" id="Rdu-3P-pQA"/>
                         <outlet property="spinner" destination="otv-r7-ch9" id="f19-V1-qxh"/>
                     </connections>
                 </viewController>
