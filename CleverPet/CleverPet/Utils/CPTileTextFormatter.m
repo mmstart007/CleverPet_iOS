@@ -241,7 +241,7 @@ CGFloat const kHorizontalRuleWidth = 300.f;
 - (NSError *)filterAbstractStringForGender:(CPAbstractMutableString *)string forPet:(CPPet *)pet
 {
     NSError *error = nil;
-    NSRegularExpression *tokenFinder = [NSRegularExpression regularExpressionWithPattern:@"\\{\\{(.*?)\\|(.*?)\\}\\}" options:0 error:&error];
+    NSRegularExpression *tokenFinder = [NSRegularExpression regularExpressionWithPattern:@"\\{\\{([^\\{]*?)\\|([^\\{]*?)\\}\\}" options:0 error:&error];
     
     if (error) {
         return error;
