@@ -149,21 +149,31 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
         }
         [self.configViewController setAnimating:YES];
         
-        // TODO: Prevent multiple requests when hitting this frequently
-        BLOCK_SELF_REF_OUTSIDE();
-        [self loadConfig:YES completion:^(NSError *error) {
-            BLOCK_SELF_REF_INSIDE();
-            if (error) {
+        [self performAppForegroundedCheck:YES];
+    }
+}
+
+- (void)performAppForegroundedCheck:(BOOL)allowRetry
+{
+    // TODO: Prevent multiple requests when hitting this frequently
+    BLOCK_SELF_REF_OUTSIDE();
+    [self loadConfig:YES completion:^(NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        if (error) {
+            // This request sometimes fails on iOS 9 when foregrounding the app immediately after unlocking the device. If we failed because the network connection was lost, we suspect this was the case. So, instead of displaying an error, perform a single retry
+            if (allowRetry && [error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNetworkConnectionLost) {
+                [self performAppForegroundedCheck:NO];
+            } else {
                 NSString *errorTitle = [error.domain isEqualToString:@"AppVersion"] ? NSLocalizedString(@"App Version Out of Date", @"Title for alert shown when using out of date version of the app") : NSLocalizedString(@"Unable to load app config", @"Title for error shown when unable to load app config");
                 [self.configViewController displayErrorAlertWithTitle:errorTitle andMessage:error.localizedDescription];
-            } else {
-                if (self.configViewController) {
-                    [self.configViewController dismiss];
-                    self.configViewController = nil;
-                }
             }
-        }];
-    }
+        } else {
+            if (self.configViewController) {
+                [self.configViewController dismiss];
+                self.configViewController = nil;
+            }
+        }
+    }];
 }
 
 // Using notifications so we don't have to worry about overriding reachability update blocks if somewhere else needs them as well
