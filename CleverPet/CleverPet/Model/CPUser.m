@@ -15,4 +15,8 @@
     return [JSONKeyMapper mapper:[JSONKeyMapper mapperFromUnderscoreCaseToCamelCase] withExceptions:@{@"animal":@"pet"}];
 }
 
+- (void)setWeightUnits:(NSString *)weightUnits {
+    _pet.weightUnits = weightUnits;
+}
+
 @end

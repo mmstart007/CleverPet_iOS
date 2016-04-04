@@ -15,5 +15,6 @@
 @property (nonatomic, strong) NSString<Optional> *userId;
 @property (nonatomic, strong) CPPet<Optional> *pet;
 @property (nonatomic, strong) CPDevice<Optional> *device;
+@property (nonatomic, strong) NSString *weightUnits;
 
 @end

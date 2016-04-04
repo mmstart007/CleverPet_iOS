@@ -66,11 +66,17 @@
     // TODO: populate fields from pet profile object
     
     self.textFields = @[self.nameField, self.familyNameField, self.breedField, self.weightField, self.genderField, self.neuteredField];
-    self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
+
     self.textValidator = [[CPTextValidator alloc] init];
     
     self.pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
     self.petImage.image = [self.pet petPhoto];
+    
+    if ([self.pet.weightUnits isEqualToString:@"kg"]) {
+        [self.weightUnitSelector setSelectedSegmentIndex:1];
+    }
+    
+    self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
     
     self.nameField.text = self.pet.name;
     self.familyNameField.text = self.pet.familyName;
@@ -207,7 +213,7 @@
     if ([alteredString length] == 0) {
         alteredString = kGenderNeutralUnspecified;
     }
-    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kAlteredKey:alteredString};
+    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kAlteredKey:alteredString, kWeightUnits : [self.weightDescriptor stringByReplacingOccurrencesOfString:@"s" withString:@""]};
     [CPPet validateInput:petInfo isInitialSetup:NO completion:^(BOOL isValidInput, NSString *errorMessage) {
         if (isValidInput) {
             if ([[CPUserManager sharedInstance] hasPetInfoChanged:petInfo]) {
