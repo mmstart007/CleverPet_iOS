@@ -14,7 +14,7 @@
 #import "CPConfigViewController.h"
 #import "CPUserManager.h"
 
-#define USE_LOCAL_CONFIG 1
+#define USE_LOCAL_CONFIG 0
 #if USE_LOCAL_CONFIG
 #warning #### Local config is enabled! Please disable before checking in!
 #endif

@@ -34,7 +34,7 @@ NSString * const kLastSeenPathFragment = @"lastseen";
 #define DEVICE_LAST_SEEN(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kLastSeenPathFragment]
 #define SPECIFIC_SCHEDULE(deviceId, scheduleId) [NSString stringWithFormat:@"%@/%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment, scheduleId]
 
-#define PARTICLE_ENABLED 0
+#define PARTICLE_ENABLED 1
 
 #if !PARTICLE_ENABLED
 #warning #### Particle is not enabled! Please enable before checking in!
