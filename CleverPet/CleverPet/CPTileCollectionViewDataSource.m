@@ -198,6 +198,8 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
 - (void)tileDataManager:(CPTileDataManager *)dataManager didDeleteRows:(NSIndexSet *)deletedRows updateRows:(NSIndexSet *)updatedRows insertRows:(NSIndexSet *)insertedRows fromRefresh:(BOOL)isFromRefresh
 {
     if (self.currentTileDataManager == dataManager) {
+        
+        [self.tableHeaderView scrollViewDidScroll:self.tableView];
         [self.tableView beginUpdates];
         
         if (deletedRows.count > 0) {

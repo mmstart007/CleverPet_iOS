@@ -27,7 +27,7 @@
         
         self.containerView = [[UIView alloc] init];
         self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
-        self.containerView.backgroundColor = [UIColor redColor];
+        self.containerView.backgroundColor = [UIColor appWhiteColor];
         [self addSubview:self.containerView];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[containerView]|" options:0 metrics:nil views:@{@"containerView":self.containerView}]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[containerView]|" options:0 metrics:nil views:@{@"containerView":self.containerView}]];
