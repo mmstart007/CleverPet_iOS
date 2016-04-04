@@ -97,6 +97,10 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
     [self obtainGCMToken];
 }
 
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"Notification received: %@", userInfo);
+}
+
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -133,6 +137,7 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
     
     self.gcmHandler = ^(NSString *token, NSError *error) {
         if (!error) {
+            NSLog(@"Token: %@", token);
             [[CPGCMManager sharedInstance] obtainedGCMToken:token];
         }
         // TODO: handle error
