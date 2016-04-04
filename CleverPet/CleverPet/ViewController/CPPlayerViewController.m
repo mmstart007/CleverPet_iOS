@@ -1,9 +1,5 @@
 #import "CPPlayerViewController.h"
 
-@interface PresentVideoPlayerViewController : UIViewController
-
-@end
-
 @interface UIViewController (VideoPlayerWindow)
 
 - (void)presentInWindowInternal;

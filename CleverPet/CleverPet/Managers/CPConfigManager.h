@@ -17,5 +17,7 @@ extern NSString * const kConfigErrorKey;
 - (ASYNC)loadConfig:(BOOL)forceLoad completion:(void (^)(NSError *))completion;
 - (void)appEnteredForeground;
 - (NSString*)getServerUrl;
+- (void)hubClaimingBegan;
+- (void)hubClaimingEnded;
 
 @end

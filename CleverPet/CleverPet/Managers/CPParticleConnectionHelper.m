@@ -8,6 +8,7 @@
 
 #import "CPParticleConnectionHelper.h"
 #import <SparkSetup/SparkSetup.h>
+#import "CPConfigManager.h"
 
 NSString * const kParticleOrganizationName = @"particle_organization_name";
 NSString * const kParticleOrganizationSlug = @"particle_organization_slug";
@@ -105,6 +106,8 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
 
 - (void)presentSetupControllerOnController:(UINavigationController *)controller withDelegate:(id<CPParticleConnectionDelegate>)delegate
 {
+    // Don't perform config checks while in the process of claiming hubs
+    [[CPConfigManager sharedInstance] hubClaimingBegan];
     self.delegate = delegate;
     [self setupCustomAppearance];
     SparkSetupMainController *setupController = [[SparkSetupMainController alloc] init];
@@ -114,6 +117,7 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
 
 - (void)sparkSetupViewController:(SparkSetupMainController *)controller didFinishWithResult:(SparkSetupMainControllerResult)result device:(SparkDevice *)device
 {
+    [[CPConfigManager sharedInstance] hubClaimingEnded];
     if (result == SparkSetupMainControllerResultSuccess) {
         NSTimeZone *timeZone = [NSTimeZone localTimeZone];
         [self.delegate deviceClaimed:@{kParticleIdKey:device.id, kNameKey:device.name, kTimeZoneKey:(timeZone ? @([timeZone secondsFromGMT]) : @(0))}];

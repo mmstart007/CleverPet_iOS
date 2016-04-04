@@ -18,6 +18,7 @@
 #import <Google/CloudMessaging.h>
 #import "CPGCMManager.h"
 #import "CPUserManager.h"
+#import "CPPlayerViewController.h"
 
 typedef void (^gcmHandler)(NSString *token, NSError *error);
 
@@ -86,7 +87,10 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
-    return UIInterfaceOrientationMaskPortrait|UIInterfaceOrientationMaskLandscapeLeft|UIInterfaceOrientationMaskLandscapeRight;
+    if([window.rootViewController isKindOfClass:[PresentVideoPlayerViewController class]]) {
+        return UIInterfaceOrientationMaskPortrait|UIInterfaceOrientationMaskLandscapeLeft|UIInterfaceOrientationMaskLandscapeRight;
+    }
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
