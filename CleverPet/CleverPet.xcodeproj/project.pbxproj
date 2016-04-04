@@ -111,6 +111,8 @@
 		97EB7AFC1C73F282007F1383 /* CPPetProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7AFB1C73F282007F1383 /* CPPetProfileViewController.m */; };
 		97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */; };
 		97EB7B081C75316F007F1383 /* CPPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EB7B071C75316F007F1383 /* CPPickerViewController.m */; };
+		97EC01041C921FFC00929EFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97EC01031C921FFC00929EFE /* GoogleService-Info.plist */; };
+		97EC01071C92258600929EFE /* CPGCMManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC01061C92258600929EFE /* CPGCMManager.m */; };
 		97EC010A1C92354300929EFE /* CPSplashImageUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC01091C92354300929EFE /* CPSplashImageUtils.m */; };
 		97F7284E1C7E416A005E65C2 /* CPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F7284D1C7E416A005E65C2 /* CPConfigManager.m */; };
 		97F728511C7E588C005E65C2 /* CPAppEngineCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */; };
@@ -293,6 +295,9 @@
 		97EB7B011C7508E1007F1383 /* UIViewController+CleverPet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CleverPet.m"; sourceTree = "<group>"; };
 		97EB7B061C75316F007F1383 /* CPPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPickerViewController.h; sourceTree = "<group>"; };
 		97EB7B071C75316F007F1383 /* CPPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPPickerViewController.m; sourceTree = "<group>"; };
+		97EC01031C921FFC00929EFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		97EC01051C92258600929EFE /* CPGCMManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPGCMManager.h; sourceTree = "<group>"; };
+		97EC01061C92258600929EFE /* CPGCMManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPGCMManager.m; sourceTree = "<group>"; };
 		97EC01081C92354300929EFE /* CPSplashImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSplashImageUtils.h; sourceTree = "<group>"; };
 		97EC01091C92354300929EFE /* CPSplashImageUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSplashImageUtils.m; sourceTree = "<group>"; };
 		97F7284C1C7E416A005E65C2 /* CPConfigManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPConfigManager.h; sourceTree = "<group>"; };
@@ -366,6 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				0D36AA871C7243D600349D03 /* main.m */,
+				97EC01031C921FFC00929EFE /* GoogleService-Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -526,6 +532,8 @@
 				971D630F1C88FFC2006C9F80 /* CPTileCommunicationManager.m */,
 				51A8A7B91C90E127001A1572 /* CPFirebaseManager.h */,
 				51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */,
+				97EC01051C92258600929EFE /* CPGCMManager.h */,
+				97EC01061C92258600929EFE /* CPGCMManager.m */,
 				0D535F251C93A91F003B4CF8 /* CPChartRenderer.h */,
 				0D535F261C93A91F003B4CF8 /* CPChartRenderer.m */,
 				97E678331CA313FF00971A0F /* CPHubStatusManager.h */,
@@ -683,7 +691,12 @@
 				TargetAttributes = {
 					0D36AA821C7243D600349D03 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 8TD89Q5H39;
+						DevelopmentTeam = B6N59G6Q3X;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -742,6 +755,7 @@
 				971D63121C8A3B1C006C9F80 /* faqs.json in Resources */,
 				0D36AA911C7243D600349D03 /* Main.storyboard in Resources */,
 				979D846A1C84FAF200ADB6B0 /* Raleway-ExtraBoldItalic.ttf in Resources */,
+				97EC01041C921FFC00929EFE /* GoogleService-Info.plist in Resources */,
 				0DE13B611C7EDFAC00648834 /* CPMainScreenStatsHeaderView.xib in Resources */,
 				0DD4BD311C739426006B3725 /* CPTileViewCell.xib in Resources */,
 				0DE13B591C7ECE3400648834 /* CPMainScreenHeaderView.xib in Resources */,
@@ -886,6 +900,7 @@
 				0DE13B451C7E9CB100648834 /* CPMainTableSectionHeader.m in Sources */,
 				979D84431C7FA50700ADB6B0 /* CPFileUtils.m in Sources */,
 				97B635441C91E6FA00DFE89C /* CPHubPlaceholderViewController.m in Sources */,
+				97EC01071C92258600929EFE /* CPGCMManager.m in Sources */,
 				97EB7B021C7508E1007F1383 /* UIViewController+CleverPet.m in Sources */,
 				9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */,
 				97EB7AF11C73BEA9007F1383 /* UIColor+CleverPet.m in Sources */,
@@ -1004,6 +1019,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1013,6 +1029,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1023,6 +1040,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
@@ -1031,6 +1049,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

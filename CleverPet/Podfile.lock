@@ -33,16 +33,34 @@ PODS:
   - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
   - Firebase (2.5.1)
+  - GGLInstanceID (1.1.6)
+  - Google/CloudMessaging (1.0.7):
+    - GGLInstanceID (~> 1.0)
+    - Google/Core
+    - GoogleCloudMessaging (~> 1.0)
+  - Google/Core (1.0.7):
+    - GoogleNetworkingUtilities (~> 1.0)
+    - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.0)
   - GoogleAppUtilities (1.0.0):
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleAuthUtilities (1.0.1):
     - GoogleNetworkingUtilities (~> 1.0)
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleCloudMessaging (1.2.0):
+    - GoogleInterchangeUtilities (~> 1.0)
+    - GoogleIPhoneUtilities (~> 1.0)
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleIdentityToolkit (1.1.3):
     - GoogleNetworkingUtilities (~> 1.0.0)
     - GoogleParsingUtilities (~> 1.0.0)
     - GoogleSignIn (~> 2.0)
     - GoogleUtilities (~> 1.0.0)
+  - GoogleInterchangeUtilities (1.1.0):
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleIPhoneUtilities (1.2.0):
+    - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.0)
   - GoogleNetworkingUtilities (1.0.0):
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleParsingUtilities (1.0.0):
@@ -92,6 +110,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - Firebase (>= 2.5.0)
+  - Google/CloudMessaging
   - GoogleIdentityToolkit
   - Intercom
   - JSONModel
@@ -128,9 +147,14 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
+  GGLInstanceID: f92465924a9b8a48f712829d22e223653ab8dc72
+  Google: 875f5a8ade86dd02e36586e4a54814843938c7f6
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
   GoogleAuthUtilities: 049ffd3a297cdffd271451b82fd4e75304f15ef3
+  GoogleCloudMessaging: f37ea14dd0f41d4d889c10b5559dd35bbfd9ac26
   GoogleIdentityToolkit: c4cb90839fb7eb4df4c14a452a983c6fab23b115
+  GoogleInterchangeUtilities: d7f7174176fbcf9710f696f1acebad4dbd98ac03
+  GoogleIPhoneUtilities: 1c2996078f079d2fc54453dbd13eaf5523666550
   GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
   GoogleParsingUtilities: 9158b059542c2314294cda34fb0384d80456e030
   GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8

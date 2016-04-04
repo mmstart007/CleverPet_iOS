@@ -19,6 +19,7 @@
 #import <SSKeychain/SSKeychain.h>
 #import "CPHubPlaceholderViewController.h"
 #import <GoogleSignIn/GoogleSignIn.h>
+#import "CPGCMManager.h"
 
 #define DEFAULT_ERROR_MESSAGE NSLocalizedString(@"An unexpected error occurred. Please try again.", @"Error message displayed for unhandled login error codes")
 NSString * const kAutoLogin = @"CPLoginControllerAutoLogin";
@@ -314,6 +315,8 @@ didFinishSignInWithToken:(NSString *)token
         }
         case CPLoginResult_UserWithSetupCompleted:
         {
+            // Send our push token up to the server
+            [[CPGCMManager sharedInstance] userLoggedIn];
             self.hubPlaceholderVc = nil;
             // We've made it completely through our signin/account setup flow. Store the users auth token in the keychain to support autologin.
             // Just storing by our auto login name, since the user id is irrelevant, we just want the last user

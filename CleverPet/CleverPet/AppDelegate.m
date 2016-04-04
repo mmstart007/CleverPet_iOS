@@ -15,9 +15,17 @@
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <Google/CloudMessaging.h>
+#import "CPGCMManager.h"
+#import "CPUserManager.h"
 #import "CPPlayerViewController.h"
 
-@interface AppDelegate ()
+typedef void (^gcmHandler)(NSString *token, NSError *error);
+
+@interface AppDelegate ()<GGLInstanceIDDelegate>
+
+@property (nonatomic, copy) gcmHandler gcmHandler;
+@property (nonatomic, strong) NSDictionary *registrationOptions;
 
 @end
 
@@ -39,6 +47,17 @@
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     [Fabric with:@[[Crashlytics class]]];
     
+    // Register for notifications
+    [self initializeGCM];
+    UIUserNotificationType allNotificationTypes =
+    (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+    UIUserNotificationSettings *settings =
+    [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
+    
+    
     return YES;
 }
 
@@ -55,6 +74,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     [[CPConfigManager sharedInstance] appEnteredForeground];
+    [[CPUserManager sharedInstance] processPendingLogouts];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -71,6 +91,18 @@
         return UIInterfaceOrientationMaskPortrait|UIInterfaceOrientationMaskLandscapeLeft|UIInterfaceOrientationMaskLandscapeRight;
     }
     return UIInterfaceOrientationMaskPortrait;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    
+    self.registrationOptions = @{kGGLInstanceIDRegisterAPNSOption:deviceToken,
+                             kGGLInstanceIDAPNSServerTypeSandboxOption:@YES};
+    [self obtainGCMToken];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSLog(@"Notification received: %@", userInfo);
 }
 
 - (BOOL)application:(UIApplication *)application
@@ -90,6 +122,38 @@
     gitkitClient.widgetURL = @"http://localhost?placeholder";
     gitkitClient.providers = @[kGITProviderGoogle, kGITProviderFacebook];
     [GIDSignIn sharedInstance].clientID = @"879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com";
+}
+
+#pragma mark - GGLInstanceIDDelegate
+- (void)onTokenRefresh
+{
+    [self obtainGCMToken];
+}
+
+- (void)initializeGCM
+{
+    // Create a config and set a delegate that implements the GGLInstaceIDDelegate protocol.
+    GGLInstanceIDConfig *instanceIDConfig = [GGLInstanceIDConfig defaultConfig];
+    instanceIDConfig.delegate = self;
+    // Start the GGLInstanceID shared instance with the that config and request a registration
+    // token to enable reception of notifications
+    [[GGLInstanceID sharedInstance] startWithConfig:instanceIDConfig];
+    
+    self.gcmHandler = ^(NSString *token, NSError *error) {
+        if (!error) {
+            NSLog(@"Token: %@", token);
+            [[CPGCMManager sharedInstance] obtainedGCMToken:token];
+        }
+        // TODO: handle error
+    };
+}
+
+- (void)obtainGCMToken
+{
+    [[GGLInstanceID sharedInstance] tokenWithAuthorizedEntity:@"879679195763"
+                                                        scope:kGGLInstanceIDScopeGCM
+                                                      options:self.registrationOptions
+                                                      handler:self.gcmHandler];
 }
 
 @end

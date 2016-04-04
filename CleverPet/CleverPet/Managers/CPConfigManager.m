@@ -12,6 +12,7 @@
 #import "CPFirebaseManager.h"
 #import <AFNetworking/AFNetworking.h>
 #import "CPConfigViewController.h"
+#import "CPUserManager.h"
 
 #define USE_LOCAL_CONFIG 0
 #if USE_LOCAL_CONFIG
@@ -105,6 +106,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
                 }
             }
             [self applyConfig:responseObject];
+        	[[CPUserManager sharedInstance] processPendingLogouts];
             [[NSNotificationCenter defaultCenter] postNotificationName:kConfigUpdatedNotification object:nil userInfo:@{}];
             if (completion) completion(nil);
 #if !USE_LOCAL_CONFIG
@@ -174,6 +176,11 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
             }
         }
     }];
+}
+
+- (NSString*)getServerUrl
+{
+    return self.configData[@"app_server_url"];
 }
 
 // Using notifications so we don't have to worry about overriding reachability update blocks if somewhere else needs them as well

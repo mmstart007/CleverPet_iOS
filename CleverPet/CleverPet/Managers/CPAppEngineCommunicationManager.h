@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile,
 
 - (void)applyConfig:(NSDictionary*)configData;
 - (AFHTTPSessionManager*)getSessionManager;
+- (NSString *)currentAuthHeader;
 
 - (ASYNC)loginWithAuthToken:(NSString*)gitKitToken completion:(void (^)(CPLoginResult result, NSError *error))completion;
 - (ASYNC)logoutWithCompletion:(void (^)(NSError *error))completion;
@@ -33,5 +34,7 @@ typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile,
 - (ASYNC)updateDevice:(NSString*)deviceId particle:(NSDictionary*)particleInfo completion:(void (^)(NSError *error))completion;
 - (ASYNC)updateDevice:(NSString*)deviceId schedule:(NSString*)scheduleId withInfo:(NSDictionary*)scheduleInfo completion:(void (^)(NSError *error))completion;
 - (ASYNC)checkDeviceLastSeen:(NSString*)deviceId completion:(void (^)(NSInteger delta, NSError *error))completion;
+
+- (ASYNC)performLogoutWithAuthHeader:(NSString*)authHeader completion:(void (^)(NSError *error))completion;
 
 @end

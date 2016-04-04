@@ -261,6 +261,14 @@ Fabric: Copyright 2015 Twitter, Inc. All Rights Reserved. Use of this software i
 
 https://www.firebase.com/terms/terms-of-service.html
 
+## GGLInstanceID
+
+Copyright 2015 Google Inc.
+
+## Google
+
+Copyright 2015 Google Inc.
+
 ## GoogleAppUtilities
 
 Copyright 2015 Google Inc.
@@ -269,9 +277,21 @@ Copyright 2015 Google Inc.
 
 Copyright 2015 Google Inc.
 
+## GoogleCloudMessaging
+
+Copyright 2015 Google Inc.
+
+## GoogleIPhoneUtilities
+
+Copyright 2015 Google Inc.
+
 ## GoogleIdentityToolkit
 
 Copyright 2015 Google Inc. All Rights Reserved.
+
+## GoogleInterchangeUtilities
+
+Copyright 2015 Google Inc.
 
 ## GoogleNetworkingUtilities
 

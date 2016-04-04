@@ -10,8 +10,11 @@
 #import "CPAppEngineCommunicationManager.h"
 #import "CPFileUtils.h"
 #import "CPLoginController.h"
+#import "CPGCMManager.h"
 
 NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
+NSString * const kPendingLogoutGCMTokenKey = @"CPUserManager_gcmTokenKey";
+NSString * const kPendingLogoutUserAuthKey = @"CPUserManager_auth";
 
 @interface CPUserManager()
 
@@ -37,6 +40,8 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     self.currentUser = [[CPUser alloc] initWithDictionary:userInfo error:&error];
     // Update to use device time zone. Probably should pull this out
     [CPSharedUtils deviceTimeZoneUpdated:self.currentUser.device.timeZone];
+    // If our current user logged in, we don't need to worry about processing a pending logout for that user anymore
+    [self removeUserFromPendingLogouts:self.currentUser.userId];
 }
 
 - (void)userCreatedPet:(NSDictionary *)petInfo
@@ -227,7 +232,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     [[CPAppEngineCommunicationManager sharedInstance] logoutWithCompletion:^(NSError *error) {
         BLOCK_SELF_REF_INSIDE();
         if (!error) {
-            [self removeUserFromPendingLogouts:currentUser];
+            [self removeUserFromPendingLogouts:currentUser.userId];
         }
     }];
     [[CPLoginController sharedInstance] logout];
@@ -240,29 +245,47 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 
 - (void)addUserToPendingLogouts:(CPUser*)user
 {
-    // Write our user id and device token to defaults so we can attempt to remove the push on the server at a later point if the logout call fails
-    NSMutableDictionary *pendingLogouts = [[[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts] mutableCopy];
-    if (!pendingLogouts) {
-        pendingLogouts = [NSMutableDictionary dictionary];
+    NSString *gcmToken = [[CPGCMManager sharedInstance] getToken];
+    if (gcmToken) {
+        // Write our user id and device token to defaults so we can attempt to remove the push on the server at a later point if the logout call fails
+        NSMutableDictionary *pendingLogouts = [[[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts] mutableCopy];
+        if (!pendingLogouts) {
+            pendingLogouts = [NSMutableDictionary dictionary];
+        }
+        
+        pendingLogouts[user.userId] = @{kPendingLogoutGCMTokenKey:gcmToken, kPendingLogoutUserAuthKey:[[CPAppEngineCommunicationManager sharedInstance] currentAuthHeader]};
+        [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    
-    // TODO: Add push token to user object
-    // TODO: we aren't getting user id back from the server, either figure out something to use as an identifier(email probably works), or ask for the id
-//    pendingLogouts[user.userId] = @"pushToken";
-    [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)removeUserFromPendingLogouts:(CPUser*)user
+- (void)removeUserFromPendingLogouts:(NSString*)userId
 {
     NSMutableDictionary *pendingLogouts = [[[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts] mutableCopy];
     if (!pendingLogouts) {
         return;
     }
     
-//    pendingLogouts[user.userId] = nil;
+    pendingLogouts[userId] = nil;
     [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)processPendingLogouts
+{
+    NSDictionary *pendingLogouts = [[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts];
+    for (NSString *userId in [pendingLogouts allKeys]) {
+        NSDictionary *userInfo = pendingLogouts[userId];
+        BLOCK_SELF_REF_OUTSIDE();
+        [[CPAppEngineCommunicationManager sharedInstance] performLogoutWithAuthHeader:userInfo[kPendingLogoutUserAuthKey] completion:^(NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            if (!error)
+            {
+                // No action to take on error, we just leave it in pending logouts to try again later
+                [self removeUserFromPendingLogouts:userId];
+            }
+        }];
+    }
 }
 
 @end

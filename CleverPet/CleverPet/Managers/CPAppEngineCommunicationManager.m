@@ -12,6 +12,7 @@
 #import "CPParticleConnectionHelper.h"
 #import <Spark-SDK/SparkDevice.h>
 #import "CPFirebaseManager.h"
+#import "CPConfigManager.h"
 
 NSString * const kAppEngineBaseUrl = @"app_server_url";
 NSString * const kNewUserPath = @"users/new";
@@ -78,6 +79,11 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 - (AFHTTPSessionManager*)getSessionManager
 {
     return self.sessionManager;
+}
+
+- (NSString*)currentAuthHeader
+{
+    return [self.sessionManager.requestSerializer valueForHTTPHeaderField:@"Authorization"];
 }
 
 #pragma mark - Login and user calls
@@ -395,6 +401,29 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 - (void)setAuthToken:(NSString *)authToken
 {
     [self.sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", authToken] forHTTPHeaderField:@"Authorization"];
+}
+
+- (ASYNC)performLogoutWithAuthHeader:(NSString *)authHeader completion:(void (^)(NSError *))completion
+{
+    NSString *serverUrl = [[CPConfigManager sharedInstance] getServerUrl];
+    if (serverUrl) {
+        
+        // Spin up a session manager so we don't mess with our regular auth
+        AFHTTPSessionManager *sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:serverUrl]];
+        sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [sessionManager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
+                                                
+        BLOCK_SELF_REF_OUTSIDE();
+        [sessionManager PUT:kUserLogoutPath parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if (completion) completion(nil);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            BLOCK_SELF_REF_INSIDE();
+            if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
+        }];
+    } else {
+        if (completion) completion([self errorForMessage:@"Config not set up"]);
+    }
 }
 
 @end
