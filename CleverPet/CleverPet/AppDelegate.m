@@ -109,6 +109,8 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
+    //let app handle redirect
+    [[NSNotificationCenter defaultCenter] postNotificationName:kWaitForURLHandle object:nil];
     // Handle custom scheme redirect here.
     return [GITClient handleOpenURL:url
                   sourceApplication:sourceApplication
