@@ -213,7 +213,15 @@
     if ([alteredString length] == 0) {
         alteredString = kGenderNeutralUnspecified;
     }
-    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kAlteredKey:alteredString, kWeightUnits : [self.weightDescriptor stringByReplacingOccurrencesOfString:@"s" withString:@""]};
+    
+    //Convert wieght to lbs to be saved on the server
+    NSString *weight = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
+    if ([self.weightDescriptor isEqualToString:@"kgs"]) {
+        NSInteger convertedWeight = roundf([weight floatValue]*kLbsToKgs);
+        weight = [NSString stringWithFormat:@"%ld", (long)convertedWeight];
+    }
+    
+    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:weight, kAlteredKey:alteredString, kWeightUnits : [self.weightDescriptor stringByReplacingOccurrencesOfString:@"s" withString:@""]};
     [CPPet validateInput:petInfo isInitialSetup:NO completion:^(BOOL isValidInput, NSString *errorMessage) {
         if (isValidInput) {
             if ([[CPUserManager sharedInstance] hasPetInfoChanged:petInfo]) {

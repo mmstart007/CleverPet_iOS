@@ -22,6 +22,8 @@ NSInteger const kMaxWeight = 999;
 NSInteger const kMinAge = 0;
 NSInteger const kMaxAge = 99;
 
+CGFloat const kLbsToKgs = 2.2;
+
 #pragma mark - JSON keys
 NSString * const kErrorKey = @"error";
 // User keys

@@ -75,6 +75,8 @@ extern NSInteger const kMaxWeight;
 extern NSInteger const kMinAge;
 extern NSInteger const kMaxAge;
 
+extern CGFloat const kLbsToKgs;
+
 #pragma mark - JSON keys
 extern NSString * const kErrorKey;
 // User keys

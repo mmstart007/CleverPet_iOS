@@ -48,6 +48,7 @@ NSString * const kPendingLogoutUserAuthKey = @"CPUserManager_auth";
 {
     NSError *error;
     self.currentUser.pet = [[CPPet alloc] initWithDictionary:petInfo error:&error];
+    self.currentUser.weightUnits = self.currentUser.weightUnits;
 }
 
 - (void)updatePetInfo:(NSDictionary *)petInfo withCompletion:(void (^)(NSError *))completion
@@ -65,6 +66,7 @@ NSString * const kPendingLogoutUserAuthKey = @"CPUserManager_auth";
                 [self.currentUser.pet mergeFromDictionary:currentPetInfo useKeyMapping:YES error:nil];
                 if (completion) completion(error);
             } else {
+                self.currentUser.weightUnits = self.currentUser.pet.weightUnits;
                 // Send notification if pets name or gender has changed
                 if (![currentPetInfo[kNameKey] isEqualToString:petInfo[kNameKey]] || ![currentPetInfo[kGenderKey] isEqualToString:petInfo[kGenderKey]]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:kPetInfoUpdated object:nil];
