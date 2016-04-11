@@ -16,7 +16,11 @@
 }
 
 - (void)setWeightUnits:(NSString *)weightUnits {
+    _weightUnits = weightUnits;
     _pet.weightUnits = weightUnits;
+    if ([weightUnits isEqualToString:@"kg"]) {
+        _pet.weight = [[NSString stringWithFormat:@"%.1f",_pet.weight/kLbsToKgs]floatValue];
+    }
 }
 
 @end

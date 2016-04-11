@@ -13,6 +13,7 @@
 #import "CPLoginController.h"
 #import "CPTextValidator.h"
 #import "CPPet.h"
+#import "CPUserManager.h"
 
 @interface CPPetProfileViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate>
 
@@ -129,7 +130,16 @@
         return;
     }
     
-    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kDOBKey:[self getDOB], kWeightUnits : [self.weightDescriptor stringByReplacingOccurrencesOfString:@"s" withString:@""]};
+    //Convert wieght to lbs to be saved on the server
+    NSString *weight = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
+    
+    NSString *weightUnit =  [self.weightDescriptor stringByReplacingOccurrencesOfString:@"s" withString:@""];
+    if ([weightUnit isEqualToString:@"kg"]) {
+        CGFloat convertedWeight = [weight floatValue]*kLbsToKgs;
+        weight = [NSString stringWithFormat:@"%.1f", convertedWeight];
+    }
+    
+    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:weight, kDOBKey:[self getDOB], kWeightUnits : weightUnit};
     [CPPet validateInput:petInfo isInitialSetup:YES completion:^(BOOL isValidInput, NSString *errorMessage) {
         
         if (isValidInput) {
