@@ -81,7 +81,12 @@
     self.nameField.text = self.pet.name;
     self.familyNameField.text = self.pet.familyName;
     self.breedField.text = self.pet.breed;
-    self.weightField.text = [NSString stringWithFormat:@"%ld %@", (long)self.pet.weight, self.weightDescriptor];
+    if (self.pet.weight == roundf(self.pet.weight)) {
+        self.weightField.text = [NSString stringWithFormat:@"%ld %@", (long)self.pet.weight, self.weightDescriptor];
+    }else {
+       self.weightField.text = [NSString stringWithFormat:@"%.1f %@", self.pet.weight, self.weightDescriptor];
+    }
+    
     // Uppercase first letter of word, since it's all lower case coming from the server
     self.genderField.text = [self.pet.gender stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.gender substringToIndex:1] uppercaseString]];
     self.neuteredField.text = [CPGenderUtils stringForAlteredState:self.pet.altered withGender:self.pet.gender];
@@ -217,8 +222,8 @@
     //Convert wieght to lbs to be saved on the server
     NSString *weight = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
     if ([self.weightDescriptor isEqualToString:@"kgs"]) {
-        NSInteger convertedWeight = roundf([weight floatValue]*kLbsToKgs);
-        weight = [NSString stringWithFormat:@"%ld", (long)convertedWeight];
+        CGFloat convertedWeight = [weight floatValue]*kLbsToKgs;
+        weight = [NSString stringWithFormat:@"%.1f", convertedWeight];
     }
     
     NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:weight, kAlteredKey:alteredString, kWeightUnits : [self.weightDescriptor stringByReplacingOccurrencesOfString:@"s" withString:@""]};

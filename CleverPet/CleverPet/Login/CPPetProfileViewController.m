@@ -135,8 +135,8 @@
     
     NSString *weightUnit =  [self.weightDescriptor stringByReplacingOccurrencesOfString:@"s" withString:@""];
     if ([weightUnit isEqualToString:@"kg"]) {
-        NSInteger convertedWeight = roundf([weight floatValue]*kLbsToKgs);
-        weight = [NSString stringWithFormat:@"%ld", convertedWeight];
+        CGFloat convertedWeight = [weight floatValue]*kLbsToKgs;
+        weight = [NSString stringWithFormat:@"%.1f", convertedWeight];
     }
     
     NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:weight, kDOBKey:[self getDOB], kWeightUnits : weightUnit};

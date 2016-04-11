@@ -89,7 +89,7 @@ NSString * const kPendingLogoutUserAuthKey = @"CPUserManager_auth";
             hasChanged = YES;
             // Additional checking for weight, as passed in pet info will be a string, but toDict weight will be a number. Will have to do the same thing for any other primitives we may add
             if ([key isEqualToString:kWeightKey]) {
-                hasChanged = [petInfo[key] integerValue] != [currentPetInfo[key] integerValue];
+                hasChanged = [petInfo[key] floatValue] != [currentPetInfo[key] floatValue];
             }
             if (hasChanged) break;
         }
