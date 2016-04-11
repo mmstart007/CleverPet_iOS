@@ -49,6 +49,7 @@ object:obj]
 removeObserver:self]
 
 extern NSString * const kPetInfoUpdated;
+extern NSString * const kWaitForURLHandle;
 
 #pragma mark - Blocks
 

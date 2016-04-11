@@ -10,6 +10,7 @@
 #import "CPTileTextFormatter.h"
 
 NSString * const kPetInfoUpdated = @"NOTE_PetInfoUpdated";
+NSString * const kWaitForURLHandle = @"NOTE_WaitForURLHandle";
 
 NSInteger const kNameFieldMinChars = 2;
 NSInteger const kNameFieldMaxChars = 10;

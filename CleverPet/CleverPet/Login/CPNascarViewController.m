@@ -100,16 +100,34 @@
     return YES;
 }
 
+- (void)didNotSignIn:(NSNotification *)notification {
+    UNREG_SELF_FOR_NOTIFICATION(UIApplicationDidBecomeActiveNotification);
+    UNREG_SELF_FOR_NOTIFICATION(kWaitForURLHandle);
+    self.loadingView.hidden = YES;
+}
+
+- (void)waitForURLHandle:(NSNotification *)notification  {
+    UNREG_SELF_FOR_NOTIFICATION(UIApplicationDidBecomeActiveNotification);
+    UNREG_SELF_FOR_NOTIFICATION(kWaitForURLHandle);
+}
+
+- (void)listenForReturnToApp {
+    REG_SELF_FOR_NOTIFICATION(kWaitForURLHandle, waitForURLHandle:);
+    REG_SELF_FOR_NOTIFICATION(UIApplicationDidBecomeActiveNotification, didNotSignIn:);
+}
+
 #pragma mark - IBActions
 - (IBAction)facebookTapped:(id)sender
 {
     self.loadingView.hidden = NO;
+    [self listenForReturnToApp];
     [[CPLoginController sharedInstance] signInWithFacebook];
 }
 
 - (IBAction)googleTapped:(id)sender
 {
     self.loadingView.hidden = NO;
+    [self listenForReturnToApp];
     [[CPLoginController sharedInstance] signInWithGoogle];
 }
 
@@ -117,6 +135,7 @@
 {
     if ([self validateInput]) {
         self.loadingView.hidden = NO;
+        [self listenForReturnToApp];
         [[CPLoginController sharedInstance] signInWithEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
     }
 }
