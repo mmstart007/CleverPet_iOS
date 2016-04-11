@@ -134,6 +134,7 @@
     NSString *weight = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
     
     NSString *weightUnit =  [self.weightDescriptor stringByReplacingOccurrencesOfString:@"s" withString:@""];
+    [[CPUserManager sharedInstance] getCurrentUser].weightUnits = weightUnit;
     if ([weightUnit isEqualToString:@"kg"]) {
         CGFloat convertedWeight = [weight floatValue]*kLbsToKgs;
         weight = [NSString stringWithFormat:@"%.1f", convertedWeight];
