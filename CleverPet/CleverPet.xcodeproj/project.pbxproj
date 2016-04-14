@@ -934,6 +934,7 @@
 /* Begin XCBuildConfiguration section */
 		0D36AA981C7243D600349D03 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -962,6 +963,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=https://storage.googleapis.com/cleverpet-app/configs/dev/config.json";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -975,8 +977,9 @@
 			};
 			name = Debug;
 		};
-		0D36AA991C7243D600349D03 /* Release */ = {
+		0D36AA991C7243D600349D03 /* DEV Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -999,6 +1002,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
+				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=https://storage.googleapis.com/cleverpet-app/configs/dev/config.json";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1010,7 +1014,7 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = "DEV Release";
 		};
 		0D36AA9B1C7243D600349D03 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1033,7 +1037,7 @@
 			};
 			name = Debug;
 		};
-		0D36AA9C1C7243D600349D03 /* Release */ = {
+		0D36AA9C1C7243D600349D03 /* DEV Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
 			buildSettings = {
@@ -1051,7 +1055,125 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
-			name = Release;
+			name = "DEV Release";
+		};
+		5D8479881CBF64D200368856 /* PROD Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=https://storage.googleapis.com/cleverpet-app/configs/prod/config.json";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "PROD Release";
+		};
+		5D8479891CBF64D200368856 /* PROD Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
+				INFOPLIST_FILE = CleverPet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = "PROD Release";
+		};
+		5D84798A1CBF64DC00368856 /* STAGE Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=https://storage.googleapis.com/cleverpet-app/configs/stage/config.json";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "STAGE Release";
+		};
+		5D84798B1CBF64DC00368856 /* STAGE Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
+				INFOPLIST_FILE = CleverPet/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = "STAGE Release";
 		};
 /* End XCBuildConfiguration section */
 
@@ -1060,19 +1182,23 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D36AA981C7243D600349D03 /* Debug */,
-				0D36AA991C7243D600349D03 /* Release */,
+				0D36AA991C7243D600349D03 /* DEV Release */,
+				5D8479881CBF64D200368856 /* PROD Release */,
+				5D84798A1CBF64DC00368856 /* STAGE Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "DEV Release";
 		};
 		0D36AA9A1C7243D600349D03 /* Build configuration list for PBXNativeTarget "CleverPet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0D36AA9B1C7243D600349D03 /* Debug */,
-				0D36AA9C1C7243D600349D03 /* Release */,
+				0D36AA9C1C7243D600349D03 /* DEV Release */,
+				5D8479891CBF64D200368856 /* PROD Release */,
+				5D84798B1CBF64DC00368856 /* STAGE Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "DEV Release";
 		};
 /* End XCConfigurationList section */
 	};

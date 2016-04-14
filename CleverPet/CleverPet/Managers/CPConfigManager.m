@@ -19,7 +19,9 @@
 #warning #### Local config is enabled! Please disable before checking in!
 #endif
 
-NSString * const kConfigUrl = @"https://storage.googleapis.com/cleverpet-app/configs/config.json";
+#define MACRO_NAME(f) #f
+#define MACRO_VALUE(f)  MACRO_NAME(f)
+
 NSString * const kMinimumVersionKey = @"minimum_required_version";
 NSString * const kDeprecationMessageKey = @"deprecation_message";
 NSString * const kDefaultDeprecationMessage = @"Your app does not meet the minimum version. Do something about it.";
@@ -74,7 +76,9 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
     if (!self.hubClaimingInProgress && (!self.configData || forceLoad)) {
 #if !USE_LOCAL_CONFIG
         BLOCK_SELF_REF_OUTSIDE();
-        [self.sessionManager GET:kConfigUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSString *configURL = [NSString stringWithFormat:@"%s", MACRO_VALUE(SERVER_CONFIG_URL)];
+        NSLog(@"Using config url: %@", configURL);
+        [self.sessionManager GET:configURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             BLOCK_SELF_REF_INSIDE();
 #else
             NSString *localConfigPath = [[NSBundle mainBundle] pathForResource:@"localConfig" ofType:@"json"];
