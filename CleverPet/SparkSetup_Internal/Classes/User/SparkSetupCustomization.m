@@ -54,7 +54,7 @@
         self.brandImageBackgroundColor = [UIColor colorWithRed:229 green:229 blue:237];
       
         self.modeButtonName = @"mode button";
-        self.networkNamePrefix = @"Photon";
+        self.networkNamePrefix = @"CleverPet";
         self.listenModeLEDColorName = @"blue";
 //        self.appName = self.brandName;// @"SparkSetup";
         self.fontSizeOffset = 0;
