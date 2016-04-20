@@ -319,7 +319,7 @@ NSString *FormatSimpleDateForRelative(CPSimpleDate *simpleDate) {
     if (section == HEADER_VIEW_SECTION) {
         return self.headerStatsHeight;
     } else {
-        return 50;
+        return 0;
     }
 }
 
