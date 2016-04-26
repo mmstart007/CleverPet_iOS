@@ -168,7 +168,7 @@
     self.editImageButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.editImageButton setTitleColor:[UIColor appWhiteColor] forState:UIControlStateNormal];
     
-    self.weightUnitSelector.tintColor = [UIColor appTextFieldPlaceholderColor];
+    self.weightUnitSelector.tintColor = [UIColor darkGrayColor];
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
     
