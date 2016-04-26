@@ -12,15 +12,15 @@
 NSString * const kFontName = @"Raleway";
 
 CGFloat const kNavBarTitleFontSize = 18.0;
-CGFloat const kBackButtonTitleFontSize = 12.0;
-CGFloat const kButtonTitleFontSize = 15.0;
-CGFloat const kTextFieldFontSize = 15.0;
-CGFloat const kSignInHeaderFontSize = 17.0;
-CGFloat const kSubCopyFontSize = 13.0;
-CGFloat const kHubStatusSubCopyFontSize = 12.0;
+CGFloat const kBackButtonTitleFontSize = 15.0;
+CGFloat const kButtonTitleFontSize = 18.0;
+CGFloat const kTextFieldFontSize = 18.0;
+CGFloat const kSignInHeaderFontSize = 20.0;
+CGFloat const kSubCopyFontSize = 16.0;
+CGFloat const kHubStatusSubCopyFontSize = 15.0;
 
-CGFloat const kTableCellTitleSize = 15.0;
-CGFloat const kTableCellSubTextSize = 10.0;
+CGFloat const kTableCellTitleSize = 18.0;
+CGFloat const kTableCellSubTextSize = 13.0;
 
 @implementation UIFont(CleverPet)
 
