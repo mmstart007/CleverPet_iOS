@@ -19,9 +19,6 @@
 #warning #### Local config is enabled! Please disable before checking in!
 #endif
 
-#define MACRO_NAME(f) #f
-#define MACRO_VALUE(f)  MACRO_NAME(f)
-
 NSString * const kMinimumVersionKey = @"minimum_required_version";
 NSString * const kDeprecationMessageKey = @"deprecation_message";
 NSString * const kDefaultDeprecationMessage = @"Your app does not meet the minimum version. Do something about it.";
@@ -61,6 +58,8 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
         NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
         config.URLCache = nil;
         self.sessionManager = [[AFHTTPSessionManager alloc] initWithSessionConfiguration:config];
+        
+        NSLog(@"Using gitkit project id (in plist file) %@", @MACRO_VALUE(GITKIT_PROJECT_ID));
     }
     return self;
 }
