@@ -1028,7 +1028,11 @@
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=dev";
+				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
+					"SERVER_CONFIG_URL=dev",
+					"GITKIT_PROJECT_ID=dev-erpetcloud",
+					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
+				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1049,7 +1053,11 @@
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=dev";
+				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
+					"SERVER_CONFIG_URL=dev",
+					"GITKIT_PROJECT_ID=dev-erpetcloud",
+					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
+				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1109,7 +1117,11 @@
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=prod";
+				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
+					"SERVER_CONFIG_URL=prod",
+					"GOOGLE_CLIENT_ID=289189234956-e49hg43g3akaig7p7tfk08klutubfa4k.apps.googleusercontent.com",
+					"GITKIT_PROJECT_ID=cleverpetcloud",
+				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1169,7 +1181,11 @@
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=stage";
+				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
+					"SERVER_CONFIG_URL=stage",
+					"GITKIT_PROJECT_ID=dev-erpetcloud",
+					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
+				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
