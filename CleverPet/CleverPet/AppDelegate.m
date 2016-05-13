@@ -120,7 +120,7 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
 - (void)setupGoogleIdentityToolkit
 {
     GITClient *gitkitClient = [GITClient sharedInstance];
-    gitkitClient.apiKey = @"AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA";
+    gitkitClient.apiKey = @MACRO_VALUE(GITKIT_API_KEY);
     gitkitClient.widgetURL = @"http://localhost?placeholder";
     gitkitClient.providers = @[kGITProviderGoogle, kGITProviderFacebook];
     

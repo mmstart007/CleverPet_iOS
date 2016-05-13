@@ -963,7 +963,6 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=https://storage.googleapis.com/cleverpet-app/configs/dev/config.json";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1002,7 +1001,6 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=https://storage.googleapis.com/cleverpet-app/configs/dev/config.json";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1032,6 +1030,7 @@
 					"SERVER_CONFIG_URL=dev",
 					"GITKIT_PROJECT_ID=dev-erpetcloud",
 					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
+					"GITKIT_API_KEY=AIzaSyAZfelXCdBgvL-Ntza2_FC7oPTMHqZiBh4",
 				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1056,7 +1055,9 @@
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
 					"SERVER_CONFIG_URL=dev",
 					"GITKIT_PROJECT_ID=dev-erpetcloud",
+					"GITKIT_API_KEY=AIzaSyAZfelXCdBgvL-Ntza2_FC7oPTMHqZiBh4",
 					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
+					"GITKIT_URL_SCHEME=com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75",
 				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1092,7 +1093,6 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=https://storage.googleapis.com/cleverpet-app/configs/prod/config.json";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1119,8 +1119,10 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
 					"SERVER_CONFIG_URL=prod",
-					"GOOGLE_CLIENT_ID=289189234956-e49hg43g3akaig7p7tfk08klutubfa4k.apps.googleusercontent.com",
+					"GOOGLE_CLIENT_ID=289189234956-o85e2ra13mictrhdq49ilms02ehd9quf.apps.googleusercontent.com",
 					"GITKIT_PROJECT_ID=cleverpetcloud",
+					"GITKIT_API_KEY=AIzaSyCI0JYSmup2KdelX3LyNGOzcdK7dfV_4tY",
+					"GITKIT_URL_SCHEME=com.googleusercontent.apps.289189234956-o85e2ra13mictrhdq49ilms02ehd9quf",
 				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1156,7 +1158,6 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = "SERVER_CONFIG_URL=https://storage.googleapis.com/cleverpet-app/configs/stage/config.json";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1185,6 +1186,8 @@
 					"SERVER_CONFIG_URL=stage",
 					"GITKIT_PROJECT_ID=dev-erpetcloud",
 					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
+					"GITKIT_API_KEY=AIzaSyAZfelXCdBgvL-Ntza2_FC7oPTMHqZiBh4",
+					"GITKIT_URL_SCHEME=com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75",
 				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
