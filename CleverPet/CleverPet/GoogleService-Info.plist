@@ -23,7 +23,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<false/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:289189234956:ios:d9ab24dfc54b3e17</string>
+	<string>1:879679195763:ios:d9ab24dfc54b3e17</string>
 	<key>PROJECT_ID</key>
 	<string>${GITKIT_PROJECT_ID}</string>
 </dict>

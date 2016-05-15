@@ -56,8 +56,6 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     
-    
-    
     return YES;
 }
 
