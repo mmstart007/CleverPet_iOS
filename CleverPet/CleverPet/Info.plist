@@ -36,7 +36,6 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>io.cleverpet.app.ios</string>
-				<string>${GITKIT_URL_SCHEME}</string>
 			</array>
 		</dict>
 		<dict>
