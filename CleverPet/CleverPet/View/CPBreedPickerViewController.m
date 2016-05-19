@@ -35,6 +35,8 @@
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
     [self.tableView registerNib:[UINib nibWithNibName:@"CPSimpleTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.textField becomeFirstResponder];
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 }
 
 - (void)viewDidAppear:(BOOL)animated
