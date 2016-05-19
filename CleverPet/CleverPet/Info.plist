@@ -36,6 +36,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>io.cleverpet.app.ios</string>
+                <string>${REVERSED_GOOGLE_CLIENT_ID}</string>
 			</array>
 		</dict>
 		<dict>
