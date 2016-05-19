@@ -1058,8 +1058,8 @@
 					"SERVER_CONFIG_URL=dev",
 					"GITKIT_PROJECT_ID=dev-erpetcloud",
                     "GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
-                    "GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
-                    "GITKIT_URL_SCHEME=com.googleusercontent.apps.879679195763-cq2jj2mah1hifvneh9jgfdclsqr3olvm",
+                    "GOOGLE_CLIENT_ID=879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep.apps.googleusercontent.com",
+                    "GITKIT_URL_SCHEME=com.googleusercontent.apps.879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep",
                     "GCM_SENDER_ID=879679195736",
                     "GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
 				);
