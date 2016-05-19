@@ -36,17 +36,8 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>io.cleverpet.app.ios</string>
-				<string>${GITKIT_URL_SCHEME}</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
-			<string>gitkit</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>${GITKIT_URL_SCHEME}</string>
+				<string>com.googleusercontent.apps.289189234956-o85e2ra13mictrhdq49ilms02ehd9quf</string>
+				<string>com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75</string>
 			</array>
 		</dict>
 	</array>
