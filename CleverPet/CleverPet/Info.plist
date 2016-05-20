@@ -36,7 +36,8 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>io.cleverpet.app.ios</string>
-                <string>${REVERSED_GOOGLE_CLIENT_ID}</string>
+                <string>com.googleusercontent.apps.289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt</string>
+                <string>com.googleusercontent.apps.879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep</string>
 			</array>
 		</dict>
 		<dict>
@@ -46,7 +47,8 @@
 			<string>gitkit</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>${GITKIT_URL_SCHEME}</string>
+                <string>com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m</string>
+                <string>com.googleusercontent.apps.879679195763-kqen3kdr47jcn278lrjp3n7pek0u1hqt</string>
 			</array>
 		</dict>
 	</array>
