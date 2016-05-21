@@ -1061,6 +1061,7 @@
                     "GOOGLE_CLIENT_ID=879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep.apps.googleusercontent.com",
                     "REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep",
                     "GITKIT_URL_SCHEME=com.googleusercontent.apps.879679195763-kqen3kdr47jcn278lrjp3n7pek0u1hqt",
+                    "WIDGET_URL=http://dev-erpetcloud2.appspot.com/users/login/widget",
                     "GCM_SENDER_ID=879679195736",
                     "GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
 				);
@@ -1129,6 +1130,7 @@
                     "GOOGLE_CLIENT_ID=289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt.apps.googleusercontent.com",
                     "REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt",
                     "GITKIT_URL_SCHEME=com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m",
+                    "WIDGET_URL=http://v2-dot-cleverpetcloud.appspot.com/users/login/widget",
                     "GCM_SENDER_ID=289189234956",
                     "GOOGLE_APP_ID=1:289189234956:ios:d9ab24dfc54b3e17"
 				);

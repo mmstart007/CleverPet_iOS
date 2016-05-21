@@ -93,7 +93,7 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    
+
     self.registrationOptions = @{kGGLInstanceIDRegisterAPNSOption:deviceToken,
                              kGGLInstanceIDAPNSServerTypeSandboxOption:@YES};
     [self obtainGCMToken];
@@ -119,9 +119,9 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
 {
     GITClient *gitkitClient = [GITClient sharedInstance];
     gitkitClient.apiKey = @MACRO_VALUE(GITKIT_API_KEY);
-    gitkitClient.widgetURL = @"http://v2-dot-cleverpetcloud.appspot.com/users/login/widget";
+    gitkitClient.widgetURL = @MACRO_VALUE(WIDGET_URL);
     gitkitClient.providers = @[kGITProviderGoogle, kGITProviderFacebook];
-    
+
     NSString *gidClientID = @MACRO_VALUE(GOOGLE_CLIENT_ID);
     [GIDSignIn sharedInstance].clientID = gidClientID;
     NSLog(@"Using google client id %@", gidClientID);
