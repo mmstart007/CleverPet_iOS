@@ -1202,6 +1202,7 @@
                     "WIDGET_URL=http://dev-erpetcloud2.appspot.com/users/login/widget",
                     "GCM_SENDER_ID=879679195736",
                     "GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
+                );
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
