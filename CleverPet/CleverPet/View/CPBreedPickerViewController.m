@@ -18,7 +18,6 @@
 @property (weak, nonatomic) IBOutlet CPTextField *textField;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *separator;
-@property (nonatomic) BOOL shouldDisplayBreeds;
 
 @end
 
@@ -36,6 +35,8 @@
     self.tableView.backgroundColor = [UIColor appBackgroundColor];
     [self.tableView registerNib:[UINib nibWithNibName:@"CPSimpleTableViewCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.textField becomeFirstResponder];
+    self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -67,14 +68,11 @@
 //    
 //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF LIKE[cd] %@", wildcardString];
     
-    if ([string length] >= 2) {
-        self.shouldDisplayBreeds = YES;
-    }
     
-    if (self.shouldDisplayBreeds && [string length] > 0) {
+    if ([string length] > 0) {
         self.filteredBreeds = [[self.breedsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF CONTAINS[cd] %@", string]] mutableCopy];
     } else {
-        self.filteredBreeds = nil;
+        self.filteredBreeds = [self.breedsArray mutableCopy];
     }
     // Ensure we always have Mixed Breed as an option
     NSString *mixed = NSLocalizedString(@"Mixed Breed", @"Default option for breed selector");
