@@ -1029,10 +1029,11 @@
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
 					"SERVER_CONFIG_URL=dev",
 					"GITKIT_PROJECT_ID=dev-erpetcloud",
-                    "GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
+					"GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
 					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
-                    "GCM_SENDER_ID=879679195736",
-                    "GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
+					"GCM_SENDER_ID=879679195736",
+					"GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
+					"WIDGET_URL=v2-dot-cleverpetcloud.appspot.com/users/login/widget",
 				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1057,13 +1058,13 @@
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
 					"SERVER_CONFIG_URL=dev",
 					"GITKIT_PROJECT_ID=dev-erpetcloud2",
-                    "GITKIT_API_KEY=AIzaSyAHPnK9lIYQgtehjbTrSGD0Sic-vCBLEmA",
-                    "GOOGLE_CLIENT_ID=867813813689-uagq2ino7r0tngs3d4krpa7ropn3gk50.apps.googleusercontent.com",
-                    "REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.867813813689-uagq2ino7r0tngs3d4krpa7ropn3gk50",
-                    "GITKIT_URL_SCHEME=com.googleusercontent.apps.867813813689-q1tbafqa428b2qodkjl1f01mar3va12v",
-                    "WIDGET_URL=http://dev-erpetcloud.appspot.com/users/login/widget",
-                    "GCM_SENDER_ID=867813813689",
-                    "GOOGLE_APP_ID=1:867813813689:ios:d9ab24dfc54b3e17",
+					"GITKIT_API_KEY=AIzaSyAHPnK9lIYQgtehjbTrSGD0Sic-vCBLEmA",
+					"GOOGLE_CLIENT_ID=867813813689-uagq2ino7r0tngs3d4krpa7ropn3gk50.apps.googleusercontent.com",
+					"REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.867813813689-uagq2ino7r0tngs3d4krpa7ropn3gk50",
+					"GITKIT_URL_SCHEME=com.googleusercontent.apps.867813813689-q1tbafqa428b2qodkjl1f01mar3va12v",
+					"WIDGET_URL=http://dev-erpetcloud.appspot.com/users/login/widget",
+					"GCM_SENDER_ID=867813813689",
+					"GOOGLE_APP_ID=1:867813813689:ios:d9ab24dfc54b3e17",
 				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1127,12 +1128,12 @@
 					"SERVER_CONFIG_URL=prod",
 					"GITKIT_PROJECT_ID=cleverpetcloud",
 					"GITKIT_API_KEY=AIzaSyBh3jikpb_a6SPy3p1BB-XAUurZlS-DQvw",
-                    "GOOGLE_CLIENT_ID=289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt.apps.googleusercontent.com",
-                    "REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt",
-                    "GITKIT_URL_SCHEME=com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m",
-                    "WIDGET_URL=http://v2-dot-cleverpetcloud.appspot.com/users/login/widget",
-                    "GCM_SENDER_ID=289189234956",
-                    "GOOGLE_APP_ID=1:289189234956:ios:d9ab24dfc54b3e17",
+					"GOOGLE_CLIENT_ID=289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt.apps.googleusercontent.com",
+					"REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt",
+					"GITKIT_URL_SCHEME=com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m",
+					"WIDGET_URL=v2-dot-cleverpetcloud.appspot.com/users/login/widget",
+					"GCM_SENDER_ID=289189234956",
+					"GOOGLE_APP_ID=1:289189234956:ios:d9ab24dfc54b3e17",
 				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1195,14 +1196,15 @@
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
 					"SERVER_CONFIG_URL=dev",
 					"GITKIT_PROJECT_ID=dev-erpetcloud",
-                    "GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
-                    "GOOGLE_CLIENT_ID=879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep.apps.googleusercontent.com",
-                    "REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep",
-                    "GITKIT_URL_SCHEME=com.googleusercontent.apps.879679195763-kqen3kdr47jcn278lrjp3n7pek0u1hqt",
-                    "WIDGET_URL=http://dev-erpetcloud2.appspot.com/users/login/widget",
-                    "GCM_SENDER_ID=879679195736",
-                    "GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
-                );
+					"GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
+					"GOOGLE_CLIENT_ID=879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep.apps.googleusercontent.com",
+					"REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep",
+					"GITKIT_URL_SCHEME=com.googleusercontent.apps.879679195763-kqen3kdr47jcn278lrjp3n7pek0u1hqt",
+					"WIDGET_URL=http://dev-erpetcloud2.appspot.com/users/login/widget",
+					"GCM_SENDER_ID=879679195736",
+					"GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
+					"WIDGET_URL=v2-dot-cleverpetcloud.appspot.com/users/login/widget",
+				);
 				INFOPLIST_FILE = CleverPet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
