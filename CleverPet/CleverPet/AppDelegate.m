@@ -119,7 +119,8 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
 {
     GITClient *gitkitClient = [GITClient sharedInstance];
     gitkitClient.apiKey = @MACRO_VALUE(GITKIT_API_KEY);
-    gitkitClient.widgetURL = @MACRO_VALUE(WIDGET_URL);
+    NSString *widgetURL = @MACRO_VALUE(WIDGET_URL);
+    gitkitClient.widgetURL = [NSString stringWithFormat:@"http://%@", widgetURL];
     gitkitClient.providers = @[kGITProviderGoogle, kGITProviderFacebook];
 
     NSString *gidClientID = @MACRO_VALUE(GOOGLE_CLIENT_ID);
