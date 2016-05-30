@@ -1028,13 +1028,16 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
 					"SERVER_CONFIG_URL=dev",
+					"GCM_SENDER_ID=879679195763",
+					"SERVER_CONFIG_URL=stage",
 					"GITKIT_PROJECT_ID=dev-erpetcloud",
-					"GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
 					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
-					"GCM_SENDER_ID=879679195736",
+					"GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
 					"GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
 				);
+				GITKIT_URL_SCHEME = "com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75";
 				INFOPLIST_FILE = CleverPet/Info.plist;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
@@ -1055,16 +1058,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
+					"GCM_SENDER_ID=879679195763",
 					"SERVER_CONFIG_URL=dev",
 					"GITKIT_PROJECT_ID=dev-erpetcloud",
-                    "GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
-                    "GOOGLE_CLIENT_ID=879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep.apps.googleusercontent.com",
-                    "REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep",
-                    "GITKIT_URL_SCHEME=com.googleusercontent.apps.879679195763-kqen3kdr47jcn278lrjp3n7pek0u1hqt",
-                    "GCM_SENDER_ID=879679195736",
-                    "GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
+					"GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
+					"GOOGLE_CLIENT_ID=879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep.apps.googleusercontent.com",
+					"REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep",
+					"GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
 				);
+				GITKIT_URL_SCHEME = "com.googleusercontent.apps.879679195763-kqen3kdr47jcn278lrjp3n7pek0u1hqt";
 				INFOPLIST_FILE = CleverPet/Info.plist;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
@@ -1123,16 +1127,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
+					"GCM_SENDER_ID=289189234956",
 					"SERVER_CONFIG_URL=prod",
 					"GITKIT_PROJECT_ID=cleverpetcloud",
 					"GITKIT_API_KEY=AIzaSyBh3jikpb_a6SPy3p1BB-XAUurZlS-DQvw",
-                    "GOOGLE_CLIENT_ID=289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt.apps.googleusercontent.com",
-                    "REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt",
-                    "GITKIT_URL_SCHEME=com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m",
-                    "GCM_SENDER_ID=289189234956",
-                    "GOOGLE_APP_ID=1:289189234956:ios:d9ab24dfc54b3e17"
+					"GOOGLE_CLIENT_ID=289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt.apps.googleusercontent.com",
+					"REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt",
+					"GOOGLE_APP_ID=1:289189234956:ios:d9ab24dfc54b3e17",
 				);
+				GITKIT_URL_SCHEME = "com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m";
 				INFOPLIST_FILE = CleverPet/Info.plist;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
@@ -1191,14 +1196,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
+					"GCM_SENDER_ID=879679195763",
 					"SERVER_CONFIG_URL=stage",
 					"GITKIT_PROJECT_ID=dev-erpetcloud",
 					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
 					"GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
-					"GCM_SENDER_ID=879679195736",
 					"GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
 				);
+				GITKIT_URL_SCHEME = "com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75";
 				INFOPLIST_FILE = CleverPet/Info.plist;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;

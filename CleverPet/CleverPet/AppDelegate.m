@@ -153,7 +153,7 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
 
 - (void)obtainGCMToken
 {
-    [[GGLInstanceID sharedInstance] tokenWithAuthorizedEntity:@"879679195763"
+    [[GGLInstanceID sharedInstance] tokenWithAuthorizedEntity:@STR(GCM_SENDER_ID)
                                                         scope:kGGLInstanceIDScopeGCM
                                                       options:self.registrationOptions
                                                       handler:self.gcmHandler];
