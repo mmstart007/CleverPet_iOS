@@ -7,7 +7,11 @@
 //
 
 #import "SparkUserSignupViewController.h"
+#ifdef FRAMEWORK
+#import <ParticleSDK/ParticleSDK.h>
+#else
 #import "Spark-SDK.h"
+#endif
 #import "SparkUserLoginViewController.h"
 #import "SparkSetupWebViewController.h"
 #import "SparkSetupCustomization.h"

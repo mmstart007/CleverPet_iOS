@@ -9,24 +9,35 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "SparkSetupCustomization.h"
-#import "Spark-SDK.h"
+//#ifdef FRAMEWORK
+//#import <ParticleSDK/ParticleSDK.h>
+//#else
+//#import "Spark-SDK.h"
+//#endif
 
 typedef NS_ENUM(NSInteger, SparkSetupMainControllerResult) {
     SparkSetupMainControllerResultSuccess=1,
-    SparkSetupMainControllerResultFailure,
-    SparkSetupMainControllerResultUserCancel,
-    SparkSetupMainControllerResultLoggedIn, // relevant to initWithAuthenticationOnly:YES only
-    SparkSetupMainControllerResultSkippedAuth, // relevant to initWithAuthenticationOnly:YES only
-    SparkSetupMainControllerResultSuccessNotClaimed
-
+//    SparkSetupMainControllerResultFailure,                        // DEPRECATED starting 0.5.0
+    SparkSetupMainControllerResultUserCancel,                       // User cancelled setup
+    SparkSetupMainControllerResultLoggedIn,                         // relevant to initWithAuthenticationOnly:YES only (user successfully logged in)
+    SparkSetupMainControllerResultSkippedAuth,                      // relevant to initWithAuthenticationOnly:YES only (user skipped authentication)
+    SparkSetupMainControllerResultSuccessNotClaimed,                // Setup finished successfully but device does not belong to currently logged in user so cannot be determined if it came online
+    
+    SparkSetupMainControllerResultSuccessDeviceOffline,             // new 0.5.0 -- Setup finished successfully but device did not come online - might indicate a problem
+    SparkSetupMainControllerResultFailureClaiming,                  // new 0.5.0 -- setup was aborted because device claiming device timed out
+    SparkSetupMainControllerResultFailureConfigure,                 // new 0.5.0 -- Setup process couldn't send configure command to device - device Wi-fi network connection might have been dropped, running setup again after putting device back in listen mode is advised.
+    SparkSetupMainControllerResultFailureCannotDisconnectFromDevice,// new 0.5.0 -- Setup process couldn't disconnect from the device setup Wi-fi network. Usually an internal issue with the device, running setup again after putting device back in listen mode is advised.
+    SparkSetupMainControllerResultFailureLostConnectionToDevice     // new 0.5.0 -- Setup lost connection to the device Wi-Fi / dropped port before finalizing configuration process.
 };
 
 extern NSString *const kSparkSetupDidLogoutNotification;
 extern NSString *const kSparkSetupDidFinishNotification;
 extern NSString *const kSparkSetupDidFinishStateKey;
 extern NSString *const kSparkSetupDidFinishDeviceKey;
+extern NSString *const kSparkSetupDidFailDeviceIDKey;
 
 @class SparkSetupMainController;
+@class SparkDevice;
 
 @protocol SparkSetupMainControllerDelegate
 @required
@@ -38,6 +49,18 @@ extern NSString *const kSparkSetupDidFinishDeviceKey;
  *  @param device     SparkDevice instance in case the setup completed successfully and a SparkDevice was claimed to logged in user
  */
 - (void)sparkSetupViewController:(SparkSetupMainController *)controller didFinishWithResult:(SparkSetupMainControllerResult)result device:(SparkDevice *)device;
+
+@optional
+/**
+ *  Optional delegate method that will be called whenever SparkSetup wizard completes unsuccessfully in the following states: (new from 0.5.0)
+ *  SuccessDeviceOffline, FailureClaiming, FailutreConfigure, FailureCannotDisconnectFromDevice, LostConnectionToDevice, SuccessNotClaimed
+ *
+ *  @param controller Instance of main SparkSetup viewController
+ *  @param deviceID   Device ID string of the device which was last tried to be setup
+ */
+
+- (void)sparkSetupViewController:(SparkSetupMainController *)controller didNotSucceeedWithDeviceID:(NSString *)deviceID;
+
 @end
 
 
@@ -52,9 +75,9 @@ extern NSString *const kSparkSetupDidFinishDeviceKey;
  *  [self presentViewController:setupController animated:YES completion:nil];
  *  If no active user session exists than this call will also authenticate user to the Spark cloud (or allow her to sign up) before the soft AP wizard will be displayed
  *
- *  @return An inititalized SparkSetupMainController instance ready to be presented.
+ *  @return An initialized SparkSetupMainController instance ready to be presented.
  */
--(instancetype)init NS_DESIGNATED_INITIALIZER;
+-(instancetype)init; // NS_DESIGNATED_INITIALIZER;
 
 /**
  *  Entry point for invoking Spark Cloud authentication (login/signup/password recovery screens) only, use by calling this on your viewController:

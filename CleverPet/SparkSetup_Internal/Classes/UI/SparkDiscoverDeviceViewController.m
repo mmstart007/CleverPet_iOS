@@ -11,7 +11,11 @@
 #import "SparkSetupCommManager.h"
 #import "SparkSelectNetworkViewController.h"
 #import <Foundation/Foundation.h>
-#import "SparkCloud.h"
+#ifdef FRAMEWORK
+#import <ParticleSDK/ParticleSDK.h>
+#else
+#import "Spark-SDK.h"
+#endif
 #import "SparkSetupSecurityManager.h"
 #import "SparkSetupUILabel.h"
 //#import "UIViewController+SparkSetupCommManager.h"
@@ -427,7 +431,7 @@
                 if (!self.didGoToWifiListScreen)
                 {
 
-                    if ([SparkCloud sharedInstance].isLoggedIn)
+                    if ([SparkCloud sharedInstance].isAuthenticated)
                     {
                         // that means device is claimed by somebody else - we want to check that with user (and set claimcode if user wants to change ownership)
                         NSString *messageStr = [NSString stringWithFormat:@"This %@ is has been setup before, do you want to override ownership to %@?",[SparkSetupCustomization sharedInstance].deviceName,[SparkCloud sharedInstance].loggedInUsername];
