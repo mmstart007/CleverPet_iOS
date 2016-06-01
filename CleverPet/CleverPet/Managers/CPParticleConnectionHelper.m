@@ -8,6 +8,7 @@
 
 #import "CPParticleConnectionHelper.h"
 #import <SparkSetup/SparkSetup.h>
+#import <Spark-SDK/SparkCloud.h>
 
 NSString * const kParticleOrganizationName = @"particle_organization_name";
 NSString * const kParticleOrganizationSlug = @"particle_organization_slug";
@@ -100,7 +101,11 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
     // TODO: Spark ignores the refresh_token, but pass it along anyways
     newTokenInfo[@"refresh_token"] = tokenInfo[@"refresh_token"];
     
-    [[SparkCloud sharedInstance] loginWithAccessToken:newTokenInfo completion:completion];
+    BOOL accessTokenResult = [[SparkCloud sharedInstance] injectSessionAccessToken:tokenInfo[@"access_token"] withExpiryDate:expiryDate andRefreshToken:tokenInfo[@"refresh_token"]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        completion(accessTokenResult ? nil : [NSError errorWithDomain:@"CPParticleConnectionHelper" code:-1 userInfo:nil]);
+    });
 }
 
 - (void)presentSetupControllerOnController:(UINavigationController *)controller withDelegate:(id<CPParticleConnectionDelegate>)delegate
