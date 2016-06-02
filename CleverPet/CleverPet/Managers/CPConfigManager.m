@@ -75,7 +75,7 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
     if (!self.hubClaimingInProgress && (!self.configData || forceLoad)) {
 #if !USE_LOCAL_CONFIG
         BLOCK_SELF_REF_OUTSIDE();
-        NSString *configURL = [NSString stringWithFormat:@"https://storage.googleapis.com/cleverpet-app/configs/%s/config.json", MACRO_VALUE(SERVER_CONFIG_URL)];
+        NSString *configURL = [NSString stringWithFormat:@"https://storage.googleapis.com/cleverpet-app/configs/%s/config.json", "pilot"];
         NSLog(@"Using config url: %@", configURL);
         [self.sessionManager GET:configURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             BLOCK_SELF_REF_INSIDE();
