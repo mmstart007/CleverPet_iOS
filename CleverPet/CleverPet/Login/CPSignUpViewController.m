@@ -10,6 +10,7 @@
 #import "CPLoginController.h"
 #import "CPTextField.h"
 #import "CPLoadingView.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface CPSignUpViewController ()<UITextFieldDelegate>
 
@@ -25,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end
+
+NSInteger const kMinPasswordLength = 6;
 
 @implementation CPSignUpViewController
 
@@ -71,20 +74,39 @@
 {
     NSString *emailString = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
+    if ([emailString length] > kEmailMaxChars) {
+        [self displayErrorAlertWithTitle:nil andMessage:[NSString stringWithFormat:NSLocalizedString(@"Your email address must be less than %d characters", @"Error message displayed when email address exceeds max length"), kEmailMaxChars]];
+        return NO;
+    }
+    
     if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
         [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address")];
         return NO;
     }
     
-    if ([[self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] < 1) {
+    NSString *nameString = [self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([nameString length] < 1) {
         [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter a display name", @"Error message when trying to sign up with an invalid display name")];
         return NO;
     }
     
-    // TODO: Password verification before sending to identity toolkit
+    if ([nameString length] > kEmailMaxChars) {
+        [self displayErrorAlertWithTitle:nil andMessage:[NSString stringWithFormat:NSLocalizedString(@"Your name must be less than %d characters", @"Error message displayed when user name exceeds max length"), kEmailMaxChars]];
+        return NO;
+    }
     
     if ([self.passwordField.text length] < 1 || self.verifyField.text.length < 1) {
         [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter and verify your password", @"Error message when trying to sign up with missing password")];
+        return NO;
+    }
+    
+    if ([self.passwordField.text length] < kMinPasswordLength) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Password does not meet requirements", @"Title of alert displayed when attempting to sign up with a short password") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Your password must be a minimum of %d characters", @"Body of alert displayed when attempting to sign up with a short password"), kMinPasswordLength]];
+        return NO;
+    }
+    
+    if ([self.passwordField.text length] > kPasswordMaxChars) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Password does not meet requirements", @"Title of alert displayed when attempting to sign up with a long") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Your password must be a maximum of %d characters", @"Body of alert displayed when attempting to sign up with a long password"), kPasswordMaxChars]];
         return NO;
     }
     
@@ -100,8 +122,12 @@
 - (IBAction)signUpTapped:(id)sender
 {
     if ([self validateInput]) {
-        self.loginView.hidden = NO;
-        [[CPLoginController sharedInstance] signUpWithEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] displayName:[self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] andPassword:self.passwordField.text];
+        if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+            self.loginView.hidden = NO;
+            [[CPLoginController sharedInstance] signUpWithEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] displayName:[self.nameField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] andPassword:self.passwordField.text];
+        } else {
+            [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:OFFLINE_TEXT];
+        }
     }
 }
 

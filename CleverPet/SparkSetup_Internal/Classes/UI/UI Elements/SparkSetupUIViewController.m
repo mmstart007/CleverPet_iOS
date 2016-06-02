@@ -71,8 +71,8 @@
 
 -(void)disableKeyboardMovesViewUp
 {
-    // TODO: something less hacky
-    [self viewWillDisappear:NO];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 
 }
 #pragma mark public methods

@@ -55,7 +55,16 @@
 
 - (BOOL)isValidPetWeightText:(NSString *)text
 {
-    return [text rangeOfCharacterFromSet:self.invalidNumericalCharacters options:NSCaseInsensitiveSearch].location == NSNotFound;
+    //Allow for single decimal place
+    NSError *error = nil;
+    NSRegularExpression *tokenFinder = [NSRegularExpression regularExpressionWithPattern:@"[0-9]{1,3}(\\.[0-9])?" options:0 error:&error];
+    NSRegularExpression *periodFinder = [NSRegularExpression regularExpressionWithPattern:@"\\." options:0 error:&error];
+    NSInteger period = [periodFinder numberOfMatchesInString:text options:0 range:NSMakeRange(0, text.length)];
+    NSInteger result = [tokenFinder numberOfMatchesInString:text options:0 range:NSMakeRange(0, text.length)];
+    return (result <= 1 && period <= 1);
+    
+    //[text rangeOfCharacterFromSet:self.invalidNumericalCharacters options:NSCaseInsensitiveSearch].location == NSNotFound;
+    //return [text rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet] options:NSCaseInsensitiveSearch].location == NSNotFound;
 }
 
 @end

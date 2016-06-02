@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "CPTileSection.h"
 
+@class CPTileDataManager;
+@protocol CPTileDataManagerDelegate <NSObject>
+- (void)tileDataManager:(CPTileDataManager *)dataManager didDeleteRows:(NSIndexSet *)deletedRows updateRows:(NSIndexSet *)updatedRows insertRows:(NSIndexSet *)insertedRows fromRefresh:(BOOL)isFromRefresh;
+- (void)tileDataManager:(CPTileDataManager *)dataManager encounteredRefreshError:(NSError *)error;
+@end
+
 @interface CPTileDataManager : NSObject
 - (instancetype)initWithFilter:(NSString *)filter;
 - (NSUInteger)sectionCount;
@@ -19,11 +25,13 @@
 - (NSUInteger)rowCount;
 - (NSIndexPath *)indexPathFromCellIndex:(NSUInteger)cellIndex;
 
-- (NSIndexSet *)addTile:(CPTile *)tile;
-- (NSIndexSet *)deleteTile:(CPTile *)tile;
-- (BOOL)refreshTiles:(BOOL)forceRefresh completion:(void (^)(NSIndexSet *indexes, NSError *error))completion;
-- (ASYNC)pageMoreTiles:(void (^)(NSIndexSet *indexes, NSError *error))completion;
+- (BOOL)refreshTiles:(BOOL)forceRefresh;
+- (void)pageMoreTiles;
 - (void)clearBackingData;
 - (BOOL)allowPaging;
-- (void)forceNextRefresh;
+- (void)updateTile:(CPTile *)tile;
+- (id)deleteTile:(CPTile *)tile;
+- (void)petInfoUpdated;
+
+@property (weak, nonatomic) id<CPTileDataManagerDelegate> delegate;
 @end

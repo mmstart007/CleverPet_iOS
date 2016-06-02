@@ -12,11 +12,13 @@
 #import "CPParticleConnectionHelper.h"
 #import <Spark-SDK/SparkDevice.h>
 #import "CPFirebaseManager.h"
+#import "CPConfigManager.h"
 
 NSString * const kAppEngineBaseUrl = @"app_server_url";
 NSString * const kNewUserPath = @"users/new";
 NSString * const kUserLoginPath = @"users/login";
 NSString * const kUserLogoutPath = @"users/logout";
+NSString * const kUserEmailPath = @"users/email";
 NSString * const kUserInfoPath = @"users/info";
 NSString * const kPetProfilePath = @"animals";
 #define SPECIFIC_PET_PROFILE(petId) [NSString stringWithFormat:@"%@/%@", kPetProfilePath, petId]
@@ -24,15 +26,19 @@ NSString * const kPetProfilePath = @"animals";
 #define CREATE_DEVICE_FOR_ANIMAL(animalId) [NSString stringWithFormat:@"animals/%@/devices", animalId]
 NSString * const kDevicePath = @"devices";
 NSString * const kSchedulesPathFragment = @"schedules";
-NSString * const kModePathFragment = @"mode";
 NSString * const kParticlePathFragment = @"particle";
 NSString * const kLastSeenPathFragment = @"lastseen";
 #define SPECIFIC_DEVICE(deviceId) [NSString stringWithFormat:@"%@/%@", kDevicePath, deviceId]
 #define SPECIFIC_DEVICE_SCHEDULES(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment]
-#define SPECIFIC_DEVICE_MODE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kModePathFragment]
 #define SPECIFIC_DEVICE_PARTICLE(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kParticlePathFragment]
 #define DEVICE_LAST_SEEN(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kLastSeenPathFragment]
 #define SPECIFIC_SCHEDULE(deviceId, scheduleId) [NSString stringWithFormat:@"%@/%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment, scheduleId]
+
+#define PARTICLE_ENABLED 1
+
+#if !PARTICLE_ENABLED
+#warning #### Particle is not enabled! Please enable before checking in!
+#endif
 
 // TODO: error codes or something so this isn't string matching
 NSString * const kNoUserAccountError = @"No account exists for the given email address";
@@ -58,14 +64,26 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 - (void)applyConfig:(NSDictionary *)configData
 {
     // TODO: handle missing config
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    AFHTTPResponseSerializer *responseSerializer = [AFHTTPResponseSerializer serializer];
+    if (self.sessionManager) {
+        // If we already have a session manager, we want to transfer our request serializer across so we don't lose our auth header
+        requestSerializer = self.sessionManager.requestSerializer;
+        responseSerializer = self.sessionManager.responseSerializer;
+    }
     self.sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:configData[kAppEngineBaseUrl]]];
-    self.sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
-    self.sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    self.sessionManager.requestSerializer = requestSerializer;
+    self.sessionManager.responseSerializer = responseSerializer;
 }
 
 - (AFHTTPSessionManager*)getSessionManager
 {
     return self.sessionManager;
+}
+
+- (NSString*)currentAuthHeader
+{
+    return [self.sessionManager.requestSerializer valueForHTTPHeaderField:@"Authorization"];
 }
 
 #pragma mark - Login and user calls
@@ -121,6 +139,20 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     [self.sessionManager.requestSerializer setValue:nil forHTTPHeaderField:@"Authorization"];
 }
 
+- (ASYNC)forgotPasswordForEmail:(NSString *)email completion:(void (^)(NSError *error))completion {
+    BLOCK_SELF_REF_OUTSIDE();
+    [self.sessionManager POST:kUserEmailPath parameters:@{@"email":email, @"action":@"resetPassword"}
+                     progress:nil
+                      success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+                          if (completion) completion(nil);
+                      }
+                      failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                          BLOCK_SELF_REF_INSIDE();
+                          if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
+                      }];
+}
+
+
 - (ASYNC)userLoggedIn:(NSDictionary *)userInfo completion:(void (^)(CPLoginResult, NSError *))completion
 {
     CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
@@ -134,22 +166,30 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
             if (!currentUser.pet) {
                 result = CPLoginResult_UserWithoutPetProfile;
             } else if (!currentUser.device) {
-//                result = CPLoginResult_UserWithoutDevice;
+#if PARTICLE_ENABLED
+                result = CPLoginResult_UserWithoutDevice;
+#endif
             } else if (!currentUser.device.particleId) {
-//                result = CPLoginResult_UserWithoutParticle;
+#if PARTICLE_ENABLED
+                result = CPLoginResult_UserWithoutParticle;
+#endif
             }
             
-//            if ((currentUser.device && currentUser.device.particleId) && (!currentUser.device.weekdaySchedule || !currentUser.device.weekendSchedule)) {
-//                [self lookupDeviceSchedules:currentUser.device.deviceId completion:^(NSError *error) {
-//                    if (error) {
-//                        if (completion) completion(CPLoginResult_Failure, error);
-//                    } else {
-//                        if (completion) completion(result, nil);
-//                    }
-//                }];
-//            } else {
+#if PARTICLE_ENABLED
+            if ((currentUser.device && currentUser.device.particleId) && (!currentUser.device.weekdaySchedule || !currentUser.device.weekendSchedule)) {
+                [self lookupDeviceSchedules:currentUser.device.deviceId completion:^(NSError *error) {
+                    if (error) {
+                        if (completion) completion(CPLoginResult_Failure, error);
+                    } else {
+                        if (completion) completion(result, nil);
+                    }
+                }];
+            } else {
+#endif
                 if (completion) completion(result, nil);
-//            }
+#if PARTICLE_ENABLED
+            }
+#endif
         }
     };
     
@@ -239,11 +279,11 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     }];
 }
 
-- (ASYNC)updateDevice:(NSString *)deviceId mode:(NSString *)mode completion:(void (^)(NSError *))completion
+- (ASYNC)updateDevice:(NSString *)deviceId mode:(NSDictionary*)deviceInfo completion:(void (^)(NSError *))completion
 {
     NSParameterAssert(deviceId);
     BLOCK_SELF_REF_OUTSIDE();
-    [self.sessionManager PUT:SPECIFIC_DEVICE_MODE(deviceId) parameters:@{kModeKey:mode} success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [self.sessionManager PUT:SPECIFIC_DEVICE(deviceId) parameters:deviceInfo success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         BLOCK_SELF_REF_INSIDE();
         NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:nil];
         if (jsonResponse[kErrorKey]) {
@@ -361,6 +401,29 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 - (void)setAuthToken:(NSString *)authToken
 {
     [self.sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", authToken] forHTTPHeaderField:@"Authorization"];
+}
+
+- (ASYNC)performLogoutWithAuthHeader:(NSString *)authHeader completion:(void (^)(NSError *))completion
+{
+    NSString *serverUrl = [[CPConfigManager sharedInstance] getServerUrl];
+    if (serverUrl) {
+        
+        // Spin up a session manager so we don't mess with our regular auth
+        AFHTTPSessionManager *sessionManager = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:serverUrl]];
+        sessionManager.requestSerializer = [AFHTTPRequestSerializer serializer];
+        sessionManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [sessionManager.requestSerializer setValue:authHeader forHTTPHeaderField:@"Authorization"];
+                                                
+        BLOCK_SELF_REF_OUTSIDE();
+        [sessionManager PUT:kUserLogoutPath parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if (completion) completion(nil);
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            BLOCK_SELF_REF_INSIDE();
+            if (completion) completion([self convertAFNetworkingErrorToServerError:error]);
+        }];
+    } else {
+        if (completion) completion([self errorForMessage:@"Config not set up"]);
+    }
 }
 
 @end

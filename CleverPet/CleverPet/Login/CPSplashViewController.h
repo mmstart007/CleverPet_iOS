@@ -10,6 +10,6 @@
 
 @class GITAccount;
 
-@interface CPSplashViewController : UIViewController
+@interface CPSplashViewController : CPBaseViewController
 
 @end

@@ -10,8 +10,11 @@
 #import "CPAppEngineCommunicationManager.h"
 #import "CPFileUtils.h"
 #import "CPLoginController.h"
+#import "CPGCMManager.h"
 
 NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
+NSString * const kPendingLogoutGCMTokenKey = @"CPUserManager_gcmTokenKey";
+NSString * const kPendingLogoutUserAuthKey = @"CPUserManager_auth";
 
 @interface CPUserManager()
 
@@ -37,30 +40,21 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     self.currentUser = [[CPUser alloc] initWithDictionary:userInfo error:&error];
     // Update to use device time zone. Probably should pull this out
     [CPSharedUtils deviceTimeZoneUpdated:self.currentUser.device.timeZone];
+    // If our current user logged in, we don't need to worry about processing a pending logout for that user anymore
+    [self removeUserFromPendingLogouts:self.currentUser.userId];
 }
 
 - (void)userCreatedPet:(NSDictionary *)petInfo
 {
     NSError *error;
     self.currentUser.pet = [[CPPet alloc] initWithDictionary:petInfo error:&error];
+    self.currentUser.weightUnits = self.currentUser.weightUnits;
 }
 
 - (void)updatePetInfo:(NSDictionary *)petInfo withCompletion:(void (^)(NSError *))completion
 {
     NSDictionary *currentPetInfo = [self.currentUser.pet toDictionary];
-    BOOL shouldUpdate = NO;
-    // Don't need to do anything if no fields have been updated
-    for (NSString *key in petInfo) {
-        if (!currentPetInfo[key] || ![currentPetInfo[key] isEqual:petInfo[key]]) {
-            shouldUpdate = YES;
-            // Additional checking for weight, as passed in pet info will be a string, but toDict weight will be a number. Will have to do the same thing for any other primitives we may add
-            if ([key isEqualToString:kWeightKey]) {
-                shouldUpdate = [petInfo[key] integerValue] != [currentPetInfo[key] integerValue];
-            }
-            if (shouldUpdate) break;
-        }
-    }
-    
+    BOOL shouldUpdate = [self hasPetInfoChanged:petInfo];
     if (shouldUpdate) {
         NSError *error;
         [self.currentUser.pet mergeFromDictionary:petInfo useKeyMapping:YES error:&error];
@@ -68,18 +62,40 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
         BLOCK_SELF_REF_OUTSIDE();
         [[CPAppEngineCommunicationManager sharedInstance] updatePet:self.currentUser.pet.petId withInfo:petInfo completion:^(NSError *error) {
             BLOCK_SELF_REF_INSIDE();
-            // TODO: Handle failure somehow
             if (error) {
-                // reset back to original info
                 [self.currentUser.pet mergeFromDictionary:currentPetInfo useKeyMapping:YES error:nil];
-                completion(error);
+                if (completion) completion(error);
             } else {
-               completion(nil);
+                self.currentUser.weightUnits = self.currentUser.pet.weightUnits;
+                // Send notification if pets name or gender has changed
+                if (![currentPetInfo[kNameKey] isEqualToString:petInfo[kNameKey]] || ![currentPetInfo[kGenderKey] isEqualToString:petInfo[kGenderKey]]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:kPetInfoUpdated object:nil];
+                }
+                
+               if (completion) completion(nil);
             }
         }];
     }else {
-        completion(nil);
+        if (completion) completion(nil);
     }
+}
+
+- (BOOL)hasPetInfoChanged:(NSDictionary *)petInfo
+{
+    BOOL hasChanged = NO;
+    NSDictionary *currentPetInfo = [self.currentUser.pet toDictionary];
+    for (NSString *key in petInfo) {
+        if (!currentPetInfo[key] || ![currentPetInfo[key] isEqual:petInfo[key]]) {
+            hasChanged = YES;
+            // Additional checking for weight, as passed in pet info will be a string, but toDict weight will be a number. Will have to do the same thing for any other primitives we may add
+            if ([key isEqualToString:kWeightKey]) {
+                hasChanged = [petInfo[key] floatValue] != [currentPetInfo[key] floatValue];
+            }
+            if (hasChanged) break;
+        }
+    }
+    
+    return hasChanged;
 }
 
 - (void)updatePetPhoto:(UIImage *)image
@@ -97,22 +113,35 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     [CPSharedUtils deviceTimeZoneUpdated:self.currentUser.device.timeZone];
 }
 
-- (void)updateDeviceInfo:(NSDictionary *)deviceInfo
+- (void)updateDeviceInfo:(NSDictionary *)deviceInfo withCompletion:(void (^)(NSError *))completion
 {
+    __block NSInteger pendingRequests = 0;
+    __block NSError *blockError;
+    void (^requestFinished)(NSError *error) = ^(NSError *error){
+        if (error) {
+            blockError = error;
+        }
+        pendingRequests--;
+        if (pendingRequests == 0) {
+            if (completion) completion(blockError);
+        }
+    };
+    
     if (deviceInfo[kModeKey]) {
-        NSString *oldMode = self.currentUser.device.mode;
+        NSString *oldMode = self.currentUser.device.desiredMode;
         NSString *newMode = deviceInfo[kModeKey];
         if (![oldMode isEqualToString:newMode]) {
-            self.currentUser.device.mode = newMode;
-            
+            NSMutableDictionary *deviceUpdateDict = [[self.currentUser.device toDictionary] mutableCopy];
+            deviceUpdateDict[kDesiredModeKey] = newMode;
+            self.currentUser.device.desiredMode = newMode;
+            pendingRequests++;
             BLOCK_SELF_REF_OUTSIDE();
-            [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId mode:newMode completion:^(NSError *error) {
+            [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId mode:deviceUpdateDict completion:^(NSError *error) {
                 BLOCK_SELF_REF_INSIDE();
-                // TODO: Handle failure
                 if (error) {
-                    // Reset back to original mode
-                    self.currentUser.device.mode = oldMode;
+                    self.currentUser.device.desiredMode = oldMode;
                 }
+                requestFinished(error);
             }];
         }
     }
@@ -130,13 +159,12 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
             [schedule updateEndTime:endTime];
             NSDictionary *newSchedule = [schedule toDictionary];
             
-            BLOCK_SELF_REF_OUTSIDE();
+            pendingRequests++;
             [[CPAppEngineCommunicationManager sharedInstance] updateDevice:self.currentUser.device.deviceId schedule:schedule.scheduleId withInfo:newSchedule completion:^(NSError *error) {
-                BLOCK_SELF_REF_INSIDE();
                 if (error) {
-                    // TODO: handle failure
                     [schedule mergeFromDictionary:previousSchedule useKeyMapping:YES error:nil];
                 }
+                requestFinished(error);
             }];
         }
     };
@@ -150,6 +178,26 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
         NSDictionary *weekendSchedule = deviceInfo[kWeekendKey];
         scheduleHandler(self.currentUser.device.weekendSchedule, weekendSchedule);
     }
+}
+
+- (BOOL)hasDeviceInfoChanged:(NSDictionary *)deviceInfo
+{
+    return [self hasModeChanged:deviceInfo] || [self hasSchedule:self.currentUser.device.weekdaySchedule changed:deviceInfo[kWeekdayKey]] || [self hasSchedule:self.currentUser.device.weekendSchedule changed:deviceInfo[kWeekendKey]];
+}
+
+- (BOOL)hasModeChanged:(NSDictionary *)deviceInfo
+{
+    NSString *oldMode = self.currentUser.device.desiredMode;
+    NSString *newMode = deviceInfo[kModeKey];
+    return ![oldMode isEqualToString:newMode];
+}
+
+- (BOOL)hasSchedule:(CPDeviceSchedule *)schedule changed:(NSDictionary*)scheduleInfo
+{
+    NSInteger startTime = [scheduleInfo[kStartTimeKey] integerValue];
+    NSInteger endTime = [scheduleInfo[kEndTimeKey] integerValue];
+    
+    return schedule.startTime != startTime || schedule.endTime != endTime;
 }
 
 - (void)fetchedDeviceSchedules:(NSDictionary *)scheduleInfo
@@ -186,7 +234,7 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
     [[CPAppEngineCommunicationManager sharedInstance] logoutWithCompletion:^(NSError *error) {
         BLOCK_SELF_REF_INSIDE();
         if (!error) {
-            [self removeUserFromPendingLogouts:currentUser];
+            [self removeUserFromPendingLogouts:currentUser.userId];
         }
     }];
     [[CPLoginController sharedInstance] logout];
@@ -199,29 +247,47 @@ NSString * const kPendingLogouts = @"DefaultsKey_PendingLogouts";
 
 - (void)addUserToPendingLogouts:(CPUser*)user
 {
-    // Write our user id and device token to defaults so we can attempt to remove the push on the server at a later point if the logout call fails
-    NSMutableDictionary *pendingLogouts = [[[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts] mutableCopy];
-    if (!pendingLogouts) {
-        pendingLogouts = [NSMutableDictionary dictionary];
+    NSString *gcmToken = [[CPGCMManager sharedInstance] getToken];
+    if (gcmToken) {
+        // Write our user id and device token to defaults so we can attempt to remove the push on the server at a later point if the logout call fails
+        NSMutableDictionary *pendingLogouts = [[[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts] mutableCopy];
+        if (!pendingLogouts) {
+            pendingLogouts = [NSMutableDictionary dictionary];
+        }
+        
+        pendingLogouts[user.userId] = @{kPendingLogoutGCMTokenKey:gcmToken, kPendingLogoutUserAuthKey:[[CPAppEngineCommunicationManager sharedInstance] currentAuthHeader]};
+        [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    
-    // TODO: Add push token to user object
-    // TODO: we aren't getting user id back from the server, either figure out something to use as an identifier(email probably works), or ask for the id
-//    pendingLogouts[user.userId] = @"pushToken";
-    [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (void)removeUserFromPendingLogouts:(CPUser*)user
+- (void)removeUserFromPendingLogouts:(NSString*)userId
 {
     NSMutableDictionary *pendingLogouts = [[[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts] mutableCopy];
     if (!pendingLogouts) {
         return;
     }
     
-//    pendingLogouts[user.userId] = nil;
+    pendingLogouts[userId] = nil;
     [[NSUserDefaults standardUserDefaults] setObject:pendingLogouts forKey:kPendingLogouts];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)processPendingLogouts
+{
+    NSDictionary *pendingLogouts = [[NSUserDefaults standardUserDefaults] objectForKey:kPendingLogouts];
+    for (NSString *userId in [pendingLogouts allKeys]) {
+        NSDictionary *userInfo = pendingLogouts[userId];
+        BLOCK_SELF_REF_OUTSIDE();
+        [[CPAppEngineCommunicationManager sharedInstance] performLogoutWithAuthHeader:userInfo[kPendingLogoutUserAuthKey] completion:^(NSError *error) {
+            BLOCK_SELF_REF_INSIDE();
+            if (!error)
+            {
+                // No action to take on error, we just leave it in pending logouts to try again later
+                [self removeUserFromPendingLogouts:userId];
+            }
+        }];
+    }
 }
 
 @end

@@ -8,10 +8,19 @@
 
 #import <Foundation/Foundation.h>
 
+#define MACRO_NAME(f) #f
+#define MACRO_VALUE(f)  MACRO_NAME(f)
+
+extern NSString * const kConfigUpdatedNotification;
+extern NSString * const kConfigErrorKey;
+
 @interface CPConfigManager : NSObject
 
 + (instancetype)sharedInstance;
-- (ASYNC)loadConfigWithCompletion:(void (^)(NSError *error))completion;
+- (ASYNC)loadConfig:(BOOL)forceLoad completion:(void (^)(NSError *))completion;
 - (void)appEnteredForeground;
+- (NSString*)getServerUrl;
+- (void)hubClaimingBegan;
+- (void)hubClaimingEnded;
 
 @end

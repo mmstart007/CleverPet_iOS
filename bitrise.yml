@@ -1,0 +1,79 @@
+---
+format_version: 1.1.0
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+app:
+  envs:
+  - BITRISE_PROJECT_PATH: CleverPet/CleverPet.xcworkspace
+    opts:
+      is_expand: false
+  - BITRISE_SCHEME: CleverPet
+    opts:
+      is_expand: false
+trigger_map:
+- pattern: "*"
+  is_pull_request_allowed: true
+  workflow: primary
+workflows:
+  primary:
+    steps:
+    - activate-ssh-key@3.1.0:
+        title: Activate App SSH key
+        inputs:
+        - ssh_key_save_path: "$HOME/.ssh/steplib_ssh_step_id_rsa"
+    - git-clone@3.2.0: {}
+    - certificate-and-profile-installer@1.4.0: {}
+    - xcode-archive@1.7.1:
+        title: Archive DEV
+        inputs:
+        - project_path: CleverPet/CleverPet.xcworkspace
+        - configuration: DEV Release
+        - output_dir: "${BITRISE_DEPLOY_DIR}"
+    - script@1.1.0:
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            echo $BITRISE_IPA_PATH
+            cd $(dirname $BITRISE_IPA_PATH)
+            mv $BITRISE_IPA_PATH ./CleverPet-Dev.ipa
+        - runner_bin: "/bin/bash"
+          opts:
+            is_expand: true
+        - working_dir: ''
+    - xcode-archive@1.7.1:
+        title: Archive STAGE
+        inputs:
+        - project_path: CleverPet/CleverPet.xcworkspace
+        - configuration: STAGE Release
+        - output_dir: "${BITRISE_DEPLOY_DIR}"
+    - script@1.1.0:
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            echo $BITRISE_IPA_PATH
+            cd $(dirname $BITRISE_IPA_PATH)
+            mv $BITRISE_IPA_PATH ./CleverPet-Stage.ipa
+        - runner_bin: "/bin/bash"
+          opts:
+            is_expand: true
+        - working_dir: ''
+    - xcode-archive@1.7.1:
+        title: Archive PROD
+        inputs:
+        - project_path: CleverPet/CleverPet.xcworkspace
+        - configuration: PROD Release
+        - output_dir: "${BITRISE_DEPLOY_DIR}"
+    - script@1.1.0:
+        inputs:
+        - content: |-
+            #!/bin/bash
+
+            echo $BITRISE_IPA_PATH
+            cd $(dirname $BITRISE_IPA_PATH)
+            mv $BITRISE_IPA_PATH ./CleverPet-Prod.ipa
+        - runner_bin: "/bin/bash"
+          opts:
+            is_expand: true
+        - working_dir: ''
+    - deploy-to-bitrise-io@1.2.2: {}

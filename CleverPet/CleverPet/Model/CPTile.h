@@ -39,6 +39,9 @@ typedef NS_ENUM(NSUInteger){
 @property (nonatomic, strong) NSString *tileId;
 @property (nonatomic, strong) NSString<Optional> *title;
 @property (nonatomic, assign) BOOL userDeletable;
+
+@property (nonatomic, strong) NSNumber<Optional> *removed;
+
 // TODO: can probably remove
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) NSURL<Optional> *videoThumbnailUrl;
@@ -55,5 +58,6 @@ typedef NS_ENUM(NSUInteger){
 
 @property (strong, nonatomic) CPGraph<Optional> *graph;
 
-+(void)setTimeZoneOffset:(NSInteger)offset;
+- (void)clearParsedBody;
+
 @end

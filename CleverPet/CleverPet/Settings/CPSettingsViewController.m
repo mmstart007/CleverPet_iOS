@@ -8,12 +8,12 @@
 
 #import "CPSettingsViewController.h"
 #import <Intercom/Intercom.h>
-#import "CPAppEngineCommunicationManager.h"
 #import "CPUserManager.h"
-#import <AFNetworking/AFNetworkReachabilityManager.h>
 #import "CPHubSettingsViewController.h"
 #import "CPHubPlaceholderViewController.h"
 #import "CPParticleConnectionHelper.h"
+#import "CPHubStatusManager.h"
+#import "CPAppEngineCommunicationManager.h"
 
 NSUInteger const kDeviceSection = 0;
 NSUInteger const kHelpSection = 1;
@@ -22,8 +22,6 @@ NSUInteger const kAccountSection = 2;
 NSUInteger const kHelpSectionChatWithUsRow = 0;
 NSUInteger const kDeviceSectionHubSettingsRow = 0;
 NSUInteger const kDeviceSectionHubSetupRow = 1;
-
-NSInteger const kLastSeenThreshhold = 120;
 
 @interface CPSettingsBasicCell : UITableViewCell
 
@@ -38,7 +36,7 @@ NSInteger const kLastSeenThreshhold = 120;
 @property (weak, nonatomic) IBOutlet UIView *indicatorDot;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
-- (void)updateWithHubConnection:(HubConnectionState)connectionState;
+- (void)updateWithHubConnection:(HubConnectionState)connectionState withTimestamp:(NSString*)updateTime;
 
 @end
 
@@ -49,6 +47,8 @@ NSInteger const kLastSeenThreshhold = 120;
 @property (nonatomic, assign) BOOL checkingHubStatus;
 @property (nonatomic, assign) HubConnectionState connectionState;
 @property (nonatomic, strong) CPHubPlaceholderViewController *hubPlaceholder;
+@property (nonatomic, strong) CPHubStatusHandle updateHandle;
+@property (nonatomic, strong) NSDateFormatter *formatter;
 
 @end
 
@@ -61,21 +61,32 @@ NSInteger const kLastSeenThreshhold = 120;
     self.tableView.separatorColor = [UIColor appBackgroundColor];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    // TODO: button image
-    [button setImage:[UIImage imageNamed:@"menu"] forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(0, 0, 40, 40)];
+    [button setTitle:NSLocalizedString(@"Done", nil) forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
+    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor appTealColor]];
+    [button sizeToFit];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     [button addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = barButton;
     self.pseudoBackButton = barButton;
     self.connectionState = HubConnectionState_Unknown;
+    
+    self.formatter = [[NSDateFormatter alloc] init];
+    self.formatter.timeStyle = NSDateFormatterShortStyle;
+    
+    // Listen for hub status updates
+    BLOCK_SELF_REF_OUTSIDE();
+    self.updateHandle = [[CPHubStatusManager sharedInstance] registerForHubStatusUpdates:^(HubConnectionState status) {
+        BLOCK_SELF_REF_INSIDE();
+        self.connectionState = status;
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [self updateHubStatus];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,32 +94,17 @@ NSInteger const kLastSeenThreshhold = 120;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setConnectionState:(HubConnectionState)connectionState
+- (void)dealloc
 {
-    _connectionState = connectionState;
-    [self.hubCell updateWithHubConnection:_connectionState];
+    [[CPHubStatusManager sharedInstance] unregisterForHubStatusUpdates:self.updateHandle];
 }
 
-- (void)updateHubStatus
+- (void)setConnectionState:(HubConnectionState)connectionState
 {
-    if(!self.checkingHubStatus) {
-        // Check if we're offline
-        if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
-            self.connectionState = HubConnectionState_Offline;
-        } else {
-            self.checkingHubStatus = YES;
-            BLOCK_SELF_REF_OUTSIDE();
-            [[CPAppEngineCommunicationManager sharedInstance] checkDeviceLastSeen:[[CPUserManager sharedInstance] getCurrentUser].device.deviceId completion:^(NSInteger delta, NSError *error) {
-                BLOCK_SELF_REF_INSIDE();
-                self.checkingHubStatus = NO;
-                if (error || delta == NSNotFound || delta > kLastSeenThreshhold) {
-                    self.connectionState = HubConnectionState_Disconnected;
-                } else {
-                    self.connectionState = HubConnectionState_Connected;
-                }
-            }];
-        }
+    if (_connectionState != connectionState) {
+        _connectionState = connectionState;
     }
+    [self.hubCell updateWithHubConnection:_connectionState withTimestamp:[self.formatter stringFromDate:[NSDate date]]];
 }
 
 #pragma mark - IBActions
@@ -120,7 +116,6 @@ NSInteger const kLastSeenThreshhold = 120;
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // TODO: check hub state
     if ((section == kHelpSection && YES) || section == kDeviceSection) {
         return 2;
     }
@@ -198,7 +193,7 @@ NSInteger const kLastSeenThreshhold = 120;
             [self performSegueWithIdentifier:@"hubSettings" sender:nil];
         } else if (indexPath.row == kDeviceSectionHubSetupRow) {
             CPHubPlaceholderViewController *vc = [[UIStoryboard storyboardWithName:@"Login" bundle:nil] instantiateViewControllerWithIdentifier:@"HubPlaceholder"];
-            vc.message = NSLocalizedString(@"Press Continue to continue with Hub setup.\n\nIf you connect to a new Hub, this will result in your current hub being unlinked from your account.", @"Message displayed to user when performing hub setup from the settings");
+            vc.message = NSLocalizedString(@"Press Continue to begin Hub setup.\n\nIf you connect to a new Hub, this will result in your current Hub being unlinked from your account.", @"Message displayed to user when performing hub setup from the settings");
             vc.delegate = self;
             vc.shouldConfirmCancellation = NO;
             self.hubPlaceholder = vc;
@@ -241,17 +236,14 @@ NSInteger const kLastSeenThreshhold = 120;
 
 - (void)deviceClaimFailed
 {
-    [self.hubPlaceholder displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
+    [self.hubPlaceholder displayMessage:NSLocalizedString(@"Uh oh! Your Hub didn't connect to WiFi. Is the WiFi signal where you put the Hub strong enough? Was the password entered correctly?\n\nLet's try connecting again. Make sure your phone is no longer connected to the Hub's network.\n\nUnplug the Hub from the wall, then plug back in. When the light on the Hub dome flashes blue, press Continue.", @"Message displayed to user when particle device claim fails")];
 }
 
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.destinationViewController isKindOfClass:[CPHubSettingsViewController class]]) {
-        CPHubSettingsViewController *vc = segue.destinationViewController;
-        vc.connectionState = self.connectionState;
-    }
+    
 }
 
 @end
@@ -291,7 +283,7 @@ NSInteger const kLastSeenThreshhold = 120;
     self.accessoryView = imageView;
 }
 
-- (void)updateWithHubConnection:(HubConnectionState)connectionState;
+- (void)updateWithHubConnection:(HubConnectionState)connectionState withTimestamp:(NSString*)updateTime
 {
     switch (connectionState) {
         case HubConnectionState_Unknown:
@@ -303,19 +295,19 @@ NSInteger const kLastSeenThreshhold = 120;
         case HubConnectionState_Connected:
         {
             self.indicatorDot.backgroundColor = [UIColor appHubOnlineColor];
-            self.statusLabel.text = NSLocalizedString(@"On", @"Hub status when the hub is reachable");
+            self.statusLabel.text =[NSString stringWithFormat: NSLocalizedString(@"On. Last updated %@", @"Hub status when the hub is reachable"), updateTime];
             break;
         }
         case HubConnectionState_Disconnected:
         {
             self.indicatorDot.backgroundColor = [UIColor appHubOfflineColor];
-            self.statusLabel.text = NSLocalizedString(@"Disconnected", @"Hub status when the hub is not reachable");
+            self.statusLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Disconnected. Last updated %@", @"Hub status when the hub is not reachable, %@ = last updated time"), updateTime];
             break;
         }
         case HubConnectionState_Offline:
         {
             self.indicatorDot.backgroundColor = [UIColor appHubOfflineColor];
-            self.statusLabel.text = NSLocalizedString(@"No Data", @"Hub status when phone is offline");
+            self.statusLabel.text = [NSString stringWithFormat:NSLocalizedString(@"No Data. Last updated %@", @"Hub status when phone is offline"), updateTime];;
             break;
         }
     }

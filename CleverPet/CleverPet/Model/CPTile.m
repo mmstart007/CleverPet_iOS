@@ -51,7 +51,7 @@
 - (NSAttributedString *)parsedBody {
     if (!_parsedBody) {
         // TODO: pass the pet in somewhere?
-        _parsedBody = [[CPTileTextFormatter instance] formatTileText:self.message forPet:[[CPUserManager sharedInstance] getCurrentUser].pet];
+        _parsedBody = [[CPTileTextFormatter instance] formatMarkdownText:self.message forPet:[[CPUserManager sharedInstance] getCurrentUser].pet];
     }
 
     return _parsedBody;
@@ -104,6 +104,11 @@
 - (void)setMessage:(NSString *)message {
     self.parsedBody = nil;
     _message = message;
+}
+
+- (void)clearParsedBody
+{
+    _parsedBody = nil;
 }
 
 @end

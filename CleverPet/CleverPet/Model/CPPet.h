@@ -17,7 +17,8 @@
 @property (nonatomic, strong) NSString *familyName;
 @property (nonatomic, strong) NSString *gender;
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, assign) NSInteger weight;
+@property (nonatomic, assign) CGFloat weight;
+@property (nonatomic, strong) NSString<Optional> *weightUnits;
 
 // TODO: Score/protocol/other nonsense
 

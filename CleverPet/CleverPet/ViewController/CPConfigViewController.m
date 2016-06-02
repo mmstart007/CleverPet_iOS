@@ -8,8 +8,9 @@
 
 #import "CPConfigViewController.h"
 #import "CPSplashImageUtils.h"
+#import "CPConfigManager.h"
 
-NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
+NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 2; // 2 seconds
 
 @interface CPConfigViewController ()
 
@@ -18,6 +19,8 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (nonatomic, strong) NSDate *loadedDate;
 @property (nonatomic, strong) NSTimer *dismissTimer;
+@property (weak, nonatomic) IBOutlet UIView *fade;
+@property (weak, nonatomic) IBOutlet UIButton *retryButton;
 
 @end
 
@@ -32,6 +35,12 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
     self.messageLabel.font = [UIFont cpLightFontWithSize:15 italic:NO];
     self.messageLabel.textColor = [UIColor appTitleTextColor];
     self.backgroundImage.image = [CPSplashImageUtils getSplashImage];
+    self.fade.layer.cornerRadius = 10.f;
+    
+    self.retryButton.backgroundColor = [UIColor appLightTealColor];
+    [self.retryButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    self.retryButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:0];
+    self.retryButton.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,12 +62,15 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
         [self.spinner stopAnimating];
     }
     self.messageLabel.hidden = !isAnimating;
+    self.fade.hidden = !isAnimating;
+    self.retryButton.hidden = YES;
 }
 
 - (void)displayErrorAlertWithTitle:(NSString *)title andMessage:(NSString *)message
 {
     [self setAnimating:NO];
     [super displayErrorAlertWithTitle:title andMessage:message];
+    self.retryButton.hidden = NO;
 }
 
 - (void)dismiss
@@ -76,6 +88,12 @@ NSTimeInterval const kCPConfigViewControllerMinimumTimeVisible = 5; // 5 seconds
 {
     self.dismissTimer = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)retryTapped:(id)sender
+{
+    // Trigger config manager to load config
+    [[CPConfigManager sharedInstance] appEnteredForeground];
 }
 
 /*

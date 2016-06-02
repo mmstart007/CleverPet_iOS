@@ -14,6 +14,7 @@
 #import "CPPetPhotoViewController.h"
 #import "CPUserManager.h"
 #import "CPGenderUtils.h"
+#import "CPLoadingView.h"
 
 @interface CPProfileSettingsViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate, CPPetPhotoDelegate, UIScrollViewDelegate>
 
@@ -50,7 +51,9 @@
 
 @property (nonatomic, strong) CPPet *pet;
 @property (nonatomic, weak) UIBarButtonItem *pseudoBackButton;
+@property (nonatomic, weak) UIBarButtonItem *saveButton;
 @property (nonatomic, weak) UITapGestureRecognizer *logoutRecognizer;
+@property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
 
 @end
 
@@ -63,16 +66,27 @@
     // TODO: populate fields from pet profile object
     
     self.textFields = @[self.nameField, self.familyNameField, self.breedField, self.weightField, self.genderField, self.neuteredField];
-    self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
+
     self.textValidator = [[CPTextValidator alloc] init];
     
     self.pet = [[CPUserManager sharedInstance] getCurrentUser].pet;
     self.petImage.image = [self.pet petPhoto];
     
+    if ([self.pet.weightUnits isEqualToString:@"kg"]) {
+        [self.weightUnitSelector setSelectedSegmentIndex:1];
+    }
+    
+    self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
+    
     self.nameField.text = self.pet.name;
     self.familyNameField.text = self.pet.familyName;
     self.breedField.text = self.pet.breed;
-    self.weightField.text = [NSString stringWithFormat:@"%ld %@", (long)self.pet.weight, self.weightDescriptor];
+    if (self.pet.weight == roundf(self.pet.weight)) {
+        self.weightField.text = [NSString stringWithFormat:@"%ld %@", (long)self.pet.weight, self.weightDescriptor];
+    }else {
+       self.weightField.text = [NSString stringWithFormat:@"%.1f %@", self.pet.weight, self.weightDescriptor];
+    }
+    
     // Uppercase first letter of word, since it's all lower case coming from the server
     self.genderField.text = [self.pet.gender stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[self.pet.gender substringToIndex:1] uppercaseString]];
     self.neuteredField.text = [CPGenderUtils stringForAlteredState:self.pet.altered withGender:self.pet.gender];
@@ -81,15 +95,26 @@
     [self setupStyling];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    // TODO: button image
-    [button setTitle:@"Back" forState:UIControlStateNormal];
+    [button setTitle:@"Cancel" forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
-    [button sizeToFit];
     [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor appTealColor]];
+    button.frame = CGRectMake(0, 0, 50, 40);
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     [button addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItem = barButton;
     self.pseudoBackButton = barButton;
+    
+    button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setTitle:@"Save" forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
+    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    [button setTintColor:[UIColor appTealColor]];
+    [button sizeToFit];
+    barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [button addTarget:self action:@selector(saveButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = barButton;
+    self.saveButton = barButton;
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(logoutTapped:)];
     [self.logoutContainer addGestureRecognizer:recognizer];
@@ -101,12 +126,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // Mess with our title so we get the appropriate back button
+    self.title = @"Profile";
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
     REG_SELF_FOR_NOTIFICATION(UIKeyboardWillShowNotification, keyboardWillShow:);
     REG_SELF_FOR_NOTIFICATION(UIKeyboardWillHideNotification, keyboardWillHide:);
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.view endEditing:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -130,7 +168,7 @@
     self.editImageButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.editImageButton setTitleColor:[UIColor appWhiteColor] forState:UIControlStateNormal];
     
-    self.weightUnitSelector.tintColor = [UIColor appTextFieldPlaceholderColor];
+    self.weightUnitSelector.tintColor = [UIColor darkGrayColor];
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
     
@@ -170,25 +208,48 @@
 
 - (void)backButtonTapped:(id)sender
 {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)saveButtonTapped:(id)sender
+{
+    [self.view endEditing:YES];
     NSString *alteredString = [CPGenderUtils genderNeutralStringForAlteredState:self.neuteredField.text];
     if ([alteredString length] == 0) {
         alteredString = kGenderNeutralUnspecified;
     }
-    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kAlteredKey:alteredString};
+    
+    //Convert wieght to lbs to be saved on the server
+    NSString *weight = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
+    if ([self.weightDescriptor isEqualToString:@"kgs"]) {
+        CGFloat convertedWeight = [weight floatValue]*kLbsToKgs;
+        weight = [NSString stringWithFormat:@"%.1f", convertedWeight];
+    }
+    
+    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyNameField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:weight, kAlteredKey:alteredString, kWeightUnits : [self.weightDescriptor stringByReplacingOccurrencesOfString:@"s" withString:@""]};
     [CPPet validateInput:petInfo isInitialSetup:NO completion:^(BOOL isValidInput, NSString *errorMessage) {
         if (isValidInput) {
-            [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:^(NSError *error) {
-                if (error) {
-                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Unable to Save", nil) message:error.localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-                    [alert addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            if ([[CPUserManager sharedInstance] hasPetInfoChanged:petInfo]) {
+                
+                [self showLoading:YES];
+                BLOCK_SELF_REF_OUTSIDE();
+                [[CPUserManager sharedInstance] updatePetInfo:petInfo withCompletion:^(NSError *error) {
+                    BLOCK_SELF_REF_INSIDE();
+                    [self showLoading:NO];
+                    if (error) {
+                        // Verify we even have a network connection before this nonsense
+                        if ([error isOfflineError]) {
+                            [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:OFFLINE_TEXT];
+                        } else {
+                            [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:error.localizedDescription];
+                        }
+                    } else {
                         [self.navigationController popViewControllerAnimated:YES];
-                    }]];
-                    [self presentViewController:alert animated:YES completion:nil];
-                } else {
-                    [self.navigationController popViewControllerAnimated:YES];
-                }
-            }];
-
+                    }
+                }];
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         } else {
             [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", nil) andMessage:errorMessage];
         }
@@ -197,7 +258,23 @@
 
 - (void)logoutTapped:(UITapGestureRecognizer*)recognizer
 {
-    [[CPUserManager sharedInstance] logout];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"Are you sure you want to sign out?", @"Confirmation message displayed to user when logging out") preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:CANCEL_TEXT style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *logoutAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Sign Out", @"Logout confirmation button text") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [[CPUserManager sharedInstance] logout];
+    }];
+    
+    [alert addAction:cancelAction];
+    [alert addAction:logoutAction];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void)showLoading:(BOOL)loading
+{
+    self.loadingView.hidden = !loading;
+    self.pseudoBackButton.enabled = !loading;
+    self.saveButton.enabled = !loading;
 }
 
 #pragma mark - UITextFieldDelegate methods
@@ -205,6 +282,34 @@
 {
     if (textField == self.weightField) {
         self.weightField.text = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
+    } else if (textField == self.genderField) {
+        if (!self.genderPicker) {
+            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+            CPPickerViewController *genderPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
+            [genderPicker setupForPickingGender];
+            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
+            [genderPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
+            genderPicker.delegate = self;
+            textField.inputView = genderPicker.view;
+            self.genderPicker = genderPicker;
+        }
+    } else if (textField == self.neuteredField) {
+        if (!self.neuteredPicker) {
+            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+            CPPickerViewController *neuteredPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
+            [neuteredPicker setupForPickingNeuteredWithGender:[self.genderField.text lowercaseString]];
+            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
+            [neuteredPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
+            neuteredPicker.delegate = self;
+            textField.inputView = neuteredPicker.view;
+            self.neuteredPicker = neuteredPicker;
+        }
+    } else if (textField == self.breedField) {
+        UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
+        CPBreedPickerViewController *vc = [pickerStoryboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
+        vc.delegate = self;
+        vc.selectedBreed = self.breedField.text;
+        [self presentViewController:vc animated:YES completion:nil];
     }
 }
 
@@ -240,42 +345,6 @@
     return NO;
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    if (textField == self.genderField) {
-        if (!self.genderPicker) {
-            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
-            CPPickerViewController *genderPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
-            [genderPicker setupForPickingGender];
-            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
-            [genderPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
-            genderPicker.delegate = self;
-            textField.inputView = genderPicker.view;
-            self.genderPicker = genderPicker;
-        }
-    } else if (textField == self.neuteredField) {
-        if (!self.neuteredPicker) {
-            UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
-            CPPickerViewController *neuteredPicker = [pickerStoryboard instantiateViewControllerWithIdentifier:@"Picker"];
-            [neuteredPicker setupForPickingNeuteredWithGender:[self.genderField.text lowercaseString]];
-            // Update the picker height, allowing it to take up at most half the screen(we shouldn't ever have to be larger than the table content size with the current number of rows)
-            [neuteredPicker updateHeightWithMaximum:self.view.bounds.size.height*.5f];
-            neuteredPicker.delegate = self;
-            textField.inputView = neuteredPicker.view;
-            self.neuteredPicker = neuteredPicker;
-        }
-    } else if (textField == self.breedField) {
-        UIStoryboard *pickerStoryboard = [UIStoryboard storyboardWithName:@"Pickers" bundle:nil];
-        CPBreedPickerViewController *vc = [pickerStoryboard instantiateViewControllerWithIdentifier:@"BreedPicker"];
-        vc.delegate = self;
-        vc.selectedBreed = self.breedField.text;
-        [self presentViewController:vc animated:YES completion:nil];
-        return NO;
-    }
-    
-    return YES;
-}
-
 #pragma mark - CPPickerDelegate methods
 - (void)pickerViewController:(CPPickerViewController *)controller selectedString:(NSString *)string
 {
@@ -306,7 +375,7 @@
 {
     [[CPUserManager sharedInstance] updatePetPhoto:image];
     self.petImage.image = [self.pet petPhoto];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Navigation
@@ -314,6 +383,7 @@
 {
     if ([segue.destinationViewController isKindOfClass:[CPPetPhotoViewController class]])
     {
+        self.title = CANCEL_TEXT;
         CPPetPhotoViewController *photoPicker = segue.destinationViewController;
         photoPicker.delegate = self;
         photoPicker.selectedImage = [self.pet petPhotoForPicker];

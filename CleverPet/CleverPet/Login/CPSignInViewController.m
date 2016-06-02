@@ -10,6 +10,7 @@
 #import "CPLoginController.h"
 #import "CPTextField.h"
 #import "CPLoadingView.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
 
 @interface CPSignInViewController ()<UITextFieldDelegate>
 
@@ -68,31 +69,64 @@
     self.cancelButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
-- (BOOL)validateInput
+- (NSString *)validateInput
 {
     NSString *emailString = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *errorMessage;
     
-    if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
-        [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address")];
-        return NO;
+    if ([emailString length] > kEmailMaxChars) {
+        errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Your email address must be less than %d characters", @"Error message displayed when email address exceeds max length"), kEmailMaxChars];
     }
     
-    return YES;
+    if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
+        errorMessage = NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address");
+    }
+    
+    if (errorMessage) {
+        [self displayErrorAlertWithTitle:nil andMessage:errorMessage];
+        return nil;
+    }
+    
+    return emailString;
 }
 
 #pragma mark - IBActions
 - (IBAction)forgotPasswordTapped:(id)sender
 {
-    
+    NSString *emailString = [self validateInput];
+    self.loadingView.hidden = NO;
+    BLOCK_SELF_REF_OUTSIDE();
+    [[CPLoginController sharedInstance] forgotPasswordForEmail:emailString withCompletion:^(NSError *error) {
+        BLOCK_SELF_REF_INSIDE();
+        self.loadingView.hidden = YES;
+        if (error) {
+            if ([error isOfflineError]) {
+                [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:OFFLINE_TEXT];
+            } else {
+                [self displayErrorAlertWithTitle:ERROR_TEXT andMessage:NSLocalizedString(@"Unable to send forgot password email.", @"There was an error when trying to send the forgot password email.")];
+            }
+        } else {
+            [self displayErrorAlertWithTitle:NSLocalizedString(@"Email Sent", @"Title for forgot password email confirmation.") andMessage:[NSString stringWithFormat:NSLocalizedString(@"An email was sent to %@ with instructions on how to reset your password.", @"Email sent to the user's address to let them reset their password."), emailString]];
+        }
+    }];
 }
 
 - (IBAction)signInTapped:(id)sender
 {
     if ([self validateInput]) {
         self.loadingView.hidden = NO;
-        [[CPLoginController sharedInstance] verifyPassword:self.passwordField.text forEmail:self.emailField.text failure:^{
+        [[CPLoginController sharedInstance] verifyPassword:self.passwordField.text forEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] failure:^{
             self.loadingView.hidden = YES;
-            [self displayErrorAlertWithTitle:NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails") andMessage:NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails")];
+            NSString *title;
+            NSString *message;
+            if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+                title = NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails");
+                message = NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails");
+            } else {
+                title = ERROR_TEXT;
+                message = OFFLINE_TEXT;
+            }
+            [self displayErrorAlertWithTitle:title andMessage:message];
         }];
     }
 }

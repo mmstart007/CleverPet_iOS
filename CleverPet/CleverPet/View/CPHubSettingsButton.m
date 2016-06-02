@@ -65,11 +65,15 @@ CGFloat const kHubButtonBorderWidth = 3.f;
 
 - (void)setupImages
 {
+    self.contentMode = UIViewContentModeRight;
+    self.imageView.contentMode = UIViewContentModeRight;
     self.backgroundColor = [UIColor clearColor];
-    [self setBackgroundImage:[CPHubSettingsButton unselectedImage] forState:UIControlStateNormal];
-    [self setBackgroundImage:[CPHubSettingsButton unselectedImage] forState:UIControlStateHighlighted|UIControlStateSelected];
-    [self setBackgroundImage:[CPHubSettingsButton selectedImage] forState:UIControlStateHighlighted];
-    [self setBackgroundImage:[CPHubSettingsButton selectedImage] forState:UIControlStateSelected];
+    // Monkey with the insets to get the image to align to the right
+    self.imageEdgeInsets = UIEdgeInsetsMake(0, self.bounds.size.width - (kHubButtonSize + 2*kHubButtonBorderWidth), 0, 0);
+    [self setImage:[CPHubSettingsButton unselectedImage] forState:UIControlStateNormal];
+    [self setImage:[CPHubSettingsButton unselectedImage] forState:UIControlStateHighlighted|UIControlStateSelected];
+    [self setImage:[CPHubSettingsButton selectedImage] forState:UIControlStateHighlighted];
+    [self setImage:[CPHubSettingsButton selectedImage] forState:UIControlStateSelected];
 }
 
 /*

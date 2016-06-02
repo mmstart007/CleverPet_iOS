@@ -10,6 +10,7 @@
 #import "CPLoginController.h"
 #import "CPTextField.h"
 #import "CPLoadingView.h"
+#import <Intercom/Intercom.h>
 
 @interface CPNascarViewController ()<UITextFieldDelegate>
 
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *signInButtonBottomConstraint;
 @property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UIButton *intercomButton;
 
 @end
 
@@ -73,30 +75,59 @@
     self.signInButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.cancelButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
     self.cancelButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
+    [self.intercomButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+    self.intercomButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
 }
 
 - (BOOL)validateInput
 {
     NSString *emailString = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSString *errorMessage;
+    
+    if ([emailString length] > kEmailMaxChars) {
+        errorMessage = [NSString stringWithFormat:NSLocalizedString(@"Your email address must be less than %d characters", @"Error message displayed when email address exceeds max length"), kEmailMaxChars];
+    }
     
     if (![[CPLoginController sharedInstance] isValidEmail:emailString]) {
-        [self displayErrorAlertWithTitle:nil andMessage:NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address")];
+        errorMessage = NSLocalizedString(@"Please enter a valid email address", @"Error message when trying to sign in with an invalid email address");
+    }
+    
+    if (errorMessage) {
+        [self displayErrorAlertWithTitle:nil andMessage:errorMessage];
         return NO;
     }
     
     return YES;
 }
 
+- (void)didNotSignIn:(NSNotification *)notification {
+    UNREG_SELF_FOR_NOTIFICATION(UIApplicationDidBecomeActiveNotification);
+    UNREG_SELF_FOR_NOTIFICATION(kWaitForURLHandle);
+    self.loadingView.hidden = YES;
+}
+
+- (void)waitForURLHandle:(NSNotification *)notification  {
+    UNREG_SELF_FOR_NOTIFICATION(UIApplicationDidBecomeActiveNotification);
+    UNREG_SELF_FOR_NOTIFICATION(kWaitForURLHandle);
+}
+
+- (void)listenForReturnToApp {
+    REG_SELF_FOR_NOTIFICATION(kWaitForURLHandle, waitForURLHandle:);
+    REG_SELF_FOR_NOTIFICATION(UIApplicationDidBecomeActiveNotification, didNotSignIn:);
+}
+
 #pragma mark - IBActions
 - (IBAction)facebookTapped:(id)sender
 {
     self.loadingView.hidden = NO;
+    [self listenForReturnToApp];
     [[CPLoginController sharedInstance] signInWithFacebook];
 }
 
 - (IBAction)googleTapped:(id)sender
 {
     self.loadingView.hidden = NO;
+    [self listenForReturnToApp];
     [[CPLoginController sharedInstance] signInWithGoogle];
 }
 
@@ -104,7 +135,8 @@
 {
     if ([self validateInput]) {
         self.loadingView.hidden = NO;
-        [[CPLoginController sharedInstance] signInWithEmail:self.emailField.text];
+        [self listenForReturnToApp];
+        [[CPLoginController sharedInstance] signInWithEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
     }
 }
 
@@ -113,12 +145,21 @@
     [[CPLoginController sharedInstance] loginViewPressedCancel:self];
 }
 
+- (IBAction)intercomTapped:(id)sender
+{
+    [Intercom presentConversationList];
+}
 #pragma mark - UITextFieldDelegate methods
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     [self signInTapped:nil];
     return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    return ![string isEqualToString:@" "];
 }
 
 #pragma mark - Keyboard

@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface CPSharedUtils : NSObject
 
 + (void)deviceTimeZoneUpdated:(NSInteger)offset;
++ (UINavigationController *)getRootNavController;
 
 @end
 
@@ -46,6 +48,8 @@ object:obj]
 [[NSNotificationCenter defaultCenter]  \
 removeObserver:self]
 
+extern NSString * const kPetInfoUpdated;
+extern NSString * const kWaitForURLHandle;
 
 #pragma mark - Blocks
 
@@ -57,12 +61,22 @@ removeObserver:self]
 #import "UIColor+CleverPet.h"
 #import "UIViewController+CleverPet.h"
 #import "UIImageView+AFNetworking.h"
+#import "NSError+CleverPet.h"
+#import "CPBaseViewController.h"
 
 #pragma mark - Data field max and min values
 extern NSInteger const kNameFieldMinChars;
 extern NSInteger const kNameFieldMaxChars;
 extern NSInteger const kFamilyNameFieldMinChars;
 extern NSInteger const kFamilyNameFieldMaxChars;
+extern NSInteger const kEmailMaxChars;
+extern NSInteger const kPasswordMaxChars;
+extern NSInteger const kMinWeight;
+extern NSInteger const kMaxWeight;
+extern NSInteger const kMinAge;
+extern NSInteger const kMaxAge;
+
+extern CGFloat const kLbsToKgs;
 
 #pragma mark - JSON keys
 extern NSString * const kErrorKey;
@@ -83,6 +97,7 @@ extern NSString * const kBreedKey;
 extern NSString * const kWeightKey;
 extern NSString * const kDOBKey;
 extern NSString * const kAlteredKey;
+extern NSString * const kWeightUnits;
 
 // Gender keys. Correspond to the gender values returned by the server.
 extern NSString * const kMaleKey;
@@ -98,6 +113,7 @@ extern NSString * const kStandbyMode;
 extern NSString * const kSchedulerMode;
 extern NSString * const kLastSeenKey;
 extern NSString * const kTimeZoneKey;
+extern NSString * const kDesiredModeKey;
 // Schedule keys
 extern NSString * const kScheduleIdKey;
 extern NSString * const kWeekdayKey;
@@ -111,6 +127,14 @@ extern NSString * const kCursorKey;
 extern NSString * const kMoreKey;
 extern NSString * const kTilesKey;
 extern NSString * const kPageSizeKey;
+// GCM keys
+extern NSString * const kGCMTokenKey;
 
 #define ASYNC void
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+
+#pragma mark - Text
+#define CANCEL_TEXT NSLocalizedString(@"Cancel", @"Cancel")
+#define OK_TEXT NSLocalizedString(@"OK", @"OK")
+#define ERROR_TEXT NSLocalizedString(@"Error", @"Error")
+#define OFFLINE_TEXT NSLocalizedString(@"The internet connection appears to be offline.", @"The internet connection appears to be offline.")

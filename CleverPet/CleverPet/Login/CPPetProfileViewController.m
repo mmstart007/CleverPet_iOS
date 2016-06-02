@@ -13,11 +13,11 @@
 #import "CPLoginController.h"
 #import "CPTextValidator.h"
 #import "CPPet.h"
+#import "CPUserManager.h"
 
 @interface CPPetProfileViewController ()<UITextFieldDelegate, CPPickerViewDelegate, CPBreedPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subCopyLabel;
 @property (weak, nonatomic) IBOutlet CPTextField *nameField;
 @property (weak, nonatomic) IBOutlet CPTextField *familyField;
 @property (weak, nonatomic) IBOutlet CPTextField *breedField;
@@ -36,7 +36,7 @@
 @property (nonatomic, strong) CPTextValidator *textValidator;
 // TODO: pull this out somewhere
 @property (nonatomic, strong) NSDateFormatter *dateFormatter;
-@property (nonatomic, assign) BOOL isCancelling;
+@property (nonatomic, assign) BOOL shouldUpdateNavBar;
 
 @end
 
@@ -52,7 +52,7 @@
     
     self.weightDescriptor = [[self.weightUnitSelector titleForSegmentAtIndex:self.weightUnitSelector.selectedSegmentIndex] lowercaseString];
     
-    self.weightUnitSelector.tintColor = [UIColor appTextFieldPlaceholderColor];
+    self.weightUnitSelector.tintColor = [UIColor darkGrayColor];
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
     [self.weightUnitSelector setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor], NSFontAttributeName:[UIFont cpLightFontWithSize:16.f italic:NO]} forState:UIControlStateNormal];
     self.textValidator = [[CPTextValidator alloc] init];
@@ -78,7 +78,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    if (!self.isCancelling) {
+    [self.view endEditing:YES];
+    if (self.shouldUpdateNavBar) {
+        self.shouldUpdateNavBar = NO;
         [self.navigationController setNavigationBarHidden:NO animated:animated];
     }
 }
@@ -100,9 +102,6 @@
     self.headerLabel.text = NSLocalizedString(@"Pet's Profile", @"Title text for pets profile");
     self.headerLabel.font = [UIFont cpLightFontWithSize:kSignInHeaderFontSize italic:NO];
     self.headerLabel.textColor = [UIColor appTitleTextColor];
-    self.subCopyLabel.text = NSLocalizedString(@"Placeholder sub copy", @"Sub copy text for pets profile");
-    self.subCopyLabel.font = [UIFont cpLightFontWithSize:kSubCopyFontSize italic:NO];
-    self.subCopyLabel.textColor = [UIColor appSubCopyTextColor];
     self.continueButton.backgroundColor = [UIColor appLightTealColor];
     self.continueButton.titleLabel.font = [UIFont cpLightFontWithSize:kButtonTitleFontSize italic:NO];
     [self.continueButton setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
@@ -124,10 +123,29 @@
 #pragma mark - IBActions
 - (IBAction)continueTapped:(id)sender
 {
-    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:[self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""], kDOBKey:[self getDOB]};
+    // Validate pet age
+    NSInteger ageValue = [self.ageField.text integerValue];
+    if (ageValue < kMinAge || ageValue > kMaxAge) {
+        [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:[NSString stringWithFormat:NSLocalizedString(@"Age must be between %d and %d", @"Error message when pet age is invalid. First %d is minimum age, second %d is maximum age"), kMinAge, kMaxAge]];
+        return;
+    }
+    
+    //Convert wieght to lbs to be saved on the server
+    NSString *weight = [self.weightField.text stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", self.weightDescriptor] withString:@""];
+    
+    NSString *weightUnit =  [self.weightDescriptor stringByReplacingOccurrencesOfString:@"s" withString:@""];
+    [[CPUserManager sharedInstance] getCurrentUser].weightUnits = weightUnit;
+    if ([weightUnit isEqualToString:@"kg"]) {
+        CGFloat convertedWeight = [weight floatValue]*kLbsToKgs;
+        weight = [NSString stringWithFormat:@"%.1f", convertedWeight];
+    }
+    
+    NSDictionary *petInfo = @{kNameKey:self.nameField.text, kFamilyNameKey:self.familyField.text, kGenderKey:[self.genderField.text lowercaseString], kBreedKey:self.breedField.text, kWeightKey:weight, kDOBKey:[self getDOB], kWeightUnits : weightUnit};
     [CPPet validateInput:petInfo isInitialSetup:YES completion:^(BOOL isValidInput, NSString *errorMessage) {
+        
         if (isValidInput) {
             [[CPLoginController sharedInstance] setPendingUserInfo:petInfo];
+            self.shouldUpdateNavBar = YES;
             [self performSegueWithIdentifier:@"setPetPhoto" sender:nil];
         } else {
             [self displayErrorAlertWithTitle:NSLocalizedString(@"Invalid Input", @"Error title for profile setup") andMessage:errorMessage];
@@ -144,7 +162,7 @@
 
 - (IBAction)cancelTapped:(id)sender
 {
-    self.isCancelling = YES;
+    self.shouldUpdateNavBar = YES;
     [[CPLoginController sharedInstance] cancelPetProfileCreation];
 }
 
