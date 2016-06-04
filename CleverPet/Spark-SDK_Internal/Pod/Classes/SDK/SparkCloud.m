@@ -8,8 +8,8 @@
 
 #import "SparkCloud.h"
 #import "KeychainItemWrapper.h"
-#import "SparkAccessToken.h"
-#import "SparkUser.h"
+#import "SparkSession.h"
+//#import "SparkUser.h"
 #import <AFNetworking/AFNetworking.h>
 #import <EventSource.h>
 #import "SparkEvent.h"
@@ -26,11 +26,11 @@ NSString *const kEventListenersDictIDKey = @"id";
 static NSString *const kDefaultOAuthClientId = @"particle";
 static NSString *const kDefaultOAuthClientSecret = @"particle";
 
-@interface SparkCloud () <SparkAccessTokenDelegate>
+@interface SparkCloud () <SparkSessionDelegate>
 
 @property (nonatomic, strong, nonnull) NSURL* baseURL;
-@property (nonatomic, strong, nullable) SparkAccessToken* token;
-@property (nonatomic, strong, nullable) SparkUser* user;
+@property (nonatomic, strong, nullable) SparkSession* session;
+//@property (nonatomic, strong, nullable) SparkUser* user;
 @property (nonatomic, strong, nonnull) AFHTTPSessionManager *manager;
 
 @property (nonatomic, strong, nonnull) NSMutableDictionary *eventListenersDict;
@@ -71,11 +71,11 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
         self.OAuthClientSecret = kDefaultOAuthClientSecret;
 
         // try to restore session (user and access token)
-        self.user = [[SparkUser alloc] initWithSavedSession];
-        self.token = [[SparkAccessToken alloc] initWithSavedSession];
-        if (self.token)
+//        self.user = [[SparkUser alloc] initWithSavedSession];
+        self.session = [[SparkSession alloc] initWithSavedSession];
+        if (self.session)
         {
-            self.token.delegate = self;
+            self.session.delegate = self;
         }
         
         // Init HTTP manager
@@ -98,15 +98,45 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
 
 -(nullable NSString *)accessToken
 {
-    return [self.token accessToken];
+    return [self.session accessToken];
 }
 
+-(BOOL)injectSessionAccessToken:(NSString * _Nonnull)accessToken
+{
+    [self logout];
+    self.session = [[SparkSession alloc] initWithToken:accessToken];
+    if (self.session) {
+        self.session.delegate = self;
+        return YES;
+    } else return NO;
+}
+
+-(BOOL)injectSessionAccessToken:(NSString *)accessToken withExpiryDate:(NSDate *)expiryDate
+{
+    [self logout];
+    self.session = [[SparkSession alloc] initWithToken:accessToken andExpiryDate:expiryDate];
+    if (self.session) {
+        self.session.delegate = self;
+        return YES;
+    } else return NO;
+}
+
+-(BOOL)injectSessionAccessToken:(NSString *)accessToken withExpiryDate:(NSDate *)expiryDate andRefreshToken:(nonnull NSString *)refreshToken
+{
+    [self logout];
+    self.session = [[SparkSession alloc] initWithToken:accessToken withExpiryDate:expiryDate withRefreshToken:refreshToken];
+    if (self.session) {
+        self.session.delegate = self;
+        return YES;
+    } else return NO;
+
+}
 
 -(nullable NSString *)loggedInUsername
 {
-    if ((self.user) && (self.token))
+    if ((self.session.username) && (self.session.accessToken))
     {
-        return self.user.user;
+        return self.session.username;
     }
     else
     {
@@ -116,8 +146,12 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
 
 -(BOOL)isLoggedIn
 {
-    return self.token != nil;
-//    return (self.loggedInUsername != nil);
+    return (self.session.username != nil);
+}
+
+-(BOOL)isAuthenticated
+{
+    return (self.session.accessToken != nil);
 }
 
 #pragma mark Setter functions
@@ -132,18 +166,55 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
 
 #pragma mark Delegate functions
 
--(void)sparkAccessToken:(SparkAccessToken *)accessToken didExpireAt:(NSDate *)date
+-(void)SparkSession:(SparkSession *)session didExpireAt:(NSDate *)date
 {
     // handle auto-renewal of expired access tokens by internal timer event
     // TODO: fix that to do it using a refresh token and not save the user password!
-    if (self.user)
-    {
-        [self loginWithUser:self.user.user password:self.user.password completion:nil];
+    if (self.session.refreshToken) {
+        [self refreshToken:self.session.refreshToken];
     }
-    else
-    {
-        self.token = nil;
+    else {
+        [self logout];
     }
+}
+
+-(void)refreshToken:(NSString *)refreshToken
+{
+    NSLog(@"Refreshing session...");
+    // non default params
+    NSDictionary *params = @{
+                             @"grant_type": @"refresh_token",
+                             @"refresh_token": refreshToken
+                             };
+    
+    [self.manager.requestSerializer setAuthorizationHeaderFieldWithUsername:self.OAuthClientId password:self.OAuthClientSecret];
+    // OAuth login
+    [self.manager POST:@"oauth/token" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSMutableDictionary *responseDict = [responseObject mutableCopy];
+        
+        if (self.session.username)
+            responseDict[@"username"] = self.session.username;
+        
+        self.session = [[SparkSession alloc] initWithNewSession:responseDict];
+        if (self.session) // login was successful
+        {
+            NSLog(@"New session created using refresh token");
+            self.session.delegate = self;
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSHTTPURLResponse *serverResponse = (NSHTTPURLResponse *)task.response;
+        
+        NSData *errorData = error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey];
+        if (errorData)
+        {
+            NSDictionary *serializedFailedBody = [NSJSONSerialization JSONObjectWithData:errorData options:kNilOptions error:nil];
+            NSLog(@"! refreshToken %@ Failed (status code %d): %@", task.originalRequest.URL,(int)serverResponse.statusCode,serializedFailedBody);
+        }
+    }];
+    
+    [self.manager.requestSerializer clearAuthorizationHeader];
+
 }
 
 
@@ -162,13 +233,13 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
     // OAuth login
     NSURLSessionDataTask *task = [self.manager POST:@"oauth/token" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        NSDictionary *responseDict = responseObject;
+        NSMutableDictionary *responseDict = [responseObject mutableCopy];
 
-        self.token = [[SparkAccessToken alloc] initWithNewSession:responseDict];
-        if (self.token) // login was successful
+        responseDict[@"username"] = user;
+        self.session = [[SparkSession alloc] initWithNewSession:responseDict];
+        if (self.session) // login was successful
         {
-            self.token.delegate = self;
-            self.user = [[SparkUser alloc] initWithUser:user andPassword:password];
+            self.session.delegate = self;
         }
         
         if (completion)
@@ -195,26 +266,6 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
     [self.manager.requestSerializer clearAuthorizationHeader];
     
     return task;
-}
-
-- (void)loginWithAccessToken:(NSDictionary *)tokenInfo completion:(nullable SparkCompletionBlock)completion
-{
-    // TODO: refresh token behaviour
-    NSError *error;
-    self.token = [[SparkAccessToken alloc] initWithNewSession:tokenInfo];
-    if (self.token) // login was successful
-    {
-        self.token.delegate = self;
-    } else {
-        // TODO: Error code
-        error = [self makeErrorWithDescription:@"Failed to generate access token" code:1];
-    }
-    
-    if (completion)
-    {
-        completion(error);
-    }
-    
 }
 
 -(NSURLSessionDataTask *)signupWithUser:(NSString *)user password:(NSString *)password completion:(nullable SparkCompletionBlock)completion
@@ -305,15 +356,17 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
     
     NSURLSessionDataTask *task = [self.manager POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
     {
-         NSHTTPURLResponse *serverResponse = (NSHTTPURLResponse *)task.response;
-         NSDictionary *responseDict = responseObject;
-         NSLog(@"Got status code %d, and response: %@",(int)serverResponse.statusCode,responseDict);
-         
-         self.token = [[SparkAccessToken alloc] initWithNewSession:responseDict];
-         if (self.token) // customer login was successful
+        NSHTTPURLResponse *serverResponse = (NSHTTPURLResponse *)task.response;
+        NSMutableDictionary *responseDict = [responseObject mutableCopy];
+        NSLog(@"Got status code %d, and response: %@",(int)serverResponse.statusCode,responseDict);
+
+        responseDict[@"username"] = email;
+        
+         self.session = [[SparkSession alloc] initWithNewSession:responseDict];
+        
+         if (self.session) // customer login was successful
          {
-             self.token.delegate = self;
-             self.user = [[SparkUser alloc] initWithUser:email andPassword:password]; // TODO: fix that to refresh token behaviour
+             self.session.delegate = self;
          }
          
          if (completion)
@@ -352,14 +405,13 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
 
 -(void)logout
 {
-    [self.token removeSession];
-    [self.user removeSession];
+    [self.session removeSession];
 }
 
 -(NSURLSessionDataTask *)claimDevice:(NSString *)deviceID completion:(nullable SparkCompletionBlock)completion
 {
-    if (self.token.accessToken) {
-        NSString *authorization = [NSString stringWithFormat:@"Bearer %@",self.token.accessToken];
+    if (self.session.accessToken) {
+        NSString *authorization = [NSString stringWithFormat:@"Bearer %@",self.session.accessToken];
         [self.manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
     }
 
@@ -403,8 +455,8 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
 -(NSURLSessionDataTask *)getDevice:(NSString *)deviceID
                         completion:(nullable void (^)(SparkDevice * _Nullable device, NSError * _Nullable error))completion
 {
-    if (self.token.accessToken) {
-        NSString *authorization = [NSString stringWithFormat:@"Bearer %@",self.token.accessToken];
+    if (self.session.accessToken) {
+        NSString *authorization = [NSString stringWithFormat:@"Bearer %@",self.session.accessToken];
         [self.manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
     }
 
@@ -446,8 +498,8 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
 
 -(NSURLSessionDataTask *)getDevices:(nullable void (^)(NSArray * _Nullable sparkDevices, NSError * _Nullable error))completion
 {
-    if (self.token.accessToken) {
-        NSString *authorization = [NSString stringWithFormat:@"Bearer %@", self.token.accessToken];
+    if (self.session.accessToken) {
+        NSString *authorization = [NSString stringWithFormat:@"Bearer %@", self.session.accessToken];
         [self.manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
     }
     
@@ -547,8 +599,8 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
 
 -(NSURLSessionDataTask *)generateClaimCode:(nullable void(^)(NSString * _Nullable claimCode, NSArray * _Nullable userClaimedDeviceIDs, NSError * _Nullable error))completion
 {
-    if (self.token.accessToken) {
-        NSString *authorization = [NSString stringWithFormat:@"Bearer %@",self.token.accessToken];
+    if (self.session.accessToken) {
+        NSString *authorization = [NSString stringWithFormat:@"Bearer %@",self.session.accessToken];
         [self.manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
     }
 
@@ -602,8 +654,8 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
                                        withActivationCode:(nullable NSString *)activationCode
                                                completion:(nullable void(^)(NSString * _Nullable claimCode, NSArray * _Nullable userClaimedDeviceIDs, NSError * _Nullable error))completion
 {
-    if (self.token.accessToken) {
-        NSString *authorization = [NSString stringWithFormat:@"Bearer %@",self.token.accessToken];
+    if (self.session.accessToken) {
+        NSString *authorization = [NSString stringWithFormat:@"Bearer %@",self.session.accessToken];
         [self.manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
     }
     
@@ -692,7 +744,7 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
 -(NSURLSessionDataTask *)requestPasswordResetForUser:(NSString *)email
                                           completion:(nullable SparkCompletionBlock)completion
 {
-    NSDictionary *params = @{@"email": email};
+    NSDictionary *params = @{@"username": email};
     NSString *urlPath = [NSString stringWithFormat:@"/v1/user/password-reset"];
     
     NSURLSessionDataTask *task = [self.manager POST:urlPath parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject)
@@ -893,8 +945,8 @@ static NSString *const kDefaultOAuthClientSecret = @"particle";
                                    completion:(nullable SparkCompletionBlock)completion
 {
     NSMutableDictionary *params = [NSMutableDictionary new];
-    if (self.token.accessToken) {
-        NSString *authorization = [NSString stringWithFormat:@"Bearer %@",self.token.accessToken];
+    if (self.session.accessToken) {
+        NSString *authorization = [NSString stringWithFormat:@"Bearer %@",self.session.accessToken];
         [self.manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
     }
     

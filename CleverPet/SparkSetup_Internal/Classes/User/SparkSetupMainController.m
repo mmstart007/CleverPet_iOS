@@ -10,7 +10,12 @@
 #import "SparkUserSignupViewController.h"
 #import "SparkSetupCommManager.h"
 #import "SparkSetupConnection.h"
-#import "SparkCloud.h"
+#ifdef FRAMEWORK
+#import <ParticleSDK/ParticleSDK.h>
+#else
+#import "Spark-SDK.h"
+#endif
+
 #import "SparkSetupCustomization.h"
 #import "SparkUserLoginViewController.h"
 #import "SparkSetupUIElements.h"
@@ -21,6 +26,7 @@ NSString *const kSparkSetupDidFinishNotification = @"kSparkSetupDidFinishNotific
 NSString *const kSparkSetupDidFinishStateKey = @"kSparkSetupDidFinishStateKey";
 NSString *const kSparkSetupDidFinishDeviceKey = @"kSparkSetupDidFinishDeviceKey";
 NSString *const kSparkSetupDidLogoutNotification = @"kSparkSetupDidLogoutNotification";
+NSString *const kSparkSetupDidFailDeviceIDKey = @"kSparkSetupDidFailDeviceIDKey";
 
 @interface SparkSetupMainController() <SparkUserLoginDelegate>
 
@@ -36,7 +42,12 @@ NSString *const kSparkSetupDidLogoutNotification = @"kSparkSetupDidLogoutNotific
 
 +(NSBundle *)getResourcesBundle
 {
+#ifdef FRAMEWORK
+    // frameework has assets as
+    NSBundle *bundle = [NSBundle bundleForClass:self];
+#else
     NSBundle *bundle = [NSBundle bundleWithURL:[[NSBundle bundleForClass:[self class]] URLForResource:@"SparkSetup" withExtension:@"bundle"]];
+#endif
     return bundle;
 }
 
@@ -93,7 +104,7 @@ NSString *const kSparkSetupDidLogoutNotification = @"kSparkSetupDidLogoutNotific
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupDidFinishObserver:) name:kSparkSetupDidFinishNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupDidLogoutObserver:) name:kSparkSetupDidLogoutNotification object:nil];
     
-    if ([SparkCloud sharedInstance].isLoggedIn)
+    if ([SparkCloud sharedInstance].isAuthenticated)
     {
         // start from discover screen if user is already logged in
         if (self.authenticationOnly == NO)
@@ -211,10 +222,17 @@ NSString *const kSparkSetupDidLogoutNotification = @"kSparkSetupDidLogoutNotific
     NSDictionary *finishStateDict = note.userInfo;
     NSNumber* state = finishStateDict[kSparkSetupDidFinishStateKey];
     SparkDevice *device = finishStateDict[kSparkSetupDidFinishDeviceKey];
+    NSString *deviceID = finishStateDict[kSparkSetupDidFailDeviceIDKey];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kSparkSetupDidFinishNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kSparkSetupDidLogoutNotification object:nil];
     
+    
     [self dismissViewControllerAnimated:YES completion:^{
+        if ((!device) && (deviceID)) {
+            [self.delegate sparkSetupViewController:self didNotSucceeedWithDeviceID:deviceID];
+        }
+        
         [self.delegate sparkSetupViewController:self didFinishWithResult:[state integerValue] device:device]; // TODO: add NSError reporting?
     }];
 }

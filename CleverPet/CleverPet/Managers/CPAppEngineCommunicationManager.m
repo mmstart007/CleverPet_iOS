@@ -34,6 +34,8 @@ NSString * const kLastSeenPathFragment = @"lastseen";
 #define DEVICE_LAST_SEEN(deviceId) [NSString stringWithFormat:@"%@/%@/%@", kDevicePath, deviceId, kLastSeenPathFragment]
 #define SPECIFIC_SCHEDULE(deviceId, scheduleId) [NSString stringWithFormat:@"%@/%@/%@/%@", kDevicePath, deviceId, kSchedulesPathFragment, scheduleId]
 
+#define PARTICLES_FAILEDPAIRING(deviceId) [NSString stringWithFormat:@"particles/%@/failedpairing", deviceId]
+
 #define PARTICLE_ENABLED 1
 
 #if !PARTICLE_ENABLED
@@ -424,6 +426,22 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
     } else {
         if (completion) completion([self errorForMessage:@"Config not set up"]);
     }
+}
+
+- (ASYNC)reportParticleDeviceConnectionFailure:(NSString *)failureReason deviceId:(NSString *)deviceId
+{
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc] init];
+    if (failureReason) {
+        parameters[@"error_code"] = failureReason;
+    }
+    
+    if (!deviceId.length) {
+        deviceId = @"unknown";
+    }
+    
+    [self.sessionManager POST:PARTICLES_FAILEDPAIRING(deviceId) parameters:parameters progress:nil success:nil failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Failed to report pairing error: %@", error);
+    }];
 }
 
 @end

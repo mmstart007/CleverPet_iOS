@@ -4,11 +4,25 @@ Particle iOS Device Setup library adheres to [Semantic Versioning](http://semver
 
 ---
 
-## WIP 
+## [0.5.0](https://github.com/spark/spark-setup-ios/releases/tag/0.5.0) (2016-5-19)
 
-* AFnetworking 3.0 support
-* XCode 7.2 project settings support
-* Adapting to Cocoapods 1.0.0
+* New delegate function didFailWithDeviceID - will report the device ID that setup failed setting up
+
+* Main setup delegate function will now report detailed failture codes via the SparkSetupMainControllerResult enum (updated) 
+
+## [0.4.1](https://github.com/spark/spark-setup-ios/releases/tag/0.4.1) (2016-5-19)
+
+* Missing setup assets bug fix (podspec issue)
+
+## [0.4.0](https://github.com/spark/spark-setup-ios/releases/tag/0.4.0) (2016-4-5)
+
+* Library now published as dynamic framework through Carthage
+
+* Supress depraction warnings for iOS 9
+
+* Operate with the iOS Cloud SDK 0.4.0
+
+* Do not tint the success/warning/fail icon on last setup screen
 
 ## [0.3.3](https://github.com/spark/spark-setup-ios/releases/tag/0.3.3) (2015-11-25)
 

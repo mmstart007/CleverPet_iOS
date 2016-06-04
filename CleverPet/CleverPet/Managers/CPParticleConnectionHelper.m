@@ -8,7 +8,9 @@
 
 #import "CPParticleConnectionHelper.h"
 #import <SparkSetup/SparkSetup.h>
+#import <Spark-SDK/SparkCloud.h>
 #import "CPConfigManager.h"
+#import "CPAppEngineCommunicationManager.h"
 
 NSString * const kParticleOrganizationName = @"particle_organization_name";
 NSString * const kParticleOrganizationSlug = @"particle_organization_slug";
@@ -22,6 +24,8 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
 @property (nonatomic, strong) NSString *productName;
 @property (nonatomic, strong) NSString *productSlug;
 @property (nonatomic, weak) id<CPParticleConnectionDelegate> delegate;
+
+@property (strong, nonatomic) NSString *lastFailedDeviceId;
 
 @end
 
@@ -101,7 +105,11 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
     // TODO: Spark ignores the refresh_token, but pass it along anyways
     newTokenInfo[@"refresh_token"] = tokenInfo[@"refresh_token"];
     
-    [[SparkCloud sharedInstance] loginWithAccessToken:newTokenInfo completion:completion];
+    BOOL accessTokenResult = [[SparkCloud sharedInstance] injectSessionAccessToken:tokenInfo[@"access_token"] withExpiryDate:expiryDate andRefreshToken:tokenInfo[@"refresh_token"]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        completion(accessTokenResult ? nil : [NSError errorWithDomain:@"CPParticleConnectionHelper" code:-1 userInfo:nil]);
+    });
 }
 
 - (void)presentSetupControllerOnController:(UINavigationController *)controller withDelegate:(id<CPParticleConnectionDelegate>)delegate
@@ -125,9 +133,42 @@ NSString * const kParticleProductSlug = @"particle_product_slug";
         if (result == SparkSetupMainControllerResultUserCancel) {
             [self.delegate deviceClaimCanceled];
         } else {
+            NSString *lastFailedDeviceId = self.lastFailedDeviceId;
+            if (!lastFailedDeviceId && device) {
+                lastFailedDeviceId = device.id;
+            }
+            
+            [[CPAppEngineCommunicationManager sharedInstance] reportParticleDeviceConnectionFailure:[self failureReasonStringFromSparkResult:result] deviceId:self.lastFailedDeviceId];
+            
             [self.delegate deviceClaimFailed];
         }
     }
+
+    self.lastFailedDeviceId = nil;
+}
+
+- (void)sparkSetupViewController:(SparkSetupMainController *)controller didNotSucceeedWithDeviceID:(NSString *)deviceID
+{
+    self.lastFailedDeviceId = deviceID;
+}
+
+#define ENUM_TO_STRING_CASE(Enum) case Enum: return @"" # Enum;
+- (NSString *)failureReasonStringFromSparkResult:(SparkSetupMainControllerResult)result
+{
+    switch (result) {
+            ENUM_TO_STRING_CASE(SparkSetupMainControllerResultSuccess)
+            ENUM_TO_STRING_CASE(SparkSetupMainControllerResultUserCancel)
+            ENUM_TO_STRING_CASE(SparkSetupMainControllerResultLoggedIn)
+            ENUM_TO_STRING_CASE(SparkSetupMainControllerResultSkippedAuth)
+            ENUM_TO_STRING_CASE(SparkSetupMainControllerResultSuccessNotClaimed)
+            ENUM_TO_STRING_CASE(SparkSetupMainControllerResultSuccessDeviceOffline)
+            ENUM_TO_STRING_CASE(SparkSetupMainControllerResultFailureClaiming)
+            ENUM_TO_STRING_CASE(SparkSetupMainControllerResultFailureConfigure)
+            ENUM_TO_STRING_CASE(SparkSetupMainControllerResultFailureCannotDisconnectFromDevice)
+            ENUM_TO_STRING_CASE(SparkSetupMainControllerResultFailureLostConnectionToDevice)
+    }
+    
+    return @"Unknown error.";
 }
 
 @end

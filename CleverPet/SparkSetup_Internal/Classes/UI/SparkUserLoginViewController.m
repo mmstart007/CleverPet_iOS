@@ -10,7 +10,11 @@
 #import "SparkSetupWebViewController.h"
 #import "SparkSetupCustomization.h"
 #import "SparkSetupUIElements.h"
+#ifdef FRAMEWORK
+#import <ParticleSDK/ParticleSDK.h>
+#else
 #import "Spark-SDK.h"
+#endif
 #ifdef ANALYTICS
 #import "Mixpanel.h"
 #endif
