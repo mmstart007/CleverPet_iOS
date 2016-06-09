@@ -36,5 +36,5 @@ typedef NS_ENUM(NSUInteger, CPLoginResult) {CPLoginResult_UserWithoutPetProfile,
 - (ASYNC)checkDeviceLastSeen:(NSString*)deviceId completion:(void (^)(NSInteger delta, NSError *error))completion;
 
 - (ASYNC)performLogoutWithAuthHeader:(NSString*)authHeader completion:(void (^)(NSError *error))completion;
-
+- (ASYNC)reportParticleDeviceConnectionFailure:(NSString *)failureReason deviceId:(NSString *)deviceId;
 @end

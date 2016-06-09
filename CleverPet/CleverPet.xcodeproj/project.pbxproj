@@ -116,7 +116,7 @@
 		97EC010A1C92354300929EFE /* CPSplashImageUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 97EC01091C92354300929EFE /* CPSplashImageUtils.m */; };
 		97F7284E1C7E416A005E65C2 /* CPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F7284D1C7E416A005E65C2 /* CPConfigManager.m */; };
 		97F728511C7E588C005E65C2 /* CPAppEngineCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */; };
-		BCD1938D360A74B45F4482F4 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */; };
+		C29D3A67647946CA314A0FE2 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB5BA94E0A1455B0C16826E9 /* libPods-CleverPet.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -164,7 +164,6 @@
 		0DE13B641C7EE9FC00648834 /* CPLabelUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPLabelUtils.h; sourceTree = "<group>"; };
 		0DE13B651C7FABB200648834 /* CPTileDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileDataManager.h; sourceTree = "<group>"; };
 		0DE13B661C7FABB200648834 /* CPTileDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileDataManager.m; sourceTree = "<group>"; };
-		12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1827A1BFAE0043C9D902D1AC /* CPTileViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileViewCell.h; sourceTree = "<group>"; };
 		1827A50A4A6169E21622727F /* CPTileSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileSection.m; sourceTree = "<group>"; };
 		1827A57728C978A652728E14 /* CPTileViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTileViewCell.m; sourceTree = "<group>"; };
@@ -179,8 +178,6 @@
 		1827ABB6A0821DBDEABC48C9 /* CPTileSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileSection.h; sourceTree = "<group>"; };
 		1827ABBC45661B9B8347A62B /* CPMainTableSectionHeaderFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainTableSectionHeaderFilter.h; sourceTree = "<group>"; };
 		1827AD320F0C4F8FD18E36D8 /* CPTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTile.m; sourceTree = "<group>"; };
-		1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
-		3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.release.xcconfig"; sourceTree = "<group>"; };
 		51A8A7B91C90E127001A1572 /* CPFirebaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFirebaseManager.h; sourceTree = "<group>"; };
 		51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFirebaseManager.m; sourceTree = "<group>"; };
 		73C6EFFA1C9A123F004CA862 /* localConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = localConfig.json; sourceTree = "<group>"; };
@@ -304,6 +301,11 @@
 		97F7284D1C7E416A005E65C2 /* CPConfigManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPConfigManager.m; sourceTree = "<group>"; };
 		97F7284F1C7E588C005E65C2 /* CPAppEngineCommunicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAppEngineCommunicationManager.h; sourceTree = "<group>"; };
 		97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAppEngineCommunicationManager.m; sourceTree = "<group>"; };
+		A73DC3F1C221907F0B7DF27C /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
+		CB5BA94E0A1455B0C16826E9 /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3A1A6D0B05A737136D997CB /* Pods-CleverPet.stage release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.stage release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.stage release.xcconfig"; sourceTree = "<group>"; };
+		F719EDCF1318B19E7CF57278 /* Pods-CleverPet.dev release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.dev release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.dev release.xcconfig"; sourceTree = "<group>"; };
+		FF77B9C9A08E543B4DF393DD /* Pods-CleverPet.prod release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.prod release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.prod release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,7 +315,7 @@
 			files = (
 				97E6782F1CA09F8000971A0F /* Photos.framework in Frameworks */,
 				979D84781C84FF3000ADB6B0 /* CoreText.framework in Frameworks */,
-				BCD1938D360A74B45F4482F4 /* libPods-CleverPet.a in Frameworks */,
+				C29D3A67647946CA314A0FE2 /* libPods-CleverPet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,8 +327,8 @@
 			children = (
 				0D36AA851C7243D600349D03 /* CleverPet */,
 				0D36AA841C7243D600349D03 /* Products */,
-				57ADBCB9E6A0A0D72BB97CA7 /* Pods */,
 				D625135D7BCE1E48B006E50A /* Frameworks */,
+				D24F3E5B150BDFF9BAEC8AED /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -432,15 +434,6 @@
 				0D8AC9861C7CEACD0096F339 /* CPTileTextFormatter.m */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		57ADBCB9E6A0A0D72BB97CA7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */,
-				3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		974868B11C725A990031BEEF /* Login */ = {
@@ -644,12 +637,23 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		D24F3E5B150BDFF9BAEC8AED /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A73DC3F1C221907F0B7DF27C /* Pods-CleverPet.debug.xcconfig */,
+				F719EDCF1318B19E7CF57278 /* Pods-CleverPet.dev release.xcconfig */,
+				FF77B9C9A08E543B4DF393DD /* Pods-CleverPet.prod release.xcconfig */,
+				E3A1A6D0B05A737136D997CB /* Pods-CleverPet.stage release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		D625135D7BCE1E48B006E50A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				97E6782E1CA09F8000971A0F /* Photos.framework */,
 				979D84771C84FF3000ADB6B0 /* CoreText.framework */,
-				12289E9A58FFD1424A618F43 /* libPods-CleverPet.a */,
+				CB5BA94E0A1455B0C16826E9 /* libPods-CleverPet.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -661,14 +665,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0D36AA9A1C7243D600349D03 /* Build configuration list for PBXNativeTarget "CleverPet" */;
 			buildPhases = (
-				8EB7CAD985CF53BD7EA4420A /* Check Pods Manifest.lock */,
+				1AA1E7ECA6474B6AF7BF9714 /* 📦 Check Pods Manifest.lock */,
 				0D36AA7F1C7243D600349D03 /* Sources */,
 				0D36AA801C7243D600349D03 /* Frameworks */,
 				0D36AA811C7243D600349D03 /* Resources */,
-				11913D9F032B5AD5C1F14CBE /* Embed Pods Frameworks */,
-				121785C1CF39DB22AA5A7959 /* Copy Pods Resources */,
 				97E678281CA077E600971A0F /* Version Update */,
 				971D337E1C938D43000A0DD6 /* ShellScript */,
+				5C2072222E9188504D26FA8B /* 📦 Embed Pods Frameworks */,
+				A0696023F492DCDC863E83EA /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -766,49 +770,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		11913D9F032B5AD5C1F14CBE /* Embed Pods Frameworks */ = {
+		1AA1E7ECA6474B6AF7BF9714 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		121785C1CF39DB22AA5A7959 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8EB7CAD985CF53BD7EA4420A /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5C2072222E9188504D26FA8B /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		971D337E1C938D43000A0DD6 /* ShellScript */ = {
@@ -837,6 +826,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"${SRCROOT}/CleverPet/Scripts/post_build.sh\"";
+		};
+		A0696023F492DCDC863E83EA /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -934,7 +938,6 @@
 /* Begin XCBuildConfiguration section */
 		0D36AA981C7243D600349D03 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -978,7 +981,6 @@
 		};
 		0D36AA991C7243D600349D03 /* DEV Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1016,7 +1018,7 @@
 		};
 		0D36AA9B1C7243D600349D03 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1A781CE70A3779F3A075E1B9 /* Pods-CleverPet.debug.xcconfig */;
+			baseConfigurationReference = A73DC3F1C221907F0B7DF27C /* Pods-CleverPet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
@@ -1028,13 +1030,17 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
 					"SERVER_CONFIG_URL=dev",
+					"GCM_SENDER_ID=879679195763",
+					"SERVER_CONFIG_URL=stage",
 					"GITKIT_PROJECT_ID=dev-erpetcloud",
-					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
 					"GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
-					"GCM_SENDER_ID=879679195736",
+					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
 					"GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
+					"WIDGET_URL=v2-dot-cleverpetcloud.appspot.com/users/login/widget",
 				);
+				GITKIT_URL_SCHEME = "com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75";
 				INFOPLIST_FILE = CleverPet/Info.plist;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
@@ -1045,7 +1051,7 @@
 		};
 		0D36AA9C1C7243D600349D03 /* DEV Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
+			baseConfigurationReference = F719EDCF1318B19E7CF57278 /* Pods-CleverPet.dev release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
@@ -1055,14 +1061,19 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
+					"GCM_SENDER_ID=867813813689",
 					"SERVER_CONFIG_URL=dev",
-					"GITKIT_PROJECT_ID=dev-erpetcloud",
-					"GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
-					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
-					"GCM_SENDER_ID=879679195736",
-					"GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
+					"GITKIT_PROJECT_ID=dev-erpetcloud2",
+					"GITKIT_API_KEY=AIzaSyAHPnK9lIYQgtehjbTrSGD0Sic-vCBLEmA",
+					"GOOGLE_CLIENT_ID=867813813689-uagq2ino7r0tngs3d4krpa7ropn3gk50.apps.googleusercontent.com",
+					"REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.867813813689-uagq2ino7r0tngs3d4krpa7ropn3gk50",
+					"GOOGLE_APP_ID=1:867813813689:ios:d9ab24dfc54b3e17",
+					"GITKIT_URL_SCHEME=com.googleusercontent.apps.867813813689-q1tbafqa428b2qodkjl1f01mar3va12v",
+					"WIDGET_URL=http://dev-erpetcloud2.appspot.com/users/login/widget",
 				);
+				GITKIT_URL_SCHEME = "com.googleusercontent.apps.867813813689-q1tbafqa428b2qodkjl1f01mar3va12v";
 				INFOPLIST_FILE = CleverPet/Info.plist;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
@@ -1073,7 +1084,6 @@
 		};
 		5D8479881CBF64D200368856 /* PROD Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1111,7 +1121,7 @@
 		};
 		5D8479891CBF64D200368856 /* PROD Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
+			baseConfigurationReference = FF77B9C9A08E543B4DF393DD /* Pods-CleverPet.prod release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
@@ -1121,14 +1131,19 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
+					"GCM_SENDER_ID=289189234956",
 					"SERVER_CONFIG_URL=prod",
 					"GITKIT_PROJECT_ID=cleverpetcloud",
 					"GITKIT_API_KEY=AIzaSyBh3jikpb_a6SPy3p1BB-XAUurZlS-DQvw",
-					"GOOGLE_CLIENT_ID=289189234956-o85e2ra13mictrhdq49ilms02ehd9quf.apps.googleusercontent.com",
-					"GCM_SENDER_ID=289189234956",
+					"GOOGLE_CLIENT_ID=289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt.apps.googleusercontent.com",
+					"REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt",
+					"GITKIT_URL_SCHEME=com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m",
+					"WIDGET_URL=cleverpetcloud.appspot.com/users/login/widget",
 					"GOOGLE_APP_ID=1:289189234956:ios:d9ab24dfc54b3e17",
 				);
+				GITKIT_URL_SCHEME = "com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m";
 				INFOPLIST_FILE = CleverPet/Info.plist;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
@@ -1139,7 +1154,6 @@
 		};
 		5D84798A1CBF64DC00368856 /* STAGE Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1177,7 +1191,7 @@
 		};
 		5D84798B1CBF64DC00368856 /* STAGE Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F01E2EDF84A2F884CB98C49 /* Pods-CleverPet.release.xcconfig */;
+			baseConfigurationReference = E3A1A6D0B05A737136D997CB /* Pods-CleverPet.stage release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Stage";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
@@ -1187,14 +1201,19 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
+					"GCM_SENDER_ID=879679195763",
 					"SERVER_CONFIG_URL=stage",
 					"GITKIT_PROJECT_ID=dev-erpetcloud",
-					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
+					"GOOGLE_CLIENT_ID=879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep.apps.googleusercontent.com",
 					"GITKIT_API_KEY=AIzaSyBgLm-Xeu_7Ms6H4pWtZpAG2Rih4jG9lfA",
-					"GCM_SENDER_ID=879679195736",
 					"GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
+					"REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep",
+					"GITKIT_URL_SCHEME=com.googleusercontent.apps.879679195763-kqen3kdr47jcn278lrjp3n7pek0u1hqt",
+					"WIDGET_URL=http://dev-erpetcloud.appspot.com/users/login/widget",
 				);
+				GITKIT_URL_SCHEME = "com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75";
 				INFOPLIST_FILE = CleverPet/Info.plist;
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;

@@ -22,6 +22,7 @@ PODS:
   - Bolts/AppLinks (1.6.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.6.0)
+  - CHCSVParser (2.1.0)
   - CorePlot (2.0)
   - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
@@ -33,7 +34,7 @@ PODS:
   - FBSDKShareKit (4.10.0):
     - FBSDKCoreKit
   - Firebase (2.5.1)
-  - GGLInstanceID (1.1.6)
+  - GGLInstanceID (1.2.1)
   - Google/CloudMessaging (1.0.7):
     - GGLInstanceID (~> 1.0)
     - Google/Core
@@ -56,9 +57,9 @@ PODS:
     - GoogleParsingUtilities (~> 1.0.0)
     - GoogleSignIn (~> 2.0)
     - GoogleUtilities (~> 1.0.0)
-  - GoogleInterchangeUtilities (1.1.0):
+  - GoogleInterchangeUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
-  - GoogleIPhoneUtilities (1.2.0):
+  - GoogleIPhoneUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
     - GoogleUtilities (~> 1.0)
   - GoogleNetworkingUtilities (1.0.0):
@@ -80,39 +81,40 @@ PODS:
   - OAStackView (1.0.1)
   - OJFSegmentedProgressView (0.0.1)
   - RBStoryboardLink (0.1.4)
-  - Spark-SDK (0.3.5):
-    - Spark-SDK/Helpers (= 0.3.5)
-    - Spark-SDK/SDK (= 0.3.5)
-  - Spark-SDK/Helpers (0.3.5)
-  - Spark-SDK/SDK (0.3.5):
+  - Spark-SDK (0.4.1):
+    - Spark-SDK/Helpers (= 0.4.1)
+    - Spark-SDK/SDK (= 0.4.1)
+  - Spark-SDK/Helpers (0.4.1)
+  - Spark-SDK/SDK (0.4.1):
     - AFNetworking (~> 3.0)
     - Spark-SDK/Helpers
-  - SparkSetup (0.3.3):
-    - SparkSetup/Comm (= 0.3.3)
-    - SparkSetup/Core (= 0.3.3)
-    - SparkSetup/Resources (= 0.3.3)
-  - SparkSetup/Comm (0.3.3)
-  - SparkSetup/Core (0.3.3):
+  - SparkSetup (0.5.0):
+    - SparkSetup/Comm (= 0.5.0)
+    - SparkSetup/Core (= 0.5.0)
+  - SparkSetup/Comm (0.5.0)
+  - SparkSetup/Core (0.5.0):
     - Spark-SDK
     - SparkSetup/Comm
-    - SparkSetup/Resources
-  - SparkSetup/Resources (0.3.3)
   - SSKeychain (1.4.0)
 
 DEPENDENCIES:
-  - AFNetworking
+  - AFNetworking (= 3.0.4)
   - AttributedMarkdown (from `https://github.com/dreamwieber/AttributedMarkdown.git`)
-  - BABCropperView
-  - CorePlot (~> 2.0)
+  - BABCropperView (= 0.4.6)
+  - Bolts (= 1.6.0)
+  - CHCSVParser
+  - CorePlot (= 2.0)
   - Crashlytics
   - Fabric
-  - FBSDKCoreKit
-  - FBSDKLoginKit
-  - FBSDKShareKit
-  - Firebase (>= 2.5.0)
+  - FBSDKCoreKit (= 4.10.0)
+  - FBSDKLoginKit (= 4.10.0)
+  - FBSDKShareKit (= 4.10.0)
+  - Firebase (= 2.5.1)
   - Google/CloudMessaging
-  - GoogleIdentityToolkit
-  - Intercom
+  - GoogleAppUtilities (= 1.0.0)
+  - GoogleIdentityToolkit (= 1.1.3)
+  - GoogleSymbolUtilities (= 1.0.3)
+  - Intercom (= 2.3.19)
   - JSONModel
   - NMRangeSlider
   - OAStackView
@@ -140,6 +142,7 @@ SPEC CHECKSUMS:
   AttributedMarkdown: ac5060667280be8cc8ee33a46c73e4ec6b17ca1a
   BABCropperView: 908858c9fd17e9bb6d2446f3ae56172c14363974
   Bolts: f52a250053bb517ca874523c3913776359ab3def
+  CHCSVParser: 3bcc7bdb72111a31222e95d57eacceefe4e537e8
   CorePlot: b7f422ad363f2b0e48152471d6da45ce232eb8c6
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
@@ -147,14 +150,14 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: d3d4a2e9d31954deb00bfea964167a05ca1ea976
   FBSDKShareKit: 54587b4624706ace1e810cf83412a918141f807a
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
-  GGLInstanceID: f92465924a9b8a48f712829d22e223653ab8dc72
+  GGLInstanceID: 4a317044f744281b82cd03015f379899f277cad3
   Google: 875f5a8ade86dd02e36586e4a54814843938c7f6
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
   GoogleAuthUtilities: 049ffd3a297cdffd271451b82fd4e75304f15ef3
   GoogleCloudMessaging: f37ea14dd0f41d4d889c10b5559dd35bbfd9ac26
   GoogleIdentityToolkit: c4cb90839fb7eb4df4c14a452a983c6fab23b115
-  GoogleInterchangeUtilities: d7f7174176fbcf9710f696f1acebad4dbd98ac03
-  GoogleIPhoneUtilities: 1c2996078f079d2fc54453dbd13eaf5523666550
+  GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
+  GoogleIPhoneUtilities: 63f25e93a3ddcb66884d182aab3a660d98f1479b
   GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
   GoogleParsingUtilities: 9158b059542c2314294cda34fb0384d80456e030
   GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8
@@ -166,8 +169,10 @@ SPEC CHECKSUMS:
   OAStackView: 95e7cb79cbea25c2342f496a44bdbe8bd4c8d510
   OJFSegmentedProgressView: 53b0d9fb54fc1587b887e6c3d814b09f724a4a66
   RBStoryboardLink: 0faae84aea6a5e8716c4469984d847d958c3fcb3
-  Spark-SDK: dbd947fd197f08655b5f458ec559de5c920e8e70
-  SparkSetup: f9618dd24548ab8a024efdaa65a89f63ed44a7ee
+  Spark-SDK: e9f7713a28526157983d28c452f4f271e8496912
+  SparkSetup: 5b749ddbde434f48359acdcf772052ca8a421486
   SSKeychain: c71293fa57216a40ab06c23f4085387583293de4
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 1bb2dccd57dd1e4d4b247f72874b8e35a980525f
+
+COCOAPODS: 1.0.0

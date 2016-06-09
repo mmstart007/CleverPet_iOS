@@ -1,1 +1,0 @@
-../../../../Spark-SDK_Internal/Pod/Classes/SDK/SparkUser.h

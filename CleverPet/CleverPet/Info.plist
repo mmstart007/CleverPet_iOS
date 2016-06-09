@@ -36,8 +36,21 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>io.cleverpet.app.ios</string>
-				<string>com.googleusercontent.apps.289189234956-o85e2ra13mictrhdq49ilms02ehd9quf</string>
-				<string>com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75</string>
+                <string>com.googleusercontent.apps.289189234956-ecj7euplj4ll1vob62aq5dcpk13r5ugt</string>
+                <string>com.googleusercontent.apps.879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep</string>
+                <string>com.googleusercontent.apps.867813813689-uagq2ino7r0tngs3d4krpa7ropn3gk50</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>gitkit</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+                <string>com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m</string>
+                <string>com.googleusercontent.apps.879679195763-kqen3kdr47jcn278lrjp3n7pek0u1hqt</string>
+                <string>com.googleusercontent.apps.867813813689-q1tbafqa428b2qodkjl1f01mar3va12v</string>
 			</array>
 		</dict>
 	</array>

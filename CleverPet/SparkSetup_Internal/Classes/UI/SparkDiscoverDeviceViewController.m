@@ -11,7 +11,11 @@
 #import "SparkSetupCommManager.h"
 #import "SparkSelectNetworkViewController.h"
 #import <Foundation/Foundation.h>
-#import "SparkCloud.h"
+#ifdef FRAMEWORK
+#import <ParticleSDK/ParticleSDK.h>
+#else
+#import "Spark-SDK.h"
+#endif
 #import "SparkSetupSecurityManager.h"
 #import "SparkSetupUILabel.h"
 //#import "UIViewController+SparkSetupCommManager.h"
@@ -328,7 +332,7 @@
         vc.videoFilePath = [SparkSetupCustomization sharedInstance].instructionalVideoFilename;
     } else if ([segue.identifier isEqualToString:@"done"]) {
         SparkSetupResultViewController *resultVC = segue.destinationViewController;
-        resultVC.setupResult = SparkSetupResultFailureConfigure;
+//        resultVC.setupResult = SparkSetupResultFailureConfigure;
     }
     
 }
@@ -458,7 +462,7 @@
                 if (!self.didGoToWifiListScreen)
                 {
 
-                    if ([SparkCloud sharedInstance].isLoggedIn)
+                    if ([SparkCloud sharedInstance].isAuthenticated)
                     {
                         // that means device is claimed by somebody else - we want to check that with user (and set claimcode if user wants to change ownership)
                         NSString *messageStr = [NSString stringWithFormat:@"This %@ is has been setup before, do you want to override ownership?",[SparkSetupCustomization sharedInstance].deviceName,[SparkCloud sharedInstance].loggedInUsername];

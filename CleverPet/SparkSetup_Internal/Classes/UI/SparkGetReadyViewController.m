@@ -9,7 +9,11 @@
 #import "SparkGetReadyViewController.h"
 #import "SparkSetupWebViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
-#import "SparkCloud.h"
+#ifdef FRAMEWORK
+#import <ParticleSDK/ParticleSDK.h>
+#else
+#import "Spark-SDK.h"
+#endif
 #import "SparkSetupMainController.h"
 #import "SparkDiscoverDeviceViewController.h"
 #import "SparkSetupUIElements.h"
@@ -56,7 +60,7 @@
     self.cancelSetupButton.titleLabel.font = [UIFont fontWithName:[SparkSetupCustomization sharedInstance].headerTextFontName size:self.self.cancelSetupButton.titleLabel.font.pointSize];
     [self.cancelSetupButton setTitleColor:[SparkSetupCustomization sharedInstance].elementTextColor forState:UIControlStateNormal];
 
-    if ([SparkCloud sharedInstance].isLoggedIn)
+    if ([SparkCloud sharedInstance].isAuthenticated)
     {
     }
     else
@@ -153,7 +157,7 @@
         }
     };
     
-    if ([SparkCloud sharedInstance].isLoggedIn)
+    if ([SparkCloud sharedInstance].isAuthenticated)
     {
         if ([SparkSetupCustomization sharedInstance].organization)
         {

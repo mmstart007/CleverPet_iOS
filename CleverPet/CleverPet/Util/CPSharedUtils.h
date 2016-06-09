@@ -138,3 +138,6 @@ extern NSString * const kGCMTokenKey;
 #define OK_TEXT NSLocalizedString(@"OK", @"OK")
 #define ERROR_TEXT NSLocalizedString(@"Error", @"Error")
 #define OFFLINE_TEXT NSLocalizedString(@"The internet connection appears to be offline.", @"The internet connection appears to be offline.")
+
+#define STR_HELPER(x) #x
+#define STR(x) STR_HELPER(x)

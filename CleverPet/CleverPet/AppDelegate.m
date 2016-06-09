@@ -93,7 +93,7 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-    
+
     self.registrationOptions = @{kGGLInstanceIDRegisterAPNSOption:deviceToken,
                              kGGLInstanceIDAPNSServerTypeSandboxOption:@YES};
     [self obtainGCMToken];
@@ -119,9 +119,10 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
 {
     GITClient *gitkitClient = [GITClient sharedInstance];
     gitkitClient.apiKey = @MACRO_VALUE(GITKIT_API_KEY);
-    gitkitClient.widgetURL = @"http://localhost?placeholder";
+    NSString *widgetURL = @MACRO_VALUE(WIDGET_URL);
+    gitkitClient.widgetURL = [NSString stringWithFormat:@"http://%@", widgetURL];
     gitkitClient.providers = @[kGITProviderGoogle, kGITProviderFacebook];
-    
+
     NSString *gidClientID = @MACRO_VALUE(GOOGLE_CLIENT_ID);
     [GIDSignIn sharedInstance].clientID = gidClientID;
     NSLog(@"Using google client id %@", gidClientID);
@@ -153,7 +154,7 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
 
 - (void)obtainGCMToken
 {
-    [[GGLInstanceID sharedInstance] tokenWithAuthorizedEntity:@"879679195763"
+    [[GGLInstanceID sharedInstance] tokenWithAuthorizedEntity:@STR(GCM_SENDER_ID)
                                                         scope:kGGLInstanceIDScopeGCM
                                                       options:self.registrationOptions
                                                       handler:self.gcmHandler];
