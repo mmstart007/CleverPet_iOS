@@ -216,7 +216,7 @@ NSString * const kPendingLogoutUserAuthKey = @"CPUserManager_auth";
     for (CPDeviceSchedule *schedule in schedules) {
         // If Monday is present, we're a weekday. If not, we're a weekend
         //unichar daysOn = [schedule.daysOn characterAtIndex:0];
-        char daysOn = (char)[intFromHexString:schedule.daysOn];
+        char daysOn = (char)[self intFromHexString:schedule.daysOn];
         BOOL isWeekend = (daysOn & (1 << 0)) >> 0;
         if (isWeekend) {
             self.currentUser.device.weekendSchedule = schedule;
