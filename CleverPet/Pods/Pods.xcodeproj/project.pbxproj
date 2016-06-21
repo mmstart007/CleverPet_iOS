@@ -5952,6 +5952,499 @@
 			};
 			name = "DEV Release";
 		};
+		3B0464FC1D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_PROD_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0464FD1D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 189892B5515786B9597BB3C370CEE08F /* AFNetworking.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AFNetworking/AFNetworking-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0464FE1D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5E295D993B49068382C9B8A29FCA6BF4 /* AttributedMarkdown.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/AttributedMarkdown/AttributedMarkdown-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0464FF1D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74B0F1028EF014C745B87F703C96FAB4 /* BABCropperView.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/BABCropperView/BABCropperView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0465001D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74B0F1028EF014C745B87F703C96FAB4 /* BABCropperView.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/BABCropperView";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/BABCropperView/ResourceBundle-BABCropperView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = BABCropperView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = "PILOT Release";
+		};
+		3B0465011D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 771645E4DE50B1E535BCEF63793F1583 /* Bolts.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Bolts/Bolts-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0465021D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C9DAB3207ACB2DD328947751D1519DF /* CHCSVParser.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CHCSVParser/CHCSVParser-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0465031D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12F952415CAD6E11FD8981003F2DC63E /* CorePlot.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/CorePlot/CorePlot-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0465041D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D5F13005DD93A5197422FFCA6207B43 /* FBSDKCoreKit.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/FBSDKCoreKit/FBSDKCoreKit-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0465051D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3066C19DE508313A393B482000F7F23E /* FBSDKLoginKit.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/FBSDKLoginKit/FBSDKLoginKit-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0465061D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E857BDB404FC1E2174673F857044A6E /* FBSDKShareKit.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/FBSDKShareKit/FBSDKShareKit-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0465071D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 946E4091C3A6E19EE57B127128C25525 /* Firebase.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Firebase/Firebase-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0465081D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 022C5BAF78311C6FC2EB74A5C8623A08 /* JSONModel.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/JSONModel/JSONModel-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0465091D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46BA76CA5FF82F0BE9CF6639BB363A3E /* NMRangeSlider.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/NMRangeSlider/NMRangeSlider-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B04650A1D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DBAA1761E3AF849CA3254E1F567F4AC7 /* OAStackView.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/OAStackView/OAStackView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B04650B1D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DBAA1761E3AF849CA3254E1F567F4AC7 /* OAStackView.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/OAStackView";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/OAStackView/ResourceBundle-OAStackView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = OAStackView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = "PILOT Release";
+		};
+		3B04650C1D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C52FFD5704BB58695637168DCFEF990 /* OJFSegmentedProgressView.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/OJFSegmentedProgressView/OJFSegmentedProgressView-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B04650D1D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01637CB90F0ABED7E7E7A9134C7DAB96 /* Pods-CleverPet.prod release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B04650E1D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 037BDCF588A281F51F1AE3FC3D21C405 /* RBStoryboardLink.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/RBStoryboardLink/RBStoryboardLink-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B04650F1D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1FE0D7EA06B2DA4CC520747EE29A0873 /* Spark-SDK.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/Spark-SDK/Spark-SDK-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0465101D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDBB78FFC55C2B3115D4688C89033DA3 /* SparkSetup.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SparkSetup/SparkSetup-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
+		3B0465111D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDBB78FFC55C2B3115D4688C89033DA3 /* SparkSetup.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SparkSetup";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/SparkSetup/ResourceBundle-SparkSetup-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SparkSetup;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = "PILOT Release";
+		};
+		3B0465121D0F38D300970A5C /* PILOT Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 496080630A780D5C179CB6625D23A10B /* SSKeychain.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SSKeychain/SSKeychain-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = "PILOT Release";
+		};
 		3BDEEF0FAE78820D2D1D1D831D057FA6 /* DEV Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3E857BDB404FC1E2174673F857044A6E /* FBSDKShareKit.xcconfig */;
@@ -7907,6 +8400,7 @@
 				EB59CDC48C58D378504BFD41CB2AEE03 /* Debug */,
 				3780928763C528CBA1C907B390E78786 /* DEV Release */,
 				2A2605E055D7C62BE2095F2EEC0FC9AC /* PROD Release */,
+				3B04650A1D0F38D300970A5C /* PILOT Release */,
 				1B63E7C23107BD1DD7A52BF5CE765951 /* Release */,
 				79E6C2E235301B752C0B984658281D0F /* STAGE Release */,
 			);
@@ -7919,6 +8413,7 @@
 				991D63D25CF417F52B3D4BFCA39E4BB8 /* Debug */,
 				5C6B50D74334A183682AC6FE774EAEDE /* DEV Release */,
 				F4FB83CF5F245CE91367669A26B5D328 /* PROD Release */,
+				3B0465111D0F38D300970A5C /* PILOT Release */,
 				4DE90094FBD4CE11697ABC326A60D9D2 /* Release */,
 				E24E4909BC036E19E3CBFC71F9DE03F4 /* STAGE Release */,
 			);
@@ -7931,6 +8426,7 @@
 				772C5D6EEFBAAFB72CFA1BC0A4704A05 /* Debug */,
 				A68DE766473EC4DABD54619CB7F222FD /* DEV Release */,
 				5CFF0F26EBB12E4DB2223F14FBA5301A /* PROD Release */,
+				3B0464FD1D0F38D300970A5C /* PILOT Release */,
 				349D98CC153F9B0191883DB3191B6FCE /* Release */,
 				DAD6EA3D4901EA36A70E1F2A4F805D53 /* STAGE Release */,
 			);
@@ -7943,6 +8439,7 @@
 				7B82E3398365808321D6FD8AE0B341DE /* Debug */,
 				A5C4408150A0887F10C98FF871E481B2 /* DEV Release */,
 				BB40666FDA108B17D9724FE9FF15D415 /* PROD Release */,
+				3B0465101D0F38D300970A5C /* PILOT Release */,
 				A3236A5A68123B779B27A82CE5BAEA6F /* Release */,
 				768B7303D3BA8D6655E7367F7EFAD239 /* STAGE Release */,
 			);
@@ -7955,6 +8452,7 @@
 				951F4998B2E35719357D2C8D768B755D /* Debug */,
 				200FE076115E515C3ACDC80898795C6B /* DEV Release */,
 				93A93DD9CD90521F1094447D7D9BFD72 /* PROD Release */,
+				3B0465091D0F38D300970A5C /* PILOT Release */,
 				C560D528B1CF84AFD706F4FAB5D7CD75 /* Release */,
 				06F6EF3E0C9B55D4DE03FF2F3B601FA7 /* STAGE Release */,
 			);
@@ -7967,6 +8465,7 @@
 				47BEF9D903506B003EA5C2B249729489 /* Debug */,
 				5CA4E3842FA192045D0D2B672F22977F /* DEV Release */,
 				02768A5D1E9D169CBC3EC5AD3CCD069A /* PROD Release */,
+				3B0464FC1D0F38D300970A5C /* PILOT Release */,
 				AAF678CED40D3499169D10F63CA0719E /* Release */,
 				179B90B0F9268BE8B94117774B5D654C /* STAGE Release */,
 			);
@@ -7979,6 +8478,7 @@
 				71676B8110B18F059BBD51BB671C981B /* Debug */,
 				4356E54061F857387D0981089ADD04F7 /* DEV Release */,
 				87AB5833132B76CDE71FF6352A62D019 /* PROD Release */,
+				3B0465031D0F38D300970A5C /* PILOT Release */,
 				CED78F98A63E7B614FCCDE853532AE20 /* Release */,
 				70A1F78E70F3A2D72C47B67E482A786D /* STAGE Release */,
 			);
@@ -7991,6 +8491,7 @@
 				DFD0A289F015001B7D5D13B08A7BCE03 /* Debug */,
 				1E8AEBB226AEC5571C424F91B8E6DD13 /* DEV Release */,
 				2BB5242D3D68651A3BFEF8C8C3B2581D /* PROD Release */,
+				3B0465081D0F38D300970A5C /* PILOT Release */,
 				4FA938850E6D636E3F3A6A83D3798A0F /* Release */,
 				7378E51936AB15658A48BAF4D7F6B3A8 /* STAGE Release */,
 			);
@@ -8003,6 +8504,7 @@
 				E372EF911FB1B14421B583768952FF98 /* Debug */,
 				6B48246A49E4ECE7DC2E570F097ADFBB /* DEV Release */,
 				F3522877A659810BDC8D662DA4E97BA7 /* PROD Release */,
+				3B0465011D0F38D300970A5C /* PILOT Release */,
 				1E9FD2BEF209A45B958FA189D8B27093 /* Release */,
 				364ED78931F5E6C9368235E0258B3EB3 /* STAGE Release */,
 			);
@@ -8015,6 +8517,7 @@
 				7C2A71861222CC195E2A729684990DD3 /* Debug */,
 				4FE1A3640024E9FD150D13FFC4D28378 /* DEV Release */,
 				FCC99681AFAD3F1912FAC975F5831252 /* PROD Release */,
+				3B04650F1D0F38D300970A5C /* PILOT Release */,
 				FB3311BEA2740357BE7601B89563C96A /* Release */,
 				29D18D11D05CCE385E381A482DB10621 /* STAGE Release */,
 			);
@@ -8027,6 +8530,7 @@
 				E2692E36558EF7A29EDC1F8436B5172C /* Debug */,
 				12EA7BFCD5F54CB7460CC74E9A035668 /* DEV Release */,
 				AEC24515BEE5BF866A64845F3CD89843 /* PROD Release */,
+				3B0465001D0F38D300970A5C /* PILOT Release */,
 				BF34C953617EB26A7814C754A34BB689 /* Release */,
 				AEBE8E26FBE61E398874A978F86F03B3 /* STAGE Release */,
 			);
@@ -8039,6 +8543,7 @@
 				6642680E3C65CBA6E39FFA4F08C62D98 /* Debug */,
 				9BFFDA09CFE9FE3B87275727630A27C8 /* DEV Release */,
 				06CCA1E508FE5A14BBF416829084F13E /* PROD Release */,
+				3B04650E1D0F38D300970A5C /* PILOT Release */,
 				E4004163DE7747248F6E26885499038F /* Release */,
 				7A28F1D82F700D6CC825230F947ADFB3 /* STAGE Release */,
 			);
@@ -8051,6 +8556,7 @@
 				D8805C1EE4131FB9CF8D6CF5941A830D /* Debug */,
 				18A3BED74B1AAD932249485A9C5C9F80 /* DEV Release */,
 				84179EC78B9A206E8D915D3D45223322 /* PROD Release */,
+				3B04650C1D0F38D300970A5C /* PILOT Release */,
 				6B9B134BE3EF1331CFD423646BA4D9C8 /* Release */,
 				85113BA6C5D00A856DB8DB0D39AF088E /* STAGE Release */,
 			);
@@ -8063,6 +8569,7 @@
 				E987669B2848FEA8179B6717CA582657 /* Debug */,
 				A33A6040CAFEF2081D3E89D99910E58F /* DEV Release */,
 				1F99D5B130E8731089E91D0D5AA89CD7 /* PROD Release */,
+				3B0464FE1D0F38D300970A5C /* PILOT Release */,
 				287007EDF8690E8D6EE4627F8FCDFA25 /* Release */,
 				DE627530CA69457E900376B2A8AB2080 /* STAGE Release */,
 			);
@@ -8075,6 +8582,7 @@
 				B5A77A4973827F4ABEA9DE7E421AB11C /* Debug */,
 				CBD7414C4B8C14E4ADD8C03A73CC2DA7 /* DEV Release */,
 				F7DD27D5B01CD960359FA42B1D5625F6 /* PROD Release */,
+				3B0465041D0F38D300970A5C /* PILOT Release */,
 				CD1401E90E781DC4F936FF381761CA34 /* Release */,
 				733FD35DDF97A6834E9C98227518FA0F /* STAGE Release */,
 			);
@@ -8087,6 +8595,7 @@
 				B41D23CEEAAFCA5E140B42D40577392E /* Debug */,
 				7547582D74EB861DFBB6866B571D339E /* DEV Release */,
 				2F95B8A757BBCFF08370887328500C9E /* PROD Release */,
+				3B0465071D0F38D300970A5C /* PILOT Release */,
 				DCAB2BE91D7D751EC15B45D0C7719183 /* Release */,
 				50D3AD1FDDA89C5723A216A6D48FBB85 /* STAGE Release */,
 			);
@@ -8099,6 +8608,7 @@
 				E6EB22FCA5F994ACFB7741EFFC6BF614 /* Debug */,
 				A5B98C3776BEFC1BEB312176B91C72E5 /* DEV Release */,
 				8637942224845FDFAD1949ACDBCB4F62 /* PROD Release */,
+				3B04650D1D0F38D300970A5C /* PILOT Release */,
 				E62E9F054A795DBEC680DA7D938E38AC /* Release */,
 				C21D5F2E858DF109CC6A436A111CCDAC /* STAGE Release */,
 			);
@@ -8111,6 +8621,7 @@
 				7488F9B7E611E0417C354AA29BAEB6B3 /* Debug */,
 				73DC4FFF7D4C350C23B0EDA660494DC2 /* DEV Release */,
 				679490ADF72BBBF90E94F9883BFDEFC5 /* PROD Release */,
+				3B04650B1D0F38D300970A5C /* PILOT Release */,
 				DCF925184C8B91C2F771C4DA30CA2A85 /* Release */,
 				D247B0A31398C31A8630421BF65A1D70 /* STAGE Release */,
 			);
@@ -8123,6 +8634,7 @@
 				EA10E711E35CD6272386DA8792BB0D4E /* Debug */,
 				943D881D1DDC95D3D25866ADCA6F5BE0 /* DEV Release */,
 				9281AEEA98E32EB1905627A559C0F0C7 /* PROD Release */,
+				3B0464FF1D0F38D300970A5C /* PILOT Release */,
 				6C556DAF5011209D8A661866860C02F4 /* Release */,
 				28AB7FBF6D5AE7DB70C079D545CA3B20 /* STAGE Release */,
 			);
@@ -8135,6 +8647,7 @@
 				844BE6B3C58C4C0BFE343444787BB045 /* Debug */,
 				42510DC74D2CA0C1BFF33607F3EF170C /* DEV Release */,
 				A8598046C88DB38F53DA71FE5DB87B08 /* PROD Release */,
+				3B0465021D0F38D300970A5C /* PILOT Release */,
 				10549BE714D812CD81389F70319C6CAB /* Release */,
 				CCF2DF4CB93C457596107F5A9D34AACD /* STAGE Release */,
 			);
@@ -8147,6 +8660,7 @@
 				EB24B133891460DF024D1F5C79EFFC88 /* Debug */,
 				A28B5A67ECF5BB7E972C0354D7ACDEA4 /* DEV Release */,
 				DB40A7F02F1290D763A255533F248466 /* PROD Release */,
+				3B0465121D0F38D300970A5C /* PILOT Release */,
 				7FA5F9D95F08E6A7FB0192E7CAB87399 /* Release */,
 				6AEA06624AF9D3B466149DED2EC43ED4 /* STAGE Release */,
 			);
@@ -8159,6 +8673,7 @@
 				49CC917015BD6156A7FE929547414820 /* Debug */,
 				2A76644243FA783C031DB758D337946D /* DEV Release */,
 				C7D0339DC4C81D4FE541EA513D57B97C /* PROD Release */,
+				3B0465051D0F38D300970A5C /* PILOT Release */,
 				5EABEF1A9F34848EE1ECF129639CB711 /* Release */,
 				650D049FAFD7968551AF0E921E8DEDED /* STAGE Release */,
 			);
@@ -8171,6 +8686,7 @@
 				94F50A1A2C6358D63A978D87ECD5E2DA /* Debug */,
 				3BDEEF0FAE78820D2D1D1D831D057FA6 /* DEV Release */,
 				FC7C8E1C636AFC048F0EB272569F2574 /* PROD Release */,
+				3B0465061D0F38D300970A5C /* PILOT Release */,
 				417E1018F27A8C9E5A7ACAD7B090C1DA /* Release */,
 				28F2E458B7019ADEC87B7F556E897839 /* STAGE Release */,
 			);
