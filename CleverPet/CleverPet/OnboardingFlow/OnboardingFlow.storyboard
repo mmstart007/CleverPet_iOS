@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Lwa Signin View Controller-->
+        <scene sceneID="ZwS-5E-pxP">
+            <objects>
+                <viewController storyboardIdentifier="lwasignin" id="SPh-Rh-rl1" customClass="CPLwaSigninViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="D7D-pX-GVs"/>
+                        <viewControllerLayoutGuide type="bottom" id="bSP-7x-1SQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h9N-fI-2Rt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ab3-lw-wdK">
+                                <rect key="frame" x="168" y="530" width="264" height="50"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="RJl-n2-dVp"/>
+                                    <constraint firstAttribute="width" constant="264" id="a2R-5d-jDt"/>
+                                </constraints>
+                                <state key="normal" title="Sign up"/>
+                                <connections>
+                                    <action selector="signinButtonTapped:" destination="SPh-Rh-rl1" eventType="touchUpInside" id="eiW-IX-jNa"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bSP-7x-1SQ" firstAttribute="top" secondItem="Ab3-lw-wdK" secondAttribute="bottom" constant="20" id="Ull-3o-Ora"/>
+                            <constraint firstItem="Ab3-lw-wdK" firstAttribute="centerX" secondItem="h9N-fI-2Rt" secondAttribute="centerX" id="zgw-Zq-RCM"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cKP-6v-h3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="488" y="300"/>
+        </scene>
+        <!--Repl Dashboard View Controller-->
+        <scene sceneID="Hh6-Dl-m5T">
+            <objects>
+                <viewController storyboardIdentifier="repldashboard" id="aie-dZ-xIv" customClass="CPReplDashboardViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pjs-c1-1db"/>
+                        <viewControllerLayoutGuide type="bottom" id="NzO-4N-h1W"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="NCT-FU-p7j">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replenishment Dashboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3i-ny-9Rw">
+                                <rect key="frame" x="20" y="87" width="560" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="8Kf-9P-Fhr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rQd-CW-hLr">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="22R-sp-pKk"/>
+                                </constraints>
+                                <string key="text">You logged in as
+....</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="22R-sp-pKk"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="22R-sp-pKk"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rea-c7-JyV">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="260" id="CSN-az-Dss"/>
+                                    <constraint firstAttribute="height" constant="50" id="zuM-qb-7Ph"/>
+                                </constraints>
+                                <state key="normal" title="Sign out"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="CSN-az-Dss"/>
+                                        <exclude reference="zuM-qb-7Ph"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="CSN-az-Dss"/>
+                                        <include reference="zuM-qb-7Ph"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="signoutButtonTapped:" destination="aie-dZ-xIv" eventType="touchUpInside" id="6US-xa-McQ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="u3i-ny-9Rw" firstAttribute="leading" secondItem="NCT-FU-p7j" secondAttribute="leading" constant="20" id="404-ex-Nr5"/>
+                            <constraint firstItem="rQd-CW-hLr" firstAttribute="centerY" secondItem="NCT-FU-p7j" secondAttribute="centerY" id="Bwr-D8-dw6"/>
+                            <constraint firstItem="rQd-CW-hLr" firstAttribute="centerY" secondItem="NCT-FU-p7j" secondAttribute="centerY" id="E4o-fP-E7c"/>
+                            <constraint firstItem="u3i-ny-9Rw" firstAttribute="top" secondItem="NCT-FU-p7j" secondAttribute="top" constant="87" id="JI5-Qm-6iD"/>
+                            <constraint firstItem="Rea-c7-JyV" firstAttribute="centerX" secondItem="NCT-FU-p7j" secondAttribute="centerX" id="Ozv-i1-p8z"/>
+                            <constraint firstAttribute="bottom" secondItem="Rea-c7-JyV" secondAttribute="bottom" constant="20" id="UJh-IV-fST"/>
+                            <constraint firstAttribute="trailing" secondItem="rQd-CW-hLr" secondAttribute="trailing" constant="20" id="a2Q-Nr-s9m"/>
+                            <constraint firstItem="rQd-CW-hLr" firstAttribute="leading" secondItem="NCT-FU-p7j" secondAttribute="leading" constant="20" id="equ-EO-ocs"/>
+                            <constraint firstAttribute="trailing" secondItem="u3i-ny-9Rw" secondAttribute="trailing" constant="20" id="es3-Y8-ZoT"/>
+                            <constraint firstItem="rQd-CW-hLr" firstAttribute="centerX" secondItem="NCT-FU-p7j" secondAttribute="centerX" id="nmH-pB-ygA"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="rQd-CW-hLr"/>
+                                <exclude reference="Rea-c7-JyV"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Bwr-D8-dw6"/>
+                                <exclude reference="E4o-fP-E7c"/>
+                                <exclude reference="a2Q-Nr-s9m"/>
+                                <exclude reference="equ-EO-ocs"/>
+                                <exclude reference="nmH-pB-ygA"/>
+                                <exclude reference="Ozv-i1-p8z"/>
+                                <exclude reference="UJh-IV-fST"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="rQd-CW-hLr"/>
+                                <include reference="Rea-c7-JyV"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="Bwr-D8-dw6"/>
+                                <include reference="E4o-fP-E7c"/>
+                                <include reference="a2Q-Nr-s9m"/>
+                                <include reference="equ-EO-ocs"/>
+                                <exclude reference="nmH-pB-ygA"/>
+                                <include reference="Ozv-i1-p8z"/>
+                                <include reference="UJh-IV-fST"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="accountIdLabel" destination="rQd-CW-hLr" id="1mh-TY-EUM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QvO-MO-9fx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="487.5" y="1014"/>
+        </scene>
+    </scenes>
+</document>
