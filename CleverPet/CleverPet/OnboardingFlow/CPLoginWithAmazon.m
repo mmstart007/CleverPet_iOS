@@ -12,7 +12,7 @@
 
 + (NSArray *)appRequestScopes
 {
-    return [NSArray arrayWithObjects:@"profile", nil];
+    return [NSArray arrayWithObjects:@"profile:user_id", nil];
 }
 
 @end

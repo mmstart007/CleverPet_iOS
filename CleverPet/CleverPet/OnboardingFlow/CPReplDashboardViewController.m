@@ -55,7 +55,8 @@
             [self.delegate replenishDashboardDidSignout];
         }
     } else if (apiResult.api == kAPIGetProfile) {
-        self.accountIdLabel.text = [NSString stringWithFormat:@"You logged in as\n%@", apiResult.result[@"name"]];
+        NSLog(@"%@", apiResult.result);
+        self.accountIdLabel.text = [NSString stringWithFormat:@"You logged in as\n%@", apiResult.result[@"user_id"]];
     }
 }
 
