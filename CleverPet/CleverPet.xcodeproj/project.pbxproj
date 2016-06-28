@@ -117,6 +117,14 @@
 		97F7284E1C7E416A005E65C2 /* CPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F7284D1C7E416A005E65C2 /* CPConfigManager.m */; };
 		97F728511C7E588C005E65C2 /* CPAppEngineCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */; };
 		C29D3A67647946CA314A0FE2 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB5BA94E0A1455B0C16826E9 /* libPods-CleverPet.a */; };
+		CEEABDFB1D21C6D800605323 /* LoginWithAmazon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEABDFA1D21C6D800605323 /* LoginWithAmazon.framework */; };
+		CEEABDFD1D21C72700605323 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEABDFC1D21C72700605323 /* Security.framework */; };
+		CEEABDFF1D21C72D00605323 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEABDFE1D21C72D00605323 /* SafariServices.framework */; };
+		CEEABE011D21C73500605323 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEABE001D21C73500605323 /* CoreGraphics.framework */; };
+		CEEABE041D224CAF00605323 /* OnboardingFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEABE031D224CAF00605323 /* OnboardingFlow.storyboard */; };
+		CEEABE071D22657300605323 /* CPLwaSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEABE061D22657300605323 /* CPLwaSigninViewController.m */; };
+		CEEABE0A1D2269CD00605323 /* CPReplDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEABE091D2269CD00605323 /* CPReplDashboardViewController.m */; };
+		CEEABE111D226EC500605323 /* CPLoginWithAmazon.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEABE101D226EC500605323 /* CPLoginWithAmazon.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -303,6 +311,17 @@
 		97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAppEngineCommunicationManager.m; sourceTree = "<group>"; };
 		A73DC3F1C221907F0B7DF27C /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
 		CB5BA94E0A1455B0C16826E9 /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEEABDFA1D21C6D800605323 /* LoginWithAmazon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoginWithAmazon.framework; path = LoginWithAmazon/LoginWithAmazon.framework; sourceTree = "<group>"; };
+		CEEABDFC1D21C72700605323 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CEEABDFE1D21C72D00605323 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		CEEABE001D21C73500605323 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CEEABE031D224CAF00605323 /* OnboardingFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OnboardingFlow.storyboard; sourceTree = "<group>"; };
+		CEEABE051D22657300605323 /* CPLwaSigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLwaSigninViewController.h; sourceTree = "<group>"; };
+		CEEABE061D22657300605323 /* CPLwaSigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLwaSigninViewController.m; sourceTree = "<group>"; };
+		CEEABE081D2269CD00605323 /* CPReplDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPReplDashboardViewController.h; sourceTree = "<group>"; };
+		CEEABE091D2269CD00605323 /* CPReplDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPReplDashboardViewController.m; sourceTree = "<group>"; };
+		CEEABE0F1D226EC500605323 /* CPLoginWithAmazon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLoginWithAmazon.h; sourceTree = "<group>"; };
+		CEEABE101D226EC500605323 /* CPLoginWithAmazon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLoginWithAmazon.m; sourceTree = "<group>"; };
 		E3A1A6D0B05A737136D997CB /* Pods-CleverPet.stage release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.stage release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.stage release.xcconfig"; sourceTree = "<group>"; };
 		F719EDCF1318B19E7CF57278 /* Pods-CleverPet.dev release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.dev release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.dev release.xcconfig"; sourceTree = "<group>"; };
 		FF77B9C9A08E543B4DF393DD /* Pods-CleverPet.prod release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.prod release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.prod release.xcconfig"; sourceTree = "<group>"; };
@@ -313,6 +332,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEEABE011D21C73500605323 /* CoreGraphics.framework in Frameworks */,
+				CEEABDFF1D21C72D00605323 /* SafariServices.framework in Frameworks */,
+				CEEABDFD1D21C72700605323 /* Security.framework in Frameworks */,
+				CEEABDFB1D21C6D800605323 /* LoginWithAmazon.framework in Frameworks */,
 				97E6782F1CA09F8000971A0F /* Photos.framework in Frameworks */,
 				979D84781C84FF3000ADB6B0 /* CoreText.framework in Frameworks */,
 				C29D3A67647946CA314A0FE2 /* libPods-CleverPet.a in Frameworks */,
@@ -365,6 +388,7 @@
 				1827A78F146E373DB1371921 /* ViewController */,
 				0D36AA8C1C7243D600349D03 /* ViewController.h */,
 				0D36AA8D1C7243D600349D03 /* ViewController.m */,
+				CEEABE021D224C8400605323 /* OnboardingFlow */,
 			);
 			path = CleverPet;
 			sourceTree = "<group>";
@@ -637,6 +661,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		CEEABE021D224C8400605323 /* OnboardingFlow */ = {
+			isa = PBXGroup;
+			children = (
+				CEEABE031D224CAF00605323 /* OnboardingFlow.storyboard */,
+				CEEABE051D22657300605323 /* CPLwaSigninViewController.h */,
+				CEEABE061D22657300605323 /* CPLwaSigninViewController.m */,
+				CEEABE081D2269CD00605323 /* CPReplDashboardViewController.h */,
+				CEEABE091D2269CD00605323 /* CPReplDashboardViewController.m */,
+				CEEABE0F1D226EC500605323 /* CPLoginWithAmazon.h */,
+				CEEABE101D226EC500605323 /* CPLoginWithAmazon.m */,
+			);
+			path = OnboardingFlow;
+			sourceTree = "<group>";
+		};
 		D24F3E5B150BDFF9BAEC8AED /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -651,6 +689,10 @@
 		D625135D7BCE1E48B006E50A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEEABE001D21C73500605323 /* CoreGraphics.framework */,
+				CEEABDFE1D21C72D00605323 /* SafariServices.framework */,
+				CEEABDFC1D21C72700605323 /* Security.framework */,
+				CEEABDFA1D21C6D800605323 /* LoginWithAmazon.framework */,
 				97E6782E1CA09F8000971A0F /* Photos.framework */,
 				979D84771C84FF3000ADB6B0 /* CoreText.framework */,
 				CB5BA94E0A1455B0C16826E9 /* libPods-CleverPet.a */,
@@ -695,7 +737,6 @@
 				TargetAttributes = {
 					0D36AA821C7243D600349D03 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = B6N59G6Q3X;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -764,6 +805,7 @@
 				0DD4BD311C739426006B3725 /* CPTileViewCell.xib in Resources */,
 				0DE13B591C7ECE3400648834 /* CPMainScreenHeaderView.xib in Resources */,
 				979D84671C84FAF200ADB6B0 /* Raleway-Bold.ttf in Resources */,
+				CEEABE041D224CAF00605323 /* OnboardingFlow.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -853,7 +895,9 @@
 				97F728511C7E588C005E65C2 /* CPAppEngineCommunicationManager.m in Sources */,
 				97CC446C1C768A32003C4258 /* CPFAQViewController.m in Sources */,
 				97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */,
+				CEEABE071D22657300605323 /* CPLwaSigninViewController.m in Sources */,
 				97CC44851C77E703003C4258 /* CPAppearance.m in Sources */,
+				CEEABE111D226EC500605323 /* CPLoginWithAmazon.m in Sources */,
 				979D844F1C80FCB200ADB6B0 /* CPLoadingView.m in Sources */,
 				97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */,
 				97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */,
@@ -887,6 +931,7 @@
 				97EC010A1C92354300929EFE /* CPSplashImageUtils.m in Sources */,
 				1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */,
 				97D258211C8F5F17002C4CC6 /* CPPlayerViewController.m in Sources */,
+				CEEABE0A1D2269CD00605323 /* CPReplDashboardViewController.m in Sources */,
 				0DE13B671C7FABB200648834 /* CPTileDataManager.m in Sources */,
 				1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */,
 				0DE13B631C7EE9DF00648834 /* CPLabelUtils.m in Sources */,
@@ -1022,10 +1067,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stanley Liu (89A37WQV78)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stanley Liu (89A37WQV78)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LoginWithAmazon",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
@@ -1045,7 +1094,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8014e352-9c92-4415-a194-9e48b9154c35";
 			};
 			name = Debug;
 		};
@@ -1055,9 +1104,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stanley Liu (89A37WQV78)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stanley Liu (89A37WQV78)";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LoginWithAmazon",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
@@ -1078,7 +1131,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8014e352-9c92-4415-a194-9e48b9154c35";
 			};
 			name = "DEV Release";
 		};
@@ -1125,9 +1178,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Pilot";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stanley Liu (89A37WQV78)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stanley Liu (89A37WQV78)";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LoginWithAmazon",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
@@ -1148,7 +1205,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8014e352-9c92-4415-a194-9e48b9154c35";
 			};
 			name = "PILOT Release";
 		};
@@ -1195,9 +1252,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stanley Liu (89A37WQV78)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stanley Liu (89A37WQV78)";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LoginWithAmazon",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
@@ -1218,7 +1279,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8014e352-9c92-4415-a194-9e48b9154c35";
 			};
 			name = "PROD Release";
 		};
@@ -1265,9 +1326,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Stage";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Stanley Liu (89A37WQV78)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stanley Liu (89A37WQV78)";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LoginWithAmazon",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CleverPet/CleverPet-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS[arch=*]" = (
@@ -1288,7 +1353,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "8014e352-9c92-4415-a194-9e48b9154c35";
 			};
 			name = "STAGE Release";
 		};
