@@ -109,6 +109,8 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
     
+    NSLog(@"%@", url);
+    NSLog(@"%@", sourceApplication);
     // Pass on the url to the SDK to parse authorization code from the url.
     BOOL isValidRedirectSignInURL = [AIMobileLib handleOpenURL:url sourceApplication:sourceApplication];
     

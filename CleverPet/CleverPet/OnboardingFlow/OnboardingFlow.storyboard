@@ -41,10 +41,10 @@
             </objects>
             <point key="canvasLocation" x="488" y="300"/>
         </scene>
-        <!--Repl Dashboard View Controller-->
+        <!--Replenish Dash View Controller-->
         <scene sceneID="Hh6-Dl-m5T">
             <objects>
-                <viewController storyboardIdentifier="repldashboard" id="aie-dZ-xIv" customClass="CPReplDashboardViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="replenishdash" id="aie-dZ-xIv" customClass="CPReplenishDashViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="pjs-c1-1db"/>
                         <viewControllerLayoutGuide type="bottom" id="NzO-4N-h1W"/>
@@ -53,7 +53,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replenishment Dashboard" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3i-ny-9Rw">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replenish Dash" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u3i-ny-9Rw">
                                 <rect key="frame" x="20" y="87" width="560" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="8Kf-9P-Fhr"/>
@@ -127,13 +127,13 @@
                                 <exclude reference="Rea-c7-JyV"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Ozv-i1-p8z"/>
+                                <exclude reference="UJh-IV-fST"/>
                                 <exclude reference="Bwr-D8-dw6"/>
                                 <exclude reference="E4o-fP-E7c"/>
                                 <exclude reference="a2Q-Nr-s9m"/>
                                 <exclude reference="equ-EO-ocs"/>
                                 <exclude reference="nmH-pB-ygA"/>
-                                <exclude reference="Ozv-i1-p8z"/>
-                                <exclude reference="UJh-IV-fST"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -142,13 +142,13 @@
                                 <include reference="Rea-c7-JyV"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Ozv-i1-p8z"/>
+                                <include reference="UJh-IV-fST"/>
                                 <exclude reference="Bwr-D8-dw6"/>
                                 <include reference="E4o-fP-E7c"/>
                                 <include reference="a2Q-Nr-s9m"/>
                                 <include reference="equ-EO-ocs"/>
                                 <exclude reference="nmH-pB-ygA"/>
-                                <include reference="Ozv-i1-p8z"/>
-                                <include reference="UJh-IV-fST"/>
                             </mask>
                         </variation>
                     </view>

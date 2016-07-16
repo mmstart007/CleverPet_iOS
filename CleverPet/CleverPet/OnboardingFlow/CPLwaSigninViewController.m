@@ -7,9 +7,13 @@
 //
 
 #import "CPLwaSigninViewController.h"
-#import "CPLoginWithAmazon.h"
+#import "CPReplenishDashUtil.h"
+#import "CPAmazonAPI.h"
 
 @interface CPLwaSigninViewController () <AIAuthenticationDelegate>
+{
+    CPAmazonAPI *requestManager;
+}
 
 - (IBAction)signinButtonTapped:(id)sender;
 
@@ -39,17 +43,32 @@
 
 #pragma mark - IBActions
 - (IBAction)signinButtonTapped:(id)sender {
-    [AIMobileLib authorizeUserForScopes:[CPLoginWithAmazon appRequestScopes] delegate:self];
+    [AIMobileLib authorizeUserForScopes:[CPReplenishDashUtil appRequestScopes] delegate:self options:[CPReplenishDashUtil appRequestScopeOptions]];
 }
 
 #pragma mark - Amazon Authentication Delegate
 - (void)requestDidSucceed:(APIResult *)apiResult
 {
-    if (self.delegate &&
+    NSString *authCode = apiResult.result;
+
+    NSLog(@"Auth Code -> %@ \n ClientID -> %@ \n RedirctURI -> %@", apiResult.result, [AIMobileLib getClientId], [AIMobileLib getRedirectUri]);
+    
+    [[CPAmazonAPI manager] sendAuthCode : authCode
+                      grant_type : @"authorization_code"
+                        clientId : [AIMobileLib getClientId]
+                    redirect_uri : [AIMobileLib getRedirectUri]
+                         success : ^(NSDictionary *result) {
+                                NSLog(@"success getting device token!");
+                         } failure : ^(NSError *error) {
+                             NSLog(@"failed getting device token!");
+                        }];
+
+/*    if (self.delegate &&
         [self.delegate respondsToSelector:@selector(loginWithAmazonDidSuccess)])
     {
         [self.delegate loginWithAmazonDidSuccess];
     }
+ */
 }
 
 - (void)requestDidFail:(APIError *)errorResponse

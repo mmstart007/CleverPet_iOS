@@ -14,8 +14,8 @@
 #import "CPParticleConnectionHelper.h"
 #import "CPHubStatusManager.h"
 #import "CPAppEngineCommunicationManager.h"
-#import "CPLoginWithAmazon.h"
-#import "CPReplDashboardViewController.h"
+#import "CPReplenishDashUtil.h"
+#import "CPReplenishDashViewController.h"
 #import "CPLwaSigninViewController.h"
 
 NSUInteger const kDeviceSection = 0;
@@ -50,7 +50,7 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
 
 @end
 
-@interface CPSettingsViewController () <CPHubPlaceholderDelegate, CPParticleConnectionDelegate, AIAuthenticationDelegate, CPLoginWithAmazonDelegate, CPReplenishDashboardDelegate>
+@interface CPSettingsViewController () <CPHubPlaceholderDelegate, CPParticleConnectionDelegate, AIAuthenticationDelegate, CPLoginWithAmazonDelegate, CPReplenishDashDelegate>
 
 @property (weak, nonatomic) IBOutlet CPSettingsHubStatusCell *hubCell;
 @property (weak, nonatomic) UIBarButtonItem *pseudoBackButton;
@@ -211,7 +211,8 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
             self.hubPlaceholder = vc;
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == kDeviceSectionAutoOrderRow) {
-            [AIMobileLib getAccessTokenForScopes:[CPLoginWithAmazon appRequestScopes] withOverrideParams:nil delegate:self];
+//            [AIMobileLib getAccessTokenForScopes:[CPReplenishDashUtil appLWARequestScopes] withOverrideParams:[CPReplenishDashUtil appLWARequestScopeOptions] delegate:self];
+            [self openLoginWithAmazon];
         }
     }
 }
@@ -296,7 +297,7 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
 }
 
 #pragma mark - ReplenishDashboard Delegate
-- (void)replenishDashboardUserNotAuthorized
+- (void)replenishDashUserNotAuthorized
 {
     [self.navigationController popToViewController:self animated:YES];
     dispatch_time_t after = dispatch_time(DISPATCH_TIME_NOW, 500 * NSEC_PER_MSEC);
@@ -305,7 +306,7 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
     });
 }
 
-- (void)replenishDashboardDidSignout
+- (void)replenishDashDidSignout
 {
     [self.navigationController popToViewController:self animated:YES];
     dispatch_time_t after = dispatch_time(DISPATCH_TIME_NOW, 500 * NSEC_PER_MSEC);
@@ -317,7 +318,7 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
 #pragma mark - Helpers for onboarding flow
 - (void)openReplenishmentDashboard
 {
-    CPReplDashboardViewController *vc = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateViewControllerWithIdentifier:@"repldashboard"];
+    CPReplenishDashViewController *vc = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateViewControllerWithIdentifier:@"replenishdash"];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }

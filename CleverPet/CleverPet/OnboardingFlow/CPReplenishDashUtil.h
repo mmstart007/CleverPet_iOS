@@ -1,5 +1,5 @@
 //
-//  CPLoginWithAmazon.h
+//  CPReplenishDashUtil.h
 //  CleverPet
 //
 //  Created by user on 6/28/16.
@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <LoginWithAmazon/LoginWithAmazon.h>
 
-@interface CPLoginWithAmazon : NSObject
+@interface CPReplenishDashUtil : NSObject
 
 + (NSArray *)appRequestScopes;
++ (NSDictionary *)appRequestScopeOptions;
 
 @end

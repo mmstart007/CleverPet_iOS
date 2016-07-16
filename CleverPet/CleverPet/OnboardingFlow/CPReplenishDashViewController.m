@@ -1,15 +1,15 @@
 //
-//  CPReplDashboardViewController.m
+//  CPReplenishDashViewController.m
 //  CleverPet
 //
 //  Created by user on 6/28/16.
 //  Copyright © 2016 CleverPet, Inc. All rights reserved.
 //
 
-#import "CPReplDashboardViewController.h"
-#import "CPLoginWithAmazon.h"
+#import "CPReplenishDashViewController.h"
+#import "CPReplenishDashUtil.h"
 
-@interface CPReplDashboardViewController () <AIAuthenticationDelegate>
+@interface CPReplenishDashViewController () <AIAuthenticationDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *accountIdLabel;
 
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation CPReplDashboardViewController
+@implementation CPReplenishDashViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,9 +50,9 @@
 {
     if (apiResult.api == kAPIClearAuthorizationState) {
         if (self.delegate &&
-            [self.delegate respondsToSelector:@selector(replenishDashboardDidSignout)])
+            [self.delegate respondsToSelector:@selector(replenishDashDidSignout)])
         {
-            [self.delegate replenishDashboardDidSignout];
+            [self.delegate replenishDashDidSignout];
         }
     } else if (apiResult.api == kAPIGetProfile) {
         NSLog(@"%@", apiResult.result);
@@ -71,9 +71,9 @@
     } else if (errorResponse.api == kAPIGetProfile) {
         if(errorResponse.error.code == kAIApplicationNotAuthorized) {
             if (self.delegate &&
-                [self.delegate respondsToSelector:@selector(replenishDashboardUserNotAuthorized)])
+                [self.delegate respondsToSelector:@selector(replenishDashUserNotAuthorized)])
             {
-                [self.delegate replenishDashboardUserNotAuthorized];
+                [self.delegate replenishDashUserNotAuthorized];
             }
         }
         else {
