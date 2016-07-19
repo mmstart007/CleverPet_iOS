@@ -117,14 +117,15 @@
 		97F7284E1C7E416A005E65C2 /* CPConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F7284D1C7E416A005E65C2 /* CPConfigManager.m */; };
 		97F728511C7E588C005E65C2 /* CPAppEngineCommunicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */; };
 		C29D3A67647946CA314A0FE2 /* libPods-CleverPet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CB5BA94E0A1455B0C16826E9 /* libPods-CleverPet.a */; };
+		CEE473661D2B637E00BB46A9 /* CPAmazonAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE473651D2B637D00BB46A9 /* CPAmazonAPI.m */; };
 		CEEABDFB1D21C6D800605323 /* LoginWithAmazon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEABDFA1D21C6D800605323 /* LoginWithAmazon.framework */; };
 		CEEABDFD1D21C72700605323 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEABDFC1D21C72700605323 /* Security.framework */; };
 		CEEABDFF1D21C72D00605323 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEABDFE1D21C72D00605323 /* SafariServices.framework */; };
 		CEEABE011D21C73500605323 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEEABE001D21C73500605323 /* CoreGraphics.framework */; };
 		CEEABE041D224CAF00605323 /* OnboardingFlow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEEABE031D224CAF00605323 /* OnboardingFlow.storyboard */; };
 		CEEABE071D22657300605323 /* CPLwaSigninViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEABE061D22657300605323 /* CPLwaSigninViewController.m */; };
-		CEEABE0A1D2269CD00605323 /* CPReplDashboardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEABE091D2269CD00605323 /* CPReplDashboardViewController.m */; };
-		CEEABE111D226EC500605323 /* CPLoginWithAmazon.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEABE101D226EC500605323 /* CPLoginWithAmazon.m */; };
+		CEEABE0A1D2269CD00605323 /* CPReplenishDashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEABE091D2269CD00605323 /* CPReplenishDashViewController.m */; };
+		CEEABE111D226EC500605323 /* CPReplenishDashUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEABE101D226EC500605323 /* CPReplenishDashUtil.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -311,6 +312,8 @@
 		97F728501C7E588C005E65C2 /* CPAppEngineCommunicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAppEngineCommunicationManager.m; sourceTree = "<group>"; };
 		A73DC3F1C221907F0B7DF27C /* Pods-CleverPet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.debug.xcconfig"; sourceTree = "<group>"; };
 		CB5BA94E0A1455B0C16826E9 /* libPods-CleverPet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CleverPet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEE473641D2B637D00BB46A9 /* CPAmazonAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPAmazonAPI.h; sourceTree = "<group>"; };
+		CEE473651D2B637D00BB46A9 /* CPAmazonAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPAmazonAPI.m; sourceTree = "<group>"; };
 		CEEABDFA1D21C6D800605323 /* LoginWithAmazon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LoginWithAmazon.framework; path = LoginWithAmazon/LoginWithAmazon.framework; sourceTree = "<group>"; };
 		CEEABDFC1D21C72700605323 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		CEEABDFE1D21C72D00605323 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
@@ -318,10 +321,10 @@
 		CEEABE031D224CAF00605323 /* OnboardingFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OnboardingFlow.storyboard; sourceTree = "<group>"; };
 		CEEABE051D22657300605323 /* CPLwaSigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLwaSigninViewController.h; sourceTree = "<group>"; };
 		CEEABE061D22657300605323 /* CPLwaSigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLwaSigninViewController.m; sourceTree = "<group>"; };
-		CEEABE081D2269CD00605323 /* CPReplDashboardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPReplDashboardViewController.h; sourceTree = "<group>"; };
-		CEEABE091D2269CD00605323 /* CPReplDashboardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPReplDashboardViewController.m; sourceTree = "<group>"; };
-		CEEABE0F1D226EC500605323 /* CPLoginWithAmazon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLoginWithAmazon.h; sourceTree = "<group>"; };
-		CEEABE101D226EC500605323 /* CPLoginWithAmazon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLoginWithAmazon.m; sourceTree = "<group>"; };
+		CEEABE081D2269CD00605323 /* CPReplenishDashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPReplenishDashViewController.h; sourceTree = "<group>"; };
+		CEEABE091D2269CD00605323 /* CPReplenishDashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPReplenishDashViewController.m; sourceTree = "<group>"; };
+		CEEABE0F1D226EC500605323 /* CPReplenishDashUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPReplenishDashUtil.h; sourceTree = "<group>"; };
+		CEEABE101D226EC500605323 /* CPReplenishDashUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPReplenishDashUtil.m; sourceTree = "<group>"; };
 		E3A1A6D0B05A737136D997CB /* Pods-CleverPet.stage release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.stage release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.stage release.xcconfig"; sourceTree = "<group>"; };
 		F719EDCF1318B19E7CF57278 /* Pods-CleverPet.dev release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.dev release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.dev release.xcconfig"; sourceTree = "<group>"; };
 		FF77B9C9A08E543B4DF393DD /* Pods-CleverPet.prod release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CleverPet.prod release.xcconfig"; path = "Pods/Target Support Files/Pods-CleverPet/Pods-CleverPet.prod release.xcconfig"; sourceTree = "<group>"; };
@@ -667,10 +670,12 @@
 				CEEABE031D224CAF00605323 /* OnboardingFlow.storyboard */,
 				CEEABE051D22657300605323 /* CPLwaSigninViewController.h */,
 				CEEABE061D22657300605323 /* CPLwaSigninViewController.m */,
-				CEEABE081D2269CD00605323 /* CPReplDashboardViewController.h */,
-				CEEABE091D2269CD00605323 /* CPReplDashboardViewController.m */,
-				CEEABE0F1D226EC500605323 /* CPLoginWithAmazon.h */,
-				CEEABE101D226EC500605323 /* CPLoginWithAmazon.m */,
+				CEEABE081D2269CD00605323 /* CPReplenishDashViewController.h */,
+				CEEABE091D2269CD00605323 /* CPReplenishDashViewController.m */,
+				CEEABE0F1D226EC500605323 /* CPReplenishDashUtil.h */,
+				CEEABE101D226EC500605323 /* CPReplenishDashUtil.m */,
+				CEE473641D2B637D00BB46A9 /* CPAmazonAPI.h */,
+				CEE473651D2B637D00BB46A9 /* CPAmazonAPI.m */,
 			);
 			path = OnboardingFlow;
 			sourceTree = "<group>";
@@ -897,7 +902,7 @@
 				97EB7AB81C72A300007F1383 /* CPSignInViewController.m in Sources */,
 				CEEABE071D22657300605323 /* CPLwaSigninViewController.m in Sources */,
 				97CC44851C77E703003C4258 /* CPAppearance.m in Sources */,
-				CEEABE111D226EC500605323 /* CPLoginWithAmazon.m in Sources */,
+				CEEABE111D226EC500605323 /* CPReplenishDashUtil.m in Sources */,
 				979D844F1C80FCB200ADB6B0 /* CPLoadingView.m in Sources */,
 				97EB7AB51C729F33007F1383 /* CPNascarViewController.m in Sources */,
 				97EB7AF71C73CA1B007F1383 /* CPTextField.m in Sources */,
@@ -931,7 +936,7 @@
 				97EC010A1C92354300929EFE /* CPSplashImageUtils.m in Sources */,
 				1827A6103FE3659BFFCE8F1B /* CPTile.m in Sources */,
 				97D258211C8F5F17002C4CC6 /* CPPlayerViewController.m in Sources */,
-				CEEABE0A1D2269CD00605323 /* CPReplDashboardViewController.m in Sources */,
+				CEEABE0A1D2269CD00605323 /* CPReplenishDashViewController.m in Sources */,
 				0DE13B671C7FABB200648834 /* CPTileDataManager.m in Sources */,
 				1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */,
 				0DE13B631C7EE9DF00648834 /* CPLabelUtils.m in Sources */,
@@ -942,6 +947,7 @@
 				0DE13B5F1C7EDF7900648834 /* CPMainScreenStatsHeaderView.m in Sources */,
 				1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */,
 				0DE13B4A1C7EA52300648834 /* CPTableHeaderView.m in Sources */,
+				CEE473661D2B637E00BB46A9 /* CPAmazonAPI.m in Sources */,
 				971D63011C863D0A006C9F80 /* CPConfigViewController.m in Sources */,
 				1827A8223D012D668D3D728D /* CPMainScreenViewController.m in Sources */,
 				97CC446F1C7694DB003C4258 /* CPHubSettingsViewController.m in Sources */,

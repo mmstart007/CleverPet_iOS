@@ -35,8 +35,10 @@
                                    @"{ \"dash:replenish\":{ \"device_model\":\"%@\", \"serial\":\"%@\", \"is_test_device\":\"%@\" } }",
                                    device_model_id, device_id, is_test_device],
              kAIOptionReturnAuthCode : @YES,
-             kAIOptionCodeChallenge : [self createCodeChallenge:@"CleverPet Hub"],
-             kAIOptionCodeChallengeMethod : @"S256"};
+//             kAIOptionCodeChallenge : [self createCodeChallenge:@"CleverPet Hub"],
+//             kAIOptionCodeChallengeMethod : @"S256"};
+             kAIOptionCodeChallenge : @"CleverPet Hub",
+             kAIOptionCodeChallengeMethod : @"plain"};
 }
 
 #pragma Mark: Helper Methods (Make sure to add the Security Framework)
