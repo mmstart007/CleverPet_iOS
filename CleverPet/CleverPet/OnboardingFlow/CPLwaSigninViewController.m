@@ -64,29 +64,9 @@
                                     
                                     NSString *f_refreshToken = [result objectForKey:@"refresh_token"];
                                     
-                                    NSLog(@"Reply First Refresh Token ------- : %@", f_refreshToken);
+                                    [USERDEFAULT setObject:f_refreshToken forKey:REFRESH_TOKEN];
                                     
-                                    [[CPAmazonAPI manager] sendRefreshToken:f_refreshToken
-                                                grant_type:@"refresh_token"
-                                                 client_id:[AIMobileLib getClientId]
-                                                   success:^(NSDictionary *result) {
-                                                       NSString *s_refreshToken = [result objectForKey:@"refresh_token"];
-                                                       NSLog(@"Reply Second Refresh Token ------- : %@", s_refreshToken);
-//                                                       NSLog(@"success getting Refresh token!");
-
-                                                       [[CPAmazonAPI manager] sendRefreshToken:f_refreshToken
-                                                                                    grant_type:@"refresh_token"
-                                                                                     client_id:[AIMobileLib getClientId]
-                                                                                       success:^(NSDictionary *result) {
-                                                                                           NSString *t_refreshToken = [result objectForKey:@"refresh_token"];
-                                                                                           NSLog(@"Reply Third Refresh Token ------- : %@", t_refreshToken);
-                                                                                           //                                                       NSLog(@"success getting Refresh token!");
-                                                                                       } failure:^(NSError *error) {
-                                                                                           NSLog(@"failed getting Refresh token!");
-                                                                                       }];
-                                                   } failure:^(NSError *error) {
-                                                       NSLog(@"failed getting Refresh token!");
-                                                   }];
+                                    NSLog(@"Reply First Refresh Token ------- : %@", [USERDEFAULT stringForKey:REFRESH_TOKEN]);
 
                                 } failure : ^(NSError *error) {
                                     NSLog(@"failed getting First Refresh token!");

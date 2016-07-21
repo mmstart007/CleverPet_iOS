@@ -211,8 +211,23 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
             self.hubPlaceholder = vc;
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == kDeviceSectionAutoOrderRow) {
-//            [AIMobileLib getAccessTokenForScopes:[CPReplenishDashUtil appLWARequestScopes] withOverrideParams:[CPReplenishDashUtil appLWARequestScopeOptions] delegate:self];
-            [self openLoginWithAmazon];
+
+            NSString *refreshToken = [USERDEFAULT stringForKey:REFRESH_TOKEN];
+            if (refreshToken.length > 0 || refreshToken != nil) {
+
+                [[CPAmazonAPI manager] sendRefreshToken:refreshToken
+                                             grant_type:@"refresh_token"
+                                              client_id:[AIMobileLib getClientId]
+                                                success:^(NSDictionary *result) {
+                                                    NSString *s_refreshToken = [result objectForKey:@"refresh_token"];
+                                                    NSLog(@"Reply Second Refresh Token ------- : %@", s_refreshToken);
+                                                    //                                                       NSLog(@"success getting Refresh token!");
+                                                    
+                                                } failure:^(NSError *error) {
+                                                    NSLog(@"failed getting Refresh token!");
+                                                }];
+            } else
+                [self openLoginWithAmazon];
         }
     }
 }

@@ -9,5 +9,11 @@
 #ifdef __OBJC__
 
 #import "CPSharedUtils.h"
+#import "CPAmazonAPI.h"
 
 #endif
+
+
+#define USERDEFAULT                                 [NSUserDefaults standardUserDefaults]
+
+#define REFRESH_TOKEN                               @"RefreshToken"

@@ -369,10 +369,6 @@
 		0D36AA851C7243D600349D03 /* CleverPet */ = {
 			isa = PBXGroup;
 			children = (
-				0D36AA891C7243D600349D03 /* AppDelegate.h */,
-				0D36AA8A1C7243D600349D03 /* AppDelegate.m */,
-				0D36AA921C7243D600349D03 /* Assets.xcassets */,
-				97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */,
 				97EB7AC31C73B826007F1383 /* Font */,
 				0DDF53FA1C910F730048FF6F /* Graph */,
 				0D36AA971C7243D600349D03 /* Info.plist */,
@@ -399,6 +395,10 @@
 		0D36AA861C7243D600349D03 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0D36AA891C7243D600349D03 /* AppDelegate.h */,
+				0D36AA8A1C7243D600349D03 /* AppDelegate.m */,
+				0D36AA921C7243D600349D03 /* Assets.xcassets */,
+				97EB7AF31C73C4A8007F1383 /* CleverPet-Prefix.pch */,
 				0D36AA871C7243D600349D03 /* main.m */,
 				97EC01031C921FFC00929EFE /* GoogleService-Info.plist */,
 			);
