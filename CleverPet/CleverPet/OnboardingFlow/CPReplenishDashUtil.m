@@ -37,7 +37,8 @@
              kAIOptionReturnAuthCode : @YES,
 //             kAIOptionCodeChallenge : [self createCodeChallenge:@"CleverPet Hub"],
 //             kAIOptionCodeChallengeMethod : @"S256"};
-             kAIOptionCodeChallenge : @"CleverPet Hub",
+//             kAIOptionCodeChallenge : @"CleverPet Hub",
+             kAIOptionCodeChallenge : @"this_is_a_large_unique_string_or_hash_for_using_USER_ID_and_DEVICE_ID",
              kAIOptionCodeChallengeMethod : @"plain"};
 }
 

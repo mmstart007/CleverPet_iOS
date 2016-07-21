@@ -51,17 +51,46 @@
 {
     NSString *authCode = apiResult.result;
 
-    NSLog(@"Auth Code -> %@ \n ClientID -> %@ \n RedirctURI -> %@", apiResult.result, [AIMobileLib getClientId], [AIMobileLib getRedirectUri]);
+//    NSLog(@"Auth Code -> %@ \n ClientID -> %@ \n RedirctURI -> %@", apiResult.result, [AIMobileLib getClientId], [AIMobileLib getRedirectUri]);
     
     [[CPAmazonAPI manager] sendAuthCode : authCode
-                      grant_type : @"authorization_code"
-                        clientId : [AIMobileLib getClientId]
-                    redirect_uri : [AIMobileLib getRedirectUri]
-                         success : ^(NSDictionary *result) {
-                                NSLog(@"success getting device token!");
-                         } failure : ^(NSError *error) {
-                             NSLog(@"failed getting device token!");
-                        }];
+                             grant_type : @"authorization_code"
+                               clientId : [AIMobileLib getClientId]
+                           redirect_uri : [AIMobileLib getRedirectUri]
+                          code_verifier : @"this_is_a_large_unique_string_or_hash_for_using_USER_ID_and_DEVICE_ID"
+                                success : ^(NSDictionary *result) {
+                                    
+//                                    NSLog(@"success getting First Refresh token!");
+                                    
+                                    NSString *f_refreshToken = [result objectForKey:@"refresh_token"];
+                                    
+                                    NSLog(@"Reply First Refresh Token ------- : %@", f_refreshToken);
+                                    
+                                    [[CPAmazonAPI manager] sendRefreshToken:f_refreshToken
+                                                grant_type:@"refresh_token"
+                                                 client_id:[AIMobileLib getClientId]
+                                                   success:^(NSDictionary *result) {
+                                                       NSString *s_refreshToken = [result objectForKey:@"refresh_token"];
+                                                       NSLog(@"Reply Second Refresh Token ------- : %@", s_refreshToken);
+//                                                       NSLog(@"success getting Refresh token!");
+
+                                                       [[CPAmazonAPI manager] sendRefreshToken:f_refreshToken
+                                                                                    grant_type:@"refresh_token"
+                                                                                     client_id:[AIMobileLib getClientId]
+                                                                                       success:^(NSDictionary *result) {
+                                                                                           NSString *t_refreshToken = [result objectForKey:@"refresh_token"];
+                                                                                           NSLog(@"Reply Third Refresh Token ------- : %@", t_refreshToken);
+                                                                                           //                                                       NSLog(@"success getting Refresh token!");
+                                                                                       } failure:^(NSError *error) {
+                                                                                           NSLog(@"failed getting Refresh token!");
+                                                                                       }];
+                                                   } failure:^(NSError *error) {
+                                                       NSLog(@"failed getting Refresh token!");
+                                                   }];
+
+                                } failure : ^(NSError *error) {
+                                    NSLog(@"failed getting First Refresh token!");
+                                }];
 
 /*    if (self.delegate &&
         [self.delegate respondsToSelector:@selector(loginWithAmazonDidSuccess)])
