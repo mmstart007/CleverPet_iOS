@@ -16,6 +16,7 @@
 }
 
 - (IBAction)signinButtonTapped:(id)sender;
+- (IBAction)learnMoreButtonTapped:(id)sender;
 
 @end
 
@@ -44,6 +45,10 @@
 #pragma mark - IBActions
 - (IBAction)signinButtonTapped:(id)sender {
     [AIMobileLib authorizeUserForScopes:[CPReplenishDashUtil appRequestScopes] delegate:self options:[CPReplenishDashUtil appRequestScopeOptions]];
+}
+
+- (IBAction)learnMoreButtonTapped:(id)sender {
+    
 }
 
 #pragma mark - Amazon Authentication Delegate

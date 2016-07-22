@@ -222,7 +222,7 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
                                                     NSString *s_refreshToken = [result objectForKey:@"refresh_token"];
                                                     NSLog(@"Reply Second Refresh Token ------- : %@", s_refreshToken);
                                                     //                                                       NSLog(@"success getting Refresh token!");
-                                                    
+                                                    [self openReplenishmentDashboard];
                                                 } failure:^(NSError *error) {
                                                     NSLog(@"failed getting Refresh token!");
                                                 }];

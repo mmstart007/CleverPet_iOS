@@ -11,9 +11,16 @@
 
 @interface CPReplenishDashViewController () <AIAuthenticationDelegate>
 
-@property (weak, nonatomic) IBOutlet UILabel *accountIdLabel;
+@property (strong, nonatomic) IBOutlet UIProgressView *progress;
+@property (strong, nonatomic) IBOutlet UILabel *lblAmountConsumed;
+@property (strong, nonatomic) IBOutlet UILabel *lblReorder;
+@property (strong, nonatomic) IBOutlet UILabel *lblPerReorder;
+@property (strong, nonatomic) IBOutlet UILabel *lblLastDelivery;
+@property (strong, nonatomic) IBOutlet UILabel *lblNextReorder;
+@property (strong, nonatomic) IBOutlet UILabel *lblCups;
 
-- (IBAction)signoutButtonTapped:(id)sender;
+
+- (IBAction)replenishButtonTapped:(id)sender;
 
 @end
 
@@ -21,6 +28,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _progress.transform = CGAffineTransformScale(_progress.transform, 1, 10);
+    _progress.clipsToBounds = YES;
     
     [AIMobileLib getProfile:self];
 }
@@ -41,6 +51,11 @@
 */
 
 #pragma mark - IBActions
+
+- (IBAction)replenishButtonTapped:(id)sender {
+    
+}
+
 - (IBAction)signoutButtonTapped:(id)sender {
     [AIMobileLib clearAuthorizationState:self];
 }
@@ -56,7 +71,7 @@
         }
     } else if (apiResult.api == kAPIGetProfile) {
         NSLog(@"%@", apiResult.result);
-        self.accountIdLabel.text = [NSString stringWithFormat:@"You logged in as\n%@", apiResult.result[@"user_id"]];
+//        self.accountIdLabel.text = [NSString stringWithFormat:@"You logged in as\n%@", apiResult.result[@"user_id"]];
     }
 }
 
@@ -77,9 +92,10 @@
             }
         }
         else {
-            self.accountIdLabel.text = [NSString stringWithFormat:@"Error occurred with message: %@", errorResponse.error.message];
+//            self.accountIdLabel.text = [NSString stringWithFormat:@"Error occurred with message: %@", errorResponse.error.message];
         }
     }
 }
+
 
 @end
