@@ -119,8 +119,9 @@
         [params addEntriesFromDictionary:@{
                                            @"Authorization"         : authorization,
                                            @"x-amzn-accept-type"    : acceptType,
-                                           @"x-amzn-tu[e-version"   : typeVersion,
+                                           @"x-amzn-type-version"   : typeVersion,
                                            }];
+    NSLog(@"Params -----------, %@", params);
         ///////
         NSError *error;
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
