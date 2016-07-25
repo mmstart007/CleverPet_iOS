@@ -108,4 +108,46 @@
     return nil;
 }
 
+- (NSURLSessionDataTask *) replenishAPI : (NSString *)authorization
+                             acceptType : (NSString *)acceptType
+                            typeVersion : typeVersion
+                                success : (void (^)(NSDictionary *result))success
+                                failure : (void (^)(NSError *error))failure;
+{
+        NSString *uri =  @"replenish/DryDogFoodKibble1";
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        [params addEntriesFromDictionary:@{
+                                           @"Authorization"         : authorization,
+                                           @"x-amzn-accept-type"    : acceptType,
+                                           @"x-amzn-tu[e-version"   : typeVersion,
+                                           }];
+        ///////
+        NSError *error;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+        
+        NSMutableURLRequest *req = [[AFJSONRequestSerializer serializer] requestWithMethod:@"POST" URLString:[NSString stringWithFormat:@"%@/%@", DRSProduction, uri] parameters:nil error:nil];
+        
+        req.timeoutInterval= [[[NSUserDefaults standardUserDefaults] valueForKey:@"timeoutInterval"] longValue];
+        [req setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [req setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [req setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+        //    NSLog(@"Request URL === %@", req);
+        
+        [[manager dataTaskWithRequest:req completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+            
+            if (!error) {
+                NSLog(@"Reply JSON: %@", responseObject);
+                success(responseObject);
+            } else {
+                NSLog(@"Error==== %@ \n\n , %@, \n\n %@", error, response, responseObject);
+                failure(responseObject);
+            }
+        }] resume];
+        
+    return nil;
+}
+
 @end

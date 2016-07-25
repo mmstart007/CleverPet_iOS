@@ -10,6 +10,8 @@
 #import <AFNetworking/AFNetworking.h>
 
 #define CPBaseURL @"https://api.amazon.com"
+#define DRSProduction @"https://dash-replenishment-service-na.amazon.com"
+#define DRSProductionWebContent @"https://drs-web.amazon.com"
 
 @interface CPAmazonAPI : AFHTTPSessionManager
 
@@ -25,6 +27,12 @@
 - (NSURLSessionDataTask *) sendRefreshToken : (NSString *)refreshToken
                                  grant_type : (NSString *)grant_type
                                   client_id : (NSString *)clientId
+                                success : (void (^)(NSDictionary *result))success
+                                failure : (void (^)(NSError *error))failure;
+
+- (NSURLSessionDataTask *) replenishAPI : (NSString *)authorization
+                             acceptType : (NSString *)acceptType
+                            typeVersion : typeVersion
                                 success : (void (^)(NSDictionary *result))success
                                 failure : (void (^)(NSError *error))failure;
 

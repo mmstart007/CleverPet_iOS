@@ -219,9 +219,19 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
                                              grant_type:@"refresh_token"
                                               client_id:[AIMobileLib getClientId]
                                                 success:^(NSDictionary *result) {
-                                                    NSString *s_refreshToken = [result objectForKey:@"refresh_token"];
-                                                    NSLog(@"Reply Second Refresh Token ------- : %@", s_refreshToken);
-                                                    //                                                       NSLog(@"success getting Refresh token!");
+                                                    NSString *accessToken = [result objectForKey:@"access_token"];
+
+                                                    NSLog(@"Reply Refresh Token ------- : %@", result);
+
+                                                    [[CPAmazonAPI manager] replenishAPI:accessToken
+                                                                             acceptType:@"com.amazon.dash.replenishment.DrsReplenishResult@1.0"
+                                                                            typeVersion:@"com.amazon.dash.replenishment.DrsReplenishInput@1.0"
+                                                                                success:^(NSDictionary *result) {
+                                                                                    NSLog(@"Replenish ------- : %@", result);
+                                                                                } failure:^(NSError *error) {
+                                                                                    NSLog(@"failed !");
+                                                                                }];
+                                                    
                                                     [self openReplenishmentDashboard];
                                                 } failure:^(NSError *error) {
                                                     NSLog(@"failed getting Refresh token!");

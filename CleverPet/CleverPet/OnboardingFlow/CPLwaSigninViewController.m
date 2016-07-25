@@ -65,14 +65,23 @@
                           code_verifier : @"this_is_a_large_unique_string_or_hash_for_using_USER_ID_and_DEVICE_ID"
                                 success : ^(NSDictionary *result) {
                                     
-//                                    NSLog(@"success getting First Refresh token!");
-                                    
                                     NSString *f_refreshToken = [result objectForKey:@"refresh_token"];
                                     
                                     [USERDEFAULT setObject:f_refreshToken forKey:REFRESH_TOKEN];
                                     
-                                    NSLog(@"Reply First Refresh Token ------- : %@", [USERDEFAULT stringForKey:REFRESH_TOKEN]);
+                                    NSLog(@"Reply First Refresh Token ------- : %@", result); //[USERDEFAULT stringForKey:REFRESH_TOKEN]);
 
+/*                                        [[CPAmazonAPI manager] sendRefreshToken:f_refreshToken
+                                                                     grant_type:@"refresh_token"
+                                                                      client_id:[AIMobileLib getClientId]
+                                                                        success:^(NSDictionary *result) {
+
+                                                                            NSLog(@"Reply Second Refresh Token ------- : %@", result);
+                                                                            //                                                       NSLog(@"success getting Refresh token!");
+                                                                        } failure:^(NSError *error) {
+                                                                            NSLog(@"failed getting Refresh token!");
+                                                                        }];
+*/
                                 } failure : ^(NSError *error) {
                                     NSLog(@"failed getting First Refresh token!");
                                 }];
