@@ -150,6 +150,7 @@
         [self.signInButton layoutIfNeeded];
     }
 }
+
 /*
 #pragma mark - Navigation
 

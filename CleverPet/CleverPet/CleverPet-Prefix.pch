@@ -17,4 +17,9 @@
 
 #define USERDEFAULT                                 [NSUserDefaults standardUserDefaults]
 
+// Amazon User Info
 #define REFRESH_TOKEN                               @"RefreshToken"
+#define ACCESS_TOKEN                                @"AccessToken"
+
+// Current User Info
+#define CPUSER_AUTH_TOKEN                           @"cpuser_auth_token"

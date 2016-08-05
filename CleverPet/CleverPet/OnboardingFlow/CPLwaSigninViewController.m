@@ -9,6 +9,8 @@
 #import "CPLwaSigninViewController.h"
 #import "CPReplenishDashUtil.h"
 #import "CPAmazonAPI.h"
+#import "CPUserManager.h"
+#import "CPUser.h"
 
 @interface CPLwaSigninViewController () <AIAuthenticationDelegate>
 {
@@ -66,22 +68,19 @@
                                 success : ^(NSDictionary *result) {
                                     
                                     NSString *f_refreshToken = [result objectForKey:@"refresh_token"];
-                                    
                                     [USERDEFAULT setObject:f_refreshToken forKey:REFRESH_TOKEN];
                                     
-                                    NSLog(@"Reply First Refresh Token ------- : %@", result); //[USERDEFAULT stringForKey:REFRESH_TOKEN]);
+                                    [[CPAmazonAPI manager] sendRefreshToken:f_refreshToken
+                                                                 grant_type:@"refresh_token"
+                                                                  client_id:[AIMobileLib getClientId]
+                                                                    success:^(NSDictionary *result) {
+                                     
+                                                                        NSLog(@"Reply Second Refresh Token ------- : %@", result);
+//                                                                        NSLog(@"success getting Refresh token!");
+                                     } failure:^(NSError *error) {
+                                         NSLog(@"failed getting Refresh token!");
+                                     }];
 
-/*                                        [[CPAmazonAPI manager] sendRefreshToken:f_refreshToken
-                                                                     grant_type:@"refresh_token"
-                                                                      client_id:[AIMobileLib getClientId]
-                                                                        success:^(NSDictionary *result) {
-
-                                                                            NSLog(@"Reply Second Refresh Token ------- : %@", result);
-                                                                            //                                                       NSLog(@"success getting Refresh token!");
-                                                                        } failure:^(NSError *error) {
-                                                                            NSLog(@"failed getting Refresh token!");
-                                                                        }];
-*/
                                 } failure : ^(NSError *error) {
                                     NSLog(@"failed getting First Refresh token!");
                                 }];

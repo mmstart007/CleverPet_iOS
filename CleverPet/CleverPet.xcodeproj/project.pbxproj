@@ -442,8 +442,8 @@
 			children = (
 				971D62FF1C863D0A006C9F80 /* CPConfigViewController.h */,
 				971D63001C863D0A006C9F80 /* CPConfigViewController.m */,
-				1827A7B9850CB706EB4171D0 /* CPMainScreenViewController.m */,
 				1827A708180DD5D390DB0EA8 /* CPMainScreenViewController.h */,
+				1827A7B9850CB706EB4171D0 /* CPMainScreenViewController.m */,
 				97D2581F1C8F5F17002C4CC6 /* CPPlayerViewController.h */,
 				97D258201C8F5F17002C4CC6 /* CPPlayerViewController.m */,
 				97633C3C1CA47237009BC1F0 /* CPBaseViewController.h */,

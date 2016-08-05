@@ -219,11 +219,28 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
                                              grant_type:@"refresh_token"
                                               client_id:[AIMobileLib getClientId]
                                                 success:^(NSDictionary *result) {
+                                                    
                                                     NSString *accessToken = [result objectForKey:@"access_token"];
+                                                    NSString *f_refreshToken = [result objectForKey:@"refresh_token"];
+                                                    [USERDEFAULT setObject:accessToken forKey:ACCESS_TOKEN];
 
-                                                    NSLog(@"Reply Refresh Token ------- : %@", result);
+//                                                    NSLog(@"Reply Refresh Token ------- : %@", result);
 
-                                                    [[CPAmazonAPI manager] replenishAPI:accessToken
+                                                    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
+                                                    NSString *currentUserDeviceID = currentUser.device.deviceId;  // Current User Device ID
+                                                    NSString *currentUserAuthToken = [USERDEFAULT objectForKey:CPUSER_AUTH_TOKEN];  // Current User AuthToken
+                                                    NSLog(@"Refresh Token ------- : %@ \n Current User DeviceID ------- %@ \n Current User Auth Token ----- %@", f_refreshToken, currentUserDeviceID, currentUserAuthToken); //[USERDEFAULT stringForKey:REFRESH_TOKEN]);
+                                                    
+                                                    [[CPAmazonAPI manager] setRefreshTokenInCP:f_refreshToken
+                                                                                     device_id:currentUserDeviceID
+                                                                             cpuser_auth_token:currentUserAuthToken
+                                                                                       success:^(NSDictionary *result) {
+                                                                                           NSLog(@"Set Refresh Token Success ----- %@", result);
+                                                                                       } failure:^(NSError *error) {
+                                                                                           NSLog(@"Set Refresh token failed !");
+                                                                                       }];
+                                                    
+/*                                                    [[CPAmazonAPI manager] replenishAPI:accessToken
                                                                              acceptType:@"com.amazon.dash.replenishment.DrsReplenishResult@1.0"
                                                                             typeVersion:@"com.amazon.dash.replenishment.DrsReplenishInput@1.0"
                                                                                 success:^(NSDictionary *result) {
@@ -231,7 +248,7 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
                                                                                 } failure:^(NSError *error) {
                                                                                     NSLog(@"failed !");
                                                                                 }];
-                                                    
+*/
                                                     [self openReplenishmentDashboard];
                                                 } failure:^(NSError *error) {
                                                     NSLog(@"failed getting Refresh token!");

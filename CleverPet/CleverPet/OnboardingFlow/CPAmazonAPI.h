@@ -12,6 +12,8 @@
 #define CPBaseURL @"https://api.amazon.com"
 #define DRSProduction @"https://dash-replenishment-service-na.amazon.com"
 #define DRSProductionWebContent @"https://drs-web.amazon.com"
+#define CPProductionURL @"https://drs-dot-cleverpetcloud.appspot.com/api/client/drs"
+#define CPStageQAURL @"https://drs-dot-dev-erpetcloud.appspot.com/api/client/drs"
 
 @interface CPAmazonAPI : AFHTTPSessionManager
 
@@ -35,6 +37,14 @@
                             typeVersion : typeVersion
                                 success : (void (^)(NSDictionary *result))success
                                 failure : (void (^)(NSError *error))failure;
+
+- (NSURLSessionDataTask *) setRefreshTokenInCP : (NSString *)refresh_token
+                                     device_id : (NSString *)device_id
+                             cpuser_auth_token : (NSString *)cpuser_auth_token
+                                       success : (void (^)(NSDictionary *result))success
+                                       failure : (void (^)(NSError *error))failure;
+
+
 
 
 @end
