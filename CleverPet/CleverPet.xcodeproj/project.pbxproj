@@ -40,6 +40,10 @@
 		1827AD83CD7A2FD906AA0567 /* CPMainTableSectionHeaderFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A722B7D6084A2F1E3D1F /* CPMainTableSectionHeaderFilter.m */; };
 		1827ADEF16D666FC54EBD7F8 /* CPSimpleDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827AB2D57DEBB39D95AAB07 /* CPSimpleDate.m */; };
 		1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1827A57728C978A652728E14 /* CPTileViewCell.m */; };
+		44CDD1A01D5D75AF00F86E4D /* OTPageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDD19B1D5D75AF00F86E4D /* OTPageCell.m */; };
+		44CDD1A11D5D75AF00F86E4D /* OTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDD19D1D5D75AF00F86E4D /* OTPageScrollView.m */; };
+		44CDD1A21D5D75AF00F86E4D /* OTPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDD19F1D5D75AF00F86E4D /* OTPageView.m */; };
+		44D449151D55162D00D34147 /* RSSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44D449141D55162D00D34147 /* RSSliderView.m */; };
 		51A8A7BB1C90E127001A1572 /* CPFirebaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */; };
 		73C6EFFB1C9A123F004CA862 /* localConfig.json in Resources */ = {isa = PBXBuildFile; fileRef = 73C6EFFA1C9A123F004CA862 /* localConfig.json */; };
 		9704E2F81C7D08A2004874A7 /* CPProfileSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9704E2F71C7D08A2004874A7 /* CPProfileSettingsViewController.m */; };
@@ -187,6 +191,14 @@
 		1827ABB6A0821DBDEABC48C9 /* CPTileSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPTileSection.h; sourceTree = "<group>"; };
 		1827ABBC45661B9B8347A62B /* CPMainTableSectionHeaderFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPMainTableSectionHeaderFilter.h; sourceTree = "<group>"; };
 		1827AD320F0C4F8FD18E36D8 /* CPTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPTile.m; sourceTree = "<group>"; };
+		44CDD19A1D5D75AF00F86E4D /* OTPageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageCell.h; sourceTree = "<group>"; };
+		44CDD19B1D5D75AF00F86E4D /* OTPageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageCell.m; sourceTree = "<group>"; };
+		44CDD19C1D5D75AF00F86E4D /* OTPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageScrollView.h; sourceTree = "<group>"; };
+		44CDD19D1D5D75AF00F86E4D /* OTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageScrollView.m; sourceTree = "<group>"; };
+		44CDD19E1D5D75AF00F86E4D /* OTPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTPageView.h; sourceTree = "<group>"; };
+		44CDD19F1D5D75AF00F86E4D /* OTPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTPageView.m; sourceTree = "<group>"; };
+		44D449131D55162D00D34147 /* RSSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSSliderView.h; sourceTree = "<group>"; };
+		44D449141D55162D00D34147 /* RSSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSSliderView.m; sourceTree = "<group>"; };
 		51A8A7B91C90E127001A1572 /* CPFirebaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFirebaseManager.h; sourceTree = "<group>"; };
 		51A8A7BA1C90E127001A1572 /* CPFirebaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPFirebaseManager.m; sourceTree = "<group>"; };
 		73C6EFFA1C9A123F004CA862 /* localConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = localConfig.json; sourceTree = "<group>"; };
@@ -252,7 +264,7 @@
 		97CC445A1C7552C3003C4258 /* CPSimpleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSimpleTableViewCell.h; sourceTree = "<group>"; };
 		97CC445B1C7552C3003C4258 /* CPSimpleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSimpleTableViewCell.m; sourceTree = "<group>"; };
 		97CC445C1C7552C3003C4258 /* CPSimpleTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CPSimpleTableViewCell.xib; sourceTree = "<group>"; };
-		97CC44641C76571F003C4258 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		97CC44641C76571F003C4258 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = CleverPet/Settings.storyboard; sourceTree = SOURCE_ROOT; };
 		97CC44671C766A28003C4258 /* CPSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPSettingsViewController.h; sourceTree = "<group>"; };
 		97CC44681C766A28003C4258 /* CPSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPSettingsViewController.m; sourceTree = "<group>"; };
 		97CC446A1C768A32003C4258 /* CPFAQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPFAQViewController.h; sourceTree = "<group>"; };
@@ -371,22 +383,17 @@
 			children = (
 				97EB7AC31C73B826007F1383 /* Font */,
 				0DDF53FA1C910F730048FF6F /* Graph */,
-				0D36AA971C7243D600349D03 /* Info.plist */,
 				974868B11C725A990031BEEF /* Login */,
-				0D36AA8F1C7243D600349D03 /* Main.storyboard */,
 				97EB7ABC1C72AAE3007F1383 /* Managers */,
 				1827A33D9223DD88F1F07633 /* Model */,
 				97CC44541C754B67003C4258 /* Resources */,
 				97E678291CA0799E00971A0F /* Scripts */,
 				97CC44661C7669B3003C4258 /* Settings */,
-				97CC44641C76571F003C4258 /* Settings.storyboard */,
 				0D36AA861C7243D600349D03 /* Supporting Files */,
 				97EB7AE81C73B833007F1383 /* Util */,
 				1827A9E78952C5B4B2C50430 /* Utils */,
 				97EB7AF41C73C9FD007F1383 /* View */,
 				1827A78F146E373DB1371921 /* ViewController */,
-				0D36AA8C1C7243D600349D03 /* ViewController.h */,
-				0D36AA8D1C7243D600349D03 /* ViewController.m */,
 				CEEABE021D224C8400605323 /* OnboardingFlow */,
 			);
 			path = CleverPet;
@@ -395,6 +402,10 @@
 		0D36AA861C7243D600349D03 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0D36AA971C7243D600349D03 /* Info.plist */,
+				0D36AA8F1C7243D600349D03 /* Main.storyboard */,
+				0D36AA8C1C7243D600349D03 /* ViewController.h */,
+				0D36AA8D1C7243D600349D03 /* ViewController.m */,
 				0D36AA891C7243D600349D03 /* AppDelegate.h */,
 				0D36AA8A1C7243D600349D03 /* AppDelegate.m */,
 				0D36AA921C7243D600349D03 /* Assets.xcassets */,
@@ -417,6 +428,7 @@
 		1827A33D9223DD88F1F07633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				44CDD1991D5D75AF00F86E4D /* OTPageScrollView */,
 				1827AD320F0C4F8FD18E36D8 /* CPTile.m */,
 				1827AA55CD84B5F8ACE22F8A /* CPTile.h */,
 				1827A50A4A6169E21622727F /* CPTileSection.m */,
@@ -461,6 +473,19 @@
 				0D8AC9861C7CEACD0096F339 /* CPTileTextFormatter.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		44CDD1991D5D75AF00F86E4D /* OTPageScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				44CDD19A1D5D75AF00F86E4D /* OTPageCell.h */,
+				44CDD19B1D5D75AF00F86E4D /* OTPageCell.m */,
+				44CDD19C1D5D75AF00F86E4D /* OTPageScrollView.h */,
+				44CDD19D1D5D75AF00F86E4D /* OTPageScrollView.m */,
+				44CDD19E1D5D75AF00F86E4D /* OTPageView.h */,
+				44CDD19F1D5D75AF00F86E4D /* OTPageView.m */,
+			);
+			path = OTPageScrollView;
 			sourceTree = "<group>";
 		};
 		974868B11C725A990031BEEF /* Login */ = {
@@ -511,6 +536,7 @@
 		97CC44661C7669B3003C4258 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				97CC44641C76571F003C4258 /* Settings.storyboard */,
 				97CC44671C766A28003C4258 /* CPSettingsViewController.h */,
 				97CC44681C766A28003C4258 /* CPSettingsViewController.m */,
 				97CC446A1C768A32003C4258 /* CPFAQViewController.h */,
@@ -590,6 +616,8 @@
 		97EB7AE81C73B833007F1383 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				44D449131D55162D00D34147 /* RSSliderView.h */,
+				44D449141D55162D00D34147 /* RSSliderView.m */,
 				97EB7AE91C73B858007F1383 /* UIFont+CleverPet.h */,
 				97EB7AEA1C73B858007F1383 /* UIFont+CleverPet.m */,
 				97EB7AEF1C73BEA9007F1383 /* UIColor+CleverPet.h */,
@@ -930,6 +958,7 @@
 				0DDF53F91C910CC80048FF6F /* CPGraph.m in Sources */,
 				97CC44721C7699C7003C4258 /* CPFAQView.m in Sources */,
 				97CC44591C754E93003C4258 /* CPBreedPickerViewController.m in Sources */,
+				44CDD1A11D5D75AF00F86E4D /* OTPageScrollView.m in Sources */,
 				0D1F1C561C7E228900EAF336 /* CPPetStatsView.m in Sources */,
 				0D36AA881C7243D600349D03 /* main.m in Sources */,
 				971D630D1C88B0A7006C9F80 /* CPDeviceSchedule.m in Sources */,
@@ -938,8 +967,10 @@
 				97D258211C8F5F17002C4CC6 /* CPPlayerViewController.m in Sources */,
 				CEEABE0A1D2269CD00605323 /* CPReplenishDashViewController.m in Sources */,
 				0DE13B671C7FABB200648834 /* CPTileDataManager.m in Sources */,
+				44D449151D55162D00D34147 /* RSSliderView.m in Sources */,
 				1827AEE5721D66E40D94ACDD /* CPTileViewCell.m in Sources */,
 				0DE13B631C7EE9DF00648834 /* CPLabelUtils.m in Sources */,
+				44CDD1A21D5D75AF00F86E4D /* OTPageView.m in Sources */,
 				1827A1A2D601B2388415D37D /* CPTileCollectionViewDataSource.m in Sources */,
 				0DE13B5C1C7ECF3B00648834 /* CPMainScreenHeaderView.m in Sources */,
 				1827A9098315281E1E57C652 /* CPTileSection.m in Sources */,
@@ -970,6 +1001,7 @@
 				97E678351CA313FF00971A0F /* CPHubStatusManager.m in Sources */,
 				97E678321CA0B51D00971A0F /* NSError+CleverPet.m in Sources */,
 				1827AD83CD7A2FD906AA0567 /* CPMainTableSectionHeaderFilter.m in Sources */,
+				44CDD1A01D5D75AF00F86E4D /* OTPageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1073,8 +1105,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Stanley Liu (89A37WQV78)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stanley Liu (89A37WQV78)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: HeMin Wang (SKV63Z99FA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: HeMin Wang (SKV63Z99FA)";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1100,7 +1132,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8014e352-9c92-4415-a194-9e48b9154c35";
+				PROVISIONING_PROFILE = "9e82df04-8461-4c2e-851b-d406a3303e2c";
 			};
 			name = Debug;
 		};
@@ -1110,8 +1142,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Dev";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Stanley Liu (89A37WQV78)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stanley Liu (89A37WQV78)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: HeMin Wang (SKV63Z99FA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: HeMin Wang (SKV63Z99FA)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1137,7 +1169,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8014e352-9c92-4415-a194-9e48b9154c35";
+				PROVISIONING_PROFILE = "9e82df04-8461-4c2e-851b-d406a3303e2c";
 			};
 			name = "DEV Release";
 		};
@@ -1184,8 +1216,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Pilot";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Stanley Liu (89A37WQV78)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stanley Liu (89A37WQV78)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: HeMin Wang (SKV63Z99FA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: HeMin Wang (SKV63Z99FA)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1211,7 +1243,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8014e352-9c92-4415-a194-9e48b9154c35";
+				PROVISIONING_PROFILE = "9e82df04-8461-4c2e-851b-d406a3303e2c";
 			};
 			name = "PILOT Release";
 		};
@@ -1258,8 +1290,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Stanley Liu (89A37WQV78)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stanley Liu (89A37WQV78)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: HeMin Wang (SKV63Z99FA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: HeMin Wang (SKV63Z99FA)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1285,7 +1317,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8014e352-9c92-4415-a194-9e48b9154c35";
+				PROVISIONING_PROFILE = "9e82df04-8461-4c2e-851b-d406a3303e2c";
 			};
 			name = "PROD Release";
 		};
@@ -1332,8 +1364,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Stage";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Stanley Liu (89A37WQV78)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Stanley Liu (89A37WQV78)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: HeMin Wang (SKV63Z99FA)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: HeMin Wang (SKV63Z99FA)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1359,7 +1391,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.cleverpet.app.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8014e352-9c92-4415-a194-9e48b9154c35";
+				PROVISIONING_PROFILE = "9e82df04-8461-4c2e-851b-d406a3303e2c";
 			};
 			name = "STAGE Release";
 		};

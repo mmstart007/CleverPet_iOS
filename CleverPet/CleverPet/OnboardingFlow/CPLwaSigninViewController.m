@@ -17,8 +17,13 @@
     CPAmazonAPI *requestManager;
 }
 
+@property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
+@property (strong, nonatomic) IBOutlet UIView *helpView;
+@property (strong, nonatomic) IBOutlet UIView *cornerRadiusView;
+
 - (IBAction)signinButtonTapped:(id)sender;
 - (IBAction)learnMoreButtonTapped:(id)sender;
+- (IBAction)backButtonTapped:(id)sender;
 
 @end
 
@@ -27,6 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,15 +40,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    UNREG_SELF_FOR_ALL_NOTIFICATIONS();
+    self.loadingView.hidden = YES;
 }
-*/
+
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+    
+    self.cornerRadiusView.layer.cornerRadius = 25.0f;
+    self.cornerRadiusView.clipsToBounds = YES;
+}
 
 #pragma mark - IBActions
 - (IBAction)signinButtonTapped:(id)sender {
@@ -50,7 +60,13 @@
 }
 
 - (IBAction)learnMoreButtonTapped:(id)sender {
-    
+    _helpView.hidden = NO;
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (IBAction)backButtonTapped:(id)sender {
+    _helpView.hidden = YES;
+    self.navigationController.navigationBarHidden = NO;
 }
 
 #pragma mark - Amazon Authentication Delegate
@@ -60,6 +76,8 @@
 
 //    NSLog(@"Auth Code -> %@ \n ClientID -> %@ \n RedirctURI -> %@", apiResult.result, [AIMobileLib getClientId], [AIMobileLib getRedirectUri]);
     
+    self.loadingView.hidden = NO;
+
     [[CPAmazonAPI manager] sendAuthCode : authCode
                              grant_type : @"authorization_code"
                                clientId : [AIMobileLib getClientId]
@@ -68,15 +86,35 @@
                                 success : ^(NSDictionary *result) {
                                     
                                     NSString *f_refreshToken = [result objectForKey:@"refresh_token"];
+                                    NSString *access_token = [result objectForKey:@"access_token"];
+
                                     [USERDEFAULT setObject:f_refreshToken forKey:REFRESH_TOKEN];
-                                    
+                                    [USERDEFAULT setObject:access_token forKey:ACCESS_TOKEN];
+
                                     [[CPAmazonAPI manager] sendRefreshToken:f_refreshToken
                                                                  grant_type:@"refresh_token"
                                                                   client_id:[AIMobileLib getClientId]
                                                                     success:^(NSDictionary *result) {
                                      
-                                                                        NSLog(@"Reply Second Refresh Token ------- : %@", result);
-//                                                                        NSLog(@"success getting Refresh token!");
+                                                                        CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
+                                                                        NSString *currentUserDeviceID = currentUser.device.deviceId;  // Current User Device ID
+                                                                        NSString *currentUserAuthToken = [USERDEFAULT objectForKey:CPUSER_AUTH_TOKEN];  // Current User AuthToken
+                                                                        NSLog(@"Refresh Token ------- : %@ \n Current User DeviceID ------- %@ \n Current User Auth Token ----- %@", f_refreshToken, currentUserDeviceID, currentUserAuthToken); //[USERDEFAULT stringForKey:REFRESH_TOKEN]);
+                                                                        
+                                                                        [[CPAmazonAPI manager] setRefreshTokenInCP:f_refreshToken
+                                                                                                         device_id:currentUserDeviceID
+                                                                                                 cpuser_auth_token:currentUserAuthToken
+                                                                                                           success:^(NSDictionary *result) {
+                                                                                                               
+                                                                                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                                                                                   self.loadingView.hidden = YES;
+                                                                                                                   NSLog(@"Set Refresh Token Success!!!");
+                                                                                                               });
+                                                                                                               
+                                                                                                           } failure:^(NSError *error) {
+                                                                                                               self.loadingView.hidden = YES;
+                                                                                                               NSLog(@"Set Refresh token failed !");
+                                                                                                           }];
                                      } failure:^(NSError *error) {
                                          NSLog(@"failed getting Refresh token!");
                                      }];
@@ -101,5 +139,15 @@
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
+
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -215,7 +215,10 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
             NSString *refreshToken = [USERDEFAULT stringForKey:REFRESH_TOKEN];
             if (refreshToken.length > 0 || refreshToken != nil) {
 
-                [[CPAmazonAPI manager] sendRefreshToken:refreshToken
+                // Go to ReplenishmentDashboard Controller
+                [self openReplenishmentDashboard];
+                
+/*                [[CPAmazonAPI manager] sendRefreshToken:refreshToken
                                              grant_type:@"refresh_token"
                                               client_id:[AIMobileLib getClientId]
                                                 success:^(NSDictionary *result) {
@@ -235,24 +238,19 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
                                                                                      device_id:currentUserDeviceID
                                                                              cpuser_auth_token:currentUserAuthToken
                                                                                        success:^(NSDictionary *result) {
-                                                                                           NSLog(@"Set Refresh Token Success ----- %@", result);
+                                                                                           NSLog(@"Set Refresh Token Success!!!");
+                                                                                           
+                                                                                           // Go to ReplenishmentDashboard Controller
+                                                                                           [self openReplenishmentDashboard];
                                                                                        } failure:^(NSError *error) {
                                                                                            NSLog(@"Set Refresh token failed !");
                                                                                        }];
                                                     
-/*                                                    [[CPAmazonAPI manager] replenishAPI:accessToken
-                                                                             acceptType:@"com.amazon.dash.replenishment.DrsReplenishResult@1.0"
-                                                                            typeVersion:@"com.amazon.dash.replenishment.DrsReplenishInput@1.0"
-                                                                                success:^(NSDictionary *result) {
-                                                                                    NSLog(@"Replenish ------- : %@", result);
-                                                                                } failure:^(NSError *error) {
-                                                                                    NSLog(@"failed !");
-                                                                                }];
-*/
-                                                    [self openReplenishmentDashboard];
                                                 } failure:^(NSError *error) {
                                                     NSLog(@"failed getting Refresh token!");
                                                 }];
+ */
+
             } else
                 [self openLoginWithAmazon];
         }
@@ -367,9 +365,11 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
 
 - (void)openLoginWithAmazon
 {
-    CPLwaSigninViewController *vc = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateViewControllerWithIdentifier:@"lwasignin"];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        CPLwaSigninViewController *vc = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateViewControllerWithIdentifier:@"lwasignin"];
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
+    });
 }
 
 @end

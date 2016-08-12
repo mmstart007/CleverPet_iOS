@@ -11,6 +11,8 @@
 #import "CPSharedUtils.h"
 #import "CPAmazonAPI.h"
 #import "CPLoadingView.h"
+#import "CPUserManager.h"
+#import "CPUser.h"
 
 #endif
 
