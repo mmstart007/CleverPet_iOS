@@ -11,6 +11,7 @@
 #import "CPLabelUtils.h"
 #import "CPFirebaseManager.h"
 #import "OJFSegmentedProgressView.h"
+#import "CPReplenishDashViewController.h"
 #import "CPReplenishDashUtil.h"
 #import "CPAmazonAPI.h"
 #import "CPUserManager.h"
@@ -130,6 +131,10 @@
                                                                                                                dispatch_async(dispatch_get_main_queue(), ^{
                                                                                                                    self.loadingView.hidden = YES;
                                                                                                                    NSLog(@"Set Refresh Token Success!!!");
+                                                                                                                   
+                                                                                                                   CPReplenishDashViewController *vc = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateViewControllerWithIdentifier:@"replenishdash"];
+                                                                                                                   [self.navigationController pushViewController:vc animated:YES];
+                                                                                                                   
                                                                                                                });
                                                                                                                
                                                                                                            } failure:^(NSError *error) {

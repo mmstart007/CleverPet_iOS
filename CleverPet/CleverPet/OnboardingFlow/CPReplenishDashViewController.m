@@ -16,10 +16,10 @@
 @interface CPReplenishDashViewController () <AIAuthenticationDelegate>
 
 
+@property (strong, nonatomic) IBOutlet UIScrollView *explainScrollView;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *estimatedReorderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *bottomLabel;
-@property (strong, nonatomic) IBOutlet UIScrollView *explainScrollView;
 @property (strong, nonatomic) IBOutlet UILabel *detailLabel;
 @property (strong, nonatomic) IBOutlet UILabel *explainLabel;
 @property (strong, nonatomic) IBOutlet UILabel *configLabel;
@@ -98,9 +98,9 @@
     NSInteger subscribed            = [[data objectForKey:@"subscribed"]integerValue];
     NSInteger order_inprogress      = [[data objectForKey:@"order_inprogress"]integerValue];
     NSString *kibbles               = [[data objectForKey:@"kibbles"]stringValue];
-    NSString *replenish_threshold   = [[data objectForKey:@"replenish_threshold"]stringValue];
+//    NSString *replenish_threshold   = [[data objectForKey:@"replenish_threshold"]stringValue];
     
-    subscribed = 1; order_inprogress = 0;
+    subscribed = 1; order_inprogress = 1;
     
     if (subscribed == 0) {
         
@@ -115,15 +115,14 @@
         if (order_inprogress == 1) {
             
             _titleLabel.text = @"Order\nPlaced";
-            _detailLabel.text = @"Amazon is processing your\norder. The Hub will tally how\nmuch your dog eats. The next\nbag will arrive after your dog has\nconsumed most of the food from\nthis order.";
+            _detailLabel.text = @"Amazon is processing your order. The Hub will tally how much your dog eats. The next bag will arrive after your dog has consumed most of the food from this order.";
             
         } else {
             
             _titleLabel.text = @"Jan 23";
             _estimatedReorderLabel.text = @"Estimated reorder date";
-            NSString *str = [NSString stringWithFormat:@"A bag of food will be ordered\noafter the Hub provides food\nanother %@ times. The\nreorder date is based on your\ndog eating %@ times per day.", kibbles, replenish_threshold];
+            NSString *str = [NSString stringWithFormat:@"A bag of food will be ordered oafter the Hub provides food another %@ times. The reorder date is based on today's estimate that your dog will eat 60 times per day.", kibbles];
             _detailLabel.text = str;
-
         }
     }
 }
@@ -156,11 +155,14 @@
 
 - (IBAction)explainButtonTapped:(id)sender {
     
-    NSLog(@"Explain button Tapped!!!");
+    [_explainScrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
+    NSLog(@"%@",NSStringFromCGPoint(_explainScrollView.contentOffset));
 }
 
 - (IBAction)detailButtonTapped:(id)sender {
-    NSLog(@"Detail button Tapped!!!");
+
+    [_explainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    NSLog(@"%@",NSStringFromCGPoint(_explainScrollView.contentOffset));
 }
 
 #pragma mark - Amazon Authentication Delegate

@@ -287,9 +287,9 @@ We hope that works for you!</string>
                                         <rect key="frame" x="600" y="0.0" width="600" height="240"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JSI-O4-Nfc">
-                                                <rect key="frame" x="54" y="0.0" width="492" height="241"/>
+                                                <rect key="frame" x="54" y="-8" width="492" height="257"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" secondItem="JSI-O4-Nfc" secondAttribute="height" multiplier="307:151" id="xrW-JT-gkl"/>
+                                                    <constraint firstAttribute="width" secondItem="JSI-O4-Nfc" secondAttribute="height" multiplier="307:160" id="xrW-JT-gkl"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
