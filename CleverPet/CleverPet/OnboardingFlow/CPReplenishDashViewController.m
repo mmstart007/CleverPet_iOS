@@ -8,6 +8,10 @@
 
 #import "CPReplenishDashViewController.h"
 #import "CPReplenishDashUtil.h"
+#import "UIView+CPShadowEffect.h"
+#import "CPLabelUtils.h"
+#import "CPFirebaseManager.h"
+#import "OJFSegmentedProgressView.h"
 
 @interface CPReplenishDashViewController () <AIAuthenticationDelegate>
 
@@ -18,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *explainScrollView;
 @property (strong, nonatomic) IBOutlet UILabel *detailLabel;
 @property (strong, nonatomic) IBOutlet UILabel *explainLabel;
+@property (strong, nonatomic) IBOutlet UILabel *configLabel;
 
 
 @property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
@@ -32,6 +37,16 @@
     
     [AIMobileLib getProfile:self];
     [self getRegistrationDetail];
+    
+    ApplyFontAndColorToLabels([UIFont cpBoldFontWithSize:35 italic:NO],
+                              [UIColor appTitleTextColor],
+                              @[self.titleLabel]);
+    ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:29 italic:NO],
+                              [UIColor appTitleTextColor],
+                              @[self.explainLabel, self.detailLabel]);
+    ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:29 italic:NO],
+                              [UIColor appSubCopyTextColor],
+                              @[self.estimatedReorderLabel, self.bottomLabel, self.configLabel]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -94,19 +109,18 @@
         _bottomLabel.text = @"To resume, please\nset auto reorder to ON in\nAmazon's configuration.";
         
     } else {
+        _explainLabel.text = @"Explain      >";
         _bottomLabel.text = @"Once an order is placed, you\nmay cancel it via email\ninstructions from Amazon.";
         
         if (order_inprogress == 1) {
             
             _titleLabel.text = @"Order\nPlaced";
-            _explainLabel.text = @"Explain      >";
             _detailLabel.text = @"Amazon is processing your\norder. The Hub will tally how\nmuch your dog eats. The next\nbag will arrive after your dog has\nconsumed most of the food from\nthis order.";
             
         } else {
             
             _titleLabel.text = @"Jan 23";
             _estimatedReorderLabel.text = @"Estimated reorder date";
-            _explainLabel.text = @"Explain      >";
             NSString *str = [NSString stringWithFormat:@"A bag of food will be ordered\noafter the Hub provides food\nanother %@ times. The\nreorder date is based on your\ndog eating %@ times per day.", kibbles, replenish_threshold];
             _detailLabel.text = str;
 
@@ -140,8 +154,13 @@
                                     }];
 }
 
-- (IBAction)signoutButtonTapped:(id)sender {
-    [AIMobileLib clearAuthorizationState:self];
+- (IBAction)explainButtonTapped:(id)sender {
+    
+    NSLog(@"Explain button Tapped!!!");
+}
+
+- (IBAction)detailButtonTapped:(id)sender {
+    NSLog(@"Detail button Tapped!!!");
 }
 
 #pragma mark - Amazon Authentication Delegate

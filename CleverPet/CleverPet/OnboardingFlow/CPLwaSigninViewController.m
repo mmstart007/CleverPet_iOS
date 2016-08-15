@@ -7,6 +7,10 @@
 //
 
 #import "CPLwaSigninViewController.h"
+#import "UIView+CPShadowEffect.h"
+#import "CPLabelUtils.h"
+#import "CPFirebaseManager.h"
+#import "OJFSegmentedProgressView.h"
 #import "CPReplenishDashUtil.h"
 #import "CPAmazonAPI.h"
 #import "CPUserManager.h"
@@ -20,6 +24,15 @@
 @property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
 @property (strong, nonatomic) IBOutlet UIView *helpView;
 @property (strong, nonatomic) IBOutlet UIView *cornerRadiusView;
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *orderdedLabel;
+@property (strong, nonatomic) IBOutlet UILabel *reorderingLabel;
+@property (strong, nonatomic) IBOutlet UILabel *helpTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *helpLabel;
+@property (strong, nonatomic) IBOutlet UILabel *help1Label;
+@property (strong, nonatomic) IBOutlet UIButton *gotButton;
+@property (strong, nonatomic) IBOutlet UIButton *learnMoreButton;
+@property (strong, nonatomic) IBOutlet UIButton *signButton;
 
 - (IBAction)signinButtonTapped:(id)sender;
 - (IBAction)learnMoreButtonTapped:(id)sender;
@@ -32,7 +45,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    
+    ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:35 italic:NO],
+                              [UIColor colorWithRed:44.0/255.0 green:175.0/255.0 blue:193.0/255.0 alpha:1.0],
+                              @[self.titleLabel, self.helpTitleLabel]);
+    ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:29 italic:NO],
+                              [UIColor appTitleTextColor],
+                              @[self.helpLabel, self.help1Label, self.orderdedLabel, self.reorderingLabel]);
+    self.signButton.titleLabel.font = [UIFont cpLightFontWithSize:19 italic:NO];
+    self.gotButton.titleLabel.font = [UIFont cpLightFontWithSize:19 italic:NO];
 }
 
 - (void)didReceiveMemoryWarning {
