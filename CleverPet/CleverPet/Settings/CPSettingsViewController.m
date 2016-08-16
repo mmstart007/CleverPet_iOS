@@ -17,6 +17,8 @@
 #import "CPReplenishDashUtil.h"
 #import "CPReplenishDashViewController.h"
 #import "CPLwaSigninViewController.h"
+#import "CPOnboardingNavigationController.h"
+#import "CPReplenishNavigationController.h"
 
 NSUInteger const kDeviceSection = 0;
 NSUInteger const kHelpSection = 1;
@@ -358,18 +360,20 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
 #pragma mark - Helpers for onboarding flow
 - (void)openReplenishmentDashboard
 {
-    CPReplenishDashViewController *vc = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateViewControllerWithIdentifier:@"replenishdash"];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
+    CPReplenishNavigationController *nav = [[UIStoryboard storyboardWithName:@"Replenish" bundle:nil] instantiateInitialViewController];
+    
+    [self.navigationController presentViewController:nav animated:YES completion:^{
+        
+    }];
 }
 
 - (void)openLoginWithAmazon
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        CPLwaSigninViewController *vc = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateViewControllerWithIdentifier:@"lwasignin"];
-        vc.delegate = self;
-        [self.navigationController pushViewController:vc animated:YES];
-    });
+    CPOnboardingNavigationController *nav = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateInitialViewController];
+    
+    [self.navigationController presentViewController:nav animated:YES completion:^{
+        
+    }];
 }
 
 @end

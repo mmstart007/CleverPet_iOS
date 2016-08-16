@@ -23,6 +23,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *detailLabel;
 @property (strong, nonatomic) IBOutlet UILabel *explainLabel;
 @property (strong, nonatomic) IBOutlet UILabel *configLabel;
+@property (weak, nonatomic) UIBarButtonItem *pseudoBackButton;
 
 
 @property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
@@ -47,6 +48,17 @@
     ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:29 italic:NO],
                               [UIColor appSubCopyTextColor],
                               @[self.estimatedReorderLabel, self.bottomLabel, self.configLabel]);
+
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
+//    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
+//    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+//    [button setTintColor:[UIColor appTealColor]];
+//    [button sizeToFit];
+//    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+//    [button addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.leftBarButtonItem = barButton;
+//    self.pseudoBackButton = barButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,6 +99,7 @@
                                        } failure:^(NSError *error) {
                                            self.loadingView.hidden = YES;
                                            NSLog(@"Get Registration Data failed ! -----");
+                                           
                                        }];
     
 }
@@ -121,13 +134,19 @@
             
             _titleLabel.text = @"Jan 23";
             _estimatedReorderLabel.text = @"Estimated reorder date";
-            NSString *str = [NSString stringWithFormat:@"A bag of food will be ordered oafter the Hub provides food another %@ times. The reorder date is based on today's estimate that your dog will eat 60 times per day.", kibbles];
+            NSString *str = [NSString stringWithFormat:@"A bag of food will be ordered after the Hub provides food another %@ times. The reorder date is based on today's estimate that your dog will eat 60 times per day.", kibbles];
             _detailLabel.text = str;
         }
     }
 }
 
 #pragma mark - IBActions
+- (IBAction)menuButtonTapped:(id)sender
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
 
 - (IBAction)configureButtonTapped:(id)sender {
     
@@ -176,7 +195,6 @@
         }
     } else if (apiResult.api == kAPIGetProfile) {
         NSLog(@"%@", apiResult.result);
-//        self.accountIdLabel.text = [NSString stringWithFormat:@"You logged in as\n%@", apiResult.result[@"user_id"]];
     }
 }
 

@@ -34,6 +34,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *gotButton;
 @property (strong, nonatomic) IBOutlet UIButton *learnMoreButton;
 @property (strong, nonatomic) IBOutlet UIButton *signButton;
+@property (strong, nonatomic) UIBarButtonItem *pseudoBackButton;
+@property (strong, nonatomic) IBOutlet UIView *topView;
+@property (strong, nonatomic) IBOutlet UIButton *menuButton;
 
 - (IBAction)signinButtonTapped:(id)sender;
 - (IBAction)learnMoreButtonTapped:(id)sender;
@@ -55,6 +58,17 @@
                               @[self.helpLabel, self.help1Label, self.orderdedLabel, self.reorderingLabel]);
     self.signButton.titleLabel.font = [UIFont cpLightFontWithSize:19 italic:NO];
     self.gotButton.titleLabel.font = [UIFont cpLightFontWithSize:19 italic:NO];
+
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [button setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
+//    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
+//    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
+//    [button setTintColor:[UIColor appTealColor]];
+//    [button sizeToFit];
+//    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+//    [button addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+//    self.navigationItem.leftBarButtonItem = barButton;
+//    self.pseudoBackButton = barButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,12 +97,21 @@
 
 - (IBAction)learnMoreButtonTapped:(id)sender {
     _helpView.hidden = NO;
-    self.navigationController.navigationBarHidden = YES;
+    _topView.hidden = YES;
+    _menuButton.hidden = YES;
 }
 
 - (IBAction)backButtonTapped:(id)sender {
     _helpView.hidden = YES;
-    self.navigationController.navigationBarHidden = NO;
+    _topView.hidden = NO;
+    _menuButton.hidden = NO;
+}
+
+- (IBAction)menuButtonTapped:(id)sender
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 #pragma mark - Amazon Authentication Delegate
@@ -132,7 +155,7 @@
                                                                                                                    self.loadingView.hidden = YES;
                                                                                                                    NSLog(@"Set Refresh Token Success!!!");
                                                                                                                    
-                                                                                                                   CPReplenishDashViewController *vc = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateViewControllerWithIdentifier:@"replenishdash"];
+                                                                                                                   CPReplenishDashViewController *vc = [[UIStoryboard storyboardWithName:@"Replenish" bundle:nil] instantiateViewControllerWithIdentifier:@"replenishdash"];
                                                                                                                    [self.navigationController pushViewController:vc animated:YES];
                                                                                                                    
                                                                                                                });
