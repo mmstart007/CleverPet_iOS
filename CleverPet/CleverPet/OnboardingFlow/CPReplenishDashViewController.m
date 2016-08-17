@@ -110,10 +110,26 @@
     
     NSInteger subscribed            = [[data objectForKey:@"subscribed"]integerValue];
     NSInteger order_inprogress      = [[data objectForKey:@"order_inprogress"]integerValue];
-    NSString *kibbles               = [[data objectForKey:@"kibbles"]stringValue];
-//    NSString *replenish_threshold   = [[data objectForKey:@"replenish_threshold"]stringValue];
+    NSInteger kibbles               = [[data objectForKey:@"kibbles"]integerValue];
+    NSString *dateStr               = [data objectForKey:@"expectedReplenishmentDate"];
     
-    subscribed = 1; order_inprogress = 1;
+    NSDateFormatter *dateFormat  = [[NSDateFormatter alloc] init];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"EST"]];
+    [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
+    
+    NSDate *changeDate=[dateFormat dateFromString:dateStr];
+    NSString *str=[dateFormat stringFromDate:changeDate];
+    
+    //getting your local time
+    NSTimeZone *tz=[NSTimeZone localTimeZone];
+    //setting yourlocal time
+    [dateFormat setTimeZone:tz];
+    NSDate *date = [dateFormat dateFromString:str];
+    //Setting your desired format
+    [dateFormat setDateFormat:@"MMM dd"];
+    NSString *newDate=[dateFormat stringFromDate:date];
+    
+    subscribed = 1; order_inprogress = 0;
     
     if (subscribed == 0) {
         
@@ -132,9 +148,9 @@
             
         } else {
             
-            _titleLabel.text = @"Jan 23";
+            _titleLabel.text = newDate;
             _estimatedReorderLabel.text = @"Estimated reorder date";
-            NSString *str = [NSString stringWithFormat:@"A bag of food will be ordered after the Hub provides food another %@ times. The reorder date is based on today's estimate that your dog will eat 60 times per day.", kibbles];
+            NSString *str = [NSString stringWithFormat:@"A bag of food will be ordered after the Hub provides food another %ld times. The reorder date is based on today's estimate that your dog will eat 60 times per day.", (long)kibbles];
             _detailLabel.text = str;
         }
     }
