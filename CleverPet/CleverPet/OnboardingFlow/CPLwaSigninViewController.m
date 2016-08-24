@@ -143,13 +143,15 @@
                                      
                                                                         CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
                                                                         NSString *currentUserDeviceID = currentUser.device.deviceId;  // Current User Device ID
-                                                                        NSString *currentUserAuthToken = [USERDEFAULT objectForKey:CPUSER_AUTH_TOKEN];  // Current User AuthToken
-                                                                        NSLog(@"Refresh Token ------- : %@ \n Current User DeviceID ------- %@ \n Current User Auth Token ----- %@", f_refreshToken, currentUserDeviceID, currentUserAuthToken); //[USERDEFAULT stringForKey:REFRESH_TOKEN]);
+                                                                        NSString *cpuser_auth_token = [USERDEFAULT objectForKey:CPUSER_AUTH_TOKEN];  // Current User AuthToken
+
+                                                                        NSLog(@"Refresh Token ------- : %@ \n Current User DeviceID ------- %@ \n Current User Auth Token ----- %@", f_refreshToken, currentUserDeviceID, cpuser_auth_token); //[USERDEFAULT stringForKey:REFRESH_TOKEN]);
                                                                         
-                                                                        [[CPAmazonAPI manager] setRefreshTokenInCP:f_refreshToken
-                                                                                                         device_id:currentUserDeviceID
-                                                                                                 cpuser_auth_token:currentUserAuthToken
-                                                                                                           success:^(NSDictionary *result) {
+                                                                        [[CPAmazonAPI manager] setRefreshTokenInCP : f_refreshToken
+                                                                                                         device_id : currentUserDeviceID
+                                                                                                         client_id : [AIMobileLib getClientId]
+                                                                                                 cpuser_auth_token : cpuser_auth_token
+                                                                                                           success : ^(NSDictionary *result) {
                                                                                                                
                                                                                                                dispatch_async(dispatch_get_main_queue(), ^{
                                                                                                                    self.loadingView.hidden = YES;

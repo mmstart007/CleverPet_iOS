@@ -214,47 +214,7 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
             [self.navigationController pushViewController:vc animated:YES];
         } else if (indexPath.row == kDeviceSectionAutoOrderRow) {
 
-            NSString *refreshToken = [USERDEFAULT stringForKey:REFRESH_TOKEN];
-            if (refreshToken.length > 0 || refreshToken != nil) {
-
-                // Go to ReplenishmentDashboard Controller
-                [self openReplenishmentDashboard];
-                
-/*                [[CPAmazonAPI manager] sendRefreshToken:refreshToken
-                                             grant_type:@"refresh_token"
-                                              client_id:[AIMobileLib getClientId]
-                                                success:^(NSDictionary *result) {
-                                                    
-                                                    NSString *accessToken = [result objectForKey:@"access_token"];
-                                                    NSString *f_refreshToken = [result objectForKey:@"refresh_token"];
-                                                    [USERDEFAULT setObject:accessToken forKey:ACCESS_TOKEN];
-
-//                                                    NSLog(@"Reply Refresh Token ------- : %@", result);
-
-                                                    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
-                                                    NSString *currentUserDeviceID = currentUser.device.deviceId;  // Current User Device ID
-                                                    NSString *currentUserAuthToken = [USERDEFAULT objectForKey:CPUSER_AUTH_TOKEN];  // Current User AuthToken
-                                                    NSLog(@"Refresh Token ------- : %@ \n Current User DeviceID ------- %@ \n Current User Auth Token ----- %@", f_refreshToken, currentUserDeviceID, currentUserAuthToken); //[USERDEFAULT stringForKey:REFRESH_TOKEN]);
-                                                    
-                                                    [[CPAmazonAPI manager] setRefreshTokenInCP:f_refreshToken
-                                                                                     device_id:currentUserDeviceID
-                                                                             cpuser_auth_token:currentUserAuthToken
-                                                                                       success:^(NSDictionary *result) {
-                                                                                           NSLog(@"Set Refresh Token Success!!!");
-                                                                                           
-                                                                                           // Go to ReplenishmentDashboard Controller
-                                                                                           [self openReplenishmentDashboard];
-                                                                                       } failure:^(NSError *error) {
-                                                                                           NSLog(@"Set Refresh token failed !");
-                                                                                       }];
-                                                    
-                                                } failure:^(NSError *error) {
-                                                    NSLog(@"failed getting Refresh token!");
-                                                }];
- */
-
-            } else
-                [self openLoginWithAmazon];
+            [self checkingAmazonLogin];
         }
     }
 }
@@ -355,6 +315,30 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
     dispatch_after(after, dispatch_get_main_queue(), ^{
         [self openLoginWithAmazon];
     });
+}
+
+#pragma mark - Checking the Amzon DRS Login
+- (void)checkingAmazonLogin
+{
+    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
+    NSString *currentUserDeviceID = currentUser.device.deviceId;  // Current User Device ID
+    NSString *cpuser_auth_token = [USERDEFAULT objectForKey:CPUSER_AUTH_TOKEN];  // Current User AuthToken
+    [[CPAmazonAPI manager] checkAmazonLogin : currentUserDeviceID
+                          cpuser_auth_token : (NSString *)cpuser_auth_token
+                                    success : ^(NSDictionary *result, NSInteger responseCode) {
+                                        
+                                        NSLog(@"Amazon Login check ==== %ld", (long)responseCode);
+                                        if (responseCode == 200) {
+                                            
+                                            // Go to ReplenishmentDashboard Controller
+                                            [self openReplenishmentDashboard];
+                                        } else {
+                                            [self openLoginWithAmazon];
+                                        }
+                                        
+                                    } failure : ^(NSError *error) {
+                                        
+                                    }];
 }
 
 #pragma mark - Helpers for onboarding flow

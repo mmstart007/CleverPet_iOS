@@ -37,7 +37,6 @@
     [super viewDidLoad];
     
     [AIMobileLib getProfile:self];
-    [self getRegistrationDetail];
     
     ApplyFontAndColorToLabels([UIFont cpBoldFontWithSize:35 italic:NO],
                               [UIColor appTitleTextColor],
@@ -49,16 +48,6 @@
                               [UIColor appSubCopyTextColor],
                               @[self.estimatedReorderLabel, self.bottomLabel, self.configLabel]);
 
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [button setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
-//    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
-//    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
-//    [button setTintColor:[UIColor appTealColor]];
-//    [button sizeToFit];
-//    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-//    [button addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-//    self.navigationItem.leftBarButtonItem = barButton;
-//    self.pseudoBackButton = barButton;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,6 +65,19 @@
 {
     [super viewDidDisappear:animated];
     UNREG_SELF_FOR_ALL_NOTIFICATIONS();
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self getRegistrationDetail];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getRegistrationDetail];
 }
 
 #pragma mark - Registration Detail
@@ -129,7 +131,7 @@
     [dateFormat setDateFormat:@"MMM dd"];
     NSString *newDate=[dateFormat stringFromDate:date];
     
-    subscribed = 1; order_inprogress = 0;
+//    subscribed = 1; order_inprogress = 0;
     
     if (subscribed == 0) {
         
@@ -148,7 +150,11 @@
             
         } else {
             
-            _titleLabel.text = newDate;
+            if (newDate == nil || newDate.length == 0 || [newDate isEqualToString:@""] || [newDate isKindOfClass:[NSNull class]] || [newDate isEqualToString:@"(null)"])
+                _titleLabel.text = @"Unknown";
+            else
+                _titleLabel.text = newDate;
+            
             _estimatedReorderLabel.text = @"Estimated reorder date";
             NSString *str = [NSString stringWithFormat:@"A bag of food will be ordered after the Hub provides food another %ld times. The reorder date is based on today's estimate that your dog will eat 60 times per day.", (long)kibbles];
             _detailLabel.text = str;
@@ -168,6 +174,11 @@
     
     self.loadingView.hidden = NO;
     NSString *f_refreshToken = [USERDEFAULT objectForKey:REFRESH_TOKEN];
+    
+    
+    
+
+    
     [[CPAmazonAPI manager] sendRefreshToken:f_refreshToken
                                  grant_type:@"refresh_token"
                                   client_id:[AIMobileLib getClientId]
@@ -191,13 +202,13 @@
 - (IBAction)explainButtonTapped:(id)sender {
     
     [_explainScrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
-    NSLog(@"%@",NSStringFromCGPoint(_explainScrollView.contentOffset));
+//    NSLog(@"%@",NSStringFromCGPoint(_explainScrollView.contentOffset));
 }
 
 - (IBAction)detailButtonTapped:(id)sender {
 
     [_explainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    NSLog(@"%@",NSStringFromCGPoint(_explainScrollView.contentOffset));
+//    NSLog(@"%@",NSStringFromCGPoint(_explainScrollView.contentOffset));
 }
 
 #pragma mark - Amazon Authentication Delegate

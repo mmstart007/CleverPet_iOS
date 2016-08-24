@@ -25,3 +25,4 @@
 
 // Current User Info
 #define CPUSER_AUTH_TOKEN                           @"cpuser_auth_token"
+#define CPUSER_CLIENT_ID                            @"cpuser_client_id"

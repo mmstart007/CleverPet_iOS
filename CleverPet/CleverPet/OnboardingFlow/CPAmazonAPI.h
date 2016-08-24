@@ -12,8 +12,14 @@
 #define CPBaseURL @"https://api.amazon.com"
 #define DRSProduction @"https://dash-replenishment-service-na.amazon.com"
 #define DRSProductionWebContent @"https://drs-web.amazon.com"
-#define CPProductionURL @"https://cloudv3-dot-cleverpetcloud.appspot.com/api/client/drs"
-#define CPStageQAURL @"https://cloudv3-dot-dev-erpetcloud.appspot.com/api/client/drs"
+
+
+//#ifdef DEBUG
+//NSString* const CPStageQAURL = @"https://cleverpetcloud.appspot.com/api/client/drs";
+//#else
+NSString* const CPStageQAURL = @"https://dev-erpetcloud.appspot.com/api/client/drs";
+//#endif
+
 
 @interface CPAmazonAPI : AFHTTPSessionManager
 
@@ -45,6 +51,7 @@
 
 - (NSURLSessionDataTask *) setRefreshTokenInCP : (NSString *)refresh_token
                                      device_id : (NSString *)device_id
+                                     client_id : (NSString *)client_id
                              cpuser_auth_token : (NSString *)cpuser_auth_token
                                        success : (void (^)(NSDictionary *result))success
                                        failure : (void (^)(NSError *error))failure;
@@ -54,6 +61,11 @@
                                    cpuser_auth_token : (NSString *)cpuser_auth_token
                                              success : (void (^)(NSDictionary *result))success
                                              failure : (void (^)(NSError *error))failure;
+
+- (NSURLSessionDataTask *) checkAmazonLogin : (NSString *)device_id
+                          cpuser_auth_token : (NSString *)cpuser_auth_token
+                                    success : (void (^)(NSDictionary *result, NSInteger responseCode))success
+                                    failure : (void (^)(NSError *error))failure;
 
 
 

@@ -198,11 +198,12 @@
 
 - (NSURLSessionDataTask *)setRefreshTokenInCP : (NSString *)refresh_token
                                     device_id : (NSString *)device_id
+                                    client_id : (NSString *)client_id
                             cpuser_auth_token : (NSString *)cpuser_auth_token
                                       success : (void (^)(NSDictionary *))success
                                       failure : (void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:@"registrations/%@/refresh_token", device_id];
+    NSString *url = [NSString stringWithFormat:@"registrations/%@/refresh_token/%@", device_id, client_id];
 
     NSMutableURLRequest  *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", CPStageQAURL, url]]];
     NSLog(@"Set RefreshToken Request URL ======= %@", request);
@@ -277,6 +278,44 @@
     
     return nil;
 }
+
+- (NSURLSessionDataTask *) checkAmazonLogin : (NSString *)device_id
+                          cpuser_auth_token : (NSString *)cpuser_auth_token
+                                    success : (void (^)(NSDictionary *result, NSInteger responseCode))success
+                                    failure : (void (^)(NSError *error))failure
+{
+    NSString *url = [NSString stringWithFormat:@"registrations/%@", device_id];
+    
+    NSMutableURLRequest  *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", CPStageQAURL, url]]];
+    NSLog(@"checkAmazonLogin Request URL ======= %@", request);
+    request.HTTPMethod = @"GET";
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    [request addValue:[NSString stringWithFormat:@"Bearer %@",cpuser_auth_token ] forHTTPHeaderField:@"Authorization"];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    
+    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error) {
+            
+            failure(error);
+            NSLog(@"%@", error.localizedDescription);
+            
+        }else {
+            
+            success(nil, ((NSHTTPURLResponse *)response).statusCode);
+            NSLog(@"Respons Code OK ======== %ld", (long)((NSHTTPURLResponse *)response).statusCode);
+        }
+        
+    }];
+    
+    [task resume];
+    
+    return nil;
+}
+
 
 
 
