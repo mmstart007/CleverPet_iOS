@@ -8,17 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworking.h>
+#import "CPConfigManager.h"
 
 #define CPBaseURL @"https://api.amazon.com"
 #define DRSProduction @"https://dash-replenishment-service-na.amazon.com"
 #define DRSProductionWebContent @"https://drs-web.amazon.com"
 
 
-//#ifdef DEBUG
-//NSString* const CPStageQAURL = @"https://cleverpetcloud.appspot.com/api/client/drs";
-//#else
-NSString* const CPStageQAURL = @"https://dev-erpetcloud.appspot.com/api/client/drs";
-//#endif
+//NSString * const CPStageQAURL = @MACRO_VALUE(CP_API_BASE_URL);
 
 
 @interface CPAmazonAPI : AFHTTPSessionManager

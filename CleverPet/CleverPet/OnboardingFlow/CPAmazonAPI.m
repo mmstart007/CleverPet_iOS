@@ -162,9 +162,10 @@
                                   success:(void (^)(NSDictionary *))success
                                   failure:(void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:@"registrations/%@", device_id];
+    NSString* CPStageQAURL = @MACRO_VALUE(CP_API_BASE_URL);
+    NSString *url = [NSString stringWithFormat:@"api/client/drs/registrations/%@", device_id];
     
-    NSMutableURLRequest  *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", CPStageQAURL, url]]];
+    NSMutableURLRequest  *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@/%@", CPStageQAURL, url]]];
     NSLog(@"Set Device ID Request URL ======= %@", request);
     request.HTTPMethod = @"GET";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -203,9 +204,10 @@
                                       success : (void (^)(NSDictionary *))success
                                       failure : (void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:@"registrations/%@/refresh_token/%@", device_id, client_id];
+    NSString* CPStageQAURL = @MACRO_VALUE(CP_API_BASE_URL);
+    NSString *url = [NSString stringWithFormat:@"api/client/drs/registrations/%@/refresh_token/%@", device_id, client_id];
 
-    NSMutableURLRequest  *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", CPStageQAURL, url]]];
+    NSMutableURLRequest  *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@/%@", CPStageQAURL, url]]];
     NSLog(@"Set RefreshToken Request URL ======= %@", request);
     request.HTTPMethod = @"POST";
     NSData *postData = [refresh_token dataUsingEncoding:NSUTF8StringEncoding];
@@ -244,9 +246,10 @@
                                             success : (void (^)(NSDictionary *))success
                                             failure : (void (^)(NSError *))failure
 {
-    NSString *url = [NSString stringWithFormat:@"registrations/%@/replenish_threshold", device_id];
+    NSString* CPStageQAURL = @MACRO_VALUE(CP_API_BASE_URL);
+    NSString *url = [NSString stringWithFormat:@"api/client/drs/registrations/%@/replenish_threshold", device_id];
 
-    NSMutableURLRequest  *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", CPStageQAURL, url]]];
+    NSMutableURLRequest  *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@/%@", CPStageQAURL, url]]];
     NSLog(@"Replenish Threshold Request URL ======= %@", request);
     request.HTTPMethod = @"POST";
     NSData *postData = [replenish_threshold dataUsingEncoding:NSUTF8StringEncoding];
@@ -284,9 +287,11 @@
                                     success : (void (^)(NSDictionary *result, NSInteger responseCode))success
                                     failure : (void (^)(NSError *error))failure
 {
-    NSString *url = [NSString stringWithFormat:@"registrations/%@", device_id];
+    NSString* CPStageQAURL = @MACRO_VALUE(CP_API_BASE_URL);
+    NSLog(@"CPStageQAURL ==== %@", CPStageQAURL);
+    NSString *url = [NSString stringWithFormat:@"api/client/drs/registrations/%@", device_id];
     
-    NSMutableURLRequest  *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", CPStageQAURL, url]]];
+    NSMutableURLRequest  *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://%@/%@", CPStageQAURL, url]]];
     NSLog(@"checkAmazonLogin Request URL ======= %@", request);
     request.HTTPMethod = @"GET";
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

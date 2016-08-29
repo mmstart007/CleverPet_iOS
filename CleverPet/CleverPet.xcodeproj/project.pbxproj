@@ -1140,6 +1140,7 @@
 					"GOOGLE_CLIENT_ID=879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75.apps.googleusercontent.com",
 					"GOOGLE_APP_ID=1:879679195763:ios:d9ab24dfc54b3e17",
 					"WIDGET_URL=v2-dot-cleverpetcloud.appspot.com/users/login/widget",
+					"CP_API_BASE_URL=cleverpetcloud.appspot.com",
 				);
 				GITKIT_URL_SCHEME = "com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75";
 				INFOPLIST_FILE = CleverPet/Info.plist;
@@ -1177,6 +1178,7 @@
 					"GOOGLE_APP_ID=1:867813813689:ios:d9ab24dfc54b3e17",
 					"GITKIT_URL_SCHEME=com.googleusercontent.apps.867813813689-q1tbafqa428b2qodkjl1f01mar3va12v",
 					"WIDGET_URL=http://dev-erpetcloud2.appspot.com/users/login/widget",
+					"CP_API_BASE_URL=dev-erpetcloud2.appspot.com",
 				);
 				GITKIT_URL_SCHEME = "com.googleusercontent.apps.867813813689-q1tbafqa428b2qodkjl1f01mar3va12v";
 				INFOPLIST_FILE = CleverPet/Info.plist;
@@ -1251,6 +1253,7 @@
 					"GITKIT_URL_SCHEME=com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m",
 					"WIDGET_URL=cleverpetcloud.appspot.com/users/login/widget",
 					"GOOGLE_APP_ID=1:289189234956:ios:d9ab24dfc54b3e17",
+					"CP_API_BASE_URL=cleverpetcloud.appspot.com",
 				);
 				GITKIT_URL_SCHEME = "com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m";
 				INFOPLIST_FILE = CleverPet/Info.plist;
@@ -1325,6 +1328,7 @@
 					"GITKIT_URL_SCHEME=com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m",
 					"WIDGET_URL=cleverpetcloud.appspot.com/users/login/widget",
 					"GOOGLE_APP_ID=1:289189234956:ios:d9ab24dfc54b3e17",
+					"CP_API_BASE_URL=cleverpetcloud.appspot.com",
 				);
 				GITKIT_URL_SCHEME = "com.googleusercontent.apps.289189234956-7s08cbv2hkjd2mjesl0j4i498nod959m";
 				INFOPLIST_FILE = CleverPet/Info.plist;
@@ -1399,6 +1403,7 @@
 					"REVERSED_GOOGLE_CLIENT_ID=com.googleusercontent.apps.879679195763-0j5cbrdfb8if6jipsbuassjrrghhepep",
 					"GITKIT_URL_SCHEME=com.googleusercontent.apps.879679195763-kqen3kdr47jcn278lrjp3n7pek0u1hqt",
 					"WIDGET_URL=http://dev-erpetcloud.appspot.com/users/login/widget",
+					"CP_API_BASE_URL=dev-erpetcloud.appspot.com",
 				);
 				GITKIT_URL_SCHEME = "com.googleusercontent.apps.879679195763-2ka7o32ebkl0e6v41rj44rs9raaj0a75";
 				INFOPLIST_FILE = CleverPet/Info.plist;
