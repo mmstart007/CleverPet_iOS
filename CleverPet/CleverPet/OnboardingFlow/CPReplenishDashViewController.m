@@ -113,6 +113,7 @@
     NSInteger subscribed            = [[data objectForKey:@"subscribed"]integerValue];
     NSInteger order_inprogress      = [[data objectForKey:@"order_inprogress"]integerValue];
     NSInteger kibbles               = [[data objectForKey:@"kibbles"]integerValue];
+    NSInteger kibbles_per_day       = [[data objectForKey:@"kibbles_per_day"]integerValue];
     NSString *dateStr               = [data objectForKey:@"expectedReplenishmentDate"];
     
     NSDateFormatter *dateFormat  = [[NSDateFormatter alloc] init];
@@ -156,7 +157,7 @@
                 _titleLabel.text = newDate;
             
             _estimatedReorderLabel.text = @"Estimated reorder date";
-            NSString *str = [NSString stringWithFormat:@"A bag of food will be ordered after the Hub provides food another %ld times. The reorder date is based on today's estimate that your dog will eat 60 times per day.", (long)kibbles];
+            NSString *str = [NSString stringWithFormat:@"A bag of food will be ordered after the Hub provides food another %ld times. The reorder date is based on today's estimate that your dog will eat %ld times per day.", (long)kibbles, (long)kibbles_per_day];
             _detailLabel.text = str;
         }
     }
