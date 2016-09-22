@@ -12,6 +12,7 @@
 #import "CPLabelUtils.h"
 #import "CPFirebaseManager.h"
 #import "OJFSegmentedProgressView.h"
+#import "CPOnboardingNavigationController.h"
 
 @interface CPReplenishDashViewController () <AIAuthenticationDelegate>
 
@@ -174,13 +175,38 @@
 - (IBAction)configureButtonTapped:(id)sender {
     
     self.loadingView.hidden = NO;
-    NSString *f_refreshToken = [USERDEFAULT objectForKey:REFRESH_TOKEN];
-    
-    
-    
 
+    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
+    NSString *f_refreshToken = currentUser.cpuser_refresh_token;
     
-    [[CPAmazonAPI manager] sendRefreshToken:f_refreshToken
+    if (f_refreshToken != nil) {
+        
+        [self sendRefreshToken:f_refreshToken];
+        
+    } else {
+        
+        CPOnboardingNavigationController *nav = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateInitialViewController];
+        [self.navigationController presentViewController:nav animated:YES completion:^{
+            
+        }];
+    }
+    
+}
+
+- (IBAction)explainButtonTapped:(id)sender {
+    
+    [_explainScrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
+}
+
+- (IBAction)detailButtonTapped:(id)sender {
+
+    [_explainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+#pragma mark - SendRefreshToken
+- (void)sendRefreshToken:(NSString *)refreshToken {
+    
+    [[CPAmazonAPI manager] sendRefreshToken:refreshToken
                                  grant_type:@"refresh_token"
                                   client_id:[AIMobileLib getClientId]
                                     success:^(NSDictionary *result) {
@@ -198,18 +224,6 @@
                                     } failure:^(NSError *error) {
                                         NSLog(@"failed getting Refresh token!");
                                     }];
-}
-
-- (IBAction)explainButtonTapped:(id)sender {
-    
-    [_explainScrollView setContentOffset:CGPointMake(self.view.frame.size.width, 0) animated:YES];
-//    NSLog(@"%@",NSStringFromCGPoint(_explainScrollView.contentOffset));
-}
-
-- (IBAction)detailButtonTapped:(id)sender {
-
-    [_explainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-//    NSLog(@"%@",NSStringFromCGPoint(_explainScrollView.contentOffset));
 }
 
 #pragma mark - Amazon Authentication Delegate

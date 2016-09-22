@@ -24,7 +24,7 @@
     NSString *device_id = currentUser.device.deviceId;
     NSString *is_test_device =
     //#ifdef DEBUG
-#if 1
+#if 0
     @"true"
 #else
     @"false"

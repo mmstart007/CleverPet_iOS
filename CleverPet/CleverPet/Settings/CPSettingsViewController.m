@@ -329,7 +329,6 @@ NSUInteger const kDeviceSectionAutoOrderRow = 2;
                                         
                                         NSLog(@"Amazon Login check ==== %ld", (long)responseCode);
                                         if (responseCode == 200) {
-                                            
                                             // Go to ReplenishmentDashboard Controller
                                             [self openReplenishmentDashboard];
                                         } else {

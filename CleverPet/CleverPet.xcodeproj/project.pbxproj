@@ -340,7 +340,7 @@
 		CEEABE001D21C73500605323 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CEEABE031D224CAF00605323 /* OnboardingFlow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = OnboardingFlow.storyboard; sourceTree = "<group>"; };
 		CEEABE051D22657300605323 /* CPLwaSigninViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPLwaSigninViewController.h; sourceTree = "<group>"; };
-		CEEABE061D22657300605323 /* CPLwaSigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLwaSigninViewController.m; sourceTree = "<group>"; };
+		CEEABE061D22657300605323 /* CPLwaSigninViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPLwaSigninViewController.m; sourceTree = "<group>"; wrapsLines = 1; };
 		CEEABE081D2269CD00605323 /* CPReplenishDashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPReplenishDashViewController.h; sourceTree = "<group>"; };
 		CEEABE091D2269CD00605323 /* CPReplenishDashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPReplenishDashViewController.m; sourceTree = "<group>"; };
 		CEEABE0F1D226EC500605323 /* CPReplenishDashUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPReplenishDashUtil.h; sourceTree = "<group>"; };
