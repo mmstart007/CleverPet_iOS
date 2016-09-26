@@ -32,6 +32,7 @@
 @end
 
 @implementation CPPetStatsView
+
 - (void)awakeFromNib
 {
     ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:12 italic:NO],

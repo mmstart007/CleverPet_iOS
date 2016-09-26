@@ -229,6 +229,7 @@ didFinishSignInWithToken:(NSString *)token
         BLOCK_SELF_REF_OUTSIDE();
         [[CPAppEngineCommunicationManager sharedInstance] loginWithAuthToken:token completion:^(CPLoginResult result, NSError *error) {
             BLOCK_SELF_REF_INSIDE();
+            NSLog(@"Result : %lu", (unsigned long)result);
             if (result == CPLoginResult_Failure) {
                 // TODO: nicer error handling
                 [self.delegate loginAttemptFailed:error.localizedDescription];
@@ -406,4 +407,6 @@ didFinishSignInWithToken:(NSString *)token
 - (void)forgotPasswordForEmail:(NSString *)emailString withCompletion:(void (^)(NSError *))completion {
     [[CPAppEngineCommunicationManager sharedInstance] forgotPasswordForEmail:emailString completion:completion];
 }
+
+
 @end

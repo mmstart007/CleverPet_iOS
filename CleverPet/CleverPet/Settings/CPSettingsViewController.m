@@ -14,6 +14,11 @@
 #import "CPParticleConnectionHelper.h"
 #import "CPHubStatusManager.h"
 #import "CPAppEngineCommunicationManager.h"
+#import "CPReplenishDashUtil.h"
+#import "CPReplenishDashViewController.h"
+#import "CPLwaSigninViewController.h"
+#import "CPOnboardingNavigationController.h"
+#import "CPReplenishNavigationController.h"
 
 NSUInteger const kDeviceSection = 0;
 NSUInteger const kHelpSection = 1;
@@ -22,11 +27,18 @@ NSUInteger const kAccountSection = 2;
 NSUInteger const kHelpSectionChatWithUsRow = 0;
 NSUInteger const kDeviceSectionHubSettingsRow = 0;
 NSUInteger const kDeviceSectionHubSetupRow = 1;
+NSUInteger const kDeviceSectionAutoOrderRow = 2;
+
+@interface CPSettingsAutoOrderCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UIView *separator;
+
+@end
 
 @interface CPSettingsBasicCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIView *separator;
 
 @end
 
@@ -40,7 +52,7 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
 
 @end
 
-@interface CPSettingsViewController ()<CPHubPlaceholderDelegate, CPParticleConnectionDelegate>
+@interface CPSettingsViewController () <CPHubPlaceholderDelegate, CPParticleConnectionDelegate, AIAuthenticationDelegate, CPLoginWithAmazonDelegate, CPReplenishDashDelegate>
 
 @property (weak, nonatomic) IBOutlet CPSettingsHubStatusCell *hubCell;
 @property (weak, nonatomic) UIBarButtonItem *pseudoBackButton;
@@ -116,8 +128,10 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ((section == kHelpSection && YES) || section == kDeviceSection) {
+    if (section == kHelpSection) {
         return 2;
+    } else if (section == kDeviceSection) {
+        return 3;
     }
     
     return 1;
@@ -198,6 +212,9 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
             vc.shouldConfirmCancellation = NO;
             self.hubPlaceholder = vc;
             [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == kDeviceSectionAutoOrderRow) {
+
+            [self checkingAmazonLogin];
         }
     }
 }
@@ -246,6 +263,122 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
     
 }
 
+#pragma mark - Amazon Authentication Delegate
+- (void)requestDidSucceed:(APIResult *)apiResult
+{
+    [self openReplenishmentDashboard];
+}
+
+- (void)requestDidFail:(APIError *)errorResponse
+{
+    if(errorResponse.error.code == kAIApplicationNotAuthorized) {
+        [self openLoginWithAmazon];
+    }
+    else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@""
+                                                                                 message:[NSString stringWithFormat:@"Error occurred with message: %@", errorResponse.error.message]
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+}
+
+#pragma mark - LoginWithAmazon Delegate
+- (void)loginWithAmazonDidSuccess
+{
+    [self.navigationController popToViewController:self animated:YES];
+    dispatch_time_t after = dispatch_time(DISPATCH_TIME_NOW, 500 * NSEC_PER_MSEC);
+    dispatch_after(after, dispatch_get_main_queue(), ^{
+        [self openReplenishmentDashboard];
+    });
+}
+
+- (void)loginWithAmazonDidCancel
+{
+    [self.navigationController popToViewController:self animated:YES];
+}
+
+#pragma mark - ReplenishDashboard Delegate
+- (void)replenishDashUserNotAuthorized
+{
+    [self.navigationController popToViewController:self animated:YES];
+    dispatch_time_t after = dispatch_time(DISPATCH_TIME_NOW, 500 * NSEC_PER_MSEC);
+    dispatch_after(after, dispatch_get_main_queue(), ^{
+        [self openLoginWithAmazon];
+    });
+}
+
+- (void)replenishDashDidSignout
+{
+    [self.navigationController popToViewController:self animated:YES];
+    dispatch_time_t after = dispatch_time(DISPATCH_TIME_NOW, 500 * NSEC_PER_MSEC);
+    dispatch_after(after, dispatch_get_main_queue(), ^{
+        [self openLoginWithAmazon];
+    });
+}
+
+#pragma mark - Checking the Amzon DRS Login
+- (void)checkingAmazonLogin
+{
+    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
+    NSString *currentUserDeviceID = currentUser.device.deviceId;  // Current User Device ID
+    NSString *cpuser_auth_token = [USERDEFAULT objectForKey:CPUSER_AUTH_TOKEN];  // Current User AuthToken
+    [[CPAmazonAPI manager] checkAmazonLogin : currentUserDeviceID
+                          cpuser_auth_token : (NSString *)cpuser_auth_token
+                                    success : ^(NSDictionary *result, NSInteger responseCode) {
+                                        
+                                        NSLog(@"Amazon Login check ==== %ld", (long)responseCode);
+                                        if (responseCode == 200) {
+                                            // Go to ReplenishmentDashboard Controller
+                                            [self openReplenishmentDashboard];
+                                        } else {
+                                            [self openLoginWithAmazon];
+                                        }
+                                        
+                                    } failure : ^(NSError *error) {
+                                        
+                                    }];
+}
+
+#pragma mark - Helpers for onboarding flow
+- (void)openReplenishmentDashboard
+{
+    CPReplenishNavigationController *nav = [[UIStoryboard storyboardWithName:@"Replenish" bundle:nil] instantiateInitialViewController];
+    
+    [self.navigationController presentViewController:nav animated:YES completion:^{
+        
+    }];
+}
+
+- (void)openLoginWithAmazon
+{
+    CPOnboardingNavigationController *nav = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateInitialViewController];
+    
+    [self.navigationController presentViewController:nav animated:YES completion:^{
+        
+    }];
+}
+
+@end
+
+#pragma mark - Auto-order Cell
+
+@implementation CPSettingsAutoOrderCell
+
+- (void)awakeFromNib
+{
+    self.titleLabel.font = [UIFont cpLightFontWithSize:kTableCellTitleSize italic:NO];
+    self.titleLabel.textColor = [UIColor appTitleTextColor];
+    self.separator.backgroundColor = [UIColor appBackgroundColor];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure"]];
+    self.accessoryView = imageView;
+}
+
+- (void)setupWithTitle:(NSString*)title
+{
+    self.titleLabel.text = title;
+}
+
 @end
 
 #pragma mark - Basic Cell
@@ -256,7 +389,6 @@ NSUInteger const kDeviceSectionHubSetupRow = 1;
 {
     self.titleLabel.font = [UIFont cpLightFontWithSize:kTableCellTitleSize italic:NO];
     self.titleLabel.textColor = [UIColor appTitleTextColor];
-    self.separator.backgroundColor = [UIColor appBackgroundColor];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"disclosure"]];
     self.accessoryView = imageView;
 }

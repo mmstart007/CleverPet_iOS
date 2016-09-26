@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <GoogleIdentityToolkit/GITkit.h>
 #import <GoogleSignin/GoogleSignin.h>
+#import <LoginWithAmazon/LoginWithAmazon.h>
 #import "CPAppearance.h"
 #import <Intercom/Intercom.h>
 #import "CPConfigManager.h"
@@ -107,6 +108,15 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
+    
+    NSLog(@"openURL: %@", url);
+    NSLog(@"openURL: %@", sourceApplication);
+    // Pass on the url to the SDK to parse authorization code from the url.
+    BOOL isValidRedirectSignInURL = [AIMobileLib handleOpenURL:url sourceApplication:sourceApplication];
+    
+    if(isValidRedirectSignInURL)
+        return YES;
+    
     //let app handle redirect
     [[NSNotificationCenter defaultCenter] postNotificationName:kWaitForURLHandle object:nil];
     // Handle custom scheme redirect here.

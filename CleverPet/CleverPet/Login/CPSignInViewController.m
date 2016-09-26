@@ -115,18 +115,23 @@
 {
     if ([self validateInput]) {
         self.loadingView.hidden = NO;
-        [[CPLoginController sharedInstance] verifyPassword:self.passwordField.text forEmail:[self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] failure:^{
-            self.loadingView.hidden = YES;
-            NSString *title;
-            NSString *message;
-            if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
-                title = NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails");
-                message = NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails");
-            } else {
-                title = ERROR_TEXT;
-                message = OFFLINE_TEXT;
-            }
-            [self displayErrorAlertWithTitle:title andMessage:message];
+        [[CPLoginController sharedInstance] verifyPassword : self.passwordField.text
+                                                  forEmail : [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]
+                                                   failure : ^{
+                                                       
+                                                       self.loadingView.hidden = YES;
+                                                       NSString *title;
+                                                       NSString *message;
+                                                       if ([[AFNetworkReachabilityManager sharedManager] isReachable]) {
+                                                           title = NSLocalizedString(@"Incorrect Password", @"Alert title when password sign in fails");
+                                                           message = NSLocalizedString(@"Please check your password and try again", @"Alert message when password sign in fails");
+                                                       } else {
+                                                           title = ERROR_TEXT;
+                                                           message = OFFLINE_TEXT;
+                                                       }
+                                                       
+                                                       [self displayErrorAlertWithTitle:title andMessage:message];
+                                                       
         }];
     }
 }

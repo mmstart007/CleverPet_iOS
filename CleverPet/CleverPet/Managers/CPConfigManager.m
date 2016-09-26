@@ -77,50 +77,54 @@ NSTimeInterval const kMinimumTimeBetweenChecks = 60 * 60; // 1 hour
         BLOCK_SELF_REF_OUTSIDE();
         NSString *configURL = [NSString stringWithFormat:@"https://storage.googleapis.com/cleverpet-app/configs/%s/config.json", MACRO_VALUE(SERVER_CONFIG_URL)];
         NSLog(@"Using config url: %@", configURL);
-        [self.sessionManager GET:configURL parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            BLOCK_SELF_REF_INSIDE();
+        [self.sessionManager GET : configURL
+                      parameters : nil
+                        progress : nil
+                         success : ^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                             
+                             BLOCK_SELF_REF_INSIDE();
 #else
-            NSString *localConfigPath = [[NSBundle mainBundle] pathForResource:@"localConfig" ofType:@"json"];
-            NSData *localConfigData = [NSData dataWithContentsOfFile:localConfigPath];
-            NSError *error = nil;
-            NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:localConfigData options:0 error:&error];
-            if (error) {
-                if (completion) completion(error);
-                return;
-            }
+                             NSString *localConfigPath = [[NSBundle mainBundle] pathForResource:@"localConfig" ofType:@"json"];
+                             NSData *localConfigData = [NSData dataWithContentsOfFile:localConfigPath];
+                             NSError *error = nil;
+                             NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:localConfigData options:0 error:&error];
+                             if (error) {
+                                 if (completion) completion(error);
+                                 return;
+                             }
 #endif
-            // Update our last checked config date
-            [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kLastCheckedConfigKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-            NSString *minimumVersion = responseObject[kMinimumVersionKey];
-            // Ignore the minimum version set on our test config
-            if (minimumVersion && ![minimumVersion isEqualToString:@"test"]) {
-                if ([version compare:minimumVersion options:NSNumericSearch] == NSOrderedAscending) {
-                    NSString *deprecationMessage = responseObject[kDeprecationMessageKey];
-                    if ([deprecationMessage length] == 0) {
-                        deprecationMessage = kDefaultDeprecationMessage;
-                    }
-                    NSError *configError = [NSError errorWithDomain:@"AppVersion" code:1 userInfo:@{NSLocalizedDescriptionKey:deprecationMessage}];
-                    if (completion) completion(configError);
-                    [[NSNotificationCenter defaultCenter] postNotificationName:kConfigUpdatedNotification object:nil userInfo:@{kConfigErrorKey:configError}];
-                    return;
-                }
-            }
-            [self applyConfig:responseObject];
-        	[[CPUserManager sharedInstance] processPendingLogouts];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kConfigUpdatedNotification object:nil userInfo:@{}];
-            if (completion) completion(nil);
+                             // Update our last checked config date
+                             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:kLastCheckedConfigKey];
+                             [[NSUserDefaults standardUserDefaults] synchronize];
+                             
+                             NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+                             NSString *minimumVersion = responseObject[kMinimumVersionKey];
+                             // Ignore the minimum version set on our test config
+                             if (minimumVersion && ![minimumVersion isEqualToString:@"test"]) {
+                                 if ([version compare:minimumVersion options:NSNumericSearch] == NSOrderedAscending) {
+                                     NSString *deprecationMessage = responseObject[kDeprecationMessageKey];
+                                     if ([deprecationMessage length] == 0) {
+                                         deprecationMessage = kDefaultDeprecationMessage;
+                                     }
+                                     NSError *configError = [NSError errorWithDomain:@"AppVersion" code:1 userInfo:@{NSLocalizedDescriptionKey:deprecationMessage}];
+                                     if (completion) completion(configError);
+                                     [[NSNotificationCenter defaultCenter] postNotificationName:kConfigUpdatedNotification object:nil userInfo:@{kConfigErrorKey:configError}];
+                                     return;
+                                 }
+                             }
+                             [self applyConfig:responseObject];
+                             [[CPUserManager sharedInstance] processPendingLogouts];
+                             [[NSNotificationCenter defaultCenter] postNotificationName:kConfigUpdatedNotification object:nil userInfo:@{}];
+                             if (completion) completion(nil);
 #if !USE_LOCAL_CONFIG
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            // TODO: Perhaps ignore the timer the next time we see if we should check so the user isn't shut out of the app?
-            // If we're offline, register for reachability notifications and update when appropriate
-            BLOCK_SELF_REF_INSIDE();
-            if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
-                [self listenForReachability];
-            }
-            if (completion) completion(error);
+                         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                             // TODO: Perhaps ignore the timer the next time we see if we should check so the user isn't shut out of the app?
+                             // If we're offline, register for reachability notifications and update when appropriate
+                             BLOCK_SELF_REF_INSIDE();
+                             if (![[AFNetworkReachabilityManager sharedManager] isReachable]) {
+                                 [self listenForReachability];
+                             }
+                             if (completion) completion(error);
         }];
 #endif
     } else {

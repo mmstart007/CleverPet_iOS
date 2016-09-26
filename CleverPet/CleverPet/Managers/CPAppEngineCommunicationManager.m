@@ -158,6 +158,7 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 - (ASYNC)userLoggedIn:(NSDictionary *)userInfo completion:(void (^)(CPLoginResult, NSError *))completion
 {
     CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
+    NSLog(@"current user device id : %@", currentUser.device.deviceId);
     
     void (^particleAuthSet)(NSError *) = ^(NSError *error){
         if (error) {
@@ -402,6 +403,9 @@ NSString * const kNoUserAccountError = @"No account exists for the given email a
 #pragma mark - Util
 - (void)setAuthToken:(NSString *)authToken
 {
+    NSLog(@"AuthToken : %@", authToken);
+    [USERDEFAULT setObject:authToken forKey:CPUSER_AUTH_TOKEN];
+    
     [self.sessionManager.requestSerializer setValue:[NSString stringWithFormat:@"Bearer %@", authToken] forHTTPHeaderField:@"Authorization"];
 }
 

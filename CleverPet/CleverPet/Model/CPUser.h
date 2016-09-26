@@ -13,6 +13,8 @@
 @interface CPUser : JSONModel
 
 @property (nonatomic, strong) NSString<Optional> *userId;
+@property (nonatomic, strong) NSString<Optional> *cpuser_auth_token;
+@property (nonatomic, strong) NSString<Optional> *cpuser_refresh_token;
 @property (nonatomic, strong) CPPet<Optional> *pet;
 @property (nonatomic, strong) CPDevice<Optional> *device;
 @property (nonatomic, strong) NSString *weightUnits;

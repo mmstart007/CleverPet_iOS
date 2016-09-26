@@ -9,5 +9,20 @@
 #ifdef __OBJC__
 
 #import "CPSharedUtils.h"
+#import "CPAmazonAPI.h"
+#import "CPLoadingView.h"
+#import "CPUserManager.h"
+#import "CPUser.h"
 
 #endif
+
+
+#define USERDEFAULT                                 [NSUserDefaults standardUserDefaults]
+
+// Amazon User Info
+#define REFRESH_TOKEN                               @"RefreshToken"
+#define ACCESS_TOKEN                                @"AccessToken"
+
+// Current User Info
+#define CPUSER_AUTH_TOKEN                           @"cpuser_auth_token"
+#define CPUSER_CLIENT_ID                            @"cpuser_client_id"
