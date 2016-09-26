@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Rh6-Mj-bEo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Rh6-Mj-bEo">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -61,34 +61,31 @@
                                 <color key="textColor" red="0.17254901959999999" green="0.68627450980000004" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aUU-Kf-vJx">
-                                <rect key="frame" x="60" y="63" width="480" height="342"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="aUU-Kf-vJx">
+                                <rect key="frame" x="54" y="58" width="492" height="352"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aUU-Kf-vJx" secondAttribute="height" multiplier="255:182" id="taM-vp-A3S"/>
                                 </constraints>
-                                <string key="text">CleverPet works best when
-dogs get most of their food
-from the Hub. The Hub knows
-how much food your dog has
-eaten from it. When your dog
-finishes a bag of food via the
-CleverPet Hub, a new one can
-be automatically ordered!</string>
+                                <string key="text">The CleverPet Hub knows how
+much food has been eaten
+from it. Before the Hub gets
+through a whole bag of food, a
+new one can be reordered!</string>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="29"/>
-                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.78431372549019607" green="0.14509803921568626" blue="0.023529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7dZ-cz-Xoo">
-                                <rect key="frame" x="54" y="366" width="492" height="169"/>
+                                <rect key="frame" x="54" y="360" width="492" height="168"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="7dZ-cz-Xoo" secondAttribute="height" multiplier="406:139" id="ypV-Y5-XHb"/>
                                 </constraints>
-                                <string key="text">The first bag will ship when you
-sign up. Do you want to sign
-up for Amazon’s automatic food
-re-ordering?</string>
+                                <string key="text">Your first order will ship right
+after you sign up with Amazon
+Dash Replenishment and
+select the food you want.</string>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="29"/>
-                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.7843137255" green="0.1450980392" blue="0.023529411760000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ab3-lw-wdK">
@@ -106,14 +103,14 @@ re-ordering?</string>
                                     <action selector="signinButtonTapped:" destination="SPh-Rh-rl1" eventType="touchUpInside" id="eiW-IX-jNa"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8x-3z-o1K">
+                            <button hidden="YES" opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f8x-3z-o1K">
                                 <rect key="frame" x="240" y="346" width="120" height="40"/>
-                                <color key="backgroundColor" red="0.79771351440000005" green="0.79771351440000005" blue="0.79771351440000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.7843137255" green="0.1450980392" blue="0.023529411760000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2HF-rC-0Y0"/>
                                     <constraint firstAttribute="width" constant="120" id="3OF-2y-q2F"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="19"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <state key="normal" title="Learn More">
                                     <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -227,11 +224,11 @@ We hope that works for you!</string>
                             <constraint firstItem="7dZ-cz-Xoo" firstAttribute="centerX" secondItem="h9N-fI-2Rt" secondAttribute="centerX" id="b51-aS-fB1"/>
                             <constraint firstItem="ly1-3f-6fU" firstAttribute="centerX" secondItem="h9N-fI-2Rt" secondAttribute="centerX" id="cgk-Yl-y5C"/>
                             <constraint firstItem="bSP-7x-1SQ" firstAttribute="top" secondItem="Fk7-b0-UYh" secondAttribute="bottom" id="hCr-G5-4Nd"/>
-                            <constraint firstItem="aUU-Kf-vJx" firstAttribute="width" secondItem="h9N-fI-2Rt" secondAttribute="width" multiplier="0.8" id="hdH-x2-7Yo"/>
+                            <constraint firstItem="aUU-Kf-vJx" firstAttribute="width" secondItem="h9N-fI-2Rt" secondAttribute="width" multiplier="0.82" id="hdH-x2-7Yo"/>
                             <constraint firstItem="f8x-3z-o1K" firstAttribute="centerY" secondItem="h9N-fI-2Rt" secondAttribute="centerY" multiplier="1.22" id="hgf-OH-3s1"/>
                             <constraint firstItem="bSP-7x-1SQ" firstAttribute="top" secondItem="wmQ-2v-29I" secondAttribute="bottom" id="ke0-nK-9fl"/>
                             <constraint firstAttribute="trailing" secondItem="hrI-Pv-9az" secondAttribute="trailing" id="lFD-V5-LI0"/>
-                            <constraint firstItem="7dZ-cz-Xoo" firstAttribute="centerY" secondItem="h9N-fI-2Rt" secondAttribute="centerY" multiplier="1.5" id="niu-R0-efp"/>
+                            <constraint firstItem="7dZ-cz-Xoo" firstAttribute="centerY" secondItem="h9N-fI-2Rt" secondAttribute="centerY" multiplier="1.48" id="niu-R0-efp"/>
                             <constraint firstAttribute="trailing" secondItem="wmQ-2v-29I" secondAttribute="trailing" id="qfs-04-XXn"/>
                             <constraint firstItem="Fk7-b0-UYh" firstAttribute="top" secondItem="h9N-fI-2Rt" secondAttribute="top" id="tcw-Jt-m0T"/>
                             <constraint firstItem="YO1-4g-17F" firstAttribute="height" secondItem="hrI-Pv-9az" secondAttribute="height" id="yXG-D4-Mky"/>

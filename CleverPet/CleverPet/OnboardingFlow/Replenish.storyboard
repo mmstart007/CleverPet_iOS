@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="n5R-2l-VY3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="n5R-2l-VY3">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -107,8 +107,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Jv-j4-9VL" userLabel="Detail View">
                                         <rect key="frame" x="600" y="0.0" width="600" height="240"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KhP-A8-2nX">
-                                                <rect key="frame" x="54" y="-8" width="492" height="257"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KhP-A8-2nX">
+                                                <rect key="frame" x="69" y="-16" width="522" height="273"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="KhP-A8-2nX" secondAttribute="height" multiplier="307:160" id="pi6-6b-sAm"/>
                                                 </constraints>
@@ -128,11 +128,11 @@
                                         <constraints>
                                             <constraint firstItem="KhP-A8-2nX" firstAttribute="centerY" secondItem="5Jv-j4-9VL" secondAttribute="centerY" id="1jk-E2-FTx"/>
                                             <constraint firstAttribute="bottom" secondItem="1Xl-XS-ct7" secondAttribute="bottom" id="IEw-NF-HwK"/>
-                                            <constraint firstItem="KhP-A8-2nX" firstAttribute="centerX" secondItem="5Jv-j4-9VL" secondAttribute="centerX" id="PNf-dg-DDy"/>
+                                            <constraint firstItem="KhP-A8-2nX" firstAttribute="centerX" secondItem="5Jv-j4-9VL" secondAttribute="centerX" multiplier="1.1" id="PNf-dg-DDy"/>
                                             <constraint firstAttribute="trailing" secondItem="1Xl-XS-ct7" secondAttribute="trailing" id="bhn-Tj-y68"/>
                                             <constraint firstItem="1Xl-XS-ct7" firstAttribute="leading" secondItem="5Jv-j4-9VL" secondAttribute="leading" id="od6-99-3Po"/>
                                             <constraint firstItem="1Xl-XS-ct7" firstAttribute="top" secondItem="5Jv-j4-9VL" secondAttribute="top" id="wGD-Z5-T41"/>
-                                            <constraint firstItem="KhP-A8-2nX" firstAttribute="width" secondItem="5Jv-j4-9VL" secondAttribute="width" multiplier="0.82" id="wNa-XG-Yzg"/>
+                                            <constraint firstItem="KhP-A8-2nX" firstAttribute="width" secondItem="5Jv-j4-9VL" secondAttribute="width" multiplier="0.87" id="wNa-XG-Yzg"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -163,7 +163,7 @@
                                             <constraint firstAttribute="width" secondItem="NLR-b0-Iax" secondAttribute="height" multiplier="219:61" id="dVM-FJ-PCk"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="27"/>
-                                        <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.7843137255" green="0.1450980392" blue="0.023529411760000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="setting" translatesAutoresizingMaskIntoConstraints="NO" id="r1j-WS-cn2">

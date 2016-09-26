@@ -389,20 +389,12 @@
 		0D36AA851C7243D600349D03 /* CleverPet */ = {
 			isa = PBXGroup;
 			children = (
-				97EB7AC31C73B826007F1383 /* Font */,
-				0DDF53FA1C910F730048FF6F /* Graph */,
-				974868B11C725A990031BEEF /* Login */,
-				97EB7ABC1C72AAE3007F1383 /* Managers */,
-				1827A33D9223DD88F1F07633 /* Model */,
-				97CC44541C754B67003C4258 /* Resources */,
-				97E678291CA0799E00971A0F /* Scripts */,
-				97CC44661C7669B3003C4258 /* Settings */,
-				0D36AA861C7243D600349D03 /* Supporting Files */,
-				97EB7AE81C73B833007F1383 /* Util */,
 				1827A9E78952C5B4B2C50430 /* Utils */,
+				0D36AA861C7243D600349D03 /* Supporting Files */,
+				1827A33D9223DD88F1F07633 /* Model */,
 				97EB7AF41C73C9FD007F1383 /* View */,
-				1827A78F146E373DB1371921 /* ViewController */,
-				CEEABE021D224C8400605323 /* OnboardingFlow */,
+				1827A78F146E373DB1371921 /* Controller */,
+				97CC44541C754B67003C4258 /* Resources */,
 			);
 			path = CleverPet;
 			sourceTree = "<group>";
@@ -430,12 +422,16 @@
 				0DDF53FB1C910F970048FF6F /* CPGraphView.h */,
 				0DDF53FC1C910F970048FF6F /* CPGraphView.m */,
 			);
-			path = Graph;
+			name = Graph;
+			path = ../Graph;
 			sourceTree = "<group>";
 		};
 		1827A33D9223DD88F1F07633 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				97E678291CA0799E00971A0F /* Scripts */,
+				0DDF53FA1C910F730048FF6F /* Graph */,
+				97EB7ABC1C72AAE3007F1383 /* Managers */,
 				44CDD1991D5D75AF00F86E4D /* OTPageScrollView */,
 				1827AD320F0C4F8FD18E36D8 /* CPTile.m */,
 				1827AA55CD84B5F8ACE22F8A /* CPTile.h */,
@@ -457,9 +453,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		1827A78F146E373DB1371921 /* ViewController */ = {
+		1827A78F146E373DB1371921 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				974868B11C725A990031BEEF /* Login */,
+				97CC44661C7669B3003C4258 /* Settings */,
+				CEEABE021D224C8400605323 /* OnboardingFlow */,
 				971D62FF1C863D0A006C9F80 /* CPConfigViewController.h */,
 				971D63001C863D0A006C9F80 /* CPConfigViewController.m */,
 				1827A708180DD5D390DB0EA8 /* CPMainScreenViewController.h */,
@@ -475,12 +474,14 @@
 				44D8002D1D634D07007CFAA5 /* CPReplenishNavigationController.h */,
 				44D8002E1D634D07007CFAA5 /* CPReplenishNavigationController.m */,
 			);
+			name = Controller;
 			path = ViewController;
 			sourceTree = "<group>";
 		};
 		1827A9E78952C5B4B2C50430 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				97EB7AE81C73B833007F1383 /* Util */,
 				0D8AC9851C7CEACD0096F339 /* CPTileTextFormatter.h */,
 				0D8AC9861C7CEACD0096F339 /* CPTileTextFormatter.m */,
 			);
@@ -517,12 +518,14 @@
 				97B635421C91E6FA00DFE89C /* CPHubPlaceholderViewController.h */,
 				97B635431C91E6FA00DFE89C /* CPHubPlaceholderViewController.m */,
 			);
-			path = Login;
+			name = Login;
+			path = ../Login;
 			sourceTree = "<group>";
 		};
 		97CC44541C754B67003C4258 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				97EB7AC31C73B826007F1383 /* Font */,
 				73C6EFFA1C9A123F004CA862 /* localConfig.json */,
 				97CC44551C754B67003C4258 /* breeds.json */,
 				971D63111C8A3B1C006C9F80 /* faqs.json */,
@@ -558,7 +561,8 @@
 				9704E2F61C7D08A2004874A7 /* CPProfileSettingsViewController.h */,
 				9704E2F71C7D08A2004874A7 /* CPProfileSettingsViewController.m */,
 			);
-			path = Settings;
+			name = Settings;
+			path = ../Settings;
 			sourceTree = "<group>";
 		};
 		97E678291CA0799E00971A0F /* Scripts */ = {
@@ -566,7 +570,8 @@
 			children = (
 				97E6782A1CA0799E00971A0F /* post_build.sh */,
 			);
-			path = Scripts;
+			name = Scripts;
+			path = ../Scripts;
 			sourceTree = "<group>";
 		};
 		97EB7ABC1C72AAE3007F1383 /* Managers */ = {
@@ -597,7 +602,8 @@
 				97E678331CA313FF00971A0F /* CPHubStatusManager.h */,
 				97E678341CA313FF00971A0F /* CPHubStatusManager.m */,
 			);
-			path = Managers;
+			name = Managers;
+			path = ../Managers;
 			sourceTree = "<group>";
 		};
 		97EB7AC31C73B826007F1383 /* Font */ = {
@@ -622,7 +628,8 @@
 				979D84631C84F60500ADB6B0 /* Raleway-Thin.ttf */,
 				979D84641C84F60500ADB6B0 /* Raleway-ThinItalic.ttf */,
 			);
-			path = Font;
+			name = Font;
+			path = ../Font;
 			sourceTree = "<group>";
 		};
 		97EB7AE81C73B833007F1383 /* Util */ = {
@@ -657,7 +664,8 @@
 				97E678301CA0B51D00971A0F /* NSError+CleverPet.h */,
 				97E678311CA0B51D00971A0F /* NSError+CleverPet.m */,
 			);
-			path = Util;
+			name = Util;
+			path = ../Util;
 			sourceTree = "<group>";
 		};
 		97EB7AF41C73C9FD007F1383 /* View */ = {
@@ -718,7 +726,8 @@
 				CEE473641D2B637D00BB46A9 /* CPAmazonAPI.h */,
 				CEE473651D2B637D00BB46A9 /* CPAmazonAPI.m */,
 			);
-			path = OnboardingFlow;
+			name = OnboardingFlow;
+			path = ../OnboardingFlow;
 			sourceTree = "<group>";
 		};
 		D24F3E5B150BDFF9BAEC8AED /* Pods */ = {

@@ -56,19 +56,13 @@
     ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:29 italic:NO],
                               [UIColor appTitleTextColor],
                               @[self.helpLabel, self.help1Label, self.orderdedLabel, self.reorderingLabel]);
+    ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:29 italic:NO],
+                              [UIColor appRedColor],
+                              @[self.orderdedLabel, self.reorderingLabel]);
+    
     self.signButton.titleLabel.font = [UIFont cpLightFontWithSize:19 italic:NO];
     self.gotButton.titleLabel.font = [UIFont cpLightFontWithSize:19 italic:NO];
 
-//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [button setTitle:NSLocalizedString(@"Settings", nil) forState:UIControlStateNormal];
-//    [button.titleLabel setFont:[UIFont cpLightFontWithSize:12 italic:NO]];
-//    [button setTitleColor:[UIColor appTealColor] forState:UIControlStateNormal];
-//    [button setTintColor:[UIColor appTealColor]];
-//    [button sizeToFit];
-//    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
-//    [button addTarget:self action:@selector(menuButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-//    self.navigationItem.leftBarButtonItem = barButton;
-//    self.pseudoBackButton = barButton;
 }
 
 - (void)didReceiveMemoryWarning {

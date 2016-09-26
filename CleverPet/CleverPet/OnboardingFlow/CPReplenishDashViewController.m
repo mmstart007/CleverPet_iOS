@@ -47,7 +47,10 @@
                               @[self.explainLabel, self.detailLabel]);
     ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:29 italic:NO],
                               [UIColor appSubCopyTextColor],
-                              @[self.estimatedReorderLabel, self.bottomLabel, self.configLabel]);
+                              @[self.estimatedReorderLabel, self.configLabel]);
+    ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:29 italic:NO],
+                              [UIColor appRedColor],
+                              @[self.bottomLabel]);
 
 }
 
@@ -133,7 +136,7 @@
     [dateFormat setDateFormat:@"MMM dd"];
     NSString *newDate=[dateFormat stringFromDate:date];
     
-//    subscribed = 1; order_inprogress = 0;
+//    subscribed = 1; order_inprogress =1;
     
     if (subscribed == 0) {
         
@@ -148,7 +151,25 @@
         if (order_inprogress == 1) {
             
             _titleLabel.text = @"Order\nPlaced";
-            _detailLabel.text = @"Amazon is processing your order. The Hub will tally how much your dog eats. The next bag will arrive after your dog has consumed most of the food from this order.";
+            _detailLabel.numberOfLines = 7;
+            NSString *redText = @"CleverPet counts how\nmuch your dog eats from the\nHub. Another bag will be\n reordered after your dog\nconsumes most of the kibble in\nthis order.";
+            NSString *str = [NSString stringWithFormat:@"Amazon is processing your\norder. %@", redText];
+
+            // Define general attributes for the entire text
+            NSDictionary *attribs = @{
+                                      NSForegroundColorAttributeName: self.detailLabel.textColor,
+                                      NSFontAttributeName: self.detailLabel.font
+                                      };
+            NSMutableAttributedString *attributedText =
+            [[NSMutableAttributedString alloc] initWithString:str
+                                                   attributes:attribs];
+            
+            // Red text attributes
+            NSRange redTextRange = [str rangeOfString:redText];// * Notice that usage of rangeOfString in this case may cause some bugs - I use it here only for demonstration
+            [attributedText setAttributes:@{NSForegroundColorAttributeName:[UIColor appRedColor]}
+                                    range:redTextRange];
+            
+            _detailLabel.attributedText = attributedText;
             
         } else {
             
@@ -158,8 +179,43 @@
                 _titleLabel.text = newDate;
             
             _estimatedReorderLabel.text = @"Estimated reorder date";
-            NSString *str = [NSString stringWithFormat:@"A bag of food will be ordered after the Hub provides food another %ld times. The reorder date is based on today's estimate that your dog will eat %ld times per day.", (long)kibbles, (long)kibbles_per_day];
-            _detailLabel.text = str;
+            _detailLabel.numberOfLines = 5;
+            NSString  *redText = @"re";
+            NSString *str = [NSString stringWithFormat:@"A bag of food will be %@ordered\nafter the Hub provides food\nanother %ld times. The\nreorder date is based on your\ndog eating %ld times per day.", redText, (long)kibbles, (long)kibbles_per_day];
+            
+            // Define general attributes for the entire text
+            NSDictionary *attribs = @{
+                                      NSForegroundColorAttributeName: self.detailLabel.textColor,
+                                      NSFontAttributeName: self.detailLabel.font
+                                      };
+            NSMutableAttributedString *attributedText =
+            [[NSMutableAttributedString alloc] initWithString:str
+                                                   attributes:attribs];
+            
+            // Red text attributes
+            UIFont *redTextBoldFont = [UIFont boldSystemFontOfSize:self.detailLabel.font.pointSize];
+            NSRange redTextRange = [str rangeOfString:redText];// * Notice that usage of rangeOfString in this case may cause some bugs - I use it here only for demonstration
+            [attributedText setAttributes:@{NSForegroundColorAttributeName:[UIColor appRedColor],
+                                            NSFontAttributeName:redTextBoldFont}
+                                    range:redTextRange];
+            
+            // Kibble text attributes
+            UIColor *kibbleTextColor = [UIColor appTitleTextColor];
+            UIFont *kibbleTextBoldFont = [UIFont boldSystemFontOfSize:self.detailLabel.font.pointSize];
+            NSRange kibbleTextRange = [str rangeOfString:[NSString stringWithFormat: @"%ld", (long)kibbles]];// * Notice that usage of rangeOfString in this case may cause some bugs - I use it here only for demonstration
+            [attributedText setAttributes:@{NSForegroundColorAttributeName:kibbleTextColor,
+                                            NSFontAttributeName:kibbleTextBoldFont}
+                                    range:kibbleTextRange];
+
+            // Per day text attributes
+            UIColor *perDayTextColor = [UIColor appTitleTextColor];
+            UIFont *perDayTextBoldFont = [UIFont boldSystemFontOfSize:self.detailLabel.font.pointSize];
+            NSRange perDayTextRange = [str rangeOfString:[NSString stringWithFormat:@"%ld",  (long)kibbles_per_day]];// * Notice that usage of rangeOfString in this case may cause some bugs - I use it here only for demonstration
+            [attributedText setAttributes:@{NSForegroundColorAttributeName:perDayTextColor,
+                                            NSFontAttributeName:perDayTextBoldFont}
+                                    range:perDayTextRange];
+            
+            _detailLabel.attributedText = attributedText;
         }
     }
 }
