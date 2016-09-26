@@ -108,7 +108,7 @@
                                         <rect key="frame" x="600" y="0.0" width="600" height="240"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KhP-A8-2nX">
-                                                <rect key="frame" x="69" y="-16" width="522" height="273"/>
+                                                <rect key="frame" x="39" y="-16" width="522" height="273"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="KhP-A8-2nX" secondAttribute="height" multiplier="307:160" id="pi6-6b-sAm"/>
                                                 </constraints>
@@ -128,7 +128,7 @@
                                         <constraints>
                                             <constraint firstItem="KhP-A8-2nX" firstAttribute="centerY" secondItem="5Jv-j4-9VL" secondAttribute="centerY" id="1jk-E2-FTx"/>
                                             <constraint firstAttribute="bottom" secondItem="1Xl-XS-ct7" secondAttribute="bottom" id="IEw-NF-HwK"/>
-                                            <constraint firstItem="KhP-A8-2nX" firstAttribute="centerX" secondItem="5Jv-j4-9VL" secondAttribute="centerX" multiplier="1.1" id="PNf-dg-DDy"/>
+                                            <constraint firstItem="KhP-A8-2nX" firstAttribute="centerX" secondItem="5Jv-j4-9VL" secondAttribute="centerX" id="PNf-dg-DDy"/>
                                             <constraint firstAttribute="trailing" secondItem="1Xl-XS-ct7" secondAttribute="trailing" id="bhn-Tj-y68"/>
                                             <constraint firstItem="1Xl-XS-ct7" firstAttribute="leading" secondItem="5Jv-j4-9VL" secondAttribute="leading" id="od6-99-3Po"/>
                                             <constraint firstItem="1Xl-XS-ct7" firstAttribute="top" secondItem="5Jv-j4-9VL" secondAttribute="top" id="wGD-Z5-T41"/>
