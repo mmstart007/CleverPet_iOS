@@ -72,7 +72,7 @@ from it. Before the Hub gets
 through a whole bag of food, a
 new one can be reordered!</string>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="29"/>
-                                <color key="textColor" red="0.78431372549019607" green="0.14509803921568626" blue="0.023529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7dZ-cz-Xoo">
@@ -85,7 +85,7 @@ after you sign up with Amazon
 Dash Replenishment and
 select the food you want.</string>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="29"/>
-                                <color key="textColor" red="0.7843137255" green="0.1450980392" blue="0.023529411760000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ab3-lw-wdK">

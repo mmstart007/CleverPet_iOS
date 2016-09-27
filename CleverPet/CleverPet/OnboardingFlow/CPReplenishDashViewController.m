@@ -49,7 +49,7 @@
                               [UIColor appSubCopyTextColor],
                               @[self.estimatedReorderLabel, self.configLabel]);
     ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:29 italic:NO],
-                              [UIColor appRedColor],
+                              [UIColor appTitleTextColor],
                               @[self.bottomLabel]);
 
 }
@@ -166,7 +166,7 @@
             
             // Red text attributes
             NSRange redTextRange = [str rangeOfString:redText];// * Notice that usage of rangeOfString in this case may cause some bugs - I use it here only for demonstration
-            [attributedText setAttributes:@{NSForegroundColorAttributeName:[UIColor appRedColor]}
+            [attributedText setAttributes:@{NSForegroundColorAttributeName:[UIColor appTitleTextColor]}
                                     range:redTextRange];
             
             _detailLabel.attributedText = attributedText;
@@ -180,8 +180,7 @@
             
             _estimatedReorderLabel.text = @"Estimated reorder date";
             _detailLabel.numberOfLines = 5;
-            NSString  *redText = @"re";
-            NSString *str = [NSString stringWithFormat:@"A bag of food will be %@ordered\nafter the Hub provides food\nanother %ld times. The\nreorder date is based on your\ndog eating %ld times per day.", redText, (long)kibbles, (long)kibbles_per_day];
+            NSString *str = [NSString stringWithFormat:@"A bag of food will be reordered\nafter the Hub provides food\nanother %ld times. The\nreorder date is based on your\ndog eating %ld times per day.", (long)kibbles, (long)kibbles_per_day];
             
             // Define general attributes for the entire text
             NSDictionary *attribs = @{
@@ -192,12 +191,6 @@
             [[NSMutableAttributedString alloc] initWithString:str
                                                    attributes:attribs];
             
-            // Red text attributes
-            UIFont *redTextBoldFont = [UIFont boldSystemFontOfSize:self.detailLabel.font.pointSize];
-            NSRange redTextRange = [str rangeOfString:redText];// * Notice that usage of rangeOfString in this case may cause some bugs - I use it here only for demonstration
-            [attributedText setAttributes:@{NSForegroundColorAttributeName:[UIColor appRedColor],
-                                            NSFontAttributeName:redTextBoldFont}
-                                    range:redTextRange];
             
             // Kibble text attributes
             UIColor *kibbleTextColor = [UIColor appTitleTextColor];
@@ -236,7 +229,7 @@
     NSString *f_refreshToken = currentUser.cpuser_refresh_token;
     
     if (f_refreshToken != nil) {
-        
+    
         [self sendRefreshToken:f_refreshToken];
         
     } else {

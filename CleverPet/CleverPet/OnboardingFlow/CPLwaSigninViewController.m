@@ -57,7 +57,7 @@
                               [UIColor appTitleTextColor],
                               @[self.helpLabel, self.help1Label, self.orderdedLabel, self.reorderingLabel]);
     ApplyFontAndColorToLabels([UIFont cpLightFontWithSize:29 italic:NO],
-                              [UIColor appRedColor],
+                              [UIColor appTitleTextColor],
                               @[self.orderdedLabel, self.reorderingLabel]);
     
     self.signButton.titleLabel.font = [UIFont cpLightFontWithSize:19 italic:NO];
