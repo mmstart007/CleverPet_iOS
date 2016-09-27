@@ -65,23 +65,15 @@
     [self.view setNeedsLayout];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    UNREG_SELF_FOR_ALL_NOTIFICATIONS();
-
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     [self getRegistrationDetail];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getRegistrationDetail];
 }
 
 #pragma mark - Registration Detail
