@@ -146,7 +146,7 @@
         
     } else {
         _explainLabel.text = @"Explain      >";
-        _bottomLabel.text = @"Once an order is placed, you\nmay cancel it via email\ninstructions from Amazon.";
+        _bottomLabel.text = @"Once an order is placed, you\nhave one day to cancel via\nthe email from Amazon.";
         
         if (order_inprogress == 1) {
             

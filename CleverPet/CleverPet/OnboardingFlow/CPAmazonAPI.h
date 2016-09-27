@@ -10,7 +10,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "CPConfigManager.h"
 
-#define CPBaseURL @"https://amazon.com"
+#define CPBaseURL @"https://api.amazon.com"
 #define DRSProduction @"https://dash-replenishment-service-na.amazon.com"
 #define DRSProductionWebContent @"https://drs-web.amazon.com"
 

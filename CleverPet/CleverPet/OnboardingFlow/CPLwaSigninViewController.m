@@ -117,8 +117,6 @@
     
     self.loadingView.hidden = NO;
 
-    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
-
     [[CPAmazonAPI manager] sendAuthCode : authCode
                              grant_type : @"authorization_code"
                                clientId : [AIMobileLib getClientId]
@@ -127,7 +125,10 @@
                                 success : ^(NSDictionary *result) {
                                     
                                     NSString *f_refreshToken = [result objectForKey:@"refresh_token"];
+
+                                    CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
                                     currentUser.cpuser_refresh_token  = f_refreshToken;
+                                    NSLog(@"Current User Refresh Token  ==== : %@", currentUser.cpuser_refresh_token);
 
                                     NSString *access_token = [result objectForKey:@"access_token"];
                                     [USERDEFAULT setObject:access_token forKey:ACCESS_TOKEN];
