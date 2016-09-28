@@ -20,6 +20,7 @@
 #import "CPGCMManager.h"
 #import "CPUserManager.h"
 #import "CPPlayerViewController.h"
+#import "CPReplenishDashUtil.h"
 
 typedef void (^gcmHandler)(NSString *token, NSError *error);
 
@@ -111,6 +112,13 @@ typedef void (^gcmHandler)(NSString *token, NSError *error);
     
     NSLog(@"openURL: %@", url);
     NSLog(@"openURL: %@", sourceApplication);
+    
+    NSRange subStrRange = [[url.absoluteString lowercaseString] rangeOfString:[[CPReplenishDashUtil urlForAmazonLoginPage] lowercaseString]];
+    if (subStrRange.location != NSNotFound) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:Notification_Allowed_On_Teaser_Page object:nil];
+        return YES;
+    }
+    
     // Pass on the url to the SDK to parse authorization code from the url.
     BOOL isValidRedirectSignInURL = [AIMobileLib handleOpenURL:url sourceApplication:sourceApplication];
     

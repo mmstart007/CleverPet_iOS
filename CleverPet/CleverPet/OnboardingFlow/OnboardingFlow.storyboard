@@ -89,13 +89,12 @@ select the food you want.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ab3-lw-wdK">
-                                <rect key="frame" x="210" y="520" width="180" height="40"/>
+                                <rect key="frame" x="150" y="503" width="300" height="75"/>
                                 <color key="backgroundColor" red="0.17254901960784313" green="0.68627450980392157" blue="0.75686274509803919" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="RJl-n2-dVp"/>
-                                    <constraint firstAttribute="width" constant="180" id="a2R-5d-jDt"/>
+                                    <constraint firstAttribute="width" secondItem="Ab3-lw-wdK" secondAttribute="height" multiplier="4:1" id="swI-E9-xFF"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="23"/>
                                 <state key="normal" title="Sign up">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -216,7 +215,6 @@ We hope that works for you!</string>
                             <constraint firstItem="7dZ-cz-Xoo" firstAttribute="width" secondItem="h9N-fI-2Rt" secondAttribute="width" multiplier="0.82" id="QEz-KO-vCL"/>
                             <constraint firstItem="hrI-Pv-9az" firstAttribute="top" secondItem="D7D-pX-GVs" secondAttribute="bottom" id="RSv-Ar-ob3"/>
                             <constraint firstItem="hrI-Pv-9az" firstAttribute="leading" secondItem="h9N-fI-2Rt" secondAttribute="leading" id="SOd-Rs-et7"/>
-                            <constraint firstItem="bSP-7x-1SQ" firstAttribute="top" secondItem="Ab3-lw-wdK" secondAttribute="bottom" constant="40" id="Ull-3o-Ora"/>
                             <constraint firstAttribute="trailing" secondItem="Fk7-b0-UYh" secondAttribute="trailing" id="VDl-0W-TzH"/>
                             <constraint firstItem="YO1-4g-17F" firstAttribute="trailing" secondItem="hrI-Pv-9az" secondAttribute="trailing" constant="-16" id="VbI-NF-kvF"/>
                             <constraint firstItem="ly1-3f-6fU" firstAttribute="width" secondItem="h9N-fI-2Rt" secondAttribute="width" multiplier="0.65" id="XQ7-1k-ksj"/>
@@ -226,14 +224,16 @@ We hope that works for you!</string>
                             <constraint firstItem="bSP-7x-1SQ" firstAttribute="top" secondItem="Fk7-b0-UYh" secondAttribute="bottom" id="hCr-G5-4Nd"/>
                             <constraint firstItem="aUU-Kf-vJx" firstAttribute="width" secondItem="h9N-fI-2Rt" secondAttribute="width" multiplier="0.82" id="hdH-x2-7Yo"/>
                             <constraint firstItem="f8x-3z-o1K" firstAttribute="centerY" secondItem="h9N-fI-2Rt" secondAttribute="centerY" multiplier="1.22" id="hgf-OH-3s1"/>
+                            <constraint firstItem="Ab3-lw-wdK" firstAttribute="width" secondItem="h9N-fI-2Rt" secondAttribute="width" multiplier="0.5" id="jpx-Rp-N2c"/>
                             <constraint firstItem="bSP-7x-1SQ" firstAttribute="top" secondItem="wmQ-2v-29I" secondAttribute="bottom" id="ke0-nK-9fl"/>
                             <constraint firstAttribute="trailing" secondItem="hrI-Pv-9az" secondAttribute="trailing" id="lFD-V5-LI0"/>
+                            <constraint firstItem="Ab3-lw-wdK" firstAttribute="centerX" secondItem="h9N-fI-2Rt" secondAttribute="centerX" id="mz7-XI-asH"/>
                             <constraint firstItem="7dZ-cz-Xoo" firstAttribute="centerY" secondItem="h9N-fI-2Rt" secondAttribute="centerY" multiplier="1.48" id="niu-R0-efp"/>
+                            <constraint firstItem="Ab3-lw-wdK" firstAttribute="centerY" secondItem="h9N-fI-2Rt" secondAttribute="centerY" multiplier="1.8" id="pd2-Ap-GGa"/>
                             <constraint firstAttribute="trailing" secondItem="wmQ-2v-29I" secondAttribute="trailing" id="qfs-04-XXn"/>
                             <constraint firstItem="Fk7-b0-UYh" firstAttribute="top" secondItem="h9N-fI-2Rt" secondAttribute="top" id="tcw-Jt-m0T"/>
                             <constraint firstItem="YO1-4g-17F" firstAttribute="height" secondItem="hrI-Pv-9az" secondAttribute="height" id="yXG-D4-Mky"/>
                             <constraint firstItem="ly1-3f-6fU" firstAttribute="centerY" secondItem="h9N-fI-2Rt" secondAttribute="centerY" multiplier="0.35" id="zJF-ym-KsE"/>
-                            <constraint firstItem="Ab3-lw-wdK" firstAttribute="centerX" secondItem="h9N-fI-2Rt" secondAttribute="centerX" id="zgw-Zq-RCM"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="WwZ-3z-qOO">

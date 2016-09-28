@@ -17,9 +17,12 @@
 #import "CPUserManager.h"
 #import "CPUser.h"
 
-@interface CPLwaSigninViewController () <AIAuthenticationDelegate>
+@import SafariServices;
+
+@interface CPLwaSigninViewController () <AIAuthenticationDelegate, SFSafariViewControllerDelegate>
 {
     CPAmazonAPI *requestManager;
+    SFSafariViewController *safariVC;
 }
 
 @property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
@@ -62,7 +65,8 @@
     
     self.signButton.titleLabel.font = [UIFont cpLightFontWithSize:19 italic:NO];
     self.gotButton.titleLabel.font = [UIFont cpLightFontWithSize:19 italic:NO];
-
+    
+    safariVC = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -70,10 +74,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    UNREG_SELF_FOR_NOTIFICATION(Notification_Allowed_On_Teaser_Page);
+    NSLog(@"Unregistering  Notification...");
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    UNREG_SELF_FOR_ALL_NOTIFICATIONS();
     self.loadingView.hidden = YES;
 }
 
@@ -86,7 +96,25 @@
 
 #pragma mark - IBActions
 - (IBAction)signinButtonTapped:(id)sender {
-    [AIMobileLib authorizeUserForScopes:[CPReplenishDashUtil appRequestScopes] delegate:self options:[CPReplenishDashUtil appRequestScopeOptions]];
+    safariVC = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:[CPReplenishDashUtil urlForTeaserPage]]];
+    safariVC.delegate = self;
+    [self presentViewController:safariVC animated:YES completion:^{
+        REG_SELF_FOR_NOTIFICATION(Notification_Allowed_On_Teaser_Page, proceedLoginWithAmazon:);
+        NSLog(@"Registered Notification...");
+    }];
+}
+
+- (void)proceedLoginWithAmazon:(NSNotification *)notification
+{
+    NSLog(@"proceedLoginWithAmazon");
+    if (safariVC == nil) {
+        [AIMobileLib authorizeUserForScopes:[CPReplenishDashUtil appRequestScopes] delegate:self options:[CPReplenishDashUtil appRequestScopeOptions]];
+    } else {
+        [safariVC dismissViewControllerAnimated:NO completion:^{
+            safariVC = nil;
+            [AIMobileLib authorizeUserForScopes:[CPReplenishDashUtil appRequestScopes] delegate:self options:[CPReplenishDashUtil appRequestScopeOptions]];
+        }];
+    }
 }
 
 - (IBAction)learnMoreButtonTapped:(id)sender {
@@ -196,5 +224,11 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller
+{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+    safariVC = nil;
+}
 
 @end

@@ -10,6 +10,9 @@
 #import "CPUserManager.h"
 #include <CommonCrypto/CommonDigest.h>
 
+#define URL_FOR_LWA_PAGE                @"lwa://login"
+#define COMPOSITE_ID_FOR_TEASER         @"amzn1.dash.v1.composite.7a3b2f2b-5371-4f74-9cbd-ef4ecd59c5ae"
+
 @implementation CPReplenishDashUtil
 
 + (NSArray *)appRequestScopes
@@ -71,6 +74,16 @@
     NSString *finalCode = [encryptedCode base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
     return finalCode;
+}
+
++ (NSString *)urlForTeaserPage
+{
+    return [NSString stringWithFormat:@"https://drs-web.amazon.com/teaser?compositeId=%@&loginUri=%@", COMPOSITE_ID_FOR_TEASER, URL_FOR_LWA_PAGE];
+}
+
++ (NSString *)urlForAmazonLoginPage
+{
+    return URL_FOR_LWA_PAGE;
 }
 
 @end

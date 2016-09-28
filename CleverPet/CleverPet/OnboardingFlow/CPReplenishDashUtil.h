@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <LoginWithAmazon/LoginWithAmazon.h>
 
+#define Notification_Allowed_On_Teaser_Page         @"Notification_Allowed_On_Teaser_Page"
+
 @interface CPReplenishDashUtil : NSObject
 
 + (NSArray *)appRequestScopes;
 + (NSDictionary *)appRequestScopeOptions;
+
++ (NSString *)urlForTeaserPage;
++ (NSString *)urlForAmazonLoginPage;
 
 @end

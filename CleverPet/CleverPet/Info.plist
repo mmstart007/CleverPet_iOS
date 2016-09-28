@@ -59,6 +59,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>amzn-$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+				<string>lwa</string>
 			</array>
 		</dict>
 	</array>

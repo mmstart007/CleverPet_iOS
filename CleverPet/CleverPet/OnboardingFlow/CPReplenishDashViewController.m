@@ -218,20 +218,38 @@
     self.loadingView.hidden = NO;
 
     CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
-    NSString *f_refreshToken = currentUser.cpuser_refresh_token;
+    NSString *currentUserDeviceID = currentUser.device.deviceId;  // Current User Device ID
+    NSString *cpuser_auth_token = [USERDEFAULT objectForKey:CPUSER_AUTH_TOKEN];  // Current User AuthToken
     
-    if (f_refreshToken != nil) {
-    
-        [self sendRefreshToken:f_refreshToken];
-        
-    } else {
-        
-        CPOnboardingNavigationController *nav = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateInitialViewController];
-        [self.navigationController presentViewController:nav animated:YES completion:^{
-            
-        }];
-    }
-    
+    [[CPAmazonAPI manager] checkAmazonLogin : currentUserDeviceID
+                          cpuser_auth_token : (NSString *)cpuser_auth_token
+                                    success : ^(NSDictionary *result, NSInteger responseCode) {
+                                        
+                                        NSLog(@"Amazon Login check ==== %ld", (long)responseCode);
+
+//                                        self.loadingView.hidden = YES;
+//                                        if (responseCode == 200) {
+//                                            dispatch_async(dispatch_get_main_queue(), ^{
+//                                                
+//                                                NSString *access_token = [result objectForKey:@"access_token"];
+//                                                NSString *replenishmentUrl = [NSString stringWithFormat:@"https://drs-web.amazon.com/settings?access_token=%@&exitUri=https://amazon.com", access_token];
+//                                                NSURL *url = [NSURL URLWithString:[replenishmentUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//                                                NSLog(@"Replenishment URL ---- %@", url);
+//                                                
+//                                                [[UIApplication sharedApplication] openURL:url];
+//                                            });
+//                                        } else {
+                                            CPOnboardingNavigationController *nav = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateInitialViewController];
+                                            
+                                            [self.navigationController presentViewController:nav animated:YES completion:^{
+                                                
+                                            }];
+//                                        }
+                                        
+                                    } failure : ^(NSError *error) {
+                                        
+                                    }];
+
 }
 
 - (IBAction)explainButtonTapped:(id)sender {
@@ -242,29 +260,6 @@
 - (IBAction)detailButtonTapped:(id)sender {
 
     [_explainScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-}
-
-#pragma mark - SendRefreshToken
-- (void)sendRefreshToken:(NSString *)refreshToken {
-    
-    [[CPAmazonAPI manager] sendRefreshToken:refreshToken
-                                 grant_type:@"refresh_token"
-                                  client_id:[AIMobileLib getClientId]
-                                    success:^(NSDictionary *result) {
-                                        
-                                        dispatch_async(dispatch_get_main_queue(), ^{
-                                            self.loadingView.hidden = YES;
-                                            
-                                            NSString *access_token = [result objectForKey:@"access_token"];
-                                            NSString *replenishmentUrl = [NSString stringWithFormat:@"https://drs-web.amazon.com/settings?access_token=%@&exitUri=https://amazon.com", access_token];
-                                            NSURL *url = [NSURL URLWithString:[replenishmentUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                                            NSLog(@"Replenishment URL ---- %@", url);
-                                            
-                                            [[UIApplication sharedApplication] openURL:url];
-                                        });
-                                    } failure:^(NSError *error) {
-                                        NSLog(@"failed getting Refresh token!");
-                                    }];
 }
 
 #pragma mark - Amazon Authentication Delegate
