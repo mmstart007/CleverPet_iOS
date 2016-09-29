@@ -25,9 +25,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *explainLabel;
 @property (strong, nonatomic) IBOutlet UILabel *configLabel;
 @property (weak, nonatomic) UIBarButtonItem *pseudoBackButton;
-
-
 @property (weak, nonatomic) IBOutlet CPLoadingView *loadingView;
+@property (strong, nonatomic) IBOutlet UIView *configureView;
+
+@property (strong, nonatomic) NSString *access_token;
 
 
 @end
@@ -68,6 +69,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    [self checkingAmazonLoginStatus];
     [self getRegistrationDetail];
 }
 
@@ -138,7 +140,7 @@
         
     } else {
         _explainLabel.text = @"Explain      >";
-        _bottomLabel.text = @"Once an order is placed, you\nhave one day to cancel via\nthe email from Amazon.";
+        _bottomLabel.text = @"Once an order is placed, you\nhave one day to cancel via the\nemail from Amazon.";
         
         if (order_inprogress == 1) {
             
@@ -215,8 +217,16 @@
 
 - (IBAction)configureButtonTapped:(id)sender {
     
-    self.loadingView.hidden = NO;
+    NSString *replenishmentUrl = [NSString stringWithFormat:@"https://drs-web.amazon.com/settings?access_token=%@&exitUri=https://amazon.com", self.access_token];
+    NSURL *url = [NSURL URLWithString:[replenishmentUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"Replenishment URL ---- %@", url);
+    
+    [[UIApplication sharedApplication] openURL:url];
+}
 
+- (void)checkingAmazonLoginStatus {
+    self.loadingView.hidden = NO;
+    
     CPUser *currentUser = [[CPUserManager sharedInstance] getCurrentUser];
     NSString *currentUserDeviceID = currentUser.device.deviceId;  // Current User Device ID
     NSString *cpuser_auth_token = [USERDEFAULT objectForKey:CPUSER_AUTH_TOKEN];  // Current User AuthToken
@@ -226,17 +236,18 @@
                                     success : ^(NSDictionary *result, NSInteger responseCode) {
                                         
                                         NSLog(@"Amazon Login check ==== %ld", (long)responseCode);
-
+                                        
                                         self.loadingView.hidden = YES;
                                         if (responseCode == 200) {
                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                 
-                                                NSString *access_token = [result objectForKey:@"access_token"];
-                                                NSString *replenishmentUrl = [NSString stringWithFormat:@"https://drs-web.amazon.com/settings?access_token=%@&exitUri=https://amazon.com", access_token];
-                                                NSURL *url = [NSURL URLWithString:[replenishmentUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                                                NSLog(@"Replenishment URL ---- %@", url);
-                                                
-                                                [[UIApplication sharedApplication] openURL:url];
+                                                self.access_token = [result objectForKey:@"access_token"];
+//                                                self.access_token = @"Atzr|IwEBIH1HVAHxd7w78Nqqi7qwchAsdVRpotglUWQs6_51lIF29wv9tcmwOzmGxgzceCOVNtWw3i3dyFS3Eyb-N70k2ZzFCnJYPbQO4Juqa1gda5XWjAlLBLf2x65NJL1VRRLaw-1pemzvkyzssugdMGQ1-byWAXXQTA-ZJcootJpAw8biXAwoB9kyJVgGs7Z2HMrmkLfCpMTuACqhEgOkWSrnYm-fXCZJ5EThOYT9E2kQy7L-ehOQ7qQoq5ipklmzclR0EPHvIMTGhujK5c2G0cC7z1L446P7NhsEp8oG5wrLKnKNIL6UrBKIX0HfCb-BLY765HGMAuUyCpUhNmkoN1zUg5izMpw0CTp3MVsVvlNBPYsFEzyR2-vSKsm8XHJezHPOp-1WsuDo4805Gx84E_wp2uKoriTC5CO1nA0yR4VOb-WXqQ";
+                                                if (self.access_token == nil || self.access_token.length == 0 || [self.access_token isEqualToString:@""] || [self.access_token isKindOfClass:[NSNull class]] || [self.access_token isEqualToString:@"(null)"]) {
+                                                    self.configureView.hidden = true;
+                                                } else {
+                                                    self.configureView.hidden = false;
+                                                }
                                             });
                                         } else {
                                             CPOnboardingNavigationController *nav = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateInitialViewController];
@@ -249,7 +260,6 @@
                                     } failure : ^(NSError *error) {
                                         
                                     }];
-
 }
 
 - (IBAction)explainButtonTapped:(id)sender {

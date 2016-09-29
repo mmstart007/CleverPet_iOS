@@ -247,6 +247,7 @@
                     <connections>
                         <outlet property="bottomLabel" destination="NLR-b0-Iax" id="8tp-Yf-fis"/>
                         <outlet property="configLabel" destination="J4A-kt-Lc4" id="UDJ-fE-kNi"/>
+                        <outlet property="configureView" destination="Ano-LT-0r6" id="jp6-2C-XTf"/>
                         <outlet property="detailLabel" destination="KhP-A8-2nX" id="xik-MW-EaG"/>
                         <outlet property="estimatedReorderLabel" destination="vhv-aj-7Mf" id="PEf-yp-siN"/>
                         <outlet property="explainLabel" destination="yzx-l9-DJR" id="w27-Jf-bLJ"/>
