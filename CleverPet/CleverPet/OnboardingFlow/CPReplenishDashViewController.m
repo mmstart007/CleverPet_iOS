@@ -227,24 +227,24 @@
                                         
                                         NSLog(@"Amazon Login check ==== %ld", (long)responseCode);
 
-//                                        self.loadingView.hidden = YES;
-//                                        if (responseCode == 200) {
-//                                            dispatch_async(dispatch_get_main_queue(), ^{
-//                                                
-//                                                NSString *access_token = [result objectForKey:@"access_token"];
-//                                                NSString *replenishmentUrl = [NSString stringWithFormat:@"https://drs-web.amazon.com/settings?access_token=%@&exitUri=https://amazon.com", access_token];
-//                                                NSURL *url = [NSURL URLWithString:[replenishmentUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//                                                NSLog(@"Replenishment URL ---- %@", url);
-//                                                
-//                                                [[UIApplication sharedApplication] openURL:url];
-//                                            });
-//                                        } else {
+                                        self.loadingView.hidden = YES;
+                                        if (responseCode == 200) {
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                
+                                                NSString *access_token = [result objectForKey:@"access_token"];
+                                                NSString *replenishmentUrl = [NSString stringWithFormat:@"https://drs-web.amazon.com/settings?access_token=%@&exitUri=https://amazon.com", access_token];
+                                                NSURL *url = [NSURL URLWithString:[replenishmentUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                                                NSLog(@"Replenishment URL ---- %@", url);
+                                                
+                                                [[UIApplication sharedApplication] openURL:url];
+                                            });
+                                        } else {
                                             CPOnboardingNavigationController *nav = [[UIStoryboard storyboardWithName:@"OnboardingFlow" bundle:nil] instantiateInitialViewController];
                                             
                                             [self.navigationController presentViewController:nav animated:YES completion:^{
                                                 
                                             }];
-//                                        }
+                                        }
                                         
                                     } failure : ^(NSError *error) {
                                         
