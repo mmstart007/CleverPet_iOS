@@ -186,7 +186,7 @@
         }else {
             
             success(dataDic);
-            NSLog(@"Respons Code OK ======== %ld", (long)((NSHTTPURLResponse *)response).statusCode);
+            NSLog(@"Get DRS Registration Respons Code OK ======== %ld", (long)((NSHTTPURLResponse *)response).statusCode);
 //            NSLog(@"Respons Data ========= %@", dataDic);
         }
         
@@ -230,7 +230,7 @@
         }else {
     
             success(dataDic);
-            NSLog(@"Respons Code OK ======== %ld", (long)((NSHTTPURLResponse *)response).statusCode);
+            NSLog(@"Set Refresh Token Respons Code OK ======== %ld", (long)((NSHTTPURLResponse *)response).statusCode);
         }
         
     }];
@@ -272,7 +272,7 @@
         }else {
             
             success(dataDic);
-            NSLog(@"Respons Code OK ======== %ld", (long)((NSHTTPURLResponse *)response).statusCode);
+            NSLog(@"ReplenishThreshold Respons Code OK ======== %ld", (long)((NSHTTPURLResponse *)response).statusCode);
         }
         
     }];
@@ -311,7 +311,7 @@
         }else {
             
             success(nil, ((NSHTTPURLResponse *)response).statusCode);
-            NSLog(@"Respons Code OK ======== %ld", (long)((NSHTTPURLResponse *)response).statusCode);
+            NSLog(@"Get Access Token Respons Code OK ======== %ld", (long)((NSHTTPURLResponse *)response).statusCode);
         }
         
     }];

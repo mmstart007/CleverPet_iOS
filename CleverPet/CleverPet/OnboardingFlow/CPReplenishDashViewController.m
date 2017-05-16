@@ -242,6 +242,7 @@
                                             dispatch_async(dispatch_get_main_queue(), ^{
                                                 
                                                 self.access_token = [result objectForKey:@"access_token"];
+                                                NSLog(@"Access Token ====== %@", self.access_token);
 //                                                self.access_token = @"Atzr|IwEBIH1HVAHxd7w78Nqqi7qwchAsdVRpotglUWQs6_51lIF29wv9tcmwOzmGxgzceCOVNtWw3i3dyFS3Eyb-N70k2ZzFCnJYPbQO4Juqa1gda5XWjAlLBLf2x65NJL1VRRLaw-1pemzvkyzssugdMGQ1-byWAXXQTA-ZJcootJpAw8biXAwoB9kyJVgGs7Z2HMrmkLfCpMTuACqhEgOkWSrnYm-fXCZJ5EThOYT9E2kQy7L-ehOQ7qQoq5ipklmzclR0EPHvIMTGhujK5c2G0cC7z1L446P7NhsEp8oG5wrLKnKNIL6UrBKIX0HfCb-BLY765HGMAuUyCpUhNmkoN1zUg5izMpw0CTp3MVsVvlNBPYsFEzyR2-vSKsm8XHJezHPOp-1WsuDo4805Gx84E_wp2uKoriTC5CO1nA0yR4VOb-WXqQ";
                                                 if (self.access_token == nil || self.access_token.length == 0 || [self.access_token isEqualToString:@""] || [self.access_token isKindOfClass:[NSNull class]] || [self.access_token isEqualToString:@"(null)"]) {
                                                     self.configureView.hidden = true;
